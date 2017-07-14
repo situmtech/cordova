@@ -30,20 +30,25 @@ public class SitumPlugin extends CordovaPlugin {
     super.initialize(cordova, webView);
     Log.d(TAG, "Initializing Situm Plugin");
     SitumSdk.init(cordova.getActivity());
-    es.situm.sdk.SitumSdk.configuration().setApiKey("alberto.doval@cocodin.com", "391b363b6f1a00acf10f67471380980dcdf989ffafc08601229b6c67bb4d1a11");
+    //es.situm.sdk.SitumSdk.configuration().setApiKey("alberto.doval@cocodin.com", "391b363b6f1a00acf10f67471380980dcdf989ffafc08601229b6c67bb4d1a11");
   }
 
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
     Log.d(TAG, "execute: " + action);
-    if(action.equals("echo")) {
-      String phrase = args.getString(0);
-      Log.d(TAG, phrase);
-    } else if(action.equals("fetchBuildings")) {
+    if (action.equalsIgnoreCase("setApiKey")) {
+      String email = args.getString(0);
+      String apiKey = args.getString(1);
+      es.situm.sdk.SitumSdk.configuration().setApiKey(email, apiKey);
+    } else if(action.equalsIgnoreCase("setUserPass")) {
+      String email = args.getString(0);
+      String password = args.getString(1);
+      es.situm.sdk.SitumSdk.configuration().setUserPass(email, password);
+    } else if(action.equalsIgnoreCase("fetchBuildings")) {
       PluginHelper.fetchBuildings(cordova, webView, args, callbackContext);
-    } else if(action.equals("startPositioning")) {
+    } else if(action.equalsIgnoreCase("startPositioning")) {
       PluginHelper.startPositioning(cordova, webView, args, callbackContext);
     }
-    else if(action.equals("stopPositioning")) {
+    else if(action.equalsIgnoreCase("stopPositioning")) {
       PluginHelper.stopPositioning(cordova, webView, args, callbackContext);
     }
     return true;
