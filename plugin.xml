@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    id="situm-cordova-plugin"
+    version="1.0.0">
+    <name>Situm Cordova plugin</name>
+    <description></description>
+    <license>MIT</license>
+    <keywords></keywords>
+    <repo></repo>
+    <issue></issue>
+
+    <!-- android -->
+    <platform name="android">
+      <js-module src="www/plugin.js" name="plugin">
+        <runs/>
+
+        <!-- This is the window variable name you want, like window.MyCordovaPlugin -->
+        <clobbers target="cordova.plugins.Situm" />
+      </js-module>
+      <config-file target="res/xml/config.xml" parent="/*">
+        <feature name="Situm">
+          <param name="android-package" value="es.situm.plugin.SitumPlugin" />
+          <param name="onload" value="true" />
+        </feature>
+      </config-file>
+
+      <source-file src="src/android/es/situm/plugin/SitumPlugin.java" target-dir="src/es/situm/plugin" />
+    </platform>
+
+    <!-- ios -->
+    <platform name="ios">
+        <js-module src="www/plugin.js" name="plugin">
+            <runs/>
+            <clobbers target="cordova.plugins.Situm" />
+        </js-module>
+        <config-file target="config.xml" parent="/*">
+            <feature name="Situm">
+                <param name="ios-package" value="Situm" onload="true" />
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/SitumPlugin.h" />
+        <source-file src="src/ios/SitumPlugin.m" />
+    </platform>
+</plugin>
