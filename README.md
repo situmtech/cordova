@@ -9,25 +9,25 @@ IOS: Not implemented yet
 
 > Android
 
--setApiKey:
+setApiKey:
 
 ```javascript
       cordova.plugins.Situm.setApiKey("email", "api_key");
 ```
 
--setUserPass:
+setUserPass:
 
 ```javascript
-       cordova.plugins.Situm.setApiKey("email", "password");
+       cordova.plugins.Situm.setUserPass("email", "password");
 ```
 
--fetchBuildings:
+fetchBuildings:
 
 ```javascript
        cordova.plugins.Situm.fetchBuildings(callback);
 ```
 
--startPositioning:
+startPositioning:
 
 ```javascript
       let buildings = [{
@@ -36,7 +36,7 @@ IOS: Not implemented yet
       }];
     cordova.plugins.Situm.startPositioning(buildings, callback)
 ```
--stopPositioning:
+stopPositioning:
 
 ```javascript
     cordova.plugins.Situm.stopPositioning(callback)
