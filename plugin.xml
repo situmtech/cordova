@@ -10,6 +10,10 @@
     <repo>https://github.com/cocodinTech/situm-cordova-plugin.git</repo>
     <issue>https://github.com/cocodinTech/situm-cordova-plugin/issues</issue>
 
+    <engines>
+        <engine name="cordova-android" version=">=6.0.0" />
+    </engines>
+
     <!-- android -->
     <platform name="android">
         <js-module src="www/plugin.js" name="Situm">
@@ -22,7 +26,7 @@
             <param name="onload" value="true" />
             </feature>
       </config-file>
-      
+
       <source-file src="src/android/es/situm/plugin/SitumPlugin.java" target-dir="src/es/situm/plugin" />
     </platform>
 

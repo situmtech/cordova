@@ -4,8 +4,7 @@
   "cordova": {
     "id": "situm-cordova-plugin",
     "platforms": [
-      "android",
-      "ios"
+      "android"
     ]
   },
   "description": "Situm Cordova-based Plugin for hybrid apps."
