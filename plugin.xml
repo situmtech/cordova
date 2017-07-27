@@ -13,9 +13,6 @@
     <!-- android -->
     <platform name="android">
       <js-module src="www/plugin.js" name="Situm">
-        <runs/>
-
-        <!-- This is the window variable name you want, like window.MyCordovaPlugin -->
         <clobbers target="cordova.plugins.Situm" />
       </js-module>
       <config-file target="res/xml/config.xml" parent="/*">
