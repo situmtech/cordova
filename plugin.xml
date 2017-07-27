@@ -16,7 +16,7 @@
 
     <!-- android -->
     <platform name="android">
-        <js-module src="www/plugin.js" name="Situm">
+        <js-module src="www/android/plugin.js" name="Situm">
             <runs/>
             <clobbers target="cordova.plugins.Situm" />
         </js-module>
