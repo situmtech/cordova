@@ -26,7 +26,7 @@
     </platform>
 
     <!-- ios -->
-    <platform name="ios">
+    <!--<platform name="ios">
         <js-module src="www/plugin.js" name="Situm">
             <runs/>
             <clobbers target="cordova.plugins.Situm" />
@@ -39,5 +39,5 @@
 
         <header-file src="src/ios/SitumPlugin.h" />
         <source-file src="src/ios/SitumPlugin.m" />
-    </platform>
+    </platform> ios -->
 </plugin>
