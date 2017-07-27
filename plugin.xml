@@ -10,6 +10,8 @@
     <repo>https://github.com/cocodinTech/situm-cordova-plugin.git</repo>
     <issue>https://github.com/cocodinTech/situm-cordova-plugin/issues</issue>
 
+    <asset src="www/plugin.js" target="www/plugin.js"/>
+
     <!-- android -->
     <platform name="android">
       <js-module src="www/plugin.js" name="Situm">
