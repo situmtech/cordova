@@ -10,13 +10,12 @@
     <repo>https://github.com/cocodinTech/situm-cordova-plugin.git</repo>
     <issue>https://github.com/cocodinTech/situm-cordova-plugin/issues</issue>
 
-    <asset src="www/plugin.js" target="www/plugin.js"/>
-
+    <js-module src="www/plugin.js" name="Situm">
+    <clobbers target="cordova.plugins.Situm" />
+    </js-module>
+    
     <!-- android -->
     <platform name="android">
-      <js-module src="www/plugin.js" name="Situm">
-        <clobbers target="cordova.plugins.Situm" />
-      </js-module>
       <config-file target="res/xml/config.xml" parent="/*">
         <feature name="Situm">
           <param name="android-package" value="es.situm.plugin.SitumPlugin" />
