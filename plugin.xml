@@ -14,10 +14,10 @@
         <engine name="cordova-android" version=">=6.0.0" />
     </engines>
 
-    <asset src="www/android/plugin.js" target="www/android/plugin.js" />
+    <asset src="www/android/plugin.js" target="www/android/situm.js" />
     <!-- android -->
     <platform name="android">
-        <js-module src="www/android/plugin.js" name="Situm">
+        <js-module src="www/android/situm.js" name="situm">
             <runs/>
             <clobbers target="cordova.plugins.Situm" />
         </js-module>
