@@ -48,7 +48,10 @@ public class SitumPlugin extends CordovaPlugin {
       PluginHelper.startPositioning(cordova, webView, args, callbackContext);
     } else if(action.equalsIgnoreCase("stopPositioning")) {
       PluginHelper.stopPositioning(cordova, webView, args, callbackContext);
-    }
+    } 
+    //else if(action.equalsIgnoreCase("requestDirections")) {
+      //PluginHelper.requestDirections(cordova, webView, args, callbackContext);
+    //}
     return true;
   }
 

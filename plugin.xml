@@ -6,13 +6,13 @@
     <name>Situm Cordova plugin</name>
     <description></description>
     <license>MIT</license>
-    <keywords></keywords>
-    <repo></repo>
-    <issue></issue>
+    <keywords>situm, indoor positioning</keywords>
+    <repo>https://github.com/cocodinTech/situm-cordova-plugin.git</repo>
+    <issue>https://github.com/cocodinTech/situm-cordova-plugin/issues</issue>
 
     <!-- android -->
     <platform name="android">
-      <js-module src="www/plugin.js" name="plugin">
+      <js-module src="www/plugin.js" name="Situm">
         <runs/>
 
         <!-- This is the window variable name you want, like window.MyCordovaPlugin -->
@@ -30,7 +30,7 @@
 
     <!-- ios -->
     <platform name="ios">
-        <js-module src="www/plugin.js" name="plugin">
+        <js-module src="www/plugin.js" name="Situm">
             <runs/>
             <clobbers target="cordova.plugins.Situm" />
         </js-module>
