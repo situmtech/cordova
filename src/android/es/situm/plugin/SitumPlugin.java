@@ -2,29 +2,19 @@
  */
 package es.situm.plugin;
 
-import es.situm.plugin.PluginHelper;
 import android.util.Log;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaWebView;
-import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 import es.situm.sdk.SitumSdk;
-import es.situm.sdk.model.cartography.Building;
-import es.situm.sdk.utils.Handler;
-import es.situm.sdk.error.Error;
-
-import java.util.Collection;
-import java.util.Date;
 
 public class SitumPlugin extends CordovaPlugin {
-  
-  private static final String TAG = "SitumPlugin";
 
-  private Building selectedBuilding;
+  private static final String TAG = "SitumPlugin";
 
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     super.initialize(cordova, webView);
@@ -48,7 +38,7 @@ public class SitumPlugin extends CordovaPlugin {
       PluginHelper.startPositioning(cordova, webView, args, callbackContext);
     } else if(action.equalsIgnoreCase("stopPositioning")) {
       PluginHelper.stopPositioning(cordova, webView, args, callbackContext);
-    } 
+    }
     //else if(action.equalsIgnoreCase("requestDirections")) {
       //PluginHelper.requestDirections(cordova, webView, args, callbackContext);
     //}

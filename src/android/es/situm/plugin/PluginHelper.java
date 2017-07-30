@@ -26,15 +26,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class PluginHelper {
-    private static final String ACCURACY = "accuracy";
-    private static final String BEARING = "bearing";
-    private static final String BUILDING_ID = "building_id";
-    private static final String BUILDING_NAME = "building_name";
-    private static final String FLOOR_ID = "floor_id";
-    private static final String STATUS_NAME = "status_name";
+
     private static final String TAG = "PluginHelper";
-    private static final String X_COORDINATE = "x";
-    private static final String Y_COORDINATE = "y";
+
     private static LocationListener locationListener;
     private static LocationRequest locationRequest;
 
@@ -45,13 +39,7 @@ public class PluginHelper {
                 JSONArray jsonaBuildings = new JSONArray();
                 for (Building building : buildings) {
                     Log.i(PluginHelper.TAG, "onSuccess: " + building.getIdentifier() + " - " + building.getName());
-                    JSONObject jsonoBuilding = new JSONObject();
-                    try {
-                        jsonoBuilding.put(PluginHelper.BUILDING_ID, building.getIdentifier());
-                        jsonoBuilding.put(PluginHelper.BUILDING_NAME, building.getName());
-                    } catch (JSONException e) {
-                        Log.e(PluginHelper.TAG, "Unexpected error building response", e.getCause());
-                    }
+                    JSONObject jsonoBuilding = LocationWrapper.buildingToJsonObject(building);
                     jsonaBuildings.put(jsonoBuilding);
                 }
                 if (buildings.isEmpty()) {
@@ -70,8 +58,8 @@ public class PluginHelper {
     public static void startPositioning(final CordovaInterface cordova, CordovaWebView webView, JSONArray args, final CallbackContext callbackContext) {
         try {
             JSONObject jsonoBuilding = args.getJSONObject(0);
-            String sBuildingId = jsonoBuilding.getString(BUILDING_ID);
-            String sBuildingName = jsonoBuilding.getString(BUILDING_NAME);
+            String sBuildingId = jsonoBuilding.getString(LocationWrapper.BUILDING_IDENTIFIER);
+            String sBuildingName = jsonoBuilding.getString(LocationWrapper.BUILDING_NAME);
             if (locationListener == null) {
                 LocationRequest locationRequest = new Builder().buildingIdentifier(sBuildingId).build();
                 Log.i(TAG, "startPositioning: starting positioning in " + sBuildingName);
@@ -81,42 +69,19 @@ public class PluginHelper {
                         Log.i(PluginHelper.TAG, "onLocationChanged() called with: location = [" + location + "]");
                         CartesianCoordinate cartesianCoordinate = location.getCartesianCoordinate();
                         String locationMessage = "building: " + location.getBuildingIdentifier() + "\nfloor: " + location.getFloorIdentifier() + "\nx: " + cartesianCoordinate.getX() + "\ny: " + cartesianCoordinate.getY() + "\nyaw: " + location.getCartesianBearing() + "\naccuracy: " + location.getAccuracy();
-                        try {
-                            JSONObject jsonoCoordinate = new JSONObject();
-                            JSONObject jSONObject;
-                            jsonoCoordinate.put(PluginHelper.BUILDING_ID, location.getBuildingIdentifier());
-                            jsonoCoordinate.put(PluginHelper.FLOOR_ID, location.getFloorIdentifier());
-                            jsonoCoordinate.put(PluginHelper.X_COORDINATE, cartesianCoordinate.getX());
-                            jsonoCoordinate.put(PluginHelper.Y_COORDINATE, cartesianCoordinate.getY());
-                            jsonoCoordinate.put(PluginHelper.BEARING, location.getCartesianBearing());
-                            jsonoCoordinate.put(PluginHelper.ACCURACY, (double) location.getAccuracy());
-                            PluginResult result = new PluginResult(Status.OK, jsonoCoordinate);
-                            result.setKeepCallback(true);
-                            callbackContext.sendPluginResult(result);
-                            jSONObject = jsonoCoordinate;
-                        } catch (JSONException e3) {
-                            e = e3;
-                            Log.e(PluginHelper.TAG, "Unexpected error building response", e.getCause());
-                            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
-                        }
+                        JSONObject jsonObject = LocationWrapper.locationToJsonObject(location);
+                        PluginResult result = new PluginResult(Status.OK, jsonObject);
+                        result.setKeepCallback(true);
+                        callbackContext.sendPluginResult(result);
                     }
 
                     public void onStatusChanged(@NonNull LocationStatus status) {
                         JSONException e;
                         Log.i(PluginHelper.TAG, "onStatusChanged() called with: status = [" + status + "]");
-                        try {
-                            JSONObject jsonoCoordinate = new JSONObject();
-                            JSONObject jSONObject;
-                            jsonoCoordinate.put(PluginHelper.STATUS_NAME, status.name());
-                            PluginResult result = new PluginResult(Status.OK, jsonoCoordinate);
-                            result.setKeepCallback(true);
-                            callbackContext.sendPluginResult(result);
-                            jSONObject = jsonoCoordinate;
-                        } catch (JSONException e3) {
-                            e = e3;
-                            Log.e(PluginHelper.TAG, "Unexpected error building response", e.getCause());
-                            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
-                        }
+                        JSONObject jsonObject = LocationWrapper.locationStatusToJsonObject(status);
+                        PluginResult result = new PluginResult(Status.OK, jsonObject);
+                        result.setKeepCallback(true);
+                        callbackContext.sendPluginResult(result);
                     }
 
                     public void onError(@NonNull Error error) {
