@@ -1,4 +1,4 @@
-package android.es.situm.plugin;
+package es.situm.plugin;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -84,23 +84,16 @@ public class PluginHelper {
                         try {
                             JSONObject jsonoCoordinate = new JSONObject();
                             JSONObject jSONObject;
-                            try {
-                                jsonoCoordinate.put(PluginHelper.BUILDING_ID, location.getBuildingIdentifier());
-                                jsonoCoordinate.put(PluginHelper.FLOOR_ID, location.getFloorIdentifier());
-                                jsonoCoordinate.put(PluginHelper.X_COORDINATE, cartesianCoordinate.getX());
-                                jsonoCoordinate.put(PluginHelper.Y_COORDINATE, cartesianCoordinate.getY());
-                                jsonoCoordinate.put(PluginHelper.BEARING, location.getCartesianBearing());
-                                jsonoCoordinate.put(PluginHelper.ACCURACY, (double) location.getAccuracy());
-                                PluginResult result = new PluginResult(Status.OK, jsonoCoordinate);
-                                result.setKeepCallback(true);
-                                callbackContext.sendPluginResult(result);
-                                jSONObject = jsonoCoordinate;
-                            } catch (JSONException e2) {
-                                e = e2;
-                                jSONObject = jsonoCoordinate;
-                                Log.e(PluginHelper.TAG, "Unexpected error building response", e.getCause());
-                                callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
-                            }
+                            jsonoCoordinate.put(PluginHelper.BUILDING_ID, location.getBuildingIdentifier());
+                            jsonoCoordinate.put(PluginHelper.FLOOR_ID, location.getFloorIdentifier());
+                            jsonoCoordinate.put(PluginHelper.X_COORDINATE, cartesianCoordinate.getX());
+                            jsonoCoordinate.put(PluginHelper.Y_COORDINATE, cartesianCoordinate.getY());
+                            jsonoCoordinate.put(PluginHelper.BEARING, location.getCartesianBearing());
+                            jsonoCoordinate.put(PluginHelper.ACCURACY, (double) location.getAccuracy());
+                            PluginResult result = new PluginResult(Status.OK, jsonoCoordinate);
+                            result.setKeepCallback(true);
+                            callbackContext.sendPluginResult(result);
+                            jSONObject = jsonoCoordinate;
                         } catch (JSONException e3) {
                             e = e3;
                             Log.e(PluginHelper.TAG, "Unexpected error building response", e.getCause());
@@ -114,18 +107,11 @@ public class PluginHelper {
                         try {
                             JSONObject jsonoCoordinate = new JSONObject();
                             JSONObject jSONObject;
-                            try {
-                                jsonoCoordinate.put(PluginHelper.STATUS_NAME, status.name());
-                                PluginResult result = new PluginResult(Status.OK, jsonoCoordinate);
-                                result.setKeepCallback(true);
-                                callbackContext.sendPluginResult(result);
-                                jSONObject = jsonoCoordinate;
-                            } catch (JSONException e2) {
-                                e = e2;
-                                jSONObject = jsonoCoordinate;
-                                Log.e(PluginHelper.TAG, "Unexpected error building response", e.getCause());
-                                callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
-                            }
+                            jsonoCoordinate.put(PluginHelper.STATUS_NAME, status.name());
+                            PluginResult result = new PluginResult(Status.OK, jsonoCoordinate);
+                            result.setKeepCallback(true);
+                            callbackContext.sendPluginResult(result);
+                            jSONObject = jsonoCoordinate;
                         } catch (JSONException e3) {
                             e = e3;
                             Log.e(PluginHelper.TAG, "Unexpected error building response", e.getCause());
@@ -168,7 +154,7 @@ public class PluginHelper {
     }
 
     private static void showLocationSettings(CordovaInterface cordova) {
-        Toast.makeText(cordova.getActivity(), "You must enable location", 1).show();
+        Toast.makeText(cordova.getActivity(), "You must enable location", Toast.LENGTH_LONG).show();
         cordova.getActivity().startActivityForResult(new Intent("android.settings.LOCATION_SOURCE_SETTINGS"), 0);
     }
 
