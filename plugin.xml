@@ -28,6 +28,7 @@
       </config-file>
 
       <source-file src="src/android/es/situm/plugin/SitumPlugin.java" target-dir="src/es/situm/plugin" />
+      <source-file src="src/android/es/situm/plugin/PluginHelper.java" target-dir="src/es/situm/plugin" />
     </platform>
 
     <!-- ios -->
