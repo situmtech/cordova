@@ -4,6 +4,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Vector;
+
 import es.situm.sdk.location.LocationStatus;
 import es.situm.sdk.model.cartography.Building;
 import es.situm.sdk.model.cartography.Floor;
@@ -19,6 +23,8 @@ import es.situm.sdk.model.location.Coordinate;
 import es.situm.sdk.model.location.Dimensions;
 import es.situm.sdk.model.location.Location;
 import es.situm.sdk.model.navigation.NavigationProgress;
+import es.situm.sdk.v1.SitumConversionArea;
+import es.situm.sdk.v1.SitumEvent;
 
 public class LocationWrapper {
 
@@ -54,6 +60,7 @@ public class LocationWrapper {
     public static final String QUALITY = "quality";
     public static final String IS_OUTDOOR = "isOutdoor";
 
+    public static final String RADIUS = "radius";
     public static final String ACCURACY = "accuracy";
     public static final String BEARING = "bearing";
     public static final String TIMESTAMP = "timestamp";
@@ -112,6 +119,15 @@ public class LocationWrapper {
     public static final String TIME_TO_END_STEP = "timeToEndStep";
     public static final String TIME_TO_GOAL = "timeToGoal";
 
+    public static final String CONVERSION_AREA = "conversionArea";
+    public static final String IDENTIFIER = "identifier";
+    public static final String CUSTOM_FIELDS = "customFields";
+    public static final String TOP_LEFT = "topLeft";
+    public static final String BOTTOM_LEFT = "bottomLeft";
+    public static final String TOP_RIGHT = "topRight";
+    public static final String BOTTOM_RIGHT = "bottomRight";
+
+
 
     public static JSONObject buildingToJsonObject(Building building) {
         JSONObject jo = new JSONObject();
@@ -134,6 +150,30 @@ public class LocationWrapper {
         return  jo;
     }
 
+    public static JSONObject mapStringToJsonObject(Map<String,String> mp) {
+        JSONObject jo = new JSONObject();
+        try {
+            Iterator it = mp.entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry<String,String> pairs = (Map.Entry<String, String>)it.next();
+                jo.put(pairs.getKey(), pairs.getValue());
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jo;
+    }
+
+    public static Building buildingJsonObjectToBuilding(JSONObject jo) {
+        Building building = null;
+        try {
+            building = new Building.Builder().userIdentifier(jo.getString(BUILDING_IDENTIFIER)).address(jo.getString(ADDRESS)).name(jo.getString(BUILDING_NAME)).build();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return  building;
+    }
+
 
     //Floor
 
@@ -146,6 +186,38 @@ public class LocationWrapper {
             jo.put(MAP_URL, floor.getMapUrl().getValue());
             jo.put(SCALE, floor.getScale());
             jo.put(FLOOR_IDENTIFIER, floor.getIdentifier());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jo;
+    }
+
+    //Situm Events
+
+    public static JSONObject situmEventToJsonObject(SitumEvent situmEvent) {
+        JSONObject jo = new JSONObject();
+        try {
+            jo.put(BUILDING_IDENTIFIER, situmEvent.getBuildingId());
+            jo.put(IDENTIFIER, situmEvent.getId());
+            jo.put(FLOOR_IDENTIFIER, situmEvent.getFloor_id());
+            jo.put(INFO_HTML, situmEvent.getHtml());
+            jo.put(CONVERSION_AREA, conversionAreaToJsonObject(situmEvent.getConversionArea()));
+            jo.put(CUSTOM_FIELDS, mapStringToJsonObject(situmEvent.getCustomFields()));
+            jo.put(RADIUS, situmEvent.getRadius());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jo;
+    }
+
+    public static JSONObject conversionAreaToJsonObject(SitumConversionArea situmCA) {
+        JSONObject jo = new JSONObject();
+        try {
+            jo.put(FLOOR_IDENTIFIER, situmCA.getFloor_id());
+            jo.put(TOP_LEFT, situmCA.getTopLeft());
+            jo.put(TOP_RIGHT, situmCA.getTopRight());
+            jo.put(BOTTOM_LEFT, situmCA.getBottomLeft());
+            jo.put(BOTTOM_RIGHT, situmCA.getBottomRight());
         } catch (JSONException e) {
             e.printStackTrace();
         }
