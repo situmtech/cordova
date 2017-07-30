@@ -20,6 +20,9 @@
             <runs/>
             <clobbers target="cordova.plugins.Situm" />
         </js-module>
+
+        <framework src="src/android/situm.gradle" custom="true" type="gradleReference" />
+
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="Situm">
             <param name="android-package" value="es.situm.plugin.SitumPlugin" />
