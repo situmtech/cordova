@@ -28,19 +28,21 @@ public class SitumPlugin extends CordovaPlugin {
       String email = args.getString(0);
       String apiKey = args.getString(1);
       es.situm.sdk.SitumSdk.configuration().setApiKey(email, apiKey);
-    } else if(action.equalsIgnoreCase("setUserPass")) {
+    } else if (action.equalsIgnoreCase("setUserPass")) {
       String email = args.getString(0);
       String password = args.getString(1);
       es.situm.sdk.SitumSdk.configuration().setUserPass(email, password);
-    } else if(action.equalsIgnoreCase("fetchBuildings")) {
+    } else if (action.equalsIgnoreCase("fetchBuildings")) {
       PluginHelper.fetchBuildings(cordova, webView, args, callbackContext);
-    } else if(action.equalsIgnoreCase("startPositioning")) {
+    } else if (action.equalsIgnoreCase("startPositioning")) {
       PluginHelper.startPositioning(cordova, webView, args, callbackContext);
-    } else if(action.equalsIgnoreCase("stopPositioning")) {
+    } else if (action.equalsIgnoreCase("stopPositioning")) {
       PluginHelper.stopPositioning(cordova, webView, args, callbackContext);
+    } else if (action.equalsIgnoreCase("fetchPoiCategories")) {
+      PluginHelper.fetchPoiCategories(cordova, webView, args, callbackContext);
     }
     //else if(action.equalsIgnoreCase("requestDirections")) {
-      //PluginHelper.requestDirections(cordova, webView, args, callbackContext);
+    //PluginHelper.requestDirections(cordova, webView, args, callbackContext);
     //}
     return true;
   }

@@ -27,6 +27,12 @@ fetchBuildings:
        cordova.plugins.Situm.fetchBuildings(callback);
 ```
 
+fetchPoiCategories:
+
+```javascript
+       cordova.plugins.Situm.fetchPoiCategories(callback);
+```
+
 startPositioning:
 
 ```javascript
