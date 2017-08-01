@@ -39,7 +39,8 @@ public class PluginHelper {
     private static LocationListener locationListener;
     private static LocationRequest locationRequest;
 
-    public static void fetchBuildings(CordovaInterface cordova, CordovaWebView webView, JSONArray args, final CallbackContext callbackContext) {
+    public static void fetchBuildings(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+            final CallbackContext callbackContext) {
         SitumSdk.communicationManager().fetchBuildings(new Handler<Collection<Building>>() {
             public void onSuccess(Collection<Building> buildings) {
                 Log.d(PluginHelper.TAG, "onSuccess: Buildings fetched successfully.");
@@ -62,25 +63,123 @@ public class PluginHelper {
         });
     }
 
-    public static void fetchFloorsFromBuilding(CordovaInterface cordova, CordovaWebView webView, JSONArray args, final CallbackContext callbackContext) {
+    public static void fetchFloorsFromBuilding(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+            final CallbackContext callbackContext) {
         try {
             JSONObject jsonoBuilding = args.getJSONObject(0);
             Building building = LocationWrapper.buildingJsonObjectToBuilding(jsonoBuilding);
-            SitumSdk.communicationManager().fetchFloorsFromBuilding(building,
-                new HashMap<String, Object>(), new Handler<Collection<Floor>>() {
+            SitumSdk.communicationManager().fetchFloorsFromBuilding(building, new HashMap<String, Object>(),
+                    new Handler<Collection<Floor>>() {
+                        @Override
+                        public void onSuccess(Collection<Floor> floors) {
+                            Log.d(PluginHelper.TAG, "onSuccess: Floors fetched successfully.");
+                            JSONArray jsonaFloors = new JSONArray();
+                            for (Floor floor : floors) {
+                                Log.i(PluginHelper.TAG, "onSuccess: " + floor.getIdentifier());
+                                JSONObject jsonoFloor = LocationWrapper.floorToJsonObject(floor);
+                                jsonaFloors.put(jsonoFloor);
+                            }
+                            if (floors.isEmpty()) {
+                                Log.e(PluginHelper.TAG, "onSuccess: you have no floors defined for this building");
+                            }
+                            callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonaFloors));
+                        }
+
+                        @Override
+                        public void onFailure(Error error) {
+                            Log.e(PluginHelper.TAG, "onFailure:" + error);
+                            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, error.getMessage()));
+                        }
+                    });
+        } catch (JSONException e) {
+            Log.e(TAG, "Unexpected error in floor response", e.getCause());
+        }
+    }
+
+    public static void fetchIndoorPOIsFromBuilding(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+            final CallbackContext callbackContext) {
+        try {
+            JSONObject jsonoBuilding = args.getJSONObject(0);
+            Building building = LocationWrapper.buildingJsonObjectToBuilding(jsonoBuilding);
+            SitumSdk.communicationManager().fetchIndoorPOIsFromBuilding(building, new HashMap<String, Object>(),
+                    new Handler<Collection<Poi>>() {
+                        @Override
+                        public void onSuccess(Collection<Poi> pois) {
+                            Log.d(PluginHelper.TAG, "onSuccess: Floors fetched successfully.");
+                            JSONArray jsonaPois = new JSONArray();
+                            for (Poi poi : pois) {
+                                Log.i(PluginHelper.TAG, "onSuccess: " + poi.getIdentifier() + " - " + poi.getName());
+                                JSONObject jsonoPoi = LocationWrapper.poiToJsonObject(poi);
+                                jsonaPois.put(jsonoPoi);
+                            }
+                            if (pois.isEmpty()) {
+                                Log.e(PluginHelper.TAG, "onSuccess: you have no indoor pois defined for this building");
+                            }
+                            callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonaPois));
+                        }
+
+                        @Override
+                        public void onFailure(Error error) {
+                            Log.e(PluginHelper.TAG, "onFailure:" + error);
+                            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, error.getMessage()));
+                        }
+                    });
+        } catch (JSONException e) {
+            Log.e(TAG, "Unexpected error in poi response", e.getCause());
+        }
+    }
+
+    public static void fetchOutdoorPOIsFromBuilding(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+            final CallbackContext callbackContext) {
+        try {
+            JSONObject jsonoBuilding = args.getJSONObject(0);
+            Building building = LocationWrapper.buildingJsonObjectToBuilding(jsonoBuilding);
+            SitumSdk.communicationManager().fetchOutdoorPOIsFromBuilding(building, new HashMap<String, Object>(),
+                    new Handler<Collection<Poi>>() {
+                        @Override
+                        public void onSuccess(Collection<Poi> pois) {
+                            Log.d(PluginHelper.TAG, "onSuccess: Floors fetched successfully.");
+                            JSONArray jsonaPois = new JSONArray();
+                            for (Poi poi : pois) {
+                                Log.i(PluginHelper.TAG, "onSuccess: " + poi.getIdentifier() + " - " + poi.getName());
+                                JSONObject jsonoPoi = LocationWrapper.poiToJsonObject(poi);
+                                jsonaPois.put(jsonoPoi);
+                            }
+                            if (pois.isEmpty()) {
+                                Log.e(PluginHelper.TAG, "onSuccess: you have no indoor pois defined for this building");
+                            }
+                            callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonaPois));
+                        }
+
+                        @Override
+                        public void onFailure(Error error) {
+                            Log.e(PluginHelper.TAG, "onFailure:" + error);
+                            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, error.getMessage()));
+                        }
+                    });
+        } catch (JSONException e) {
+            Log.e(TAG, "Unexpected error in poi response", e.getCause());
+        }
+    }
+
+    public static void fetchPoiCategories(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+            final CallbackContext callbackContext) {
+        SitumSdk.communicationManager().fetchPoiCategories(new HashMap<String, Object>(),
+                new Handler<Collection<PoiCategory>>() {
                     @Override
-                    public void onSuccess(Collection<Floor> floors) {
-                        Log.d(PluginHelper.TAG, "onSuccess: Floors fetched successfully.");
-                        JSONArray jsonaFloors = new JSONArray();
-                        for (Floor floor : floors) {
-                            Log.i(PluginHelper.TAG, "onSuccess: " + floor.getIdentifier());
-                            JSONObject jsonoFloor = LocationWrapper.floorToJsonObject(floor);
-                            jsonaFloors.put(jsonoFloor);
+                    public void onSuccess(Collection<PoiCategory> poiCategories) {
+                        Log.d(PluginHelper.TAG, "onSuccess: POI Categories fetched successfully.");
+                        JSONArray jsonaPoiCategories = new JSONArray();
+                        for (PoiCategory poiCategory : poiCategories) {
+                            Log.i(PluginHelper.TAG,
+                                    "onSuccess: " + poiCategory.getCode() + " - " + poiCategory.getName());
+                            JSONObject jsonoPoiCategory = LocationWrapper.poiCategoryToJsonObject(poiCategory);
+                            jsonaPoiCategories.put(jsonoPoiCategory);
                         }
-                        if (floors.isEmpty()) {
-                            Log.e(PluginHelper.TAG, "onSuccess: you have no floors defined for this building");
+                        if (poiCategories.isEmpty()) {
+                            Log.e(PluginHelper.TAG, "onSuccess: you have no categories defined for POIs");
                         }
-                        callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonaFloors));
+                        callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonaPoiCategories));
                     }
 
                     @Override
@@ -89,87 +188,22 @@ public class PluginHelper {
                         callbackContext.sendPluginResult(new PluginResult(Status.ERROR, error.getMessage()));
                     }
                 });
-        } catch (JSONException e) {
-            Log.e(TAG, "Unexpected error in floor response", e.getCause());
-        }
     }
 
-    public static void fetchIndoorPOIsFromBuilding(CordovaInterface cordova, CordovaWebView webView, JSONArray args, final CallbackContext callbackContext) {
+    public static void fetchEventsFromBuilding(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+            final CallbackContext callbackContext) {
         try {
             JSONObject jsonoBuilding = args.getJSONObject(0);
             Building building = LocationWrapper.buildingJsonObjectToBuilding(jsonoBuilding);
-            SitumSdk.communicationManager().fetchIndoorPOIsFromBuilding(building,
-                    new HashMap<String, Object>(), new Handler<Collection<Poi>>() {
-                        @Override
-                        public void onSuccess(Collection<Poi> pois) {
-                            Log.d(PluginHelper.TAG, "onSuccess: Floors fetched successfully.");
-                            JSONArray jsonaPois = new JSONArray();
-                            for (Poi poi : pois) {
-                                Log.i(PluginHelper.TAG, "onSuccess: " + poi.getIdentifier() + " - " + poi.getName());
-                                JSONObject jsonoPoi = LocationWrapper.poiToJsonObject(poi);
-                                jsonaPois.put(jsonoPoi);
-                            }
-                            if (pois.isEmpty()) {
-                                Log.e(PluginHelper.TAG, "onSuccess: you have no indoor pois defined for this building");
-                            }
-                            callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonaPois));
-                        }
-
-                        @Override
-                        public void onFailure(Error error) {
-                            Log.e(PluginHelper.TAG, "onFailure:" + error);
-                            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, error.getMessage()));
-                        }
-                    });
-        } catch (JSONException e) {
-            Log.e(TAG, "Unexpected error in poi response", e.getCause());
-        }
-    }
-
-    public static void fetchOutdoorPOIsFromBuilding(CordovaInterface cordova, CordovaWebView webView, JSONArray args, final CallbackContext callbackContext) {
-        try {
-            JSONObject jsonoBuilding = args.getJSONObject(0);
-            Building building = LocationWrapper.buildingJsonObjectToBuilding(jsonoBuilding);
-            SitumSdk.communicationManager().fetchOutdoorPOIsFromBuilding(building,
-                    new HashMap<String, Object>(), new Handler<Collection<Poi>>() {
-                        @Override
-                        public void onSuccess(Collection<Poi> pois) {
-                            Log.d(PluginHelper.TAG, "onSuccess: Floors fetched successfully.");
-                            JSONArray jsonaPois = new JSONArray();
-                            for (Poi poi : pois) {
-                                Log.i(PluginHelper.TAG, "onSuccess: " + poi.getIdentifier() + " - " + poi.getName());
-                                JSONObject jsonoPoi = LocationWrapper.poiToJsonObject(poi);
-                                jsonaPois.put(jsonoPoi);
-                            }
-                            if (pois.isEmpty()) {
-                                Log.e(PluginHelper.TAG, "onSuccess: you have no indoor pois defined for this building");
-                            }
-                            callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonaPois));
-                        }
-
-                        @Override
-                        public void onFailure(Error error) {
-                            Log.e(PluginHelper.TAG, "onFailure:" + error);
-                            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, error.getMessage()));
-                        }
-                    });
-        } catch (JSONException e) {
-            Log.e(TAG, "Unexpected error in poi response", e.getCause());
-        }
-    }
-
-    public static void fetchEventsFromBuilding(CordovaInterface cordova, CordovaWebView webView, JSONArray args, final CallbackContext callbackContext) {
-        try {
-            JSONObject jsonoBuilding = args.getJSONObject(0);
-            Building building = LocationWrapper.buildingJsonObjectToBuilding(jsonoBuilding);
-            SitumSdk.communicationManager().fetchEventsFromBuilding(building,
-                    new HashMap<String, Object>(), new Handler<Collection<es.situm.sdk.v1.SitumEvent>>() {
+            SitumSdk.communicationManager().fetchEventsFromBuilding(building, new HashMap<String, Object>(),
+                    new Handler<Collection<es.situm.sdk.v1.SitumEvent>>() {
                         @Override
                         public void onSuccess(Collection<SitumEvent> situmEvents) {
                             Log.d(PluginHelper.TAG, "onSuccess: Floors fetched successfully.");
                             JSONArray jsonaEvents = new JSONArray();
                             for (SitumEvent situmEvent : situmEvents) {
-                                Log.i(PluginHelper.TAG, "onSuccess: " + situmEvent.getId() + " - " + situmEvent.getName());
+                                Log.i(PluginHelper.TAG,
+                                        "onSuccess: " + situmEvent.getId() + " - " + situmEvent.getName());
                                 JSONObject jsonoSitumEvent = LocationWrapper.situmEventToJsonObject(situmEvent);
                                 jsonaEvents.put(jsonoSitumEvent);
                             }
@@ -190,8 +224,8 @@ public class PluginHelper {
         }
     }
 
-
-    public static void startPositioning(final CordovaInterface cordova, CordovaWebView webView, JSONArray args, final CallbackContext callbackContext) {
+    public static void startPositioning(final CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+            final CallbackContext callbackContext) {
         try {
             JSONObject jsonoBuilding = args.getJSONObject(0);
             String sBuildingId = jsonoBuilding.getString(LocationWrapper.BUILDING_IDENTIFIER);
@@ -204,7 +238,10 @@ public class PluginHelper {
                         JSONException e;
                         Log.i(PluginHelper.TAG, "onLocationChanged() called with: location = [" + location + "]");
                         CartesianCoordinate cartesianCoordinate = location.getCartesianCoordinate();
-                        String locationMessage = "building: " + location.getBuildingIdentifier() + "\nfloor: " + location.getFloorIdentifier() + "\nx: " + cartesianCoordinate.getX() + "\ny: " + cartesianCoordinate.getY() + "\nyaw: " + location.getCartesianBearing() + "\naccuracy: " + location.getAccuracy();
+                        String locationMessage = "building: " + location.getBuildingIdentifier() + "\nfloor: "
+                                + location.getFloorIdentifier() + "\nx: " + cartesianCoordinate.getX() + "\ny: "
+                                + cartesianCoordinate.getY() + "\nyaw: " + location.getCartesianBearing()
+                                + "\naccuracy: " + location.getAccuracy();
                         JSONObject jsonObject = LocationWrapper.locationToJsonObject(location);
                         PluginResult result = new PluginResult(Status.OK, jsonObject);
                         result.setKeepCallback(true);
@@ -226,14 +263,14 @@ public class PluginHelper {
                         result.setKeepCallback(true);
                         callbackContext.sendPluginResult(result);
                         switch (error.getCode()) {
-                            case 8001:
-                                PluginHelper.requestLocationPermission(cordova);
-                                return;
-                            case 8002:
-                                PluginHelper.showLocationSettings(cordova);
-                                return;
-                            default:
-                                return;
+                        case 8001:
+                            PluginHelper.requestLocationPermission(cordova);
+                            return;
+                        case 8002:
+                            PluginHelper.showLocationSettings(cordova);
+                            return;
+                        default:
+                            return;
                         }
                     }
                 };
@@ -246,7 +283,8 @@ public class PluginHelper {
         }
     }
 
-    public static void stopPositioning(CordovaInterface cordova, CordovaWebView webView, JSONArray args, CallbackContext callbackContext) {
+    public static void stopPositioning(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+            CallbackContext callbackContext) {
         if (locationListener != null) {
             SitumSdk.locationManager().removeUpdates(locationListener);
         } else {
@@ -260,6 +298,7 @@ public class PluginHelper {
     }
 
     private static void requestLocationPermission(CordovaInterface cordova) {
-        ActivityCompat.requestPermissions(cordova.getActivity(), new String[]{"android.permission.ACCESS_COARSE_LOCATION"}, 0);
+        ActivityCompat.requestPermissions(cordova.getActivity(),
+                new String[] { "android.permission.ACCESS_COARSE_LOCATION" }, 0);
     }
 }
