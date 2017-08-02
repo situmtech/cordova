@@ -3,20 +3,23 @@ var exec = require('cordova/exec');
 var PLUGIN_NAME = 'Situm';
 
 var Situm = {
-  setApiKey: function(email, apiKey, cb) {
+  setApiKey: function (email, apiKey, cb) {
     exec(cb, null, PLUGIN_NAME, 'setApiKey', [email, apiKey]);
   },
-  setUserPass: function(email, apiKey, cb) {
+  setUserPass: function (email, apiKey, cb) {
     exec(cb, null, PLUGIN_NAME, 'setUserPass', [email, password]);
   },
-  fetchBuildings: function(cb) {
+  fetchBuildings: function (cb) {
     exec(cb, null, PLUGIN_NAME, 'fetchBuildings', []);
   },
-  startPositioning: function(arrBuilding,cb) {
+  startPositioning: function (arrBuilding, cb) {
     exec(cb, null, PLUGIN_NAME, 'startPositioning', arrBuilding);
   },
-  stopPositioning: function(cb) {
+  stopPositioning: function (cb) {
     exec(cb, null, PLUGIN_NAME, 'stopPositioning', []);
+  },
+  fetchFloorsFromBuilding: function (building, cb) {
+    exec(cb, null, PLUGIN_NAME, 'fetchFloorsFromBuildings');
   }
 };
 module.exports = Situm;
