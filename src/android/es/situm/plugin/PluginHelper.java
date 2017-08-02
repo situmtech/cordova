@@ -1,6 +1,7 @@
 package es.situm.plugin;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
@@ -14,6 +15,7 @@ import es.situm.sdk.location.LocationStatus;
 import es.situm.sdk.model.cartography.Building;
 import es.situm.sdk.model.cartography.Floor;
 import es.situm.sdk.model.cartography.Poi;
+import es.situm.sdk.model.cartography.PoiCategory;
 import es.situm.sdk.model.location.CartesianCoordinate;
 import es.situm.sdk.model.location.Location;
 import es.situm.sdk.utils.Handler;
@@ -31,6 +33,8 @@ import org.apache.cordova.PluginResult.Status;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import javax.xml.datatype.DatatypeFactory;
 
 public class PluginHelper {
 
@@ -224,6 +228,33 @@ public class PluginHelper {
         }
     }
 
+    public static void fetchMapFromFloor(CordovaInterface cordova, CordovaWebView webView, final JSONArray args,
+            final CallbackContext callbackContext) {
+        try {
+            JSONObject jsonoFloor = args.getJSONObject(0);
+            Floor floor = LocationWrapper.buildingJsonObjectToFloor(jsonoFloor);
+            SitumSdk.communicationManager().fetchMapFromFloor(floor, new HashMap<String, Object>(),
+                    new Handler<Bitmap>() {
+                        @Override
+                        public void onSuccess(Bitmap bitmap) {
+                            Log.d(PluginHelper.TAG, "onSuccess: Map fetched successfully");
+                            JSONArray jsonaMap = new JSONArray();
+                            JSONObject jsonoMap = LocationWrapper.bitmapToString(bitmap);
+                            jsonaMap.put(jsonoMap);
+                            callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonaMap));
+                        }
+
+                        @Override
+                        public void onFailure(Error error) {
+                            Log.e(PluginHelper.TAG, "onFailure: " + error);
+                            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, error.getMessage()));
+                        }
+                    });
+        } catch (JSONException e) {
+            Log.e(TAG, "Unexpected error in map download", e.getCause());
+        }
+    }
+
     public static void startPositioning(final CordovaInterface cordova, CordovaWebView webView, JSONArray args,
             final CallbackContext callbackContext) {
         try {
@@ -287,6 +318,7 @@ public class PluginHelper {
             CallbackContext callbackContext) {
         if (locationListener != null) {
             SitumSdk.locationManager().removeUpdates(locationListener);
+            locationListener = null;
         } else {
             Log.i(TAG, "stopPositioning: location listener is not started.");
         }

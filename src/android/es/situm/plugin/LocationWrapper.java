@@ -1,17 +1,24 @@
 package es.situm.plugin;
 
+import android.graphics.Bitmap;
+import android.util.Base64;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Vector;
+//import java.util.Vector;
+
+import java.io.ByteArrayOutputStream;
 
 import es.situm.sdk.location.LocationStatus;
+import es.situm.sdk.model.URL;
 import es.situm.sdk.model.cartography.Building;
 import es.situm.sdk.model.cartography.Floor;
 import es.situm.sdk.model.cartography.Poi;
+import es.situm.sdk.model.cartography.PoiCategory;
 import es.situm.sdk.model.cartography.Point;
 import es.situm.sdk.model.directions.Indication;
 import es.situm.sdk.model.directions.Route;
@@ -28,7 +35,7 @@ import es.situm.sdk.v1.SitumEvent;
 
 public class LocationWrapper {
 
-    public static final String TAG = "LocationWrapper";
+    //public static final String TAG = "LocationWrapper";
 
     public static final String ADDRESS = "address";
     public static final String BOUNDS = "bounds";
@@ -39,6 +46,9 @@ public class LocationWrapper {
     public static final String BUILDING_NAME = "name";
     public static final String PICTURE_THUMB_URL = "pictureThumbUrl";
     public static final String POI_NAME = "poiName";
+    public static final String POI_CATEGORY_NAME = "poiCategoryName";
+    public static final String POI_CATEGORY_CODE = "poiCategoryCode";
+    public static final String IS_PUBLIC = "public";
     public static final String PICTURE_URL = "pictureUrl";
     public static final String ROTATION = "rotation";
     public static final String USER_IDENTIFIER = "userIdentifier";
@@ -127,10 +137,6 @@ public class LocationWrapper {
     public static final String TOP_RIGHT = "topRight";
     public static final String BOTTOM_RIGHT = "bottomRight";
 
-    public static final String POI_CATEGORY_NAME = "poiCategoryName";
-    public static final String POI_CATEGORY_CODE = "poiCategoryCode";
-    public static final String IS_PUBLIC = "public";
-
     public static JSONObject buildingToJsonObject(Building building) {
         JSONObject jo = new JSONObject();
         try {
@@ -192,6 +198,18 @@ public class LocationWrapper {
             e.printStackTrace();
         }
         return jo;
+    }
+
+    public static Floor buildingJsonObjectToFloor(JSONObject jo) {
+        Floor floor = null;
+        try {
+            floor = new Floor.Builder().buildingIdentifier(jo.getString(BUILDING_IDENTIFIER))
+                    .altitude(jo.getDouble(ALTITUDE)).level(jo.getInt(LEVEL)).mapUrl(new URL(jo.getString(MAP_URL)))
+                    .scale(jo.getDouble(SCALE)).build();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return floor;
     }
 
     //Situm Events
@@ -547,6 +565,23 @@ public class LocationWrapper {
             jo.put(ROUTE_STEP, routeStepToJsonObject(navigationProgress.getRouteStep()));
             jo.put(TIME_TO_END_STEP, navigationProgress.getTimeToEndStep());
             jo.put(TIME_TO_GOAL, navigationProgress.getTimeToGoal());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jo;
+    }
+
+    // Utils
+
+    public static JSONObject bitmapToString(Bitmap bitmap) {
+        JSONObject jo = null;
+        try {
+            String encodedImage;
+            ByteArrayOutputStream byteArrayBitmapStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayBitmapStream);
+            byte[] b = byteArrayBitmapStream.toByteArray();
+            encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
+            jo.put("data", encodedImage);
         } catch (JSONException e) {
             e.printStackTrace();
         }
