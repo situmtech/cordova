@@ -19,7 +19,7 @@ var Situm = {
     exec(cb, null, PLUGIN_NAME, 'stopPositioning', []);
   },
   fetchFloorsFromBuilding: function (building, cb) {
-    exec(cb, null, PLUGIN_NAME, 'fetchFloorsFromBuildings');
+    exec(cb, null, PLUGIN_NAME, 'fetchFloorsFromBuildings', building);
   }
 };
 module.exports = Situm;
