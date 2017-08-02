@@ -20,6 +20,9 @@ var Situm = {
   },
   fetchFloorsFromBuilding: function (building, cb) {
     exec(cb, null, PLUGIN_NAME, 'fetchFloorsFromBuildings', building);
+  },
+  fetchPoiCategories: function (cb) {
+    exec(cb, null, PLUGIN_NAME, 'fetchPoiCategories');
   }
 };
 module.exports = Situm;
