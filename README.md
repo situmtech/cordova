@@ -27,6 +27,18 @@ fetchBuildings:
        cordova.plugins.Situm.fetchBuildings(callback);
 ```
 
+fetchFloorsFromBuilding:
+
+```javascript
+      cordova.plugins.Situm.fetchFloorsFromBuilding(building, callback);
+```
+
+fetchMapFromFloor:
+
+```javascript
+      cordova.plugins.Situm.fetchMapFromFloor(floor, callback);
+```
+
 fetchPoiCategories:
 
 ```javascript
