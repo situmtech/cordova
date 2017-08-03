@@ -175,8 +175,14 @@ public class LocationWrapper {
     public static Building buildingJsonObjectToBuilding(JSONObject jo) {
         Building building = null;
         try {
-            building = new Building.Builder().userIdentifier(jo.getString(BUILDING_IDENTIFIER))
-                    .address(jo.getString(ADDRESS)).name(jo.getString(BUILDING_NAME)).build();
+            Coordinate center = new Coordinate(jo.getJSONObject(CENTER).getDouble(LATITUDE),
+                    jo.getJSONObject(CENTER).getDouble(LONGITUDE));
+            Dimensions dimesnsions = new Dimensions(jo.getJSONObject(DIMENSIONS).getDouble(WIDTH),
+                    jo.getJSONObject(DIMENSIONS).getDouble(HEIGHT));
+            building = new Building.Builder().identifier(jo.getString(BUILDING_IDENTIFIER))
+                    .address(jo.getString(ADDRESS)).name(jo.getString(BUILDING_NAME))
+                    .userIdentifier(jo.getString(USER_IDENTIFIER)).center(center).dimensions(dimesnsions)
+                    .infoHtml(jo.getString(INFO_HTML)).build();
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -200,7 +206,7 @@ public class LocationWrapper {
         return jo;
     }
 
-    public static Floor buildingJsonObjectToFloor(JSONObject jo) {
+    public static Floor floorJsonObjectToFloor(JSONObject jo) {
         Floor floor = null;
         try {
             floor = new Floor.Builder().buildingIdentifier(jo.getString(BUILDING_IDENTIFIER))
