@@ -29,10 +29,9 @@ fetchBuildings:
 
 fetchFloorsFromBuilding:
 
-     building: A building object, must be the same structure that original building java object.
-     See: http://developers.situm.es/sdk_documentation/android/javadoc/2.7.0/
-
 ```javascript
+      building: A building object, must be the same structure that original building java object.
+      See: <a href="http://developers.situm.es/sdk_documentation/android/javadoc/2.7.0/">http://developers.situm.es/sdk_documentation/android/javadoc/2.7.0/</a>
       cordova.plugins.Situm.fetchFloorsFromBuilding(building, callback);
 ```
 
@@ -52,7 +51,7 @@ startPositioning:
 
 ```javascript
     building: A building object, must be the same structure that original building java object.
-    See: http://developers.situm.es/sdk_documentation/android/javadoc/2.7.0/
+    See: <a href="http://developers.situm.es/sdk_documentation/android/javadoc/2.7.0/">http://developers.situm.es/sdk_documentation/android/javadoc/2.7.0/</a>
     cordova.plugins.Situm.startPositioning(buildings, callback)
 ```
 stopPositioning:
