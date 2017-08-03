@@ -29,14 +29,19 @@ fetchBuildings:
 
 fetchFloorsFromBuilding:
 
-  building: A building object, must be the same structure that original building java object.
-  See: <a href="http://developers.situm.es/sdk_documentation/android/javadoc/2.7.0/">http://developers.situm.es/sdk_documentation/android/javadoc/2.7.0/</a>
+  building: A building object, must have the same structure that original building java object.
+
+  See: <a target="_blank" href="http://developers.situm.es/sdk_documentation/android/javadoc/2.7.0/">http://developers.situm.es/sdk_documentation/android/javadoc/2.7.0/</a>
 
 ```javascript
       cordova.plugins.Situm.fetchFloorsFromBuilding(building, callback);
 ```
 
 fetchMapFromFloor:
+
+  floor: A floor object, must have the same structure that original floor java object.
+
+  See: <a target="_blank" href="http://developers.situm.es/sdk_documentation/android/javadoc/2.7.0/">http://developers.situm.es/sdk_documentation/android/javadoc/2.7.0/</a>
 
 ```javascript
       cordova.plugins.Situm.fetchMapFromFloor(floor, callback);
@@ -50,8 +55,9 @@ fetchPoiCategories:
 
 startPositioning:
 
-  building: A building object, must be the same structure that original building java object.
-  See: <a href="http://developers.situm.es/sdk_documentation/android/javadoc/2.7.0/">http://developers.situm.es/sdk_documentation/android/javadoc/2.7.0/</a>
+  building: A building object, must have the same structure that original building java object.
+
+  See: <a target="_blank" href="http://developers.situm.es/sdk_documentation/android/javadoc/2.7.0/">http://developers.situm.es/sdk_documentation/android/javadoc/2.7.0/</a>
 
 ```javascript
     cordova.plugins.Situm.startPositioning(buildings, callback)
