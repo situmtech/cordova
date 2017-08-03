@@ -229,7 +229,7 @@ public class PluginHelper {
             final CallbackContext callbackContext) {
         try {
             JSONObject jsonoFloor = args.getJSONObject(0);
-            Floor floor = LocationWrapper.buildingJsonObjectToFloor(jsonoFloor);
+            Floor floor = LocationWrapper.floorJsonObjectToFloor(jsonoFloor);
             SitumSdk.communicationManager().fetchMapFromFloor(floor, new Handler<Bitmap>() {
                 @Override
                 public void onSuccess(Bitmap bitmap) {
