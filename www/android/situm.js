@@ -23,6 +23,9 @@ var Situm = {
   },
   fetchPoiCategories: function (cb) {
     exec(cb, null, PLUGIN_NAME, 'fetchPoiCategories');
+  },
+  fetchMapFromFloor: function (floor, cb) {
+    exec(cb, null, PLUGIN_NAME, 'fetchMapFromFloor', [floor]);
   }
 };
 module.exports = Situm;
