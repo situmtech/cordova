@@ -234,10 +234,8 @@ public class PluginHelper {
                 @Override
                 public void onSuccess(Bitmap bitmap) {
                     Log.d(PluginHelper.TAG, "onSuccess: Map fetched successfully");
-                    JSONArray jsonaMap = new JSONArray();
                     JSONObject jsonoMap = LocationWrapper.bitmapToString(bitmap);
-                    jsonaMap.put(jsonoMap);
-                    callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonaMap));
+                    callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonoMap));
                 }
 
                 @Override

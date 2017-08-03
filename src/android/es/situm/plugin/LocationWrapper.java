@@ -580,13 +580,12 @@ public class LocationWrapper {
     // Utils
 
     public static JSONObject bitmapToString(Bitmap bitmap) {
-        JSONObject jo = null;
+        JSONObject jo = new JSONObject();
         try {
             String encodedImage;
-            ByteArrayOutputStream byteArrayBitmapStream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayBitmapStream);
-            byte[] b = byteArrayBitmapStream.toByteArray();
-            encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
+            ByteArrayOutputStream byteArrayOS = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOS);
+            encodedImage = Base64.encodeToString(byteArrayOS.toByteArray(), Base64.DEFAULT);
             jo.put("data", encodedImage);
         } catch (JSONException e) {
             e.printStackTrace();
