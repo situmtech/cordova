@@ -51,10 +51,8 @@ fetchPoiCategories:
 startPositioning:
 
 ```javascript
-      let buildings = [{
-        'building_id' : this.buildingId,
-        'building_name' : this.buildingName
-      }];
+    building: A building object, must be the same structure that original building java object.
+    See: http://developers.situm.es/sdk_documentation/android/javadoc/2.7.0/
     cordova.plugins.Situm.startPositioning(buildings, callback)
 ```
 stopPositioning:
