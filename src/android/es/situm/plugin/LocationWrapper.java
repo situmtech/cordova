@@ -1,17 +1,24 @@
 package es.situm.plugin;
 
+import android.graphics.Bitmap;
+import android.util.Base64;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Vector;
+//import java.util.Vector;
+
+import java.io.ByteArrayOutputStream;
 
 import es.situm.sdk.location.LocationStatus;
+import es.situm.sdk.model.URL;
 import es.situm.sdk.model.cartography.Building;
 import es.situm.sdk.model.cartography.Floor;
 import es.situm.sdk.model.cartography.Poi;
+import es.situm.sdk.model.cartography.PoiCategory;
 import es.situm.sdk.model.cartography.Point;
 import es.situm.sdk.model.directions.Indication;
 import es.situm.sdk.model.directions.Route;
@@ -28,7 +35,7 @@ import es.situm.sdk.v1.SitumEvent;
 
 public class LocationWrapper {
 
-    public static final String TAG = "LocationWrapper";
+    //public static final String TAG = "LocationWrapper";
 
     public static final String ADDRESS = "address";
     public static final String BOUNDS = "bounds";
@@ -39,6 +46,9 @@ public class LocationWrapper {
     public static final String BUILDING_NAME = "name";
     public static final String PICTURE_THUMB_URL = "pictureThumbUrl";
     public static final String POI_NAME = "poiName";
+    public static final String POI_CATEGORY_NAME = "poiCategoryName";
+    public static final String POI_CATEGORY_CODE = "poiCategoryCode";
+    public static final String IS_PUBLIC = "public";
     public static final String PICTURE_URL = "pictureUrl";
     public static final String ROTATION = "rotation";
     public static final String USER_IDENTIFIER = "userIdentifier";
@@ -104,7 +114,7 @@ public class LocationWrapper {
     public static final String DISTANCE_TO_NEXT_LEVEL = "distanceToNextLevel";
     public static final String DISTANCE_TO_CLOSEST_POINT_IN_ROUTE = "distanceToClosestPointInRoute";
     public static final String DISTANCE_TO_END_STEP = "distanceToEndStep";
-    public static final String INDICATION_TYPE= "indicationType";
+    public static final String INDICATION_TYPE = "indicationType";
     public static final String CURRENT_INDICATION = "currentIndication";
     public static final String NEXT_INDICATION = "nextIndication";
     public static final String IS_FIRST = "isFirst";
@@ -127,8 +137,6 @@ public class LocationWrapper {
     public static final String TOP_RIGHT = "topRight";
     public static final String BOTTOM_RIGHT = "bottomRight";
 
-
-
     public static JSONObject buildingToJsonObject(Building building) {
         JSONObject jo = new JSONObject();
         try {
@@ -147,15 +155,15 @@ public class LocationWrapper {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return  jo;
+        return jo;
     }
 
-    public static JSONObject mapStringToJsonObject(Map<String,String> mp) {
+    public static JSONObject mapStringToJsonObject(Map<String, String> mp) {
         JSONObject jo = new JSONObject();
         try {
             Iterator it = mp.entrySet().iterator();
             while (it.hasNext()) {
-                Map.Entry<String,String> pairs = (Map.Entry<String, String>)it.next();
+                Map.Entry<String, String> pairs = (Map.Entry<String, String>) it.next();
                 jo.put(pairs.getKey(), pairs.getValue());
             }
         } catch (JSONException e) {
@@ -167,13 +175,19 @@ public class LocationWrapper {
     public static Building buildingJsonObjectToBuilding(JSONObject jo) {
         Building building = null;
         try {
-            building = new Building.Builder().userIdentifier(jo.getString(BUILDING_IDENTIFIER)).address(jo.getString(ADDRESS)).name(jo.getString(BUILDING_NAME)).build();
+            Coordinate center = new Coordinate(jo.getJSONObject(CENTER).getDouble(LATITUDE),
+                    jo.getJSONObject(CENTER).getDouble(LONGITUDE));
+            Dimensions dimesnsions = new Dimensions(jo.getJSONObject(DIMENSIONS).getDouble(WIDTH),
+                    jo.getJSONObject(DIMENSIONS).getDouble(HEIGHT));
+            building = new Building.Builder().identifier(jo.getString(BUILDING_IDENTIFIER))
+                    .address(jo.getString(ADDRESS)).name(jo.getString(BUILDING_NAME))
+                    .userIdentifier(jo.getString(USER_IDENTIFIER)).center(center).dimensions(dimesnsions)
+                    .infoHtml(jo.getString(INFO_HTML)).build();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return  building;
+        return building;
     }
-
 
     //Floor
 
@@ -190,6 +204,18 @@ public class LocationWrapper {
             e.printStackTrace();
         }
         return jo;
+    }
+
+    public static Floor floorJsonObjectToFloor(JSONObject jo) {
+        Floor floor = null;
+        try {
+            floor = new Floor.Builder().buildingIdentifier(jo.getString(BUILDING_IDENTIFIER))
+                    .altitude(jo.getDouble(ALTITUDE)).level(jo.getInt(LEVEL)).mapUrl(new URL(jo.getString(MAP_URL)))
+                    .scale(jo.getDouble(SCALE)).build();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return floor;
     }
 
     //Situm Events
@@ -224,8 +250,6 @@ public class LocationWrapper {
         return jo;
     }
 
-
-
     // POI
 
     public static JSONObject poiToJsonObject(Poi poi) {
@@ -245,8 +269,17 @@ public class LocationWrapper {
         return jo;
     }
 
-
-
+    public static JSONObject poiCategoryToJsonObject(PoiCategory poiCategory) {
+        JSONObject jo = new JSONObject();
+        try {
+            jo.put(POI_CATEGORY_CODE, poiCategory.getCode());
+            jo.put(POI_CATEGORY_NAME, poiCategory.getName());
+            jo.put(IS_PUBLIC, poiCategory.isPublic());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jo;
+    }
 
     // Location
 
@@ -289,18 +322,13 @@ public class LocationWrapper {
     public static Location locationJsonObjectToLocation(JSONObject jo) {
         Location location = null;
         try {
-            location = new Location.Builder(jo.getLong(TIMESTAMP),
-                    jo.getString(PROVIDER), pointJsonObjectToPoint(jo.getJSONObject(POSITION)),
-                    Float.valueOf(jo.getString(ACCURACY)))
-                    .build();
+            location = new Location.Builder(jo.getLong(TIMESTAMP), jo.getString(PROVIDER),
+                    pointJsonObjectToPoint(jo.getJSONObject(POSITION)), Float.valueOf(jo.getString(ACCURACY))).build();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return  location;
+        return location;
     }
-
-
-
 
     // Coordinate
 
@@ -312,7 +340,7 @@ public class LocationWrapper {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return  jo;
+        return jo;
     }
 
     public static Coordinate coordinateJsonObjectToCoordinate(JSONObject jo) {
@@ -322,10 +350,8 @@ public class LocationWrapper {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return  coordinate;
+        return coordinate;
     }
-
-
 
     // Point
 
@@ -341,21 +367,20 @@ public class LocationWrapper {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return  jo;
+        return jo;
     }
 
     public static Point pointJsonObjectToPoint(JSONObject jo) {
         Point point = null;
         try {
-            point = new Point(jo.getString(BUILDING_IDENTIFIER), jo.getString(FLOOR_IDENTIFIER), coordinateJsonObjectToCoordinate(jo.getJSONObject(COORDINATE)), cartesianCoordinateJsonObjectToCartesianCoordinate(jo.getJSONObject(CARTESIAN_COORDINATE)));
+            point = new Point(jo.getString(BUILDING_IDENTIFIER), jo.getString(FLOOR_IDENTIFIER),
+                    coordinateJsonObjectToCoordinate(jo.getJSONObject(COORDINATE)),
+                    cartesianCoordinateJsonObjectToCartesianCoordinate(jo.getJSONObject(CARTESIAN_COORDINATE)));
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return  point;
+        return point;
     }
-
-
-
 
     // CartesianCoordinate
 
@@ -367,7 +392,7 @@ public class LocationWrapper {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return  jo;
+        return jo;
     }
 
     public static CartesianCoordinate cartesianCoordinateJsonObjectToCartesianCoordinate(JSONObject jo) {
@@ -377,9 +402,8 @@ public class LocationWrapper {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return  cartesianCoordinate;
+        return cartesianCoordinate;
     }
-
 
     // Dimensions
 
@@ -391,10 +415,8 @@ public class LocationWrapper {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return  jo;
+        return jo;
     }
-
-
 
     // Bounds
 
@@ -408,10 +430,8 @@ public class LocationWrapper {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return  jo;
+        return jo;
     }
-
-
 
     // Angle
 
@@ -425,9 +445,8 @@ public class LocationWrapper {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return  jo;
+        return jo;
     }
-
 
     // Route
 
@@ -435,23 +454,23 @@ public class LocationWrapper {
         JSONObject jo = new JSONObject();
         try {
             JSONArray edgesJsonArray = new JSONArray();
-            for (RouteStep routeStep:route.getEdges()) {
+            for (RouteStep routeStep : route.getEdges()) {
                 edgesJsonArray.put(routeStepToJsonObject(routeStep));
             }
             JSONArray stepsJsonArray = new JSONArray();
-            for (RouteStep routeStep:route.getSteps()) {
+            for (RouteStep routeStep : route.getSteps()) {
                 stepsJsonArray.put(routeStepToJsonObject(routeStep));
             }
             JSONArray indicationsJsonArray = new JSONArray();
-            for (Indication indication:route.getIndications()) {
+            for (Indication indication : route.getIndications()) {
                 indicationsJsonArray.put(indicationToJsonObject(indication));
             }
             JSONArray nodesJsonArray = new JSONArray();
-            for (Point point:route.getNodes()) {
+            for (Point point : route.getNodes()) {
                 nodesJsonArray.put(pointToJsonObject(point));
             }
             JSONArray pointsJsonArray = new JSONArray();
-            for (Point point:route.getPoints()) {
+            for (Point point : route.getPoints()) {
                 pointsJsonArray.put(pointToJsonObject(point));
             }
 
@@ -469,10 +488,8 @@ public class LocationWrapper {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return  jo;
+        return jo;
     }
-
-
 
     //RouteStep
 
@@ -489,26 +506,21 @@ public class LocationWrapper {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return  jo;
+        return jo;
     }
 
     public static RouteStep routeStepJsonObjectToRouteStep(JSONObject jo) {
         RouteStep routeStep = null;
         try {
-            routeStep = new RouteStep.Builder()
-                    .distance(jo.getDouble(DISTANCE))
-                    .distanceToEnd(jo.getDouble(DISTANCE_TO_GOAL))
-                    .from(pointJsonObjectToPoint(jo.getJSONObject(FROM)))
-                    .to(pointJsonObjectToPoint(jo.getJSONObject(TO)))
-                    .id(jo.getInt(ID))
-                    .isLast(jo.getBoolean(IS_LAST))
+            routeStep = new RouteStep.Builder().distance(jo.getDouble(DISTANCE))
+                    .distanceToEnd(jo.getDouble(DISTANCE_TO_GOAL)).from(pointJsonObjectToPoint(jo.getJSONObject(FROM)))
+                    .to(pointJsonObjectToPoint(jo.getJSONObject(TO))).id(jo.getInt(ID)).isLast(jo.getBoolean(IS_LAST))
                     .build();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return  routeStep;
+        return routeStep;
     }
-
 
     // Indication
 
@@ -526,27 +538,24 @@ public class LocationWrapper {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return  jo;
+        return jo;
     }
 
     public static Indication indicationJsonObjectToIndication(JSONObject jo) {
         Indication indication = null;
         try {
-            indication = new Indication.Builder()
-                    .setDistance(jo.getDouble(DISTANCE))
+            indication = new Indication.Builder().setDistance(jo.getDouble(DISTANCE))
                     .setDistanceToNextLevel(jo.getInt(DISTANCE_TO_NEXT_LEVEL))
                     .setInstructionType(Indication.Action.valueOf(jo.getString(INDICATION_TYPE)))
                     .setOrientation(jo.getDouble(ORIENTATION))
                     .setOrientationType(Indication.Orientation.valueOf(jo.getString(ORIENTATION_TYPE)))
-                    .setStepIdxDestination(jo.getInt(STEP_IDX_DESTINATION))
-                    .setStepIdxOrigin(jo.getInt(STEP_IDX_ORIGIN))
+                    .setStepIdxDestination(jo.getInt(STEP_IDX_DESTINATION)).setStepIdxOrigin(jo.getInt(STEP_IDX_ORIGIN))
                     .build();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return  indication;
+        return indication;
     }
-
 
     // NavigationProgress
 
@@ -565,6 +574,22 @@ public class LocationWrapper {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return  jo;
+        return jo;
+    }
+
+    // Utils
+
+    public static JSONObject bitmapToString(Bitmap bitmap) {
+        JSONObject jo = new JSONObject();
+        try {
+            String encodedImage;
+            ByteArrayOutputStream byteArrayOS = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOS);
+            encodedImage = Base64.encodeToString(byteArrayOS.toByteArray(), Base64.DEFAULT);
+            jo.put("data", encodedImage);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jo;
     }
 }

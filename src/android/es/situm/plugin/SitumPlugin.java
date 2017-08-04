@@ -38,6 +38,18 @@ public class SitumPlugin extends CordovaPlugin {
       PluginHelper.startPositioning(cordova, webView, args, callbackContext);
     } else if(action.equalsIgnoreCase("stopPositioning")) {
       PluginHelper.stopPositioning(cordova, webView, args, callbackContext);
+    } else if(action.equalsIgnoreCase("fetchPoiCategories")) {
+      PluginHelper.fetchPoiCategories(cordova, webView, args, callbackContext);
+    } else if(action.equalsIgnoreCase("fetchFloorsFromBuilding")) {
+      PluginHelper.fetchFloorsFromBuilding(cordova, webView, args, callbackContext);
+    } else if(action.equalsIgnoreCase("fetchIndoorPOIsFromBuilding")) {
+      PluginHelper.fetchIndoorPOIsFromBuilding(cordova, webView, args, callbackContext);
+    } else if(action.equalsIgnoreCase("fetchOutdoorPOIsFromBuilding")) {
+      PluginHelper.fetchOutdoorPOIsFromBuilding(cordova, webView, args, callbackContext);
+    } else if(action.equalsIgnoreCase("fetchEventsFromBuilding")) {
+      PluginHelper.fetchEventsFromBuilding(cordova, webView, args, callbackContext);
+    } else if(action.equalsIgnoreCase("fetchMapFromFloor")) {
+      PluginHelper.fetchMapFromFloor(cordova, webView, args, callbackContext);
     }
     //else if(action.equalsIgnoreCase("requestDirections")) {
       //PluginHelper.requestDirections(cordova, webView, args, callbackContext);
