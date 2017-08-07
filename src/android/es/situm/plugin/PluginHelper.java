@@ -384,4 +384,9 @@ public class PluginHelper {
         Log.e(TAG, message);
         callbackContext.sendPluginResult(new PluginResult(Status.OK, message));
     }
+
+    public static void invalidateCache(CallbackContext callbackContext) {
+        SitumSdk.communicationManager().invalidateCache();
+        callbackContext.sendPluginResult(new PluginResult(Status.OK, "Cache invalidated"));
+    }
 }

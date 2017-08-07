@@ -41,6 +41,9 @@ var Situm = {
   },
   fetchPoiCategoryIconSelected: function (category, cb) {
     exec(cb, null, PLUGIN_NAME, 'fetchPoiCategoryIconSelected', [category]);
+  },
+  invalidateCache: function (cb) {
+    exec(cb, null, PLUGIN_NAME, 'invalidateCache');
   }
 };
 module.exports = Situm;
