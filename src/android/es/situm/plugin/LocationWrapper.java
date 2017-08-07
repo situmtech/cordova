@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 //import java.util.Vector;
@@ -14,6 +15,7 @@ import java.util.Map;
 import java.io.ByteArrayOutputStream;
 
 import es.situm.sdk.location.LocationStatus;
+import es.situm.sdk.model.I18nString;
 import es.situm.sdk.model.URL;
 import es.situm.sdk.model.cartography.Building;
 import es.situm.sdk.model.cartography.Floor;
@@ -279,6 +281,18 @@ public class LocationWrapper {
             e.printStackTrace();
         }
         return jo;
+    }
+
+    public static PoiCategory poiCategoryFromJsonObject(JSONObject jo){
+        PoiCategory category = null;
+        try{
+            Map<String, String> mapName = new HashMap<String, String>();
+            mapName.put("name",jo.getString(POI_CATEGORY_NAME));
+            category = new PoiCategory.Builder().code(jo.getString(POI_CATEGORY_CODE)).name(new I18nString(mapName)).isPublic(jo.getBoolean(IS_PUBLIC)).build();
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+        return category;
     }
 
     // Location

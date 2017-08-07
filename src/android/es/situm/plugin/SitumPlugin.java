@@ -28,31 +28,37 @@ public class SitumPlugin extends CordovaPlugin {
       String email = args.getString(0);
       String apiKey = args.getString(1);
       es.situm.sdk.SitumSdk.configuration().setApiKey(email, apiKey);
-    } else if(action.equalsIgnoreCase("setUserPass")) {
+    } else if (action.equalsIgnoreCase("setUserPass")) {
       String email = args.getString(0);
       String password = args.getString(1);
       es.situm.sdk.SitumSdk.configuration().setUserPass(email, password);
-    } else if(action.equalsIgnoreCase("fetchBuildings")) {
+    } else if (action.equalsIgnoreCase("fetchBuildings")) {
       PluginHelper.fetchBuildings(cordova, webView, args, callbackContext);
-    } else if(action.equalsIgnoreCase("startPositioning")) {
+    } else if (action.equalsIgnoreCase("startPositioning")) {
       PluginHelper.startPositioning(cordova, webView, args, callbackContext);
-    } else if(action.equalsIgnoreCase("stopPositioning")) {
+    } else if (action.equalsIgnoreCase("stopPositioning")) {
       PluginHelper.stopPositioning(cordova, webView, args, callbackContext);
-    } else if(action.equalsIgnoreCase("fetchPoiCategories")) {
+    } else if (action.equalsIgnoreCase("fetchPoiCategories")) {
       PluginHelper.fetchPoiCategories(cordova, webView, args, callbackContext);
-    } else if(action.equalsIgnoreCase("fetchFloorsFromBuilding")) {
+    } else if (action.equalsIgnoreCase("fetchFloorsFromBuilding")) {
       PluginHelper.fetchFloorsFromBuilding(cordova, webView, args, callbackContext);
-    } else if(action.equalsIgnoreCase("fetchIndoorPOIsFromBuilding")) {
+    } else if (action.equalsIgnoreCase("fetchIndoorPOIsFromBuilding")) {
       PluginHelper.fetchIndoorPOIsFromBuilding(cordova, webView, args, callbackContext);
-    } else if(action.equalsIgnoreCase("fetchOutdoorPOIsFromBuilding")) {
+    } else if (action.equalsIgnoreCase("fetchOutdoorPOIsFromBuilding")) {
       PluginHelper.fetchOutdoorPOIsFromBuilding(cordova, webView, args, callbackContext);
-    } else if(action.equalsIgnoreCase("fetchEventsFromBuilding")) {
+    } else if (action.equalsIgnoreCase("fetchEventsFromBuilding")) {
       PluginHelper.fetchEventsFromBuilding(cordova, webView, args, callbackContext);
-    } else if(action.equalsIgnoreCase("fetchMapFromFloor")) {
+    } else if (action.equalsIgnoreCase("fetchMapFromFloor")) {
       PluginHelper.fetchMapFromFloor(cordova, webView, args, callbackContext);
+    } else if (action.equalsIgnoreCase("fetchPoiCategoryIconNormal")) {
+      PluginHelper.fetchPoiCategoryIconNormal(cordova, webView, args, callbackContext);
+    } else if (action.equalsIgnoreCase("fetchPoiCategoryIconSelected")) {
+      PluginHelper.fetchPoiCategoryIconSelected(cordova, webView, args, callbackContext);
+    } else {
+      PluginHelper.returnDefaultResponse(callbackContext);
     }
     //else if(action.equalsIgnoreCase("requestDirections")) {
-      //PluginHelper.requestDirections(cordova, webView, args, callbackContext);
+    //PluginHelper.requestDirections(cordova, webView, args, callbackContext);
     //}
     return true;
   }

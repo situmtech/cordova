@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.telecom.Call;
 import android.util.Log;
+import android.webkit.WebSettings;
 import android.widget.Toast;
 import es.situm.sdk.SitumSdk;
 import es.situm.sdk.error.Error;
@@ -191,6 +193,54 @@ public class PluginHelper {
         });
     }
 
+    public static void fetchPoiCategoryIconNormal(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+            final CallbackContext callbackContext) {
+        try {
+            JSONObject jsonoCategory = args.getJSONObject(0);
+            PoiCategory category = LocationWrapper.poiCategoryFromJsonObject(jsonoCategory);
+            SitumSdk.communicationManager().fetchPoiCategoryIconNormal(category, new Handler<Bitmap>() {
+                @Override
+                public void onSuccess(Bitmap bitmap) {
+                    Log.d(PluginHelper.TAG, "onSuccess: Poi icon fetched successfully");
+                    JSONObject jsonoMap = LocationWrapper.bitmapToString(bitmap);
+                    callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonoMap));
+                }
+
+                @Override
+                public void onFailure(Error error) {
+                    Log.e(PluginHelper.TAG, "onFailure: " + error);
+                    callbackContext.sendPluginResult(new PluginResult(Status.ERROR, error.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+            Log.e(TAG, "Unexpected error in situm POI response", e.getCause());
+        }
+    }
+
+    public static void fetchPoiCategoryIconSelected(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+            final CallbackContext callbackContext) {
+        try {
+            JSONObject jsonoCategory = args.getJSONObject(0);
+            PoiCategory category = LocationWrapper.poiCategoryFromJsonObject(jsonoCategory);
+            SitumSdk.communicationManager().fetchPoiCategoryIconNormal(category, new Handler<Bitmap>() {
+                @Override
+                public void onSuccess(Bitmap bitmap) {
+                    Log.d(PluginHelper.TAG, "onSuccess: Poi icon fetched successfully");
+                    JSONObject jsonoMap = LocationWrapper.bitmapToString(bitmap);
+                    callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonoMap));
+                }
+
+                @Override
+                public void onFailure(Error error) {
+                    Log.e(PluginHelper.TAG, "onFailure: " + error);
+                    callbackContext.sendPluginResult(new PluginResult(Status.ERROR, error.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+            Log.e(TAG, "Unexpected error in situm POI response", e.getCause());
+        }
+    }
+
     public static void fetchEventsFromBuilding(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
             final CallbackContext callbackContext) {
         try {
@@ -326,5 +376,11 @@ public class PluginHelper {
     private static void requestLocationPermission(CordovaInterface cordova) {
         ActivityCompat.requestPermissions(cordova.getActivity(),
                 new String[] { "android.permission.ACCESS_COARSE_LOCATION" }, 0);
+    }
+
+    public static void returnDefaultResponse(CallbackContext callbackContext) {
+        String message = "Error function name not found";
+        Log.e(TAG, message);
+        callbackContext.sendPluginResult(new PluginResult(Status.OK, message));
     }
 }
