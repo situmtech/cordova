@@ -151,7 +151,8 @@ public class PluginHelper {
                                 jsonaPois.put(jsonoPoi);
                             }
                             if (pois.isEmpty()) {
-                                Log.e(PluginHelper.TAG, "onSuccess: you have no indoor pois defined for this building");
+                                Log.e(PluginHelper.TAG,
+                                        "onSuccess: you have no outdoor pois defined for this building");
                             }
                             callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonaPois));
                         }
