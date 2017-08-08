@@ -39,7 +39,7 @@ IOS: Not implemented yet
         description: "description", // string
         created_at: 00-00-0000,     // datetime
         updated_at: 00-00-0000,     // datetime
-        location: location,         // object -> see [http://developers.situm.es/pages/rest/buildings.html](http://developers.situm.es/pages/rest/buildings.html)
+        location: location,         // object -> see http://developers.situm.es/pages/rest/buildings.html
         corners: corners,           // object -> see http://developers.situm.es/pages/rest/buildings.html
         dimensions: dimensions,     // object -> see http://developers.situm.es/pages/rest/buildings.html
         rotation: 0.00,             // float
@@ -97,6 +97,115 @@ IOS: Not implemented yet
        cordova.plugins.Situm.fetchPoiCategories((poiCategories) => {
          // poiCategories -> array of POI categories
        });
+```
+
+**fetchPoiCategoryIconNormal**
+
+```javascript
+      let category = {
+          "id": 1,
+          "name_en": "Coffee",
+          "name_es": "Cafetería",
+          "code": "situm-coffee",
+          "icon_url": "/uploads/situm/poi_category/icon/1/31cc9fdf-6820-447d-ac13-a0a4d0642d3b.png",
+          "selected_icon_url": "/uploads/situm/poi_category/selected_icon/1/eb7c6c7e-33ba-40c5-ae22-e993b64d1439.png",
+          "updated_at": "2016-07-11T10:20:39.684+02:00",
+          "created_at": "2016-06-23T09:14:05.701+02:00",
+          "public": true
+      };  
+      cordova.plugins.Situm.fetchPoiCategoryIconNormal(category, (icon) => {
+
+      });
+```
+
+**fetchPoiCategoryIconSelected**
+
+```javascript
+      let category = {
+          "id": 1,
+          "name_en": "Coffee",
+          "name_es": "Cafetería",
+          "code": "situm-coffee",
+          "icon_url": "/uploads/situm/poi_category/icon/1/31cc9fdf-6820-447d-ac13-a0a4d0642d3b.png",
+          "selected_icon_url": "/uploads/situm/poi_category/selected_icon/1/eb7c6c7e-33ba-40c5-ae22-e993b64d1439.png",
+          "updated_at": "2016-07-11T10:20:39.684+02:00",
+          "created_at": "2016-06-23T09:14:05.701+02:00",
+          "public": true
+      };  
+      cordova.plugins.Situm.fetchPoiCategoryIconSelected(category, (icon) => {
+
+      });
+```
+
+**invalidateCache**
+
+```javascript
+      cordova.plugins.Situm.invalidateCache((res) => {
+          // res -> string message
+      });
+```
+
+**requestDirections**
+
+```javascript
+      // from & to -> POI object
+      from = {
+        "id": 1110,
+        "building_id": 98,
+        "name": "Salida de emergencia",
+        "category_id": null,
+        "created_at": "2016-06-23T09:13:44.238+02:00",
+        "updated_at": "2016-06-23T09:13:44.238+02:00",
+        "info": "<p>Office information</p>",
+        "position": {
+          "floor_id": 250,
+          "radius": 5,
+          "georeferences": {
+            "lat": 42.8888740652095,
+            "lng": -8.52679516919729
+          },
+          "cartesians": {
+            "x": 118.195381193397,
+            "y": 83.5619519803241
+          }
+        },
+        "custom_fields": [
+          {
+            "key": "active",
+            "value": "false"
+          }
+        ]
+      }
+      to = {
+        "id": 1110,
+        "building_id": 98,
+        "name": "Salida de emergencia",
+        "category_id": null,
+        "created_at": "2016-06-23T09:13:44.238+02:00",
+        "updated_at": "2016-06-23T09:13:44.238+02:00",
+        "info": "<p>Office information</p>",
+        "position": {
+          "floor_id": 250,
+          "radius": 5,
+          "georeferences": {
+            "lat": 42.8888740652095,
+            "lng": -8.52679516919729
+          },
+          "cartesians": {
+            "x": 118.195381193397,
+            "y": 83.5619519803241
+          }
+        },
+        "custom_fields": [
+          {
+            "key": "active",
+            "value": "false"
+          }
+        ]
+      }
+      cordova.plugins.Situm.requestDirections([from, to], (res) => {
+        // res -> route object
+      });
 ```
 
 **startPositioning:**
