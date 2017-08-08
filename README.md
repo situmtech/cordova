@@ -39,20 +39,20 @@ fetchFloorsFromBuilding:
         description: "description", // string
         created_at: 00-00-0000,     // datetime
         updated_at: 00-00-0000,     // datetime
-        location: location,         // object
-        corners: corners,           // object
-        dimensions: dimensions,     // object
+        location: location,         // object -> see http://developers.situm.es/pages/rest/buildings.html
+        corners: corners,           // object -> see http://developers.situm.es/pages/rest/buildings.html
+        dimensions: dimensions,     // object -> see http://developers.situm.es/pages/rest/buildings.html
         rotation: 0.00,             // float
         picture_url: "url",         // string optional
         picture_thumb_url: "url",   // string optional
         server_url: "url",          // string optional
-        calibration_model: model,   // object
+        calibration_model: model,   // object -> see http://developers.situm.es/pages/rest/buildings.html
         info: "info",               // string
-        floors: floors,             // array of floors
-        indoor_pois: indoor_pois,   // array of POIs
-        outdoor_pois: outdoor_pois, // array of POIs
-        events: events ,            // array of events
-        paths: paths                // object
+        floors: floors,             // array of floors see -> http://developers.situm.es/pages/rest/floors.html
+        indoor_pois: indoor_pois,   // array of POIs see -> http://developers.situm.es/pages/rest/indoor_pois.html
+        outdoor_pois: outdoor_pois, // array of POIs see -> http://developers.situm.es/pages/rest/outdoor_pois.html
+        events: events ,            // array of events see -> http://developers.situm.es/pages/rest/events.html
+        paths: paths                // object see -> http://developers.situm.es/pages/rest/paths.html
       };
       cordova.plugins.Situm.fetchFloorsFromBuilding(building, (floors) => {
         // floors -> array of floor objects from given building
@@ -70,7 +70,9 @@ fetchMapFromFloor:
 fetchPoiCategories:
 
 ```javascript
-       cordova.plugins.Situm.fetchPoiCategories(callback);
+       cordova.plugins.Situm.fetchPoiCategories((poiCategories) => {
+         // poiCategories -> array of POI categories
+       });
 ```
 
 startPositioning:
