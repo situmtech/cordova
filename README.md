@@ -9,19 +9,19 @@ IOS: Not implemented yet
 
 > Android
 
-setApiKey:
+**setApiKey:**
 
 ```javascript
       cordova.plugins.Situm.setApiKey("email", "api_key");
 ```
 
-setUserPass:
+**setUserPass:**
 
 ```javascript
        cordova.plugins.Situm.setUserPass("email", "password");
 ```
 
-fetchBuildings:
+**fetchBuildings:**
 
 ```javascript
        cordova.plugins.Situm.fetchBuildings((buildings) => {
@@ -29,7 +29,7 @@ fetchBuildings:
        });
 ```
 
-fetchFloorsFromBuilding:
+**fetchFloorsFromBuilding:**
 
 ```javascript
       let building = {
@@ -39,7 +39,7 @@ fetchFloorsFromBuilding:
         description: "description", // string
         created_at: 00-00-0000,     // datetime
         updated_at: 00-00-0000,     // datetime
-        location: location,         // object -> see http://developers.situm.es/pages/rest/buildings.html
+        location: location,         // object -> see [http://developers.situm.es/pages/rest/buildings.html](http://developers.situm.es/pages/rest/buildings.html)
         corners: corners,           // object -> see http://developers.situm.es/pages/rest/buildings.html
         dimensions: dimensions,     // object -> see http://developers.situm.es/pages/rest/buildings.html
         rotation: 0.00,             // float
@@ -59,7 +59,31 @@ fetchFloorsFromBuilding:
       });
 ```
 
-fetchMapFromFloor:
+**fetchIndoorPOIsFromBuilding**
+
+```javascript
+      cordova.plugin.Situm.fetchIndoorPOIsFromBuilding(building, (indoorPOIs) => {
+        // indoorPOIs -> array of POIs indoor building
+      });
+```
+
+**fetchOutdoorPOIsFromBuilding**
+
+```javascript
+      cordova.plugins.Situm.fetchOutdoorPOIsFromBuilding(building, (outdoorPOIs) => {
+        // outdoorPOIs -> array of POIs outdoor building
+      });
+```
+
+**fetchEventsFromBuilding**
+
+```javascript
+      cordova.plugins.Situm.fetchEventsFromBuilding(building, (events) => {
+        // events -> array of events
+      });
+```
+
+**fetchMapFromFloor:**
 
 ```javascript
       cordova.plugins.Situm.fetchMapFromFloor(floor, (map) => {
@@ -67,7 +91,7 @@ fetchMapFromFloor:
       });
 ```
 
-fetchPoiCategories:
+**fetchPoiCategories:**
 
 ```javascript
        cordova.plugins.Situm.fetchPoiCategories((poiCategories) => {
@@ -75,16 +99,12 @@ fetchPoiCategories:
        });
 ```
 
-startPositioning:
-
-  building: A building object, must have the same structure that original building java object.
-
-  See: <a target="_blank" href="http://developers.situm.es/sdk_documentation/android/javadoc/2.7.0/">http://developers.situm.es/sdk_documentation/android/javadoc/2.7.0/</a>
+**startPositioning:**
 
 ```javascript
     cordova.plugins.Situm.startPositioning(buildings, callback)
 ```
-stopPositioning:
+**stopPositioning:**
 
 ```javascript
     cordova.plugins.Situm.stopPositioning(callback)
