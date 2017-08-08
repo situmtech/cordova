@@ -56,6 +56,8 @@ public class SitumPlugin extends CordovaPlugin {
       PluginHelper.fetchPoiCategoryIconSelected(cordova, webView, args, callbackContext);
     } else if (action.equalsIgnoreCase("invalidateCache")) {
       PluginHelper.invalidateCache(callbackContext);
+    } else if (action.equalsIgnoreCase("requestDirections")) {
+      PluginHelper.requestDirections(cordova, webView, args, callbackContext);
     } else {
       PluginHelper.returnDefaultResponse(callbackContext);
     }

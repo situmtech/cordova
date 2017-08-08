@@ -9,6 +9,8 @@ import android.util.Log;
 import android.webkit.WebSettings;
 import android.widget.Toast;
 import es.situm.sdk.SitumSdk;
+import es.situm.sdk.directions.DirectionsManager;
+import es.situm.sdk.directions.DirectionsRequest;
 import es.situm.sdk.error.Error;
 import es.situm.sdk.location.LocationListener;
 import es.situm.sdk.location.LocationRequest;
@@ -18,6 +20,8 @@ import es.situm.sdk.model.cartography.Building;
 import es.situm.sdk.model.cartography.Floor;
 import es.situm.sdk.model.cartography.Poi;
 import es.situm.sdk.model.cartography.PoiCategory;
+import es.situm.sdk.model.cartography.Point;
+import es.situm.sdk.model.directions.Route;
 import es.situm.sdk.model.location.CartesianCoordinate;
 import es.situm.sdk.model.location.Location;
 import es.situm.sdk.utils.Handler;
@@ -25,7 +29,6 @@ import es.situm.sdk.v1.SitumEvent;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
@@ -388,5 +391,32 @@ public class PluginHelper {
     public static void invalidateCache(CallbackContext callbackContext) {
         SitumSdk.communicationManager().invalidateCache();
         callbackContext.sendPluginResult(new PluginResult(Status.OK, "Cache invalidated"));
+    }
+
+    public static void requestDirections(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+            final CallbackContext callbackContext) {
+        try {
+            JSONObject jsonoFrom = args.getJSONObject(0);
+            JSONObject jsonoTo = args.getJSONObject(1);
+            Point from = LocationWrapper.pointJsonObjectToPoint(jsonoFrom);
+            Point to = LocationWrapper.pointJsonObjectToPoint(jsonoTo);
+            DirectionsRequest directionRequest = new DirectionsRequest.Builder().from(from, null).to(to).build();
+            SitumSdk.directionsManager().requestDirections(directionRequest, new Handler<Route>() {
+                @Override
+                public void onSuccess(Route route) {
+                    JSONObject jsonoRoute = LocationWrapper.routeToJsonObject(route);
+                    Log.i(TAG, "onSuccess: Route calculated successfully");
+                    callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonoRoute));
+                }
+
+                @Override
+                public void onFailure(Error error) {
+                    Log.e(TAG, "onError:" + error.getMessage());
+                    callbackContext.sendPluginResult(new PluginResult(Status.ERROR, error.getMessage()));
+                }
+            });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
