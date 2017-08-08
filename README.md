@@ -24,27 +24,47 @@ setUserPass:
 fetchBuildings:
 
 ```javascript
-       cordova.plugins.Situm.fetchBuildings(callback);
+       cordova.plugins.Situm.fetchBuildings((buildings) => {
+         // buildings -> array of building objects
+       });
 ```
 
 fetchFloorsFromBuilding:
 
-  building: A building object, must have the same structure that original building java object.
-
-  See: <a target="_blank" href="http://developers.situm.es/sdk_documentation/android/javadoc/2.7.0/">http://developers.situm.es/sdk_documentation/android/javadoc/2.7.0/</a>
-
 ```javascript
-      cordova.plugins.Situm.fetchFloorsFromBuilding(building, callback);
+      let building = {
+        id: 0,                      // integer
+        user_id: 0,                 // intger
+        name: "name",               // string
+        description: "description", // string
+        created_at: 00-00-0000,     // datetime
+        updated_at: 00-00-0000,     // datetime
+        location: location,         // object
+        corners: corners,           // object
+        dimensions: dimensions,     // object
+        rotation: 0.00,             // float
+        picture_url: "url",         // string optional
+        picture_thumb_url: "url",   // string optional
+        server_url: "url",          // string optional
+        calibration_model: model,   // object
+        info: "info",               // string
+        floors: floors,             // array of floors
+        indoor_pois: indoor_pois,   // array of POIs
+        outdoor_pois: outdoor_pois, // array of POIs
+        events: events ,            // array of events
+        paths: paths                // object
+      };
+      cordova.plugins.Situm.fetchFloorsFromBuilding(building, (floors) => {
+        // floors -> array of floor objects from given building
+      });
 ```
 
 fetchMapFromFloor:
 
-  floor: A floor object, must have the same structure that original floor java object.
-
-  See: <a target="_blank" href="http://developers.situm.es/sdk_documentation/android/javadoc/2.7.0/">http://developers.situm.es/sdk_documentation/android/javadoc/2.7.0/</a>
-
 ```javascript
-      cordova.plugins.Situm.fetchMapFromFloor(floor, callback);
+      cordova.plugins.Situm.fetchMapFromFloor(floor, (map) => {
+        // map -> image encoded as base64 string
+      });
 ```
 
 fetchPoiCategories:
