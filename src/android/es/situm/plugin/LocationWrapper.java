@@ -265,6 +265,7 @@ public class LocationWrapper {
             jo.put(POSITION, pointToJsonObject(poi.getPosition()));
             jo.put(IS_INDOOR, poi.isIndoor());
             jo.put(IS_OUTDOOR, poi.isOutdoor());
+            jo.put(POI_CATEGORY_NAME, poi.getCategory());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -283,13 +284,14 @@ public class LocationWrapper {
         return jo;
     }
 
-    public static PoiCategory poiCategoryFromJsonObject(JSONObject jo){
+    public static PoiCategory poiCategoryFromJsonObject(JSONObject jo) {
         PoiCategory category = null;
-        try{
+        try {
             Map<String, String> mapName = new HashMap<String, String>();
-            mapName.put("name",jo.getString(POI_CATEGORY_NAME));
-            category = new PoiCategory.Builder().code(jo.getString(POI_CATEGORY_CODE)).name(new I18nString(mapName)).isPublic(jo.getBoolean(IS_PUBLIC)).build();
-        }catch(JSONException e){
+            mapName.put("name", jo.getString(POI_CATEGORY_NAME));
+            category = new PoiCategory.Builder().code(jo.getString(POI_CATEGORY_CODE)).name(new I18nString(mapName))
+                    .isPublic(jo.getBoolean(IS_PUBLIC)).build();
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         return category;
