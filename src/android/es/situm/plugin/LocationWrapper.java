@@ -50,6 +50,7 @@ public class LocationWrapper {
     public static final String POI_NAME = "poiName";
     public static final String POI_CATEGORY_NAME = "poiCategoryName";
     public static final String POI_CATEGORY_CODE = "poiCategoryCode";
+    public static final String POI_CATEGORY = "category";
     public static final String IS_PUBLIC = "public";
     public static final String PICTURE_URL = "pictureUrl";
     public static final String ROTATION = "rotation";
@@ -265,7 +266,7 @@ public class LocationWrapper {
             jo.put(POSITION, pointToJsonObject(poi.getPosition()));
             jo.put(IS_INDOOR, poi.isIndoor());
             jo.put(IS_OUTDOOR, poi.isOutdoor());
-            jo.put(POI_CATEGORY_NAME, poi.getCategory());
+            jo.put(POI_CATEGORY, poi.getCategory().getName());
         } catch (JSONException e) {
             e.printStackTrace();
         }
