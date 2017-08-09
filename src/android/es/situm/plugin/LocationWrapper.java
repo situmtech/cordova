@@ -142,7 +142,6 @@ public class LocationWrapper {
     public static final String POI_CATEGORY_ICON_SELECTED = "icon_selected";
     public static final String POI_CATEGORY_ICON_UNSELECTED = "icon_unselected";
 
-
     public static JSONObject buildingToJsonObject(Building building) {
         JSONObject jo = new JSONObject();
         try {
@@ -281,8 +280,8 @@ public class LocationWrapper {
         try {
             jo.put(POI_CATEGORY_CODE, poiCategory.getCode());
             jo.put(POI_CATEGORY_NAME, poiCategory.getName());
-            jo.put(POI_CATEGORY_ICON_SELECTED, poiCategory.getSelectedIconUrl());
-            jo.put(POI_CATEGORY_ICON_UNSELECTED, poiCategory.getUnselectedIconUrl());
+            jo.put(POI_CATEGORY_ICON_SELECTED, poiCategory.getSelectedIconUrl().getValue());
+            jo.put(POI_CATEGORY_ICON_UNSELECTED, poiCategory.getUnselectedIconUrl().getValue());
             jo.put(IS_PUBLIC, poiCategory.isPublic());
         } catch (JSONException e) {
             e.printStackTrace();
