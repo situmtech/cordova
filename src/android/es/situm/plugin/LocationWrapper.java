@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 //import java.util.Vector;
@@ -14,6 +15,7 @@ import java.util.Map;
 import java.io.ByteArrayOutputStream;
 
 import es.situm.sdk.location.LocationStatus;
+import es.situm.sdk.model.I18nString;
 import es.situm.sdk.model.URL;
 import es.situm.sdk.model.cartography.Building;
 import es.situm.sdk.model.cartography.Floor;
@@ -48,6 +50,7 @@ public class LocationWrapper {
     public static final String POI_NAME = "poiName";
     public static final String POI_CATEGORY_NAME = "poiCategoryName";
     public static final String POI_CATEGORY_CODE = "poiCategoryCode";
+    public static final String POI_CATEGORY = "category";
     public static final String IS_PUBLIC = "public";
     public static final String PICTURE_URL = "pictureUrl";
     public static final String ROTATION = "rotation";
@@ -136,6 +139,8 @@ public class LocationWrapper {
     public static final String BOTTOM_LEFT = "bottomLeft";
     public static final String TOP_RIGHT = "topRight";
     public static final String BOTTOM_RIGHT = "bottomRight";
+    public static final String POI_CATEGORY_ICON_SELECTED = "icon_selected";
+    public static final String POI_CATEGORY_ICON_UNSELECTED = "icon_unselected";
 
     public static JSONObject buildingToJsonObject(Building building) {
         JSONObject jo = new JSONObject();
@@ -263,6 +268,7 @@ public class LocationWrapper {
             jo.put(POSITION, pointToJsonObject(poi.getPosition()));
             jo.put(IS_INDOOR, poi.isIndoor());
             jo.put(IS_OUTDOOR, poi.isOutdoor());
+            jo.put(POI_CATEGORY, poi.getCategory().getCode());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -274,11 +280,26 @@ public class LocationWrapper {
         try {
             jo.put(POI_CATEGORY_CODE, poiCategory.getCode());
             jo.put(POI_CATEGORY_NAME, poiCategory.getName());
+            jo.put(POI_CATEGORY_ICON_SELECTED, poiCategory.getSelectedIconUrl().getValue());
+            jo.put(POI_CATEGORY_ICON_UNSELECTED, poiCategory.getUnselectedIconUrl().getValue());
             jo.put(IS_PUBLIC, poiCategory.isPublic());
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return jo;
+    }
+
+    public static PoiCategory poiCategoryFromJsonObject(JSONObject jo) {
+        PoiCategory category = null;
+        try {
+            Map<String, String> mapName = new HashMap<String, String>();
+            mapName.put("name", jo.getString(POI_CATEGORY_NAME));
+            category = new PoiCategory.Builder().code(jo.getString(POI_CATEGORY_CODE)).name(new I18nString(mapName))
+                    .isPublic(jo.getBoolean(IS_PUBLIC)).build();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return category;
     }
 
     // Location
