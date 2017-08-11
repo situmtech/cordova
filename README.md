@@ -86,6 +86,18 @@ IOS: Not implemented yet
 **fetchMapFromFloor:**
 
 ```javascript
+      let floor = {
+        "id": 995,
+        "project_id": 630,
+        "level": -1,
+        "level_height": -3
+        "created_at": "2016-09-16T09:45:20.098+02:00",
+        "updated_at": "2016-09-16T09:45:20.098+02:00",
+        "maps": {
+          "scale": 20.1388,
+          "map_url": "http://dashboard.situm.es/uploads/situm/floor/map/995/80eadc8f-df52-48e1-aa0b-2e5abd1262dd.PNG",
+        },
+      };
       cordova.plugins.Situm.fetchMapFromFloor(floor, (map) => {
         // map -> image encoded as base64 string
       });
@@ -204,7 +216,7 @@ IOS: Not implemented yet
         ]
       }
       cordova.plugins.Situm.requestDirections([from, to], (res) => {
-        // res -> route object, ew can draw in map with our map provider
+        // res -> route object, we can draw in map with our map provider
       });
 ```
 
