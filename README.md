@@ -86,6 +86,18 @@ IOS: Not implemented yet
 **fetchMapFromFloor:**
 
 ```javascript
+      let floor = {
+        "id": 995,
+        "project_id": 630,
+        "level": -1,
+        "level_height": -3
+        "created_at": "2016-09-16T09:45:20.098+02:00",
+        "updated_at": "2016-09-16T09:45:20.098+02:00",
+        "maps": {
+          "scale": 20.1388,
+          "map_url": "http://dashboard.situm.es/uploads/situm/floor/map/995/80eadc8f-df52-48e1-aa0b-2e5abd1262dd.PNG",
+        },
+      };
       cordova.plugins.Situm.fetchMapFromFloor(floor, (map) => {
         // map -> image encoded as base64 string
       });
@@ -204,17 +216,21 @@ IOS: Not implemented yet
         ]
       }
       cordova.plugins.Situm.requestDirections([from, to], (res) => {
-        // res -> route object
+        // res -> route object, we can draw in map with our map provider
       });
 ```
 
 **startPositioning:**
 
 ```javascript
-    cordova.plugins.Situm.startPositioning(buildings, callback)
+    cordova.plugins.Situm.startPositioning(buildings, (response) => {
+      // response -> object with the actual position. this function send us a new response when event to position changed is fired
+    });
 ```
 **stopPositioning:**
 
 ```javascript
-    cordova.plugins.Situm.stopPositioning(callback)
+    cordova.plugins.Situm.stopPositioning(() => {
+      // stop positioning
+    });
 ```
