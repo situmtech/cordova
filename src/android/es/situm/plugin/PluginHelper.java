@@ -353,7 +353,11 @@ public class PluginHelper {
                         }
                     }
                 };
-                SitumSdk.locationManager().requestLocationUpdates(locationRequest, locationListener);
+                try {
+                    SitumSdk.locationManager().requestLocationUpdates(locationRequest, locationListener);
+                } catch (Error e) {
+                    Log.e(PluginHelper.TAG, "onError() called with: error = [" + e + "]");
+                }
                 return;
             }
             Log.i(TAG, "startPositioning: location listener is already started.");
