@@ -355,7 +355,7 @@ public class PluginHelper {
                 };
                 try {
                     SitumSdk.locationManager().requestLocationUpdates(locationRequest, locationListener);
-                } catch (Error e) {
+                } catch (Exception e) {
                     Log.e(PluginHelper.TAG, "onError() called with: error = [" + e + "]");
                 }
                 return;
