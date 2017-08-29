@@ -33,26 +33,58 @@ IOS: Not implemented yet
 
 ```javascript
       let building = {
-        id: 0,                      // integer
-        user_id: 0,                 // intger
+        address: "address"
+        buildingIdentifier: 0,                      // integer
+        bounds: {
+          northEast: {
+            latitude: 0.0,
+            longitude: 0.0
+          },
+          northWest: {
+            latitude: 0.0,
+            longitude: 0.0
+          },
+          southEast: {
+            latitude: 0.0,
+            longitude: 0.0
+          },
+          southWest: {
+            latitude: 0.0,
+            longitude: 0.0
+          }
+        },
+        boundsRotated: {
+          northEast: {
+            latitude: 0.0,
+            longitude: 0.0
+          },
+          northWest: {
+            latitude: 0.0,
+            longitude: 0.0
+          },
+          southEast: {
+            latitude: 0.0,
+            longitude: 0.0
+          },
+          southWest: {
+            latitude: 0.0,
+            longitude: 0.0
+          }
+        },
+        center: {
+          latitude: 0.0,
+          longitude: 0.0
+        },
+        userIdentifier: 0,                 // intger
         name: "name",               // string
-        description: "description", // string
-        created_at: 00-00-0000,     // datetime
-        updated_at: 00-00-0000,     // datetime
-        location: location,         // object -> see http://developers.situm.es/pages/rest/buildings.html
-        corners: corners,           // object -> see http://developers.situm.es/pages/rest/buildings.html
-        dimensions: dimensions,     // object -> see http://developers.situm.es/pages/rest/buildings.html
+        dimensions: {
+          height: 10,
+          width: 10
+        },     // object -> see http://developers.situm.es/pages/rest/buildings.html
         rotation: 0.00,             // float
-        picture_url: "url",         // string optional
-        picture_thumb_url: "url",   // string optional
-        server_url: "url",          // string optional
-        calibration_model: model,   // object -> see http://developers.situm.es/pages/rest/buildings.html
-        info: "info",               // string
-        floors: floors,             // array of floors see -> http://developers.situm.es/pages/rest/floors.html
-        indoor_pois: indoor_pois,   // array of POIs see -> http://developers.situm.es/pages/rest/indoor_pois.html
-        outdoor_pois: outdoor_pois, // array of POIs see -> http://developers.situm.es/pages/rest/outdoor_pois.html
-        events: events ,            // array of events see -> http://developers.situm.es/pages/rest/events.html
-        paths: paths                // object see -> http://developers.situm.es/pages/rest/paths.html
+        pictureUrl: "url",         // string optional
+        pictureThumbUrl: "url",   // string optional
+        infoHtml: "info",               // string
       };
       cordova.plugins.Situm.fetchFloorsFromBuilding(building, (floors) => {
         // floors -> array of floor objects from given building
@@ -87,16 +119,12 @@ IOS: Not implemented yet
 
 ```javascript
       let floor = {
-        "id": 995,
-        "project_id": 630,
-        "level": -1,
-        "level_height": -3
-        "created_at": "2016-09-16T09:45:20.098+02:00",
-        "updated_at": "2016-09-16T09:45:20.098+02:00",
-        "maps": {
-          "scale": 20.1388,
-          "map_url": "http://dashboard.situm.es/uploads/situm/floor/map/995/80eadc8f-df52-48e1-aa0b-2e5abd1262dd.PNG",
-        },
+        altitude: 2,
+        buildingIdentifier: 5432,
+        floorIdentifier: 1246,
+        level: 0,
+        scale: 20.1388,
+        map_url: "http://dashboard.situm.es/uploads/situm/floor/map/995/80eadc8f-df52-48e1-aa0b-2e5abd1262dd.PNG",
       };
       cordova.plugins.Situm.fetchMapFromFloor(floor, (map) => {
         // map -> image encoded as base64 string
@@ -115,15 +143,11 @@ IOS: Not implemented yet
 
 ```javascript
       let category = {
-          "id": 1,
-          "name_en": "Coffee",
-          "name_es": "Cafetería",
-          "code": "situm-coffee",
-          "icon_url": "/uploads/situm/poi_category/icon/1/31cc9fdf-6820-447d-ac13-a0a4d0642d3b.png",
-          "selected_icon_url": "/uploads/situm/poi_category/selected_icon/1/eb7c6c7e-33ba-40c5-ae22-e993b64d1439.png",
-          "updated_at": "2016-07-11T10:20:39.684+02:00",
-          "created_at": "2016-06-23T09:14:05.701+02:00",
-          "public": true
+          poiCategoryCode: "situm-coffee",
+          poiCategoryName: "Cafetería",
+          icon_unselected: "/uploads/situm/poi_category/icon/1/31cc9fdf-6820-447d-ac13-a0a4d0642d3b.png",
+          icon_selected: "/uploads/situm/poi_category/selected_icon/1/eb7c6c7e-33ba-40c5-ae22-e993b64d1439.png",
+          public: true
       };  
       cordova.plugins.Situm.fetchPoiCategoryIconNormal(category, (icon) => {
 
@@ -134,15 +158,11 @@ IOS: Not implemented yet
 
 ```javascript
       let category = {
-          "id": 1,
-          "name_en": "Coffee",
-          "name_es": "Cafetería",
-          "code": "situm-coffee",
-          "icon_url": "/uploads/situm/poi_category/icon/1/31cc9fdf-6820-447d-ac13-a0a4d0642d3b.png",
-          "selected_icon_url": "/uploads/situm/poi_category/selected_icon/1/eb7c6c7e-33ba-40c5-ae22-e993b64d1439.png",
-          "updated_at": "2016-07-11T10:20:39.684+02:00",
-          "created_at": "2016-06-23T09:14:05.701+02:00",
-          "public": true
+          poiCategoryCode: "situm-coffee",
+          poiCategoryName: "Cafetería",
+          icon_unselected: "/uploads/situm/poi_category/icon/1/31cc9fdf-6820-447d-ac13-a0a4d0642d3b.png",
+          icon_selected: "/uploads/situm/poi_category/selected_icon/1/eb7c6c7e-33ba-40c5-ae22-e993b64d1439.png",
+          public: true
       };  
       cordova.plugins.Situm.fetchPoiCategoryIconSelected(category, (icon) => {
 
