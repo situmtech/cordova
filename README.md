@@ -162,58 +162,28 @@ IOS: Not implemented yet
 ```javascript
       // from & to -> POI object
       from = {
-        "id": 1110,
-        "building_id": 98,
-        "name": "Salida de emergencia",
-        "category_id": null,
-        "created_at": "2016-06-23T09:13:44.238+02:00",
-        "updated_at": "2016-06-23T09:13:44.238+02:00",
-        "info": "<p>Office information</p>",
-        "position": {
-          "floor_id": 250,
-          "radius": 5,
-          "georeferences": {
-            "lat": 42.8888740652095,
-            "lng": -8.52679516919729
-          },
-          "cartesians": {
-            "x": 118.195381193397,
-            "y": 83.5619519803241
-          }
+        "buildingIdentifier": "BUILDING ID",
+        "floorIdentifier": "FLOOR ID",
+        "coordinate": {
+          "latitude": 0.0,
+          "longitude": 0.0
         },
-        "custom_fields": [
-          {
-            "key": "active",
-            "value": "false"
-          }
-        ]
+        "cartesiansCoordinate": {
+          "latitude": 0.0,
+          "longitude": 0.0
+        }
       }
       to = {
-        "id": 1110,
-        "building_id": 98,
-        "name": "Salida de emergencia",
-        "category_id": null,
-        "created_at": "2016-06-23T09:13:44.238+02:00",
-        "updated_at": "2016-06-23T09:13:44.238+02:00",
-        "info": "<p>Office information</p>",
-        "position": {
-          "floor_id": 250,
-          "radius": 5,
-          "georeferences": {
-            "lat": 42.8888740652095,
-            "lng": -8.52679516919729
-          },
-          "cartesians": {
-            "x": 118.195381193397,
-            "y": 83.5619519803241
-          }
+        "buildingIdentifier": "BUILDING ID",
+        "floorIdentifier": "FLOOR ID",
+        "coordinate": {
+          "latitude": 0.0,
+          "longitude": 0.0
         },
-        "custom_fields": [
-          {
-            "key": "active",
-            "value": "false"
-          }
-        ]
+        "cartesiansCoordinate": {
+          "latitude": 0.0,
+          "longitude": 0.0
+        }
       }
       cordova.plugins.Situm.requestDirections([from, to], (res) => {
         // res -> route object, we can draw in map with our map provider
