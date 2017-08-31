@@ -391,15 +391,11 @@ public class LocationWrapper {
         return jo;
     }
 
-    public static Point pointJsonObjectToPoint(JSONObject jo) {
+    public static Point pointJsonObjectToPoint(JSONObject jo) throws JSONException {
         Point point = null;
-        try {
-            point = new Point(jo.getString(BUILDING_IDENTIFIER), jo.getString(FLOOR_IDENTIFIER),
-                    coordinateJsonObjectToCoordinate(jo.getJSONObject(COORDINATE)),
-                    cartesianCoordinateJsonObjectToCartesianCoordinate(jo.getJSONObject(CARTESIAN_COORDINATE)));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        point = new Point(jo.getString(BUILDING_IDENTIFIER), jo.getString(FLOOR_IDENTIFIER),
+                coordinateJsonObjectToCoordinate(jo.getJSONObject(COORDINATE)),
+                cartesianCoordinateJsonObjectToCartesianCoordinate(jo.getJSONObject(CARTESIAN_COORDINATE)));
         return point;
     }
 

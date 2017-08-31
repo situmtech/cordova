@@ -421,6 +421,7 @@ public class PluginHelper {
             });
         } catch (JSONException e) {
             e.printStackTrace();
+            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
         }
     }
 }
