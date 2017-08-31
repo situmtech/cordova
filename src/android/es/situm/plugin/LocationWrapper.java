@@ -34,6 +34,8 @@ import es.situm.sdk.model.location.Location;
 import es.situm.sdk.model.navigation.NavigationProgress;
 import es.situm.sdk.v1.SitumConversionArea;
 import es.situm.sdk.v1.SitumEvent;
+import jdk.nashorn.internal.runtime.Context.ThrowErrorManager;
+import sun.awt.windows.ThemeReader;
 
 public class LocationWrapper {
 
@@ -142,7 +144,7 @@ public class LocationWrapper {
     public static final String POI_CATEGORY_ICON_SELECTED = "icon_selected";
     public static final String POI_CATEGORY_ICON_UNSELECTED = "icon_unselected";
 
-    public static JSONObject buildingToJsonObject(Building building) {
+    public static JSONObject buildingToJsonObject(Building building) throws JSONException {
         JSONObject jo = new JSONObject();
         try {
             jo.put(ADDRESS, building.getAddress());
@@ -157,13 +159,14 @@ public class LocationWrapper {
             jo.put(ROTATION, building.getRotation().radians());
             jo.put(USER_IDENTIFIER, building.getUserIdentifier());
             jo.put(BUILDING_IDENTIFIER, building.getIdentifier());
+            return jo;
         } catch (JSONException e) {
+            throw e;
             e.printStackTrace();
         }
-        return jo;
     }
 
-    public static JSONObject mapStringToJsonObject(Map<String, String> mp) {
+    public static JSONObject mapStringToJsonObject(Map<String, String> mp) throws JSONException {
         JSONObject jo = new JSONObject();
         try {
             Iterator it = mp.entrySet().iterator();
@@ -171,13 +174,14 @@ public class LocationWrapper {
                 Map.Entry<String, String> pairs = (Map.Entry<String, String>) it.next();
                 jo.put(pairs.getKey(), pairs.getValue());
             }
+            return jo;
         } catch (JSONException e) {
+            throw e;
             e.printStackTrace();
         }
-        return jo;
     }
 
-    public static Building buildingJsonObjectToBuilding(JSONObject jo) {
+    public static Building buildingJsonObjectToBuilding(JSONObject jo) throws JSONException {
         Building building = null;
         try {
             Coordinate center = new Coordinate(jo.getJSONObject(CENTER).getDouble(LATITUDE),
@@ -188,15 +192,16 @@ public class LocationWrapper {
                     .address(jo.getString(ADDRESS)).name(jo.getString(BUILDING_NAME))
                     .userIdentifier(jo.getString(USER_IDENTIFIER)).center(center).dimensions(dimesnsions)
                     .infoHtml(jo.getString(INFO_HTML)).build();
+            return building;
         } catch (JSONException e) {
+            throw e;
             e.printStackTrace();
         }
-        return building;
     }
 
     //Floor
 
-    public static JSONObject floorToJsonObject(Floor floor) {
+    public static JSONObject floorToJsonObject(Floor floor) throws JSONException {
         JSONObject jo = new JSONObject();
         try {
             jo.put(ALTITUDE, floor.getAltitude());
@@ -205,27 +210,29 @@ public class LocationWrapper {
             jo.put(MAP_URL, floor.getMapUrl().getValue());
             jo.put(SCALE, floor.getScale());
             jo.put(FLOOR_IDENTIFIER, floor.getIdentifier());
+            return jo;
         } catch (JSONException e) {
+            throw e;
             e.printStackTrace();
         }
-        return jo;
     }
 
-    public static Floor floorJsonObjectToFloor(JSONObject jo) {
+    public static Floor floorJsonObjectToFloor(JSONObject jo) throws JSONException {
         Floor floor = null;
         try {
             floor = new Floor.Builder().buildingIdentifier(jo.getString(BUILDING_IDENTIFIER))
                     .altitude(jo.getDouble(ALTITUDE)).level(jo.getInt(LEVEL)).mapUrl(new URL(jo.getString(MAP_URL)))
                     .scale(jo.getDouble(SCALE)).build();
+            return floor;
         } catch (JSONException e) {
+            throw e;
             e.printStackTrace();
         }
-        return floor;
     }
 
     //Situm Events
 
-    public static JSONObject situmEventToJsonObject(SitumEvent situmEvent) {
+    public static JSONObject situmEventToJsonObject(SitumEvent situmEvent) throws JSONException {
         JSONObject jo = new JSONObject();
         try {
             jo.put(BUILDING_IDENTIFIER, situmEvent.getBuildingId());
@@ -235,13 +242,14 @@ public class LocationWrapper {
             jo.put(CONVERSION_AREA, conversionAreaToJsonObject(situmEvent.getConversionArea()));
             jo.put(CUSTOM_FIELDS, mapStringToJsonObject(situmEvent.getCustomFields()));
             jo.put(RADIUS, situmEvent.getRadius());
+            return jo;
         } catch (JSONException e) {
+            throw e;
             e.printStackTrace();
         }
-        return jo;
     }
 
-    public static JSONObject conversionAreaToJsonObject(SitumConversionArea situmCA) {
+    public static JSONObject conversionAreaToJsonObject(SitumConversionArea situmCA) throws JSONException {
         JSONObject jo = new JSONObject();
         try {
             jo.put(FLOOR_IDENTIFIER, situmCA.getFloor_id());
@@ -249,15 +257,16 @@ public class LocationWrapper {
             jo.put(TOP_RIGHT, situmCA.getTopRight());
             jo.put(BOTTOM_LEFT, situmCA.getBottomLeft());
             jo.put(BOTTOM_RIGHT, situmCA.getBottomRight());
+            return jo;
         } catch (JSONException e) {
+            throw e;
             e.printStackTrace();
         }
-        return jo;
     }
 
     // POI
 
-    public static JSONObject poiToJsonObject(Poi poi) {
+    public static JSONObject poiToJsonObject(Poi poi) throws JSONException {
         JSONObject jo = new JSONObject();
         try {
             jo.put(BUILDING_IDENTIFIER, poi.getBuildingIdentifier());
@@ -269,13 +278,14 @@ public class LocationWrapper {
             jo.put(IS_INDOOR, poi.isIndoor());
             jo.put(IS_OUTDOOR, poi.isOutdoor());
             jo.put(POI_CATEGORY, poi.getCategory().getCode());
+            return jo;
         } catch (JSONException e) {
+            throw e;
             e.printStackTrace();
         }
-        return jo;
     }
 
-    public static JSONObject poiCategoryToJsonObject(PoiCategory poiCategory) {
+    public static JSONObject poiCategoryToJsonObject(PoiCategory poiCategory) throws JSONException {
         JSONObject jo = new JSONObject();
         try {
             jo.put(POI_CATEGORY_CODE, poiCategory.getCode());
@@ -283,28 +293,30 @@ public class LocationWrapper {
             jo.put(POI_CATEGORY_ICON_SELECTED, poiCategory.getSelectedIconUrl().getValue());
             jo.put(POI_CATEGORY_ICON_UNSELECTED, poiCategory.getUnselectedIconUrl().getValue());
             jo.put(IS_PUBLIC, poiCategory.isPublic());
+            return jo;
         } catch (JSONException e) {
+            throw e;
             e.printStackTrace();
         }
-        return jo;
     }
 
-    public static PoiCategory poiCategoryFromJsonObject(JSONObject jo) {
+    public static PoiCategory poiCategoryFromJsonObject(JSONObject jo) throws JSONException {
         PoiCategory category = null;
         try {
             Map<String, String> mapName = new HashMap<String, String>();
             mapName.put("name", jo.getString(POI_CATEGORY_NAME));
             category = new PoiCategory.Builder().code(jo.getString(POI_CATEGORY_CODE)).name(new I18nString(mapName))
                     .isPublic(jo.getBoolean(IS_PUBLIC)).build();
+            return category;
         } catch (JSONException e) {
+            throw e;
             e.printStackTrace();
         }
-        return category;
     }
 
     // Location
 
-    public static JSONObject locationToJsonObject(Location location) {
+    public static JSONObject locationToJsonObject(Location location) throws JSONException {
         JSONObject jo = new JSONObject();
         try {
             jo.put(ACCURACY, location.getAccuracy());
@@ -323,60 +335,65 @@ public class LocationWrapper {
             jo.put(HAS_CARTESIAN_BEARING, location.hasCartesianBearing());
             jo.put(IS_INDOOR, location.isIndoor());
             jo.put(IS_OUTDOOR, location.isOutdoor());
+            return jo;
         } catch (JSONException e) {
+            throw e;
             e.printStackTrace();
         }
-        return jo;
     }
 
-    public static JSONObject locationStatusToJsonObject(LocationStatus locationStatus) {
+    public static JSONObject locationStatusToJsonObject(LocationStatus locationStatus) throws JSONException {
         JSONObject jo = new JSONObject();
         try {
             jo.put(STATUS_NAME, locationStatus.name());
             jo.put(STATUS_ORDINAL, locationStatus.ordinal());
+            return jo;
         } catch (JSONException e) {
+            throw e;
             e.printStackTrace();
         }
-        return jo;
     }
 
-    public static Location locationJsonObjectToLocation(JSONObject jo) {
+    public static Location locationJsonObjectToLocation(JSONObject jo) throws JSONException {
         Location location = null;
         try {
             location = new Location.Builder(jo.getLong(TIMESTAMP), jo.getString(PROVIDER),
                     pointJsonObjectToPoint(jo.getJSONObject(POSITION)), Float.valueOf(jo.getString(ACCURACY))).build();
+            return location;
         } catch (JSONException e) {
+            throw e;
             e.printStackTrace();
         }
-        return location;
     }
 
     // Coordinate
 
-    public static JSONObject coordinateToJsonObject(Coordinate coordinate) {
+    public static JSONObject coordinateToJsonObject(Coordinate coordinate) throws JSONException {
         JSONObject jo = new JSONObject();
         try {
             jo.put(LATITUDE, coordinate.getLatitude());
             jo.put(LONGITUDE, coordinate.getLongitude());
+            return jo;
         } catch (JSONException e) {
+            throw e;
             e.printStackTrace();
         }
-        return jo;
     }
 
-    public static Coordinate coordinateJsonObjectToCoordinate(JSONObject jo) {
+    public static Coordinate coordinateJsonObjectToCoordinate(JSONObject jo) throws JSONException {
         Coordinate coordinate = null;
         try {
             coordinate = new Coordinate(jo.getDouble(LATITUDE), jo.getDouble(LONGITUDE));
+            return coordinate;
         } catch (JSONException e) {
+            throw e;
             e.printStackTrace();
         }
-        return coordinate;
     }
 
     // Point
 
-    public static JSONObject pointToJsonObject(Point point) {
+    public static JSONObject pointToJsonObject(Point point) throws JSONException {
         JSONObject jo = new JSONObject();
         try {
             jo.put(BUILDING_IDENTIFIER, point.getBuildingIdentifier());
@@ -385,89 +402,102 @@ public class LocationWrapper {
             jo.put(FLOOR_IDENTIFIER, point.getFloorIdentifier());
             jo.put(IS_INDOOR, point.isIndoor());
             jo.put(IS_OUTDOOR, point.isOutdoor());
+            return jo;
         } catch (JSONException e) {
+            throw e;
             e.printStackTrace();
         }
-        return jo;
     }
 
     public static Point pointJsonObjectToPoint(JSONObject jo) throws JSONException {
         Point point = null;
-        point = new Point(jo.getString(BUILDING_IDENTIFIER), jo.getString(FLOOR_IDENTIFIER),
-                coordinateJsonObjectToCoordinate(jo.getJSONObject(COORDINATE)),
-                cartesianCoordinateJsonObjectToCartesianCoordinate(jo.getJSONObject(CARTESIAN_COORDINATE)));
-        return point;
+        try {
+            point = new Point(jo.getString(BUILDING_IDENTIFIER), jo.getString(FLOOR_IDENTIFIER),
+                    coordinateJsonObjectToCoordinate(jo.getJSONObject(COORDINATE)),
+                    cartesianCoordinateJsonObjectToCartesianCoordinate(jo.getJSONObject(CARTESIAN_COORDINATE)));
+            return point;
+        } catch (JSONException e) {
+            throw e;
+            e.printStackTrace();
+        }
     }
 
     // CartesianCoordinate
 
-    public static JSONObject cartesianCoordinateToJsonObject(CartesianCoordinate cartesianCoordinate) {
+    public static JSONObject cartesianCoordinateToJsonObject(CartesianCoordinate cartesianCoordinate)
+            throws JSONException {
         JSONObject jo = new JSONObject();
         try {
             jo.put(X, cartesianCoordinate.getX());
             jo.put(Y, cartesianCoordinate.getY());
+            return jo;
         } catch (JSONException e) {
+            throw e;
             e.printStackTrace();
         }
-        return jo;
     }
 
-    public static CartesianCoordinate cartesianCoordinateJsonObjectToCartesianCoordinate(JSONObject jo) {
+    public static CartesianCoordinate cartesianCoordinateJsonObjectToCartesianCoordinate(JSONObject jo)
+            throws JSONException {
         CartesianCoordinate cartesianCoordinate = null;
         try {
             cartesianCoordinate = new CartesianCoordinate(jo.getDouble(X), jo.getDouble(Y));
+            return cartesianCoordinate;
         } catch (JSONException e) {
+            throw e;
             e.printStackTrace();
         }
-        return cartesianCoordinate;
     }
 
     // Dimensions
 
-    public static JSONObject dimensionsToJsonObject(Dimensions dimensions) {
+    public static JSONObject dimensionsToJsonObject(Dimensions dimensions) throws JSONException {
         JSONObject jo = new JSONObject();
         try {
             jo.put(WIDTH, dimensions.getWidth());
             jo.put(HEIGHT, dimensions.getHeight());
+            return jo;
         } catch (JSONException e) {
+            throw e;
             e.printStackTrace();
         }
-        return jo;
     }
 
     // Bounds
 
-    public static JSONObject boundsToJsonObject(Bounds bounds) {
+    public static JSONObject boundsToJsonObject(Bounds bounds) throws JSONException {
         JSONObject jo = new JSONObject();
         try {
             jo.put(NORTH_EAST, coordinateToJsonObject(bounds.getNorthEast()));
             jo.put(NORTH_WEST, coordinateToJsonObject(bounds.getNorthWest()));
             jo.put(SOUTH_EAST, coordinateToJsonObject(bounds.getSouthEast()));
             jo.put(SOUTH_WEST, coordinateToJsonObject(bounds.getSouthWest()));
+            return jo;
         } catch (JSONException e) {
+            throw e;
             e.printStackTrace();
         }
-        return jo;
     }
 
     // Angle
 
-    public static JSONObject angleToJsonObject(Angle angle) {
+    public static JSONObject angleToJsonObject(Angle angle) throws JSONException {
         JSONObject jo = new JSONObject();
         try {
             jo.put(DEGREES, angle.degrees());
             jo.put(DEGREES_CLOCKWISE, angle.degreesClockwise());
             jo.put(RADIANS, angle.radians());
             jo.put(RADIANS_MINUS_PI_PI, angle.radiansMinusPiPi());
+            return jo;
         } catch (JSONException e) {
+            throw e;
             e.printStackTrace();
         }
-        return jo;
     }
 
     // Route
 
-    public static JSONObject routeToJsonObject(Route route) {
+    public static JSONObject routeToJsonObject(Route route) throws JSONException {
         JSONObject jo = new JSONObject();
         try {
             JSONArray edgesJsonArray = new JSONArray();
@@ -501,16 +531,16 @@ public class LocationWrapper {
             jo.put(INDICATIONS, indicationsJsonArray);
             jo.put(TO, pointToJsonObject(route.getTo()));
             jo.put(STEPS, stepsJsonArray);
-
+            return jo;
         } catch (JSONException e) {
+            throw e;
             e.printStackTrace();
         }
-        return jo;
     }
 
     //RouteStep
 
-    public static JSONObject routeStepToJsonObject(RouteStep routeStep) {
+    public static JSONObject routeStepToJsonObject(RouteStep routeStep) throws JSONException {
         JSONObject jo = new JSONObject();
         try {
             jo.put(DISTANCE, routeStep.getDistance());
@@ -520,28 +550,30 @@ public class LocationWrapper {
             jo.put(TO, pointToJsonObject(routeStep.getTo()));
             jo.put(IS_FIRST, routeStep.isFirst());
             jo.put(IS_LAST, routeStep.isLast());
+            return jo;
         } catch (JSONException e) {
+            throw e;
             e.printStackTrace();
         }
-        return jo;
     }
 
-    public static RouteStep routeStepJsonObjectToRouteStep(JSONObject jo) {
+    public static RouteStep routeStepJsonObjectToRouteStep(JSONObject jo) throws JSONException {
         RouteStep routeStep = null;
         try {
             routeStep = new RouteStep.Builder().distance(jo.getDouble(DISTANCE))
                     .distanceToEnd(jo.getDouble(DISTANCE_TO_GOAL)).from(pointJsonObjectToPoint(jo.getJSONObject(FROM)))
                     .to(pointJsonObjectToPoint(jo.getJSONObject(TO))).id(jo.getInt(ID)).isLast(jo.getBoolean(IS_LAST))
                     .build();
+            return routeStep;
         } catch (JSONException e) {
+            throw e;
             e.printStackTrace();
         }
-        return routeStep;
     }
 
     // Indication
 
-    public static JSONObject indicationToJsonObject(Indication indication) {
+    public static JSONObject indicationToJsonObject(Indication indication) throws JSONException {
         JSONObject jo = new JSONObject();
         try {
             jo.put(DISTANCE, indication.getDistance());
@@ -552,13 +584,14 @@ public class LocationWrapper {
             jo.put(STEP_IDX_DESTINATION, indication.getStepIdxDestination());
             jo.put(STEP_IDX_ORIGIN, indication.getStepIdxOrigin());
             jo.put(NEEDED_LEVEL_CHANGE, indication.isNeededLevelChange());
+            return jo;
         } catch (JSONException e) {
+            throw e;
             e.printStackTrace();
         }
-        return jo;
     }
 
-    public static Indication indicationJsonObjectToIndication(JSONObject jo) {
+    public static Indication indicationJsonObjectToIndication(JSONObject jo) throws JSONException {
         Indication indication = null;
         try {
             indication = new Indication.Builder().setDistance(jo.getDouble(DISTANCE))
@@ -568,15 +601,17 @@ public class LocationWrapper {
                     .setOrientationType(Indication.Orientation.valueOf(jo.getString(ORIENTATION_TYPE)))
                     .setStepIdxDestination(jo.getInt(STEP_IDX_DESTINATION)).setStepIdxOrigin(jo.getInt(STEP_IDX_ORIGIN))
                     .build();
+            return indication;
         } catch (JSONException e) {
+            throw e;
             e.printStackTrace();
         }
-        return indication;
     }
 
     // NavigationProgress
 
-    public static JSONObject navigationProgressToJsonObject(NavigationProgress navigationProgress) {
+    public static JSONObject navigationProgressToJsonObject(NavigationProgress navigationProgress)
+            throws JSONException {
         JSONObject jo = new JSONObject();
         try {
             jo.put(CLOSEST_POINT_IN_ROUTE, pointToJsonObject(navigationProgress.getClosestPointInRoute()));
@@ -588,15 +623,16 @@ public class LocationWrapper {
             jo.put(ROUTE_STEP, routeStepToJsonObject(navigationProgress.getRouteStep()));
             jo.put(TIME_TO_END_STEP, navigationProgress.getTimeToEndStep());
             jo.put(TIME_TO_GOAL, navigationProgress.getTimeToGoal());
+            return jo;
         } catch (JSONException e) {
+            throw e;
             e.printStackTrace();
         }
-        return jo;
     }
 
     // Utils
 
-    public static JSONObject bitmapToString(Bitmap bitmap) {
+    public static JSONObject bitmapToString(Bitmap bitmap) throws JSONException {
         JSONObject jo = new JSONObject();
         try {
             String encodedImage;
@@ -604,9 +640,10 @@ public class LocationWrapper {
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOS);
             encodedImage = Base64.encodeToString(byteArrayOS.toByteArray(), Base64.DEFAULT);
             jo.put("data", encodedImage);
+            return jo;
         } catch (JSONException e) {
+            throw e;
             e.printStackTrace();
         }
-        return jo;
     }
 }
