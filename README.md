@@ -188,7 +188,7 @@ IOS: Not implemented yet
           "latitude": 0.0,
           "longitude": 0.0
         },
-        "cartesiansCoordinate": {
+        "cartesianCoordinate": {
           "latitude": 0.0,
           "longitude": 0.0
         }
@@ -200,7 +200,7 @@ IOS: Not implemented yet
           "latitude": 0.0,
           "longitude": 0.0
         },
-        "cartesiansCoordinate": {
+        "cartesianCoordinate": {
           "latitude": 0.0,
           "longitude": 0.0
         }
