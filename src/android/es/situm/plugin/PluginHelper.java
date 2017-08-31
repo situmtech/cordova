@@ -135,7 +135,7 @@ public class PluginHelper {
                     });
         } catch (JSONException e) {
             Log.e(TAG, "Unexpected error in poi response", e.getCause());
-            callbackContext.sendPluginResult(new PluginResult(Stauts.ERROR, e.getMessage()));
+            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
         }
     }
 
@@ -170,7 +170,7 @@ public class PluginHelper {
                     });
         } catch (JSONException e) {
             Log.e(TAG, "Unexpected error in poi response", e.getCause());
-            callbackContext.sendPluginResult(new PluginResult(Stauts.ERROR, e.getMessage()));
+            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
         }
     }
 
@@ -221,7 +221,7 @@ public class PluginHelper {
             });
         } catch (Exception e) {
             Log.e(TAG, "Unexpected error in situm POI response", e.getCause());
-            callbackContext.sendPluginResult(new PluginResult(Stauts.ERROR, e.getMessage()));
+            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
         }
     }
 
@@ -246,7 +246,7 @@ public class PluginHelper {
             });
         } catch (Exception e) {
             Log.e(TAG, "Unexpected error in situm POI response", e.getCause());
-            callbackContext.sendPluginResult(new PluginResult(Stauts.ERROR, e.getMessage()));
+            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
         }
     }
 
@@ -281,7 +281,7 @@ public class PluginHelper {
                     });
         } catch (JSONException e) {
             Log.e(TAG, "Unexpected error in situm event response", e.getCause());
-            callbackContext.sendPluginResult(new PluginResult(Stauts.ERROR, e.getMessage()));
+            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
         }
     }
 
@@ -306,7 +306,7 @@ public class PluginHelper {
             });
         } catch (JSONException e) {
             Log.e(TAG, "Unexpected error in map download", e.getCause());
-            callbackContext.sendPluginResult(new PluginResult(Stauts.ERROR, e.getMessage()));
+            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
         }
     }
 
@@ -370,7 +370,7 @@ public class PluginHelper {
             Log.i(TAG, "startPositioning: location listener is already started.");
         } catch (JSONException e) {
             Log.e(TAG, "Unexpected error building response", e.getCause());
-            callbackContext.sendPluginResult(new PluginResult(Stauts.ERROR, e.getMessage()));
+            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
         }
     }
 
