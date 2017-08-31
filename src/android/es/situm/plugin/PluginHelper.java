@@ -57,10 +57,11 @@ public class PluginHelper {
                     JSONArray jsonaBuildings = new JSONArray();
                     for (Building building : buildings) {
                         try {
-                            Log.i(PluginHelper.TAG, "onSuccess: " + building.getIdentifier() + " - " + building.getName());
+                            Log.i(PluginHelper.TAG,
+                                    "onSuccess: " + building.getIdentifier() + " - " + building.getName());
                             JSONObject jsonoBuilding = LocationWrapper.buildingToJsonObject(building);
                             jsonaBuildings.put(jsonoBuilding);
-                        } catch(JSONException e) {
+                        } catch (JSONException e) {
                             callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
                         }
                     }
@@ -76,7 +77,7 @@ public class PluginHelper {
                 }
             });
         } catch (JSONException e) {
-            callbackContext.sendPluginResult(bew PluginResult(Status.ERROR, e.getMessage()));
+            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
         }
     }
 
