@@ -159,8 +159,8 @@ public class LocationWrapper {
             jo.put(BUILDING_IDENTIFIER, building.getIdentifier());
             return jo;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -174,8 +174,8 @@ public class LocationWrapper {
             }
             return jo;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -192,8 +192,8 @@ public class LocationWrapper {
                     .infoHtml(jo.getString(INFO_HTML)).build();
             return building;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -210,8 +210,8 @@ public class LocationWrapper {
             jo.put(FLOOR_IDENTIFIER, floor.getIdentifier());
             return jo;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -223,8 +223,8 @@ public class LocationWrapper {
                     .scale(jo.getDouble(SCALE)).build();
             return floor;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -242,8 +242,8 @@ public class LocationWrapper {
             jo.put(RADIUS, situmEvent.getRadius());
             return jo;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -257,8 +257,8 @@ public class LocationWrapper {
             jo.put(BOTTOM_RIGHT, situmCA.getBottomRight());
             return jo;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -278,8 +278,8 @@ public class LocationWrapper {
             jo.put(POI_CATEGORY, poi.getCategory().getCode());
             return jo;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -293,8 +293,8 @@ public class LocationWrapper {
             jo.put(IS_PUBLIC, poiCategory.isPublic());
             return jo;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -307,8 +307,8 @@ public class LocationWrapper {
                     .isPublic(jo.getBoolean(IS_PUBLIC)).build();
             return category;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -335,8 +335,8 @@ public class LocationWrapper {
             jo.put(IS_OUTDOOR, location.isOutdoor());
             return jo;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -347,8 +347,8 @@ public class LocationWrapper {
             jo.put(STATUS_ORDINAL, locationStatus.ordinal());
             return jo;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -359,8 +359,8 @@ public class LocationWrapper {
                     pointJsonObjectToPoint(jo.getJSONObject(POSITION)), Float.valueOf(jo.getString(ACCURACY))).build();
             return location;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -373,8 +373,8 @@ public class LocationWrapper {
             jo.put(LONGITUDE, coordinate.getLongitude());
             return jo;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -384,8 +384,8 @@ public class LocationWrapper {
             coordinate = new Coordinate(jo.getDouble(LATITUDE), jo.getDouble(LONGITUDE));
             return coordinate;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -402,8 +402,8 @@ public class LocationWrapper {
             jo.put(IS_OUTDOOR, point.isOutdoor());
             return jo;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -415,8 +415,8 @@ public class LocationWrapper {
                     cartesianCoordinateJsonObjectToCartesianCoordinate(jo.getJSONObject(CARTESIAN_COORDINATE)));
             return point;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -430,8 +430,8 @@ public class LocationWrapper {
             jo.put(Y, cartesianCoordinate.getY());
             return jo;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -442,8 +442,8 @@ public class LocationWrapper {
             cartesianCoordinate = new CartesianCoordinate(jo.getDouble(X), jo.getDouble(Y));
             return cartesianCoordinate;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -456,8 +456,8 @@ public class LocationWrapper {
             jo.put(HEIGHT, dimensions.getHeight());
             return jo;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -472,8 +472,8 @@ public class LocationWrapper {
             jo.put(SOUTH_WEST, coordinateToJsonObject(bounds.getSouthWest()));
             return jo;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -488,8 +488,8 @@ public class LocationWrapper {
             jo.put(RADIANS_MINUS_PI_PI, angle.radiansMinusPiPi());
             return jo;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -531,8 +531,8 @@ public class LocationWrapper {
             jo.put(STEPS, stepsJsonArray);
             return jo;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -550,8 +550,8 @@ public class LocationWrapper {
             jo.put(IS_LAST, routeStep.isLast());
             return jo;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -564,8 +564,8 @@ public class LocationWrapper {
                     .build();
             return routeStep;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -584,8 +584,8 @@ public class LocationWrapper {
             jo.put(NEEDED_LEVEL_CHANGE, indication.isNeededLevelChange());
             return jo;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -601,8 +601,8 @@ public class LocationWrapper {
                     .build();
             return indication;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -623,8 +623,8 @@ public class LocationWrapper {
             jo.put(TIME_TO_GOAL, navigationProgress.getTimeToGoal());
             return jo;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -640,8 +640,8 @@ public class LocationWrapper {
             jo.put("data", encodedImage);
             return jo;
         } catch (JSONException e) {
-            throw e;
             e.printStackTrace();
+            throw e;
         }
     }
 }
