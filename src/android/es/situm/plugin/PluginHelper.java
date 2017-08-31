@@ -50,26 +50,34 @@ public class PluginHelper {
 
     public static void fetchBuildings(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
             final CallbackContext callbackContext) {
-        SitumSdk.communicationManager().fetchBuildings(new Handler<Collection<Building>>() {
-            public void onSuccess(Collection<Building> buildings) {
-                Log.d(PluginHelper.TAG, "onSuccess: Buildings fetched successfully.");
-                JSONArray jsonaBuildings = new JSONArray();
-                for (Building building : buildings) {
-                    Log.i(PluginHelper.TAG, "onSuccess: " + building.getIdentifier() + " - " + building.getName());
-                    JSONObject jsonoBuilding = LocationWrapper.buildingToJsonObject(building);
-                    jsonaBuildings.put(jsonoBuilding);
+        try {
+            SitumSdk.communicationManager().fetchBuildings(new Handler<Collection<Building>>() {
+                public void onSuccess(Collection<Building> buildings) {
+                    Log.d(PluginHelper.TAG, "onSuccess: Buildings fetched successfully.");
+                    JSONArray jsonaBuildings = new JSONArray();
+                    for (Building building : buildings) {
+                        try {
+                            Log.i(PluginHelper.TAG, "onSuccess: " + building.getIdentifier() + " - " + building.getName());
+                            JSONObject jsonoBuilding = LocationWrapper.buildingToJsonObject(building);
+                            jsonaBuildings.put(jsonoBuilding);
+                        } catch(JSONException e) {
+                            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
+                        }
+                    }
+                    if (buildings.isEmpty()) {
+                        Log.e(PluginHelper.TAG, "onSuccess: you have no buildings. Create one in the Dashboard");
+                    }
+                    callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonaBuildings));
                 }
-                if (buildings.isEmpty()) {
-                    Log.e(PluginHelper.TAG, "onSuccess: you have no buildings. Create one in the Dashboard");
-                }
-                callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonaBuildings));
-            }
 
-            public void onFailure(Error error) {
-                Log.e(PluginHelper.TAG, "onFailure:" + error);
-                callbackContext.sendPluginResult(new PluginResult(Status.ERROR, error.getMessage()));
-            }
-        });
+                public void onFailure(Error error) {
+                    Log.e(PluginHelper.TAG, "onFailure:" + error);
+                    callbackContext.sendPluginResult(new PluginResult(Status.ERROR, error.getMessage()));
+                }
+            });
+        } catch (JSONException e) {
+            callbackContext.sendPluginResult(bew PluginResult(Status.ERROR, e.getMessage()));
+        }
     }
 
     public static void fetchFloorsFromBuilding(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
@@ -83,9 +91,13 @@ public class PluginHelper {
                     Log.d(PluginHelper.TAG, "onSuccess: Floors fetched successfully.");
                     JSONArray jsonaFloors = new JSONArray();
                     for (Floor floor : floors) {
-                        Log.i(PluginHelper.TAG, "onSuccess: " + floor.getIdentifier());
-                        JSONObject jsonoFloor = LocationWrapper.floorToJsonObject(floor);
-                        jsonaFloors.put(jsonoFloor);
+                        try {
+                            Log.i(PluginHelper.TAG, "onSuccess: " + floor.getIdentifier());
+                            JSONObject jsonoFloor = LocationWrapper.floorToJsonObject(floor);
+                            jsonaFloors.put(jsonoFloor);
+                        } catch (JSONException e) {
+                            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
+                        }
                     }
                     if (floors.isEmpty()) {
                         Log.e(PluginHelper.TAG, "onSuccess: you have no floors defined for this building");
