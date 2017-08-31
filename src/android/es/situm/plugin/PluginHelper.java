@@ -50,26 +50,36 @@ public class PluginHelper {
 
     public static void fetchBuildings(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
             final CallbackContext callbackContext) {
-        SitumSdk.communicationManager().fetchBuildings(new Handler<Collection<Building>>() {
-            public void onSuccess(Collection<Building> buildings) {
-                Log.d(PluginHelper.TAG, "onSuccess: Buildings fetched successfully.");
-                JSONArray jsonaBuildings = new JSONArray();
-                for (Building building : buildings) {
-                    Log.i(PluginHelper.TAG, "onSuccess: " + building.getIdentifier() + " - " + building.getName());
-                    JSONObject jsonoBuilding = LocationWrapper.buildingToJsonObject(building);
-                    jsonaBuildings.put(jsonoBuilding);
-                }
-                if (buildings.isEmpty()) {
-                    Log.e(PluginHelper.TAG, "onSuccess: you have no buildings. Create one in the Dashboard");
-                }
-                callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonaBuildings));
-            }
+        try {
+            SitumSdk.communicationManager().fetchBuildings(new Handler<Collection<Building>>() {
+                public void onSuccess(Collection<Building> buildings) {
+                    try {
+                        Log.d(PluginHelper.TAG, "onSuccess: Buildings fetched successfully.");
+                        JSONArray jsonaBuildings = new JSONArray();
 
-            public void onFailure(Error error) {
-                Log.e(PluginHelper.TAG, "onFailure:" + error);
-                callbackContext.sendPluginResult(new PluginResult(Status.ERROR, error.getMessage()));
-            }
-        });
+                        for (Building building : buildings) {
+                            Log.i(PluginHelper.TAG,
+                                    "onSuccess: " + building.getIdentifier() + " - " + building.getName());
+                            JSONObject jsonoBuilding = LocationWrapper.buildingToJsonObject(building);
+                            jsonaBuildings.put(jsonoBuilding);
+                        }
+                        if (buildings.isEmpty()) {
+                            Log.e(PluginHelper.TAG, "onSuccess: you have no buildings. Create one in the Dashboard");
+                        }
+                        callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonaBuildings));
+                    } catch (JSONException e) {
+                        callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
+                    }
+                }
+
+                public void onFailure(Error error) {
+                    Log.e(PluginHelper.TAG, "onFailure:" + error);
+                    callbackContext.sendPluginResult(new PluginResult(Status.ERROR, error.getMessage()));
+                }
+            });
+        } catch (Exception e) {
+            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
+        }
     }
 
     public static void fetchFloorsFromBuilding(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
@@ -80,17 +90,22 @@ public class PluginHelper {
             SitumSdk.communicationManager().fetchFloorsFromBuilding(building, new Handler<Collection<Floor>>() {
                 @Override
                 public void onSuccess(Collection<Floor> floors) {
-                    Log.d(PluginHelper.TAG, "onSuccess: Floors fetched successfully.");
-                    JSONArray jsonaFloors = new JSONArray();
-                    for (Floor floor : floors) {
-                        Log.i(PluginHelper.TAG, "onSuccess: " + floor.getIdentifier());
-                        JSONObject jsonoFloor = LocationWrapper.floorToJsonObject(floor);
-                        jsonaFloors.put(jsonoFloor);
+                    try {
+                        Log.d(PluginHelper.TAG, "onSuccess: Floors fetched successfully.");
+                        JSONArray jsonaFloors = new JSONArray();
+
+                        for (Floor floor : floors) {
+                            Log.i(PluginHelper.TAG, "onSuccess: " + floor.getIdentifier());
+                            JSONObject jsonoFloor = LocationWrapper.floorToJsonObject(floor);
+                            jsonaFloors.put(jsonoFloor);
+                        }
+                        if (floors.isEmpty()) {
+                            Log.e(PluginHelper.TAG, "onSuccess: you have no floors defined for this building");
+                        }
+                        callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonaFloors));
+                    } catch (JSONException e) {
+                        callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
                     }
-                    if (floors.isEmpty()) {
-                        Log.e(PluginHelper.TAG, "onSuccess: you have no floors defined for this building");
-                    }
-                    callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonaFloors));
                 }
 
                 @Override
@@ -99,8 +114,9 @@ public class PluginHelper {
                     callbackContext.sendPluginResult(new PluginResult(Status.ERROR, error.getMessage()));
                 }
             });
-        } catch (JSONException e) {
+        } catch (Exception e) {
             Log.e(TAG, "Unexpected error in floor response", e.getCause());
+            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
         }
     }
 
@@ -113,17 +129,24 @@ public class PluginHelper {
                     new Handler<Collection<Poi>>() {
                         @Override
                         public void onSuccess(Collection<Poi> pois) {
-                            Log.d(PluginHelper.TAG, "onSuccess: Floors fetched successfully.");
-                            JSONArray jsonaPois = new JSONArray();
-                            for (Poi poi : pois) {
-                                Log.i(PluginHelper.TAG, "onSuccess: " + poi.getIdentifier() + " - " + poi.getName());
-                                JSONObject jsonoPoi = LocationWrapper.poiToJsonObject(poi);
-                                jsonaPois.put(jsonoPoi);
+                            try {
+                                Log.d(PluginHelper.TAG, "onSuccess: Floors fetched successfully.");
+                                JSONArray jsonaPois = new JSONArray();
+
+                                for (Poi poi : pois) {
+                                    Log.i(PluginHelper.TAG,
+                                            "onSuccess: " + poi.getIdentifier() + " - " + poi.getName());
+                                    JSONObject jsonoPoi = LocationWrapper.poiToJsonObject(poi);
+                                    jsonaPois.put(jsonoPoi);
+                                }
+                                if (pois.isEmpty()) {
+                                    Log.e(PluginHelper.TAG,
+                                            "onSuccess: you have no indoor pois defined for this building");
+                                }
+                                callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonaPois));
+                            } catch (JSONException e) {
+                                callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
                             }
-                            if (pois.isEmpty()) {
-                                Log.e(PluginHelper.TAG, "onSuccess: you have no indoor pois defined for this building");
-                            }
-                            callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonaPois));
                         }
 
                         @Override
@@ -132,8 +155,9 @@ public class PluginHelper {
                             callbackContext.sendPluginResult(new PluginResult(Status.ERROR, error.getMessage()));
                         }
                     });
-        } catch (JSONException e) {
+        } catch (Exception e) {
             Log.e(TAG, "Unexpected error in poi response", e.getCause());
+            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
         }
     }
 
@@ -146,18 +170,24 @@ public class PluginHelper {
                     new Handler<Collection<Poi>>() {
                         @Override
                         public void onSuccess(Collection<Poi> pois) {
-                            Log.d(PluginHelper.TAG, "onSuccess: Floors fetched successfully.");
-                            JSONArray jsonaPois = new JSONArray();
-                            for (Poi poi : pois) {
-                                Log.i(PluginHelper.TAG, "onSuccess: " + poi.getIdentifier() + " - " + poi.getName());
-                                JSONObject jsonoPoi = LocationWrapper.poiToJsonObject(poi);
-                                jsonaPois.put(jsonoPoi);
+                            try {
+                                Log.d(PluginHelper.TAG, "onSuccess: Floors fetched successfully.");
+                                JSONArray jsonaPois = new JSONArray();
+
+                                for (Poi poi : pois) {
+                                    Log.i(PluginHelper.TAG,
+                                            "onSuccess: " + poi.getIdentifier() + " - " + poi.getName());
+                                    JSONObject jsonoPoi = LocationWrapper.poiToJsonObject(poi);
+                                    jsonaPois.put(jsonoPoi);
+                                }
+                                if (pois.isEmpty()) {
+                                    Log.e(PluginHelper.TAG,
+                                            "onSuccess: you have no outdoor pois defined for this building");
+                                }
+                                callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonaPois));
+                            } catch (JSONException e) {
+                                callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
                             }
-                            if (pois.isEmpty()) {
-                                Log.e(PluginHelper.TAG,
-                                        "onSuccess: you have no outdoor pois defined for this building");
-                            }
-                            callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonaPois));
                         }
 
                         @Override
@@ -166,8 +196,9 @@ public class PluginHelper {
                             callbackContext.sendPluginResult(new PluginResult(Status.ERROR, error.getMessage()));
                         }
                     });
-        } catch (JSONException e) {
+        } catch (Exception e) {
             Log.e(TAG, "Unexpected error in poi response", e.getCause());
+            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
         }
     }
 
@@ -176,17 +207,21 @@ public class PluginHelper {
         SitumSdk.communicationManager().fetchPoiCategories(new Handler<Collection<PoiCategory>>() {
             @Override
             public void onSuccess(Collection<PoiCategory> poiCategories) {
-                Log.d(PluginHelper.TAG, "onSuccess: POI Categories fetched successfully.");
-                JSONArray jsonaPoiCategories = new JSONArray();
-                for (PoiCategory poiCategory : poiCategories) {
-                    Log.i(PluginHelper.TAG, "onSuccess: " + poiCategory.getCode() + " - " + poiCategory.getName());
-                    JSONObject jsonoPoiCategory = LocationWrapper.poiCategoryToJsonObject(poiCategory);
-                    jsonaPoiCategories.put(jsonoPoiCategory);
+                try {
+                    Log.d(PluginHelper.TAG, "onSuccess: POI Categories fetched successfully.");
+                    JSONArray jsonaPoiCategories = new JSONArray();
+                    for (PoiCategory poiCategory : poiCategories) {
+                        Log.i(PluginHelper.TAG, "onSuccess: " + poiCategory.getCode() + " - " + poiCategory.getName());
+                        JSONObject jsonoPoiCategory = LocationWrapper.poiCategoryToJsonObject(poiCategory);
+                        jsonaPoiCategories.put(jsonoPoiCategory);
+                    }
+                    if (poiCategories.isEmpty()) {
+                        Log.e(PluginHelper.TAG, "onSuccess: you have no categories defined for POIs");
+                    }
+                    callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonaPoiCategories));
+                } catch (JSONException e) {
+                    callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
                 }
-                if (poiCategories.isEmpty()) {
-                    Log.e(PluginHelper.TAG, "onSuccess: you have no categories defined for POIs");
-                }
-                callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonaPoiCategories));
             }
 
             @Override
@@ -205,9 +240,13 @@ public class PluginHelper {
             SitumSdk.communicationManager().fetchPoiCategoryIconNormal(category, new Handler<Bitmap>() {
                 @Override
                 public void onSuccess(Bitmap bitmap) {
-                    Log.d(PluginHelper.TAG, "onSuccess: Poi icon fetched successfully");
-                    JSONObject jsonoMap = LocationWrapper.bitmapToString(bitmap);
-                    callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonoMap));
+                    try {
+                        Log.d(PluginHelper.TAG, "onSuccess: Poi icon fetched successfully");
+                        JSONObject jsonoMap = LocationWrapper.bitmapToString(bitmap);
+                        callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonoMap));
+                    } catch (JSONException e) {
+                        callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
+                    }
                 }
 
                 @Override
@@ -218,6 +257,7 @@ public class PluginHelper {
             });
         } catch (Exception e) {
             Log.e(TAG, "Unexpected error in situm POI response", e.getCause());
+            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
         }
     }
 
@@ -229,9 +269,13 @@ public class PluginHelper {
             SitumSdk.communicationManager().fetchPoiCategoryIconNormal(category, new Handler<Bitmap>() {
                 @Override
                 public void onSuccess(Bitmap bitmap) {
-                    Log.d(PluginHelper.TAG, "onSuccess: Poi icon fetched successfully");
-                    JSONObject jsonoMap = LocationWrapper.bitmapToString(bitmap);
-                    callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonoMap));
+                    try {
+                        Log.d(PluginHelper.TAG, "onSuccess: Poi icon fetched successfully");
+                        JSONObject jsonoMap = LocationWrapper.bitmapToString(bitmap);
+                        callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonoMap));
+                    } catch (JSONException e) {
+                        callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
+                    }
                 }
 
                 @Override
@@ -242,6 +286,7 @@ public class PluginHelper {
             });
         } catch (Exception e) {
             Log.e(TAG, "Unexpected error in situm POI response", e.getCause());
+            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
         }
     }
 
@@ -254,18 +299,22 @@ public class PluginHelper {
                     new Handler<Collection<es.situm.sdk.v1.SitumEvent>>() {
                         @Override
                         public void onSuccess(Collection<SitumEvent> situmEvents) {
-                            Log.d(PluginHelper.TAG, "onSuccess: Floors fetched successfully.");
-                            JSONArray jsonaEvents = new JSONArray();
-                            for (SitumEvent situmEvent : situmEvents) {
-                                Log.i(PluginHelper.TAG,
-                                        "onSuccess: " + situmEvent.getId() + " - " + situmEvent.getName());
-                                JSONObject jsonoSitumEvent = LocationWrapper.situmEventToJsonObject(situmEvent);
-                                jsonaEvents.put(jsonoSitumEvent);
+                            try {
+                                Log.d(PluginHelper.TAG, "onSuccess: Floors fetched successfully.");
+                                JSONArray jsonaEvents = new JSONArray();
+                                for (SitumEvent situmEvent : situmEvents) {
+                                    Log.i(PluginHelper.TAG,
+                                            "onSuccess: " + situmEvent.getId() + " - " + situmEvent.getName());
+                                    JSONObject jsonoSitumEvent = LocationWrapper.situmEventToJsonObject(situmEvent);
+                                    jsonaEvents.put(jsonoSitumEvent);
+                                }
+                                if (situmEvents.isEmpty()) {
+                                    Log.e(PluginHelper.TAG, "onSuccess: you have no events defined for this building");
+                                }
+                                callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonaEvents));
+                            } catch (JSONException e) {
+                                callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
                             }
-                            if (situmEvents.isEmpty()) {
-                                Log.e(PluginHelper.TAG, "onSuccess: you have no events defined for this building");
-                            }
-                            callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonaEvents));
                         }
 
                         @Override
@@ -274,8 +323,9 @@ public class PluginHelper {
                             callbackContext.sendPluginResult(new PluginResult(Status.ERROR, error.getMessage()));
                         }
                     });
-        } catch (JSONException e) {
+        } catch (Exception e) {
             Log.e(TAG, "Unexpected error in situm event response", e.getCause());
+            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
         }
     }
 
@@ -287,9 +337,13 @@ public class PluginHelper {
             SitumSdk.communicationManager().fetchMapFromFloor(floor, new Handler<Bitmap>() {
                 @Override
                 public void onSuccess(Bitmap bitmap) {
-                    Log.d(PluginHelper.TAG, "onSuccess: Map fetched successfully");
-                    JSONObject jsonoMap = LocationWrapper.bitmapToString(bitmap);
-                    callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonoMap));
+                    try {
+                        Log.d(PluginHelper.TAG, "onSuccess: Map fetched successfully");
+                        JSONObject jsonoMap = LocationWrapper.bitmapToString(bitmap);
+                        callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonoMap));
+                    } catch (JSONException e) {
+                        callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
+                    }
                 }
 
                 @Override
@@ -298,8 +352,9 @@ public class PluginHelper {
                     callbackContext.sendPluginResult(new PluginResult(Status.ERROR, error.getMessage()));
                 }
             });
-        } catch (JSONException e) {
+        } catch (Exception e) {
             Log.e(TAG, "Unexpected error in map download", e.getCause());
+            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
         }
     }
 
@@ -314,26 +369,32 @@ public class PluginHelper {
                 Log.i(TAG, "startPositioning: starting positioning in " + sBuildingName);
                 locationListener = new LocationListener() {
                     public void onLocationChanged(Location location) {
-                        JSONException e;
-                        Log.i(PluginHelper.TAG, "onLocationChanged() called with: location = [" + location + "]");
-                        CartesianCoordinate cartesianCoordinate = location.getCartesianCoordinate();
-                        String locationMessage = "building: " + location.getBuildingIdentifier() + "\nfloor: "
-                                + location.getFloorIdentifier() + "\nx: " + cartesianCoordinate.getX() + "\ny: "
-                                + cartesianCoordinate.getY() + "\nyaw: " + location.getCartesianBearing()
-                                + "\naccuracy: " + location.getAccuracy();
-                        JSONObject jsonObject = LocationWrapper.locationToJsonObject(location);
-                        PluginResult result = new PluginResult(Status.OK, jsonObject);
-                        result.setKeepCallback(true);
-                        callbackContext.sendPluginResult(result);
+                        try {
+                            Log.i(PluginHelper.TAG, "onLocationChanged() called with: location = [" + location + "]");
+                            CartesianCoordinate cartesianCoordinate = location.getCartesianCoordinate();
+                            String locationMessage = "building: " + location.getBuildingIdentifier() + "\nfloor: "
+                                    + location.getFloorIdentifier() + "\nx: " + cartesianCoordinate.getX() + "\ny: "
+                                    + cartesianCoordinate.getY() + "\nyaw: " + location.getCartesianBearing()
+                                    + "\naccuracy: " + location.getAccuracy();
+                            JSONObject jsonObject = LocationWrapper.locationToJsonObject(location);
+                            PluginResult result = new PluginResult(Status.OK, jsonObject);
+                            result.setKeepCallback(true);
+                            callbackContext.sendPluginResult(result);
+                        } catch (JSONException e) {
+                            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
+                        }
                     }
 
                     public void onStatusChanged(@NonNull LocationStatus status) {
-                        JSONException e;
-                        Log.i(PluginHelper.TAG, "onStatusChanged() called with: status = [" + status + "]");
-                        JSONObject jsonObject = LocationWrapper.locationStatusToJsonObject(status);
-                        PluginResult result = new PluginResult(Status.OK, jsonObject);
-                        result.setKeepCallback(true);
-                        callbackContext.sendPluginResult(result);
+                        try {
+                            Log.i(PluginHelper.TAG, "onStatusChanged() called with: status = [" + status + "]");
+                            JSONObject jsonObject = LocationWrapper.locationStatusToJsonObject(status);
+                            PluginResult result = new PluginResult(Status.OK, jsonObject);
+                            result.setKeepCallback(true);
+                            callbackContext.sendPluginResult(result);
+                        } catch (JSONException e) {
+                            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
+                        }
                     }
 
                     public void onError(@NonNull Error error) {
@@ -361,8 +422,9 @@ public class PluginHelper {
                 return;
             }
             Log.i(TAG, "startPositioning: location listener is already started.");
-        } catch (JSONException e) {
+        } catch (Exception e) {
             Log.e(TAG, "Unexpected error building response", e.getCause());
+            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
         }
     }
 
@@ -408,9 +470,13 @@ public class PluginHelper {
             SitumSdk.directionsManager().requestDirections(directionRequest, new Handler<Route>() {
                 @Override
                 public void onSuccess(Route route) {
-                    JSONObject jsonoRoute = LocationWrapper.routeToJsonObject(route);
-                    Log.i(TAG, "onSuccess: Route calculated successfully");
-                    callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonoRoute));
+                    try {
+                        JSONObject jsonoRoute = LocationWrapper.routeToJsonObject(route);
+                        Log.i(TAG, "onSuccess: Route calculated successfully");
+                        callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonoRoute));
+                    } catch (JSONException e) {
+                        callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
+                    }
                 }
 
                 @Override
@@ -419,8 +485,9 @@ public class PluginHelper {
                     callbackContext.sendPluginResult(new PluginResult(Status.ERROR, error.getMessage()));
                 }
             });
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
         }
     }
 }

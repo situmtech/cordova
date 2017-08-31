@@ -3,50 +3,50 @@ var exec = require('cordova/exec');
 var PLUGIN_NAME = 'Situm';
 
 var Situm = {
-  setApiKey: function (email, apiKey, cb) {
-    exec(cb, null, PLUGIN_NAME, 'setApiKey', [email, apiKey]);
+  setApiKey: function (email, apiKey, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'setApiKey', [email, apiKey]);
   },
-  setUserPass: function (email, apiKey, cb) {
-    exec(cb, null, PLUGIN_NAME, 'setUserPass', [email, password]);
+  setUserPass: function (email, apiKey, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'setUserPass', [email, password]);
   },
-  startPositioning: function (arrBuilding, cb) {
-    exec(cb, null, PLUGIN_NAME, 'startPositioning', arrBuilding);
+  startPositioning: function (arrBuilding, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'startPositioning', arrBuilding);
   },
-  stopPositioning: function (cb) {
-    exec(cb, null, PLUGIN_NAME, 'stopPositioning', []);
+  stopPositioning: function (cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'stopPositioning', []);
   },
-  fetchBuildings: function (cb) {
-    exec(cb, null, PLUGIN_NAME, 'fetchBuildings', []);
+  fetchBuildings: function (cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'fetchBuildings', []);
   },
-  fetchFloorsFromBuilding: function (building, cb) {
-    exec(cb, null, PLUGIN_NAME, 'fetchFloorsFromBuilding', [building]);
+  fetchFloorsFromBuilding: function (building, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'fetchFloorsFromBuilding', [building]);
   },
-  fetchIndoorPOIsFromBuilding: function (building, cb) {
-    exec(cb, null, PLUGIN_NAME, 'fetchIndoorPOIsFromBuilding', [building]);
+  fetchIndoorPOIsFromBuilding: function (building, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'fetchIndoorPOIsFromBuilding', [building]);
   },
-  fetchOutdoorPOIsFromBuilding: function (building, cb) {
-    exec(cb, null, PLUGIN_NAME, 'fetchOutdoorPOIsFromBuilding', [building]);
+  fetchOutdoorPOIsFromBuilding: function (building, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'fetchOutdoorPOIsFromBuilding', [building]);
   },
-  fetchEventsFromBuilding: function (building, cb) {
-    exec(cb, null, PLUGIN_NAME, 'fetchEventsFromBuilding', [building]);
+  fetchEventsFromBuilding: function (building, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'fetchEventsFromBuilding', [building]);
   },
-  fetchPoiCategories: function (cb) {
-    exec(cb, null, PLUGIN_NAME, 'fetchPoiCategories');
+  fetchPoiCategories: function (cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'fetchPoiCategories');
   },
-  fetchMapFromFloor: function (floor, cb) {
-    exec(cb, null, PLUGIN_NAME, 'fetchMapFromFloor', [floor]);
+  fetchMapFromFloor: function (floor, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'fetchMapFromFloor', [floor]);
   },
-  fetchPoiCategoryIconNormal: function (category, cb) {
-    exec(cb, null, PLUGIN_NAME, 'fetchPoiCategoryIconNormal', [category]);
+  fetchPoiCategoryIconNormal: function (category, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'fetchPoiCategoryIconNormal', [category]);
   },
-  fetchPoiCategoryIconSelected: function (category, cb) {
-    exec(cb, null, PLUGIN_NAME, 'fetchPoiCategoryIconSelected', [category]);
+  fetchPoiCategoryIconSelected: function (category, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'fetchPoiCategoryIconSelected', [category]);
   },
-  invalidateCache: function (cb) {
-    exec(cb, null, PLUGIN_NAME, 'invalidateCache');
+  invalidateCache: function (cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'invalidateCache');
   },
-  requestDirections: function (pois, cb) {
-    exec(cb, null, PLUGIN_NAME, 'requestDirections', pois);
+  requestDirections: function (pois, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'requestDirections', pois);
   }
 };
 module.exports = Situm;
