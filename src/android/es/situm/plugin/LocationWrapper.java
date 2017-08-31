@@ -34,8 +34,6 @@ import es.situm.sdk.model.location.Location;
 import es.situm.sdk.model.navigation.NavigationProgress;
 import es.situm.sdk.v1.SitumConversionArea;
 import es.situm.sdk.v1.SitumEvent;
-import jdk.nashorn.internal.runtime.Context.ThrowErrorManager;
-import sun.awt.windows.ThemeReader;
 
 public class LocationWrapper {
 
