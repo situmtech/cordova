@@ -205,7 +205,7 @@ IOS: Not implemented yet
           "y": 0.0
         }
       }
-      cordova.plugins.Situm.requestDirections([from, to], (res) => {
+      cordova.plugins.Situm.requestDirections([building, from, to], (res) => {
         // res -> route object, we can draw in map with our map provider
       });
 ```
