@@ -15,6 +15,7 @@ import java.util.Map;
 import java.io.ByteArrayOutputStream;
 
 import es.situm.sdk.location.LocationStatus;
+import es.situm.sdk.location.util.CoordinateConverter;
 import es.situm.sdk.model.I18nString;
 import es.situm.sdk.model.URL;
 import es.situm.sdk.model.cartography.Building;
@@ -35,7 +36,7 @@ import es.situm.sdk.model.navigation.NavigationProgress;
 import es.situm.sdk.v1.SitumConversionArea;
 import es.situm.sdk.v1.SitumEvent;
 
-public class LocationWrapper {
+class LocationWrapper {
 
     //public static final String TAG = "LocationWrapper";
 
@@ -142,7 +143,7 @@ public class LocationWrapper {
     public static final String POI_CATEGORY_ICON_SELECTED = "icon_selected";
     public static final String POI_CATEGORY_ICON_UNSELECTED = "icon_unselected";
 
-    public static JSONObject buildingToJsonObject(Building building) throws JSONException {
+    static JSONObject buildingToJsonObject(Building building) throws JSONException {
         JSONObject jo = new JSONObject();
         jo.put(ADDRESS, building.getAddress());
         jo.put(BOUNDS, boundsToJsonObject(building.getBounds()));
@@ -159,7 +160,7 @@ public class LocationWrapper {
         return jo;
     }
 
-    public static JSONObject mapStringToJsonObject(Map<String, String> mp) throws JSONException {
+    static JSONObject mapStringToJsonObject(Map<String, String> mp) throws JSONException {
         JSONObject jo = new JSONObject();
         Iterator it = mp.entrySet().iterator();
         while (it.hasNext()) {
@@ -169,7 +170,7 @@ public class LocationWrapper {
         return jo;
     }
 
-    public static Building buildingJsonObjectToBuilding(JSONObject jo) throws JSONException {
+    static Building buildingJsonObjectToBuilding(JSONObject jo) throws JSONException {
         Building building = null;
         Coordinate center = new Coordinate(jo.getJSONObject(CENTER).getDouble(LATITUDE),
                 jo.getJSONObject(CENTER).getDouble(LONGITUDE));
@@ -183,7 +184,7 @@ public class LocationWrapper {
 
     //Floor
 
-    public static JSONObject floorToJsonObject(Floor floor) throws JSONException {
+    static JSONObject floorToJsonObject(Floor floor) throws JSONException {
         JSONObject jo = new JSONObject();
         jo.put(ALTITUDE, floor.getAltitude());
         jo.put(BUILDING_IDENTIFIER, floor.getBuildingIdentifier());
@@ -194,7 +195,7 @@ public class LocationWrapper {
         return jo;
     }
 
-    public static Floor floorJsonObjectToFloor(JSONObject jo) throws JSONException {
+    static Floor floorJsonObjectToFloor(JSONObject jo) throws JSONException {
         Floor floor = null;
         floor = new Floor.Builder().buildingIdentifier(jo.getString(BUILDING_IDENTIFIER))
                 .altitude(jo.getDouble(ALTITUDE)).level(jo.getInt(LEVEL)).mapUrl(new URL(jo.getString(MAP_URL)))
@@ -204,7 +205,7 @@ public class LocationWrapper {
 
     //Situm Events
 
-    public static JSONObject situmEventToJsonObject(SitumEvent situmEvent) throws JSONException {
+    static JSONObject situmEventToJsonObject(SitumEvent situmEvent) throws JSONException {
         JSONObject jo = new JSONObject();
         jo.put(BUILDING_IDENTIFIER, situmEvent.getBuildingId());
         jo.put(IDENTIFIER, situmEvent.getId());
@@ -216,7 +217,7 @@ public class LocationWrapper {
         return jo;
     }
 
-    public static JSONObject conversionAreaToJsonObject(SitumConversionArea situmCA) throws JSONException {
+    static JSONObject conversionAreaToJsonObject(SitumConversionArea situmCA) throws JSONException {
         JSONObject jo = new JSONObject();
         jo.put(FLOOR_IDENTIFIER, situmCA.getFloor_id());
         jo.put(TOP_LEFT, situmCA.getTopLeft());
@@ -228,7 +229,7 @@ public class LocationWrapper {
 
     // POI
 
-    public static JSONObject poiToJsonObject(Poi poi) throws JSONException {
+    static JSONObject poiToJsonObject(Poi poi) throws JSONException {
         JSONObject jo = new JSONObject();
         jo.put(BUILDING_IDENTIFIER, poi.getBuildingIdentifier());
         jo.put(CARTESIAN_COORDINATE, cartesianCoordinateToJsonObject(poi.getCartesianCoordinate()));
@@ -242,7 +243,7 @@ public class LocationWrapper {
         return jo;
     }
 
-    public static JSONObject poiCategoryToJsonObject(PoiCategory poiCategory) throws JSONException {
+    static JSONObject poiCategoryToJsonObject(PoiCategory poiCategory) throws JSONException {
         JSONObject jo = new JSONObject();
         jo.put(POI_CATEGORY_CODE, poiCategory.getCode());
         jo.put(POI_CATEGORY_NAME, poiCategory.getName());
@@ -252,7 +253,7 @@ public class LocationWrapper {
         return jo;
     }
 
-    public static PoiCategory poiCategoryFromJsonObject(JSONObject jo) throws JSONException {
+    static PoiCategory poiCategoryFromJsonObject(JSONObject jo) throws JSONException {
         PoiCategory category = null;
         Map<String, String> mapName = new HashMap<String, String>();
         mapName.put("name", jo.getString(POI_CATEGORY_NAME));
@@ -263,7 +264,7 @@ public class LocationWrapper {
 
     // Location
 
-    public static JSONObject locationToJsonObject(Location location) throws JSONException {
+    static JSONObject locationToJsonObject(Location location) throws JSONException {
         JSONObject jo = new JSONObject();
         jo.put(ACCURACY, location.getAccuracy());
         jo.put(BEARING, angleToJsonObject(location.getBearing()));
@@ -284,30 +285,30 @@ public class LocationWrapper {
         return jo;
     }
 
-    public static JSONObject locationStatusToJsonObject(LocationStatus locationStatus) throws JSONException {
+    static JSONObject locationStatusToJsonObject(LocationStatus locationStatus) throws JSONException {
         JSONObject jo = new JSONObject();
         jo.put(STATUS_NAME, locationStatus.name());
         jo.put(STATUS_ORDINAL, locationStatus.ordinal());
         return jo;
     }
 
-    public static Location locationJsonObjectToLocation(JSONObject jo) throws JSONException {
+    /*static Location locationJsonObjectToLocation(JSONObject jo) throws JSONException {
         Location location = null;
         location = new Location.Builder(jo.getLong(TIMESTAMP), jo.getString(PROVIDER),
                 pointJsonObjectToPoint(jo.getJSONObject(POSITION)), Float.valueOf(jo.getString(ACCURACY))).build();
         return location;
-    }
+    }*/
 
     // Coordinate
 
-    public static JSONObject coordinateToJsonObject(Coordinate coordinate) throws JSONException {
+    static JSONObject coordinateToJsonObject(Coordinate coordinate) throws JSONException {
         JSONObject jo = new JSONObject();
         jo.put(LATITUDE, coordinate.getLatitude());
         jo.put(LONGITUDE, coordinate.getLongitude());
         return jo;
     }
 
-    public static Coordinate coordinateJsonObjectToCoordinate(JSONObject jo) throws JSONException {
+    static Coordinate coordinateJsonObjectToCoordinate(JSONObject jo) throws JSONException {
         Coordinate coordinate = null;
         coordinate = new Coordinate(jo.getDouble(LATITUDE), jo.getDouble(LONGITUDE));
         return coordinate;
@@ -315,7 +316,7 @@ public class LocationWrapper {
 
     // Point
 
-    public static JSONObject pointToJsonObject(Point point) throws JSONException {
+    static JSONObject pointToJsonObject(Point point) throws JSONException {
         JSONObject jo = new JSONObject();
         jo.put(BUILDING_IDENTIFIER, point.getBuildingIdentifier());
         jo.put(CARTESIAN_COORDINATE, cartesianCoordinateToJsonObject(point.getCartesianCoordinate()));
@@ -326,12 +327,20 @@ public class LocationWrapper {
         return jo;
     }
 
-    public static Point pointJsonObjectToPoint(JSONObject jo) throws JSONException {
+    static Point pointJsonObjectToPoint(JSONObject jo, JSONObject joBuilding) throws JSONException {
+        Building building = null;
         Point point = null;
 
         if (!jo.has(COORDINATE)) {
-            jo.put(COORDINATE, new JSONObject().put(LATITUDE, jo.getJSONObject(CARTESIAN_COORDINATE).getDouble(X))
-                    .put(LONGITUDE, jo.getJSONObject(CARTESIAN_COORDINATE).getDouble(Y)));
+            building = buildingJsonObjectToBuilding(joBuilding);
+            JSONObject joCartesianCoordinate = jo.getJSONObject(CARTESIAN_COORDINATE);
+            CartesianCoordinate cartesianCoordinate = cartesianCoordinateJsonObjectToCartesianCoordinate(
+                    joCartesianCoordinate);
+            CoordinateConverter coordinateConverter = new CoordinateConverter(building.getDimensions(),
+                    building.getCenter(), building.getRotation());
+            Coordinate coordinate = coordinateConverter.toCoordinate(cartesianCoordinate);
+            JSONObject joCoordinate = coordinateToJsonObject(coordinate);
+            jo.put(COORDINATE, joCoordinate);
         }
 
         point = new Point(jo.getString(BUILDING_IDENTIFIER), jo.getString(FLOOR_IDENTIFIER),
@@ -342,16 +351,14 @@ public class LocationWrapper {
 
     // CartesianCoordinate
 
-    public static JSONObject cartesianCoordinateToJsonObject(CartesianCoordinate cartesianCoordinate)
-            throws JSONException {
+    static JSONObject cartesianCoordinateToJsonObject(CartesianCoordinate cartesianCoordinate) throws JSONException {
         JSONObject jo = new JSONObject();
         jo.put(X, cartesianCoordinate.getX());
         jo.put(Y, cartesianCoordinate.getY());
         return jo;
     }
 
-    public static CartesianCoordinate cartesianCoordinateJsonObjectToCartesianCoordinate(JSONObject jo)
-            throws JSONException {
+    static CartesianCoordinate cartesianCoordinateJsonObjectToCartesianCoordinate(JSONObject jo) throws JSONException {
         CartesianCoordinate cartesianCoordinate = null;
         cartesianCoordinate = new CartesianCoordinate(jo.getDouble(X), jo.getDouble(Y));
         return cartesianCoordinate;
@@ -359,7 +366,7 @@ public class LocationWrapper {
 
     // Dimensions
 
-    public static JSONObject dimensionsToJsonObject(Dimensions dimensions) throws JSONException {
+    static JSONObject dimensionsToJsonObject(Dimensions dimensions) throws JSONException {
         JSONObject jo = new JSONObject();
         jo.put(WIDTH, dimensions.getWidth());
         jo.put(HEIGHT, dimensions.getHeight());
@@ -368,7 +375,7 @@ public class LocationWrapper {
 
     // Bounds
 
-    public static JSONObject boundsToJsonObject(Bounds bounds) throws JSONException {
+    static JSONObject boundsToJsonObject(Bounds bounds) throws JSONException {
         JSONObject jo = new JSONObject();
         jo.put(NORTH_EAST, coordinateToJsonObject(bounds.getNorthEast()));
         jo.put(NORTH_WEST, coordinateToJsonObject(bounds.getNorthWest()));
@@ -379,7 +386,7 @@ public class LocationWrapper {
 
     // Angle
 
-    public static JSONObject angleToJsonObject(Angle angle) throws JSONException {
+    static JSONObject angleToJsonObject(Angle angle) throws JSONException {
         JSONObject jo = new JSONObject();
         jo.put(DEGREES, angle.degrees());
         jo.put(DEGREES_CLOCKWISE, angle.degreesClockwise());
@@ -390,7 +397,7 @@ public class LocationWrapper {
 
     // Route
 
-    public static JSONObject routeToJsonObject(Route route) throws JSONException {
+    static JSONObject routeToJsonObject(Route route) throws JSONException {
         JSONObject jo = new JSONObject();
         JSONArray edgesJsonArray = new JSONArray();
         for (RouteStep routeStep : route.getEdges()) {
@@ -428,7 +435,7 @@ public class LocationWrapper {
 
     //RouteStep
 
-    public static JSONObject routeStepToJsonObject(RouteStep routeStep) throws JSONException {
+    static JSONObject routeStepToJsonObject(RouteStep routeStep) throws JSONException {
         JSONObject jo = new JSONObject();
         jo.put(DISTANCE, routeStep.getDistance());
         jo.put(DISTANCE_TO_GOAL, routeStep.getDistanceToGoal());
@@ -440,18 +447,18 @@ public class LocationWrapper {
         return jo;
     }
 
-    public static RouteStep routeStepJsonObjectToRouteStep(JSONObject jo) throws JSONException {
+    /*static RouteStep routeStepJsonObjectToRouteStep(JSONObject jo) throws JSONException {
         RouteStep routeStep = null;
         routeStep = new RouteStep.Builder().distance(jo.getDouble(DISTANCE))
                 .distanceToEnd(jo.getDouble(DISTANCE_TO_GOAL)).from(pointJsonObjectToPoint(jo.getJSONObject(FROM)))
                 .to(pointJsonObjectToPoint(jo.getJSONObject(TO))).id(jo.getInt(ID)).isLast(jo.getBoolean(IS_LAST))
                 .build();
         return routeStep;
-    }
+    }*/
 
     // Indication
 
-    public static JSONObject indicationToJsonObject(Indication indication) throws JSONException {
+    static JSONObject indicationToJsonObject(Indication indication) throws JSONException {
         JSONObject jo = new JSONObject();
         jo.put(DISTANCE, indication.getDistance());
         jo.put(DISTANCE_TO_NEXT_LEVEL, indication.getDistanceToNextLevel());
@@ -464,7 +471,7 @@ public class LocationWrapper {
         return jo;
     }
 
-    public static Indication indicationJsonObjectToIndication(JSONObject jo) throws JSONException {
+    static Indication indicationJsonObjectToIndication(JSONObject jo) throws JSONException {
         Indication indication = null;
         indication = new Indication.Builder().setDistance(jo.getDouble(DISTANCE))
                 .setDistanceToNextLevel(jo.getInt(DISTANCE_TO_NEXT_LEVEL))
@@ -478,8 +485,7 @@ public class LocationWrapper {
 
     // NavigationProgress
 
-    public static JSONObject navigationProgressToJsonObject(NavigationProgress navigationProgress)
-            throws JSONException {
+    static JSONObject navigationProgressToJsonObject(NavigationProgress navigationProgress) throws JSONException {
         JSONObject jo = new JSONObject();
         jo.put(CLOSEST_POINT_IN_ROUTE, pointToJsonObject(navigationProgress.getClosestPointInRoute()));
         jo.put(CURRENT_INDICATION, indicationToJsonObject(navigationProgress.getCurrentIndication()));
@@ -495,7 +501,7 @@ public class LocationWrapper {
 
     // Utils
 
-    public static JSONObject bitmapToString(Bitmap bitmap) throws JSONException {
+    static JSONObject bitmapToString(Bitmap bitmap) throws JSONException {
         JSONObject jo = new JSONObject();
         String encodedImage;
         ByteArrayOutputStream byteArrayOS = new ByteArrayOutputStream();
