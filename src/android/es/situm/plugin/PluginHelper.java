@@ -462,10 +462,11 @@ public class PluginHelper {
     public static void requestDirections(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
             final CallbackContext callbackContext) {
         try {
-            JSONObject jsonoFrom = args.getJSONObject(0);
-            JSONObject jsonoTo = args.getJSONObject(1);
-            Point from = LocationWrapper.pointJsonObjectToPoint(jsonoFrom);
-            Point to = LocationWrapper.pointJsonObjectToPoint(jsonoTo);
+            JSONObject jsonoBuilding = args.getJSONObject(0);
+            JSONObject jsonoFrom = args.getJSONObject(1);
+            JSONObject jsonoTo = args.getJSONObject(2);
+            Point from = LocationWrapper.pointJsonObjectToPoint(jsonoFrom, jsonoBuilding);
+            Point to = LocationWrapper.pointJsonObjectToPoint(jsonoTo, jsonoBuilding);
             DirectionsRequest directionRequest = new DirectionsRequest.Builder().from(from, null).to(to).build();
             SitumSdk.directionsManager().requestDirections(directionRequest, new Handler<Route>() {
                 @Override

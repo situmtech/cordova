@@ -45,8 +45,8 @@ var Situm = {
   invalidateCache: function (cb, error) {
     exec(cb, error, PLUGIN_NAME, 'invalidateCache');
   },
-  requestDirections: function (pois, cb, error) {
-    exec(cb, error, PLUGIN_NAME, 'requestDirections', pois);
+  requestDirections: function (args, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'requestDirections', args);
   }
 };
 module.exports = Situm;
