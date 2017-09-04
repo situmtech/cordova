@@ -328,6 +328,12 @@ public class LocationWrapper {
 
     public static Point pointJsonObjectToPoint(JSONObject jo) throws JSONException {
         Point point = null;
+
+        if (!jo.has(COORDINATE)) {
+            jo.put(COORDINATE, new JSONObject().put(LATITUDE, jo.getJSONObject(CARTESIAN_COORDINATE).getDouble(X))
+                    .put(LONGITUDE, jo.getJSONObject(CARTESIAN_COORDINATE).getDouble(Y)));
+        }
+
         point = new Point(jo.getString(BUILDING_IDENTIFIER), jo.getString(FLOOR_IDENTIFIER),
                 coordinateJsonObjectToCoordinate(jo.getJSONObject(COORDINATE)),
                 cartesianCoordinateJsonObjectToCartesianCoordinate(jo.getJSONObject(CARTESIAN_COORDINATE)));
