@@ -189,8 +189,8 @@ IOS: Not implemented yet
           "longitude": 0.0
         },
         "cartesianCoordinate": {
-          "latitude": 0.0,
-          "longitude": 0.0
+          "x": 0.0,
+          "y": 0.0
         }
       }
       to = {
@@ -201,8 +201,8 @@ IOS: Not implemented yet
           "longitude": 0.0
         },
         "cartesianCoordinate": {
-          "latitude": 0.0,
-          "longitude": 0.0
+          "x": 0.0,
+          "y": 0.0
         }
       }
       cordova.plugins.Situm.requestDirections([from, to], (res) => {
