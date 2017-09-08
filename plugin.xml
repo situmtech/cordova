@@ -61,8 +61,6 @@
 
 
         <framework src="src/ios/Frameworks/SitumSDK.framework" custom="true"/>
-		<framework src="lib.dylib"/>
-		<framework src="libz.dylib"/>
 
         <header-file src="src/ios/SitumPlugin.h" />
         <header-file src="src/ios/SitumLocationWrapper.h" />
