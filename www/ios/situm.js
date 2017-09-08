@@ -1,6 +1,6 @@
 var exec = require('cordova/exec');
 
-var PLUGIN_NAME = 'Situm';
+var PLUGIN_NAME = 'SitumPlugin';
 
 var Situm = {
   setApiKey: function (email, apiKey, cb, error) {
