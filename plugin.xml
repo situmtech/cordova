@@ -44,28 +44,34 @@
         </js-module>
         <config-file target="config.xml" parent="/*">
             <feature name="Situm">
-                <param name="ios-package" value="es.situm.plugin.SitumPlugin" onload="true" />
+                <param name="ios-package" value="es.situm.plugin.Situm" onload="true" />
             </feature>
         </config-file>
 
-        <pods-config ios-min-version="5.0" use-frameworks="true">
-        </pods-config>
+        <config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
+		    <string>Location is required to find out where you are</string>
+		</config-file>
+		<config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
+			<string>Location is required to find out where you are</string>
+		</config-file>
+		<config-file target="*-Info.plist" parent="NSLocationUsageDescription">
+			<string>Location is required to find out where you are</string>
+		</config-file>
+
+
+
+        <framework src="src/ios/Frameworks/SitumSDK.framework" custom="true"/>
+		<framework src="lib.dylib"/>
+		<framework src="libz.dylib"/>
 
         <header-file src="src/ios/SitumPlugin.h" />
         <header-file src="src/ios/SitumLocationWrapper.h" />
         <source-file src="src/ios/SitumPlugin.m" />
         <source-file src="src/ios/SitumLocationWrapper.m" />
 
-		<framework src="src/ios/Frameworks/SitumSDK.framework" custom="true" />
-		<framework src="lib.dylib" />
-		<framework src="libz.dylib" />
-
-		<!-- <pods-config ios-min-version="8.0" use-frameworks="true">
-	    </pods-config> -->
-        <pod name="RestKit" version="0.25.0" />
-	    <pod name="CocoaAsyncSocket"/>
-        <!-- <framework src="RestKit" type="podspec" spec="~> 0.20.0" />
-        <framework src="CocoaAsyncSocket" type="podspec"/>
-        <framework src="src/ios/Frameworks/SitumSDK.framework" custom="true" /> -->
+		<pods-config ios-min-version="9.0" use-frameworks="false">
+	    </pods-config>
+       <pod name="RestKit" version="~> 0.27.2" />
+       <pod name="CocoaAsyncSocket"/>
     </platform>
 </plugin>
