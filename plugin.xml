@@ -37,18 +37,25 @@
     </platform>
 
     <!-- ios -->
-    <!--<platform name="ios">
-        <js-module src="www/plugin.js" name="Situm">
+    <platform name="ios">
+        <js-module src="www/ios/plugin.js" name="Situm">
             <runs/>
             <clobbers target="cordova.plugins.Situm" />
         </js-module>
         <config-file target="config.xml" parent="/*">
             <feature name="Situm">
-                <param name="ios-package" value="Situm" onload="true" />
+                <param name="ios-package" value="es.situm.plugin.SitumPlugin" onload="true" />
             </feature>
         </config-file>
 
         <header-file src="src/ios/SitumPlugin.h" />
+        <header-file src="src/ios/SitumLocationWrapper.h" />
         <source-file src="src/ios/SitumPlugin.m" />
-    </platform> ios -->
+        <source-file src="src/ios/SitumLocationWrapper.m" />
+
+
+        <framework src="RestKit" type="podspec" spec="~> 0.20.0" />
+        <framework src="CocoaAsyncSocket" type="podspec"/>
+        <framework src="src/ios/Frameworks/SitumSDK.framework" custom="true" />
+    </platform>
 </plugin>
