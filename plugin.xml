@@ -38,13 +38,13 @@
 
     <!-- ios -->
     <platform name="ios">
-        <js-module src="www/ios/situm.js" name="Situm">
+        <js-module src="www/ios/situm.js" name="SitumPlugin">
             <runs/>
             <clobbers target="cordova.plugins.Situm" />
         </js-module>
         <config-file target="config.xml" parent="/*">
-            <feature name="Situm">
-                <param name="ios-package" value="es.situm.plugin.Situm" onload="true" />
+            <feature name="SitumPlugin">
+                <param name="ios-package" value="SitumPlugin" onload="true" />
             </feature>
         </config-file>
 
