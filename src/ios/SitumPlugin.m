@@ -49,8 +49,7 @@
 }
 
 
-
-- (void)fetchFloorsForBuilding:(CDVInvokedUrlCommand*)command
+- (void)fetchFloorsFromBuilding:(CDVInvokedUrlCommand*)command
 {
     NSDictionary* buildingJO = (NSDictionary*)[command.arguments objectAtIndex:0];
     
@@ -164,6 +163,62 @@
 }
 
 - (void)fetchPoiCategories:(CDVInvokedUrlCommand *)command
+{
+    NSDictionary* categoryJO = (NSDictionary*)[command.arguments objectAtIndex:0];
+    
+    if (categoryStored == nil) {
+        categoryStored = [[NSMutableDictionary alloc] init];
+    }
+    
+    [[SITCommunicationManager sharedManager] fetchCategoriesWithOptions:[categoryJO valueForKey:@"identifier"] withCompletion:^(NSArray *categories, NSError *error) {
+        if (!error) {
+            NSMutableArray *ja = [[NSMutableArray alloc] init];
+            for (SITPOICategory *obj in categories) {
+                [ja addObject:[SitumLocationWrapper.shared categoryToJsonObject:obj]];
+                [categoryStored setObject:obj forKey:[NSString stringWithFormat:@"%@", obj.name]];
+            }
+            CDVPluginResult* pluginResult = nil;
+            if (categories.count == 0) {
+                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"You have no categories. Create one in the Dashboard"];
+            } else {
+                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:ja.copy];
+            }
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        } else {
+            [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.description] callbackId:command.callbackId];
+        }
+    }];
+}
+
+- (void)fetchPoiCategoryIconNormal:(CDVInvokedUrlCommand *)command
+{
+    NSDictionary* buildingJO = (NSDictionary*)[command.arguments objectAtIndex:0];
+    
+    if (categoryStored == nil) {
+        categoryStored = [[NSMutableDictionary alloc] init];
+    }
+    
+    [[SITCommunicationManager sharedManager] fetchCategoriesWithOptions:[buildingJO valueForKey:@"identifier"] withCompletion:^(NSArray *categories, NSError *error) {
+        if (!error) {
+            NSMutableArray *ja = [[NSMutableArray alloc] init];
+            for (SITEvent *obj in categories) {
+                [ja addObject:[SitumLocationWrapper.shared categoryToJsonObject:obj]];
+                [categoryStored setObject:obj forKey:[NSString stringWithFormat:@"%@", obj.name]];
+            }
+            CDVPluginResult* pluginResult = nil;
+            if (categories.count == 0) {
+                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"You have no categories. Create one in the Dashboard"];
+            } else {
+                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:ja.copy];
+            }
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        } else {
+            [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.description] callbackId:command.callbackId];
+        }
+    }];
+}
+
+- (void)fetchPoiCategoryIconSelected:(CDVInvokedUrlCommand *)command
 {
     NSDictionary* buildingJO = (NSDictionary*)[command.arguments objectAtIndex:0];
     

@@ -194,7 +194,8 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:emptyStrCheck(building.picture_thumb_url) forKey:@"pictureThumbUrl"];
     [jo setObject:emptyStrCheck(building.picture_url) forKey:@"pictureUrl"];
     [jo setObject:building.rotation forKey:@"rotation"];
-    [jo setObject:emptyStrCheck(building.user_identifier) forKey:@"userIdentifier"];
+    //TODO check
+    //[jo setObject:emptyStrCheck(building.user_identifier) forKey:@"userIdentifier"];
     [jo setObject:emptyStrCheck([NSString stringWithFormat:@"%@", building.identifier]) forKey:@"identifier"];
     
     return jo.copy;
