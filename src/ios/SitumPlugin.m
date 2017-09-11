@@ -201,7 +201,7 @@
     [[SITCommunicationManager sharedManager] fetchCategoriesWithOptions:[buildingJO valueForKey:@"identifier"] withCompletion:^(NSArray *categories, NSError *error) {
         if (!error) {
             NSMutableArray *ja = [[NSMutableArray alloc] init];
-            for (SITEvent *obj in categories) {
+            for (SITPOICategory *obj in categories) {
                 [ja addObject:[SitumLocationWrapper.shared categoryToJsonObject:obj]];
                 [categoryStored setObject:obj forKey:[NSString stringWithFormat:@"%@", obj.name]];
             }
@@ -229,7 +229,7 @@
     [[SITCommunicationManager sharedManager] fetchCategoriesWithOptions:[buildingJO valueForKey:@"identifier"] withCompletion:^(NSArray *categories, NSError *error) {
         if (!error) {
             NSMutableArray *ja = [[NSMutableArray alloc] init];
-            for (SITEvent *obj in categories) {
+            for (SITPOICategory *obj in categories) {
                 [ja addObject:[SitumLocationWrapper.shared categoryToJsonObject:obj]];
                 [categoryStored setObject:obj forKey:[NSString stringWithFormat:@"%@", obj.name]];
             }
