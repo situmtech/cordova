@@ -7,26 +7,28 @@
 
 //Building
 
-- (NSDictionary *) buildingToJsonObject:(SITIndoorBuilding *) building;
+- (NSDictionary *) buildingToJsonObject:(SITBuilding *) building;
 
 //Building (should be deprecated)
 
 - (NSDictionary *) buildingIndoorToJsonObject:(SITIndoorBuilding *) building;
 
+
 //Floor
 
-- (NSDictionary *) floorToJsonObject:(SITIndoorLevel *) floor;
+- (NSDictionary *) floorToJsonObject:(SITFloor *) floor;
 
 //Event
+
 - (NSDictionary *) eventToJsonObject:(SITEvent *) event;
-
-// POI
-
-- (NSDictionary *) poiToJsonObject:(SITPOI *) poi;
 
 // Category
 
 - (NSDictionary *) categoryToJsonObject:(SITPOICategory *) category;
+
+// POI
+
+- (NSDictionary *) poiToJsonObject:(SITPOI *) poi;
 
 
 // Location
