@@ -32,4 +32,6 @@
 - (instancetype)initWithValue:(NSString *)value
                 defaultLocale:(NSLocale *)defaultLocale;
 
+- (NSArray *)locales;
+
 @end

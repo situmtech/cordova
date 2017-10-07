@@ -30,6 +30,16 @@
 @property (nonatomic, strong) NSString *name;
 
 /**
+ Date containing the time when a resource was first created.
+ */
+@property (nonatomic, strong) NSDate *createdAt;
+
+/**
+ Date containing the time when a resource was last updated.
+ */
+@property (nonatomic, strong) NSDate *updatedAt;
+
+/**
  *  Additional information about the SITEvent
  */
 @property (nonatomic, strong) NSString *info;

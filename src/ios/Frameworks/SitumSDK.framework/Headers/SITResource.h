@@ -25,7 +25,6 @@
  */
 @property (nonatomic, strong) NSDate *createdAt;
 
-
 /**
  Date containing the time when a resource was last updated.
  */
