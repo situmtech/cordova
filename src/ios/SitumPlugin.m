@@ -62,13 +62,13 @@
     //SITIndoorBuilding *selectedBuilding = (SITIndoorBuilding *) [buildingsStored objectForKey:buildingId];
     [[SITCommunicationManager sharedManager] fetchFloorsForBuilding:buildingId withOptions:nil success:^(NSDictionary *mapping) {
         NSMutableArray *ja = [[NSMutableArray alloc] init];
-        NSArray *indoorLevels = [mapping objectForKey:@"results"];
-        for (SITIndoorLevel *obj in indoorLevels) {
+        NSArray *floors = [mapping objectForKey:@"results"];
+        for (SITFloor *obj in floors) {
             [ja addObject:[SitumLocationWrapper.shared floorToJsonObject:obj]];
-            [floorStored setObject:obj forKey:[NSString stringWithFormat:@"%@", obj.level]];
+            [floorStored setObject:obj forKey:[NSString stringWithFormat:@"%@", obj.identifier]];
         }
         CDVPluginResult* pluginResult = nil;
-        if (indoorLevels.count == 0) {
+        if (floors.count == 0) {
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"You have no floors. Create one in the Dashboard"];
         } else {
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:ja.copy];
