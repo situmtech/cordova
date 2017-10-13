@@ -147,15 +147,15 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
     [jo setObject:emptyStrCheck(building.address) forKey:@"address"];
     [jo setObject:[self boundsToJsonObject:building.bounds] forKey:@"bounds"];
-    //[jo setObject:[self boundsToJsonObject:building.boundsRotated] forKey:@"boundsRotated"];
-    //[jo setObject:[self coordinateToJsonObject:building.coordinate] forKey:@"center"];
     [jo setObject:[self dimensionsToJsonObject:building.dimensions] forKey:@"dimensions"];
+    [jo setObject:[self coordinateToJsonObject:building.center] forKey:@"center"];
     [jo setObject:emptyStrCheck(building.name) forKey:@"name"];
+    [jo setObject:emptyStrCheck(building.infoHTML) forKey:@"infoHtml"];
     [jo setObject:emptyStrCheck(building.pictureThumbURL.direction) forKey:@"pictureThumbUrl"];
     [jo setObject:emptyStrCheck(building.pictureURL.direction) forKey:@"pictureUrl"];
     [jo setObject:building.rotation forKey:@"rotation"];
     [jo setObject:emptyStrCheck(building.userIdentifier) forKey:@"userIdentifier"];
-    [jo setObject:emptyStrCheck([NSString stringWithFormat:@"%@", building.identifier]) forKey:@"identifier"];
+    [jo setObject:emptyStrCheck(building.identifier) forKey:@"identifier"];
     
     return jo.copy;
 }
@@ -182,7 +182,9 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     return type;
 }
 
-- (NSDictionary *) buildingIndoorToJsonObject:(SITIndoorBuilding *) building {
+//deprecated method
+
+- (NSDictionary *) buildingIndoorToJsonObject:(SITIndoorBuilding *) building __deprecated{
     
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
     [jo setObject:emptyStrCheck(building.address) forKey:@"address"];
@@ -212,6 +214,17 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:[NSNumber numberWithDouble:floor.scale] forKey:@"scale"];
     [jo setObject:[NSString stringWithFormat:@"%@", floor.identifier] forKey:@"identifier"];
     return jo.copy;
+}
+
+- (SITFloor *) jsonObjectToFloor:(NSDictionary *) nsFloor {
+    SITFloor *floor  = [[SITFloor alloc] init];
+    floor.scale = [[nsFloor objectForKey:@"scale"] doubleValue];
+    SITURL *url  = [[SITURL alloc] init];
+    floor.mapURL = [url initWithDirection:(NSString *) [[nsFloor objectForKey:@"mapUrl"] stringValue]];
+    floor.level = [[nsFloor objectForKey:@"level"] intValue];
+    floor.identifier = [[nsFloor objectForKey:@"identifier"] stringValue];
+    floor.buildingIdentifier = [[nsFloor objectForKey:@"buildingIdentifier"] stringValue];
+    return floor.copy;
 }
 
 //Event
