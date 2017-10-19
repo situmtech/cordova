@@ -4,6 +4,8 @@
 
 #import <Cordova/CDVAvailability.h>
 
+static NSString *ResultsKey = @"results";
+
 @implementation SitumPlugin
 
 - (void)setApiKey:(CDVInvokedUrlCommand *)command {
@@ -25,28 +27,29 @@
         buildingsStored = [[NSMutableDictionary alloc] init];
     }
     
-    [[SITCommunicationManager sharedManager]
-     fetchIndoorBuildingsWithOptions:nil
-     withCompletion:^(NSArray *indoorBuildings, NSError *error) {
-         if (!error) {
-             NSMutableArray *ja = [[NSMutableArray alloc] init];
-             for (SITIndoorBuilding *obj in indoorBuildings) {
-                 [ja addObject:[SitumLocationWrapper.shared buildingIndoorToJsonObject:obj]];
-                 [buildingsStored setObject:obj forKey:[NSString stringWithFormat:@"%@", obj.identifier]];
-             }
-             CDVPluginResult* pluginResult = nil;
-             if (indoorBuildings.count == 0) {
-                 pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"You have no buildings. Create one in the Dashboard"];
-             } else {
-                 pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:ja.copy];
-             }
-             [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-             
-         } else {
-             [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.description] callbackId:command.callbackId];
-         }
-     }];
-}
+    // Forcing requests to go to the network instead of cache
+    NSDictionary *options = @{@"forceRequest":@YES,};
+    
+    [[SITCommunicationManager sharedManager] fetchBuildingsWithOptions:options success:^(NSDictionary *mapping) {
+        NSArray *buildings = [mapping valueForKey:ResultsKey];
+        CDVPluginResult* pluginResult = nil;
+        if (buildings.count == 0) {
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"There are no buildings on the account. Please go to dashboard http://dashboard.situm.es and learn more about the first step with Situm technology"];
+        }
+        else {
+            NSMutableArray *ja = [[NSMutableArray alloc] init];
+            for (SITBuilding *obj in buildings) {
+                [ja addObject:[SitumLocationWrapper.shared buildingToJsonObject:obj]];
+                [buildingsStored setObject:obj forKey:[NSString stringWithFormat:@"%@", obj.identifier]];
+            }
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:ja.copy];
+        }
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }
+   failure:^(NSError *error) {
+     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.description] callbackId:command.callbackId];
+   }];
+ }
 
 
 - (void)fetchFloorsFromBuilding:(CDVInvokedUrlCommand*)command
@@ -59,17 +62,16 @@
     
     NSString *buildingId = [buildingJO valueForKey:@"identifier"];
     
-    //SITIndoorBuilding *selectedBuilding = (SITIndoorBuilding *) [buildingsStored objectForKey:buildingId];
     [[SITCommunicationManager sharedManager] fetchFloorsForBuilding:buildingId withOptions:nil success:^(NSDictionary *mapping) {
         NSMutableArray *ja = [[NSMutableArray alloc] init];
-        NSArray *indoorLevels = [mapping objectForKey:@"results"];
-        for (SITIndoorLevel *obj in indoorLevels) {
+        NSArray *floors = [mapping objectForKey:@"results"];
+        for (SITFloor *obj in floors) {
             [ja addObject:[SitumLocationWrapper.shared floorToJsonObject:obj]];
-            [floorStored setObject:obj forKey:[NSString stringWithFormat:@"%@", obj.level]];
+            [floorStored setObject:obj forKey:[NSString stringWithFormat:@"%@", obj.identifier]];
         }
         CDVPluginResult* pluginResult = nil;
-        if (indoorLevels.count == 0) {
-            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"You have no floors. Create one in the Dashboard"];
+        if (floors.count == 0) {
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"The selected building does not have floors. Correct that on http://dashboard.situm.es"];
         } else {
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:ja.copy];
         }
@@ -248,29 +250,20 @@
 
 - (void)fetchMapFromFloor:(CDVInvokedUrlCommand *)command
 {
-//    NSDictionary* floorJO = (NSDictionary*)[command.arguments objectAtIndex:0];
-//    
-//    if (floorStored == nil) {
-//        floorStored = [[NSMutableDictionary alloc] init];
-//    }
-//    
-//    [[SITCommunicationManager sharedManager] fetchMapFromFloor:[floorStored valueForKey:@"identifier"]  withOptions:nil success:^(NSDictionary *mapping) {
-//        NSArray *list = [mapping objectForKey:@"results"];
-//        NSMutableArray *ja = [[NSMutableArray alloc] init];
-//        for (SITPOI *obj in list) {
-//            [ja addObject:[SitumLocationWrapper.shared poiToJsonObject:obj]];
-//            [poisStored setObject:obj forKey:obj.name];
-//        }
-//        CDVPluginResult* pluginResult = nil;
-//        if (list.count == 0) {
-//            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"You have no poi. Create one in the Dashboard"];
-//        } else {
-//            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:ja.copy];
-//        }
-//        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-//    } failure:^(NSError *error) {
-//        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.description] callbackId:command.callbackId];
-//    }];
+    NSDictionary* floorJO = (NSDictionary*)[command.arguments objectAtIndex:0];
+    
+   if (floorStored == nil) {
+       floorStored = [[NSMutableDictionary alloc] init];
+   }
+    SITFloor* floor = [SitumLocationWrapper.shared jsonObjectToFloor:floorJO];
+    
+   [[SITCommunicationManager sharedManager] fetchMapFromFloor: floor withCompletion:^(NSData *imageData) {
+     NSMutableDictionary *jaMap = [[NSMutableDictionary alloc] init];
+     NSString *imageBase64Encoded = [imageData base64EncodedStringWithOptions:0];
+     [jaMap setObject:[NSString stringWithFormat:@"%@", imageBase64Encoded] forKey:@"data"];
+     CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:jaMap];
+     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }];
 }
 
 
@@ -295,7 +288,7 @@
     
     routeCallbackId = command.callbackId;
     
-    NSDictionary* building = (NSDictionary*)[command.arguments objectAtIndex:0];
+    NSDictionary* building = (NSDictionary*)[command.arguments objectAtIndex:0]; //not used
     NSDictionary* fromLocation = (NSDictionary*)[command.arguments objectAtIndex:1];
     NSDictionary* toPOI = (NSDictionary*)[command.arguments objectAtIndex:2];
     

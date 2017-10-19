@@ -11,12 +11,15 @@
 
 //Building (should be deprecated)
 
-- (NSDictionary *) buildingIndoorToJsonObject:(SITIndoorBuilding *) building;
+- (NSDictionary *) buildingIndoorToJsonObject:(SITIndoorBuilding *) building __deprecated;
 
 
 //Floor
 
 - (NSDictionary *) floorToJsonObject:(SITFloor *) floor;
+
+- (SITFloor *) jsonObjectToFloor:(NSDictionary *) joFloor;
+
 
 //Event
 

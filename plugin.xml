@@ -58,7 +58,15 @@
 			<string>Location is required to find out where you are</string>
 		</config-file>
 
-
+        <framework src="CFNetwork.framework" />
+        <framework src="CoreData.framework" />
+        <framework src="CoreLocation.framework" />
+        <framework src="CoreMotion.framework" />
+        <framework src="CoreBluetooth.framework" />
+        <framework src="Security.framework" />
+        <framework src="SystemConfiguration.framework"/>
+        <framework src="libz.dylib" />
+        <framework src="libc++.dylib" />
 
         <framework src="src/ios/Frameworks/SitumSDK.framework" custom="true"/>
 
@@ -67,9 +75,9 @@
         <source-file src="src/ios/SitumPlugin.m" />
         <source-file src="src/ios/SitumLocationWrapper.m" />
 
-		<pods-config ios-min-version="9.0" use-frameworks="false">
+		<!--<pods-config ios-min-version="9.0" use-frameworks="false">
 	    </pods-config>
        <pod name="RestKit" version="~> 0.27.2" />
-       <pod name="CocoaAsyncSocket"/>
+       <pod name="CocoaAsyncSocket"/>-->
     </platform>
 </plugin>
