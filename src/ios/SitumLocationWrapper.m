@@ -153,7 +153,9 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:emptyStrCheck(building.infoHTML) forKey:@"infoHtml"];
     [jo setObject:emptyStrCheck(building.pictureThumbURL.direction) forKey:@"pictureThumbUrl"];
     [jo setObject:emptyStrCheck(building.pictureURL.direction) forKey:@"pictureUrl"];
-    [jo setObject:building.rotation forKey:@"rotation"];
+    // [jo setObject:building.rotation forKey:@"rotation"];
+    [jo setObject:[NSNumber numberWithFloat:[building.rotation degrees]] forKey:@"rotationDegrees"];
+    [jo setObject:[NSNumber numberWithFloat:[building.rotation radians]] forKey:@"rotationRadians"];
     [jo setObject:emptyStrCheck(building.userIdentifier) forKey:@"userIdentifier"];
     [jo setObject:emptyStrCheck(building.identifier) forKey:@"identifier"];
     
