@@ -91,7 +91,10 @@
 #import "SITBounds.h"
 
 
-
+#import "SITCalibrationManager.h"
+#import "SITBeaconManager.h"
+#import "SITNode.h"
+#import "SITLink.h"
 
 /*!
  *  The Situm Framework (SitumSDK.framework) provides information about the buildings supporting indoor location services as well as location data of a user inside a building. The framework uses a multi-sensor approach to find the user's location inside a building.
