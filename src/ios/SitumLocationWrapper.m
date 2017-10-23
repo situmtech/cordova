@@ -221,12 +221,11 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
 - (SITFloor *) jsonObjectToFloor:(NSDictionary *) nsFloor {
     SITFloor *floor  = [[SITFloor alloc] init];
     floor.scale = [[nsFloor objectForKey:@"scale"] doubleValue];
-    SITURL *url  = [[SITURL alloc] init];
-    floor.mapURL = [url initWithDirection:(NSString *) [[nsFloor objectForKey:@"mapUrl"] stringValue]];
+    floor.mapURL = [[SITURL alloc] initWithDirection:[nsFloor objectForKey:@"mapUrl"]];;
     floor.level = [[nsFloor objectForKey:@"level"] intValue];
-    floor.identifier = [[nsFloor objectForKey:@"identifier"] stringValue];
-    floor.buildingIdentifier = [[nsFloor objectForKey:@"buildingIdentifier"] stringValue];
-    return floor.copy;
+    //floor.identifier = [[nsFloor objectForKey:@"identifier"] stringValue];
+    floor.buildingIdentifier = [nsFloor objectForKey:@"buildingIdentifier"];
+    return floor;
 }
 
 //Event

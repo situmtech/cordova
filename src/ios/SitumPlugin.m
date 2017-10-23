@@ -13,10 +13,10 @@ static NSString *ResultsKey = @"results";
   NSString* apiKey = [command.arguments objectAtIndex:1];
   [SITServices provideAPIKey:apiKey forEmail:email];
 
-  NSArray *allPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-  NSString *documentsDirectory = [allPaths objectAtIndex:0];
-  NSString *pathForLog = [documentsDirectory stringByAppendingPathComponent:@"logging.txt"];
-  freopen([pathForLog cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
+  //NSArray *allPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  //NSString *documentsDirectory = [allPaths objectAtIndex:0];
+  //NSString *pathForLog = [documentsDirectory stringByAppendingPathComponent:@"logging.txt"];
+  //freopen([pathForLog cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
   
 }
 
