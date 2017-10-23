@@ -277,11 +277,6 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
     [jo setObject:[NSNumber numberWithFloat:location.accuracy] forKey:@"accuracy"];
     [jo setObject:[self angleToJsonObject:location.bearing] forKey:@"bearing"];
-    kSITQualityValues bearingQuality = kSITHigh;
-    if ([(NSNumber*)[location objectForKey:@"bearingQuality"] integerValue] == 0) {
-        bearingQuality = kSITLow;
-    }
-    [jo setObject:[NSNumber numberWithInteger:bearingQuality] forKey:@"bearingQuality"];
     [jo setObject:emptyStrCheck(location.position.buildingIdentifier) forKey:@"buildingIdentifier"];
     [jo setObject:[self angleToJsonObject:location.cartesianBearing] forKey:@"cartesianBearing"];
     [jo setObject:[self cartesianCoordinateToJsonObject:location.position.cartesianCoordinate] forKey:@"cartesianCoordinate"];
