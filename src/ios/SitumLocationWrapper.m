@@ -278,7 +278,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:[NSNumber numberWithFloat:location.accuracy] forKey:@"accuracy"];
     [jo setObject:[self angleToJsonObject:location.bearing] forKey:@"bearing"];
     kSITQualityValues bearingQuality = kSITHigh;
-    if ([(NSNumber*)[jo objectForKey:@"bearingQuality"] integerValue] == 0) {
+    if ([(NSNumber*)[location objectForKey:@"bearingQuality"] integerValue] == 0) {
         bearingQuality = kSITLow;
     }
     [jo setObject:[NSNumber numberWithInteger:bearingQuality] forKey:@"bearingQuality"];
