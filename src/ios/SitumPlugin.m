@@ -12,6 +12,11 @@ static NSString *ResultsKey = @"results";
   NSString* email = [command.arguments objectAtIndex:0];
   NSString* apiKey = [command.arguments objectAtIndex:1];
   [SITServices provideAPIKey:apiKey forEmail:email];
+
+  //NSArray *allPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  //NSString *documentsDirectory = [allPaths objectAtIndex:0];
+  //NSString *pathForLog = [documentsDirectory stringByAppendingPathComponent:@"logging.txt"];
+  //freopen([pathForLog cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
   
 }
 
@@ -368,9 +373,7 @@ static NSString *ResultsKey = @"results";
 
 - (void)locationManager:(nonnull id<SITLocationInterface>)locationManager
          didUpdateState:(SITLocationState)state {
-    NSMutableDictionary *locationChanged = [[NSMutableDictionary alloc] init];
-    [locationChanged setValue:@"statusChanged" forKey:@"type"];
-    [locationChanged setValue:[SitumLocationWrapper.shared locationStateToString:state] forKey:@"value"];
+    NSMutableDictionary *locationChanged = [[SitumLocationWrapper.shared locationStateToString:state] mutableCopy];
     
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:locationChanged.copy];
     pluginResult.keepCallback = [NSNumber numberWithBool:true];
@@ -393,7 +396,7 @@ static NSString *ResultsKey = @"results";
     NSString * timestamp = [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
     
     NSMutableDictionary *routeJO = [[SitumLocationWrapper.shared routeToJsonObject:route] mutableCopy];
-    [routeJO setValue:timestamp forKey:@"timeStamp"];
+    //[routeJO setValue:timestamp forKey:@"timeStamp"];
     [routesStored setObject:route forKey:timestamp];
     
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:routeJO.copy];
