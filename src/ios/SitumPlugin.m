@@ -9,15 +9,15 @@ static NSString *ResultsKey = @"results";
 @implementation SitumPlugin
 
 - (void)setApiKey:(CDVInvokedUrlCommand *)command {
-  NSString* email = [command.arguments objectAtIndex:0];
-  NSString* apiKey = [command.arguments objectAtIndex:1];
-  [SITServices provideAPIKey:apiKey forEmail:email];
-
-  //NSArray *allPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-  //NSString *documentsDirectory = [allPaths objectAtIndex:0];
-  //NSString *pathForLog = [documentsDirectory stringByAppendingPathComponent:@"logging.txt"];
-  //freopen([pathForLog cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
-  
+    NSString* email = [command.arguments objectAtIndex:0];
+    NSString* apiKey = [command.arguments objectAtIndex:1];
+    [SITServices provideAPIKey:apiKey forEmail:email];
+    
+    //NSArray *allPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    //NSString *documentsDirectory = [allPaths objectAtIndex:0];
+    //NSString *pathForLog = [documentsDirectory stringByAppendingPathComponent:@"logging.txt"];
+    //freopen([pathForLog cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
+    
 }
 
 - (void)setUserPass:(CDVInvokedUrlCommand *)command {
@@ -51,10 +51,10 @@ static NSString *ResultsKey = @"results";
         }
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }
-   failure:^(NSError *error) {
-     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.description] callbackId:command.callbackId];
-   }];
- }
+                                                               failure:^(NSError *error) {
+                                                                   [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.description] callbackId:command.callbackId];
+                                                               }];
+}
 
 
 - (void)fetchFloorsFromBuilding:(CDVInvokedUrlCommand*)command
@@ -85,7 +85,7 @@ static NSString *ResultsKey = @"results";
         [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.description] callbackId:command.callbackId];
     }];
 }
-    
+
 
 - (void)fetchIndoorPOIsFromBuilding:(CDVInvokedUrlCommand*)command
 {
@@ -171,13 +171,13 @@ static NSString *ResultsKey = @"results";
 
 - (void)fetchPoiCategories:(CDVInvokedUrlCommand *)command
 {
-    NSDictionary* categoryJO = (NSDictionary*)[command.arguments objectAtIndex:0];
+    //NSDictionary* categoryJO = (NSDictionary*)[command.arguments objectAtIndex:0];
     
     if (categoryStored == nil) {
         categoryStored = [[NSMutableDictionary alloc] init];
     }
     
-    [[SITCommunicationManager sharedManager] fetchCategoriesWithOptions:[categoryJO valueForKey:@"identifier"] withCompletion:^(NSArray *categories, NSError *error) {
+    [[SITCommunicationManager sharedManager] fetchCategoriesWithOptions:nil withCompletion:^(NSArray *categories, NSError *error) {
         if (!error) {
             NSMutableArray *ja = [[NSMutableArray alloc] init];
             for (SITPOICategory *obj in categories) {
@@ -257,17 +257,17 @@ static NSString *ResultsKey = @"results";
 {
     NSDictionary* floorJO = (NSDictionary*)[command.arguments objectAtIndex:0];
     
-   if (floorStored == nil) {
-       floorStored = [[NSMutableDictionary alloc] init];
-   }
+    if (floorStored == nil) {
+        floorStored = [[NSMutableDictionary alloc] init];
+    }
     SITFloor* floor = [SitumLocationWrapper.shared jsonObjectToFloor:floorJO];
     
-   [[SITCommunicationManager sharedManager] fetchMapFromFloor: floor withCompletion:^(NSData *imageData) {
-     NSMutableDictionary *jaMap = [[NSMutableDictionary alloc] init];
-     NSString *imageBase64Encoded = [imageData base64EncodedStringWithOptions:0];
-     [jaMap setObject:[NSString stringWithFormat:@"%@", imageBase64Encoded] forKey:@"data"];
-     CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:jaMap];
-     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    [[SITCommunicationManager sharedManager] fetchMapFromFloor: floor withCompletion:^(NSData *imageData) {
+        NSMutableDictionary *jaMap = [[NSMutableDictionary alloc] init];
+        NSString *imageBase64Encoded = [imageData base64EncodedStringWithOptions:0];
+        [jaMap setObject:[NSString stringWithFormat:@"%@", imageBase64Encoded] forKey:@"data"];
+        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:jaMap];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }];
 }
 
@@ -373,9 +373,7 @@ static NSString *ResultsKey = @"results";
 
 - (void)locationManager:(nonnull id<SITLocationInterface>)locationManager
          didUpdateState:(SITLocationState)state {
-    NSMutableDictionary *locationChanged = [[NSMutableDictionary alloc] init];
-    [locationChanged setValue:@"statusChanged" forKey:@"type"];
-    [locationChanged setValue:[SitumLocationWrapper.shared locationStateToString:state] forKey:@"value"];
+    NSMutableDictionary *locationChanged = [[SitumLocationWrapper.shared locationStateToString:state] mutableCopy];
     
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:locationChanged.copy];
     pluginResult.keepCallback = [NSNumber numberWithBool:true];
@@ -398,7 +396,7 @@ static NSString *ResultsKey = @"results";
     NSString * timestamp = [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
     
     NSMutableDictionary *routeJO = [[SitumLocationWrapper.shared routeToJsonObject:route] mutableCopy];
-    [routeJO setValue:timestamp forKey:@"timeStamp"];
+    //[routeJO setValue:timestamp forKey:@"timeStamp"];
     [routesStored setObject:route forKey:timestamp];
     
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:routeJO.copy];
