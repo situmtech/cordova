@@ -321,7 +321,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:[NSNumber numberWithDouble:location.timestamp] forKey:@"timestamp"];
     [jo setObject:[NSNumber numberWithBool:location.position.isIndoor] forKey:@"isIndoor"];
     [jo setObject:[NSNumber numberWithBool:location.position.isOutdoor] forKey:@"isOutdoor"];
-    [jo serObject:emptyStrCheck(location.deviceId) forKey:@"deviceId"];
+    [jo setObject:emptyStrCheck(location.deviceId) forKey:@"deviceId"];
     [jo setValue:@"locationChanged" forKey:@"type"];
     return jo.copy;
 }
