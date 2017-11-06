@@ -6,17 +6,27 @@
 
 static NSString *ResultsKey = @"results";
 
+static BOOL IS_LOG_ENABLED = NO;
+
+static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
+
 @implementation SitumPlugin
 
 - (void)setApiKey:(CDVInvokedUrlCommand *)command {
     NSString* email = [command.arguments objectAtIndex:0];
     NSString* apiKey = [command.arguments objectAtIndex:1];
     [SITServices provideAPIKey:apiKey forEmail:email];
-    
-    //NSArray *allPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    //NSString *documentsDirectory = [allPaths objectAtIndex:0];
-    //NSString *pathForLog = [documentsDirectory stringByAppendingPathComponent:@"logging.txt"];
-    //freopen([pathForLog cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
+
+    if (IS_LOG_ENABLED)
+    {
+        /* code */
+        NSArray *allPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [allPaths objectAtIndex:0];
+        NSString *pathForLog = [documentsDirectory stringByAppendingPathComponent:@"logging.txt"];
+        freopen([pathForLog cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
+
+        NSLog([NSString stringWithFormat: @"%@ Logging ios calls", DEFAULT_SITUM_LOG]);
+    }
     
 }
 
@@ -31,14 +41,28 @@ static NSString *ResultsKey = @"results";
     if (buildingsStored == nil) {
         buildingsStored = [[NSMutableDictionary alloc] init];
     }
+
+    NSString *operation = @"Fetching buildings request";
+    if (IS_LOG_ENABLED)
+    {
+        NSLog([NSString stringWithFormat: @"%@ %@ ", DEFAULT_SITUM_LOG, operation]);
+    }
     
     // Forcing requests to go to the network instead of cache
     NSDictionary *options = @{@"forceRequest":@YES,};
     
     [[SITCommunicationManager sharedManager] fetchBuildingsWithOptions:options success:^(NSDictionary *mapping) {
+        if (IS_LOG_ENABLED)
+        {
+            NSLog([NSString stringWithFormat: @"%@ %@ Fetching buildings returned values", DEFAULT_SITUM_LOG, operation]);
+        }
         NSArray *buildings = [mapping valueForKey:ResultsKey];
         CDVPluginResult* pluginResult = nil;
         if (buildings.count == 0) {
+            if (IS_LOG_ENABLED)
+            {
+                NSLog([NSString stringWithFormat: @"%@ %@ No buildings were retrieved", DEFAULT_SITUM_LOG, operation]);
+            }
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"There are no buildings on the account. Please go to dashboard http://dashboard.situm.es and learn more about the first step with Situm technology"];
         }
         else {
@@ -47,11 +71,19 @@ static NSString *ResultsKey = @"results";
                 [ja addObject:[SitumLocationWrapper.shared buildingToJsonObject:obj]];
                 [buildingsStored setObject:obj forKey:[NSString stringWithFormat:@"%@", obj.identifier]];
             }
+            if (IS_LOG_ENABLED)
+            {
+                NSLog([NSString stringWithFormat: @"%@ %@ Retrieved the following buildings: %@", DEFAULT_SITUM_LOG, operation, buildings]);
+            }
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:ja.copy];
         }
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }
                                                                failure:^(NSError *error) {
+                                                                   if (IS_LOG_ENABLED)
+                                                                    {
+                                                                        NSLog([NSString stringWithFormat: @"%@ %@ Error retrieving buildings: %@", DEFAULT_SITUM_LOG, operation, error]);
+                                                                    }
                                                                    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.description] callbackId:command.callbackId];
                                                                }];
 }
@@ -61,6 +93,12 @@ static NSString *ResultsKey = @"results";
 {
     NSDictionary* buildingJO = (NSDictionary*)[command.arguments objectAtIndex:0];
     
+    NSString *operation = @"Fetching floors request";
+    if (IS_LOG_ENABLED)
+    {
+        NSLog([NSString stringWithFormat: @"%@ %@ with parameters: %@", DEFAULT_SITUM_LOG, operation, buildingJO]);
+    }
+
     if (floorStored == nil) {
         floorStored = [[NSMutableDictionary alloc] init];
     }
@@ -68,20 +106,54 @@ static NSString *ResultsKey = @"results";
     NSString *buildingId = [buildingJO valueForKey:@"identifier"];
     
     [[SITCommunicationManager sharedManager] fetchFloorsForBuilding:buildingId withOptions:nil success:^(NSDictionary *mapping) {
+        if (IS_LOG_ENABLED)
+        {
+            NSLog([NSString stringWithFormat: @"%@ %@ responded", DEFAULT_SITUM_LOG, operation]);
+        }
+
         NSMutableArray *ja = [[NSMutableArray alloc] init];
         NSArray *floors = [mapping objectForKey:@"results"];
+        if (IS_LOG_ENABLED)
+        {
+            NSLog([NSString stringWithFormat: @"%@ %@ results: %@", DEFAULT_SITUM_LOG, operation, floors]);
+        }
         for (SITFloor *obj in floors) {
-            [ja addObject:[SitumLocationWrapper.shared floorToJsonObject:obj]];
+            NSDictionary *floorJson = [SitumLocationWrapper.shared floorToJsonObject:obj];
+            if (IS_LOG_ENABLED)
+            {
+                NSLog([NSString stringWithFormat: @"%@ %@ parsed floor: %@", DEFAULT_SITUM_LOG, operation, floorJson]);
+            }
+            [ja addObject:floorJson];
+            if (IS_LOG_ENABLED)
+            {
+                NSLog([NSString stringWithFormat: @"%@ %@ json array has : %@", DEFAULT_SITUM_LOG, operation, ja]);
+            }
             [floorStored setObject:obj forKey:[NSString stringWithFormat:@"%@", obj.identifier]];
+            if (IS_LOG_ENABLED)
+            {
+                NSLog([NSString stringWithFormat: @"%@ %@ added: %@ to dictionary results", DEFAULT_SITUM_LOG, operation, obj]);
+            }
         }
         CDVPluginResult* pluginResult = nil;
         if (floors.count == 0) {
+            if (IS_LOG_ENABLED)
+            {
+                NSLog([NSString stringWithFormat: @"%@ %@ no floors on building: %@", DEFAULT_SITUM_LOG, operation, buildingJO]);
+            }
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"The selected building does not have floors. Correct that on http://dashboard.situm.es"];
         } else {
+            if (IS_LOG_ENABLED)
+            {
+                NSLog([NSString stringWithFormat: @"%@ %@ retrieved floors: %@ on building: %@: %@", DEFAULT_SITUM_LOG, operation, floors, buildingJO]);
+            }
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:ja.copy];
         }
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     } failure:^(NSError *error) {
+        if (IS_LOG_ENABLED)
+        {
+            NSLog([NSString stringWithFormat: @"%@ %@ error : %@ retrieving floors on building: %@", DEFAULT_SITUM_LOG, operation, error, buildingJO]);
+        }
         [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.description] callbackId:command.callbackId];
     }];
 }
@@ -352,13 +424,13 @@ static NSString *ResultsKey = @"results";
 - (void)locationManager:(nonnull id<SITLocationInterface>)locationManager
       didUpdateLocation:(nonnull SITLocation *)location {
     if (location) {
-        [self updateWithLocation:location];
+        // [self updateWithLocation:location];
         NSDictionary *locationJO = [SitumLocationWrapper.shared locationToJsonObject:location];
-        NSMutableDictionary *locationChanged = [[NSMutableDictionary alloc] init];
-        [locationChanged setValue:@"locationChanged" forKey:@"type"];
-        [locationChanged setValue:locationJO.copy forKey:@"value"];
+        // NSMutableDictionary *locationChanged = [[NSMutableDictionary alloc] init];
+        // [locationChanged setValue:@"locationChanged" forKey:@"type"];
+        // [locationChanged setValue:locationJO.copy forKey:@"value"];
         
-        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:locationChanged.copy];
+        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:locationJO.copy];
         pluginResult.keepCallback = [NSNumber numberWithBool:true];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:locationCallbackId];
     }

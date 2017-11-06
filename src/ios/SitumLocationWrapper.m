@@ -1,5 +1,7 @@
 #import "SitumLocationWrapper.h"
 
+NSString *DATEFORMAT = @"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZ";
+
 NSString* emptyStrCheck(NSString *str) {
     if (!str || str == nil) {
         return @"";
@@ -159,6 +161,15 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:emptyStrCheck(building.userIdentifier) forKey:@"userIdentifier"];
     [jo setObject:emptyStrCheck(building.identifier) forKey:@"identifier"];
     
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:DATEFORMAT];
+
+    [jo setObject:emptyStrCheck([dateFormatter stringFromDate:building.createdAt])
+           forKey:@"createdAt"];
+
+    [jo setObject:emptyStrCheck([dateFormatter stringFromDate:building.updatedAt])
+           forKey:@"updatedAt"];
+
     return jo.copy;
 }
 
@@ -215,11 +226,30 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:floor.mapURL.direction forKey:@"mapUrl"];
     [jo setObject:[NSNumber numberWithDouble:floor.scale] forKey:@"scale"];
     [jo setObject:[NSString stringWithFormat:@"%@", floor.identifier] forKey:@"floorIdentifier"];
+    [jo setObject:emptyStrCheck(floor.identifier) forKey:@"identifier"];
+
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:DATEFORMAT];
+
+    [jo setObject:emptyStrCheck([dateFormatter stringFromDate:floor.createdAt])
+           forKey:@"createdAt"];
+
+    [jo setObject:emptyStrCheck([dateFormatter stringFromDate:floor.updatedAt])
+           forKey:@"updatedAt"];
+
     return jo.copy;
 }
 
 - (SITFloor *) jsonObjectToFloor:(NSDictionary *) nsFloor {
     SITFloor *floor  = [[SITFloor alloc] init];
+
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:DATEFORMAT];
+
+    floor.createdAt = [dateFormatter dateFromString:floor.createdAt];
+
+    floor.updatedAt = [dateFormatter dateFromString:floor.updatedAt];
+
     floor.scale = [[nsFloor objectForKey:@"scale"] doubleValue];
     floor.mapURL = [[SITURL alloc] initWithDirection:[nsFloor objectForKey:@"mapUrl"]];;
     floor.level = [[nsFloor objectForKey:@"level"] intValue];
@@ -279,6 +309,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
     [jo setObject:[NSNumber numberWithFloat:location.accuracy] forKey:@"accuracy"];
     [jo setObject:[self angleToJsonObject:location.bearing] forKey:@"bearing"];
+    [jo setObject:[NSNumber numberWithInteger:location.bearingQuality] forKey:@"bearingQuality"];
     [jo setObject:emptyStrCheck(location.position.buildingIdentifier) forKey:@"buildingIdentifier"];
     [jo setObject:[self angleToJsonObject:location.cartesianBearing] forKey:@"cartesianBearing"];
     [jo setObject:[self cartesianCoordinateToJsonObject:location.position.cartesianCoordinate] forKey:@"cartesianCoordinate"];
@@ -290,6 +321,8 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:[NSNumber numberWithDouble:location.timestamp] forKey:@"timestamp"];
     [jo setObject:[NSNumber numberWithBool:location.position.isIndoor] forKey:@"isIndoor"];
     [jo setObject:[NSNumber numberWithBool:location.position.isOutdoor] forKey:@"isOutdoor"];
+    [jo serObject:emptyStrCheck(location.deviceId) forKey:@"deviceId"];
+    [jo setValue:@"locationChanged" forKey:@"type"];
     return jo.copy;
 }
 

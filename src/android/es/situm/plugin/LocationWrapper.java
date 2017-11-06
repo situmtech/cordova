@@ -73,6 +73,7 @@ class LocationWrapper {
     public static final String PROVIDER = "provider";
     public static final String QUALITY = "quality";
     public static final String IS_OUTDOOR = "isOutdoor";
+    public static final String DEVICE_ID = "deviceId";
 
     public static final String RADIUS = "radius";
     public static final String ACCURACY = "accuracy";
@@ -282,6 +283,7 @@ class LocationWrapper {
         jo.put(HAS_CARTESIAN_BEARING, location.hasCartesianBearing());
         jo.put(IS_INDOOR, location.isIndoor());
         jo.put(IS_OUTDOOR, location.isOutdoor());
+        jo.put(DEVICE_ID, location.getDeviceId());
         return jo;
     }
 
