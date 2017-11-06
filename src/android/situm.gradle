@@ -7,7 +7,7 @@ allprojects {
 
 dependencies {
     compile 'com.google.android.gms:play-services-maps:10.0.1'
-    compile ('es.situm:situm-sdk:2.10.0@aar') {
+    compile ('es.situm:situm-sdk:2.9.0@aar') {
         transitive = true
     }
 }
