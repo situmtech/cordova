@@ -60,6 +60,7 @@
 
         <framework src="CFNetwork.framework" />
         <framework src="CoreData.framework" />
+        <framework src="UIKit.framework" />
         <framework src="CoreLocation.framework" />
         <framework src="CoreMotion.framework" />
         <framework src="CoreBluetooth.framework" />

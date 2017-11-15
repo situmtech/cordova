@@ -309,7 +309,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
     [jo setObject:[NSNumber numberWithFloat:location.accuracy] forKey:@"accuracy"];
     [jo setObject:[self angleToJsonObject:location.bearing] forKey:@"bearing"];
-    [jo setObject:[NSNumber numberWithInteger:location.bearingQuality] forKey:@"bearingQuality"];
+    [jo setObject:[self qualityStringFromQuality:location.bearingQuality] forKey:@"bearingQuality"];
     [jo setObject:emptyStrCheck(location.position.buildingIdentifier) forKey:@"buildingIdentifier"];
     [jo setObject:[self angleToJsonObject:location.cartesianBearing] forKey:@"cartesianBearing"];
     [jo setObject:[self cartesianCoordinateToJsonObject:location.position.cartesianCoordinate] forKey:@"cartesianCoordinate"];
@@ -317,13 +317,18 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:emptyStrCheck(location.position.floorIdentifier) forKey:@"floorIdentifier"];
     [jo setObject:[self pointToJsonObject:location.position] forKey:@"position"];
     [jo setObject:emptyStrCheck(location.provider) forKey:@"provider"];
-    [jo setObject:[NSNumber numberWithInteger:location.quality] forKey:@"quality"];
+    [jo setObject:[self qualityStringFromQuality:location.quality] forKey:@"quality"];
+    [jo setObject:[NSNumber numberWithBool:location.hasBearing] forKey:@"hasBearing"];
     [jo setObject:[NSNumber numberWithDouble:location.timestamp] forKey:@"timestamp"];
     [jo setObject:[NSNumber numberWithBool:location.position.isIndoor] forKey:@"isIndoor"];
     [jo setObject:[NSNumber numberWithBool:location.position.isOutdoor] forKey:@"isOutdoor"];
     [jo setObject:emptyStrCheck(location.deviceId) forKey:@"deviceId"];
     [jo setValue:@"locationChanged" forKey:@"type"];
     return jo.copy;
+}
+
+- (NSString *)qualityStringFromQuality:(kSITQualityValues)quality {
+    return quality == kSITHigh ? @"HIGH":@"LOW";
 }
 
 - (SITLocation *) locationJsonObjectToLocation:(NSDictionary *) jo {
@@ -435,6 +440,8 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
     [jo setObject:[NSNumber numberWithDouble:angle.degrees] forKey:@"degrees"];
     [jo setObject:[NSNumber numberWithDouble:angle.radians] forKey:@"radians"];
+    [jo setObject:[NSNumber numberWithDouble:angle.degressClockwise] forKey:@"degressClockwise"];
+    [jo setObject:[NSNumber numberWithDouble:angle.radiansMinusPiPi] forKey:@"radiansMinusPiPi"];
     return jo.copy;
 }
 
