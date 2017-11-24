@@ -159,7 +159,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:[NSNumber numberWithFloat:[building.rotation degrees]] forKey:@"rotationDegrees"];
     [jo setObject:[NSNumber numberWithFloat:[building.rotation radians]] forKey:@"rotationRadians"];
     [jo setObject:emptyStrCheck(building.userIdentifier) forKey:@"userIdentifier"];
-    [jo setObject:emptyStrCheck(building.identifier) forKey:@"buildingIdentifier"];
+    [jo setObject:emptyStrCheck(building.identifier) forKey:@"identifier"];
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:DATEFORMAT];
