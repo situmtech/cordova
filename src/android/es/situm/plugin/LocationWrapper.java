@@ -143,6 +143,26 @@ class LocationWrapper {
     public static final String BOTTOM_RIGHT = "bottomRight";
     public static final String POI_CATEGORY_ICON_SELECTED = "icon_selected";
     public static final String POI_CATEGORY_ICON_UNSELECTED = "icon_unselected";
+    
+    public static final String INTERVAL = "interval";
+    public static final String INDOOR_PROVIDER = "indoorProvider";
+    public static final String USE_BLE = "useBle";
+    public static final String USE_WIFI = "useWifi";
+    public static final String MOTION_MODE = "motionMode";
+    public static final String USE_FOREGROUND_SERVICE = "useForegroundService";
+    public static final String USE_DEAD_RECKONING = "useDeadReckoning";
+
+    public static final String OUTDOOR_LOCATION_OPTIONS = "outdoorLocationOptions";
+    public static final String CONTINUOUS_MODE = "continuousMode";
+    public static final String USER_DEFINED_THRESHOLD = "userDefinedThreshold";
+    public static final String BURST_INTERVAL = "burstInterval";
+    public static final String AVERAGE_SNR_THRESHOLD = "averageSnrThreshold";
+
+    public static final String BEACON_FILTERS = "beaconFilters";
+    public static final String UUID = "uuid";
+
+    public static final String SMALLEST_DISPLACEMENT = "smallestDisplacement";
+    public static final String REALTIME_UPDATE_INTERVAL = "realtimeUpdateInterval";
 
     static JSONObject buildingToJsonObject(Building building) throws JSONException {
         JSONObject jo = new JSONObject();
