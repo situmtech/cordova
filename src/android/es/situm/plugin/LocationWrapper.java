@@ -242,6 +242,7 @@ class LocationWrapper {
         jo.put(IS_OUTDOOR, poi.isOutdoor());
         jo.put(POI_CATEGORY, poi.getCategory().getCode());
         jo.put(INFO_HTML, poi.getInfoHtml());
+        jo.put(CUSTOM_FIELDS, poi.getCustomFields());
         return jo;
     }
 
