@@ -130,12 +130,14 @@ public class PluginHelper {
                         @Override
                         public void onSuccess(Collection<Poi> pois) {
                             try {
-                                Log.d(PluginHelper.TAG, "onSuccess: Floors fetched successfully.");
+                                Log.d(PluginHelper.TAG, "onSuccess: Pois fetched successfully.");
                                 JSONArray jsonaPois = new JSONArray();
 
                                 for (Poi poi : pois) {
                                     Log.i(PluginHelper.TAG,
-                                            "onSuccess: " + poi.getIdentifier() + " - " + poi.getName());
+                                            "onSuccess: " + poi.getIdentifier() + " - " + poi.getName() + "-" + poi.customFields());
+                                    
+                                    Log.d("Some log that should appear");
                                     JSONObject jsonoPoi = LocationWrapper.poiToJsonObject(poi);
                                     jsonaPois.put(jsonoPoi);
                                 }

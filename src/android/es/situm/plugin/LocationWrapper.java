@@ -158,6 +158,7 @@ class LocationWrapper {
         jo.put(ROTATION, building.getRotation().radians());
         jo.put(USER_IDENTIFIER, building.getUserIdentifier());
         jo.put(BUILDING_IDENTIFIER, building.getIdentifier());
+        jo.put(CUSTOM_FIELDS, mapStringToJsonObject(poi.getCustomFields()));
         return jo;
     }
 
@@ -228,10 +229,20 @@ class LocationWrapper {
         return jo;
     }
 
+    static JSONObject customFieldsToJSONObject(Map<String, String> customFields) {
+        JSONObject jo = new JSONObject();
+        for (Map.Entry<String, String> entry : customFields.entrySet()) {
+            Log.d("reading value of custom fields: " + entry.key + " value: " + entry.value);
+            jo.put(entry.key, entry.value);
+        }
+        return jo;
+    }
+
     // POI
 
     static JSONObject poiToJsonObject(Poi poi) throws JSONException {
         JSONObject jo = new JSONObject();
+        jo.put(IDENTIFIER, poi.getIdentifier());
         jo.put(BUILDING_IDENTIFIER, poi.getBuildingIdentifier());
         jo.put(CARTESIAN_COORDINATE, cartesianCoordinateToJsonObject(poi.getCartesianCoordinate()));
         jo.put(COORDINATE, coordinateToJsonObject(poi.getCoordinate()));
@@ -241,6 +252,7 @@ class LocationWrapper {
         jo.put(IS_INDOOR, poi.isIndoor());
         jo.put(IS_OUTDOOR, poi.isOutdoor());
         jo.put(POI_CATEGORY, poi.getCategory().getCode());
+        jo.put(CUSTOM_FIELDS, mapStringToJsonObject(poi.getCustomFields()));
         return jo;
     }
 
