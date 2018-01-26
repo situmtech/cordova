@@ -158,7 +158,7 @@ class LocationWrapper {
         jo.put(ROTATION, building.getRotation().radians());
         jo.put(USER_IDENTIFIER, building.getUserIdentifier());
         jo.put(BUILDING_IDENTIFIER, building.getIdentifier());
-        jo.put(CUSTOM_FIELDS, mapStringToJsonObject(poi.getCustomFields()));
+        jo.put(CUSTOM_FIELDS, mapStringToJsonObject(building.getCustomFields()));
         return jo;
     }
 
@@ -228,16 +228,7 @@ class LocationWrapper {
         jo.put(BOTTOM_RIGHT, situmCA.getBottomRight());
         return jo;
     }
-
-    static JSONObject customFieldsToJSONObject(Map<String, String> customFields) {
-        JSONObject jo = new JSONObject();
-        for (Map.Entry<String, String> entry : customFields.entrySet()) {
-            Log.d("reading value of custom fields: " + entry.key + " value: " + entry.value);
-            jo.put(entry.key, entry.value);
-        }
-        return jo;
-    }
-
+    
     // POI
 
     static JSONObject poiToJsonObject(Poi poi) throws JSONException {
