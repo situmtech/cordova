@@ -2,7 +2,7 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     id="situm-cordova-plugin"
-    version="1.0.0">
+    version="1.0.1">
     <name>Situm Cordova plugin</name>
     <description></description>
     <license>MIT</license>
