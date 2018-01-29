@@ -213,6 +213,10 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     //[jo setObject:emptyStrCheck(building.user_identifier) forKey:@"userIdentifier"];
     [jo setObject:emptyStrCheck([NSString stringWithFormat:@"%@", building.identifier]) forKey:@"identifier"];
     
+    if (building.customFields) {
+        [jo setObject:building.customFields forKey:@"customFields"];
+    }
+    
     return jo.copy;
 }
 
@@ -292,6 +296,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
 
 - (NSDictionary *) poiToJsonObject:(SITPOI *) poi {
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
+    [jo setObject:emptyStrCheck(poi.identifier) forKey:@"identifier"];
     [jo setObject:emptyStrCheck(poi.buildingIdentifier) forKey:@"buildingIdentifier"];
     [jo setObject:[self cartesianCoordinateToJsonObject:poi.position.cartesianCoordinate] forKey:@"cartesianCoordinate"];
     [jo setObject:[self coordinateToJsonObject:poi.position.coordinate] forKey:@"coordinate"];
@@ -300,6 +305,9 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:[self pointToJsonObject:poi.position] forKey:@"position"];
     [jo setObject:[NSNumber numberWithBool:poi.position.isIndoor] forKey:@"isIndoor"];
     [jo setObject:[NSNumber numberWithBool:poi.position.isOutdoor] forKey:@"isOutdoor"];
+    if (poi.customFields) {
+        [jo setObject:poi.customFields forKey:@"customFields"];
+    }
     return jo.copy;
 }
 
