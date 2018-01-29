@@ -3,8 +3,9 @@ Situm Cordova Plugin
 
 > Current Status:
 
-Android: In development (some calls already implemented)
-IOS: Not implemented yet
+Version 1.0.0
+Android: Services, Communication, Location, Directions and Navigation modules
+IOS: Services, Communication, Location, Directions and Navigation modules
 
 
 > Android
