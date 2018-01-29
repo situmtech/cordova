@@ -599,10 +599,16 @@ public class PluginHelper {
     public static void stopPositioning(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
             CallbackContext callbackContext) {
         if (locationListener != null) {
-            SitumSdk.locationManager().removeUpdates(locationListener);
-            locationListener = null;
+            try {
+                SitumSdk.locationManager().removeUpdates(locationListener);
+                locationListener = null;
+                callbackContext.sendPluginResult(new PluginResult(Status.OK, "Success"));
+            } catch (Exception e) {
+                callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
+            }
         } else {
             Log.i(TAG, "stopPositioning: location listener is not started.");
+            callbackContext.sendPluginResult(new PluginResult(Status.OK, "Allready disabled"));
         }
     }
 
