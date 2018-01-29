@@ -7,5 +7,28 @@
       "android"
     ]
   },
-  "description": "Situm Cordova-based Plugin for hybrid apps."
+  "description": "Situm Cordova-based Plugin for hybrid apps.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cocodinTech/situm-cordova-plugin.git"
+  },
+  "keywords": [
+    "situm",
+    "indoor positioning",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "engines": [
+    {
+      "name": "cordova-android",
+      "version": ">=6.0.0"
+    }
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cocodinTech/situm-cordova-plugin/issues"
+  },
+  "homepage": "https://github.com/cocodinTech/situm-cordova-plugin#readme"
 }

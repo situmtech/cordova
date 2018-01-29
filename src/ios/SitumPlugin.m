@@ -27,7 +27,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 
         NSLog([NSString stringWithFormat: @"%@ Logging ios calls", DEFAULT_SITUM_LOG]);
     }
-    
+
 }
 
 - (void)setUserPass:(CDVInvokedUrlCommand *)command {
