@@ -73,6 +73,7 @@ class LocationWrapper {
     public static final String PROVIDER = "provider";
     public static final String QUALITY = "quality";
     public static final String IS_OUTDOOR = "isOutdoor";
+    public static final String DEVICE_ID = "deviceId";
 
     public static final String RADIUS = "radius";
     public static final String ACCURACY = "accuracy";
@@ -142,6 +143,26 @@ class LocationWrapper {
     public static final String BOTTOM_RIGHT = "bottomRight";
     public static final String POI_CATEGORY_ICON_SELECTED = "icon_selected";
     public static final String POI_CATEGORY_ICON_UNSELECTED = "icon_unselected";
+    
+    public static final String INTERVAL = "interval";
+    public static final String INDOOR_PROVIDER = "indoorProvider";
+    public static final String USE_BLE = "useBle";
+    public static final String USE_WIFI = "useWifi";
+    public static final String MOTION_MODE = "motionMode";
+    public static final String USE_FOREGROUND_SERVICE = "useForegroundService";
+    public static final String USE_DEAD_RECKONING = "useDeadReckoning";
+
+    public static final String OUTDOOR_LOCATION_OPTIONS = "outdoorLocationOptions";
+    public static final String CONTINUOUS_MODE = "continuousMode";
+    public static final String USER_DEFINED_THRESHOLD = "userDefinedThreshold";
+    public static final String BURST_INTERVAL = "burstInterval";
+    public static final String AVERAGE_SNR_THRESHOLD = "averageSnrThreshold";
+
+    public static final String BEACON_FILTERS = "beaconFilters";
+    public static final String UUID = "uuid";
+
+    public static final String SMALLEST_DISPLACEMENT = "smallestDisplacement";
+    public static final String REALTIME_UPDATE_INTERVAL = "realtimeUpdateInterval";
 
     static JSONObject buildingToJsonObject(Building building) throws JSONException {
         JSONObject jo = new JSONObject();
@@ -157,6 +178,7 @@ class LocationWrapper {
         jo.put(ROTATION, building.getRotation().radians());
         jo.put(USER_IDENTIFIER, building.getUserIdentifier());
         jo.put(BUILDING_IDENTIFIER, building.getIdentifier());
+        jo.put(CUSTOM_FIELDS, mapStringToJsonObject(building.getCustomFields()));
         return jo;
     }
 
@@ -226,11 +248,12 @@ class LocationWrapper {
         jo.put(BOTTOM_RIGHT, situmCA.getBottomRight());
         return jo;
     }
-
+    
     // POI
 
     static JSONObject poiToJsonObject(Poi poi) throws JSONException {
         JSONObject jo = new JSONObject();
+        jo.put(IDENTIFIER, poi.getIdentifier());
         jo.put(BUILDING_IDENTIFIER, poi.getBuildingIdentifier());
         jo.put(CARTESIAN_COORDINATE, cartesianCoordinateToJsonObject(poi.getCartesianCoordinate()));
         jo.put(COORDINATE, coordinateToJsonObject(poi.getCoordinate()));
@@ -240,6 +263,8 @@ class LocationWrapper {
         jo.put(IS_INDOOR, poi.isIndoor());
         jo.put(IS_OUTDOOR, poi.isOutdoor());
         jo.put(POI_CATEGORY, poi.getCategory().getCode());
+        jo.put(INFO_HTML, poi.getInfoHtml());
+        jo.put(CUSTOM_FIELDS, mapStringToJsonObject(poi.getCustomFields()));
         return jo;
     }
 
@@ -282,6 +307,7 @@ class LocationWrapper {
         jo.put(HAS_CARTESIAN_BEARING, location.hasCartesianBearing());
         jo.put(IS_INDOOR, location.isIndoor());
         jo.put(IS_OUTDOOR, location.isOutdoor());
+        jo.put(DEVICE_ID, location.getDeviceId());
         return jo;
     }
 

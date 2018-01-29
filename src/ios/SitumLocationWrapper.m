@@ -1,5 +1,7 @@
 #import "SitumLocationWrapper.h"
 
+NSString *DATEFORMAT = @"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZ";
+
 NSString* emptyStrCheck(NSString *str) {
     if (!str || str == nil) {
         return @"";
@@ -153,10 +155,21 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:emptyStrCheck(building.infoHTML) forKey:@"infoHtml"];
     [jo setObject:emptyStrCheck(building.pictureThumbURL.direction) forKey:@"pictureThumbUrl"];
     [jo setObject:emptyStrCheck(building.pictureURL.direction) forKey:@"pictureUrl"];
-    [jo setObject:building.rotation forKey:@"rotation"];
+    // [jo setObject:building.rotation forKey:@"rotation"];
+    [jo setObject:[NSNumber numberWithFloat:[building.rotation degrees]] forKey:@"rotationDegrees"];
+    [jo setObject:[NSNumber numberWithFloat:[building.rotation radians]] forKey:@"rotationRadians"];
     [jo setObject:emptyStrCheck(building.userIdentifier) forKey:@"userIdentifier"];
     [jo setObject:emptyStrCheck(building.identifier) forKey:@"identifier"];
-    
+
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:DATEFORMAT];
+
+    [jo setObject:emptyStrCheck([dateFormatter stringFromDate:building.createdAt])
+           forKey:@"createdAt"];
+
+    [jo setObject:emptyStrCheck([dateFormatter stringFromDate:building.updatedAt])
+           forKey:@"updatedAt"];
+
     return jo.copy;
 }
 
@@ -200,6 +213,10 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     //[jo setObject:emptyStrCheck(building.user_identifier) forKey:@"userIdentifier"];
     [jo setObject:emptyStrCheck([NSString stringWithFormat:@"%@", building.identifier]) forKey:@"identifier"];
     
+    if (building.customFields) {
+        [jo setObject:building.customFields forKey:@"customFields"];
+    }
+    
     return jo.copy;
 }
 
@@ -212,31 +229,51 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:[NSNumber numberWithInteger: floor.level] forKey:@"level"];
     [jo setObject:floor.mapURL.direction forKey:@"mapUrl"];
     [jo setObject:[NSNumber numberWithDouble:floor.scale] forKey:@"scale"];
-    [jo setObject:[NSString stringWithFormat:@"%@", floor.identifier] forKey:@"identifier"];
+    [jo setObject:[NSString stringWithFormat:@"%@", floor.identifier] forKey:@"floorIdentifier"];
+    [jo setObject:emptyStrCheck(floor.identifier) forKey:@"identifier"];
+
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:DATEFORMAT];
+
+    [jo setObject:emptyStrCheck([dateFormatter stringFromDate:floor.createdAt])
+           forKey:@"createdAt"];
+
+    [jo setObject:emptyStrCheck([dateFormatter stringFromDate:floor.updatedAt])
+           forKey:@"updatedAt"];
+
     return jo.copy;
 }
 
 - (SITFloor *) jsonObjectToFloor:(NSDictionary *) nsFloor {
     SITFloor *floor  = [[SITFloor alloc] init];
+
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:DATEFORMAT];
+
+    floor.createdAt = [dateFormatter dateFromString:floor.createdAt];
+
+    floor.updatedAt = [dateFormatter dateFromString:floor.updatedAt];
+
     floor.scale = [[nsFloor objectForKey:@"scale"] doubleValue];
-    SITURL *url  = [[SITURL alloc] init];
-    floor.mapURL = [url initWithDirection:(NSString *) [[nsFloor objectForKey:@"mapUrl"] stringValue]];
+    floor.mapURL = [[SITURL alloc] initWithDirection:[nsFloor objectForKey:@"mapUrl"]];;
     floor.level = [[nsFloor objectForKey:@"level"] intValue];
-    floor.identifier = [[nsFloor objectForKey:@"identifier"] stringValue];
-    floor.buildingIdentifier = [[nsFloor objectForKey:@"buildingIdentifier"] stringValue];
-    return floor.copy;
+    floor.identifier = [nsFloor objectForKey:@"floorIdentifier"];
+    floor.buildingIdentifier = [nsFloor objectForKey:@"buildingIdentifier"];
+    return floor;
 }
 
 //Event
 
 - (NSDictionary *) eventToJsonObject:(SITEvent *) event {
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
-    //    [jo setObject:[NSNumber numberWithDouble:floor.altitude] forKey:@"altitude"];
-    //[jo setObject:emptyStrCheck([NSString stringWithFormat:@"%@", event.id]) forKey:@"buildingIdentifier"];
-    //[jo setObject:[NSNumber numberWithInteger: floor.level] forKey:@"level"];
-    //[jo setObject:floor.mapURL.direction forKey:@"mapUrl"];
-    //[jo setObject:[NSNumber numberWithDouble:floor.scale] forKey:@"scale"];
-    //[jo setObject:[NSString stringWithFormat:@"%@", floor.identifier] forKey:@"identifier"];
+    [jo setObject:[NSString stringWithFormat:@"%@", event.identifier] forKey:@"identifier"];
+    [jo setObject:[NSString stringWithFormat:@"%@", event.project_identifier] forKey:@"buildingIdentifier"];
+    [jo setObject:[NSString stringWithFormat:@"%@", event.info] forKey:@"infoHtml"];
+    //[jo setObject:[NSNumber numberWithDouble:event.conversionArea] forKey:@"radius"];
+
+    //floorIdentifier not presented in ios platform
+    //radius not presented in ios platform
+
     return jo.copy;
 }
 
@@ -244,14 +281,14 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
 
 //Floor
 
-- (NSDictionary *) categoryToJsonObject:(SITPOICategory *) category {
+- (NSDictionary *) poiCategoryToJsonObject:(SITPOICategory *) category {
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
-    //    [jo setObject:[NSNumber numberWithDouble:floor.altitude] forKey:@"altitude"];
-    //[jo setObject:emptyStrCheck([NSString stringWithFormat:@"%@", floor.buildingIdentifier]) forKey:@"buildingIdentifier"];
-    //[jo setObject:[NSNumber numberWithInteger: floor.level] forKey:@"level"];
-    //[jo setObject:floor.mapURL.direction forKey:@"mapUrl"];
-    //[jo setObject:[NSNumber numberWithDouble:floor.scale] forKey:@"scale"];
-    //[jo setObject:[NSString stringWithFormat:@"%@", floor.identifier] forKey:@"identifier"];
+    [jo setObject:[NSString stringWithFormat:@"%@", category.identifier] forKey:@"identifier"];
+    [jo setObject:[NSNumber numberWithBool:category.isPublic] forKey:@"public"];
+    [jo setObject:[NSString stringWithFormat:@"%@", category.code] forKey:@"poiCategoryCode"];
+    [jo setObject:[NSString stringWithFormat:@"%@", category.name] forKey:@"poiCategoryName"];
+    [jo setObject:category.iconURL.direction forKey:@"icon_deselected"];
+    [jo setObject:category.selectedIconURL.direction forKey:@"icon_selected"];
     return jo.copy;
 }
 
@@ -259,14 +296,18 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
 
 - (NSDictionary *) poiToJsonObject:(SITPOI *) poi {
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
+    [jo setObject:emptyStrCheck(poi.identifier) forKey:@"identifier"];
     [jo setObject:emptyStrCheck(poi.buildingIdentifier) forKey:@"buildingIdentifier"];
     [jo setObject:[self cartesianCoordinateToJsonObject:poi.position.cartesianCoordinate] forKey:@"cartesianCoordinate"];
     [jo setObject:[self coordinateToJsonObject:poi.position.coordinate] forKey:@"coordinate"];
     [jo setObject:emptyStrCheck(poi.position.floorIdentifier) forKey:@"floorIdentifier"];
-    [jo setObject:emptyStrCheck(poi.name) forKey:@"name"];
+    [jo setObject:emptyStrCheck(poi.name) forKey:@"poiName"];
     [jo setObject:[self pointToJsonObject:poi.position] forKey:@"position"];
     [jo setObject:[NSNumber numberWithBool:poi.position.isIndoor] forKey:@"isIndoor"];
     [jo setObject:[NSNumber numberWithBool:poi.position.isOutdoor] forKey:@"isOutdoor"];
+    if (poi.customFields) {
+        [jo setObject:poi.customFields forKey:@"customFields"];
+    }
     return jo.copy;
 }
 
@@ -276,6 +317,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
     [jo setObject:[NSNumber numberWithFloat:location.accuracy] forKey:@"accuracy"];
     [jo setObject:[self angleToJsonObject:location.bearing] forKey:@"bearing"];
+    [jo setObject:[self qualityStringFromQuality:location.bearingQuality] forKey:@"bearingQuality"];
     [jo setObject:emptyStrCheck(location.position.buildingIdentifier) forKey:@"buildingIdentifier"];
     [jo setObject:[self angleToJsonObject:location.cartesianBearing] forKey:@"cartesianBearing"];
     [jo setObject:[self cartesianCoordinateToJsonObject:location.position.cartesianCoordinate] forKey:@"cartesianCoordinate"];
@@ -283,11 +325,18 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:emptyStrCheck(location.position.floorIdentifier) forKey:@"floorIdentifier"];
     [jo setObject:[self pointToJsonObject:location.position] forKey:@"position"];
     [jo setObject:emptyStrCheck(location.provider) forKey:@"provider"];
-    [jo setObject:[NSNumber numberWithInteger:location.quality] forKey:@"quality"];
+    [jo setObject:[self qualityStringFromQuality:location.quality] forKey:@"quality"];
+    [jo setObject:[NSNumber numberWithBool:location.hasBearing] forKey:@"hasBearing"];
     [jo setObject:[NSNumber numberWithDouble:location.timestamp] forKey:@"timestamp"];
     [jo setObject:[NSNumber numberWithBool:location.position.isIndoor] forKey:@"isIndoor"];
     [jo setObject:[NSNumber numberWithBool:location.position.isOutdoor] forKey:@"isOutdoor"];
+    [jo setObject:emptyStrCheck(location.deviceId) forKey:@"deviceId"];
+    [jo setValue:@"locationChanged" forKey:@"type"];
     return jo.copy;
+}
+
+- (NSString *)qualityStringFromQuality:(kSITQualityValues)quality {
+    return quality == kSITHigh ? @"HIGH":@"LOW";
 }
 
 - (SITLocation *) locationJsonObjectToLocation:(NSDictionary *) jo {
@@ -305,12 +354,19 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     return location;
 }
 
-// Coordinate
-
 - (NSDictionary *) coordinateToJsonObject:(CLLocationCoordinate2D) coordinate {
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
     [jo setObject:[NSNumber numberWithDouble:coordinate.latitude] forKey:@"latitude"];
     [jo setObject:[NSNumber numberWithDouble:coordinate.longitude] forKey:@"longitude"];
+    return jo.copy;
+}
+
+// Coordinate
+
+- (NSDictionary *) indoorPointToJsonObject:(SITIndoorPoint *) iPoint {
+    NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
+    //[jo setObject:[iPoint.x doubleValue  forKey:@"x"];
+    //[jo setObject:[iPoint.y doubleValue  forKey:@"y"];
     return jo.copy;
 }
 
@@ -331,8 +387,8 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:[self cartesianCoordinateToJsonObject:point.cartesianCoordinate] forKey:@"cartesianCoordinate"];
     [jo setObject:[self coordinateToJsonObject:point.coordinate] forKey:@"coordinate"];
     [jo setObject:emptyStrCheck(point.floorIdentifier) forKey:@"floorIdentifier"];
-    [jo setObject:[NSNumber numberWithDouble:point.isIndoor] forKey:@"isIndoor"];
-    [jo setObject:[NSNumber numberWithDouble:point.isOutdoor] forKey:@"isOutdoor"];
+    [jo setObject:[NSNumber numberWithBool:point.isIndoor] forKey:@"isIndoor"];
+    [jo setObject:[NSNumber numberWithBool:point.isOutdoor] forKey:@"isOutdoor"];
     return jo.copy;
     
 }
@@ -364,7 +420,6 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:[NSNumber numberWithDouble:dimensions.width] forKey:@"width"];
     [jo setObject:[NSNumber numberWithDouble:dimensions.height] forKey:@"height"];
     return jo.copy;
-    
 }
 
 // Bounds
@@ -378,12 +433,23 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     return jo.copy;
 }
 
+- (NSDictionary *) conversionAreaToJsonObject:(SITRectangularArea *) ca {
+    NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
+    //[jo setObject:[self coordinateToJsonObject:ca.topLeft] forKey:@"topLeft"];
+    //[jo setObject:[self coordinateToJsonObject:bounds.northWest] forKey:@"top"];
+    //[jo setObject:[self coordinateToJsonObject:bounds.southEast] forKey:@"center"];
+    //[jo setObject:[self coordinateToJsonObject:bounds.southWest] forKey:@"right"];
+    return jo.copy;
+}
+
 // Angle
 
 - (NSDictionary *) angleToJsonObject:(SITAngle *) angle {
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
     [jo setObject:[NSNumber numberWithDouble:angle.degrees] forKey:@"degrees"];
     [jo setObject:[NSNumber numberWithDouble:angle.radians] forKey:@"radians"];
+    [jo setObject:[NSNumber numberWithDouble:angle.degressClockwise] forKey:@"degressClockwise"];
+    [jo setObject:[NSNumber numberWithDouble:angle.radiansMinusPiPi] forKey:@"radiansMinusPiPi"];
     return jo.copy;
 }
 

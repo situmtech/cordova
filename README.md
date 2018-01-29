@@ -3,8 +3,9 @@ Situm Cordova Plugin
 
 > Current Status:
 
-Android: In development (some calls already implemented)
-IOS: Not implemented yet
+Version 1.0.0
+Android: Services, Communication, Location, Directions and Navigation modules
+IOS: Services, Communication, Location, Directions and Navigation modules
 
 
 > Android
@@ -213,10 +214,47 @@ IOS: Not implemented yet
 **startPositioning:**
 
 ```javascript
-    cordova.plugins.Situm.startPositioning(buildings, (response) => {
+    cordova.plugins.Situm.startPositioning(requestParameters, (response) => {
+      // requestParameters -> array containing building information and request:    
       // response -> object with the actual position. this function send us a new response when event to position changed is fired
     });
+    
+    requestParameters:
+       [
+          {
+              "buildingIdentifier": 1051,
+              "name": "Ed. Emprendia - Situm"
+          },
+          {
+              "buildingIdentifier": 1051,
+              "interval": 1000,
+              "indoorProvider": "SUPPORT",
+              "useBle": true,
+              "useWifi": true,
+              "motionMode": "BY_FOOT",
+              "useForegroundService": true,
+              "useDeadReckoning": true,
+              "outdoorLocationOptions": 
+              {
+                  "continuousMode": true,
+                  "userDefinedThreshold": false,
+                  "burstInterval": 1,
+                  "averageSnrThreshold": 25.0
+              },
+              "beaconFilters": [
+                  {
+                      "uuid": "54"
+                  },
+                  {
+                      "uuid": "68"
+                  }
+              ],
+              "smallestDisplacement": 1.0,
+              "realtimeUpdateInterval": 1000
+          }
+       ]
 ```
+
 **stopPositioning:**
 
 ```javascript

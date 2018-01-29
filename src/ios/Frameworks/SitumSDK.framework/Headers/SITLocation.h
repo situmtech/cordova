@@ -128,4 +128,6 @@ typedef NS_ENUM(NSInteger, kSITQualityValues)
                          accuracy:(float)accuracy
                          provider:(NSString *)provider;
 
+- (BOOL)hasBearing;
+
 @end

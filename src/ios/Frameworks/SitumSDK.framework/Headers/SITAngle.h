@@ -18,4 +18,8 @@
 
 - (float)radians;
 
+- (float)degressClockwise;
+
+- (float)radiansMinusPiPi;
+
 @end

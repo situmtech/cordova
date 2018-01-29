@@ -118,6 +118,7 @@ typedef NS_ENUM(NSInteger, kSITIndicationOrientation) {
  Initialize a SITIndication object.
 
  @param stepIndex index of the origin SITRouteStep
+ @param destinationStepIndex index of the destination of a SITRouteStep
  @param orientationChange the angle between the virtual line of (in radians)
  @param horizontalDistance the distance between the origin and destination SITRouteStep
  @param verticalDistance the number of levels that needs to go up (positive value) or down (negative value) in order to arrive to the destination.
@@ -125,8 +126,9 @@ typedef NS_ENUM(NSInteger, kSITIndicationOrientation) {
  @discussion You should not use this method directly. Instead you should use the indications provided by SITDirectionsManager or SITNavigationManager.
  */
 - (instancetype)initWithStepIndex:(NSInteger)stepIndex
+             destinationStepIndex:(NSInteger)destinationStepIndex
                 orientationChange:(float)orientationChange
-                         horizontalDistance:(float)horizontalDistance
+               horizontalDistance:(float)horizontalDistance
                  verticalDistance:(float)verticalDistance;
 
 /**

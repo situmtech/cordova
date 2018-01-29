@@ -47,7 +47,6 @@
 #import "SITIndoorRouteStep.h"
 
 #import "SITDiagnosisServices.h"
-#import "SITCalibrationManager.h"
 
 #import "SITOccurrence.h"
 #import "SITKeyValueFilter.h"
@@ -89,7 +88,6 @@
 #import "SITRealTimeError.h"
 
 #import "SITBounds.h"
-
 
 
 
