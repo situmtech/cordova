@@ -145,9 +145,9 @@ public class PluginHelper {
 
                                 for (Poi poi : pois) {
                                     Log.i(PluginHelper.TAG,
-                                            "onSuccess: " + poi.getIdentifier() + " - " + poi.getName() + "-" + poi.customFields());
+                                            "onSuccess: " + poi.getIdentifier() + " - " + poi.getName() + "-" + poi.getCustomFields());
                                     
-                                    Log.d("Some log that should appear");
+                                    Log.d(PluginHelper.TAG, "Some log that should appear");
                                     JSONObject jsonoPoi = LocationWrapper.poiToJsonObject(poi);
                                     jsonaPois.put(jsonoPoi);
                                 }
