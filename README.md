@@ -271,23 +271,23 @@ IOS: Services, Communication, Location, Directions and Navigation modules
        ]
 ```
 A description of each parameter can be found below: 
-- buildingIdentifier: Building identifier of the building where you will start positioning.
-- interval: Desired interval for location updates, in milliseconds.This interval is inexact, the service will try to obtain location updates for your application at this interval.
-- indoorProvider: Indoor location provider. INPHONE or SUPPORT
-- useBle: Set if you want to use BLE for positioning.
-- useWiFi: Set if you want to use WiFi for positioning.
-- motionMode: (EXPERIMENTAL) Set the motion mode. BY_CAR or BY_FOOT
-- useForegroundService: (EXPERIMENTAL) Run the service in foreground.
-- useDeadReckoning: (EXPERIMENTAL) Set if you want to use dead reckoning to get fast position updates using only the inertial sensors, between the server position updates.
-- outdoorLocationOptions: Outdoor location options.
-	- continuousMode: Set the environment detection continuous mode (true) or burst mode (false).
-	- userDefinedThreshold: Set to true if the snr threshold to use is defined by the user.
-	- burstInterval: The interval to scan for GPS and detect the environment (in seconds).
-	- averageSnrThreshold: When detecting the environment, threshold over which must be the average SNR of the satellites to detect outdoor.
-- beaconFilters: Adds beacon filters to be handled during scan time, otherwise only Situm beacons will be scanned.
-	- uuid: Beacon uuid
-- smallestDisplacement: Minimum displacement between location updates (in meters).
-- realtimeUpdateInterval: Interval to upload locations to the realtime.
+- **buildingIdentifier**: Building identifier of the building where you will start positioning.
+- **interval**: Desired interval for location updates, in milliseconds.This interval is inexact, the service will try to obtain location updates for your application at this interval.
+- **indoorProvider**: Indoor location provider. `INPHONE` or `SUPPORT`
+- **useBle**: Set if you want to use BLE for positioning.
+- **useWiFi**: Set if you want to use WiFi for positioning.
+- **motionMode**: (EXPERIMENTAL) Set the motion mode. `BY_CAR` or `BY_FOOT`
+- **useForegroundService**: (EXPERIMENTAL) Run the service in foreground.
+- **useDeadReckoning**: (EXPERIMENTAL) Set if you want to use dead reckoning to get fast position updates using only the inertial sensors, between the server position updates.
+- **outdoorLocationOptions**: Outdoor location options.
+	- **continuousMode**: Set the environment detection continuous mode (true) or burst mode (false).
+	- **userDefinedThreshold**: Set to true if the snr threshold to use is defined by the user.
+	- **burstInterval**: The interval to scan for GPS and detect the environment (in seconds).
+	- **averageSnrThreshold**: When detecting the environment, threshold over which must be the average SNR of the satellites to detect outdoor.
+- **beaconFilters**: Adds beacon filters to be handled during scan time, otherwise only Situm beacons will be scanned.
+	- **uuid**: Beacon uuid
+- **smallestDisplacement**: Minimum displacement between location updates (in meters).
+- **realtimeUpdateInterval**: Interval to upload locations to the realtime.
 
 ### stopPositioning
 
