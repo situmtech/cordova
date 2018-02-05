@@ -6,23 +6,39 @@ Situm Cordova Plugin
 Version 1.0.0
 Android: Services, Communication, Location, Directions and Navigation modules
 IOS: Services, Communication, Location, Directions and Navigation modules
+## Table of contents
+  * [Android](#android)
+    + [setApiKey](#setapikey)
+    + [setUserPass](#setuserpass)
+    + [fetchBuildings](#fetchbuildings)
+    + [fetchFloorsFromBuilding](#fetchfloorsfrombuilding)
+    + [fetchIndoorPOIsFromBuilding](#fetchindoorpoisfrombuilding)
+    + [fetchOutdoorPOIsFromBuilding](#fetchoutdoorpoisfrombuilding)
+    + [fetchEventsFromBuilding](#fetcheventsfrombuilding)
+    + [fetchMapFromFloor](#fetchmapfromfloor)
+    + [fetchPoiCategories](#fetchpoicategories)
+    + [fetchPoiCategoryIconNormal](#fetchpoicategoryiconnormal)
+    + [fetchPoiCategoryIconSelected](#fetchpoicategoryiconselected)
+    + [invalidateCache](#invalidatecache)
+    + [requestDirections](#requestdirections)
+    + [startPositioning](#startpositioning)
+    + [stopPositioning](#stoppositioning)
 
+## Android
 
-> Android
-
-**setApiKey:**
+### setApiKey
 
 ```javascript
       cordova.plugins.Situm.setApiKey("email", "api_key");
 ```
 
-**setUserPass:**
+### setUserPass
 
 ```javascript
        cordova.plugins.Situm.setUserPass("email", "password");
 ```
 
-**fetchBuildings:**
+### fetchBuildings
 
 ```javascript
        cordova.plugins.Situm.fetchBuildings((buildings) => {
@@ -30,7 +46,7 @@ IOS: Services, Communication, Location, Directions and Navigation modules
        });
 ```
 
-**fetchFloorsFromBuilding:**
+### fetchFloorsFromBuilding
 
 ```javascript
       let building = {
@@ -92,7 +108,7 @@ IOS: Services, Communication, Location, Directions and Navigation modules
       });
 ```
 
-**fetchIndoorPOIsFromBuilding**
+### fetchIndoorPOIsFromBuilding
 
 ```javascript
       cordova.plugin.Situm.fetchIndoorPOIsFromBuilding(building, (indoorPOIs) => {
@@ -100,7 +116,7 @@ IOS: Services, Communication, Location, Directions and Navigation modules
       });
 ```
 
-**fetchOutdoorPOIsFromBuilding**
+### fetchOutdoorPOIsFromBuilding
 
 ```javascript
       cordova.plugins.Situm.fetchOutdoorPOIsFromBuilding(building, (outdoorPOIs) => {
@@ -108,7 +124,7 @@ IOS: Services, Communication, Location, Directions and Navigation modules
       });
 ```
 
-**fetchEventsFromBuilding**
+### fetchEventsFromBuilding
 
 ```javascript
       cordova.plugins.Situm.fetchEventsFromBuilding(building, (events) => {
@@ -116,7 +132,7 @@ IOS: Services, Communication, Location, Directions and Navigation modules
       });
 ```
 
-**fetchMapFromFloor:**
+### fetchMapFromFloor
 
 ```javascript
       let floor = {
@@ -132,7 +148,7 @@ IOS: Services, Communication, Location, Directions and Navigation modules
       });
 ```
 
-**fetchPoiCategories:**
+### fetchPoiCategories
 
 ```javascript
        cordova.plugins.Situm.fetchPoiCategories((poiCategories) => {
@@ -140,7 +156,7 @@ IOS: Services, Communication, Location, Directions and Navigation modules
        });
 ```
 
-**fetchPoiCategoryIconNormal**
+### fetchPoiCategoryIconNormal
 
 ```javascript
       let category = {
@@ -155,7 +171,7 @@ IOS: Services, Communication, Location, Directions and Navigation modules
       });
 ```
 
-**fetchPoiCategoryIconSelected**
+### fetchPoiCategoryIconSelected
 
 ```javascript
       let category = {
@@ -170,7 +186,7 @@ IOS: Services, Communication, Location, Directions and Navigation modules
       });
 ```
 
-**invalidateCache**
+### invalidateCache
 
 ```javascript
       cordova.plugins.Situm.invalidateCache((res) => {
@@ -178,7 +194,7 @@ IOS: Services, Communication, Location, Directions and Navigation modules
       });
 ```
 
-**requestDirections**
+### requestDirections
 
 ```javascript
       // from & to -> POI object
@@ -211,7 +227,7 @@ IOS: Services, Communication, Location, Directions and Navigation modules
       });
 ```
 
-**startPositioning:**
+### startPositioning
 
 ```javascript
     cordova.plugins.Situm.startPositioning(requestParameters, (response) => {
@@ -254,8 +270,26 @@ IOS: Services, Communication, Location, Directions and Navigation modules
           }
        ]
 ```
+A description of each parameter can be found below: 
+- buildingIdentifier: Building identifier of the building where you will start positioning.
+- interval: Desired interval for location updates, in milliseconds.This interval is inexact, the service will try to obtain location updates for your application at this interval.
+- indoorProvider: Indoor location provider. INPHONE or SUPPORT
+- useBle: Set if you want to use BLE for positioning.
+- useWiFi: Set if you want to use WiFi for positioning.
+- motionMode: (EXPERIMENTAL) Set the motion mode. BY_CAR or BY_FOOT
+- useForegroundService: (EXPERIMENTAL) Run the service in foreground.
+- useDeadReckoning: (EXPERIMENTAL) Set if you want to use dead reckoning to get fast position updates using only the inertial sensors, between the server position updates.
+- outdoorLocationOptions: Outdoor location options.
+	- continuousMode: Set the environment detection continuous mode (true) or burst mode (false).
+	- userDefinedThreshold: Set to true if the snr threshold to use is defined by the user.
+	- burstInterval: The interval to scan for GPS and detect the environment (in seconds).
+	- averageSnrThreshold: When detecting the environment, threshold over which must be the average SNR of the satellites to detect outdoor.
+- beaconFilters: Adds beacon filters to be handled during scan time, otherwise only Situm beacons will be scanned.
+	- uuid: Beacon uuid
+- smallestDisplacement: Minimum displacement between location updates (in meters).
+- realtimeUpdateInterval: Interval to upload locations to the realtime.
 
-**stopPositioning:**
+### stopPositioning
 
 ```javascript
     cordova.plugins.Situm.stopPositioning(() => {
