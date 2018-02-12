@@ -120,8 +120,16 @@ typedef void (^SITPOICategoriesFetchHandler)(NSArray *categories, NSError *error
  */
 typedef void (^SITPOICategoryIconFetchCompletion)(NSData *iconData, NSError *error);
 
+/**
+ *  The type of block that will be called after a login operation
+ *  @param error    An error object describing what went wrong (if any)
+ */
 typedef void (^SITLoginHandler)(NSError *error);
 
+/**
+ *  The type of block that will be called after a logout operation
+ *  @param error    An error object describing what went wrong (if any)
+ */
 typedef void (^SITLogoutHandler)(NSError *error);
 
 /**

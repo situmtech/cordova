@@ -383,13 +383,29 @@
                           withOptions:(NSDictionary *)options
                        withCompletion:(SITEventsFetchHandler)eventsFetchHandler;
 
-#pragma mark - Events management. As a developer, you should not use this methods. They are for internal use only.
-
+/**
+ *  Authenticate with user and password
+ *
+ *  @param user email of the user
+ *  @param password password of the user
+ *  @param loginHandler completion block that will be executed if the operation is performed
+ *  @discussion This method needs to be called before performing any other network operation in order to validate the credentials.
+ *              Otherwise the operations could failed with a 401 error code.
+ *  Before attempting to connect with different credentials remeber to disconnect to the actual session performing a -logoutWithCompletion: operation.
+ */
 - (BOOL)loginWithUser:(NSString *)user
              password:(NSString *)password
        withCompletion:(SITLoginHandler)loginHandler;
 
+/**
+ *  Disconnect and clear previous session credentials
+ *
+ *  @param logoutHandler completion block that will be executed if the operation if performed.
+ */
 - (BOOL)logoutWithCompletion:(SITLogoutHandler)logoutHandler;
+
+
+#pragma mark - Events management. As a developer, you should not use this methods. They are for internal use only.
 
 /**
  *  Update calibrations made with the example application
