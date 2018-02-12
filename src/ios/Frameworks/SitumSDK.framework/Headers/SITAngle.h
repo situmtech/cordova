@@ -21,5 +21,4 @@
 - (float)degressClockwise;
 
 - (float)radiansMinusPiPi;
-
 @end

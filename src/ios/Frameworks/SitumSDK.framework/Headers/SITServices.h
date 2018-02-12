@@ -8,11 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
+@class SITToken;
+
 /*!
  *  Service class for the Situm SDK for iOS
  */
 
 @interface SITServices : NSObject
+
+typedef enum {
+    NONE,
+    USERPASS,
+    APIKEY,
+    TOKEN
+} Auth;
+
+@property Auth auth;
 
 /*!
  *  Provides your API key to the Situm SDK for iOS.  This key is generated
@@ -82,10 +93,29 @@
 
 + (NSString *)password;
 
-#pragma mark - Private Methods
-
 + (BOOL)provideUser:(NSString *)user
            password:(NSString *)password;
 
+#pragma mark - Private Methods
+
++ (NSString *)parse: (NSString *) token;
+
++ (SITToken *)token;
+
++ (Auth) auth;
+
++ (NSString *) authHeader;
+
++ (NSString *) tokenHeader;
+
++ (void) clearData;
+
++ (void) clearAllData;
+
++ (BOOL) provideToken:(SITToken *)token;
+
++ (void) provideAuth:(Auth) authMode;
+
++ (BOOL)isConfigured;
 
 @end
