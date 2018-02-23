@@ -1,16 +1,17 @@
 {
-  "name": "situm-cordova-plugin",
-  "version": "1.0.0",
+  "name": "situm-cordova-plugin-official-development",
+  "version": "1.1.0",
   "cordova": {
-    "id": "situm-cordova-plugin",
+    "id": "situm-cordova-plugin-official-development",
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   },
   "description": "Situm Cordova-based Plugin for hybrid apps.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cocodinTech/situm-cordova-plugin.git"
+    "url": "git+https://github.com/situmtech/situm-cordova-plugin.git"
   },
   "keywords": [
     "situm",
@@ -25,10 +26,10 @@
       "version": ">=6.0.0"
     }
   ],
-  "author": "",
+  "author": "Situm Techonologies",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cocodinTech/situm-cordova-plugin/issues"
+    "url": "https://github.com/situmtech/situm-cordova-plugin/issues"
   },
-  "homepage": "https://github.com/cocodinTech/situm-cordova-plugin#readme"
+  "homepage": "https://github.com/siteumtech/situm-cordova-plugin#readme"
 }
