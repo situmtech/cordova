@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-    id="situm-cordova-plugin"
+    id="situm-cordova-plugin-official-develop"
     version="1.1.0">
     <name>Situm Cordova plugin</name>
     <description></description>
