@@ -2,13 +2,13 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     id="situm-cordova-plugin"
-    version="1.0.1">
+    version="1.1.0">
     <name>Situm Cordova plugin</name>
     <description></description>
     <license>MIT</license>
     <keywords>situm, indoor positioning</keywords>
-    <repo>https://github.com/cocodinTech/situm-cordova-plugin.git</repo>
-    <issue>https://github.com/cocodinTech/situm-cordova-plugin/issues</issue>
+    <repo>https://github.com/situmtech/situm-cordova-plugin.git</repo>
+    <issue>https://github.com/situmtech/situm-cordova-plugin/issues</issue>
 
     <engines>
         <engine name="cordova-android" version=">=6.0.0" />
