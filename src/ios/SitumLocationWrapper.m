@@ -213,9 +213,9 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     //[jo setObject:emptyStrCheck(building.user_identifier) forKey:@"userIdentifier"];
     [jo setObject:emptyStrCheck([NSString stringWithFormat:@"%@", building.identifier]) forKey:@"identifier"];
     
-    if (building.customFields) {
-        [jo setObject:building.customFields forKey:@"customFields"];
-    }
+    // if (building.customFields) {
+    //     [jo setObject:building.customFields forKey:@"customFields"];
+    // }
     
     return jo.copy;
 }
