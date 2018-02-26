@@ -36,6 +36,19 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     [SITServices provideUser:email password:password];
 }
 
+- (void)setCacheMaxAge:(CDVInvokedUrlCommand *)command {
+    NSNumber* cacheMaxAge = [command.arguments objectAtIndex:0]; // on iOS this value 
+    [[SITCommunicationManager sharedManager] setCacheMaxAge:[cacheMaxAge integerValue]]; 
+    NSString *operation = [NSString stringWithFormat:@"Setting cache max age to :%@ seconds", cacheMaxAge];
+
+    if (IS_LOG_ENABLED)
+    {
+        NSLog([NSString stringWithFormat: @"%@ %@ ", DEFAULT_SITUM_LOG, operation]);
+        NSLog([NSString stringWithFormat: @"%@ Cache max age is %d seconds", DEFAULT_SITUM_LOG, [[SITCommunicationManager sharedManager] cacheMaxAge]]);
+        
+    }
+}
+
 - (void)fetchBuildings:(CDVInvokedUrlCommand*)command
 {
     if (buildingsStored == nil) {
@@ -253,7 +266,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
         if (!error) {
             NSMutableArray *ja = [[NSMutableArray alloc] init];
             for (SITPOICategory *obj in categories) {
-                [ja addObject:[SitumLocationWrapper.shared categoryToJsonObject:obj]];
+                [ja addObject:[SitumLocationWrapper.shared poiCategoryToJsonObject:obj]];
                 [categoryStored setObject:obj forKey:[NSString stringWithFormat:@"%@", obj.name]];
             }
             CDVPluginResult* pluginResult = nil;
@@ -281,7 +294,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
         if (!error) {
             NSMutableArray *ja = [[NSMutableArray alloc] init];
             for (SITPOICategory *obj in categories) {
-                [ja addObject:[SitumLocationWrapper.shared categoryToJsonObject:obj]];
+                [ja addObject:[SitumLocationWrapper.shared poiCategoryToJsonObject:obj]];
                 [categoryStored setObject:obj forKey:[NSString stringWithFormat:@"%@", obj.name]];
             }
             CDVPluginResult* pluginResult = nil;
@@ -309,7 +322,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
         if (!error) {
             NSMutableArray *ja = [[NSMutableArray alloc] init];
             for (SITPOICategory *obj in categories) {
-                [ja addObject:[SitumLocationWrapper.shared categoryToJsonObject:obj]];
+                [ja addObject:[SitumLocationWrapper.shared poiCategoryToJsonObject:obj]];
                 [categoryStored setObject:obj forKey:[NSString stringWithFormat:@"%@", obj.name]];
             }
             CDVPluginResult* pluginResult = nil;
@@ -368,6 +381,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     NSDictionary* building = (NSDictionary*)[command.arguments objectAtIndex:0]; //not used
     NSDictionary* fromLocation = (NSDictionary*)[command.arguments objectAtIndex:1];
     NSDictionary* toPOI = (NSDictionary*)[command.arguments objectAtIndex:2];
+    NSDictionary* options = (NSDictionary*)[command.arguments objectAtIndex:3];
     
     if (routesStored == nil) {
         routesStored = [[NSMutableDictionary alloc] init];
@@ -383,7 +397,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
         endPoint = [SitumLocationWrapper.shared pointJsonObjectToPoint:[toPOI objectForKey:@"position"]];
     }
     
-    SITDirectionsRequest *directionsRequest = [[SITDirectionsRequest alloc] initWithRequestID:0 location:location destination:endPoint options:nil];
+    SITDirectionsRequest *directionsRequest = [[SITDirectionsRequest alloc] initWithRequestID:0 location:location destination:endPoint options:options];
     [[SITDirectionsManager sharedInstance] requestDirections:directionsRequest];
     [[SITDirectionsManager sharedInstance] setDelegate:self];
 }

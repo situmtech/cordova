@@ -9,6 +9,9 @@ var Situm = {
   setUserPass: function (email, apiKey, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'setUserPass', [email, password]);
   },
+  setCacheMaxAge: function (cacheAge, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'setCacheMaxAge', [cacheAge]);
+  },
   startPositioning: function (arrBuilding, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'startPositioning', arrBuilding);
   },

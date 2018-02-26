@@ -178,6 +178,13 @@ IOS: Services, Communication, Location, Directions and Navigation modules
       });
 ```
 
+**setCacheMaxAge**
+```javascript
+      cordova.plugins.Situm.setCacheMaxAge(cacheMaxAge, (res) => { // cacheMaxAge: time in seconds. For example if 1 day is required then 1 day * (24 hours / day) * (60 min/hour) * (60 seconds / minute) = 86.400 seconds
+          // res -> string message
+      });
+```
+
 **requestDirections**
 
 ```javascript
@@ -206,7 +213,10 @@ IOS: Services, Communication, Location, Directions and Navigation modules
           "y": 0.0
         }
       }
-      cordova.plugins.Situm.requestDirections([building, from, to], (res) => {
+      var directionsOptionsMap = new Object();
+      directionsOptionsMap["accessible"] = true/false
+
+      cordova.plugins.Situm.requestDirections([building, from, to, directionsOptionsMap], (res) => {
         // res -> route object, we can draw in map with our map provider
       });
 ```
@@ -254,6 +264,8 @@ IOS: Services, Communication, Location, Directions and Navigation modules
           }
        ]
 ```
+
+NOTE: if deadReckoning is required then buildingIdentifier property is mandatory. Only available on Android for now.
 
 **stopPositioning:**
 

@@ -27,7 +27,7 @@
 
 // Category
 
-- (NSDictionary *) categoryToJsonObject:(SITPOICategory *) category;
+- (NSDictionary *) poiCategoryToJsonObject:(SITPOICategory *) category;
 
 // POI
 

@@ -4,6 +4,8 @@ package es.situm.plugin;
 
 import android.util.Log;
 
+import java.util.concurrent.TimeUnit;
+
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
@@ -32,6 +34,10 @@ public class SitumPlugin extends CordovaPlugin {
       String email = args.getString(0);
       String password = args.getString(1);
       es.situm.sdk.SitumSdk.configuration().setUserPass(email, password);
+    } else if (action.equalsIgnoreCase("setCacheMaxAge")) {    
+      Integer cacheAge = args.getInt(0);
+      Log.d(TAG,"Setting cache max age to " + cacheAge + " seconds");
+      es.situm.sdk.SitumSdk.configuration().setCacheMaxAge(cacheAge, TimeUnit.SECONDS);
     } else if (action.equalsIgnoreCase("fetchBuildings")) {
       PluginHelper.fetchBuildings(cordova, webView, args, callbackContext);
     } else if (action.equalsIgnoreCase("startPositioning")) {
