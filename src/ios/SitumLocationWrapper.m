@@ -170,6 +170,10 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:emptyStrCheck([dateFormatter stringFromDate:building.updatedAt])
            forKey:@"updatedAt"];
 
+    if (building.customFields) {
+         [jo setObject:building.customFields forKey:@"customFields"];
+    }
+
     return jo.copy;
 }
 
