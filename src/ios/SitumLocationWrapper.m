@@ -474,16 +474,20 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     for (SITIndication *indication in route.indications) {
         [indicationsJsonArray addObject:[self indicationToJsonObject:indication]];
     }
+
+    [jo setObject:[self pointToJsonObject:route.origin] forKey:@"from"];
+    [jo setObject:[self pointToJsonObject:route.destination] forKey:@"to"];
+    [jo setObject:stepsJsonArray.copy forKey:@"steps"];
+    [jo setObject:indicationsJsonArray forKey:@"indications"];
+
+    if (route.routeSteps.count == 0) return jo; // No steps on the route
+
     
     [jo setObject:stepsJsonArray.copy forKey:@"edges"];
     [jo setObject:stepsJsonArray.firstObject forKey:@"firstStep"];
-    [jo setObject:[self pointToJsonObject:route.origin] forKey:@"from"];
-    [jo setObject:indicationsJsonArray forKey:@"indications"];
     [jo setObject:stepsJsonArray.lastObject forKey:@"lastStep"];
     [jo setObject:pointsJsonArray forKey:@"nodes"];
     [jo setObject:pointsJsonArray forKey:@"points"];
-    [jo setObject:[self pointToJsonObject:route.destination] forKey:@"to"];
-    [jo setObject:stepsJsonArray.copy forKey:@"steps"];
     return jo.copy;
     
 }
