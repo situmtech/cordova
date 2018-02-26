@@ -3,7 +3,7 @@ Situm Cordova Plugin
 
 > Current Status:
 
-Version 1.0.0
+Version 1.3.3
 Android: Services, Communication, Location, Directions and Navigation modules
 IOS: Services, Communication, Location, Directions and Navigation modules
 ## Table of contents
@@ -194,8 +194,14 @@ IOS: Services, Communication, Location, Directions and Navigation modules
       });
 ```
 
-### requestDirections
+**setCacheMaxAge**
+```javascript
+      cordova.plugins.Situm.setCacheMaxAge(cacheMaxAge, (res) => { // cacheMaxAge: time in seconds. For example if 1 day is required then 1 day * (24 hours / day) * (60 min/hour) * (60 seconds / minute) = 86.400 seconds
+          // res -> string message
+      });
+```
 
+### requestDirections
 ```javascript
       // from & to -> POI object
       from = {
@@ -222,7 +228,10 @@ IOS: Services, Communication, Location, Directions and Navigation modules
           "y": 0.0
         }
       }
-      cordova.plugins.Situm.requestDirections([building, from, to], (res) => {
+      var directionsOptionsMap = new Object();
+      directionsOptionsMap["accessible"] = true/false
+
+      cordova.plugins.Situm.requestDirections([building, from, to, directionsOptionsMap], (res) => {
         // res -> route object, we can draw in map with our map provider
       });
 ```
@@ -270,6 +279,10 @@ IOS: Services, Communication, Location, Directions and Navigation modules
           }
        ]
 ```
+
+
+NOTE: if deadReckoning is required then buildingIdentifier property is mandatory. Only available on Android for now.
+
 A description of each parameter can be found below: 
 - **buildingIdentifier**: Building identifier of the building where you will start positioning.
 - **interval**: Desired interval for location updates, in milliseconds.This interval is inexact, the service will try to obtain location updates for your application at this interval.

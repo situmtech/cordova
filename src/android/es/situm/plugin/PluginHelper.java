@@ -641,7 +641,16 @@ public class PluginHelper {
             JSONObject jsonoTo = args.getJSONObject(2);
             Point from = LocationWrapper.pointJsonObjectToPoint(jsonoFrom, jsonoBuilding);
             Point to = LocationWrapper.pointJsonObjectToPoint(jsonoTo, jsonoBuilding);
-            DirectionsRequest directionRequest = new DirectionsRequest.Builder().from(from, null).to(to).build();
+            Boolean accessibleRoute = false;
+            if (args.length() > 2) {
+                JSONObject options = args.getJSONObject(3);
+
+                if (options.has(LocationWrapper.ACCESSIBLE)) {
+                    accessibleRoute = options.getBoolean(LocationWrapper.ACCESSIBLE);
+                }
+            }
+            Log.i(TAG, "Specifying an accessible route:" + accessibleRoute );
+            DirectionsRequest directionRequest = new DirectionsRequest.Builder().from(from, null).to(to).isAccessible(accessibleRoute).build();
             SitumSdk.directionsManager().requestDirections(directionRequest, new Handler<Route>() {
                 @Override
                 public void onSuccess(Route route) {

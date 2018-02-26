@@ -163,6 +163,8 @@ class LocationWrapper {
 
     public static final String SMALLEST_DISPLACEMENT = "smallestDisplacement";
     public static final String REALTIME_UPDATE_INTERVAL = "realtimeUpdateInterval";
+    public static final String ACCESSIBLE = "accessible";
+    public static final String CACHE_AGE = "cacheAge";
 
     static JSONObject buildingToJsonObject(Building building) throws JSONException {
         JSONObject jo = new JSONObject();
