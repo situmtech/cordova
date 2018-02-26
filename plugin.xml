@@ -2,7 +2,7 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     id="situm-cordova-plugin-official-development"
-    version="1.2.0">
+    version="1.3.3">
     <name>Situm Cordova plugin (Development Official)</name>
     <description>This is the development branch. You should always use the stable one (situm-cordova-plugin-official).</description>
     <license>MIT</license>
