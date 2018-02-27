@@ -253,7 +253,7 @@ IOS: Services, Communication, Location, Directions and Navigation modules
           {
               "buildingIdentifier": 1051,
               "interval": 1000,
-              "indoorProvider": "SUPPORT",
+              "indoorProvider": "INPHONE",
               "useBle": true,
               "useWifi": true,
               "motionMode": "BY_FOOT",
