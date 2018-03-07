@@ -14,6 +14,7 @@ import es.situm.sdk.directions.DirectionsRequest;
 import es.situm.sdk.error.Error;
 import es.situm.sdk.location.LocationListener;
 import es.situm.sdk.location.LocationRequest;
+import es.situm.sdk.model.location.Angle;
 import es.situm.sdk.location.LocationRequest.Builder;
 import es.situm.sdk.location.LocationRequest.IndoorProvider;
 import es.situm.sdk.location.LocationRequest.MotionMode;
@@ -31,6 +32,9 @@ import es.situm.sdk.model.location.CartesianCoordinate;
 import es.situm.sdk.model.location.Location;
 import es.situm.sdk.utils.Handler;
 import es.situm.sdk.v1.SitumEvent;
+import es.situm.sdk.navigation.NavigationRequest;
+import es.situm.sdk.navigation.NavigationListener;
+import es.situm.sdk.model.navigation.NavigationProgress;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -54,9 +58,14 @@ public class PluginHelper {
 
     private static LocationListener locationListener;
     private static LocationRequest locationRequest;
+    private static NavigationListener navigationListener;
+    private static NavigationRequest navigationRequest;
 
     public static final float MIN_SNR = 10;
     public static final float MAX_SNR = 40;
+
+    private static Route computedRoute;
+    private static Location computedLocation;
 
     public static void fetchBuildings(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
             final CallbackContext callbackContext) {
@@ -538,6 +547,7 @@ public class PluginHelper {
                 locationListener = new LocationListener() {
                     public void onLocationChanged(Location location) {
                         try {
+                            PluginHelper.computedLocation = location; // This is for testing purposes
                             Log.i(PluginHelper.TAG, "onLocationChanged() called with: location = [" + location + "]");
                             CartesianCoordinate cartesianCoordinate = location.getCartesianCoordinate();
                             String locationMessage = "building: " + location.getBuildingIdentifier() + "\nfloor: "
@@ -633,6 +643,125 @@ public class PluginHelper {
         callbackContext.sendPluginResult(new PluginResult(Status.OK, "Cache invalidated"));
     }
 
+    public static void requestNavigationUpdates(CordovaInterface cordova,
+     CordovaWebView webView, 
+     JSONArray args, 
+     final CallbackContext callbackContext) {
+            // 1) Parse and check arguments
+
+            if (PluginHelper.computedRoute == null) {
+                Log.d(TAG, "Situm >> There is not an stored route so you are not allowed to navigate");
+                callbackContext.sendPluginResult(new PluginResult(Status.ERROR, "Compute a valid route with requestDirections before trying to navigate within a route"));
+                return;
+            }
+            // try??
+            Route route = PluginHelper.computedRoute; // args.getJSONObject(0); // Retrieve route from arguments, we do this since Route object has internal properties that we do not want to expose
+            // 2) Build Navigation Arguments
+            // 2.1) Build Navigation Request
+            Log.d(TAG,"requestNavigationUpdates executed: passed route: " +  route);
+            NavigationRequest.Builder builder = new NavigationRequest.Builder().route(route);
+
+            try {
+                JSONObject navigationJSONOptions = args.getJSONObject(0); // Route should be the first parameter
+
+                if (navigationJSONOptions.has(LocationWrapper.DISTANCE_TO_IGNORE_FIRST_INDICATION)) {
+                    Double distanceToIgnoreFirstIndication = navigationJSONOptions.getDouble(LocationWrapper.DISTANCE_TO_IGNORE_FIRST_INDICATION);
+                    builder.distanceToIgnoreFirstIndication(distanceToIgnoreFirstIndication);
+                }
+
+                if (navigationJSONOptions.has(LocationWrapper.OUTSIDE_ROUTE_THRESHOLD)) {
+                    Double outsideRouteThreshold = navigationJSONOptions.getDouble(LocationWrapper.OUTSIDE_ROUTE_THRESHOLD);
+                    builder.outsideRouteThreshold(outsideRouteThreshold);
+                }
+
+                if (navigationJSONOptions.has(LocationWrapper.DISTANCE_TO_GOAL_THRESHOLD)) {
+                    Double distanceToGoalThreshold = navigationJSONOptions.getDouble(LocationWrapper.DISTANCE_TO_GOAL_THRESHOLD);
+                    builder.distanceToGoalThreshold(distanceToGoalThreshold);
+                }
+
+            } catch (Exception e) {
+                //TODO: handle exception
+                Log.d(TAG, "Situm >> Unable to retrieve navigation options. Applying default ones");
+            }
+
+            navigationRequest = builder.build();
+
+            // 2.2) Build Navigation Callback
+            navigationListener = new NavigationListener() {
+                public void onProgress(NavigationProgress progress) {
+                    Log.d(TAG, "On progress received: " + progress);
+                    try {
+                        JSONObject jsonProgress = LocationWrapper.navigationProgressToJsonObject(progress);
+                        PluginResult result = new PluginResult(Status.OK, jsonProgress ); // TODO: Change this to return an object with valid information
+                        result.setKeepCallback(true);
+                        callbackContext.sendPluginResult(result);        
+    
+                    } catch (Exception e) {
+                        //TODO: handle exception
+                        Log.d(TAG, "On Error parsing progress: " + progress);
+                        PluginResult result = new PluginResult(Status.ERROR, e.getMessage());
+                        result.setKeepCallback(true);
+                        callbackContext.sendPluginResult(result);
+                    }
+                };
+
+                public void onDestinationReached() {
+                    Log.d(TAG, "On destination reached: ");
+                    PluginResult result = new PluginResult(Status.OK, "Destination reached");
+                    result.setKeepCallback(true);
+                    callbackContext.sendPluginResult(result);        
+                };
+
+                public void onUserOutsideRoute() {
+                    Log.d(TAG, "On user outside route: " );
+                    PluginResult result = new PluginResult(Status.OK, "User outside route");
+                    result.setKeepCallback(true);
+                    callbackContext.sendPluginResult(result);        
+                }
+            };
+            
+            // 3)  Connect interfaces and connect callback back to js
+            SitumSdk.navigationManager().requestNavigationUpdates(navigationRequest, navigationListener); // Be carefull with exceptions
+
+            PluginResult result = new PluginResult(Status.OK, "Requested navigation successfully"); // TODO: Change this to return an object with valid information
+            result.setKeepCallback(true);
+            callbackContext.sendPluginResult(result);
+
+    }
+
+    // Initialize Navigation Component 
+
+    public static void updateNavigationWithLocation(CordovaInterface cordova,
+    CordovaWebView webView, 
+    JSONArray args, 
+    final CallbackContext callbackContext) {
+        try {
+                // 1) Check for location arguments
+                JSONObject jsonLocation = args.getJSONObject(0); // What if json is not specified?
+
+                // 2) Create a Location Object from argument
+                Location actualLocation = LocationWrapper.jsonLocationObjectToLocation(jsonLocation); // Location Objet from JSON
+                // Location actualLocation = PluginHelper.computedLocation;
+                Log.i(TAG, "UpdateNavigation with Location: " + actualLocation);
+
+                // 3) Connect interfaces
+                SitumSdk.navigationManager().updateWithLocation(actualLocation);
+            } catch (Exception e) {
+                e.printStackTrace();
+                callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
+            }
+        
+    }
+
+    public static void removeNavigationUpdates(CordovaInterface cordova,
+    CordovaWebView webView, 
+    JSONArray args, 
+    final CallbackContext callbackContext) {
+        // 
+        Log.i(TAG, "Remove navigation updates");
+        SitumSdk.navigationManager().removeUpdates();
+    }
+
     public static void requestDirections(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
             final CallbackContext callbackContext) {
         try {
@@ -642,21 +771,28 @@ public class PluginHelper {
             Point from = LocationWrapper.pointJsonObjectToPoint(jsonoFrom, jsonoBuilding);
             Point to = LocationWrapper.pointJsonObjectToPoint(jsonoTo, jsonoBuilding);
             Boolean accessibleRoute = false;
+            double startingAngle = 0.0;
             if (args.length() > 2) {
                 JSONObject options = args.getJSONObject(3);
+                Log.i(TAG, "request directions options" + options);
 
                 if (options.has(LocationWrapper.ACCESSIBLE)) {
                     accessibleRoute = options.getBoolean(LocationWrapper.ACCESSIBLE);
                 }
+                if (options.has(LocationWrapper.STARTING_ANGLE)) {
+                    startingAngle = options.getDouble(LocationWrapper.STARTING_ANGLE);
+                }
             }
-            Log.i(TAG, "Specifying an accessible route:" + accessibleRoute );
-            DirectionsRequest directionRequest = new DirectionsRequest.Builder().from(from, null).to(to).isAccessible(accessibleRoute).build();
+            DirectionsRequest directionRequest = new DirectionsRequest.Builder().from(from, Angle.fromDegrees(startingAngle)).to(to).isAccessible(accessibleRoute).build();
             SitumSdk.directionsManager().requestDirections(directionRequest, new Handler<Route>() {
                 @Override
                 public void onSuccess(Route route) {
+                    
+                    // TODO: Remove this line before going to public (Just for development purposes)
+                    PluginHelper.computedRoute = route;
                     try {
                         JSONObject jsonoRoute = LocationWrapper.routeToJsonObject(route);
-                        Log.i(TAG, "onSuccess: Route calculated successfully");
+                        Log.i(TAG, "onSuccess: Route calculated successfully" + route);
                         callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonoRoute));
                     } catch (JSONException e) {
                         callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
