@@ -32,9 +32,12 @@ import es.situm.sdk.model.location.CartesianCoordinate;
 import es.situm.sdk.model.location.Coordinate;
 import es.situm.sdk.model.location.Dimensions;
 import es.situm.sdk.model.location.Location;
+import es.situm.sdk.model.location.Location.Quality;
 import es.situm.sdk.model.navigation.NavigationProgress;
 import es.situm.sdk.v1.SitumConversionArea;
 import es.situm.sdk.v1.SitumEvent;
+import jdk.nashorn.api.scripting.JSObject;
+import jdk.nashorn.internal.ir.ReturnNode;
 
 class LocationWrapper {
 
@@ -166,6 +169,11 @@ class LocationWrapper {
     public static final String ACCESSIBLE = "accessible";
     public static final String CACHE_AGE = "cacheAge";
 
+    public static final String DISTANCE_TO_IGNORE_FIRST_INDICATION = "distanceToIgnoreFirstIndication";
+    public static final String OUTSIDE_ROUTE_THRESHOLD = "outsideRouteThreshold";
+    public static final String DISTANCE_TO_GOAL_THRESHOLD = "distanceToGoalThreshold";
+    public static final String STARTING_ANGLE = "startingAngle";
+    
     static JSONObject buildingToJsonObject(Building building) throws JSONException {
         JSONObject jo = new JSONObject();
         jo.put(ADDRESS, building.getAddress());
@@ -320,12 +328,54 @@ class LocationWrapper {
         return jo;
     }
 
-    /*static Location locationJsonObjectToLocation(JSONObject jo) throws JSONException {
-        Location location = null;
-        location = new Location.Builder(jo.getLong(TIMESTAMP), jo.getString(PROVIDER),
-                pointJsonObjectToPoint(jo.getJSONObject(POSITION)), Float.valueOf(jo.getString(ACCURACY))).build();
-        return location;
-    }*/
+    static Point jsonPointToPoint(JSONObject jo) throws JSONException {
+        Point point = null;
+
+        Coordinate coordinate = coordinateJsonObjectToCoordinate(jo.getJSONObject(COORDINATE));
+        String buildingIdentifier = jo.getString(BUILDING_IDENTIFIER);
+
+        if (jo.getBoolean(IS_INDOOR) == true) {
+            point = new Point(buildingIdentifier, jo.getString(FLOOR_IDENTIFIER), coordinate, cartesianCoordinateJsonObjectToCartesianCoordinate(jo.getJSONObject(CARTESIAN_COORDINATE)));
+        } else {
+            point = new Point(buildingIdentifier, coordinate);
+        }
+
+        return point;
+    }
+
+    static Location jsonLocationObjectToLocation(JSONObject jo) throws JSONException {        
+        Location.Builder builder = new Location.Builder(
+            jo.getLong(TIMESTAMP),
+            jo.getString(PROVIDER),
+            jsonPointToPoint(jo.getJSONObject(POSITION)),
+            (float)jo.getDouble(ACCURACY)
+        );
+        builder.deviceId(jo.getString(DEVICE_ID));
+
+        // Check if is indoor (insert cartesian bearing and other properties)
+        Angle bearingAngle = angleJSONObjectToAngle(jo.getJSONObject(BEARING));
+        Quality bearingQuality = qualityJSONObjectToQuality(jo.getString(BEARING_QUALITY));
+
+        if (jo.getBoolean(IS_INDOOR) == true) {
+            // Insert cartesian properties
+            builder.cartesianBearing(angleJSONObjectToAngle(jo.getJSONObject(CARTESIAN_BEARING)), bearingAngle, bearingQuality);
+        } else {
+            builder.bearing(bearingAngle);
+        }
+
+        builder.quality(qualityJSONObjectToQuality(jo.getString(QUALITY)));
+
+        return builder.build(); // Complete this
+    }
+
+    static Quality qualityJSONObjectToQuality(String quality) throws JSONException {
+        return (quality.equals("HIGH"))? Quality.HIGH:Quality.LOW;
+    }
+
+
+    static Angle angleJSONObjectToAngle(JSONObject jo) throws JSONException {
+        return Angle.fromDegrees(jo.getDouble(DEGREES));
+    }
 
     // Coordinate
 
@@ -460,6 +510,11 @@ class LocationWrapper {
         jo.put(STEPS, stepsJsonArray);
         return jo;
     }
+
+    /*static Route jsonRouteToRoute(JSONObject jo) throws JSONException {
+        // Create a static route
+
+    }*/
 
     //RouteStep
 
