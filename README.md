@@ -22,6 +22,9 @@ IOS: Services, Communication, Location, Directions and Navigation modules
     + [requestDirections](#requestdirections)
     + [startPositioning](#startpositioning)
     + [stopPositioning](#stoppositioning)
+    + [requestNavigationUpdates](#requestnavigationupdates)
+    + [updateNavigationWithLocation](#updatenavigationwithlocation)
+    + [removeNavigationUpdates](#removenavigationupdates)
 
 ## Android
 
@@ -229,6 +232,7 @@ IOS: Services, Communication, Location, Directions and Navigation modules
       }
       var directionsOptionsMap = new Object();
       directionsOptionsMap["accessible"] = true/false
+      directionsOptionsMap["startingAngle"] = position.bearing.degrees; // Optional: only if you want to go from a location. Value in degrees
 
       cordova.plugins.Situm.requestDirections([building, from, to, directionsOptionsMap], (res) => {
         // res -> route object, we can draw in map with our map provider
@@ -308,3 +312,55 @@ A description of each parameter can be found below:
       // stop positioning
     });
 ```
+
+
+### Navigation
+
+If you want to provide indications in real time to a user you should use the Navigation APIs. Navigation APIs require a route and location updates to compute the progress of the completed route, if a user has reached the destination or if a user is outside the route and it must be recomputed.
+
+
+### requestNavigationUpdates
+
+Necessary step to request progress. Alone this method does not provide progress object. You must feed navigation API with location, as indicated on #updateNavigationWithLocation section.
+
+```javascript
+    var navigationOptions = new Object();
+    // navigationOptions["distanceToIgnoreFirstIndication"] = 0.3; // (Optional) meters;
+    // navigationOptions["outsideRouteThreshold"] = 10; // (Optional) meters;
+    // navigationOptions["distanceToGoalThreshold"] = 7; // (Optional) meters;
+    cordova.plugins.Situm.requestNavigationUpdates(
+      [navigationOptions], 
+      (res: any) => {
+        // Progress and other navigation status messages can be processed here
+        
+      }
+    , (error: any) => {
+      console.log(error)
+    });
+    );
+```
+
+
+### updateNavigationWithLocation
+
+```javascript
+    cordova.plugins.Situm.updateNavigationWithLocation([position], function(result) {
+                  console.log(result);
+                } , function (error) {
+                  console.log(error);
+                });
+```
+Usually, position variable should be one of the locations provided by the system on the #startpositioning function.
+
+### removeNavigationUpdates
+
+When you are no longer interested on Navigation Updates you should call this method to remove internal allocated resources.
+
+```javascript
+    cordova.plugins.Situm.removeNavigationUpdates();
+```
+
+### Run tests
+
+In order to create and run tests the following steps should be reproduced (this is a summary of a more in detail instructions on how to do this https://kerrishotts.github.io/pgday/workshops/2017/campp/testing.html).
+
