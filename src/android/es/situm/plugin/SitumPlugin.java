@@ -64,12 +64,15 @@ public class SitumPlugin extends CordovaPlugin {
       PluginHelper.invalidateCache(callbackContext);
     } else if (action.equalsIgnoreCase("requestDirections")) {
       PluginHelper.requestDirections(cordova, webView, args, callbackContext);
+    } else  if(action.equalsIgnoreCase("requestNavigationUpdates")) {
+      PluginHelper.requestNavigationUpdates(cordova, webView, args, callbackContext);
+    } else  if(action.equalsIgnoreCase("updateNavigationWithLocation")) {
+      PluginHelper.updateNavigationWithLocation(cordova, webView, args, callbackContext);
+    } else  if(action.equalsIgnoreCase("removeNavigationUpdates")) {
+      PluginHelper.removeNavigationUpdates(cordova, webView, args, callbackContext);
     } else {
       PluginHelper.returnDefaultResponse(callbackContext);
     }
-    //else if(action.equalsIgnoreCase("requestDirections")) {
-    //PluginHelper.requestDirections(cordova, webView, args, callbackContext);
-    //}
     return true;
   }
 
