@@ -693,24 +693,29 @@ public class PluginHelper {
                     try {
                         JSONObject jsonProgress = LocationWrapper.navigationProgressToJsonObject(progress);
                         PluginResult result = new PluginResult(Status.OK, jsonProgress ); // TODO: Change this to return an object with valid information
+                        result.setKeepCallback(true);
                         callbackContext.sendPluginResult(result);        
     
                     } catch (Exception e) {
                         //TODO: handle exception
                         Log.d(TAG, "On Error parsing progress: " + progress);
-                        callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
+                        PluginResult result = new PluginResult(Status.ERROR, e.getMessage());
+                        result.setKeepCallback(true);
+                        callbackContext.sendPluginResult(result);
                     }
                 };
 
                 public void onDestinationReached() {
                     Log.d(TAG, "On destination reached: ");
                     PluginResult result = new PluginResult(Status.OK, "Destination reached");
+                    result.setKeepCallback(true);
                     callbackContext.sendPluginResult(result);        
                 };
 
                 public void onUserOutsideRoute() {
                     Log.d(TAG, "On user outside route: " );
                     PluginResult result = new PluginResult(Status.OK, "User outside route");
+                    result.setKeepCallback(true);
                     callbackContext.sendPluginResult(result);        
                 }
             };
@@ -719,6 +724,7 @@ public class PluginHelper {
             SitumSdk.navigationManager().requestNavigationUpdates(navigationRequest, navigationListener); // Be carefull with exceptions
 
             PluginResult result = new PluginResult(Status.OK, "Requested navigation successfully"); // TODO: Change this to return an object with valid information
+            result.setKeepCallback(true);
             callbackContext.sendPluginResult(result);
 
     }

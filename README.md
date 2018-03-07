@@ -324,15 +324,28 @@ If you want to provide indications in real time to a user you should use the Nav
 Necessary step to request progress. Alone this method does not provide progress object. You must feed navigation API with location, as indicated on #updateNavigationWithLocation section.
 
 ```javascript
-    cordova.plugins.Situm.requestNavigationUpdates();
+    var navigationOptions = new Object();
+    // navigationOptions["distanceToIgnoreFirstIndication"] = 0.3; // (Optional) meters;
+    // navigationOptions["outsideRouteThreshold"] = 10; // (Optional) meters;
+    // navigationOptions["distanceToGoalThreshold"] = 7; // (Optional) meters;
+    cordova.plugins.Situm.requestNavigationUpdates(
+      [navigationOptions], 
+      (res: any) => {
+        // Progress and other navigation status messages can be processed here
+        
+      }
+    , (error: any) => {
+      console.log(error)
+    });
+    );
 ```
 
 
 ### updateNavigationWithLocation
 
 ```javascript
-    cordova.plugins.Situm.updateNavigationWithLocation([position], function(error) {
-                  console.log(error);
+    cordova.plugins.Situm.updateNavigationWithLocation([position], function(result) {
+                  console.log(result);
                 } , function (error) {
                   console.log(error);
                 });
