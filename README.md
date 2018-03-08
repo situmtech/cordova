@@ -314,7 +314,7 @@ A description of each parameter can be found below:
 ```
 
 
-### Navigation
+Navigation
 
 If you want to provide indications in real time to a user you should use the Navigation APIs. Navigation APIs require a route and location updates to compute the progress of the completed route, if a user has reached the destination or if a user is outside the route and it must be recomputed.
 
@@ -341,7 +341,7 @@ Necessary step to request progress. Alone this method does not provide progress 
 ```
 
 
-### updateNavigationWithLocation
+### updateNavigationWithLocation
 
 ```javascript
     cordova.plugins.Situm.updateNavigationWithLocation([position], function(result) {
