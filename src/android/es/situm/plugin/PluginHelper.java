@@ -688,11 +688,15 @@ public class PluginHelper {
 
             // 2.2) Build Navigation Callback
             navigationListener = new NavigationListener()   {
-                public void onProgress(NavigationProgress progress) throws JSONException {
+                public void onProgress(NavigationProgress progress) {
                     Log.d(TAG, "On progress received: " + progress);
                     try {
                         JSONObject jsonProgress = LocationWrapper.navigationProgressToJsonObject(progress);
-                        jsonProgress.put("type", "progress");
+                        try {
+                            jsonProgress.put("type", "progress");
+                        } catch (JSONException e) {
+                            Log.e(TAG, "error inserting type in navigation progress");
+                        }
                         PluginResult result = new PluginResult(Status.OK, jsonProgress ); // TODO: Change this to return an object with valid information
                         result.setKeepCallback(true);
                         callbackContext.sendPluginResult(result);        
@@ -706,21 +710,29 @@ public class PluginHelper {
                     }
                 };
 
-                public void onDestinationReached() throws JSONException {
+                public void onDestinationReached() {
                     Log.d(TAG, "On destination reached: ");
                     JSONObject jsonResult = new JSONObject();
-                    jsonResult.put("type", "destinationReached");
-                    jsonResult.put("message", "Destination reached");
+                    try {
+                        jsonResult.put("type", "destinationReached");
+                        jsonResult.put("message", "Destination reached");
+                        } catch (JSONException e) {
+                        Log.e(TAG, "error inserting type in destination reached");
+                    }
                     PluginResult result = new PluginResult(Status.OK,jsonResult);
                     result.setKeepCallback(true);
                     callbackContext.sendPluginResult(result);        
                 };
 
-                public void onUserOutsideRoute() throws JSONException {
+                public void onUserOutsideRoute() {
                     Log.d(TAG, "On user outside route: " );
                     JSONObject jsonResult = new JSONObject();
-                    jsonResult.put("type", "userOutsideRoute");
-                    jsonResult.put("message", "User outside route");
+                    try {
+                        jsonResult.put("type", "userOutsideRoute");
+                        jsonResult.put("message", "User outside route");
+                    } catch (JSONException e) {
+                        Log.e(TAG, "error inserting type in user outside route");
+                    }
                     PluginResult result = new PluginResult(Status.OK,jsonResult);
                     result.setKeepCallback(true);
                     callbackContext.sendPluginResult(result);        
