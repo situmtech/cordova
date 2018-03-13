@@ -646,7 +646,7 @@ public class PluginHelper {
     public static void requestNavigationUpdates(CordovaInterface cordova,
      CordovaWebView webView, 
      JSONArray args, 
-     final CallbackContext callbackContext) throws JSONException {
+     final CallbackContext callbackContext) {
             // 1) Parse and check arguments
 
             if (PluginHelper.computedRoute == null) {
@@ -687,8 +687,8 @@ public class PluginHelper {
             navigationRequest = builder.build();
 
             // 2.2) Build Navigation Callback
-            navigationListener = new NavigationListener() {
-                public void onProgress(NavigationProgress progress) {
+            navigationListener = new NavigationListener()   {
+                public void onProgress(NavigationProgress progress) throws JSONException {
                     Log.d(TAG, "On progress received: " + progress);
                     try {
                         JSONObject jsonProgress = LocationWrapper.navigationProgressToJsonObject(progress);
@@ -706,7 +706,7 @@ public class PluginHelper {
                     }
                 };
 
-                public void onDestinationReached() {
+                public void onDestinationReached() throws JSONException {
                     Log.d(TAG, "On destination reached: ");
                     JSONObject jsonResult = new JSONObject();
                     jsonResult.put("type", "destinationReached");
@@ -716,7 +716,7 @@ public class PluginHelper {
                     callbackContext.sendPluginResult(result);        
                 };
 
-                public void onUserOutsideRoute() {
+                public void onUserOutsideRoute() throws JSONException {
                     Log.d(TAG, "On user outside route: " );
                     JSONObject jsonResult = new JSONObject();
                     jsonResult.put("type", "userOutsideRoute");
