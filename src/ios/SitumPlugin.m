@@ -429,8 +429,12 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 {
     navigationProgressCallbackId = command.callbackId;
     
-    // NSDictionary* route = (NSDictionary*)[command.arguments objectAtIndex:0]; // ??
-    
+    // Insert here configuration options
+    /*if (command.arguments.length > 0) {
+        // Processing configuration parameters
+        NSDictionary *options = (NSDictionary*)[command.arguments objectAtIndex:0];
+ 
+    }*/
     // SITRoute *routeObj = (SITRoute*)[routesStored objectForKey:[route valueForKey:@"timeStamp"]];
     SITRoute *routeObj = self.computedRoute;
     if (routeObj) {
@@ -538,9 +542,8 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 - (void)navigationManager:(id<SITNavigationInterface>)navigationManager
         didUpdateProgress:(SITNavigationProgress *)progress
                   onRoute:(SITRoute *)route {
-    NSMutableDictionary *navigationJO = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *navigationJO = [NSMutableDictionary dictionaryWithDictionary:[SitumLocationWrapper.shared navigationProgressToJsonObject:progress]];
     [navigationJO setValue:@"progress" forKey:@"type"];
-    [navigationJO setValue:[SitumLocationWrapper.shared navigationProgressToJsonObject:progress] forKey:@"value"];
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:navigationJO.copy];
     pluginResult.keepCallback = [NSNumber numberWithBool:true];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:navigationProgressCallbackId];
@@ -550,6 +553,8 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 destinationReachedOnRoute:(SITRoute *)route {
     NSMutableDictionary *navigationJO = [[NSMutableDictionary alloc] init];
     [navigationJO setValue:@"destinationReached" forKey:@"type"];
+    [navigationJO setValue:@"User outside route" forKey:@"message"];
+    
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:navigationJO.copy];
     pluginResult.keepCallback = [NSNumber numberWithBool:true];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:navigationProgressCallbackId];
@@ -560,6 +565,8 @@ destinationReachedOnRoute:(SITRoute *)route {
          userOutsideRoute:(SITRoute *)route {
     NSMutableDictionary *navigationJO = [[NSMutableDictionary alloc] init];
     [navigationJO setValue:@"userOutsideRoute" forKey:@"type"];
+    [navigationJO setValue:@"User outside route" forKey:@"message"];
+
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:navigationJO.copy];
     pluginResult.keepCallback = [NSNumber numberWithBool:true];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:navigationProgressCallbackId];
