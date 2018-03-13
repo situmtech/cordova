@@ -579,6 +579,7 @@ class LocationWrapper {
         jo.put(ROUTE_STEP, routeStepToJsonObject(navigationProgress.getRouteStep()));
         jo.put(TIME_TO_END_STEP, navigationProgress.getTimeToEndStep());
         jo.put(TIME_TO_GOAL, navigationProgress.getTimeToGoal());
+        jo.put("currentStepIndex", navigationProgress.getRouteStep().getId());
         return jo;
     }
 
