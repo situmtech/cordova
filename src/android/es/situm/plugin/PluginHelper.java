@@ -692,6 +692,7 @@ public class PluginHelper {
                     Log.d(TAG, "On progress received: " + progress);
                     try {
                         JSONObject jsonProgress = LocationWrapper.navigationProgressToJsonObject(progress);
+                        jsonProgress.put("type", "progress");
                         PluginResult result = new PluginResult(Status.OK, jsonProgress ); // TODO: Change this to return an object with valid information
                         result.setKeepCallback(true);
                         callbackContext.sendPluginResult(result);        
@@ -707,14 +708,20 @@ public class PluginHelper {
 
                 public void onDestinationReached() {
                     Log.d(TAG, "On destination reached: ");
-                    PluginResult result = new PluginResult(Status.OK, "Destination reached");
+                    JSONObject jsonResult = new JSONObject();
+                    jsonResult.put("type", "destinationReached");
+                    jsonResult.put("message", "Destination reached");
+                    PluginResult result = new PluginResult(Status.OK,jsonResult);
                     result.setKeepCallback(true);
                     callbackContext.sendPluginResult(result);        
                 };
 
                 public void onUserOutsideRoute() {
                     Log.d(TAG, "On user outside route: " );
-                    PluginResult result = new PluginResult(Status.OK, "User outside route");
+                    JSONObject jsonResult = new JSONObject();
+                    jsonResult.put("type", "userOutsideRoute");
+                    jsonResult.put("message", "User outside route");
+                    PluginResult result = new PluginResult(Status.OK,jsonResult);
                     result.setKeepCallback(true);
                     callbackContext.sendPluginResult(result);        
                 }
