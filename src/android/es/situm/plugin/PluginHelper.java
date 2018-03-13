@@ -646,7 +646,7 @@ public class PluginHelper {
     public static void requestNavigationUpdates(CordovaInterface cordova,
      CordovaWebView webView, 
      JSONArray args, 
-     final CallbackContext callbackContext) {
+     final CallbackContext callbackContext) throws JSONException {
             // 1) Parse and check arguments
 
             if (PluginHelper.computedRoute == null) {
