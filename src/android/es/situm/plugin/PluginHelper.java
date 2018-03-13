@@ -745,7 +745,7 @@ public class PluginHelper {
                 Log.i(TAG, "UpdateNavigation with Location: " + actualLocation);
 
                 // 3) Connect interfaces
-                SitumSdk.navigationManager().updateWithLocation(actualLocation);
+                SitumSdk.navigationManager().updateWithLocation(actualLocation); // TODO: Return a message (PluginResult)
             } catch (Exception e) {
                 e.printStackTrace();
                 callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
@@ -759,7 +759,7 @@ public class PluginHelper {
     final CallbackContext callbackContext) {
         // 
         Log.i(TAG, "Remove navigation updates");
-        SitumSdk.navigationManager().removeUpdates();
+        SitumSdk.navigationManager().removeUpdates(); // TODO: Incorporate sending a result to the exterior
     }
 
     public static void requestDirections(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
