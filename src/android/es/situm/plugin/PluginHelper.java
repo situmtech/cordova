@@ -688,11 +688,16 @@ public class PluginHelper {
             navigationRequest = builder.build();
 
             // 2.2) Build Navigation Callback
-            navigationListener = new NavigationListener() {
+            navigationListener = new NavigationListener()   {
                 public void onProgress(NavigationProgress progress) {
                     Log.d(TAG, "On progress received: " + progress);
                     try {
                         JSONObject jsonProgress = LocationWrapper.navigationProgressToJsonObject(progress);
+                        try {
+                            jsonProgress.put("type", "progress");
+                        } catch (JSONException e) {
+                            Log.e(TAG, "error inserting type in navigation progress");
+                        }
                         PluginResult result = new PluginResult(Status.OK, jsonProgress ); // TODO: Change this to return an object with valid information
                         result.setKeepCallback(true);
                         callbackContext.sendPluginResult(result);        
@@ -708,14 +713,28 @@ public class PluginHelper {
 
                 public void onDestinationReached() {
                     Log.d(TAG, "On destination reached: ");
-                    PluginResult result = new PluginResult(Status.OK, "Destination reached");
+                    JSONObject jsonResult = new JSONObject();
+                    try {
+                        jsonResult.put("type", "destinationReached");
+                        jsonResult.put("message", "Destination reached");
+                        } catch (JSONException e) {
+                        Log.e(TAG, "error inserting type in destination reached");
+                    }
+                    PluginResult result = new PluginResult(Status.OK,jsonResult);
                     result.setKeepCallback(true);
                     callbackContext.sendPluginResult(result);        
                 };
 
                 public void onUserOutsideRoute() {
                     Log.d(TAG, "On user outside route: " );
-                    PluginResult result = new PluginResult(Status.OK, "User outside route");
+                    JSONObject jsonResult = new JSONObject();
+                    try {
+                        jsonResult.put("type", "userOutsideRoute");
+                        jsonResult.put("message", "User outside route");
+                    } catch (JSONException e) {
+                        Log.e(TAG, "error inserting type in user outside route");
+                    }
+                    PluginResult result = new PluginResult(Status.OK,jsonResult);
                     result.setKeepCallback(true);
                     callbackContext.sendPluginResult(result);        
                 }
@@ -746,7 +765,7 @@ public class PluginHelper {
                 Log.i(TAG, "UpdateNavigation with Location: " + actualLocation);
 
                 // 3) Connect interfaces
-                SitumSdk.navigationManager().updateWithLocation(actualLocation);
+                SitumSdk.navigationManager().updateWithLocation(actualLocation); // TODO: Return a message (PluginResult)
             } catch (Exception e) {
                 e.printStackTrace();
                 callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
@@ -760,7 +779,7 @@ public class PluginHelper {
     final CallbackContext callbackContext) {
         // 
         Log.i(TAG, "Remove navigation updates");
-        SitumSdk.navigationManager().removeUpdates();
+        SitumSdk.navigationManager().removeUpdates(); // TODO: Incorporate sending a result to the exterior
     }
 
     public static void requestDirections(final CordovaInterface cordova, CordovaWebView webView, JSONArray args,
