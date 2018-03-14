@@ -1,5 +1,6 @@
 package es.situm.plugin;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
@@ -762,7 +763,7 @@ public class PluginHelper {
         SitumSdk.navigationManager().removeUpdates();
     }
 
-    public static void requestDirections(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+    public static void requestDirections(final CordovaInterface cordova, CordovaWebView webView, JSONArray args,
             final CallbackContext callbackContext) {
         try {
             JSONObject jsonoBuilding = args.getJSONObject(0);
@@ -791,7 +792,7 @@ public class PluginHelper {
                     // TODO: Remove this line before going to public (Just for development purposes)
                     PluginHelper.computedRoute = route;
                     try {
-                        JSONObject jsonoRoute = LocationWrapper.routeToJsonObject(route);
+                        JSONObject jsonoRoute = LocationWrapper.routeToJsonObject(route, cordova.getActivity());
                         Log.i(TAG, "onSuccess: Route calculated successfully" + route);
                         callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonoRoute));
                     } catch (JSONException e) {
