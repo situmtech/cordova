@@ -136,6 +136,7 @@ class LocationWrapper {
     public static final String ROUTE_STEP = "routeStep";
     public static final String TIME_TO_END_STEP = "timeToEndStep";
     public static final String TIME_TO_GOAL = "timeToGoal";
+    public static final String NEXT_LEVEL = "nextLevel";
 
     public static final String CONVERSION_AREA = "conversionArea";
     public static final String IDENTIFIER = "identifier";
@@ -551,6 +552,7 @@ class LocationWrapper {
         jo.put(STEP_IDX_DESTINATION, indication.getStepIdxDestination());
         jo.put(STEP_IDX_ORIGIN, indication.getStepIdxOrigin());
         jo.put(NEEDED_LEVEL_CHANGE, indication.isNeededLevelChange());
+        jo.put(NEXT_LEVEL, indication.getNextLevel());
         return jo;
     }
 
@@ -562,6 +564,7 @@ class LocationWrapper {
                 .setOrientation(jo.getDouble(ORIENTATION))
                 .setOrientationType(Indication.Orientation.valueOf(jo.getString(ORIENTATION_TYPE)))
                 .setStepIdxDestination(jo.getInt(STEP_IDX_DESTINATION)).setStepIdxOrigin(jo.getInt(STEP_IDX_ORIGIN))
+                .setNextLevel(jo.getInt(NEXT_LEVEL))
                 .build();
         return indication;
     }
@@ -579,6 +582,7 @@ class LocationWrapper {
         jo.put(ROUTE_STEP, routeStepToJsonObject(navigationProgress.getRouteStep()));
         jo.put(TIME_TO_END_STEP, navigationProgress.getTimeToEndStep());
         jo.put(TIME_TO_GOAL, navigationProgress.getTimeToGoal());
+        jo.put("currentStepIndex", navigationProgress.getRouteStep().getId());
         return jo;
     }
 

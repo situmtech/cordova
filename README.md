@@ -340,6 +340,59 @@ Necessary step to request progress. Alone this method does not provide progress 
     );
 ```
 
+Types of results in success cases:
+
+1) User has arrived destination (an object of type "destinationReached" is returned)
+
+{  
+   "type":"destinationReached",
+   "message":"Destination reached"
+}
+
+2) User is outside the route (an object of type ")
+
+{  
+   "type":"userOutsideRoute",
+   "message":"User outside route"
+}
+
+3) User is inside the route but has not arrived to destination (an object of type "progress" is returned).
+
+{  
+   "closestPointInRoute":{  
+      "isIndoor":true,
+      "buildingIdentifier":"3087",
+      "coordinate":{  
+         "longitude":-8.563636606983739,
+         "latitude":42.87227301416988
+      },
+      "floorIdentifier":"4961",
+      "cartesianCoordinate":{  
+         "x":67.91600036621094,
+         "y":24.05699920654297
+      },
+      "isOutdoor":false
+   },
+   "distanceToEndStep":1.038121223449707, // meters
+   "distanceToGoal":62.55179214477539, // meters
+   "currentStepIndex":0,
+   "timeToEndStep":1.038121223449707, // seconds
+   "currentIndication":{  
+      "distanceToNextLevel":0, // if this value is greater than 0 it represent the number of floor to go up. if this value is less than 0 it represents the number of floors to go down. If equal to 0 it means there is no need to change floor.
+      "distance":1.038121223449707, // meters
+      "stepIdxOrigin":0, // index of the route step (on of the steps on Route object provided by requestDirections)
+      "stepIdxDestination":0,
+      "orientationType":"Left",
+      "indicationType":"Turn",
+      "humanReadableMessage":"Turn left and go ahead for 2 meters", // Only iOS, Android version coming
+      "orientation":1.8215326070785522, // radians
+      "neededLevelChange":false, // True if change floor is needed
+      "nextLevel":3 // Floor number. The floor level to which the user need to go. Only Android for now. iOS version coming
+   },
+   "type":"progress",
+   "timeToGoal":62.55179214477539
+}
+
 
 ### updateNavigationWithLocation
 
