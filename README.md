@@ -373,20 +373,21 @@ Types of results in success cases:
       },
       "isOutdoor":false
    },
-   "distanceToEndStep":1.038121223449707,
-   "distanceToGoal":62.55179214477539,
+   "distanceToEndStep":1.038121223449707, // meters
+   "distanceToGoal":62.55179214477539, // meters
    "currentStepIndex":0,
-   "timeToEndStep":1.038121223449707,
+   "timeToEndStep":1.038121223449707, // seconds
    "currentIndication":{  
-      "distanceToNextLevel":0,
-      "distance":1.038121223449707,
-      "stepIdxOrigin":0,
+      "distanceToNextLevel":0, // if this value is greater than 0 it represent the number of floor to go up. if this value is less than 0 it represents the number of floors to go down. If equal to 0 it means there is no need to change floor.
+      "distance":1.038121223449707, // meters
+      "stepIdxOrigin":0, // index of the route step (on of the steps on Route object provided by requestDirections)
       "stepIdxDestination":0,
       "orientationType":"Left",
       "indicationType":"Turn",
-      "humanReadableMessage":"Turn left and go ahead for 2 meters",
-      "orientation":1.8215326070785522,
-      "neededLevelChange":false
+      "humanReadableMessage":"Turn left and go ahead for 2 meters", // Only iOS, Android version coming
+      "orientation":1.8215326070785522, // radians
+      "neededLevelChange":false, // True if change floor is needed
+      "nextLevel":3 // Floor number. The floor level to which the user need to go. Only Android for now. iOS version coming
    },
    "type":"progress",
    "timeToGoal":62.55179214477539

@@ -553,7 +553,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 destinationReachedOnRoute:(SITRoute *)route {
     NSMutableDictionary *navigationJO = [[NSMutableDictionary alloc] init];
     [navigationJO setValue:@"destinationReached" forKey:@"type"];
-    [navigationJO setValue:@"User outside route" forKey:@"message"];
+    [navigationJO setValue:@"Destination reached" forKey:@"message"];
     
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:navigationJO.copy];
     pluginResult.keepCallback = [NSNumber numberWithBool:true];
