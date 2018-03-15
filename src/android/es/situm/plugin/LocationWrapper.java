@@ -132,7 +132,7 @@ class LocationWrapper {
     public static final String STEP_IDX_DESTINATION = "stepIdxDestination";
     public static final String STEP_IDX_ORIGIN = "stepIdxOrigin";
     public static final String NEEDED_LEVEL_CHANGE = "neededLevelChange";
-    public static final String TEXT = "humanReadableMessage";
+    public static final String HUMAN_READABLE_MESSAGE = "humanReadableMessage";
     public static final String ORIENTATION_TYPE = "orientationType";
     public static final String ORIENTATION = "orientation";
     public static final String ROUTE_STEP = "routeStep";
@@ -563,7 +563,7 @@ class LocationWrapper {
         jo.put(STEP_IDX_ORIGIN, indication.getStepIdxOrigin());
         jo.put(NEEDED_LEVEL_CHANGE, indication.isNeededLevelChange());
         if (context != null) {
-            jo.put(TEXT, indication.toText(context));
+            jo.put(HUMAN_READABLE_MESSAGE, indication.toText(context));
         }
         jo.put(NEXT_LEVEL, indication.getNextLevel());
         return jo;
