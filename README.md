@@ -344,20 +344,24 @@ Types of results in success cases:
 
 1) User has arrived destination (an object of type "destinationReached" is returned)
 
+```javascript
 {  
    "type":"destinationReached",
    "message":"Destination reached"
 }
+```
 
 2) User is outside the route (an object of type ")
-
+```javascript
 {  
    "type":"userOutsideRoute",
    "message":"User outside route"
 }
+```
 
 3) User is inside the route but has not arrived to destination (an object of type "progress" is returned).
 
+```javascript
 {  
    "closestPointInRoute":{  
       "isIndoor":true,
@@ -392,6 +396,7 @@ Types of results in success cases:
    "type":"progress",
    "timeToGoal":62.55179214477539
 }
+```
 
 
 ### updateNavigationWithLocation
