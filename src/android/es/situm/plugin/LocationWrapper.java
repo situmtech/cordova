@@ -1,5 +1,6 @@
 package es.situm.plugin;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Base64;
 
@@ -131,6 +132,7 @@ class LocationWrapper {
     public static final String STEP_IDX_DESTINATION = "stepIdxDestination";
     public static final String STEP_IDX_ORIGIN = "stepIdxOrigin";
     public static final String NEEDED_LEVEL_CHANGE = "neededLevelChange";
+    public static final String HUMAN_READABLE_MESSAGE = "humanReadableMessage";
     public static final String ORIENTATION_TYPE = "orientationType";
     public static final String ORIENTATION = "orientation";
     public static final String ROUTE_STEP = "routeStep";
@@ -477,6 +479,10 @@ class LocationWrapper {
     // Route
 
     static JSONObject routeToJsonObject(Route route) throws JSONException {
+        return routeToJsonObject(route, null);
+    }
+
+    static JSONObject routeToJsonObject(Route route, Context context) throws JSONException {
         JSONObject jo = new JSONObject();
         JSONArray edgesJsonArray = new JSONArray();
         for (RouteStep routeStep : route.getEdges()) {
@@ -488,7 +494,7 @@ class LocationWrapper {
         }
         JSONArray indicationsJsonArray = new JSONArray();
         for (Indication indication : route.getIndications()) {
-            indicationsJsonArray.put(indicationToJsonObject(indication));
+            indicationsJsonArray.put(indicationToJsonObject(indication, context));
         }
         JSONArray nodesJsonArray = new JSONArray();
         for (Point point : route.getNodes()) {
@@ -543,6 +549,10 @@ class LocationWrapper {
     // Indication
 
     static JSONObject indicationToJsonObject(Indication indication) throws JSONException {
+        return indicationToJsonObject(indication, null);
+    }
+
+    static JSONObject indicationToJsonObject(Indication indication, Context context) throws JSONException {
         JSONObject jo = new JSONObject();
         jo.put(DISTANCE, indication.getDistance());
         jo.put(DISTANCE_TO_NEXT_LEVEL, indication.getDistanceToNextLevel());
@@ -552,6 +562,9 @@ class LocationWrapper {
         jo.put(STEP_IDX_DESTINATION, indication.getStepIdxDestination());
         jo.put(STEP_IDX_ORIGIN, indication.getStepIdxOrigin());
         jo.put(NEEDED_LEVEL_CHANGE, indication.isNeededLevelChange());
+        if (context != null) {
+            jo.put(HUMAN_READABLE_MESSAGE, indication.toText(context));
+        }
         jo.put(NEXT_LEVEL, indication.getNextLevel());
         return jo;
     }
@@ -572,10 +585,14 @@ class LocationWrapper {
     // NavigationProgress
 
     static JSONObject navigationProgressToJsonObject(NavigationProgress navigationProgress) throws JSONException {
+        return navigationProgressToJsonObject(navigationProgress, null);
+    }
+
+    static JSONObject navigationProgressToJsonObject(NavigationProgress navigationProgress, Context context) throws JSONException {
         JSONObject jo = new JSONObject();
         jo.put(CLOSEST_POINT_IN_ROUTE, pointToJsonObject(navigationProgress.getClosestPointInRoute()));
-        jo.put(CURRENT_INDICATION, indicationToJsonObject(navigationProgress.getCurrentIndication()));
-        jo.put(NEXT_INDICATION, indicationToJsonObject(navigationProgress.getNextIndication()));
+        jo.put(CURRENT_INDICATION, indicationToJsonObject(navigationProgress.getCurrentIndication(), context));
+        jo.put(NEXT_INDICATION, indicationToJsonObject(navigationProgress.getNextIndication(), context));
         jo.put(DISTANCE_TO_CLOSEST_POINT_IN_ROUTE, navigationProgress.getDistanceToClosestPointInRoute());
         jo.put(DISTANCE_TO_END_STEP, navigationProgress.getDistanceToEndStep());
         jo.put(DISTANCE_TO_GOAL, navigationProgress.getDistanceToGoal());
