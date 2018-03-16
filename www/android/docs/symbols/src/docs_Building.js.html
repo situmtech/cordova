@@ -1,0 +1,42 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="COMM">/** @namespace
+<span class='line'>  2</span>  * &lt;b>Building&lt;/b>&lt;br />
+<span class='line'>  3</span>  * Building object definition
+<span class='line'>  4</span>  * @property {string} buildingIdentifier - Identifier of building
+<span class='line'>  5</span>  * @property {string} name - Name of building
+<span class='line'>  6</span>  * @property {string} address - Address
+<span class='line'>  7</span>  * @property {Bounds} bounds - Bounds of building without rotation, in earth coordinates
+<span class='line'>  8</span>  * @property {Bounds} boundsRotated - Bunds of building with rotation, in earth coordinates
+<span class='line'>  9</span>  * @property {Coordinate} center - Center of building, as coordinate
+<span class='line'> 10</span>  * @property {Dimensions} Dimensions - {@link Dimensions} of building in metets(width and height)
+<span class='line'> 11</span>  * @property {string} infoHtml - Additionalinformation about building, formatted with HTML
+<span class='line'> 12</span>  * @property {string} pictureThumbUrl - URL of building thumbnail image
+<span class='line'> 13</span>  * @property {string} pictureUrl - URL of building image
+<span class='line'> 14</span>  * @property {float} rotation - Angle of building rotation in radians
+<span class='line'> 15</span>  * @property {string} userIdentifier - Returns de user identifier
+<span class='line'> 16</span>  * @property {Object} customFields - Returns de custom fields of building in an Object with {key: value,...}
+<span class='line'> 17</span>  */</span><span class="WHIT">
+<span class='line'> 18</span> 
+<span class='line'> 19</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">Building</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 20</span> </span><span class="WHIT">  </span><span class="NAME">buildingIdentifier</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 21</span> </span><span class="WHIT">  </span><span class="NAME">name</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 22</span> </span><span class="WHIT">  </span><span class="NAME">address</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 23</span> </span><span class="WHIT">  </span><span class="NAME">bounds</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 24</span> </span><span class="WHIT">  </span><span class="NAME">boundsRotated</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 25</span> </span><span class="WHIT">  </span><span class="NAME">center</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 26</span> </span><span class="WHIT">  </span><span class="NAME">dimensions</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 27</span> </span><span class="WHIT">  </span><span class="NAME">infoHtml</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 28</span> </span><span class="WHIT">  </span><span class="NAME">pictureThumbUrl</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 29</span> </span><span class="WHIT">  </span><span class="NAME">pictureUrl</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 30</span> </span><span class="WHIT">  </span><span class="NAME">rotation</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 31</span> </span><span class="WHIT">  </span><span class="NAME">userIdentifier</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 32</span> </span><span class="WHIT">  </span><span class="NAME">customFields</span><span class="WHIT">
+<span class='line'> 33</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 34</span> 
+<span class='line'> 35</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Building</span></pre></body></html>

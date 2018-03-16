@@ -1,0 +1,89 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="COMM">/** @namespace
+<span class='line'>  2</span>  * &lt;b>Building&lt;/b>&lt;br />
+<span class='line'>  3</span>  * Building object definition
+<span class='line'>  4</span>  * @property {string} buildingIdentifier - Identifier of building
+<span class='line'>  5</span>  * @property {string} name - Name of building
+<span class='line'>  6</span>  * @property {string} address - Address
+<span class='line'>  7</span>  * @property {Bounds} bounds - {@link Bounds} of building without rotation, in earth coordinates
+<span class='line'>  8</span>  * @property {Bounds} boundsRotated - {@link Bounds} of building with rotation, in earth coordinates
+<span class='line'>  9</span>  * @property {Coordinate} center - Center of building, as {@link Coordinate}
+<span class='line'> 10</span>  * @property {Dimensions} Dimensions - {@link Dimensions} of building in metets(width and height)
+<span class='line'> 11</span>  * @property {string} infoHtml - Additionalinformation about building, formatted with HTML
+<span class='line'> 12</span>  * @property {string} pictureThumbUrl - URL of building thumbnail image
+<span class='line'> 13</span>  * @property {string} pictureUrl - URL of building image
+<span class='line'> 14</span>  * @property {float} rotation - Angle of building rotation in radians
+<span class='line'> 15</span>  * @property {string} userIdentifier - Returns de user identifier
+<span class='line'> 16</span>  * @property {Object} customFields - Returns de custom fields of building in an Object with {key: value,...}
+<span class='line'> 17</span>  */</span><span class="WHIT">
+<span class='line'> 18</span> 
+<span class='line'> 19</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">Building</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 20</span> </span><span class="WHIT">  </span><span class="NAME">buildingIdentifier</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 21</span> </span><span class="WHIT">  </span><span class="NAME">name</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 22</span> </span><span class="WHIT">  </span><span class="NAME">address</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 23</span> </span><span class="WHIT">  </span><span class="NAME">bounds</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 24</span> </span><span class="WHIT">  </span><span class="NAME">boundsRotated</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 25</span> </span><span class="WHIT">  </span><span class="NAME">center</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 26</span> </span><span class="WHIT">  </span><span class="NAME">dimensions</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 27</span> </span><span class="WHIT">  </span><span class="NAME">infoHtml</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 28</span> </span><span class="WHIT">  </span><span class="NAME">pictureThumbUrl</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 29</span> </span><span class="WHIT">  </span><span class="NAME">pictureUrl</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 30</span> </span><span class="WHIT">  </span><span class="NAME">rotation</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 31</span> </span><span class="WHIT">  </span><span class="NAME">userIdentifier</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 32</span> </span><span class="WHIT">  </span><span class="NAME">customFields</span><span class="WHIT">
+<span class='line'> 33</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 34</span> 
+<span class='line'> 35</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Building</span><span class="WHIT">
+<span class='line'> 36</span> 
+<span class='line'> 37</span> </span><span class="COMM">/** @namespace
+<span class='line'> 38</span>  * &lt;b>Dimensions&lt;/b>&lt;br />
+<span class='line'> 39</span>  * Dimensions object definition
+<span class='line'> 40</span>  * @property {float} width - Width
+<span class='line'> 41</span>  * @property {float} height - Height
+<span class='line'> 42</span>  */</span><span class="WHIT">
+<span class='line'> 43</span> 
+<span class='line'> 44</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">Dimensions</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 45</span> </span><span class="WHIT">  </span><span class="NAME">width</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 46</span> </span><span class="WHIT">  </span><span class="NAME">height</span><span class="WHIT">
+<span class='line'> 47</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 48</span> 
+<span class='line'> 49</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Dimensions</span><span class="WHIT">
+<span class='line'> 50</span> 
+<span class='line'> 51</span> </span><span class="COMM">/** @namespace
+<span class='line'> 52</span>  * &lt;b>Bounds&lt;/b>&lt;br />
+<span class='line'> 53</span>  * Bounds of map, floor or building
+<span class='line'> 54</span>  * @property {Coordinate} northEast - {@link Coordinate} object
+<span class='line'> 55</span>  * @property {Coordinate} northWest - {@link Coordinate} object
+<span class='line'> 56</span>  * @property {Coordinate} southEast - {@link Coordinate} object
+<span class='line'> 57</span>  * @property {Coordinate} southWest - {@link Coordinate} object
+<span class='line'> 58</span>  */</span><span class="WHIT">
+<span class='line'> 59</span> 
+<span class='line'> 60</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">Bounds</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 61</span> </span><span class="WHIT">  </span><span class="NAME">northEast</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 62</span> </span><span class="WHIT">  </span><span class="NAME">northWest</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 63</span> </span><span class="WHIT">  </span><span class="NAME">southEast</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 64</span> </span><span class="WHIT">  </span><span class="NAME">southWest</span><span class="WHIT">
+<span class='line'> 65</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 66</span> 
+<span class='line'> 67</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Bounds</span><span class="WHIT">
+<span class='line'> 68</span> 
+<span class='line'> 69</span> </span><span class="COMM">/**
+<span class='line'> 70</span>  * @namespace
+<span class='line'> 71</span>  * &lt;b>Coordinate&lt;/b>&lt;br />
+<span class='line'> 72</span>  * Coordinate
+<span class='line'> 73</span>  * @property {float} latitude - Latitude
+<span class='line'> 74</span>  * @property {float} longitude - Longitude
+<span class='line'> 75</span>  */</span><span class="WHIT">
+<span class='line'> 76</span> 
+<span class='line'> 77</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">Coordinate</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 78</span> </span><span class="WHIT">  </span><span class="NAME">latitude</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 79</span> </span><span class="WHIT">  </span><span class="NAME">longitude</span><span class="WHIT">
+<span class='line'> 80</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 81</span> 
+<span class='line'> 82</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Coordinate</span></pre></body></html>
