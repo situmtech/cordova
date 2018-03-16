@@ -60,15 +60,15 @@ var Situm = {
   },
   /**
    * Obtener los edificios asociados a una cuenta.
-   * @returns {building[]}@see {@link Building} Devuelve un array con los edificios asociados a la cuenta que tenemos configurada
+   * @returns {building[]} {@link Building} Devuelve un array con los edificios asociados a la cuenta que tenemos configurada
    */
   fetchBuildings: function (cb, error) {
     exec(cb, error, PLUGIN_NAME, 'fetchBuildings', []);
   },
   /**
    * Obtener los pisos de un edificio
-   * @param {building} building - Un edificio de los obtenidos por la función <tt>fetchBuildings</tt>
-   * @returns {floor[]} Devuelve un array con las plantas de un edificio
+   * @param {building} {@link Building} - Un edificio de los obtenidos por la función <tt>fetchBuildings</tt>
+   * @returns {floor[]} {@link Floor} - Devuelve un array con las plantas de un edificio
    */
   fetchFloorsFromBuilding: function (building, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'fetchFloorsFromBuilding', [building]);

@@ -12,8 +12,8 @@
  * @property {string} pictureThumbUrl - URL of building thumbnail image
  * @property {string} pictureUrl - URL of building image
  * @property {float} rotation - Angle of building rotation in radians
- * @property {string} userIdentifier - Returns de user identifier
- * @property {Object} customFields - Returns de custom fields of building in an Object with {key: value,...}
+ * @property {string} userIdentifier - The user identifier
+ * @property {Object} customFields - Custom fields of building in an Object with {key: value,...}
  */
 
 var Building = {
@@ -33,6 +33,29 @@ var Building = {
 }
 
 module.exports = Building
+
+/**
+ * @namespace
+ * <b>Floor</b>
+ * Floor object definition
+ * @property {float} altitude - The altitude of floor, in metres
+ * @property {string} buildingIdentifier - The building identifier
+ * @property {number} level - The floor level
+ * @property {string} mapUrl - The url of floor map image
+ * @property {float} scale - The scale of floor map in px/meters
+ * @property {string} floorIdentifier - The floor identifier
+ */
+
+var Floor = {
+  altitude,
+  buildingIdentifier,
+  level,
+  mapUrl,
+  scale,
+  floorIdentifier
+}
+
+module.exports = Floor
 
 /** @namespace
  * <b>Dimensions</b><br />
