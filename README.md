@@ -72,9 +72,36 @@ $ cordova plugin add https://github.com/situmtech/situm-cordova-plugin.git
 
 ## :large_blue_diamond: Using the Plugin
 
+#### Accessing plugin object
+
+```javascript
+/**
+ * Declare variable to access cordova namespace
+ */
+declare var cordova;
+/**
+ * Example: call setApiKey function
+ */
+
+cordova.plugins.Situm.setApiKey(email, apiKey);
 ```
-TODO INVOCATION IN PURE JS and TYPESCRIPT
+
+#### setApiKey
+
+###### Provides your API key to the Situm SDK. This key is generated for your application in the Dashboard. Old credentials will be removed.
+
+```javascript
+/**
+ * @param email => Our email account
+ * @param apiKey => The apiKey (We need to be registered in Situm Dashboard)
+ * @returns boolean: True if apiKey was set successfully, otherwise false
+ */
+setApiKey(email, apiKey) {
+
+}
 ```
+
+###### See [setApiKey](www/android/docs/symbols/Situm#.setApiKey) in docs.
 
 ## :large_blue_diamond: Contributing
 
