@@ -10,7 +10,7 @@
 * [Setup](#large_blue_diamond-setup-your-account)
 * [Pre-requisites](#large_blue_diamond-installing-pre-requisites)
 * [Install plugin](#large_blue_diamond-installing-the-plugin)
-* [Using plugin](#large_blue_diamond-using-the-plugin) star:
+* [Using plugin](#large_blue_diamond-using-the-plugin)
 
 - [Accesing plugin object](#accessing-plugin-object)
 - [setApiKey](#--setapikey)
