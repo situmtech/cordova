@@ -6,7 +6,7 @@
 
 ## :large_blue_diamond: Description
 
-Situm provides a unique Platform-as-a-Service (PaaS) solution that runs a disruptive geomagnetic positioning in its full-stack hybrid technology for accurately pinpointing a location inside a building. The Situm SDK enables app developers to use high-accuracy indoor positioning in venues that
+Situm Cordova Plugin provides a solution to use the Native Situm SDK in hybrid apps and enables app developers to use indoor positioning venues that have been fingerprinted with a pure javascript interface.
 
 ---
 
