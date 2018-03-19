@@ -32,7 +32,7 @@ var Situm = {
   * @param {string} password
   * @returns {void}
   */
-  setUserPass: function (email, apiKey, cb, error) {
+  setUserPass: function (email, password, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'setUserPass', [email, password]);
   },
   /**

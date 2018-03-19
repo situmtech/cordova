@@ -29,7 +29,7 @@ var Situm = {
    * @param {callback} error - Cordova native callback to recive errors.
    * @returns {boolean} true if operation finished successfully, otherwise false
    */
-  setUserPass: function (email, apiKey, cb, error) {
+  setUserPass: function (email, password, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'setUserPass', [email, password]);
   },
   /**

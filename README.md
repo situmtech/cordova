@@ -90,9 +90,39 @@ cordova.plugins.Situm.setApiKey(email, apiKey);
 ###### Log in into your Situm Account. This key is generated in Situm Dashboard. Return true if apiKey was set successfully, otherwise false
 
 ```javascript
-setApiKey("email@domain.com", "OUR_API_KEY") {
+setApiKey("email@domain.com", "OUR_API_KEY");
+```
 
-}
+#### - setUserPass
+
+###### Provides user's email and password.
+
+```javascript
+setUserPass("email@domain.com", "ourPassword");
+```
+
+#### - setCacheMaxAge
+
+###### Sets the maximum age of a cached response in seconds.
+
+```javascript
+setCacheMaxAge(200);
+```
+
+#### - startPositioning
+
+###### Starts listen onLocationChanged event on first [building](./www/android/docs/index.html) in array
+
+```javascript
+startPositionin([building]);
+```
+
+#### - stopPositioning
+
+###### Stop locationListener on current active listener.
+
+```javascript
+stopPositioning();
 ```
 
 ## :large_blue_diamond: Contributing
