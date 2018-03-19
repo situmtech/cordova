@@ -111,10 +111,10 @@ setCacheMaxAge(200);
 
 #### - startPositioning
 
-###### Starts listen onLocationChanged event on first [building](./www/android/docs/index.html) in array
+###### Starts listen onLocationChanged event on first [building](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Building.html) in array
 
 ```javascript
-startPositionin([building]);
+startPositioning([building]);
 ```
 
 #### - stopPositioning
