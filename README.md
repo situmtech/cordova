@@ -30,11 +30,10 @@
 
 ###### 4. Install the plugin and start to use
 
-###### 4.1. Cordova android requirements:
+###### - Cordova requirements:
 
-###### \* Android: https://cordova.apache.org/docs/en/latest/guide/platforms/android/#installing-the-requirements
-
-###### \* IOs: https://cordova.apache.org/docs/en/latest/guide/platforms/android/#installing-the-requirements
+* Android: https://cordova.apache.org/docs/en/latest/guide/platforms/android/#installing-the-requirements
+* IOs: https://cordova.apache.org/docs/en/latest/guide/platforms/android/#installing-the-requirements
 
 ---
 
