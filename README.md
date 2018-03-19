@@ -82,21 +82,15 @@ declare var cordova;
 /**
  * Example: call setApiKey function
  */
-
 cordova.plugins.Situm.setApiKey(email, apiKey);
 ```
 
-#### setApiKey
+#### - setApiKey
 
-###### Provides your API key to the Situm SDK. This key is generated for your application in the Dashboard. Old credentials will be removed.
+###### Log in into your Situm Account. This key is generated in Situm Dashboard. Return true if apiKey was set successfully, otherwise false
 
 ```javascript
-/**
- * @param email => Our email account
- * @param apiKey => The apiKey (We need to be registered in Situm Dashboard)
- * @returns boolean: True if apiKey was set successfully, otherwise false
- */
-setApiKey(email, apiKey) {
+setApiKey("email@domain.com", "OUR_API_KEY") {
 
 }
 ```
