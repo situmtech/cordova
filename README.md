@@ -48,7 +48,9 @@
 
 ###### 3. Go to the [buildings section](http://dashboard.situm.es/buildings) and create your first building.
 
-###### 4. You are ready for building your own Cordova applications. Please check next steps about requirements
+###### 4. Download Situm Mapping Tool in Play Store (Only Android devices) and calibrate your building. Check out our user guide for detailed information.
+
+###### 5. You are ready for building your own Cordova applications. Please check next steps about requirements
 
 ---
 
@@ -95,13 +97,12 @@ $ cordova plugin add https://github.com/situmtech/situm-cordova-plugin.git
 #### Accessing plugin object
 
 ```javascript
-/**
- * Declare variable to access cordova namespace
- */
-declare var cordova;
-/**
- * Example: call setApiKey function
- */
+
+When device ready event is fired, global cordova variable is injected in namespace. Plugins are available in this variable: cordova.plugins. The Situm Cordova Plugin is autowired within this object.
+
+So, all methods are called in the same way, e.g. 'setApiKey':
+
+```
 cordova.plugins.Situm.setApiKey(email, apiKey);
 ```
 
@@ -110,7 +111,7 @@ cordova.plugins.Situm.setApiKey(email, apiKey);
 ###### Log in into your Situm Account. This key is generated in Situm Dashboard. Return true if apiKey was set successfully, otherwise false
 
 ```javascript
-setApiKey("email@domain.com", "OUR_API_KEY");
+setApiKey("your_email@domain.com", "YOUR_API_KEY");
 ```
 
 #### - setUserPass
