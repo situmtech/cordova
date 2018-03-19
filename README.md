@@ -101,8 +101,6 @@ setApiKey(email, apiKey) {
 }
 ```
 
-###### See [setApiKey](https://github.com/cocodinTech/situm-cordova-plugin/tree/master/www/android/docs/symbols/Situm#.setApiKey) in docs.
-
 ## :large_blue_diamond: Contributing
 
 ```
