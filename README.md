@@ -28,6 +28,14 @@
 
 ###### 3. Go to the [buildings section](http://dashboard.situm.es/buildings) and create your first building.
 
+###### 4. Install the plugin and start to use
+
+###### 4.1. Cordova android requirements:
+
+###### \* Android: https://cordova.apache.org/docs/en/latest/guide/platforms/android/#installing-the-requirements
+
+###### \* IOs: https://cordova.apache.org/docs/en/latest/guide/platforms/android/#installing-the-requirements
+
 ---
 
 GRAPHICAL EXAMPLES
