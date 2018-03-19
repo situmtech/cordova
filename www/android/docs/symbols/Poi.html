@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - Building</title>
+		<title>JsDoc Reference - Poi</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -216,7 +216,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Namespace Building
+				Namespace Poi
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -224,8 +224,8 @@ ul.inheritsList
 				
 				
 			
-				<b>Building</b><br />
-Building object definition
+				<b>POI (Point of Interest)</b>
+Poi
 				
 				
 					<br /><i>Defined in: </i> <a href="../symbols/src/docs_Interfaces.js.html">Interfaces.js</a>.
@@ -234,7 +234,7 @@ Building object definition
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Building.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Poi.">
 				<caption>Namespace Summary</caption>
 				<thead>
 					<tr>
@@ -247,7 +247,7 @@ Building object definition
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/Building.html#constructor">Building</a></b>
+								<b><a href="../symbols/Poi.html#constructor">Poi</a></b>
 							</div>
 							<div class="description"></div>
 						</td>
@@ -260,7 +260,7 @@ Building object definition
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Building.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Poi.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -274,9 +274,9 @@ Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#address">address</a></b>
+								<b><a href="../symbols/Poi.html#buildingIdentifier">buildingIdentifier</a></b>
 								</div>
-								<div class="description">- Address</div>
+								<div class="description">- The building identifier</div>
 							</td>
 						</tr>
 					
@@ -284,9 +284,9 @@ Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#bounds">bounds</a></b>
+								<b><a href="../symbols/Poi.html#cartesiansCoordinate">cartesiansCoordinate</a></b>
 								</div>
-								<div class="description">- <a href="../symbols/Bounds.html">Bounds</a> of building without rotation, in earth coordinates</div>
+								<div class="description">- The cartesians coordinates of POI center relative to building <a href="../symbols/Bounds.html">Bounds</a> @see CartesianCoordinate</div>
 							</td>
 						</tr>
 					
@@ -294,9 +294,9 @@ Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#boundsRotated">boundsRotated</a></b>
+								<b><a href="../symbols/Poi.html#category">category</a></b>
 								</div>
-								<div class="description">- <a href="../symbols/Bounds.html">Bounds</a> of building with rotation, in earth coordinates</div>
+								<div class="description">- The PoiCategory</div>
 							</td>
 						</tr>
 					
@@ -304,9 +304,9 @@ Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#buildingIdentifier">buildingIdentifier</a></b>
+								<b><a href="../symbols/Poi.html#coordinate">coordinate</a></b>
 								</div>
-								<div class="description">- Identifier of building</div>
+								<div class="description">- The geographical coordinates of this position @see <a href="../symbols/Coordinate.html">Coordinate</a></div>
 							</td>
 						</tr>
 					
@@ -314,9 +314,9 @@ Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#center">center</a></b>
+								<b><a href="../symbols/Poi.html#customFields">customFields</a></b>
 								</div>
-								<div class="description">- Center of building, as <a href="../symbols/Coordinate.html">Coordinate</a></div>
+								<div class="description">- Additional information about POI, in format {key: value,.</div>
 							</td>
 						</tr>
 					
@@ -324,9 +324,9 @@ Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#customFields">customFields</a></b>
+								<b><a href="../symbols/Poi.html#floorIdentifier">floorIdentifier</a></b>
 								</div>
-								<div class="description">- Custom fields of building in an Object with {key: value,.</div>
+								<div class="description">- The identifier of floor</div>
 							</td>
 						</tr>
 					
@@ -334,9 +334,9 @@ Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#Dimensions">Dimensions</a></b>
+								<b><a href="../symbols/Poi.html#identifier">identifier</a></b>
 								</div>
-								<div class="description">- <a href="../symbols/Dimensions.html">Dimensions</a> of building in metets(width and height)</div>
+								<div class="description">- POI identifier</div>
 							</td>
 						</tr>
 					
@@ -344,9 +344,9 @@ Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#infoHtml">infoHtml</a></b>
+								<b><a href="../symbols/Poi.html#idIndoor">idIndoor</a></b>
 								</div>
-								<div class="description">- Additionalinformation about building, formatted with HTML</div>
+								<div class="description"></div>
 							</td>
 						</tr>
 					
@@ -354,9 +354,9 @@ Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#name">name</a></b>
+								<b><a href="../symbols/Poi.html#infoHtml">infoHtml</a></b>
 								</div>
-								<div class="description">- Name of building</div>
+								<div class="description">- Additional information about POI, in HTML</div>
 							</td>
 						</tr>
 					
@@ -364,9 +364,9 @@ Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#pictureThumbUrl">pictureThumbUrl</a></b>
+								<b><a href="../symbols/Poi.html#isOutdoor">isOutdoor</a></b>
 								</div>
-								<div class="description">- URL of building thumbnail image</div>
+								<div class="description"></div>
 							</td>
 						</tr>
 					
@@ -374,9 +374,9 @@ Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#pictureUrl">pictureUrl</a></b>
+								<b><a href="../symbols/Poi.html#poiName">poiName</a></b>
 								</div>
-								<div class="description">- URL of building image</div>
+								<div class="description">- The POI name</div>
 							</td>
 						</tr>
 					
@@ -384,19 +384,9 @@ Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#rotation">rotation</a></b>
+								<b><a href="../symbols/Poi.html#position">position</a></b>
 								</div>
-								<div class="description">- Angle of building rotation in radians</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#userIdentifier">userIdentifier</a></b>
-								</div>
-								<div class="description">- The user identifier</div>
+								<div class="description">- The position POI</div>
 							</td>
 						</tr>
 					
@@ -420,7 +410,7 @@ Building object definition
 				</div>
 				
 				<div class="fixedFont">
-						<b>Building</b>
+						<b>Poi</b>
 				</div>
 				
 				<div class="description">
@@ -448,72 +438,6 @@ Building object definition
 					Field Detail
 				</div>
 				
-					<a name="address"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{string}</span>
-					<b>address</b>
-					
-					</div>
-					<div class="description">
-						- Address
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="bounds"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{<a href="../symbols/Bounds.html">Bounds</a>}</span>
-					<b>bounds</b>
-					
-					</div>
-					<div class="description">
-						- <a href="../symbols/Bounds.html">Bounds</a> of building without rotation, in earth coordinates
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="boundsRotated"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{<a href="../symbols/Bounds.html">Bounds</a>}</span>
-					<b>boundsRotated</b>
-					
-					</div>
-					<div class="description">
-						- <a href="../symbols/Bounds.html">Bounds</a> of building with rotation, in earth coordinates
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
 					<a name="buildingIdentifier"> </a>
 					<div class="fixedFont">
 					
@@ -522,7 +446,7 @@ Building object definition
 					
 					</div>
 					<div class="description">
-						- Identifier of building
+						- The building identifier
 						
 						
 					</div>
@@ -536,15 +460,59 @@ Building object definition
 
 					<hr />
 				
-					<a name="center"> </a>
+					<a name="cartesiansCoordinate"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{<a href="../symbols/Coordinate.html">Coordinate</a>}</span>
-					<b>center</b>
+					<span class="light">{<a href="../symbols/CartesiansCoordinate.html">CartesiansCoordinate</a>}</span>
+					<b>cartesiansCoordinate</b>
 					
 					</div>
 					<div class="description">
-						- Center of building, as <a href="../symbols/Coordinate.html">Coordinate</a>
+						- The cartesians coordinates of POI center relative to building <a href="../symbols/Bounds.html">Bounds</a> @see CartesianCoordinate
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="category"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{PoiCategory}</span>
+					<b>category</b>
+					
+					</div>
+					<div class="description">
+						- The PoiCategory
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="coordinate"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{<a href="../symbols/Coordinate.html">Coordinate</a>}</span>
+					<b>coordinate</b>
+					
+					</div>
+					<div class="description">
+						- The geographical coordinates of this position @see <a href="../symbols/Coordinate.html">Coordinate</a>
 						
 						
 					</div>
@@ -566,7 +534,7 @@ Building object definition
 					
 					</div>
 					<div class="description">
-						- Custom fields of building in an Object with {key: value,...}
+						- Additional information about POI, in format {key: value,...}
 						
 						
 					</div>
@@ -580,15 +548,59 @@ Building object definition
 
 					<hr />
 				
-					<a name="Dimensions"> </a>
+					<a name="floorIdentifier"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{<a href="../symbols/Dimensions.html">Dimensions</a>}</span>
-					<b>Dimensions</b>
+					<span class="light">{string}</span>
+					<b>floorIdentifier</b>
 					
 					</div>
 					<div class="description">
-						- <a href="../symbols/Dimensions.html">Dimensions</a> of building in metets(width and height)
+						- The identifier of floor
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="identifier"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{string}</span>
+					<b>identifier</b>
+					
+					</div>
+					<div class="description">
+						- POI identifier
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="idIndoor"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{boolean}</span>
+					<b>idIndoor</b>
+					
+					</div>
+					<div class="description">
+						
 						
 						
 					</div>
@@ -610,7 +622,7 @@ Building object definition
 					
 					</div>
 					<div class="description">
-						- Additionalinformation about building, formatted with HTML
+						- Additional information about POI, in HTML
 						
 						
 					</div>
@@ -624,15 +636,37 @@ Building object definition
 
 					<hr />
 				
-					<a name="name"> </a>
+					<a name="isOutdoor"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{boolean}</span>
+					<b>isOutdoor</b>
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="poiName"> </a>
 					<div class="fixedFont">
 					
 					<span class="light">{string}</span>
-					<b>name</b>
+					<b>poiName</b>
 					
 					</div>
 					<div class="description">
-						- Name of building
+						- The POI name
 						
 						
 					</div>
@@ -646,81 +680,15 @@ Building object definition
 
 					<hr />
 				
-					<a name="pictureThumbUrl"> </a>
+					<a name="position"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{string}</span>
-					<b>pictureThumbUrl</b>
+					<span class="light">{Point}</span>
+					<b>position</b>
 					
 					</div>
 					<div class="description">
-						- URL of building thumbnail image
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="pictureUrl"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{string}</span>
-					<b>pictureUrl</b>
-					
-					</div>
-					<div class="description">
-						- URL of building image
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="rotation"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{float}</span>
-					<b>rotation</b>
-					
-					</div>
-					<div class="description">
-						- Angle of building rotation in radians
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="userIdentifier"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{string}</span>
-					<b>userIdentifier</b>
-					
-					</div>
-					<div class="description">
-						- The user identifier
+						- The position POI
 						
 						
 					</div>

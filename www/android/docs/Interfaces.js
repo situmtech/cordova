@@ -1,5 +1,4 @@
-/** @namespace
- * <b>Building</b><br />
+/** @namespace <b>Building</b><br />
  * Building object definition
  * @property {string} buildingIdentifier - Identifier of building
  * @property {string} name - Name of building
@@ -103,3 +102,53 @@ var Coordinate = {
 }
 
 module.exports = Coordinate
+
+/**
+ * @namespace
+ * <b>Cartesians Coordinate</b><br />
+ * Cartesisans Coordinate
+ * @property {float} x - x
+ * @property {float} y - y
+ */
+
+var CartesiansCoordinate = {
+  x,
+  y
+}
+
+module.exports = CartesiansCoordinate
+
+/**
+ * @namespace
+ * <b>POI (Point of Interest)</b>
+ * Poi
+ * @property {string} identifier - POI identifier
+ * @property {string} buildingIdentifier - The building identifier
+ * @property {CartesiansCoordinate} cartesiansCoordinate - The cartesians coordinates of POI center relative to building {@link Bounds} @see {@link CartesianCoordinate}
+ * @property {Coordinate} coordinate - The geographical coordinates of this position @see {@link Coordinate}
+ * @property {string} floorIdentifier - The identifier of floor
+ * @property {string} poiName - The POI name
+ * @property {Point} position - The position POI
+ * @property {boolean} idIndoor
+ * @property {boolean} isOutdoor
+ * @property {PoiCategory} category - The {@link PoiCategory}
+ * @property {string} infoHtml - Additional information about POI, in HTML
+ * @property {Object} customFields - Additional information about POI, in format {key: value,...}
+ */
+
+var Poi = {
+  identifier,
+  buildingIdentifier,
+  cartesianCoordinate,
+  coordinate,
+  floorIdentifier,
+  poiName,
+  position,
+  isIndoor,
+  isOutdoor,
+  category,
+  infoHtml,
+  customFields
+}
+
+module.exports = Poi

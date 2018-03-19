@@ -1,0 +1,201 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">exec</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">require</span><span class="PUNC">(</span><span class="STRN">'cordova/exec'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>  2</span> 
+<span class='line'>  3</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="STRN">'Situm'</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>  4</span> 
+<span class='line'>  5</span> </span><span class="COMM">/** @module
+<span class='line'>  6</span>  * &lt;b>Situm Plugin&lt;/b>&lt;br />
+<span class='line'>  7</span>  * Plugin para implementar las funciones de Situm en Ionic&lt;br />
+<span class='line'>  8</span>  * &lt;br />
+<span class='line'>  9</span>  * Dependencias:&lt;br />
+<span class='line'> 10</span>  *  - cordova-plugin-googlemaps&lt;br />
+<span class='line'> 11</span>  * &lt;br />
+<span class='line'> 12</span>  * Como utilizarlo:&lt;br />
+<span class='line'> 13</span>  *  - Para poder usarlo solo tienes que crear una aplicación de Ionic, instalarlo junto a sus dependencias 
+<span class='line'> 14</span>  *    y configurar una api-key. Para obtener una ap-key debes estar registrado en la web de Situma&lt;br />
+<span class='line'> 15</span>  * &lt;br />
+<span class='line'> 16</span>  * Uso básico:
+<span class='line'> 17</span>  */</span><span class="WHIT">
+<span class='line'> 18</span> 
+<span class='line'> 19</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">Situm</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 20</span> 
+<span class='line'> 21</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'> 22</span>    * Provides your API key to the Situm SDK for Android.
+<span class='line'> 23</span>    * @description Provides your API key to the Situm SDK for Android. This key is generated for your application in the Dashboard. Old credentials will be removed.
+<span class='line'> 24</span>    * @param {string} email - email that identifies the account. Can't be empty.
+<span class='line'> 25</span>    * @param {string} apiKey - key obtained at situm.es. Can't be empty.
+<span class='line'> 26</span>    * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
+<span class='line'> 27</span>    * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+<span class='line'> 28</span>    * @returns {boolean} true if operation finished successfully, otherwise false
+<span class='line'> 29</span>    */</span><span class="WHIT">
+<span class='line'> 30</span> </span><span class="WHIT">  </span><span class="NAME">setApiKey</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">email</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">apiKey</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 31</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'setApiKey'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">email</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">apiKey</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 32</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 33</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'> 34</span>    * Provides user's email and password.
+<span class='line'> 35</span>    * @description Provides user's email and password. This credentials will be used to obtain a valid user token to authenticate the server request, when necessary. Token obtaining is not necessary done when this method is executed. Old credentials will be removed.
+<span class='line'> 36</span>    * @param {string} email - user's email. Can't be empty.
+<span class='line'> 37</span>    * @param {string} password - user's password. Can't be empty.
+<span class='line'> 38</span>    * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
+<span class='line'> 39</span>    * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+<span class='line'> 40</span>    * @returns {boolean} true if operation finished successfully, otherwise false
+<span class='line'> 41</span>    */</span><span class="WHIT">
+<span class='line'> 42</span> </span><span class="WHIT">  </span><span class="NAME">setUserPass</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">email</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">apiKey</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 43</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'setUserPass'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">email</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">password</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 44</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 45</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'> 46</span>    * Sets the maximum age of a cached response.
+<span class='line'> 47</span>    * @description Sets the maximum age of a cached response. If the cache response's age exceeds maxAge, it will not be used and a network request will be made.
+<span class='line'> 48</span>    * @param {number} maxAge - a non-negative integer
+<span class='line'> 49</span>    * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
+<span class='line'> 50</span>    * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+<span class='line'> 51</span>    * @returns {void}
+<span class='line'> 52</span>    */</span><span class="WHIT">
+<span class='line'> 53</span> </span><span class="WHIT">  </span><span class="NAME">setCacheMaxAge</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">cacheAge</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 54</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'setCacheMaxAge'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">cacheAge</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 55</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 56</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'> 57</span>    * Set callback and starts listen onLocationChanged event.
+<span class='line'> 58</span>    * @param {building[]} arrBuilding - Array of buildings to activate locationListener.
+<span class='line'> 59</span>    * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
+<span class='line'> 60</span>    * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+<span class='line'> 61</span>    * @return {position} position - Current position of device.
+<span class='line'> 62</span>    */</span><span class="WHIT">
+<span class='line'> 63</span> </span><span class="WHIT">  </span><span class="NAME">startPositioning</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">arrBuilding</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 64</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'startPositioning'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">arrBuilding</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 65</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 66</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'> 67</span>    * Stop locationListener on current active listener.
+<span class='line'> 68</span>    * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
+<span class='line'> 69</span>    * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+<span class='line'> 70</span>    * @returns {void}
+<span class='line'> 71</span>    */</span><span class="WHIT">
+<span class='line'> 72</span> </span><span class="WHIT">  </span><span class="NAME">stopPositioning</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 73</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'stopPositioning'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 74</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 75</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'> 76</span>    * Download all the buildings for the current user.
+<span class='line'> 77</span>    * @description Download all the buildings for the current user
+<span class='line'> 78</span>    * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
+<span class='line'> 79</span>    * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+<span class='line'> 80</span>    * @returns {building[]} [adfafd]{@link Building} array.
+<span class='line'> 81</span>    */</span><span class="WHIT">
+<span class='line'> 82</span> </span><span class="WHIT">  </span><span class="NAME">fetchBuildings</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 83</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'fetchBuildings'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 84</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 85</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'> 86</span>    * Download all the floors of a building.
+<span class='line'> 87</span>    * @description Download all the floors of a building
+<span class='line'> 88</span>    * @param {building} {@link Building building} - the building. Not null.
+<span class='line'> 89</span>    * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
+<span class='line'> 90</span>    * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+<span class='line'> 91</span>    * @returns {floor[]} {@link Floor floors} array 
+<span class='line'> 92</span>    */</span><span class="WHIT">
+<span class='line'> 93</span> </span><span class="WHIT">  </span><span class="NAME">fetchFloorsFromBuilding</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">building</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 94</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'fetchFloorsFromBuilding'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">building</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 95</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 96</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'> 97</span>    * Download the indoor POIs of a building.
+<span class='line'> 98</span>    * @description Download the indoor POIs of a building
+<span class='line'> 99</span>    * @param {building} {@link Building building} - the building. Not null.
+<span class='line'>100</span>    * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
+<span class='line'>101</span>    * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+<span class='line'>102</span>    * @returns {poi[]} Array of {@link POI POIs}
+<span class='line'>103</span>    */</span><span class="WHIT">
+<span class='line'>104</span> </span><span class="WHIT">  </span><span class="NAME">fetchIndoorPOIsFromBuilding</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">building</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>105</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'fetchIndoorPOIsFromBuilding'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">building</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>106</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>107</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'>108</span>    * Download the outdoor POIs of a building.
+<span class='line'>109</span>    * @description Download the outdoor POIs of a building
+<span class='line'>110</span>    * @param {building} {@link Building building} - the building. Not null.
+<span class='line'>111</span>    * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
+<span class='line'>112</span>    * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+<span class='line'>113</span>    * @returns {poi[]} Array of {@link POI POIs}
+<span class='line'>114</span>    */</span><span class="WHIT">
+<span class='line'>115</span> </span><span class="WHIT">  </span><span class="NAME">fetchOutdoorPOIsFromBuilding</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">building</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>116</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'fetchOutdoorPOIsFromBuilding'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">building</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>117</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>118</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'>119</span>    * Download the events of a building.
+<span class='line'>120</span>    * @description Download the events of a building
+<span class='line'>121</span>    * @param {building} {@link Building building} - the building. Not null.
+<span class='line'>122</span>    * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
+<span class='line'>123</span>    * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+<span class='line'>124</span>    * @returns {event[]} The evetns of a building
+<span class='line'>125</span>    */</span><span class="WHIT">
+<span class='line'>126</span> </span><span class="WHIT">  </span><span class="NAME">fetchEventsFromBuilding</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">building</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>127</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'fetchEventsFromBuilding'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">building</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>128</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>129</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'>130</span>    * Get all POI categories, download and cache their icons asynchronously.
+<span class='line'>131</span>    * @description Get all POI categories, download and cache their icons asynchronously. To get some of those icons from local storage @see {@link fetchPoiCategoryIconNormal(PoiCategory)} or {@link fetchPoiCategoryIconSelected(PoiCategory)}
+<span class='line'>132</span>    * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
+<span class='line'>133</span>    * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+<span class='line'>134</span>    * @returns {poiCategory[]} {@link PoiCategory poiCategories}
+<span class='line'>135</span>    */</span><span class="WHIT">
+<span class='line'>136</span> </span><span class="WHIT">  </span><span class="NAME">fetchPoiCategories</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>137</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'fetchPoiCategories'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>138</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>139</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'>140</span>    * Download the map image of a floor
+<span class='line'>141</span>    * @description Download the map image of a floor
+<span class='line'>142</span>    * @param {floor} {@link Floor floor} - the floor. Not null.
+<span class='line'>143</span>    * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
+<span class='line'>144</span>    * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+<span class='line'>145</span>    * @returns {map} - The map image
+<span class='line'>146</span>    */</span><span class="WHIT">
+<span class='line'>147</span> </span><span class="WHIT">  </span><span class="NAME">fetchMapFromFloor</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">floor</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>148</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'fetchMapFromFloor'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">floor</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>149</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>150</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'>151</span>    * Get the normal category icon for a category.
+<span class='line'>152</span>    * @description Get the normal category icon for a category
+<span class='line'>153</span>    * @param {category} {@link PoiCategory category} - the category. Not null.
+<span class='line'>154</span>    * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
+<span class='line'>155</span>    * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+<span class='line'>156</span>    * @returns {icon} - The category icon
+<span class='line'>157</span>    */</span><span class="WHIT">
+<span class='line'>158</span> </span><span class="WHIT">  </span><span class="NAME">fetchPoiCategoryIconNormal</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">category</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>159</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'fetchPoiCategoryIconNormal'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">category</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>160</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>161</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'>162</span>    * Get the selected category icon for a category.
+<span class='line'>163</span>    * @description Get the selected category icon for a category
+<span class='line'>164</span>    * @param {category} {@link PoiCategory category} - the category. Not null.
+<span class='line'>165</span>    * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
+<span class='line'>166</span>    * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+<span class='line'>167</span>    * @returns {icon} - The category icon
+<span class='line'>168</span>    */</span><span class="WHIT">
+<span class='line'>169</span> </span><span class="WHIT">  </span><span class="NAME">fetchPoiCategoryIconSelected</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">category</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>170</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'fetchPoiCategoryIconSelected'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">category</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>171</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>172</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'>173</span>    * Invalidate all the resources in the cache.
+<span class='line'>174</span>    * @description Invalidate all the resources in the cache
+<span class='line'>175</span>    * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
+<span class='line'>176</span>    * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+<span class='line'>177</span>    * @returns {void}
+<span class='line'>178</span>    */</span><span class="WHIT">
+<span class='line'>179</span> </span><span class="WHIT">  </span><span class="NAME">invalidateCache</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>180</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'invalidateCache'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>181</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>182</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'>183</span>    * Calculates a route between two points.
+<span class='line'>184</span>    * @description Calculates a route between two points.
+<span class='line'>185</span>    * @param {args} request - request - non-null search parameters. {@link Building building}, {@link Point from} and {@link Point to}. Points have to be inside the same building.
+<span class='line'>186</span>    * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
+<span class='line'>187</span>    * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+<span class='line'>188</span>    * @return {route} {@link Route route} - The route between provided points
+<span class='line'>189</span>    */</span><span class="WHIT">
+<span class='line'>190</span> </span><span class="WHIT">  </span><span class="NAME">requestDirections</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">args</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>191</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'requestDirections'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">args</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>192</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>193</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>194</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Situm</span><span class="PUNC">;</span></pre></body></html>

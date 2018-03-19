@@ -195,11 +195,15 @@ ul.inheritsList
 	
 	<li><a href="../symbols/Building.html">Building</a></li>
 	
+	<li><a href="../symbols/CartesiansCoordinate.html">CartesiansCoordinate</a></li>
+	
 	<li><a href="../symbols/Coordinate.html">Coordinate</a></li>
 	
 	<li><a href="../symbols/Dimensions.html">Dimensions</a></li>
 	
 	<li><a href="../symbols/Floor.html">Floor</a></li>
+	
+	<li><a href="../symbols/Poi.html">Poi</a></li>
 	
 	<li><a href="../symbols/Situm.html">Situm</a></li>
 	
@@ -220,17 +224,7 @@ ul.inheritsList
 				
 				
 			
-				<b>Situm Plugin</b><br />
-Plugin para implementar las funciones de Situm en Ionic<br />
-<br />
-Dependencias:<br />
- - cordova-plugin-googlemaps<br />
-<br />
-Como utilizarlo:<br />
- - Para poder usarlo solo tienes que crear una aplicación de Ionic, instalarlo junto a sus dependencias 
-   y configurar una api-key. Para obtener una ap-key debes estar registrado en la web de Situma<br />
-<br />
-Uso básico:
+				Situm
 				
 				
 					<br /><i>Defined in: </i> <a href="../symbols/src/situm.js.html">situm.js</a>.
@@ -283,16 +277,16 @@ Uso básico:
 							<td class="nameDescription">
 								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.fetchBuildings">fetchBuildings</a></b>(cb, error)
 								</div>
-								<div class="description">Obtener los edificios asociados a una cuenta.</div>
+								<div class="description">Download all the buildings for the current user</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.fetchEventsFromBuilding">fetchEventsFromBuilding</a></b>(building, cb, error)
+								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.fetchEventsFromBuilding">fetchEventsFromBuilding</a></b>({@link, cb, error)
 								</div>
-								<div class="description">Obtener los eventos asociados a un edificio</div>
+								<div class="description">Download the events of a building.</div>
 							</td>
 						</tr>
 					
@@ -301,34 +295,35 @@ Uso básico:
 							<td class="nameDescription">
 								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.fetchFloorsFromBuilding">fetchFloorsFromBuilding</a></b>({@link, cb, error)
 								</div>
-								<div class="description">Obtener los pisos de un edificio</div>
+								<div class="description">Download all the floors of a building.</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.fetchIndoorPOIsFromBuilding">fetchIndoorPOIsFromBuilding</a></b>(building, cb, error)
+								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.fetchIndoorPOIsFromBuilding">fetchIndoorPOIsFromBuilding</a></b>({@link, cb, error)
 								</div>
-								<div class="description">Obtener los puntos de interés dentro del edificio</div>
+								<div class="description">Download the indoor POIs of a building.</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.fetchMapFromFloor">fetchMapFromFloor</a></b>(floor, cb, error)
+								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.fetchMapFromFloor">fetchMapFromFloor</a></b>({@link, cb, error)
 								</div>
-								<div class="description">Obtener el mapa de una de las plantas de un edificio</div>
+								<div class="description">Download the map image of a floor
+Download the map image of a floor</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.fetchOutdoorPOIsFromBuilding">fetchOutdoorPOIsFromBuilding</a></b>(building, cb, error)
+								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.fetchOutdoorPOIsFromBuilding">fetchOutdoorPOIsFromBuilding</a></b>({@link, cb, error)
 								</div>
-								<div class="description">Obtener los puntos de interés del exterior de un edificio</div>
+								<div class="description">Download the outdoor POIs of a building.</div>
 							</td>
 						</tr>
 					
@@ -337,25 +332,25 @@ Uso básico:
 							<td class="nameDescription">
 								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.fetchPoiCategories">fetchPoiCategories</a></b>(cb, error)
 								</div>
-								<div class="description">Obtener los tipos de puntos de interés que tenemos disponibles</div>
+								<div class="description">Get all POI categories, download and cache their icons asynchronously.</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.fetchPoiCategoryIconNormal">fetchPoiCategoryIconNormal</a></b>(category, cb, error)
+								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.fetchPoiCategoryIconNormal">fetchPoiCategoryIconNormal</a></b>({@link, cb, error)
 								</div>
-								<div class="description">Devuelve el icono para una categoría de puntos de interés</div>
+								<div class="description">Get the normal category icon for a category.</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.fetchPoiCategoryIconSelected">fetchPoiCategoryIconSelected</a></b>(category, cb, error)
+								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.fetchPoiCategoryIconSelected">fetchPoiCategoryIconSelected</a></b>({@link, cb, error)
 								</div>
-								<div class="description">Devuelve el icono de selección para una categoría de puntos de interés</div>
+								<div class="description">Get the selected category icon for a category.</div>
 							</td>
 						</tr>
 					
@@ -364,34 +359,34 @@ Uso básico:
 							<td class="nameDescription">
 								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.invalidateCache">invalidateCache</a></b>(cb, error)
 								</div>
-								<div class="description">In validar la caché para poder refrescar los datos</div>
+								<div class="description">Invalidate all the resources in the cache.</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.requestDirections">requestDirections</a></b>(-, cb, error)
+								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.requestDirections">requestDirections</a></b>(request, cb, error)
 								</div>
-								<div class="description">Intenta convertir un punto en una dirección</div>
+								<div class="description">Calculates a route between two points.</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.setApiKey">setApiKey</a></b>(email, api_key, cb, error)
+								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.setApiKey">setApiKey</a></b>(email, apiKey, cb, error)
 								</div>
-								<div class="description">Configura la api-key para utilizar en las peticiones.</div>
+								<div class="description">Provides your API key to the Situm SDK for Android.</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.setCacheMaxAge">setCacheMaxAge</a></b>(cacheAge, cb, error)
+								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.setCacheMaxAge">setCacheMaxAge</a></b>(maxAge, cb, error)
 								</div>
-								<div class="description">Configurar tiempo máximo para mantener los datos en caché</div>
+								<div class="description">Sets the maximum age of a cached response.</div>
 							</td>
 						</tr>
 					
@@ -400,7 +395,7 @@ Uso básico:
 							<td class="nameDescription">
 								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.setUserPass">setUserPass</a></b>(email, password, cb, error)
 								</div>
-								<div class="description">Obtener un token de usuario con una email y una contraseña.</div>
+								<div class="description">Provides user's email and password.</div>
 							</td>
 						</tr>
 					
@@ -409,7 +404,7 @@ Uso básico:
 							<td class="nameDescription">
 								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.startPositioning">startPositioning</a></b>(arrBuilding, cb, error)
 								</div>
-								<div class="description">Iniciar el evento que devuelve la ubicación, esta función devolverá la posición actual del dispositivo hasta que se llame a la función <tt>sopPositioning</tt></div>
+								<div class="description">Set callback and starts listen onLocationChanged event.</div>
 							</td>
 						</tr>
 					
@@ -418,7 +413,7 @@ Uso básico:
 							<td class="nameDescription">
 								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.stopPositioning">stopPositioning</a></b>(cb, error)
 								</div>
-								<div class="description">Detiene el evento que devuelve la ubicación del dispositivo, si no se ha llamado a la función <tt>startPositioning</tt> no tendrá efecto alguno.</div>
+								<div class="description">Stop locationListener on current active listener.</div>
 							</td>
 						</tr>
 					
@@ -478,7 +473,7 @@ Uso básico:
 					
 					</div>
 					<div class="description">
-						Obtener los edificios asociados a una cuenta.
+						Download all the buildings for the current user
 						
 						
 					</div>
@@ -490,16 +485,16 @@ Uso básico:
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<b>cb</b>
+									<span class="light fixedFont">{callback}</span> <b>cb</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive data. The plugin returns synchronously.</dd>
 							
 								<dt>
-									<b>error</b>
+									<span class="light fixedFont">{callback}</span> <b>error</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive errors. The plugin returns synchronously.</dd>
 							
 							</dl>
 						
@@ -510,7 +505,7 @@ Uso básico:
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{building[]}</span> <a href="../symbols/Building.html">Building</a> Devuelve un array con los edificios asociados a la cuenta que tenemos configurada</dd>
+								<dd><span class="light fixedFont">{building[]}</span> <a href="../symbols/Building.html">Building</a> - buildings array.</dd>
 							
 							</dl>
 						
@@ -523,11 +518,12 @@ Uso básico:
 					<div class="fixedFont">&lt;static&gt; 
 					
 					<span class="light">{event[]}</span>
-					<span class="light">Situm.</span><b>fetchEventsFromBuilding</b>(building, cb, error)
+					<span class="light">Situm.</span><b>fetchEventsFromBuilding</b>({@link, cb, error)
 					
 					</div>
 					<div class="description">
-						Obtener los eventos asociados a un edificio
+						Download the events of a building.
+Download the events of a building
 						
 						
 					</div>
@@ -539,22 +535,22 @@ Uso básico:
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{building}</span> <b>building</b>
+									<span class="light fixedFont">{building}</span> <b>{@link</b>
 									
 								</dt>
-								<dd>- Uno de los edificios disponibled</dd>
+								<dd>Building building} - the building. Not null.</dd>
 							
 								<dt>
-									<b>cb</b>
+									<span class="light fixedFont">{callback}</span> <b>cb</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive data. The plugin returns synchronously.</dd>
 							
 								<dt>
-									<b>error</b>
+									<span class="light fixedFont">{callback}</span> <b>error</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive errors. The plugin returns synchronously.</dd>
 							
 							</dl>
 						
@@ -565,7 +561,7 @@ Uso básico:
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{event[]}</span> Devuelve un array con los eventos asociados</dd>
+								<dd><span class="light fixedFont">{event[]}</span> The evetns of a building</dd>
 							
 							</dl>
 						
@@ -582,7 +578,8 @@ Uso básico:
 					
 					</div>
 					<div class="description">
-						Obtener los pisos de un edificio
+						Download all the floors of a building.
+Download all the floors of a building
 						
 						
 					</div>
@@ -597,19 +594,19 @@ Uso básico:
 									<span class="light fixedFont">{building}</span> <b>{@link</b>
 									
 								</dt>
-								<dd>Building} - Un edificio de los obtenidos por la función <tt>fetchBuildings</tt></dd>
+								<dd>Building building} - the building. Not null.</dd>
 							
 								<dt>
-									<b>cb</b>
+									<span class="light fixedFont">{callback}</span> <b>cb</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive data. The plugin returns synchronously.</dd>
 							
 								<dt>
-									<b>error</b>
+									<span class="light fixedFont">{callback}</span> <b>error</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive errors. The plugin returns synchronously.</dd>
 							
 							</dl>
 						
@@ -620,7 +617,7 @@ Uso básico:
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{floor[]}</span> <a href="../symbols/Floor.html">Floor</a> - Devuelve un array con las plantas de un edificio</dd>
+								<dd><span class="light fixedFont">{floor[]}</span> <a href="../symbols/Floor.html">Floor</a> - floors array</dd>
 							
 							</dl>
 						
@@ -633,11 +630,12 @@ Uso básico:
 					<div class="fixedFont">&lt;static&gt; 
 					
 					<span class="light">{poi[]}</span>
-					<span class="light">Situm.</span><b>fetchIndoorPOIsFromBuilding</b>(building, cb, error)
+					<span class="light">Situm.</span><b>fetchIndoorPOIsFromBuilding</b>({@link, cb, error)
 					
 					</div>
 					<div class="description">
-						Obtener los puntos de interés dentro del edificio
+						Download the indoor POIs of a building.
+Download the indoor POIs of a building
 						
 						
 					</div>
@@ -649,22 +647,22 @@ Uso básico:
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{building}</span> <b>building</b>
+									<span class="light fixedFont">{building}</span> <b>{@link</b>
 									
 								</dt>
-								<dd>- Uno de los edificios disponibles</dd>
+								<dd>Building building} - the building. Not null.</dd>
 							
 								<dt>
-									<b>cb</b>
+									<span class="light fixedFont">{callback}</span> <b>cb</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive data. The plugin returns synchronously.</dd>
 							
 								<dt>
-									<b>error</b>
+									<span class="light fixedFont">{callback}</span> <b>error</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive errors. The plugin returns synchronously.</dd>
 							
 							</dl>
 						
@@ -675,7 +673,7 @@ Uso básico:
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{poi[]}</span> Devuelve un array con los puntos de interés</dd>
+								<dd><span class="light fixedFont">{poi[]}</span> <a href="../symbols/Poi.html">Poi</a> - Array of POIs</dd>
 							
 							</dl>
 						
@@ -688,11 +686,12 @@ Uso básico:
 					<div class="fixedFont">&lt;static&gt; 
 					
 					<span class="light">{map}</span>
-					<span class="light">Situm.</span><b>fetchMapFromFloor</b>(floor, cb, error)
+					<span class="light">Situm.</span><b>fetchMapFromFloor</b>({@link, cb, error)
 					
 					</div>
 					<div class="description">
-						Obtener el mapa de una de las plantas de un edificio
+						Download the map image of a floor
+Download the map image of a floor
 						
 						
 					</div>
@@ -704,22 +703,22 @@ Uso básico:
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{floor}</span> <b>floor</b>
+									<span class="light fixedFont">{floor}</span> <b>{@link</b>
 									
 								</dt>
-								<dd>- Una planta de alguno de los edificios</dd>
+								<dd>Floor floor} - the floor. Not null.</dd>
 							
 								<dt>
-									<b>cb</b>
+									<span class="light fixedFont">{callback}</span> <b>cb</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive data. The plugin returns synchronously.</dd>
 							
 								<dt>
-									<b>error</b>
+									<span class="light fixedFont">{callback}</span> <b>error</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive errors. The plugin returns synchronously.</dd>
 							
 							</dl>
 						
@@ -730,7 +729,7 @@ Uso básico:
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{map}</span> - Una imagen en base64</dd>
+								<dd><span class="light fixedFont">{map}</span> - The map image</dd>
 							
 							</dl>
 						
@@ -743,11 +742,12 @@ Uso básico:
 					<div class="fixedFont">&lt;static&gt; 
 					
 					<span class="light">{poi[]}</span>
-					<span class="light">Situm.</span><b>fetchOutdoorPOIsFromBuilding</b>(building, cb, error)
+					<span class="light">Situm.</span><b>fetchOutdoorPOIsFromBuilding</b>({@link, cb, error)
 					
 					</div>
 					<div class="description">
-						Obtener los puntos de interés del exterior de un edificio
+						Download the outdoor POIs of a building.
+Download the outdoor POIs of a building
 						
 						
 					</div>
@@ -759,22 +759,22 @@ Uso básico:
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{building}</span> <b>building</b>
+									<span class="light fixedFont">{building}</span> <b>{@link</b>
 									
 								</dt>
-								<dd>- Uno de los edificios disponibles</dd>
+								<dd>Building building} - the building. Not null.</dd>
 							
 								<dt>
-									<b>cb</b>
+									<span class="light fixedFont">{callback}</span> <b>cb</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive data. The plugin returns synchronously.</dd>
 							
 								<dt>
-									<b>error</b>
+									<span class="light fixedFont">{callback}</span> <b>error</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive errors. The plugin returns synchronously.</dd>
 							
 							</dl>
 						
@@ -785,7 +785,7 @@ Uso básico:
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{poi[]}</span> Devuelve un array con los puntos de interés</dd>
+								<dd><span class="light fixedFont">{poi[]}</span> <a href="../symbols/Poi.html">Poi</a> - Array of POIs</dd>
 							
 							</dl>
 						
@@ -802,7 +802,8 @@ Uso básico:
 					
 					</div>
 					<div class="description">
-						Obtener los tipos de puntos de interés que tenemos disponibles
+						Get all POI categories, download and cache their icons asynchronously.
+Get all POI categories, download and cache their icons asynchronously. To get some of those icons from local storage @see fetchPoiCategoryIconNormal(PoiCategory) or fetchPoiCategoryIconSelected(PoiCategory)
 						
 						
 					</div>
@@ -814,16 +815,16 @@ Uso básico:
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<b>cb</b>
+									<span class="light fixedFont">{callback}</span> <b>cb</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive data. The plugin returns synchronously.</dd>
 							
 								<dt>
-									<b>error</b>
+									<span class="light fixedFont">{callback}</span> <b>error</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive errors. The plugin returns synchronously.</dd>
 							
 							</dl>
 						
@@ -834,7 +835,7 @@ Uso básico:
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{poiCategory[]}</span> Devuelve un array con los tipos de puntos de interés</dd>
+								<dd><span class="light fixedFont">{poiCategory[]}</span> PoiCategory - poiCategories</dd>
 							
 							</dl>
 						
@@ -847,11 +848,12 @@ Uso básico:
 					<div class="fixedFont">&lt;static&gt; 
 					
 					<span class="light">{icon}</span>
-					<span class="light">Situm.</span><b>fetchPoiCategoryIconNormal</b>(category, cb, error)
+					<span class="light">Situm.</span><b>fetchPoiCategoryIconNormal</b>({@link, cb, error)
 					
 					</div>
 					<div class="description">
-						Devuelve el icono para una categoría de puntos de interés
+						Get the normal category icon for a category.
+Get the normal category icon for a category
 						
 						
 					</div>
@@ -863,22 +865,22 @@ Uso básico:
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{category}</span> <b>category</b>
+									<span class="light fixedFont">{category}</span> <b>{@link</b>
 									
 								</dt>
-								<dd>- La categoría de la que queremos obtener el icono</dd>
+								<dd>PoiCategory category} - the category. Not null.</dd>
 							
 								<dt>
-									<b>cb</b>
+									<span class="light fixedFont">{callback}</span> <b>cb</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive data. The plugin returns synchronously.</dd>
 							
 								<dt>
-									<b>error</b>
+									<span class="light fixedFont">{callback}</span> <b>error</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive errors. The plugin returns synchronously.</dd>
 							
 							</dl>
 						
@@ -889,7 +891,7 @@ Uso básico:
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{icon}</span> - El icono en base 64</dd>
+								<dd><span class="light fixedFont">{icon}</span> - The category icon</dd>
 							
 							</dl>
 						
@@ -902,11 +904,12 @@ Uso básico:
 					<div class="fixedFont">&lt;static&gt; 
 					
 					<span class="light">{icon}</span>
-					<span class="light">Situm.</span><b>fetchPoiCategoryIconSelected</b>(category, cb, error)
+					<span class="light">Situm.</span><b>fetchPoiCategoryIconSelected</b>({@link, cb, error)
 					
 					</div>
 					<div class="description">
-						Devuelve el icono de selección para una categoría de puntos de interés
+						Get the selected category icon for a category.
+Get the selected category icon for a category
 						
 						
 					</div>
@@ -918,22 +921,22 @@ Uso básico:
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{category}</span> <b>category</b>
+									<span class="light fixedFont">{category}</span> <b>{@link</b>
 									
 								</dt>
-								<dd>- la cateogría de la que queremos obtener el icono</dd>
+								<dd>PoiCategory category} - the category. Not null.</dd>
 							
 								<dt>
-									<b>cb</b>
+									<span class="light fixedFont">{callback}</span> <b>cb</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive data. The plugin returns synchronously.</dd>
 							
 								<dt>
-									<b>error</b>
+									<span class="light fixedFont">{callback}</span> <b>error</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive errors. The plugin returns synchronously.</dd>
 							
 							</dl>
 						
@@ -944,7 +947,7 @@ Uso básico:
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{icon}</span> - El icono en base 64</dd>
+								<dd><span class="light fixedFont">{icon}</span> - The category icon</dd>
 							
 							</dl>
 						
@@ -961,7 +964,8 @@ Uso básico:
 					
 					</div>
 					<div class="description">
-						In validar la caché para poder refrescar los datos
+						Invalidate all the resources in the cache.
+Invalidate all the resources in the cache
 						
 						
 					</div>
@@ -973,16 +977,16 @@ Uso básico:
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<b>cb</b>
+									<span class="light fixedFont">{callback}</span> <b>cb</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive data. The plugin returns synchronously.</dd>
 							
 								<dt>
-									<b>error</b>
+									<span class="light fixedFont">{callback}</span> <b>error</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive errors. The plugin returns synchronously.</dd>
 							
 							</dl>
 						
@@ -1005,12 +1009,13 @@ Uso básico:
 					<a name=".requestDirections"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
-					<span class="light">{direction}</span>
-					<span class="light">Situm.</span><b>requestDirections</b>(-, cb, error)
+					<span class="light">{route}</span>
+					<span class="light">Situm.</span><b>requestDirections</b>(request, cb, error)
 					
 					</div>
 					<div class="description">
-						Intenta convertir un punto en una dirección
+						Calculates a route between two points.
+Calculates a route between two points.
 						
 						
 					</div>
@@ -1022,22 +1027,22 @@ Uso básico:
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{point}</span> <b>-</b>
+									<span class="light fixedFont">{args}</span> <b>request</b>
 									
 								</dt>
-								<dd>Un punto del mapa</dd>
+								<dd>- request - non-null search parameters. {@link Building building}, {@link Point from} and {@link Point to}. Points have to be inside the same building.</dd>
 							
 								<dt>
-									<b>cb</b>
+									<span class="light fixedFont">{callback}</span> <b>cb</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive data. The plugin returns synchronously.</dd>
 							
 								<dt>
-									<b>error</b>
+									<span class="light fixedFont">{callback}</span> <b>error</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive errors. The plugin returns synchronously.</dd>
 							
 							</dl>
 						
@@ -1048,7 +1053,7 @@ Uso básico:
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{direction}</span> - La dirección correspondiente al punto que se envía</dd>
+								<dd><span class="light fixedFont">{route}</span> Route - The route between provided points</dd>
 							
 							</dl>
 						
@@ -1060,12 +1065,13 @@ Uso básico:
 					<a name=".setApiKey"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
-					<span class="light">{void}</span>
-					<span class="light">Situm.</span><b>setApiKey</b>(email, api_key, cb, error)
+					<span class="light">{boolean}</span>
+					<span class="light">Situm.</span><b>setApiKey</b>(email, apiKey, cb, error)
 					
 					</div>
 					<div class="description">
-						Configura la api-key para utilizar en las peticiones.
+						Provides your API key to the Situm SDK for Android.
+Provides your API key to the Situm SDK for Android. This key is generated for your application in the Dashboard. Old credentials will be removed.
 						
 						
 					</div>
@@ -1080,25 +1086,25 @@ Uso básico:
 									<span class="light fixedFont">{string}</span> <b>email</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- email that identifies the account. Can't be empty.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{string}</span> <b>api_key</b>
+									<span class="light fixedFont">{string}</span> <b>apiKey</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- key obtained at situm.es. Can't be empty.</dd>
 							
 								<dt>
-									<b>cb</b>
+									<span class="light fixedFont">{callback}</span> <b>cb</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive data. The plugin returns synchronously.</dd>
 							
 								<dt>
-									<b>error</b>
+									<span class="light fixedFont">{callback}</span> <b>error</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive errors. The plugin returns synchronously.</dd>
 							
 							</dl>
 						
@@ -1109,7 +1115,7 @@ Uso básico:
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{void}</span> </dd>
+								<dd><span class="light fixedFont">{boolean}</span> true if operation finished successfully, otherwise false</dd>
 							
 							</dl>
 						
@@ -1121,12 +1127,13 @@ Uso básico:
 					<a name=".setCacheMaxAge"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
-					
-					<span class="light">Situm.</span><b>setCacheMaxAge</b>(cacheAge, cb, error)
+					<span class="light">{void}</span>
+					<span class="light">Situm.</span><b>setCacheMaxAge</b>(maxAge, cb, error)
 					
 					</div>
 					<div class="description">
-						Configurar tiempo máximo para mantener los datos en caché
+						Sets the maximum age of a cached response.
+Sets the maximum age of a cached response. If the cache response's age exceeds maxAge, it will not be used and a network request will be made.
 						
 						
 					</div>
@@ -1138,28 +1145,35 @@ Uso básico:
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{number}</span> <b>cacheAge</b>
+									<span class="light fixedFont">{number}</span> <b>maxAge</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- a non-negative integer</dd>
 							
 								<dt>
-									<b>cb</b>
+									<span class="light fixedFont">{callback}</span> <b>cb</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive data. The plugin returns synchronously.</dd>
 							
 								<dt>
-									<b>error</b>
+									<span class="light fixedFont">{callback}</span> <b>error</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive errors. The plugin returns synchronously.</dd>
 							
 							</dl>
 						
 						
 						
 						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{void}</span> </dd>
+							
+							</dl>
 						
 						
 						
@@ -1169,12 +1183,13 @@ Uso básico:
 					<a name=".setUserPass"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
-					<span class="light">{void}</span>
+					<span class="light">{boolean}</span>
 					<span class="light">Situm.</span><b>setUserPass</b>(email, password, cb, error)
 					
 					</div>
 					<div class="description">
-						Obtener un token de usuario con una email y una contraseña.
+						Provides user's email and password.
+Provides user's email and password. This credentials will be used to obtain a valid user token to authenticate the server request, when necessary. Token obtaining is not necessary done when this method is executed. Old credentials will be removed.
 						
 						
 					</div>
@@ -1189,25 +1204,25 @@ Uso básico:
 									<span class="light fixedFont">{string}</span> <b>email</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- user's email. Can't be empty.</dd>
 							
 								<dt>
 									<span class="light fixedFont">{string}</span> <b>password</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- user's password. Can't be empty.</dd>
 							
 								<dt>
-									<b>cb</b>
+									<span class="light fixedFont">{callback}</span> <b>cb</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive data. The plugin returns synchronously.</dd>
 							
 								<dt>
-									<b>error</b>
+									<span class="light fixedFont">{callback}</span> <b>error</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive errors. The plugin returns synchronously.</dd>
 							
 							</dl>
 						
@@ -1218,7 +1233,7 @@ Uso básico:
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{void}</span> </dd>
+								<dd><span class="light fixedFont">{boolean}</span> true if operation finished successfully, otherwise false</dd>
 							
 							</dl>
 						
@@ -1235,7 +1250,7 @@ Uso básico:
 					
 					</div>
 					<div class="description">
-						Iniciar el evento que devuelve la ubicación, esta función devolverá la posición actual del dispositivo hasta que se llame a la función <tt>sopPositioning</tt>
+						Set callback and starts listen onLocationChanged event.
 						
 						
 					</div>
@@ -1250,19 +1265,19 @@ Uso básico:
 									<span class="light fixedFont">{building[]}</span> <b>arrBuilding</b>
 									
 								</dt>
-								<dd>- El array de edificios que tengamos para nuestra cuenta</dd>
+								<dd>- Array of buildings to activate locationListener.</dd>
 							
 								<dt>
-									<b>cb</b>
+									<span class="light fixedFont">{callback}</span> <b>cb</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive data. The plugin returns synchronously.</dd>
 							
 								<dt>
-									<b>error</b>
+									<span class="light fixedFont">{callback}</span> <b>error</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive errors. The plugin returns synchronously.</dd>
 							
 							</dl>
 						
@@ -1273,7 +1288,7 @@ Uso básico:
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{position}</span> position - Posición actual devuelta en un objeto <tt>position</tt></dd>
+								<dd><span class="light fixedFont">{position}</span> position - Current position of device.</dd>
 							
 							</dl>
 						
@@ -1290,7 +1305,7 @@ Uso básico:
 					
 					</div>
 					<div class="description">
-						Detiene el evento que devuelve la ubicación del dispositivo, si no se ha llamado a la función <tt>startPositioning</tt> no tendrá efecto alguno.
+						Stop locationListener on current active listener.
 						
 						
 					</div>
@@ -1302,16 +1317,16 @@ Uso básico:
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<b>cb</b>
+									<span class="light fixedFont">{callback}</span> <b>cb</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive data. The plugin returns synchronously.</dd>
 							
 								<dt>
-									<b>error</b>
+									<span class="light fixedFont">{callback}</span> <b>error</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>- Cordova native callback to recive errors. The plugin returns synchronously.</dd>
 							
 							</dl>
 						
@@ -1343,7 +1358,7 @@ Uso básico:
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Fri Mar 16 2018 13:31:11 GMT+0100 (CET)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Mon Mar 19 2018 11:00:20 GMT+0100 (CET)
 		</div>
 	</body>
 </html>
