@@ -127,13 +127,13 @@ stopPositioning();
 
 #### - fetchBuildings
 
-###### Download all the [buildings](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Building.html) for the current user.
+###### Download all the buildings for the current user.
+
+###### See [building](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Building.html) in docs.
 
 ```javascript
 fetchBuildings();
 ```
-
-###### See [building](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Building.html) in docs.
 
 ## :large_blue_diamond: Contributing
 
