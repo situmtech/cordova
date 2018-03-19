@@ -18,6 +18,18 @@
 
 ---
 
+## :large_blue_diamond: Setup your account
+
+#### In this tutorial, we will guide you step by step to set up your first Android application using Situm SDK. Before starting to write code, we recommend you to set up an account in our Dashboard (https://dashboard.situm.es), retrieve your API KEY and configure your first building.
+
+###### 1. Go to the [sign in form](http://dashboard.situm.es/accounts/register) and enter your username and password to sign in.
+
+###### 2. Go to the [account section](https://dashboard.situm.es/accounts/profile) and on the bottom, click on “generate one” to generate your API KEY.
+
+###### 3. Go to the [buildings section](http://dashboard.situm.es/buildings) and create your first building.
+
+---
+
 GRAPHICAL EXAMPLES
 
 ![Calibrate](https://lh3.googleusercontent.com/9I_c7xPt12V8PZwCt7bfsor8sS3vWOro1Sht30Pw9VFLLybcD0hMZ3ELGF-WmYcrrw=h900-rw) ![Get Position](https://lh3.googleusercontent.com/1ukNJOgV8D4QXsgZFAb8SOOuB2g5K4MGFHpopRk-GAfnYa41TB2NkOYgdcpdIwSG6xY=h900-rw)
