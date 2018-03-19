@@ -9,12 +9,12 @@ var PLUGIN_NAME = 'Situm';
 var Situm = {
 
   /**
-   * Provides your API key to the Situm SDK for Android.
-   * @description Provides your API key to the Situm SDK for Android. This key is generated for your application in the Dashboard. Old credentials will be removed.
+   * Provides your API key to the Situm SDK.
+   * @description Provides your API key to the Situm SDK. This key is generated for your application in the Dashboard. Old credentials will be removed.
    * @param {string} email - email that identifies the account. Can't be empty.
    * @param {string} apiKey - key obtained at situm.es. Can't be empty.
-   * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
-   * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+   * @param {callback} cb - Cordova native callback to recive data.
+   * @param {callback} error - Cordova native callback to recive errors.
    * @returns {boolean} true if operation finished successfully, otherwise false
    */
   setApiKey: function (email, apiKey, cb, error) {
@@ -25,8 +25,8 @@ var Situm = {
    * @description Provides user's email and password. This credentials will be used to obtain a valid user token to authenticate the server request, when necessary. Token obtaining is not necessary done when this method is executed. Old credentials will be removed.
    * @param {string} email - user's email. Can't be empty.
    * @param {string} password - user's password. Can't be empty.
-   * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
-   * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+   * @param {callback} cb - Cordova native callback to recive data.
+   * @param {callback} error - Cordova native callback to recive errors.
    * @returns {boolean} true if operation finished successfully, otherwise false
    */
   setUserPass: function (email, apiKey, cb, error) {
@@ -36,8 +36,8 @@ var Situm = {
    * Sets the maximum age of a cached response.
    * @description Sets the maximum age of a cached response. If the cache response's age exceeds maxAge, it will not be used and a network request will be made.
    * @param {number} maxAge - a non-negative integer
-   * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
-   * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+   * @param {callback} cb - Cordova native callback to recive data.
+   * @param {callback} error - Cordova native callback to recive errors.
    * @returns {void}
    */
   setCacheMaxAge: function (cacheAge, cb, error) {
@@ -45,9 +45,9 @@ var Situm = {
   },
   /**
    * Set callback and starts listen onLocationChanged event.
-   * @param {building[]} arrBuilding - Array of buildings to activate locationListener.
-   * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
-   * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+   * @param {building[]} arrBuilding - Array of buildings to activate locationListener, the plugin only uses the first building.
+   * @param {callback} cb - Cordova native callback to recive data.
+   * @param {callback} error - Cordova native callback to recive errors.
    * @return {position} position - Current position of device.
    */
   startPositioning: function (arrBuilding, cb, error) {
@@ -55,8 +55,8 @@ var Situm = {
   },
   /**
    * Stop locationListener on current active listener.
-   * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
-   * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+   * @param {callback} cb - Cordova native callback to recive data.
+   * @param {callback} error - Cordova native callback to recive errors.
    * @returns {void}
    */
   stopPositioning: function (cb, error) {
@@ -66,8 +66,8 @@ var Situm = {
    * @function fetchBuildings
    * Download all the buildings for the current user.
    * @description Download all the buildings for the current user
-   * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
-   * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+   * @param {callback} cb - Cordova native callback to recive data.
+   * @param {callback} error - Cordova native callback to recive errors.
    * @returns {building[]} {@link Building} - buildings array.
    */
   fetchBuildings: function (cb, error) {
@@ -77,8 +77,8 @@ var Situm = {
    * Download all the floors of a building.
    * @description Download all the floors of a building
    * @param {building} {@link Building building} - the building. Not null.
-   * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
-   * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+   * @param {callback} cb - Cordova native callback to recive data.
+   * @param {callback} error - Cordova native callback to recive errors.
    * @returns {floor[]} {@link Floor} - floors array 
    */
   fetchFloorsFromBuilding: function (building, cb, error) {
@@ -88,8 +88,8 @@ var Situm = {
    * Download the indoor POIs of a building.
    * @description Download the indoor POIs of a building
    * @param {building} {@link Building building} - the building. Not null.
-   * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
-   * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+   * @param {callback} cb - Cordova native callback to recive data.
+   * @param {callback} error - Cordova native callback to recive errors.
    * @returns {poi[]} {@link Poi} - Array of POIs
    */
   fetchIndoorPOIsFromBuilding: function (building, cb, error) {
@@ -99,8 +99,8 @@ var Situm = {
    * Download the outdoor POIs of a building.
    * @description Download the outdoor POIs of a building
    * @param {building} {@link Building building} - the building. Not null.
-   * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
-   * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+   * @param {callback} cb - Cordova native callback to recive data.
+   * @param {callback} error - Cordova native callback to recive errors.
    * @returns {poi[]} {@link Poi} - Array of POIs
    */
   fetchOutdoorPOIsFromBuilding: function (building, cb, error) {
@@ -110,8 +110,8 @@ var Situm = {
    * Download the events of a building.
    * @description Download the events of a building
    * @param {building} {@link Building building} - the building. Not null.
-   * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
-   * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+   * @param {callback} cb - Cordova native callback to recive data.
+   * @param {callback} error - Cordova native callback to recive errors.
    * @returns {event[]} The evetns of a building
    */
   fetchEventsFromBuilding: function (building, cb, error) {
@@ -120,8 +120,8 @@ var Situm = {
   /**
    * Get all POI categories, download and cache their icons asynchronously.
    * @description Get all POI categories, download and cache their icons asynchronously. To get some of those icons from local storage @see {@link fetchPoiCategoryIconNormal(PoiCategory)} or {@link fetchPoiCategoryIconSelected(PoiCategory)}
-   * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
-   * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+   * @param {callback} cb - Cordova native callback to recive data.
+   * @param {callback} error - Cordova native callback to recive errors.
    * @returns {poiCategory[]} {@link PoiCategory} - poiCategories
    */
   fetchPoiCategories: function (cb, error) {
@@ -131,8 +131,8 @@ var Situm = {
    * Download the map image of a floor
    * @description Download the map image of a floor
    * @param {floor} {@link Floor floor} - the floor. Not null.
-   * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
-   * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+   * @param {callback} cb - Cordova native callback to recive data.
+   * @param {callback} error - Cordova native callback to recive errors.
    * @returns {map} - The map image
    */
   fetchMapFromFloor: function (floor, cb, error) {
@@ -142,8 +142,8 @@ var Situm = {
    * Get the normal category icon for a category.
    * @description Get the normal category icon for a category
    * @param {category} {@link PoiCategory category} - the category. Not null.
-   * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
-   * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+   * @param {callback} cb - Cordova native callback to recive data.
+   * @param {callback} error - Cordova native callback to recive errors.
    * @returns {icon} - The category icon
    */
   fetchPoiCategoryIconNormal: function (category, cb, error) {
@@ -153,8 +153,8 @@ var Situm = {
    * Get the selected category icon for a category.
    * @description Get the selected category icon for a category
    * @param {category} {@link PoiCategory category} - the category. Not null.
-   * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
-   * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+   * @param {callback} cb - Cordova native callback to recive data.
+   * @param {callback} error - Cordova native callback to recive errors.
    * @returns {icon} - The category icon
    */
   fetchPoiCategoryIconSelected: function (category, cb, error) {
@@ -163,8 +163,8 @@ var Situm = {
   /**
    * Invalidate all the resources in the cache.
    * @description Invalidate all the resources in the cache
-   * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
-   * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+   * @param {callback} cb - Cordova native callback to recive data.
+   * @param {callback} error - Cordova native callback to recive errors.
    * @returns {void}
    */
   invalidateCache: function (cb, error) {
@@ -174,8 +174,8 @@ var Situm = {
    * Calculates a route between two points.
    * @description Calculates a route between two points.
    * @param {args} request - request - non-null search parameters. {@link Building building}, {@link Point from} and {@link Point to}. Points have to be inside the same building.
-   * @param {callback} cb - Cordova native callback to recive data. The plugin returns synchronously.
-   * @param {callback} error - Cordova native callback to recive errors. The plugin returns synchronously.
+   * @param {callback} cb - Cordova native callback to recive data.
+   * @param {callback} error - Cordova native callback to recive errors.
    * @return {route} {@link Route} - The route between provided points
    */
   requestDirections: function (args, cb, error) {
