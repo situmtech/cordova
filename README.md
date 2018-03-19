@@ -141,6 +141,22 @@ fetchBuildings();
 fetchFloorsFromBuilding(building);
 ```
 
+#### - fetchIndoorPOIsFromBuilding
+
+###### Download the indoor [POIs](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Poi.html) of a [building](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Building.html).
+
+```javascript
+fetchIndoorPOIsFromBuilding(building);
+```
+
+#### - fetchOutdoorPOIsFromBuilding
+
+###### Download the outdoor [POIs](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Poi.html) of a [building](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Building.html).
+
+```javascript
+fetchOutdoorPOIsFromBuilding(building);
+```
+
 ## :large_blue_diamond: Contributing
 
 ```
