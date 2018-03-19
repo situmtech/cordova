@@ -36,13 +36,13 @@
 
 ###### - Configure cordova:
 
-###### \* https://cordova.apache.org/docs/en/latest/guide/cli/index.html#installing-the-cordova-cli
+* https://cordova.apache.org/docs/en/latest/guide/cli/index.html#installing-the-cordova-cli
 
 ###### - Cordova requirements:
 
-###### \* Android: https://cordova.apache.org/docs/en/latest/guide/platforms/android/#installing-the-requirements
+* Android: https://cordova.apache.org/docs/en/latest/guide/platforms/android/#installing-the-requirements
 
-###### \* IOs: https://cordova.apache.org/docs/en/latest/guide/platforms/android/#installing-the-requirements
+* IOs: https://cordova.apache.org/docs/en/latest/guide/platforms/android/#installing-the-requirements
 
 ---
 
