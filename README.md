@@ -42,19 +42,21 @@
 
 * Android: https://cordova.apache.org/docs/en/latest/guide/platforms/android/#installing-the-requirements
 
-* IOs: https://cordova.apache.org/docs/en/latest/guide/platforms/android/#installing-the-requirements
+* iOS: https://cordova.apache.org/docs/en/latest/guide/platforms/android/#installing-the-requirements
 
 ---
 
 ## :large_blue_diamond: Installing the plugin
 
-#### From npm
+###### In this we assume that you have already created an application hybrid with your favorite framework (Ionic, Phonegap, Appcelerator, Telerik...). There are some different ways to install the plugin:
+
+#### 1) Manually from npm:
 
 ```bash
 $ cordova plugin add situm-cordova-plugin-official-development
 ```
 
-#### Phonegap Build
+#### 2) Defined in config.xml for automatic installation:
 
 ```xml
   <plugin name="situm-cordova-plugin-official-development" source="npm">
@@ -62,21 +64,11 @@ $ cordova plugin add situm-cordova-plugin-official-development
   </plugin>
 ```
 
-#### From master (latest, greatest.)
+#### 3) With Cordova CLI utility from master (or another branch):
 
 ```
 $ cordova plugin add https://github.com/situmtech/situm-cordova-plugin.git
 ```
-
----
-
-## :large_blue_diamond: Configuring the plugin
-
-```
-TODO ANDROID SDK AND IOS
-```
-
----
 
 ## :large_blue_diamond: Using the Plugin
 
