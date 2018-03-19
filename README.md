@@ -20,7 +20,7 @@
 
 ## :large_blue_diamond: Setup your account
 
-#### In this tutorial, we will guide you step by step to set up your first Android application using Situm SDK. Before starting to write code, we recommend you to set up an account in our Dashboard (https://dashboard.situm.es), retrieve your API KEY and configure your first building.
+#### In this tutorial, we will guide you step by step to set up your first Cordova application using Cordova Situm Plugin. Before starting to write code, we recommend you to set up an account in our Dashboard (https://dashboard.situm.es), retrieve your API KEY and configure your first building.
 
 ###### 1. Go to the [sign in form](http://dashboard.situm.es/accounts/register) and enter your username and password to sign in.
 
@@ -29,6 +29,10 @@
 ###### 3. Go to the [buildings section](http://dashboard.situm.es/buildings) and create your first building.
 
 ###### 4. Install the plugin and start using it
+
+---
+
+## :large_blue_diamond: Install pre-requisites
 
 ###### - Configure cordova:
 
@@ -40,16 +44,6 @@
 * IOs: https://cordova.apache.org/docs/en/latest/guide/platforms/android/#installing-the-requirements
 
 ---
-
-GRAPHICAL EXAMPLES
-
-![Calibrate](https://lh3.googleusercontent.com/9I_c7xPt12V8PZwCt7bfsor8sS3vWOro1Sht30Pw9VFLLybcD0hMZ3ELGF-WmYcrrw=h900-rw) ![Get Position](https://lh3.googleusercontent.com/1ukNJOgV8D4QXsgZFAb8SOOuB2g5K4MGFHpopRk-GAfnYa41TB2NkOYgdcpdIwSG6xY=h900-rw)
-
-## :large_blue_diamond: Table of Contents
-
-```
-LIST OF LINKS TO GITHUB WIKI PAGES DETAILING OBJECTS AND INTERFACES
-```
 
 ## :large_blue_diamond: Installing the plugin
 
@@ -73,11 +67,15 @@ $ cordova plugin add situm-cordova-plugin-official-development
 $ cordova plugin add https://github.com/situmtech/situm-cordova-plugin.git
 ```
 
+---
+
 ## :large_blue_diamond: Configuring the plugin
 
 ```
 TODO ANDROID SDK AND IOS
 ```
+
+---
 
 ## :large_blue_diamond: Using the Plugin
 
