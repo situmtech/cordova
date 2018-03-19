@@ -96,8 +96,6 @@ $ cordova plugin add https://github.com/situmtech/situm-cordova-plugin.git
 
 #### Accessing plugin object
 
-```javascript
-
 When device ready event is fired, global cordova variable is injected in namespace. Plugins are available in this variable: cordova.plugins. The Situm Cordova Plugin is autowired within this object.
 
 So, all methods are called in the same way, e.g. 'setApiKey':
