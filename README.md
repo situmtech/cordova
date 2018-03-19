@@ -6,7 +6,9 @@
 
 ## :large_blue_diamond: Description
 
-Situm Cordova Plugin provides a solution to use the Native Situm SDK in hybrid apps and enables app developers to use indoor positioning venues that have been fingerprinted with a pure javascript interface.
+Situm Cordova Plugin is a set of utilities that allow any developer to build Cordova location based apps using Situm's indoor positioning system. Among many other capabilities, apps developed with Situm Cordova Plugin will be able to:
+
+· Obtain information related to buildings where Situm's positioning system is already configured: floorplans, points of interest, geotriggered events, etc. · Retrieve the location of the smartphone inside these buildings (position, orientation, and floor where the smartphone is). · Compute a route from a point A (e.g. where the smartphone is) to a point B (e.g. any point of interest within the building). · Trigger notifications when the user enters a certain area.
 
 ---
 
