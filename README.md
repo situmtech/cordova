@@ -48,7 +48,7 @@
 
 ## :large_blue_diamond: Installing the plugin
 
-###### In this we assume that you have already created an application hybrid with your favorite framework (Ionic, Phonegap, Appcelerator, Telerik...). There are some different ways to install the plugin:
+###### In this we assume that you have already created an hybrid application with your favorite framework (Ionic, Phonegap, Appcelerator, Telerik...). After that there are some different ways to install the plugin:
 
 #### 1) Manually from npm:
 
