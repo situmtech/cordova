@@ -20,7 +20,7 @@
 
 ## :large_blue_diamond: Setup your account
 
-#### In this tutorial, we will guide you step by step to set up your first Cordova application using Cordova Situm Plugin. Before starting to write code, we recommend you to set up an account in our Dashboard (https://dashboard.situm.es), retrieve your API KEY and configure your first building.
+###### In this tutorial, we will guide you step by step to set up your first Cordova application using Cordova Situm Plugin. Before starting to write code, we recommend you to set up an account in our Dashboard (https://dashboard.situm.es), retrieve your API KEY and configure your first building.
 
 ###### 1. Go to the [sign in form](http://dashboard.situm.es/accounts/register) and enter your username and password to sign in.
 
@@ -28,7 +28,7 @@
 
 ###### 3. Go to the [buildings section](http://dashboard.situm.es/buildings) and create your first building.
 
-###### 4. Install the plugin and start using it
+###### 4. You are ready for building your own Cordova applications. Please check next steps.
 
 ---
 
