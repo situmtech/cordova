@@ -30,6 +30,10 @@
 
 ###### 4. Install the plugin and start to use
 
+###### - Configure cordova:
+
+* https://cordova.apache.org/docs/en/latest/guide/cli/index.html#installing-the-cordova-cli
+
 ###### - Cordova requirements:
 
 * Android: https://cordova.apache.org/docs/en/latest/guide/platforms/android/#installing-the-requirements
