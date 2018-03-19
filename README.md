@@ -28,11 +28,11 @@
 
 ###### 3. Go to the [buildings section](http://dashboard.situm.es/buildings) and create your first building.
 
-###### 4. You are ready for building your own Cordova applications. Please check next steps.
+###### 4. You are ready for building your own Cordova applications. Please check next steps about requirements
 
 ---
 
-## :large_blue_diamond: Install pre-requisites
+## :large_blue_diamond: Installing pre-requisites
 
 ###### - Configure cordova:
 
