@@ -4,6 +4,27 @@
 
 ---
 
+## - Table of contents
+
+* [Description](#large_blue_diamond-description)
+* [Setup](#large_blue_diamond-setup-your-account)
+* [Pre-requisites](#large_blue_diamond-installing-pre-requisites)
+* [Install plugin](#large_blue_diamond-installing-the-plugin)
+* [Using plugin](#large_blue_diamond-using-the-plugin) star:
+
+- [Accesing plugin object](#accessing-plugin-object)
+- [setApiKey](#--setapikey)
+- [setUserPass](#--setUserPass)
+- [setCacheMaxAge](#--setCacheMaxAge)
+- [startPositioning](#--startPositioning)
+- [stopPositioning](#--stopPositioning)
+- [fetchBuildings](#--fetchBuildings)
+- [fetchFloorsFromBuilding](#--fetchFloorsFromBuilding)
+- [fetchIndoorPOIsFromBuilding](#--fetchIndoorPOIsFromBuilding)
+- [fetchOutdoorPOIsFromBuilding](#--fetchOutdoorPOIsFromBuilding)
+
+---
+
 ## :large_blue_diamond: Description
 
 ###### Situm Cordova Plugin is a set of utilities that allow any developer to build Cordova location based apps using Situm's indoor positioning system. Among many other capabilities, apps developed with Situm Cordova Plugin will be able to:
