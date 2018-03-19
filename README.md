@@ -11,8 +11,8 @@
 * [Pre-requisites](#large_blue_diamond-installing-pre-requisites)
 * [Install plugin](#large_blue_diamond-installing-the-plugin)
 * [Using plugin](#large_blue_diamond-using-the-plugin)
+  * [Accesing plugin object](#accessing-plugin-object)
 
-- [Accesing plugin object](#accessing-plugin-object)
 - [setApiKey](#--setapikey)
 - [setUserPass](#--setUserPass)
 - [setCacheMaxAge](#--setCacheMaxAge)
