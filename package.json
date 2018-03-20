@@ -1,6 +1,6 @@
 {
   "name": "situm-cordova-plugin-official",
-  "version": "1.3.4",
+  "version": "1.3.8",
   "cordova": {
     "id": "situm-cordova-plugin-official",
     "platforms": [
@@ -33,6 +33,6 @@
   },
   "homepage": "https://github.com/siteumtech/situm-cordova-plugin#readme",
   "dependencies": {
-    "jsdoc-toolkit": "0.0.2"
+    "cordova-paramedic": "^0.5.0"
   }
 }

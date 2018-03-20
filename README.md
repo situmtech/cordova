@@ -1,97 +1,5 @@
-# Situm Cordova Plugin &middot; [![npm](https://img.shields.io/npm/dm/situm-cordova-plugin-official-development.svg)]() [![npm](https://img.shields.io/npm/v/situm-cordova-plugin-official-development.svg)]()
-
-[![](https://situm.es/assets/svg/logo-situm.svg)](https://www.situm.es)
 
 ---
-
-## - Table of contents
-
-* [Description](#large_blue_diamond-description)
-* [Setup](#large_blue_diamond-setup-your-account)
-* [Pre-requisites](#large_blue_diamond-installing-pre-requisites)
-* [Install plugin](#large_blue_diamond-installing-the-plugin)
-* [Using plugin](#large_blue_diamond-using-the-plugin)
-  * [Accesing plugin object](#accessing-plugin-object)
-  * [Methods](#methods)
-    * [setApiKey](#--setapikey)
-    * [setUserPass](#--setUserPass)
-    * [setCacheMaxAge](#--setCacheMaxAge)
-    * [startPositioning](#--startPositioning)
-    * [stopPositioning](#--stopPositioning)
-    * [fetchBuildings](#--fetchBuildings)
-    * [fetchFloorsFromBuilding](#--fetchFloorsFromBuilding)
-    * [fetchIndoorPOIsFromBuilding](#--fetchIndoorPOIsFromBuilding)
-    * [fetchOutdoorPOIsFromBuilding](#--fetchOutdoorPOIsFromBuilding)
-    * [fetchEventsFromBuilding](#--fetchEventsFromBuilding)
-    * [fetchPoiCategories](#--fetchPoiCategories)
-    * [fetchMapFromFloor](#--fetchMapFromFloor)
-    * [fetchPoiCategoryIconNormal](#--fetchPoiCategoryIconNormal)
-    * [fetchPoiCategoryIconSelected](#--fetchPoiCategoryIconSelected)
-    * [invalidateCache](#--invalidateCache)
-    * [requestDirections](#--requestDirections)
-
----
-
-## :large_blue_diamond: Description
-
-###### Situm Cordova Plugin is a set of utilities that allow any developer to build Cordova location based apps using Situm's indoor positioning system. Among many other capabilities, apps developed with Situm Cordova Plugin will be able to:
-
-###### · Obtain information related to buildings where Situm's positioning system is already configured: floorplans, points of interest, geotriggered events, etc.
-
-###### · Retrieve the location of the smartphone inside these buildings (position, orientation, and floor where the smartphone is).
-
-###### · Compute a route from a point A (e.g. where the smartphone is) to a point B (e.g. any point of interest within the building).
-
-###### · Trigger notifications when the user enters a certain area.
-
----
-
-## :large_blue_diamond: Setup your account
-
-###### In this tutorial, we will guide you step by step to set up your first Cordova application using Cordova Situm Plugin. Before starting to write code, we recommend you to set up an account in our Dashboard (https://dashboard.situm.es), retrieve your API KEY and configure your first building.
-
-###### 1. Go to the [sign in form](http://dashboard.situm.es/accounts/register) and enter your username and password to sign in.
-
-###### 2. Go to the [account section](https://dashboard.situm.es/accounts/profile) and on the bottom, click on “generate one” to generate your API KEY.
-
-###### 3. Go to the [buildings section](http://dashboard.situm.es/buildings) and create your first building.
-
-###### 4. Download Situm Mapping Tool in Play Store (Only Android devices) and calibrate your building. Check out our user guide for detailed information.
-
-###### 5. You are ready for building your own Cordova applications. Please check next steps about requirements
-
----
-
-## :large_blue_diamond: Installing pre-requisites
-
-###### - Configure cordova:
-
-* https://cordova.apache.org/docs/en/latest/guide/cli/index.html#installing-the-cordova-cli
-
-###### - Cordova requirements:
-
-* Android: https://cordova.apache.org/docs/en/latest/guide/platforms/android/#installing-the-requirements
-
-* iOS: https://cordova.apache.org/docs/en/latest/guide/platforms/android/#installing-the-requirements
-
----
-
-## :large_blue_diamond: Installing the plugin
-
-###### In this we assume that you have already created an hybrid application with your favorite framework (Ionic, Phonegap, Appcelerator, Telerik...). After that there are some different ways to install the plugin:
-
-#### 1) Manually from npm:
-
-```bash
-$ cordova plugin add situm-cordova-plugin-official-development
-```
-
-#### 2) Defined in config.xml for automatic installation:
-
-```xml
-  <plugin name="situm-cordova-plugin-official-development" source="npm">
-
-  </plugin>
 ```
 
 #### 3) With Cordova CLI utility from master (or another branch):
@@ -946,6 +854,8 @@ So, all methods are called in the same way, e.g. 'setApiKey':
         latitude: 0.00,
         longitude: 0.00
       }
+      var directionsOptionsMap = new Object();
+      directionsOptionsMap["accessible"] = true/false
     },
     center: {
       latitude: 0.00,
@@ -1235,5 +1145,6 @@ TODO CONTRIBUTORS ?
 ## :large_blue_diamond: License
 
 ```
+
 TODO LICENSING (MIT) ?
 ```

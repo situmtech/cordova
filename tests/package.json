@@ -1,0 +1,21 @@
+{
+    "name": "situm-cordova-plugin-official-tests",
+    "version": "0.0.1",
+    "description": "",
+    "cordova": {
+      "id": "situm-cordova-plugin-official-tests",
+      "platforms": [
+        "android",
+        "ios" 
+      ]
+    },
+    "keywords": [
+      "ecosystem:cordova"
+    ],
+    "scripts": {
+        "test:android": "cordova-paramedic --cleanUpAfterRun --verbose --platform android --plugin .",
+        "test:ios": "cordova-paramedic --cleanUpAfterRun --verbose --platform ios --plugin ."
+    },
+    "author": "Abraham Barros for Situm Technologies.",
+    "license": "Apache 2.0"
+  }
