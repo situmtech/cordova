@@ -143,7 +143,7 @@ class LocationWrapper {
     public static final String BOTTOM_RIGHT = "bottomRight";
     public static final String POI_CATEGORY_ICON_SELECTED = "icon_selected";
     public static final String POI_CATEGORY_ICON_UNSELECTED = "icon_unselected";
-    
+
     public static final String INTERVAL = "interval";
     public static final String INDOOR_PROVIDER = "indoorProvider";
     public static final String USE_BLE = "useBle";
@@ -250,7 +250,7 @@ class LocationWrapper {
         jo.put(BOTTOM_RIGHT, situmCA.getBottomRight());
         return jo;
     }
-    
+
     // POI
 
     static JSONObject poiToJsonObject(Poi poi) throws JSONException {
@@ -455,7 +455,6 @@ class LocationWrapper {
         jo.put(LAST_STEP, routeStepToJsonObject(route.getLastStep()));
         jo.put(NODES, nodesJsonArray);
         jo.put(POINTS, pointsJsonArray);
-        jo.put(INDICATIONS, indicationsJsonArray);
         jo.put(TO, pointToJsonObject(route.getTo()));
         jo.put(STEPS, stepsJsonArray);
         return jo;
