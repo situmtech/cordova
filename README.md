@@ -12,15 +12,16 @@
 * [Install plugin](#large_blue_diamond-installing-the-plugin)
 * [Using plugin](#large_blue_diamond-using-the-plugin)
   * [Accesing plugin object](#accessing-plugin-object)
-  * [setApiKey](#--setapikey)
-  * [setUserPass](#--setUserPass)
-  * [setCacheMaxAge](#--setCacheMaxAge)
-  * [startPositioning](#--startPositioning)
-  * [stopPositioning](#--stopPositioning)
-  * [fetchBuildings](#--fetchBuildings)
-  * [fetchFloorsFromBuilding](#--fetchFloorsFromBuilding)
-  * [fetchIndoorPOIsFromBuilding](#--fetchIndoorPOIsFromBuilding)
-  * [fetchOutdoorPOIsFromBuilding](#--fetchOutdoorPOIsFromBuilding)
+  * [Methods](#methods)
+    * [setApiKey](#--setapikey)
+    * [setUserPass](#--setUserPass)
+    * [setCacheMaxAge](#--setCacheMaxAge)
+    * [startPositioning](#--startPositioning)
+    * [stopPositioning](#--stopPositioning)
+    * [fetchBuildings](#--fetchBuildings)
+    * [fetchFloorsFromBuilding](#--fetchFloorsFromBuilding)
+    * [fetchIndoorPOIsFromBuilding](#--fetchIndoorPOIsFromBuilding)
+    * [fetchOutdoorPOIsFromBuilding](#--fetchOutdoorPOIsFromBuilding)
 
 ---
 
@@ -100,11 +101,13 @@ When device ready event is fired, global cordova variable is injected in namespa
 
 So, all methods are called in the same way, e.g. 'setApiKey':
 
-```
+```javascript
 cordova.plugins.Situm.setApiKey(email, apiKey);
 ```
 
-#### - setApiKey
+#### Methods
+
+##### - setApiKey
 
 ###### Log in into your Situm Account. This key is generated in Situm Dashboard. Return true if apiKey was set successfully, otherwise false
 
@@ -112,7 +115,7 @@ cordova.plugins.Situm.setApiKey(email, apiKey);
 setApiKey("your_email@domain.com", "YOUR_API_KEY");
 ```
 
-#### - setUserPass
+##### - setUserPass
 
 ###### Provides user's email and password.
 
@@ -120,7 +123,7 @@ setApiKey("your_email@domain.com", "YOUR_API_KEY");
 setUserPass("email@domain.com", "ourPassword");
 ```
 
-#### - setCacheMaxAge
+##### - setCacheMaxAge
 
 ###### Sets the maximum age of a cached response in seconds.
 
@@ -128,11 +131,69 @@ setUserPass("email@domain.com", "ourPassword");
 setCacheMaxAge(200);
 ```
 
-#### - startPositioning
+##### - startPositioning
 
 ###### Starts listen onLocationChanged event on first [building](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Building.html) in array
 
 ```javascript
+var building = {
+  buildingIdentifier: "buildingIdentifier",
+  name: "buildingName",
+  address: "address",
+  bounds: {
+    northEast: {
+      latitude: 0.00,
+      longitude: 0.00
+    },
+    northWest: {
+      latitude: 0.00,
+      longitude: 0.00
+    },
+    southEast: {
+      latitude: 0.00,
+      longitude: 0.00
+    },
+    southWest: {
+      latitude: 0.00,
+      longitude: 0.00
+    }
+  },
+  boundsRotated: {
+    northEast: {
+      latitude: 0.00,
+      longitude: 0.00
+    },
+    northWest: {
+      latitude: 0.00,
+      longitude: 0.00
+    },
+    southEast: {
+      latitude: 0.00,
+      longitude: 0.00
+    },
+    southWest: {
+      latitude: 0.00,
+      longitude: 0.00
+    }
+  },
+  center: {
+    latitude: 0.00,
+    longitude: 0.00
+  },
+  dimensions: {
+    width: 0.00,
+    height: 0.00
+  },
+  infoHtml: "infoHtml",
+  pictureThumbUrl: "pictureThumbUrl",
+  pictureUrl: "pictureUrl",
+  rotation: 0.00,
+  userIdentifier: "userIdentifier",
+  customFields: {
+    name: "value"
+  }
+}
+
 startPositioning([building], position => {
   // position as location object:
   position = {
@@ -188,7 +249,7 @@ startPositioning([building], position => {
 });
 ```
 
-#### - stopPositioning
+##### - stopPositioning
 
 ###### Stop locationListener on current active listener.
 
@@ -200,7 +261,7 @@ stopPositioning(() => {
 });
 ```
 
-#### - fetchBuildings
+##### - fetchBuildings
 
 ###### Download all the [buildings](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Building.html) for the current user.
 
@@ -208,7 +269,7 @@ stopPositioning(() => {
 fetchBuildings();
 ```
 
-#### - fetchFloorsFromBuilding
+##### - fetchFloorsFromBuilding
 
 ###### Download all the [floors](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Floor.html) of a [building](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Building.html).
 
@@ -216,7 +277,7 @@ fetchBuildings();
 fetchFloorsFromBuilding(building){}
 ```
 
-#### - fetchIndoorPOIsFromBuilding
+##### - fetchIndoorPOIsFromBuilding
 
 ###### Download the indoor [POIs](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Poi.html) of a [building](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Building.html).
 
@@ -224,7 +285,7 @@ fetchFloorsFromBuilding(building){}
 fetchIndoorPOIsFromBuilding(building){}
 ```
 
-#### - fetchOutdoorPOIsFromBuilding
+##### - fetchOutdoorPOIsFromBuilding
 
 ###### Download the outdoor [POIs](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Poi.html) of a [building](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Building.html).
 
@@ -232,7 +293,7 @@ fetchIndoorPOIsFromBuilding(building){}
 fetchOutdoorPOIsFromBuilding(building){}
 ```
 
-#### - fetchEventsFromBuilding
+##### - fetchEventsFromBuilding
 
 ###### Download the events of a [building](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Building.html).
 
@@ -240,7 +301,7 @@ fetchOutdoorPOIsFromBuilding(building){}
   fetchEventsFromBuilding(building) {}
 ```
 
-#### - fetchPoiCategories
+##### - fetchPoiCategories
 
 ###### Get all [POI categories](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/PoiCategory.html), download and cache their icons asynchronously.
 
@@ -248,7 +309,7 @@ fetchOutdoorPOIsFromBuilding(building){}
   fetchPoiCategories() {}
 ```
 
-#### - fetchMapFromFloor
+##### - fetchMapFromFloor
 
 ###### Download the map image of a [floor](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Floor.html).
 
@@ -256,7 +317,7 @@ fetchOutdoorPOIsFromBuilding(building){}
 fetchMapFromFloor () {}
 ```
 
-#### - fetchPoiCategoryIconNormal
+##### - fetchPoiCategoryIconNormal
 
 ###### Get the normal category icon for a [category](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/PoiCategory.html).
 
@@ -264,7 +325,7 @@ fetchMapFromFloor () {}
 fetchPoiCategoryIconNormal () {}
 ```
 
-#### - fetchPoiCategoryIconSelected
+##### - fetchPoiCategoryIconSelected
 
 ###### Get the selected category icon for a [category](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/PoiCategory.html).
 
@@ -272,7 +333,7 @@ fetchPoiCategoryIconNormal () {}
 fetchPoiCategoryIconSelected() {}
 ```
 
-#### - invalidateCache
+##### - invalidateCache
 
 ###### Invalidate all the resources in the cache.
 
@@ -280,7 +341,7 @@ fetchPoiCategoryIconSelected() {}
 invalidateCache() {}
 ```
 
-#### - requestDirections
+##### - requestDirections
 
 ###### Calculates a route between two [points](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Point.html).
 
