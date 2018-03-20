@@ -88,6 +88,11 @@ typedef NS_ENUM(NSInteger, kSITIndicationOrientation) {
 @property (nonatomic, readonly) BOOL needLevelChange;
 
 /**
+ Destination level of the step
+ */
+@property (nonatomic, readwrite) NSNumber* nextLevel;
+
+/**
  The angle between the previous destination and the line formed by the origin and destination of the current step (in radians).
  */
 @property (nonatomic, readonly) float orientationChange;
@@ -122,6 +127,26 @@ typedef NS_ENUM(NSInteger, kSITIndicationOrientation) {
  @param orientationChange the angle between the virtual line of (in radians)
  @param horizontalDistance the distance between the origin and destination SITRouteStep
  @param verticalDistance the number of levels that needs to go up (positive value) or down (negative value) in order to arrive to the destination.
+ @param nextLevel Destination level
+ @return an indication
+ @discussion You should not use this method directly. Instead you should use the indications provided by SITDirectionsManager or SITNavigationManager.
+ */
+- (instancetype)initWithStepIndex:(NSInteger)stepIndex
+             destinationStepIndex:(NSInteger)destinationStepIndex
+                orientationChange:(float)orientationChange
+               horizontalDistance:(float)horizontalDistance
+                 verticalDistance:(float)verticalDistance
+                        nextLevel:(NSNumber*)nextLevel;
+
+/**
+ Private method.
+ Initialize a SITIndication object.
+ 
+ @param stepIndex index of the origin SITRouteStep
+ @param destinationStepIndex index of the destination of a SITRouteStep
+ @param orientationChange the angle between the virtual line of (in radians)
+ @param horizontalDistance the distance between the origin and destination SITRouteStep
+ @param verticalDistance the number of levels that needs to go up (positive value) or down (negative value) in order to arrive to the destination.
  @return an indication
  @discussion You should not use this method directly. Instead you should use the indications provided by SITDirectionsManager or SITNavigationManager.
  */
@@ -141,6 +166,7 @@ typedef NS_ENUM(NSInteger, kSITIndicationOrientation) {
  @param orientation The type of turn (if any) the user should perform in order to arrive to the destination.
  @param orientationChange The angle between the previous destination and the line formed by the origin and destination of the current step (in radians).
  @param verticalDistance Number of levels between the origin and destination.
+ @param nextLevel Destination level
  @return an indication
  @discussion You should not use this method directly. Instead you should use the indications provided by SITDirectionsManager or SITNavigationManager.
  */
@@ -150,6 +176,28 @@ typedef NS_ENUM(NSInteger, kSITIndicationOrientation) {
                      horizontalDistance:(float)horizontalDistance
                             orientation:(kSITIndicationOrientation)orientation
                             orientationChange:(float)orientationChange
+                       verticalDistance:(float)verticalDistance
+                              nextLevel:(NSNumber*)nextLevel;
+
+/**
+ Private method.
+ 
+@param originStepIndex index of the origin SITRouteStep.
+@param destinationStepIndex index of the destination SITRouteStep.
+@param action the type of action the user should perform in order to arrive to the destination.
+@param horizontalDistance distance between origin and destination (in meters).
+@param orientation The type of turn (if any) the user should perform in order to arrive to the destination.
+@param orientationChange The angle between the previous destination and the line formed by the origin and destination of the current step (in radians).
+@param verticalDistance Number of levels between the origin and destination.
+@return an indication
+@discussion You should not use this method directly. Instead you should use the indications provided by SITDirectionsManager or SITNavigationManager.
+*/
+- (instancetype)initWithOriginStepIndex:(NSInteger)originStepIndex
+                   destinationStepIndex:(NSInteger)destinationStepIndex
+                                 action:(kSITIndicationActions)action
+                     horizontalDistance:(float)horizontalDistance
+                            orientation:(kSITIndicationOrientation)orientation
+                      orientationChange:(float)orientationChange
                        verticalDistance:(float)verticalDistance;
 
 /**

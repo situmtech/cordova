@@ -529,6 +529,11 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:[NSNumber numberWithInteger:indication.originStepIndex] forKey:@"stepIdxOrigin"];
     [jo setObject:[NSNumber numberWithBool:indication.needLevelChange] forKey:@"neededLevelChange"];
     [jo setObject:[indication humanReadableMessage] forKey:@"humanReadableMessage"];
+    if (indication.nextLevel == nil) {
+        NSLog(@"Next level is nil");
+    } else {
+        [jo setObject:indication.nextLevel forKey:@"nextLevel"];
+    }
     return jo.copy;
 }
 
@@ -538,10 +543,11 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     float horizontalDistance = [(NSNumber*)[jo valueForKey:@"distance"] floatValue];
     float orientationChange = [(NSNumber*)[jo valueForKey:@"orientation"] floatValue];
     float verticalDistance = [(NSNumber*)[jo valueForKey:@"distanceToNextLevel"] floatValue];
+    NSNumber* nextLevel = (NSNumber*)[jo valueForKey:@"nextLevel"];
     kSITIndicationActions action = stringToIndicationType([jo valueForKey:@"indicationType"]);
     kSITIndicationOrientation orientation = stringToOrientationType([jo valueForKey:@"orientationType"]);
     
-    SITIndication *indication = [[SITIndication alloc] initWithOriginStepIndex:stepIdxOrigin destinationStepIndex:stepIdxDestination action:action horizontalDistance:horizontalDistance orientation:orientation orientationChange:orientationChange verticalDistance:verticalDistance];
+    SITIndication *indication = [[SITIndication alloc] initWithOriginStepIndex:stepIdxOrigin destinationStepIndex:stepIdxDestination action:action horizontalDistance:horizontalDistance orientation:orientation orientationChange:orientationChange verticalDistance:verticalDistance nextLevel:nextLevel];
     
     return indication;
 }
