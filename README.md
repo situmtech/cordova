@@ -22,6 +22,13 @@
     * [fetchFloorsFromBuilding](#--fetchFloorsFromBuilding)
     * [fetchIndoorPOIsFromBuilding](#--fetchIndoorPOIsFromBuilding)
     * [fetchOutdoorPOIsFromBuilding](#--fetchOutdoorPOIsFromBuilding)
+    * [fetchEventsFromBuilding](#--fetchEventsFromBuilding)
+    * [fetchPoiCategories](#--fetchPoiCategories)
+    * [fetchMapFromFloor](#--fetchMapFromFloor)
+    * [fetchPoiCategoryIconNormal](#--fetchPoiCategoryIconNormal)
+    * [fetchPoiCategoryIconSelected](#--fetchPoiCategoryIconSelected)
+    * [invalidateCache](#--invalidateCache)
+    * [requestDirections](#--requestDirections)
 
 ---
 
@@ -895,7 +902,6 @@ cordova.plugins.Situm.setApiKey(email, apiKey);
     }
   });
 ```
-
 ##### - requestDirections
 
 ###### Calculates a route between two [points](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Point.html).
