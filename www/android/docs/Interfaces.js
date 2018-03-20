@@ -105,18 +105,18 @@ module.exports = Coordinate
 
 /**
  * @namespace
- * <b>Cartesians Coordinate</b><br />
- * Cartesisans Coordinate
+ * <b>Cartesian Coordinate</b><br />
+ * Cartesisan Coordinate
  * @property {float} x - x
  * @property {float} y - y
  */
 
-var CartesiansCoordinate = {
+var CartesianCoordinate = {
   x,
   y
 }
 
-module.exports = CartesiansCoordinate
+module.exports = CartesianCoordinate
 
 /**
  * @namespace
@@ -124,12 +124,12 @@ module.exports = CartesiansCoordinate
  * Poi
  * @property {string} identifier - POI identifier
  * @property {string} buildingIdentifier - The building identifier
- * @property {CartesiansCoordinate} cartesiansCoordinate - The cartesians coordinates of POI center relative to building {@link Bounds} @see {@link CartesianCoordinate}
+ * @property {CartesianCoordinate} cartesianCoordinate - The cartesians coordinates of POI center relative to building {@link Bounds} @see {@link CartesianCoordinate}
  * @property {Coordinate} coordinate - The geographical coordinates of this position @see {@link Coordinate}
  * @property {string} floorIdentifier - The identifier of floor
  * @property {string} poiName - The POI name
  * @property {Point} position - The position POI
- * @property {boolean} idIndoor
+ * @property {boolean} isIndoor
  * @property {boolean} isOutdoor
  * @property {PoiCategory} category - The {@link PoiCategory}
  * @property {string} infoHtml - Additional information about POI, in HTML
@@ -152,3 +152,45 @@ var Poi = {
 }
 
 module.exports = Poi
+
+/**
+ * @namespace
+ * <b>PoiCategory</b>
+ * PoiCategory
+ * @property {string} poiCategoryCode - The code that identify PoiCategory
+ * @property {string} poiCategoryName - The name of PoiCategory
+ * @property {string} icon_selected - The url of selected icon
+ * @property {string} icon_unselected - The unselected icon url
+ * @property {boolean} public - Flag to indicate if PoiCategory is public
+ */
+
+var PoiCategory = {
+  poiCategoryCode,
+  poiCategoryName,
+  icon_selected,
+  icon_unselected,
+  public
+}
+
+module.exports = PoiCategory
+
+/**
+ * @namespace
+ * <b>Point</b>
+ * Point
+ * @property {string} buildingIdentifier - The building identifier
+ * @property {CartesiansCoordinate} cartesianCoordinate - The coordinates of point in {@link CartesianCoordinate} relative to map bounds.
+ * @property {Coordinate} coordinate - The coordinate of point in {@link Coordinate}
+ * @property {string} floorIdentifier - The floor identifier
+ * @property {boolean} isIndoor - Flag that indicates if point is indoor
+ * @property {boolean} idOutdoor - Flag that indicates if point is outdoor
+ */
+
+var Point = {
+  buildingIdentifier,
+  cartesianCoordinate,
+  coordinate,
+  floorIdentifier,
+  isIndoor,
+  isOutdoor
+}
