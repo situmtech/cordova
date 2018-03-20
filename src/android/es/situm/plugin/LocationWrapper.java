@@ -1,6 +1,5 @@
 package es.situm.plugin;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Base64;
 
@@ -33,12 +32,9 @@ import es.situm.sdk.model.location.CartesianCoordinate;
 import es.situm.sdk.model.location.Coordinate;
 import es.situm.sdk.model.location.Dimensions;
 import es.situm.sdk.model.location.Location;
-import es.situm.sdk.model.location.Location.Quality;
 import es.situm.sdk.model.navigation.NavigationProgress;
 import es.situm.sdk.v1.SitumConversionArea;
 import es.situm.sdk.v1.SitumEvent;
-import jdk.nashorn.api.scripting.JSObject;
-import jdk.nashorn.internal.ir.ReturnNode;
 
 class LocationWrapper {
 
@@ -132,13 +128,11 @@ class LocationWrapper {
     public static final String STEP_IDX_DESTINATION = "stepIdxDestination";
     public static final String STEP_IDX_ORIGIN = "stepIdxOrigin";
     public static final String NEEDED_LEVEL_CHANGE = "neededLevelChange";
-    public static final String HUMAN_READABLE_MESSAGE = "humanReadableMessage";
     public static final String ORIENTATION_TYPE = "orientationType";
     public static final String ORIENTATION = "orientation";
     public static final String ROUTE_STEP = "routeStep";
     public static final String TIME_TO_END_STEP = "timeToEndStep";
     public static final String TIME_TO_GOAL = "timeToGoal";
-    public static final String NEXT_LEVEL = "nextLevel";
 
     public static final String CONVERSION_AREA = "conversionArea";
     public static final String IDENTIFIER = "identifier";
@@ -172,11 +166,6 @@ class LocationWrapper {
     public static final String ACCESSIBLE = "accessible";
     public static final String CACHE_AGE = "cacheAge";
 
-    public static final String DISTANCE_TO_IGNORE_FIRST_INDICATION = "distanceToIgnoreFirstIndication";
-    public static final String OUTSIDE_ROUTE_THRESHOLD = "outsideRouteThreshold";
-    public static final String DISTANCE_TO_GOAL_THRESHOLD = "distanceToGoalThreshold";
-    public static final String STARTING_ANGLE = "startingAngle";
-    
     static JSONObject buildingToJsonObject(Building building) throws JSONException {
         JSONObject jo = new JSONObject();
         jo.put(ADDRESS, building.getAddress());
@@ -331,54 +320,12 @@ class LocationWrapper {
         return jo;
     }
 
-    static Point jsonPointToPoint(JSONObject jo) throws JSONException {
-        Point point = null;
-
-        Coordinate coordinate = coordinateJsonObjectToCoordinate(jo.getJSONObject(COORDINATE));
-        String buildingIdentifier = jo.getString(BUILDING_IDENTIFIER);
-
-        if (jo.getBoolean(IS_INDOOR) == true) {
-            point = new Point(buildingIdentifier, jo.getString(FLOOR_IDENTIFIER), coordinate, cartesianCoordinateJsonObjectToCartesianCoordinate(jo.getJSONObject(CARTESIAN_COORDINATE)));
-        } else {
-            point = new Point(buildingIdentifier, coordinate);
-        }
-
-        return point;
-    }
-
-    static Location jsonLocationObjectToLocation(JSONObject jo) throws JSONException {        
-        Location.Builder builder = new Location.Builder(
-            jo.getLong(TIMESTAMP),
-            jo.getString(PROVIDER),
-            jsonPointToPoint(jo.getJSONObject(POSITION)),
-            (float)jo.getDouble(ACCURACY)
-        );
-        builder.deviceId(jo.getString(DEVICE_ID));
-
-        // Check if is indoor (insert cartesian bearing and other properties)
-        Angle bearingAngle = angleJSONObjectToAngle(jo.getJSONObject(BEARING));
-        Quality bearingQuality = qualityJSONObjectToQuality(jo.getString(BEARING_QUALITY));
-
-        if (jo.getBoolean(IS_INDOOR) == true) {
-            // Insert cartesian properties
-            builder.cartesianBearing(angleJSONObjectToAngle(jo.getJSONObject(CARTESIAN_BEARING)), bearingAngle, bearingQuality);
-        } else {
-            builder.bearing(bearingAngle);
-        }
-
-        builder.quality(qualityJSONObjectToQuality(jo.getString(QUALITY)));
-
-        return builder.build(); // Complete this
-    }
-
-    static Quality qualityJSONObjectToQuality(String quality) throws JSONException {
-        return (quality.equals("HIGH"))? Quality.HIGH:Quality.LOW;
-    }
-
-
-    static Angle angleJSONObjectToAngle(JSONObject jo) throws JSONException {
-        return Angle.fromDegrees(jo.getDouble(DEGREES));
-    }
+    /*static Location locationJsonObjectToLocation(JSONObject jo) throws JSONException {
+        Location location = null;
+        location = new Location.Builder(jo.getLong(TIMESTAMP), jo.getString(PROVIDER),
+                pointJsonObjectToPoint(jo.getJSONObject(POSITION)), Float.valueOf(jo.getString(ACCURACY))).build();
+        return location;
+    }*/
 
     // Coordinate
 
@@ -479,10 +426,6 @@ class LocationWrapper {
     // Route
 
     static JSONObject routeToJsonObject(Route route) throws JSONException {
-        return routeToJsonObject(route, null);
-    }
-
-    static JSONObject routeToJsonObject(Route route, Context context) throws JSONException {
         JSONObject jo = new JSONObject();
         JSONArray edgesJsonArray = new JSONArray();
         for (RouteStep routeStep : route.getEdges()) {
@@ -494,7 +437,7 @@ class LocationWrapper {
         }
         JSONArray indicationsJsonArray = new JSONArray();
         for (Indication indication : route.getIndications()) {
-            indicationsJsonArray.put(indicationToJsonObject(indication, context));
+            indicationsJsonArray.put(indicationToJsonObject(indication));
         }
         JSONArray nodesJsonArray = new JSONArray();
         for (Point point : route.getNodes()) {
@@ -516,11 +459,6 @@ class LocationWrapper {
         jo.put(STEPS, stepsJsonArray);
         return jo;
     }
-
-    /*static Route jsonRouteToRoute(JSONObject jo) throws JSONException {
-        // Create a static route
-
-    }*/
 
     //RouteStep
 
@@ -548,10 +486,6 @@ class LocationWrapper {
     // Indication
 
     static JSONObject indicationToJsonObject(Indication indication) throws JSONException {
-        return indicationToJsonObject(indication, null);
-    }
-
-    static JSONObject indicationToJsonObject(Indication indication, Context context) throws JSONException {
         JSONObject jo = new JSONObject();
         jo.put(DISTANCE, indication.getDistance());
         jo.put(DISTANCE_TO_NEXT_LEVEL, indication.getDistanceToNextLevel());
@@ -561,10 +495,6 @@ class LocationWrapper {
         jo.put(STEP_IDX_DESTINATION, indication.getStepIdxDestination());
         jo.put(STEP_IDX_ORIGIN, indication.getStepIdxOrigin());
         jo.put(NEEDED_LEVEL_CHANGE, indication.isNeededLevelChange());
-        if (context != null) {
-            jo.put(HUMAN_READABLE_MESSAGE, indication.toText(context));
-        }
-        jo.put(NEXT_LEVEL, indication.getNextLevel());
         return jo;
     }
 
@@ -576,7 +506,6 @@ class LocationWrapper {
                 .setOrientation(jo.getDouble(ORIENTATION))
                 .setOrientationType(Indication.Orientation.valueOf(jo.getString(ORIENTATION_TYPE)))
                 .setStepIdxDestination(jo.getInt(STEP_IDX_DESTINATION)).setStepIdxOrigin(jo.getInt(STEP_IDX_ORIGIN))
-                .setNextLevel(jo.getInt(NEXT_LEVEL))
                 .build();
         return indication;
     }
@@ -584,21 +513,16 @@ class LocationWrapper {
     // NavigationProgress
 
     static JSONObject navigationProgressToJsonObject(NavigationProgress navigationProgress) throws JSONException {
-        return navigationProgressToJsonObject(navigationProgress, null);
-    }
-
-    static JSONObject navigationProgressToJsonObject(NavigationProgress navigationProgress, Context context) throws JSONException {
         JSONObject jo = new JSONObject();
         jo.put(CLOSEST_POINT_IN_ROUTE, pointToJsonObject(navigationProgress.getClosestPointInRoute()));
-        jo.put(CURRENT_INDICATION, indicationToJsonObject(navigationProgress.getCurrentIndication(), context));
-        jo.put(NEXT_INDICATION, indicationToJsonObject(navigationProgress.getNextIndication(), context));
+        jo.put(CURRENT_INDICATION, indicationToJsonObject(navigationProgress.getCurrentIndication()));
+        jo.put(NEXT_INDICATION, indicationToJsonObject(navigationProgress.getNextIndication()));
         jo.put(DISTANCE_TO_CLOSEST_POINT_IN_ROUTE, navigationProgress.getDistanceToClosestPointInRoute());
         jo.put(DISTANCE_TO_END_STEP, navigationProgress.getDistanceToEndStep());
         jo.put(DISTANCE_TO_GOAL, navigationProgress.getDistanceToGoal());
         jo.put(ROUTE_STEP, routeStepToJsonObject(navigationProgress.getRouteStep()));
         jo.put(TIME_TO_END_STEP, navigationProgress.getTimeToEndStep());
         jo.put(TIME_TO_GOAL, navigationProgress.getTimeToGoal());
-        jo.put("currentStepIndex", navigationProgress.getRouteStep().getId());
         return jo;
     }
 
