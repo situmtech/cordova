@@ -109,7 +109,7 @@ When device ready event is fired, global cordova variable is injected in namespa
 So, all methods are called in the same way, e.g. 'setApiKey':
 
 ```javascript
-cordova.plugins.Situm.setApiKey(email, apiKey);
+  cordova.plugins.Situm.setApiKey(email, apiKey);
 ```
 
 #### Methods
