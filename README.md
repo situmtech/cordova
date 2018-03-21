@@ -29,6 +29,9 @@
     * [fetchPoiCategoryIconSelected](#--fetchpoicategoryiconselected)
     * [invalidateCache](#--invalidatecache)
     * [requestDirections](#--requestdirections)
+    * [requestNavigationUpdates](#--requestnavigationupdates)
+    * [updateNavigationWithLocation](#--updatenavigationwithlocation)
+    * [removeNavigationUpdates](#--removenavigationupdates)
 
 ---
 
@@ -1224,6 +1227,146 @@ So, all methods are called in the same way, e.g. 'setApiKey':
       message: "message"
     }
   });
+```
+
+##### - requestNavigationUpdates
+
+###### Necessary step to request progress. Alone this method does not provide progress object. You must feed navigation API with location, as indicated on updateNavigationWithLocation section.
+
+```javascript
+  var navigationOptions = new Object();
+  navigationOptions["distanceToIgnoreFirstIndication"] = 0.3; // (Optional) meters;
+  navigationOptions["outsideRouteThreshold"] = 10; // (Optional) meters;
+  navigationOptions["distanceToGoalThreshold"] = 7; // (Optional) meters;
+
+  requestNavigationUpdates([navigationOptions], (res: any) => {
+    // Progress and other navigation status messages can be processed here  
+    // Types of results in success cases:
+    // 1 - User has arrived destination
+    res = {  
+      type: "destinationReached",
+      message: "Destination reached"
+    }
+    // 2 - User is outside the route
+    res = {  
+      type: "userOutsideRoute",
+      message: "User outside route"
+    }
+    // 3 - User is inside the route but has not arrived to destination.
+    res = {  
+      closestPointInRoute: {  
+        isIndoor: true,
+        buildingIdentifier: "3087",
+        coordinate: {  
+          latitude: 42.87227301416988,
+          longitude: -8.563636606983739
+        },
+        floorIdentifier: "4961",
+        cartesianCoordinate: {  
+          x: 67.91600036621094,
+          y: 24.05699920654297
+        },
+        isOutdoor: false
+      },
+      distanceToEndStep: 1.038121223449707, // meters
+      distanceToGoal: 62.55179214477539, // meters
+      currentStepIndex: 0,
+      timeToEndStep: 1.038121223449707, // seconds
+      currentIndication: {  
+        distanceToNextLevel: 0, // if this value is greater than 0 it represent the number of floor to go up. if this value is less than 0 it represents the number of floors to go down. If equal to 0 it means there is no need to change floor.
+        distance: 1.038121223449707, // meters
+        stepIdxOrigin: 0, // index of the route step (on of the steps on Route object provided by requestDirections)
+        stepIdxDestination: 0,
+        orientationType: "Left",
+        indicationType: "Turn",
+        humanReadableMessage: "Turn left and go ahead for 2 meters", // Only iOS, Android version coming
+        orientation: 1.8215326070785522, // radians
+        neededLevelChange: false, // True if change floor is needed
+        nextLevel: 3 // Floor number. The floor level to which the user need to go. Only Android for now. iOS version coming
+      },
+      type: "progress",
+      timeToGoal: 62.55179214477539
+    }
+  }, (error: any) => {
+    // If errors will come here
+    error = {
+      status: 1,
+      message: "message"
+    }  
+  });
+```
+
+##### - updateNavigationWithLocation
+    
+###### Usually, position variable should be one of the locations provided by the system on the [startPositioning](#--startpositioning) function.
+
+```javascript
+  var position = {
+    accuracy: 0.00,
+    bearing: {
+      degrees: 0.00,
+      degreesClockwise: 0.00,
+      radians: 0.00,
+      radiansMinusPiPi: 0.00,
+    },
+    bearingQuality: "bearingQuality",
+    buildingIdentifier: "buildingIdentifier",
+    cartesianBearing: {
+      degrees: 0.00,
+      degreesClockwise: 0.00,
+      radians: 0.00,
+      radiansMinusPiPi: 0.00,
+    },
+    cartesianCoordinate: {
+      x: 0.00,
+      y: 0.00 
+    },
+    coordinate: {
+      latitude: 0.00,
+      longitude: 0.00
+    },
+    floorIdentifier: "floorIdentifier",
+    position: {
+      buildingIdentifier: "buildingIdentifier",
+      cartesianCoordinate: {
+        x: 0.00,
+        y: 0.00 
+      },
+      coordinate: {
+        latitude: 0.00,
+        longitude: 0.00
+      }
+      floorIdentifier: "floorIdentifier"
+      isIndoor: true
+      isOutdoor: false
+    },
+    provider: "provider",
+    quality: "quality",
+    hasBearing: true,
+    timestamp: 000000000,
+    hasCartesianBearing: true,
+    isIndoor: true,
+    isOutdoor: false,
+    deviceId: "deviceId"
+  };
+
+  updateNavigationWithLocation([position], (result) => {
+    console.log(result);
+  }, (error) => {
+    // If errors will come here
+    error = {
+      status: 1,
+      message: "message"
+    }  
+  });
+```
+
+##### - removeNavigationUpdates
+
+###### When you are no longer interested on Navigation Updates you should call this method to remove internal allocated resources.
+
+```javascript
+  removeNavigationUpdates();
 ```
 
 ## :large_blue_diamond: Contributing
