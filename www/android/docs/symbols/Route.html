@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - Building</title>
+		<title>JsDoc Reference - Route</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -230,7 +230,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Namespace Building
+				Namespace Route
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -238,8 +238,8 @@ ul.inheritsList
 				
 				
 			
-				<b>Building</b><br />
-A Building object definition
+				<b>Route</b>
+Route between two points.
 				
 				
 					<br /><i>Defined in: </i> <a href="../symbols/src/docs_Interfaces.js.html">Interfaces.js</a>.
@@ -248,7 +248,7 @@ A Building object definition
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Building.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Route.">
 				<caption>Namespace Summary</caption>
 				<thead>
 					<tr>
@@ -261,7 +261,7 @@ A Building object definition
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/Building.html#constructor">Building</a></b>
+								<b><a href="../symbols/Route.html#constructor">Route</a></b>
 							</div>
 							<div class="description"></div>
 						</td>
@@ -274,7 +274,7 @@ A Building object definition
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Building.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Route.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -288,9 +288,9 @@ A Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#address">address</a></b>
+								<b><a href="../symbols/Route.html#edges">edges</a></b>
 								</div>
-								<div class="description">- Te building address.</div>
+								<div class="description">- Ordered list of steps to go to the goal point</div>
 							</td>
 						</tr>
 					
@@ -298,9 +298,9 @@ A Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#bounds">bounds</a></b>
+								<b><a href="../symbols/Route.html#firstStep">firstStep</a></b>
 								</div>
-								<div class="description">- Compute corners of this building, without rotation, in earth coordinates.</div>
+								<div class="description">- First step</div>
 							</td>
 						</tr>
 					
@@ -308,9 +308,9 @@ A Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#boundsRotated">boundsRotated</a></b>
+								<b><a href="../symbols/Route.html#from">from</a></b>
 								</div>
-								<div class="description">- Compute corners of this building, with rotation, in earth coordinates.</div>
+								<div class="description">- Point where the route starts.</div>
 							</td>
 						</tr>
 					
@@ -318,9 +318,9 @@ A Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#buildingIdentifier">buildingIdentifier</a></b>
+								<b><a href="../symbols/Route.html#indications">indications</a></b>
 								</div>
-								<div class="description">- The unique identifier of the resource</div>
+								<div class="description">- Ordered list of instructions to go to the destination</div>
 							</td>
 						</tr>
 					
@@ -328,9 +328,9 @@ A Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#center">center</a></b>
+								<b><a href="../symbols/Route.html#lastStep">lastStep</a></b>
 								</div>
-								<div class="description">- Center of the building's base, as geographical coordinate.</div>
+								<div class="description">- Last step</div>
 							</td>
 						</tr>
 					
@@ -338,9 +338,9 @@ A Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#customFields">customFields</a></b>
+								<b><a href="../symbols/Route.html#nodes">nodes</a></b>
 								</div>
-								<div class="description">- Map of custom fields, indexed by their name.</div>
+								<div class="description">- A collection of points of the route (not ordered)</div>
 							</td>
 						</tr>
 					
@@ -348,9 +348,9 @@ A Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#Dimensions">Dimensions</a></b>
+								<b><a href="../symbols/Route.html#points">points</a></b>
 								</div>
-								<div class="description">- Dimensions of building's base (height and width) in meters.</div>
+								<div class="description">- List of ordered points of the route</div>
 							</td>
 						</tr>
 					
@@ -358,9 +358,9 @@ A Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#infoHtml">infoHtml</a></b>
+								<b><a href="../symbols/Route.html#steps">steps</a></b>
 								</div>
-								<div class="description">- Additional information about building, formatted with HTML</div>
+								<div class="description">- Ordered list of steps to go to the goal point</div>
 							</td>
 						</tr>
 					
@@ -368,49 +368,9 @@ A Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#name">name</a></b>
+								<b><a href="../symbols/Route.html#to">to</a></b>
 								</div>
-								<div class="description">- The building name that is appropriate for display to the user.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#pictureThumbUrl">pictureThumbUrl</a></b>
-								</div>
-								<div class="description">- The URL of building thumbnail image</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#pictureUrl">pictureUrl</a></b>
-								</div>
-								<div class="description">- The URL of building image</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#rotation">rotation</a></b>
-								</div>
-								<div class="description">- Rotation angle of the building's base, relative to the west-east axis, increasing in counter-clockwise, being 0 the west-east axis.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#userIdentifier">userIdentifier</a></b>
-								</div>
-								<div class="description">- Unique identifier of the owner user of the building</div>
+								<div class="description">- Last point and goal of the route.</div>
 							</td>
 						</tr>
 					
@@ -434,7 +394,7 @@ A Building object definition
 				</div>
 				
 				<div class="fixedFont">
-						<b>Building</b>
+						<b>Route</b>
 				</div>
 				
 				<div class="description">
@@ -462,15 +422,15 @@ A Building object definition
 					Field Detail
 				</div>
 				
-					<a name="address"> </a>
+					<a name="edges"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{string}</span>
-					<b>address</b>
+					<span class="light">{<a href="../symbols/RouteStep.html">RouteStep</a>[]}</span>
+					<b>edges</b>
 					
 					</div>
 					<div class="description">
-						- Te building address.
+						- Ordered list of steps to go to the goal point
 						
 						
 					</div>
@@ -484,15 +444,15 @@ A Building object definition
 
 					<hr />
 				
-					<a name="bounds"> </a>
+					<a name="firstStep"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{<a href="../symbols/Bounds.html">Bounds</a>}</span>
-					<b>bounds</b>
+					<span class="light">{<a href="../symbols/RouteStep.html">RouteStep</a>}</span>
+					<b>firstStep</b>
 					
 					</div>
 					<div class="description">
-						- Compute corners of this building, without rotation, in earth coordinates.
+						- First step
 						
 						
 					</div>
@@ -506,15 +466,15 @@ A Building object definition
 
 					<hr />
 				
-					<a name="boundsRotated"> </a>
+					<a name="from"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{<a href="../symbols/Bounds.html">Bounds</a>}</span>
-					<b>boundsRotated</b>
+					<span class="light">{<a href="../symbols/Point.html">Point</a>}</span>
+					<b>from</b>
 					
 					</div>
 					<div class="description">
-						- Compute corners of this building, with rotation, in earth coordinates.
+						- Point where the route starts.
 						
 						
 					</div>
@@ -528,15 +488,15 @@ A Building object definition
 
 					<hr />
 				
-					<a name="buildingIdentifier"> </a>
+					<a name="indications"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{string}</span>
-					<b>buildingIdentifier</b>
+					<span class="light">{<a href="../symbols/Indication.html">Indication</a>}</span>
+					<b>indications</b>
 					
 					</div>
 					<div class="description">
-						- The unique identifier of the resource
+						- Ordered list of instructions to go to the destination
 						
 						
 					</div>
@@ -550,15 +510,15 @@ A Building object definition
 
 					<hr />
 				
-					<a name="center"> </a>
+					<a name="lastStep"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{<a href="../symbols/Coordinate.html">Coordinate</a>}</span>
-					<b>center</b>
+					<span class="light">{<a href="../symbols/RouteStep.html">RouteStep</a>}</span>
+					<b>lastStep</b>
 					
 					</div>
 					<div class="description">
-						- Center of the building's base, as geographical coordinate.
+						- Last step
 						
 						
 					</div>
@@ -572,15 +532,15 @@ A Building object definition
 
 					<hr />
 				
-					<a name="customFields"> </a>
+					<a name="nodes"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{Object}</span>
-					<b>customFields</b>
+					<span class="light">{<a href="../symbols/Point.html">Point</a>[]}</span>
+					<b>nodes</b>
 					
 					</div>
 					<div class="description">
-						- Map of custom fields, indexed by their name.
+						- A collection of points of the route (not ordered)
 						
 						
 					</div>
@@ -594,15 +554,15 @@ A Building object definition
 
 					<hr />
 				
-					<a name="Dimensions"> </a>
+					<a name="points"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{<a href="../symbols/Dimensions.html">Dimensions</a>}</span>
-					<b>Dimensions</b>
+					<span class="light">{<a href="../symbols/Point.html">Point</a>[]}</span>
+					<b>points</b>
 					
 					</div>
 					<div class="description">
-						- Dimensions of building's base (height and width) in meters.
+						- List of ordered points of the route
 						
 						
 					</div>
@@ -616,15 +576,15 @@ A Building object definition
 
 					<hr />
 				
-					<a name="infoHtml"> </a>
+					<a name="steps"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{string}</span>
-					<b>infoHtml</b>
+					<span class="light">{<a href="../symbols/RouteStep.html">RouteStep</a>[]}</span>
+					<b>steps</b>
 					
 					</div>
 					<div class="description">
-						- Additional information about building, formatted with HTML
+						- Ordered list of steps to go to the goal point
 						
 						
 					</div>
@@ -638,103 +598,15 @@ A Building object definition
 
 					<hr />
 				
-					<a name="name"> </a>
+					<a name="to"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{string}</span>
-					<b>name</b>
+					<span class="light">{<a href="../symbols/Point.html">Point</a>}</span>
+					<b>to</b>
 					
 					</div>
 					<div class="description">
-						- The building name that is appropriate for display to the user.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="pictureThumbUrl"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{string}</span>
-					<b>pictureThumbUrl</b>
-					
-					</div>
-					<div class="description">
-						- The URL of building thumbnail image
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="pictureUrl"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{string}</span>
-					<b>pictureUrl</b>
-					
-					</div>
-					<div class="description">
-						- The URL of building image
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="rotation"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{float}</span>
-					<b>rotation</b>
-					
-					</div>
-					<div class="description">
-						- Rotation angle of the building's base, relative to the west-east axis, increasing in counter-clockwise, being 0 the west-east axis.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="userIdentifier"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{string}</span>
-					<b>userIdentifier</b>
-					
-					</div>
-					<div class="description">
-						- Unique identifier of the owner user of the building
+						- Last point and goal of the route.
 						
 						
 					</div>

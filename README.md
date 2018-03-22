@@ -1004,7 +1004,7 @@ So, all methods are called in the same way, e.g. 'setApiKey':
     // Route Situm object
     route = {
       edges: [{
-        distance: 0.00
+        distance: 0.00,
         distanceToGoal: 0.00,
         from: {
           buildingIdentifier: "buildingIdentifier",
@@ -1067,12 +1067,12 @@ So, all methods are called in the same way, e.g. 'setApiKey':
           coordinate: {
             latitude: 0.00,
             longitude: 0.00
-          }
-          floorIdentifier: "floorIdentifier"
-          isIndoor: false
+          },
+          floorIdentifier: "floorIdentifier",
+          isIndoor: false,
           isOutdoor: true
         },
-        isFirst: true
+        isFirst: true,
         isLast: false
       },
       from: {
@@ -1084,14 +1084,14 @@ So, all methods are called in the same way, e.g. 'setApiKey':
         coordinate: {
           latitude: 0.00,
           longitude: 0.00
-        }
-        floorIdentifier: "floorIdentifier"
-        isIndoor: false
+        },
+        floorIdentifier: "floorIdentifier",
+        isIndoor: false,
         isOutdoor: true
       },
       indications: [{
         distance: 0.00,
-        distanceToNextLevel: 2
+        distanceToNextLevel: 2,
         indicationType: "indicationType",
         orientation: 0.00,
         orientationType: "orientationType",
@@ -1102,7 +1102,7 @@ So, all methods are called in the same way, e.g. 'setApiKey':
         ...
       }],
       lastStep: {
-        distance: 0.00
+        distance: 0.00,
         distanceToGoal: 0.00,
         from: {
           buildingIdentifier: "buildingIdentifier",
@@ -1113,9 +1113,9 @@ So, all methods are called in the same way, e.g. 'setApiKey':
           coordinate: {
             latitude: 0.00,
             longitude: 0.00
-          }
-          floorIdentifier: "floorIdentifier"
-          isIndoor: false
+          },
+          floorIdentifier: "floorIdentifier",
+          isIndoor: false,
           isOutdoor: true
         },
         id: 1,
@@ -1128,9 +1128,9 @@ So, all methods are called in the same way, e.g. 'setApiKey':
           coordinate: {
             latitude: 0.00,
             longitude: 0.00
-          }
-          floorIdentifier: "floorIdentifier"
-          isIndoor: false
+          },
+          floorIdentifier: "floorIdentifier",
+          isIndoor: false,
           isOutdoor: true
         },
         isFirst: false
@@ -1145,9 +1145,9 @@ So, all methods are called in the same way, e.g. 'setApiKey':
         coordinate: {
           latitude: 0.00,
           longitude: 0.00
-        }
-        floorIdentifier: "floorIdentifier"
-        isIndoor: false
+        },
+        floorIdentifier: "floorIdentifier",
+        isIndoor: false,
         isOutdoor: true
       }, {
         ...
@@ -1161,9 +1161,9 @@ So, all methods are called in the same way, e.g. 'setApiKey':
         coordinate: {
           latitude: 0.00,
           longitude: 0.00
-        }
-        floorIdentifier: "floorIdentifier"
-        isIndoor: false
+        },
+        floorIdentifier: "floorIdentifier",
+        isIndoor: false,
         isOutdoor: true
       }, {
         ...
@@ -1177,13 +1177,13 @@ So, all methods are called in the same way, e.g. 'setApiKey':
         coordinate: {
           latitude: 0.00,
           longitude: 0.00
-        }
-        floorIdentifier: "floorIdentifier"
-        isIndoor: false
+        },
+        floorIdentifier: "floorIdentifier",
+        isIndoor: false,
         isOutdoor: true
       },
       steps: [{
-        distance: 0.00
+        distance: 0.00,
         distanceToGoal: 0.00,
         from: {
           buildingIdentifier: "buildingIdentifier",
@@ -1194,9 +1194,9 @@ So, all methods are called in the same way, e.g. 'setApiKey':
           coordinate: {
             latitude: 0.00,
             longitude: 0.00
-          }
-          floorIdentifier: "floorIdentifier"
-          isIndoor: false
+          },
+          floorIdentifier: "floorIdentifier",
+          isIndoor: false,
           isOutdoor: true
         },
         id: 1,
@@ -1209,12 +1209,12 @@ So, all methods are called in the same way, e.g. 'setApiKey':
           coordinate: {
             latitude: 0.00,
             longitude: 0.00
-          }
-          floorIdentifier: "floorIdentifier"
-          isIndoor: false
+          },
+          floorIdentifier: "floorIdentifier",
+          isIndoor: false,
           isOutdoor: true
         },
-        isFirst: false
+        isFirst: false,
         isLast: false
       }, {
         ...

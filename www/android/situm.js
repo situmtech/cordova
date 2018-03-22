@@ -45,7 +45,7 @@ var Situm = {
   },
   /**
    * Set callback and starts listen onLocationChanged event.
-   * @param {building[]} arrBuilding - Array of buildings to activate locationListener, the plugin only uses the first building.
+   * @param {Building} arrBuilding - Array of buildings to activate locationListener, the plugin only uses the first building.
    * @param {callback} cb - Cordova native callback to recive data.
    * @param {callback} error - Cordova native callback to recive errors.
    * @return {position} position - Current position of device.
@@ -68,7 +68,7 @@ var Situm = {
    * @description Download all the buildings for the current user
    * @param {callback} cb - Cordova native callback to recive data.
    * @param {callback} error - Cordova native callback to recive errors.
-   * @returns {building[]} {@link Building} - buildings array.
+   * @returns {Building[]} - buildings array.
    */
   fetchBuildings: function (cb, error) {
     exec(cb, error, PLUGIN_NAME, 'fetchBuildings', []);
@@ -76,10 +76,10 @@ var Situm = {
   /**
    * Download all the floors of a building.
    * @description Download all the floors of a building
-   * @param {building} {@link Building building} - the building. Not null.
+   * @param {Building} building - the building. Not null.
    * @param {callback} cb - Cordova native callback to recive data.
    * @param {callback} error - Cordova native callback to recive errors.
-   * @returns {floor[]} {@link Floor} - floors array 
+   * @returns {Floor[]} - floors array 
    */
   fetchFloorsFromBuilding: function (building, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'fetchFloorsFromBuilding', [building]);
@@ -87,10 +87,10 @@ var Situm = {
   /**
    * Download the indoor POIs of a building.
    * @description Download the indoor POIs of a building
-   * @param {building} {@link Building building} - the building. Not null.
+   * @param {Building} building - the building. Not null.
    * @param {callback} cb - Cordova native callback to recive data.
    * @param {callback} error - Cordova native callback to recive errors.
-   * @returns {poi[]} {@link Poi} - Array of POIs
+   * @returns {Poi[]} - Array of POIs
    */
   fetchIndoorPOIsFromBuilding: function (building, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'fetchIndoorPOIsFromBuilding', [building]);
@@ -98,10 +98,10 @@ var Situm = {
   /**
    * Download the outdoor POIs of a building.
    * @description Download the outdoor POIs of a building
-   * @param {building} {@link Building building} - the building. Not null.
+   * @param {Building} building - the building. Not null.
    * @param {callback} cb - Cordova native callback to recive data.
    * @param {callback} error - Cordova native callback to recive errors.
-   * @returns {poi[]} {@link Poi} - Array of POIs
+   * @returns {Poi[]} - Array of POIs
    */
   fetchOutdoorPOIsFromBuilding: function (building, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'fetchOutdoorPOIsFromBuilding', [building]);
@@ -109,7 +109,7 @@ var Situm = {
   /**
    * Download the events of a building.
    * @description Download the events of a building
-   * @param {building} {@link Building building} - the building. Not null.
+   * @param {Building} building - the building. Not null.
    * @param {callback} cb - Cordova native callback to recive data.
    * @param {callback} error - Cordova native callback to recive errors.
    * @returns {event[]} The evetns of a building
@@ -122,7 +122,7 @@ var Situm = {
    * @description Get all POI categories, download and cache their icons asynchronously. To get some of those icons from local storage @see {@link fetchPoiCategoryIconNormal(PoiCategory)} or {@link fetchPoiCategoryIconSelected(PoiCategory)}
    * @param {callback} cb - Cordova native callback to recive data.
    * @param {callback} error - Cordova native callback to recive errors.
-   * @returns {poiCategory[]} {@link PoiCategory} - poiCategories
+   * @returns {PoiCategory[]} - poiCategories
    */
   fetchPoiCategories: function (cb, error) {
     exec(cb, error, PLUGIN_NAME, 'fetchPoiCategories');
@@ -130,7 +130,7 @@ var Situm = {
   /**
    * Download the map image of a floor
    * @description Download the map image of a floor
-   * @param {floor} {@link Floor floor} - the floor. Not null.
+   * @param {Floor} floor - the floor. Not null.
    * @param {callback} cb - Cordova native callback to recive data.
    * @param {callback} error - Cordova native callback to recive errors.
    * @returns {map} - The map image
@@ -141,7 +141,7 @@ var Situm = {
   /**
    * Get the normal category icon for a category.
    * @description Get the normal category icon for a category
-   * @param {category} {@link PoiCategory category} - the category. Not null.
+   * @param {PoiCategory} category - the category. Not null.
    * @param {callback} cb - Cordova native callback to recive data.
    * @param {callback} error - Cordova native callback to recive errors.
    * @returns {icon} - The category icon
@@ -152,7 +152,7 @@ var Situm = {
   /**
    * Get the selected category icon for a category.
    * @description Get the selected category icon for a category
-   * @param {category} {@link PoiCategory category} - the category. Not null.
+   * @param {PoiCategory} - the category. Not null.
    * @param {callback} cb - Cordova native callback to recive data.
    * @param {callback} error - Cordova native callback to recive errors.
    * @returns {icon} - The category icon
@@ -176,7 +176,7 @@ var Situm = {
    * @param {args} request - request - non-null search parameters. {@link Building building}, {@link Point from} and {@link Point to}. Points have to be inside the same building.
    * @param {callback} cb - Cordova native callback to recive data.
    * @param {callback} error - Cordova native callback to recive errors.
-   * @return {route} {@link Route} - The route between provided points
+   * @return {Route} - The route between provided points
    */
   requestDirections: function (args, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'requestDirections', args);

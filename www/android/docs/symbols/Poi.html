@@ -191,11 +191,13 @@ ul.inheritsList
 	
 	<li><i><a href="../symbols/_global_.html">_global_</a></i></li>
 	
+	<li><a href="../symbols/Angle.html">Angle</a></li>
+	
 	<li><a href="../symbols/Bounds.html">Bounds</a></li>
 	
 	<li><a href="../symbols/Building.html">Building</a></li>
 	
-	<li><a href="../symbols/CartesiansCoordinate.html">CartesiansCoordinate</a></li>
+	<li><a href="../symbols/CartesianCoordinate.html">CartesianCoordinate</a></li>
 	
 	<li><a href="../symbols/Coordinate.html">Coordinate</a></li>
 	
@@ -203,7 +205,19 @@ ul.inheritsList
 	
 	<li><a href="../symbols/Floor.html">Floor</a></li>
 	
+	<li><a href="../symbols/Indication.html">Indication</a></li>
+	
+	<li><a href="../symbols/Location.html">Location</a></li>
+	
 	<li><a href="../symbols/Poi.html">Poi</a></li>
+	
+	<li><a href="../symbols/PoiCategory.html">PoiCategory</a></li>
+	
+	<li><a href="../symbols/Point.html">Point</a></li>
+	
+	<li><a href="../symbols/Route.html">Route</a></li>
+	
+	<li><a href="../symbols/RouteStep.html">RouteStep</a></li>
 	
 	<li><a href="../symbols/Situm.html">Situm</a></li>
 	
@@ -225,7 +239,7 @@ ul.inheritsList
 				
 			
 				<b>POI (Point of Interest)</b>
-Poi
+Point of Interest, associated to a building, regardless of whether it's place inside or outside the building.
 				
 				
 					<br /><i>Defined in: </i> <a href="../symbols/src/docs_Interfaces.js.html">Interfaces.js</a>.
@@ -276,7 +290,7 @@ Poi
 								<div class="fixedFont">
 								<b><a href="../symbols/Poi.html#buildingIdentifier">buildingIdentifier</a></b>
 								</div>
-								<div class="description">- The building identifier</div>
+								<div class="description">- Identifier of building to which the POI belongs.</div>
 							</td>
 						</tr>
 					
@@ -284,9 +298,9 @@ Poi
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Poi.html#cartesiansCoordinate">cartesiansCoordinate</a></b>
+								<b><a href="../symbols/Poi.html#cartesianCoordinate">cartesianCoordinate</a></b>
 								</div>
-								<div class="description">- The cartesians coordinates of POI center relative to building <a href="../symbols/Bounds.html">Bounds</a> @see CartesianCoordinate</div>
+								<div class="description">- Cartesian coordinate of this position, relative to building Bounds.</div>
 							</td>
 						</tr>
 					
@@ -296,7 +310,7 @@ Poi
 								<div class="fixedFont">
 								<b><a href="../symbols/Poi.html#category">category</a></b>
 								</div>
-								<div class="description">- The PoiCategory</div>
+								<div class="description">- Category of the POI</div>
 							</td>
 						</tr>
 					
@@ -306,7 +320,7 @@ Poi
 								<div class="fixedFont">
 								<b><a href="../symbols/Poi.html#coordinate">coordinate</a></b>
 								</div>
-								<div class="description">- The geographical coordinates of this position @see <a href="../symbols/Coordinate.html">Coordinate</a></div>
+								<div class="description">- Geographical coordinate of this position</div>
 							</td>
 						</tr>
 					
@@ -316,7 +330,7 @@ Poi
 								<div class="fixedFont">
 								<b><a href="../symbols/Poi.html#customFields">customFields</a></b>
 								</div>
-								<div class="description">- Additional information about POI, in format {key: value,.</div>
+								<div class="description">- Map of custom fields, indexed by their name.</div>
 							</td>
 						</tr>
 					
@@ -326,7 +340,7 @@ Poi
 								<div class="fixedFont">
 								<b><a href="../symbols/Poi.html#floorIdentifier">floorIdentifier</a></b>
 								</div>
-								<div class="description">- The identifier of floor</div>
+								<div class="description">- If this POI is outside the building (isOutdoor == true), this field has no meaning.</div>
 							</td>
 						</tr>
 					
@@ -336,17 +350,7 @@ Poi
 								<div class="fixedFont">
 								<b><a href="../symbols/Poi.html#identifier">identifier</a></b>
 								</div>
-								<div class="description">- POI identifier</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/Poi.html#idIndoor">idIndoor</a></b>
-								</div>
-								<div class="description"></div>
+								<div class="description">- The unique identifier of the resource</div>
 							</td>
 						</tr>
 					
@@ -364,9 +368,19 @@ Poi
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
+								<b><a href="../symbols/Poi.html#isIndoor">isIndoor</a></b>
+								</div>
+								<div class="description">- Whether the POI is placed outside the building or not.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
 								<b><a href="../symbols/Poi.html#isOutdoor">isOutdoor</a></b>
 								</div>
-								<div class="description"></div>
+								<div class="description">- Whether the POI is placed outside the building or not.</div>
 							</td>
 						</tr>
 					
@@ -376,7 +390,7 @@ Poi
 								<div class="fixedFont">
 								<b><a href="../symbols/Poi.html#poiName">poiName</a></b>
 								</div>
-								<div class="description">- The POI name</div>
+								<div class="description">- A name for the POI, appropriate for display to the user.</div>
 							</td>
 						</tr>
 					
@@ -386,7 +400,7 @@ Poi
 								<div class="fixedFont">
 								<b><a href="../symbols/Poi.html#position">position</a></b>
 								</div>
-								<div class="description">- The position POI</div>
+								<div class="description"></div>
 							</td>
 						</tr>
 					
@@ -446,7 +460,7 @@ Poi
 					
 					</div>
 					<div class="description">
-						- The building identifier
+						- Identifier of building to which the POI belongs.
 						
 						
 					</div>
@@ -460,15 +474,15 @@ Poi
 
 					<hr />
 				
-					<a name="cartesiansCoordinate"> </a>
+					<a name="cartesianCoordinate"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{<a href="../symbols/CartesiansCoordinate.html">CartesiansCoordinate</a>}</span>
-					<b>cartesiansCoordinate</b>
+					<span class="light">{<a href="../symbols/CartesianCoordinate.html">CartesianCoordinate</a>}</span>
+					<b>cartesianCoordinate</b>
 					
 					</div>
 					<div class="description">
-						- The cartesians coordinates of POI center relative to building <a href="../symbols/Bounds.html">Bounds</a> @see CartesianCoordinate
+						- Cartesian coordinate of this position, relative to building Bounds.
 						
 						
 					</div>
@@ -485,12 +499,12 @@ Poi
 					<a name="category"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{PoiCategory}</span>
+					<span class="light">{<a href="../symbols/PoiCategory.html">PoiCategory</a>}</span>
 					<b>category</b>
 					
 					</div>
 					<div class="description">
-						- The PoiCategory
+						- Category of the POI
 						
 						
 					</div>
@@ -512,7 +526,7 @@ Poi
 					
 					</div>
 					<div class="description">
-						- The geographical coordinates of this position @see <a href="../symbols/Coordinate.html">Coordinate</a>
+						- Geographical coordinate of this position
 						
 						
 					</div>
@@ -534,7 +548,7 @@ Poi
 					
 					</div>
 					<div class="description">
-						- Additional information about POI, in format {key: value,...}
+						- Map of custom fields, indexed by their name.
 						
 						
 					</div>
@@ -556,7 +570,7 @@ Poi
 					
 					</div>
 					<div class="description">
-						- The identifier of floor
+						- If this POI is outside the building (isOutdoor == true), this field has no meaning.
 						
 						
 					</div>
@@ -578,29 +592,7 @@ Poi
 					
 					</div>
 					<div class="description">
-						- POI identifier
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="idIndoor"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{boolean}</span>
-					<b>idIndoor</b>
-					
-					</div>
-					<div class="description">
-						
+						- The unique identifier of the resource
 						
 						
 					</div>
@@ -636,6 +628,28 @@ Poi
 
 					<hr />
 				
+					<a name="isIndoor"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{boolean}</span>
+					<b>isIndoor</b>
+					
+					</div>
+					<div class="description">
+						- Whether the POI is placed outside the building or not.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
 					<a name="isOutdoor"> </a>
 					<div class="fixedFont">
 					
@@ -644,7 +658,7 @@ Poi
 					
 					</div>
 					<div class="description">
-						
+						- Whether the POI is placed outside the building or not.
 						
 						
 					</div>
@@ -666,7 +680,7 @@ Poi
 					
 					</div>
 					<div class="description">
-						- The POI name
+						- A name for the POI, appropriate for display to the user.
 						
 						
 					</div>
@@ -683,12 +697,12 @@ Poi
 					<a name="position"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{Point}</span>
+					<span class="light">{<a href="../symbols/Point.html">Point</a>}</span>
 					<b>position</b>
 					
 					</div>
 					<div class="description">
-						- The position POI
+						
 						
 						
 					</div>
@@ -717,7 +731,7 @@ Poi
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Mon Mar 19 2018 12:20:31 GMT+0100 (CET)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Thu Mar 22 2018 13:55:51 GMT+0100 (CET)
 		</div>
 	</body>
 </html>

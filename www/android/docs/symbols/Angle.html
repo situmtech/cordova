@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - Floor</title>
+		<title>JsDoc Reference - Angle</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -230,7 +230,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Namespace Floor
+				Namespace Angle
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -238,8 +238,8 @@ ul.inheritsList
 				
 				
 			
-				<b>Floor</b>
-Floor of a building.
+				<b>Angle</b>
+Representation of an angle.
 				
 				
 					<br /><i>Defined in: </i> <a href="../symbols/src/docs_Interfaces.js.html">Interfaces.js</a>.
@@ -248,7 +248,7 @@ Floor of a building.
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Floor.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Angle.">
 				<caption>Namespace Summary</caption>
 				<thead>
 					<tr>
@@ -261,7 +261,7 @@ Floor of a building.
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/Floor.html#constructor">Floor</a></b>
+								<b><a href="../symbols/Angle.html#constructor">Angle</a></b>
 							</div>
 							<div class="description"></div>
 						</td>
@@ -274,7 +274,7 @@ Floor of a building.
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Floor.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Angle.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -288,9 +288,9 @@ Floor of a building.
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Floor.html#altitude">altitude</a></b>
+								<b><a href="../symbols/Angle.html#degrees">degrees</a></b>
 								</div>
-								<div class="description">- Altitude of the floor above ground level, in meters.</div>
+								<div class="description">- Angle in degrees, increasing in counter-clockwise</div>
 							</td>
 						</tr>
 					
@@ -298,9 +298,9 @@ Floor of a building.
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Floor.html#buildingIdentifier">buildingIdentifier</a></b>
+								<b><a href="../symbols/Angle.html#degreesClockwise">degreesClockwise</a></b>
 								</div>
-								<div class="description">- The identifier of building which this floor belongs.</div>
+								<div class="description">- Angle in radians, increasing in clockwise</div>
 							</td>
 						</tr>
 					
@@ -308,9 +308,9 @@ Floor of a building.
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Floor.html#floorIdentifier">floorIdentifier</a></b>
+								<b><a href="../symbols/Angle.html#radians">radians</a></b>
 								</div>
-								<div class="description">- The unique identifier of the resource</div>
+								<div class="description">- Angle in radians, increasing in counter-clockwise</div>
 							</td>
 						</tr>
 					
@@ -318,29 +318,9 @@ Floor of a building.
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Floor.html#level">level</a></b>
+								<b><a href="../symbols/Angle.html#radiansMinusPiPi">radiansMinusPiPi</a></b>
 								</div>
-								<div class="description">- The number of the floor.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/Floor.html#mapUrl">mapUrl</a></b>
-								</div>
-								<div class="description">- The floor map image url</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/Floor.html#scale">scale</a></b>
-								</div>
-								<div class="description">- The scale of the floor image, in px/meters</div>
+								<div class="description">- Angle in radians in range (-pi,pi)</div>
 							</td>
 						</tr>
 					
@@ -364,7 +344,7 @@ Floor of a building.
 				</div>
 				
 				<div class="fixedFont">
-						<b>Floor</b>
+						<b>Angle</b>
 				</div>
 				
 				<div class="description">
@@ -392,15 +372,15 @@ Floor of a building.
 					Field Detail
 				</div>
 				
-					<a name="altitude"> </a>
+					<a name="degrees"> </a>
 					<div class="fixedFont">
 					
 					<span class="light">{float}</span>
-					<b>altitude</b>
+					<b>degrees</b>
 					
 					</div>
 					<div class="description">
-						- Altitude of the floor above ground level, in meters.
+						- Angle in degrees, increasing in counter-clockwise
 						
 						
 					</div>
@@ -414,103 +394,59 @@ Floor of a building.
 
 					<hr />
 				
-					<a name="buildingIdentifier"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{string}</span>
-					<b>buildingIdentifier</b>
-					
-					</div>
-					<div class="description">
-						- The identifier of building which this floor belongs.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="floorIdentifier"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{string}</span>
-					<b>floorIdentifier</b>
-					
-					</div>
-					<div class="description">
-						- The unique identifier of the resource
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="level"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{number}</span>
-					<b>level</b>
-					
-					</div>
-					<div class="description">
-						- The number of the floor.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="mapUrl"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{string}</span>
-					<b>mapUrl</b>
-					
-					</div>
-					<div class="description">
-						- The floor map image url
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="scale"> </a>
+					<a name="degreesClockwise"> </a>
 					<div class="fixedFont">
 					
 					<span class="light">{float}</span>
-					<b>scale</b>
+					<b>degreesClockwise</b>
 					
 					</div>
 					<div class="description">
-						- The scale of the floor image, in px/meters
+						- Angle in radians, increasing in clockwise
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="radians"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{float}</span>
+					<b>radians</b>
+					
+					</div>
+					<div class="description">
+						- Angle in radians, increasing in counter-clockwise
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="radiansMinusPiPi"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{float}</span>
+					<b>radiansMinusPiPi</b>
+					
+					</div>
+					<div class="description">
+						- Angle in radians in range (-pi,pi)
 						
 						
 					</div>

@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - Building</title>
+		<title>JsDoc Reference - Indication</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -230,7 +230,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Namespace Building
+				Namespace Indication
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -238,8 +238,8 @@ ul.inheritsList
 				
 				
 			
-				<b>Building</b><br />
-A Building object definition
+				<b>Indication</b>
+Represents the instruction that a user should follow when on a RouteStep to continue the route.
 				
 				
 					<br /><i>Defined in: </i> <a href="../symbols/src/docs_Interfaces.js.html">Interfaces.js</a>.
@@ -248,7 +248,7 @@ A Building object definition
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Building.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Indication.">
 				<caption>Namespace Summary</caption>
 				<thead>
 					<tr>
@@ -261,7 +261,7 @@ A Building object definition
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/Building.html#constructor">Building</a></b>
+								<b><a href="../symbols/Indication.html#constructor">Indication</a></b>
 							</div>
 							<div class="description"></div>
 						</td>
@@ -274,7 +274,7 @@ A Building object definition
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Building.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Indication.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -288,9 +288,9 @@ A Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#address">address</a></b>
+								<b><a href="../symbols/Indication.html#distance">distance</a></b>
 								</div>
-								<div class="description">- Te building address.</div>
+								<div class="description">- The distance between the origin and destination</div>
 							</td>
 						</tr>
 					
@@ -298,9 +298,9 @@ A Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#bounds">bounds</a></b>
+								<b><a href="../symbols/Indication.html#distanceToNextLevel">distanceToNextLevel</a></b>
 								</div>
-								<div class="description">- Compute corners of this building, without rotation, in earth coordinates.</div>
+								<div class="description">- The number of levels between the origin and destination</div>
 							</td>
 						</tr>
 					
@@ -308,9 +308,9 @@ A Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#boundsRotated">boundsRotated</a></b>
+								<b><a href="../symbols/Indication.html#indicationType">indicationType</a></b>
 								</div>
-								<div class="description">- Compute corners of this building, with rotation, in earth coordinates.</div>
+								<div class="description">- The Indication.Action of the instruction as String</div>
 							</td>
 						</tr>
 					
@@ -318,9 +318,9 @@ A Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#buildingIdentifier">buildingIdentifier</a></b>
+								<b><a href="../symbols/Indication.html#neededLevelChange">neededLevelChange</a></b>
 								</div>
-								<div class="description">- The unique identifier of the resource</div>
+								<div class="description">- If the user should change the level in order to arrive to destination</div>
 							</td>
 						</tr>
 					
@@ -328,9 +328,9 @@ A Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#center">center</a></b>
+								<b><a href="../symbols/Indication.html#orientation">orientation</a></b>
 								</div>
-								<div class="description">- Center of the building's base, as geographical coordinate.</div>
+								<div class="description">- The angle a user should change his direction in order to go from the origin to the destination.</div>
 							</td>
 						</tr>
 					
@@ -338,9 +338,9 @@ A Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#customFields">customFields</a></b>
+								<b><a href="../symbols/Indication.html#orientationType">orientationType</a></b>
 								</div>
-								<div class="description">- Map of custom fields, indexed by their name.</div>
+								<div class="description">- The Indication.Orientation of the instruction as String</div>
 							</td>
 						</tr>
 					
@@ -348,9 +348,9 @@ A Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#Dimensions">Dimensions</a></b>
+								<b><a href="../symbols/Indication.html#stepIdxDestination">stepIdxDestination</a></b>
 								</div>
-								<div class="description">- Dimensions of building's base (height and width) in meters.</div>
+								<div class="description">- The index of the indication's step of destination.</div>
 							</td>
 						</tr>
 					
@@ -358,59 +358,9 @@ A Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#infoHtml">infoHtml</a></b>
+								<b><a href="../symbols/Indication.html#stepIdxOrigin">stepIdxOrigin</a></b>
 								</div>
-								<div class="description">- Additional information about building, formatted with HTML</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#name">name</a></b>
-								</div>
-								<div class="description">- The building name that is appropriate for display to the user.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#pictureThumbUrl">pictureThumbUrl</a></b>
-								</div>
-								<div class="description">- The URL of building thumbnail image</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#pictureUrl">pictureUrl</a></b>
-								</div>
-								<div class="description">- The URL of building image</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#rotation">rotation</a></b>
-								</div>
-								<div class="description">- Rotation angle of the building's base, relative to the west-east axis, increasing in counter-clockwise, being 0 the west-east axis.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#userIdentifier">userIdentifier</a></b>
-								</div>
-								<div class="description">- Unique identifier of the owner user of the building</div>
+								<div class="description">- The index of the indication's step of origin</div>
 							</td>
 						</tr>
 					
@@ -434,7 +384,7 @@ A Building object definition
 				</div>
 				
 				<div class="fixedFont">
-						<b>Building</b>
+						<b>Indication</b>
 				</div>
 				
 				<div class="description">
@@ -462,257 +412,15 @@ A Building object definition
 					Field Detail
 				</div>
 				
-					<a name="address"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{string}</span>
-					<b>address</b>
-					
-					</div>
-					<div class="description">
-						- Te building address.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="bounds"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{<a href="../symbols/Bounds.html">Bounds</a>}</span>
-					<b>bounds</b>
-					
-					</div>
-					<div class="description">
-						- Compute corners of this building, without rotation, in earth coordinates.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="boundsRotated"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{<a href="../symbols/Bounds.html">Bounds</a>}</span>
-					<b>boundsRotated</b>
-					
-					</div>
-					<div class="description">
-						- Compute corners of this building, with rotation, in earth coordinates.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="buildingIdentifier"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{string}</span>
-					<b>buildingIdentifier</b>
-					
-					</div>
-					<div class="description">
-						- The unique identifier of the resource
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="center"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{<a href="../symbols/Coordinate.html">Coordinate</a>}</span>
-					<b>center</b>
-					
-					</div>
-					<div class="description">
-						- Center of the building's base, as geographical coordinate.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="customFields"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{Object}</span>
-					<b>customFields</b>
-					
-					</div>
-					<div class="description">
-						- Map of custom fields, indexed by their name.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="Dimensions"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{<a href="../symbols/Dimensions.html">Dimensions</a>}</span>
-					<b>Dimensions</b>
-					
-					</div>
-					<div class="description">
-						- Dimensions of building's base (height and width) in meters.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="infoHtml"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{string}</span>
-					<b>infoHtml</b>
-					
-					</div>
-					<div class="description">
-						- Additional information about building, formatted with HTML
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="name"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{string}</span>
-					<b>name</b>
-					
-					</div>
-					<div class="description">
-						- The building name that is appropriate for display to the user.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="pictureThumbUrl"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{string}</span>
-					<b>pictureThumbUrl</b>
-					
-					</div>
-					<div class="description">
-						- The URL of building thumbnail image
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="pictureUrl"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{string}</span>
-					<b>pictureUrl</b>
-					
-					</div>
-					<div class="description">
-						- The URL of building image
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="rotation"> </a>
+					<a name="distance"> </a>
 					<div class="fixedFont">
 					
 					<span class="light">{float}</span>
-					<b>rotation</b>
+					<b>distance</b>
 					
 					</div>
 					<div class="description">
-						- Rotation angle of the building's base, relative to the west-east axis, increasing in counter-clockwise, being 0 the west-east axis.
+						- The distance between the origin and destination
 						
 						
 					</div>
@@ -726,15 +434,147 @@ A Building object definition
 
 					<hr />
 				
-					<a name="userIdentifier"> </a>
+					<a name="distanceToNextLevel"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{string}</span>
-					<b>userIdentifier</b>
+					<span class="light">{number}</span>
+					<b>distanceToNextLevel</b>
 					
 					</div>
 					<div class="description">
-						- Unique identifier of the owner user of the building
+						- The number of levels between the origin and destination
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="indicationType"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{string}</span>
+					<b>indicationType</b>
+					
+					</div>
+					<div class="description">
+						- The Indication.Action of the instruction as String
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="neededLevelChange"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{boolean}</span>
+					<b>neededLevelChange</b>
+					
+					</div>
+					<div class="description">
+						- If the user should change the level in order to arrive to destination
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="orientation"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{float}</span>
+					<b>orientation</b>
+					
+					</div>
+					<div class="description">
+						- The angle a user should change his direction in order to go from the origin to the destination.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="orientationType"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{string}</span>
+					<b>orientationType</b>
+					
+					</div>
+					<div class="description">
+						- The Indication.Orientation of the instruction as String
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="stepIdxDestination"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{number}</span>
+					<b>stepIdxDestination</b>
+					
+					</div>
+					<div class="description">
+						- The index of the indication's step of destination.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="stepIdxOrigin"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{number}</span>
+					<b>stepIdxOrigin</b>
+					
+					</div>
+					<div class="description">
+						- The index of the indication's step of origin
 						
 						
 					</div>

@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - Building</title>
+		<title>JsDoc Reference - Point</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -230,7 +230,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Namespace Building
+				Namespace Point
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -238,8 +238,8 @@ ul.inheritsList
 				
 				
 			
-				<b>Building</b><br />
-A Building object definition
+				<b>Point</b>
+Associate geographical coordinate (Location) with Building and Floor (Cartography) and cartesian coordinate relative to that building.
 				
 				
 					<br /><i>Defined in: </i> <a href="../symbols/src/docs_Interfaces.js.html">Interfaces.js</a>.
@@ -248,7 +248,7 @@ A Building object definition
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Building.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Point.">
 				<caption>Namespace Summary</caption>
 				<thead>
 					<tr>
@@ -261,7 +261,7 @@ A Building object definition
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/Building.html#constructor">Building</a></b>
+								<b><a href="../symbols/Point.html#constructor">Point</a></b>
 							</div>
 							<div class="description"></div>
 						</td>
@@ -274,7 +274,7 @@ A Building object definition
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Building.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Point.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -288,9 +288,9 @@ A Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#address">address</a></b>
+								<b><a href="../symbols/Point.html#buildingIdentifier">buildingIdentifier</a></b>
 								</div>
-								<div class="description">- Te building address.</div>
+								<div class="description">- Unique identifier for the building to which this point belongs</div>
 							</td>
 						</tr>
 					
@@ -298,9 +298,9 @@ A Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#bounds">bounds</a></b>
+								<b><a href="../symbols/Point.html#cartesianCoordinate">cartesianCoordinate</a></b>
 								</div>
-								<div class="description">- Compute corners of this building, without rotation, in earth coordinates.</div>
+								<div class="description">- Cartesian coordinate (in meters) relative to the Bounds of building's base.</div>
 							</td>
 						</tr>
 					
@@ -308,9 +308,9 @@ A Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#boundsRotated">boundsRotated</a></b>
+								<b><a href="../symbols/Point.html#coordinate">coordinate</a></b>
 								</div>
-								<div class="description">- Compute corners of this building, with rotation, in earth coordinates.</div>
+								<div class="description">- Geographic coordinate (latitude, longitude) of the point, regardless of whether it's placed inside or outside the building.</div>
 							</td>
 						</tr>
 					
@@ -318,9 +318,9 @@ A Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#buildingIdentifier">buildingIdentifier</a></b>
+								<b><a href="../symbols/Point.html#floorIdentifier">floorIdentifier</a></b>
 								</div>
-								<div class="description">- The unique identifier of the resource</div>
+								<div class="description">- Floor identifier (inside the building) where this point is placed.</div>
 							</td>
 						</tr>
 					
@@ -328,9 +328,9 @@ A Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#center">center</a></b>
+								<b><a href="../symbols/Point.html#idOutdoor">idOutdoor</a></b>
 								</div>
-								<div class="description">- Center of the building's base, as geographical coordinate.</div>
+								<div class="description">- If the POI is outside the building.</div>
 							</td>
 						</tr>
 					
@@ -338,79 +338,9 @@ A Building object definition
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#customFields">customFields</a></b>
+								<b><a href="../symbols/Point.html#isIndoor">isIndoor</a></b>
 								</div>
-								<div class="description">- Map of custom fields, indexed by their name.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#Dimensions">Dimensions</a></b>
-								</div>
-								<div class="description">- Dimensions of building's base (height and width) in meters.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#infoHtml">infoHtml</a></b>
-								</div>
-								<div class="description">- Additional information about building, formatted with HTML</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#name">name</a></b>
-								</div>
-								<div class="description">- The building name that is appropriate for display to the user.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#pictureThumbUrl">pictureThumbUrl</a></b>
-								</div>
-								<div class="description">- The URL of building thumbnail image</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#pictureUrl">pictureUrl</a></b>
-								</div>
-								<div class="description">- The URL of building image</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#rotation">rotation</a></b>
-								</div>
-								<div class="description">- Rotation angle of the building's base, relative to the west-east axis, increasing in counter-clockwise, being 0 the west-east axis.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/Building.html#userIdentifier">userIdentifier</a></b>
-								</div>
-								<div class="description">- Unique identifier of the owner user of the building</div>
+								<div class="description">- If the POI is inside the building.</div>
 							</td>
 						</tr>
 					
@@ -434,7 +364,7 @@ A Building object definition
 				</div>
 				
 				<div class="fixedFont">
-						<b>Building</b>
+						<b>Point</b>
 				</div>
 				
 				<div class="description">
@@ -462,72 +392,6 @@ A Building object definition
 					Field Detail
 				</div>
 				
-					<a name="address"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{string}</span>
-					<b>address</b>
-					
-					</div>
-					<div class="description">
-						- Te building address.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="bounds"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{<a href="../symbols/Bounds.html">Bounds</a>}</span>
-					<b>bounds</b>
-					
-					</div>
-					<div class="description">
-						- Compute corners of this building, without rotation, in earth coordinates.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="boundsRotated"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{<a href="../symbols/Bounds.html">Bounds</a>}</span>
-					<b>boundsRotated</b>
-					
-					</div>
-					<div class="description">
-						- Compute corners of this building, with rotation, in earth coordinates.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
 					<a name="buildingIdentifier"> </a>
 					<div class="fixedFont">
 					
@@ -536,7 +400,7 @@ A Building object definition
 					
 					</div>
 					<div class="description">
-						- The unique identifier of the resource
+						- Unique identifier for the building to which this point belongs
 						
 						
 					</div>
@@ -550,15 +414,37 @@ A Building object definition
 
 					<hr />
 				
-					<a name="center"> </a>
+					<a name="cartesianCoordinate"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{<a href="../symbols/CartesianCoordinate.html">CartesianCoordinate</a>}</span>
+					<b>cartesianCoordinate</b>
+					
+					</div>
+					<div class="description">
+						- Cartesian coordinate (in meters) relative to the Bounds of building's base.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="coordinate"> </a>
 					<div class="fixedFont">
 					
 					<span class="light">{<a href="../symbols/Coordinate.html">Coordinate</a>}</span>
-					<b>center</b>
+					<b>coordinate</b>
 					
 					</div>
 					<div class="description">
-						- Center of the building's base, as geographical coordinate.
+						- Geographic coordinate (latitude, longitude) of the point, regardless of whether it's placed inside or outside the building.
 						
 						
 					</div>
@@ -572,59 +458,15 @@ A Building object definition
 
 					<hr />
 				
-					<a name="customFields"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{Object}</span>
-					<b>customFields</b>
-					
-					</div>
-					<div class="description">
-						- Map of custom fields, indexed by their name.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="Dimensions"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{<a href="../symbols/Dimensions.html">Dimensions</a>}</span>
-					<b>Dimensions</b>
-					
-					</div>
-					<div class="description">
-						- Dimensions of building's base (height and width) in meters.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="infoHtml"> </a>
+					<a name="floorIdentifier"> </a>
 					<div class="fixedFont">
 					
 					<span class="light">{string}</span>
-					<b>infoHtml</b>
+					<b>floorIdentifier</b>
 					
 					</div>
 					<div class="description">
-						- Additional information about building, formatted with HTML
+						- Floor identifier (inside the building) where this point is placed.
 						
 						
 					</div>
@@ -638,15 +480,15 @@ A Building object definition
 
 					<hr />
 				
-					<a name="name"> </a>
+					<a name="idOutdoor"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{string}</span>
-					<b>name</b>
+					<span class="light">{boolean}</span>
+					<b>idOutdoor</b>
 					
 					</div>
 					<div class="description">
-						- The building name that is appropriate for display to the user.
+						- If the POI is outside the building.
 						
 						
 					</div>
@@ -660,81 +502,15 @@ A Building object definition
 
 					<hr />
 				
-					<a name="pictureThumbUrl"> </a>
+					<a name="isIndoor"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{string}</span>
-					<b>pictureThumbUrl</b>
+					<span class="light">{boolean}</span>
+					<b>isIndoor</b>
 					
 					</div>
 					<div class="description">
-						- The URL of building thumbnail image
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="pictureUrl"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{string}</span>
-					<b>pictureUrl</b>
-					
-					</div>
-					<div class="description">
-						- The URL of building image
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="rotation"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{float}</span>
-					<b>rotation</b>
-					
-					</div>
-					<div class="description">
-						- Rotation angle of the building's base, relative to the west-east axis, increasing in counter-clockwise, being 0 the west-east axis.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="userIdentifier"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{string}</span>
-					<b>userIdentifier</b>
-					
-					</div>
-					<div class="description">
-						- Unique identifier of the owner user of the building
+						- If the POI is inside the building.
 						
 						
 					</div>
