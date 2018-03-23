@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - Point</title>
+		<title>JsDoc Reference - Route</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -230,7 +230,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Namespace Point
+				Namespace Route
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -238,8 +238,8 @@ ul.inheritsList
 				
 				
 			
-				<b>Point</b>
-Associate geographical coordinate (Location) with Building and Floor (Cartography) and cartesian coordinate relative to that building.
+				<b>Route</b>
+Route between two points.
 				
 				
 					<br /><i>Defined in: </i> <a href="../symbols/src/docs_Interfaces.js.html">Interfaces.js</a>.
@@ -248,7 +248,7 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Point.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Route.">
 				<caption>Namespace Summary</caption>
 				<thead>
 					<tr>
@@ -261,7 +261,7 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/Point.html#constructor">Point</a></b>
+								<b><a href="../symbols/Route.html#constructor">Route</a></b>
 							</div>
 							<div class="description"></div>
 						</td>
@@ -274,7 +274,7 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Point.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Route.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -288,9 +288,9 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Point.html#buildingIdentifier">buildingIdentifier</a></b>
+								<b><a href="../symbols/Route.html#edges">edges</a></b>
 								</div>
-								<div class="description">- Unique identifier for the building to which this point belongs</div>
+								<div class="description">- Ordered list of steps to go to the goal point</div>
 							</td>
 						</tr>
 					
@@ -298,9 +298,9 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Point.html#cartesianCoordinate">cartesianCoordinate</a></b>
+								<b><a href="../symbols/Route.html#firstStep">firstStep</a></b>
 								</div>
-								<div class="description">- Cartesian coordinate (in meters) relative to the Bounds of building's base.</div>
+								<div class="description">- First step</div>
 							</td>
 						</tr>
 					
@@ -308,9 +308,9 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Point.html#coordinate">coordinate</a></b>
+								<b><a href="../symbols/Route.html#from">from</a></b>
 								</div>
-								<div class="description">- Geographic coordinate (latitude, longitude) of the point, regardless of whether it's placed inside or outside the building.</div>
+								<div class="description">- Point where the route starts.</div>
 							</td>
 						</tr>
 					
@@ -318,9 +318,9 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Point.html#floorIdentifier">floorIdentifier</a></b>
+								<b><a href="../symbols/Route.html#indications">indications</a></b>
 								</div>
-								<div class="description">- Floor identifier (inside the building) where this point is placed.</div>
+								<div class="description">- Ordered list of instructions to go to the destination</div>
 							</td>
 						</tr>
 					
@@ -328,9 +328,9 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Point.html#idOutdoor">idOutdoor</a></b>
+								<b><a href="../symbols/Route.html#lastStep">lastStep</a></b>
 								</div>
-								<div class="description">- If the POI is outside the building.</div>
+								<div class="description">- Last step</div>
 							</td>
 						</tr>
 					
@@ -338,9 +338,39 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Point.html#isIndoor">isIndoor</a></b>
+								<b><a href="../symbols/Route.html#nodes">nodes</a></b>
 								</div>
-								<div class="description">- If the POI is inside the building.</div>
+								<div class="description">- A collection of points of the route (not ordered)</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/Route.html#points">points</a></b>
+								</div>
+								<div class="description">- List of ordered points of the route</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/Route.html#steps">steps</a></b>
+								</div>
+								<div class="description">- Ordered list of steps to go to the goal point</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/Route.html#to">to</a></b>
+								</div>
+								<div class="description">- Last point and goal of the route.</div>
 							</td>
 						</tr>
 					
@@ -364,7 +394,7 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 				</div>
 				
 				<div class="fixedFont">
-						<b>Point</b>
+						<b>Route</b>
 				</div>
 				
 				<div class="description">
@@ -392,15 +422,15 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 					Field Detail
 				</div>
 				
-					<a name="buildingIdentifier"> </a>
+					<a name="edges"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{string}</span>
-					<b>buildingIdentifier</b>
+					<span class="light">{<a href="../symbols/RouteStep.html">RouteStep</a>[]}</span>
+					<b>edges</b>
 					
 					</div>
 					<div class="description">
-						- Unique identifier for the building to which this point belongs
+						- Ordered list of steps to go to the goal point
 						
 						
 					</div>
@@ -414,15 +444,15 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 
 					<hr />
 				
-					<a name="cartesianCoordinate"> </a>
+					<a name="firstStep"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{<a href="../symbols/CartesianCoordinate.html">CartesianCoordinate</a>}</span>
-					<b>cartesianCoordinate</b>
+					<span class="light">{<a href="../symbols/RouteStep.html">RouteStep</a>}</span>
+					<b>firstStep</b>
 					
 					</div>
 					<div class="description">
-						- Cartesian coordinate (in meters) relative to the Bounds of building's base.
+						- First step
 						
 						
 					</div>
@@ -436,15 +466,15 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 
 					<hr />
 				
-					<a name="coordinate"> </a>
+					<a name="from"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{<a href="../symbols/Coordinate.html">Coordinate</a>}</span>
-					<b>coordinate</b>
+					<span class="light">{<a href="../symbols/Point.html">Point</a>}</span>
+					<b>from</b>
 					
 					</div>
 					<div class="description">
-						- Geographic coordinate (latitude, longitude) of the point, regardless of whether it's placed inside or outside the building.
+						- Point where the route starts.
 						
 						
 					</div>
@@ -458,15 +488,15 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 
 					<hr />
 				
-					<a name="floorIdentifier"> </a>
+					<a name="indications"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{string}</span>
-					<b>floorIdentifier</b>
+					<span class="light">{<a href="../symbols/Indication.html">Indication</a>}</span>
+					<b>indications</b>
 					
 					</div>
 					<div class="description">
-						- Floor identifier (inside the building) where this point is placed.
+						- Ordered list of instructions to go to the destination
 						
 						
 					</div>
@@ -480,15 +510,15 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 
 					<hr />
 				
-					<a name="idOutdoor"> </a>
+					<a name="lastStep"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{boolean}</span>
-					<b>idOutdoor</b>
+					<span class="light">{<a href="../symbols/RouteStep.html">RouteStep</a>}</span>
+					<b>lastStep</b>
 					
 					</div>
 					<div class="description">
-						- If the POI is outside the building.
+						- Last step
 						
 						
 					</div>
@@ -502,15 +532,81 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 
 					<hr />
 				
-					<a name="isIndoor"> </a>
+					<a name="nodes"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{boolean}</span>
-					<b>isIndoor</b>
+					<span class="light">{<a href="../symbols/Point.html">Point</a>[]}</span>
+					<b>nodes</b>
 					
 					</div>
 					<div class="description">
-						- If the POI is inside the building.
+						- A collection of points of the route (not ordered)
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="points"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{<a href="../symbols/Point.html">Point</a>[]}</span>
+					<b>points</b>
+					
+					</div>
+					<div class="description">
+						- List of ordered points of the route
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="steps"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{<a href="../symbols/RouteStep.html">RouteStep</a>[]}</span>
+					<b>steps</b>
+					
+					</div>
+					<div class="description">
+						- Ordered list of steps to go to the goal point
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="to"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{<a href="../symbols/Point.html">Point</a>}</span>
+					<b>to</b>
+					
+					</div>
+					<div class="description">
+						- Last point and goal of the route.
 						
 						
 					</div>
@@ -539,7 +635,7 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Thu Mar 22 2018 13:55:51 GMT+0100 (CET)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Fri Mar 23 2018 14:35:10 GMT+0100 (CET)
 		</div>
 	</body>
 </html>

@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - CartesianCoordinate</title>
+		<title>JsDoc Reference - Bounds</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -230,7 +230,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Namespace CartesianCoordinate
+				Namespace Bounds
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -238,8 +238,8 @@ ul.inheritsList
 				
 				
 			
-				<b>Cartesian Coordinate</b><br />
-A structure that contains cartesian coordinate.
+				<b>Bounds</b><br />
+Represents a rectangle bounds in a greographic 2D space.
 				
 				
 					<br /><i>Defined in: </i> <a href="../symbols/src/docs_Interfaces.js.html">Interfaces.js</a>.
@@ -248,7 +248,7 @@ A structure that contains cartesian coordinate.
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class CartesianCoordinate.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Bounds.">
 				<caption>Namespace Summary</caption>
 				<thead>
 					<tr>
@@ -261,7 +261,7 @@ A structure that contains cartesian coordinate.
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/CartesianCoordinate.html#constructor">CartesianCoordinate</a></b>
+								<b><a href="../symbols/Bounds.html#constructor">Bounds</a></b>
 							</div>
 							<div class="description"></div>
 						</td>
@@ -274,7 +274,7 @@ A structure that contains cartesian coordinate.
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class CartesianCoordinate.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Bounds.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -288,9 +288,9 @@ A structure that contains cartesian coordinate.
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/CartesianCoordinate.html#x">x</a></b>
+								<b><a href="../symbols/Bounds.html#northEast">northEast</a></b>
 								</div>
-								<div class="description">- Value of coordinate at x-axis</div>
+								<div class="description">- The coordinate of the north-east corner of the bound.</div>
 							</td>
 						</tr>
 					
@@ -298,9 +298,29 @@ A structure that contains cartesian coordinate.
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/CartesianCoordinate.html#y">y</a></b>
+								<b><a href="../symbols/Bounds.html#northWest">northWest</a></b>
 								</div>
-								<div class="description">- Value of coordinate at y-axis</div>
+								<div class="description">- The coordinate of the north-west corner of the bound.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/Bounds.html#southEast">southEast</a></b>
+								</div>
+								<div class="description">- The coordinate of the south-east corner of the bound.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/Bounds.html#southWest">southWest</a></b>
+								</div>
+								<div class="description">- The coordinate of the south-east corner of the bound.</div>
 							</td>
 						</tr>
 					
@@ -324,7 +344,7 @@ A structure that contains cartesian coordinate.
 				</div>
 				
 				<div class="fixedFont">
-						<b>CartesianCoordinate</b>
+						<b>Bounds</b>
 				</div>
 				
 				<div class="description">
@@ -352,15 +372,15 @@ A structure that contains cartesian coordinate.
 					Field Detail
 				</div>
 				
-					<a name="x"> </a>
+					<a name="northEast"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{float}</span>
-					<b>x</b>
+					<span class="light">{<a href="../symbols/Coordinate.html">Coordinate</a>}</span>
+					<b>northEast</b>
 					
 					</div>
 					<div class="description">
-						- Value of coordinate at x-axis
+						- The coordinate of the north-east corner of the bound.
 						
 						
 					</div>
@@ -374,15 +394,59 @@ A structure that contains cartesian coordinate.
 
 					<hr />
 				
-					<a name="y"> </a>
+					<a name="northWest"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{float}</span>
-					<b>y</b>
+					<span class="light">{<a href="../symbols/Coordinate.html">Coordinate</a>}</span>
+					<b>northWest</b>
 					
 					</div>
 					<div class="description">
-						- Value of coordinate at y-axis
+						- The coordinate of the north-west corner of the bound.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="southEast"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{<a href="../symbols/Coordinate.html">Coordinate</a>}</span>
+					<b>southEast</b>
+					
+					</div>
+					<div class="description">
+						- The coordinate of the south-east corner of the bound.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="southWest"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{<a href="../symbols/Coordinate.html">Coordinate</a>}</span>
+					<b>southWest</b>
+					
+					</div>
+					<div class="description">
+						- The coordinate of the south-east corner of the bound.
 						
 						
 					</div>
@@ -411,7 +475,7 @@ A structure that contains cartesian coordinate.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Thu Mar 22 2018 13:55:51 GMT+0100 (CET)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Fri Mar 23 2018 14:35:10 GMT+0100 (CET)
 		</div>
 	</body>
 </html>

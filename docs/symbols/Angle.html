@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - Poi</title>
+		<title>JsDoc Reference - Angle</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -230,7 +230,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Namespace Poi
+				Namespace Angle
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -238,8 +238,8 @@ ul.inheritsList
 				
 				
 			
-				<b>POI (Point of Interest)</b>
-Point of Interest, associated to a building, regardless of whether it's place inside or outside the building.
+				<b>Angle</b>
+Representation of an angle.
 				
 				
 					<br /><i>Defined in: </i> <a href="../symbols/src/docs_Interfaces.js.html">Interfaces.js</a>.
@@ -248,7 +248,7 @@ Point of Interest, associated to a building, regardless of whether it's place in
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Poi.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Angle.">
 				<caption>Namespace Summary</caption>
 				<thead>
 					<tr>
@@ -261,7 +261,7 @@ Point of Interest, associated to a building, regardless of whether it's place in
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/Poi.html#constructor">Poi</a></b>
+								<b><a href="../symbols/Angle.html#constructor">Angle</a></b>
 							</div>
 							<div class="description"></div>
 						</td>
@@ -274,7 +274,7 @@ Point of Interest, associated to a building, regardless of whether it's place in
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Poi.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Angle.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -288,9 +288,9 @@ Point of Interest, associated to a building, regardless of whether it's place in
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Poi.html#buildingIdentifier">buildingIdentifier</a></b>
+								<b><a href="../symbols/Angle.html#degrees">degrees</a></b>
 								</div>
-								<div class="description">- Identifier of building to which the POI belongs.</div>
+								<div class="description">- Angle in degrees, increasing in counter-clockwise</div>
 							</td>
 						</tr>
 					
@@ -298,9 +298,9 @@ Point of Interest, associated to a building, regardless of whether it's place in
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Poi.html#cartesianCoordinate">cartesianCoordinate</a></b>
+								<b><a href="../symbols/Angle.html#degreesClockwise">degreesClockwise</a></b>
 								</div>
-								<div class="description">- Cartesian coordinate of this position, relative to building Bounds.</div>
+								<div class="description">- Angle in radians, increasing in clockwise</div>
 							</td>
 						</tr>
 					
@@ -308,9 +308,9 @@ Point of Interest, associated to a building, regardless of whether it's place in
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Poi.html#category">category</a></b>
+								<b><a href="../symbols/Angle.html#radians">radians</a></b>
 								</div>
-								<div class="description">- Category of the POI</div>
+								<div class="description">- Angle in radians, increasing in counter-clockwise</div>
 							</td>
 						</tr>
 					
@@ -318,89 +318,9 @@ Point of Interest, associated to a building, regardless of whether it's place in
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Poi.html#coordinate">coordinate</a></b>
+								<b><a href="../symbols/Angle.html#radiansMinusPiPi">radiansMinusPiPi</a></b>
 								</div>
-								<div class="description">- Geographical coordinate of this position</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/Poi.html#customFields">customFields</a></b>
-								</div>
-								<div class="description">- Map of custom fields, indexed by their name.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/Poi.html#floorIdentifier">floorIdentifier</a></b>
-								</div>
-								<div class="description">- If this POI is outside the building (isOutdoor == true), this field has no meaning.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/Poi.html#identifier">identifier</a></b>
-								</div>
-								<div class="description">- The unique identifier of the resource</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/Poi.html#infoHtml">infoHtml</a></b>
-								</div>
-								<div class="description">- Additional information about POI, in HTML</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/Poi.html#isIndoor">isIndoor</a></b>
-								</div>
-								<div class="description">- Whether the POI is placed outside the building or not.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/Poi.html#isOutdoor">isOutdoor</a></b>
-								</div>
-								<div class="description">- Whether the POI is placed outside the building or not.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/Poi.html#poiName">poiName</a></b>
-								</div>
-								<div class="description">- A name for the POI, appropriate for display to the user.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/Poi.html#position">position</a></b>
-								</div>
-								<div class="description"></div>
+								<div class="description">- Angle in radians in range (-pi,pi)</div>
 							</td>
 						</tr>
 					
@@ -424,7 +344,7 @@ Point of Interest, associated to a building, regardless of whether it's place in
 				</div>
 				
 				<div class="fixedFont">
-						<b>Poi</b>
+						<b>Angle</b>
 				</div>
 				
 				<div class="description">
@@ -452,15 +372,15 @@ Point of Interest, associated to a building, regardless of whether it's place in
 					Field Detail
 				</div>
 				
-					<a name="buildingIdentifier"> </a>
+					<a name="degrees"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{string}</span>
-					<b>buildingIdentifier</b>
+					<span class="light">{float}</span>
+					<b>degrees</b>
 					
 					</div>
 					<div class="description">
-						- Identifier of building to which the POI belongs.
+						- Angle in degrees, increasing in counter-clockwise
 						
 						
 					</div>
@@ -474,15 +394,15 @@ Point of Interest, associated to a building, regardless of whether it's place in
 
 					<hr />
 				
-					<a name="cartesianCoordinate"> </a>
+					<a name="degreesClockwise"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{<a href="../symbols/CartesianCoordinate.html">CartesianCoordinate</a>}</span>
-					<b>cartesianCoordinate</b>
+					<span class="light">{float}</span>
+					<b>degreesClockwise</b>
 					
 					</div>
 					<div class="description">
-						- Cartesian coordinate of this position, relative to building Bounds.
+						- Angle in radians, increasing in clockwise
 						
 						
 					</div>
@@ -496,15 +416,15 @@ Point of Interest, associated to a building, regardless of whether it's place in
 
 					<hr />
 				
-					<a name="category"> </a>
+					<a name="radians"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{<a href="../symbols/PoiCategory.html">PoiCategory</a>}</span>
-					<b>category</b>
+					<span class="light">{float}</span>
+					<b>radians</b>
 					
 					</div>
 					<div class="description">
-						- Category of the POI
+						- Angle in radians, increasing in counter-clockwise
 						
 						
 					</div>
@@ -518,191 +438,15 @@ Point of Interest, associated to a building, regardless of whether it's place in
 
 					<hr />
 				
-					<a name="coordinate"> </a>
+					<a name="radiansMinusPiPi"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{<a href="../symbols/Coordinate.html">Coordinate</a>}</span>
-					<b>coordinate</b>
+					<span class="light">{float}</span>
+					<b>radiansMinusPiPi</b>
 					
 					</div>
 					<div class="description">
-						- Geographical coordinate of this position
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="customFields"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{Object}</span>
-					<b>customFields</b>
-					
-					</div>
-					<div class="description">
-						- Map of custom fields, indexed by their name.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="floorIdentifier"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{string}</span>
-					<b>floorIdentifier</b>
-					
-					</div>
-					<div class="description">
-						- If this POI is outside the building (isOutdoor == true), this field has no meaning.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="identifier"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{string}</span>
-					<b>identifier</b>
-					
-					</div>
-					<div class="description">
-						- The unique identifier of the resource
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="infoHtml"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{string}</span>
-					<b>infoHtml</b>
-					
-					</div>
-					<div class="description">
-						- Additional information about POI, in HTML
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="isIndoor"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{boolean}</span>
-					<b>isIndoor</b>
-					
-					</div>
-					<div class="description">
-						- Whether the POI is placed outside the building or not.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="isOutdoor"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{boolean}</span>
-					<b>isOutdoor</b>
-					
-					</div>
-					<div class="description">
-						- Whether the POI is placed outside the building or not.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="poiName"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{string}</span>
-					<b>poiName</b>
-					
-					</div>
-					<div class="description">
-						- A name for the POI, appropriate for display to the user.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="position"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{<a href="../symbols/Point.html">Point</a>}</span>
-					<b>position</b>
-					
-					</div>
-					<div class="description">
-						
+						- Angle in radians in range (-pi,pi)
 						
 						
 					</div>
@@ -731,7 +475,7 @@ Point of Interest, associated to a building, regardless of whether it's place in
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Thu Mar 22 2018 13:55:51 GMT+0100 (CET)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Fri Mar 23 2018 14:35:10 GMT+0100 (CET)
 		</div>
 	</body>
 </html>

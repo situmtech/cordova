@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - Route</title>
+		<title>JsDoc Reference - Poi</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -230,7 +230,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Namespace Route
+				Namespace Poi
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -238,8 +238,8 @@ ul.inheritsList
 				
 				
 			
-				<b>Route</b>
-Route between two points.
+				<b>POI (Point of Interest)</b>
+Point of Interest, associated to a building, regardless of whether it's place inside or outside the building.
 				
 				
 					<br /><i>Defined in: </i> <a href="../symbols/src/docs_Interfaces.js.html">Interfaces.js</a>.
@@ -248,7 +248,7 @@ Route between two points.
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Route.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Poi.">
 				<caption>Namespace Summary</caption>
 				<thead>
 					<tr>
@@ -261,7 +261,7 @@ Route between two points.
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/Route.html#constructor">Route</a></b>
+								<b><a href="../symbols/Poi.html#constructor">Poi</a></b>
 							</div>
 							<div class="description"></div>
 						</td>
@@ -274,7 +274,7 @@ Route between two points.
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Route.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Poi.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -288,9 +288,9 @@ Route between two points.
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Route.html#edges">edges</a></b>
+								<b><a href="../symbols/Poi.html#buildingIdentifier">buildingIdentifier</a></b>
 								</div>
-								<div class="description">- Ordered list of steps to go to the goal point</div>
+								<div class="description">- Identifier of building to which the POI belongs.</div>
 							</td>
 						</tr>
 					
@@ -298,9 +298,9 @@ Route between two points.
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Route.html#firstStep">firstStep</a></b>
+								<b><a href="../symbols/Poi.html#cartesianCoordinate">cartesianCoordinate</a></b>
 								</div>
-								<div class="description">- First step</div>
+								<div class="description">- Cartesian coordinate of this position, relative to building Bounds.</div>
 							</td>
 						</tr>
 					
@@ -308,9 +308,9 @@ Route between two points.
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Route.html#from">from</a></b>
+								<b><a href="../symbols/Poi.html#category">category</a></b>
 								</div>
-								<div class="description">- Point where the route starts.</div>
+								<div class="description">- Category of the POI</div>
 							</td>
 						</tr>
 					
@@ -318,9 +318,9 @@ Route between two points.
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Route.html#indications">indications</a></b>
+								<b><a href="../symbols/Poi.html#coordinate">coordinate</a></b>
 								</div>
-								<div class="description">- Ordered list of instructions to go to the destination</div>
+								<div class="description">- Geographical coordinate of this position</div>
 							</td>
 						</tr>
 					
@@ -328,9 +328,9 @@ Route between two points.
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Route.html#lastStep">lastStep</a></b>
+								<b><a href="../symbols/Poi.html#customFields">customFields</a></b>
 								</div>
-								<div class="description">- Last step</div>
+								<div class="description">- Map of custom fields, indexed by their name.</div>
 							</td>
 						</tr>
 					
@@ -338,9 +338,9 @@ Route between two points.
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Route.html#nodes">nodes</a></b>
+								<b><a href="../symbols/Poi.html#floorIdentifier">floorIdentifier</a></b>
 								</div>
-								<div class="description">- A collection of points of the route (not ordered)</div>
+								<div class="description">- If this POI is outside the building (isOutdoor == true), this field has no meaning.</div>
 							</td>
 						</tr>
 					
@@ -348,9 +348,9 @@ Route between two points.
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Route.html#points">points</a></b>
+								<b><a href="../symbols/Poi.html#identifier">identifier</a></b>
 								</div>
-								<div class="description">- List of ordered points of the route</div>
+								<div class="description">- The unique identifier of the resource</div>
 							</td>
 						</tr>
 					
@@ -358,9 +358,9 @@ Route between two points.
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Route.html#steps">steps</a></b>
+								<b><a href="../symbols/Poi.html#infoHtml">infoHtml</a></b>
 								</div>
-								<div class="description">- Ordered list of steps to go to the goal point</div>
+								<div class="description">- Additional information about POI, in HTML</div>
 							</td>
 						</tr>
 					
@@ -368,9 +368,39 @@ Route between two points.
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Route.html#to">to</a></b>
+								<b><a href="../symbols/Poi.html#isIndoor">isIndoor</a></b>
 								</div>
-								<div class="description">- Last point and goal of the route.</div>
+								<div class="description">- Whether the POI is placed outside the building or not.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/Poi.html#isOutdoor">isOutdoor</a></b>
+								</div>
+								<div class="description">- Whether the POI is placed outside the building or not.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/Poi.html#poiName">poiName</a></b>
+								</div>
+								<div class="description">- A name for the POI, appropriate for display to the user.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/Poi.html#position">position</a></b>
+								</div>
+								<div class="description"></div>
 							</td>
 						</tr>
 					
@@ -394,7 +424,7 @@ Route between two points.
 				</div>
 				
 				<div class="fixedFont">
-						<b>Route</b>
+						<b>Poi</b>
 				</div>
 				
 				<div class="description">
@@ -422,15 +452,15 @@ Route between two points.
 					Field Detail
 				</div>
 				
-					<a name="edges"> </a>
+					<a name="buildingIdentifier"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{<a href="../symbols/RouteStep.html">RouteStep</a>[]}</span>
-					<b>edges</b>
+					<span class="light">{string}</span>
+					<b>buildingIdentifier</b>
 					
 					</div>
 					<div class="description">
-						- Ordered list of steps to go to the goal point
+						- Identifier of building to which the POI belongs.
 						
 						
 					</div>
@@ -444,15 +474,15 @@ Route between two points.
 
 					<hr />
 				
-					<a name="firstStep"> </a>
+					<a name="cartesianCoordinate"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{<a href="../symbols/RouteStep.html">RouteStep</a>}</span>
-					<b>firstStep</b>
+					<span class="light">{<a href="../symbols/CartesianCoordinate.html">CartesianCoordinate</a>}</span>
+					<b>cartesianCoordinate</b>
 					
 					</div>
 					<div class="description">
-						- First step
+						- Cartesian coordinate of this position, relative to building Bounds.
 						
 						
 					</div>
@@ -466,147 +496,213 @@ Route between two points.
 
 					<hr />
 				
-					<a name="from"> </a>
+					<a name="category"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{<a href="../symbols/PoiCategory.html">PoiCategory</a>}</span>
+					<b>category</b>
+					
+					</div>
+					<div class="description">
+						- Category of the POI
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="coordinate"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{<a href="../symbols/Coordinate.html">Coordinate</a>}</span>
+					<b>coordinate</b>
+					
+					</div>
+					<div class="description">
+						- Geographical coordinate of this position
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="customFields"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Object}</span>
+					<b>customFields</b>
+					
+					</div>
+					<div class="description">
+						- Map of custom fields, indexed by their name.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="floorIdentifier"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{string}</span>
+					<b>floorIdentifier</b>
+					
+					</div>
+					<div class="description">
+						- If this POI is outside the building (isOutdoor == true), this field has no meaning.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="identifier"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{string}</span>
+					<b>identifier</b>
+					
+					</div>
+					<div class="description">
+						- The unique identifier of the resource
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="infoHtml"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{string}</span>
+					<b>infoHtml</b>
+					
+					</div>
+					<div class="description">
+						- Additional information about POI, in HTML
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="isIndoor"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{boolean}</span>
+					<b>isIndoor</b>
+					
+					</div>
+					<div class="description">
+						- Whether the POI is placed outside the building or not.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="isOutdoor"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{boolean}</span>
+					<b>isOutdoor</b>
+					
+					</div>
+					<div class="description">
+						- Whether the POI is placed outside the building or not.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="poiName"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{string}</span>
+					<b>poiName</b>
+					
+					</div>
+					<div class="description">
+						- A name for the POI, appropriate for display to the user.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="position"> </a>
 					<div class="fixedFont">
 					
 					<span class="light">{<a href="../symbols/Point.html">Point</a>}</span>
-					<b>from</b>
+					<b>position</b>
 					
 					</div>
 					<div class="description">
-						- Point where the route starts.
 						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="indications"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{<a href="../symbols/Indication.html">Indication</a>}</span>
-					<b>indications</b>
-					
-					</div>
-					<div class="description">
-						- Ordered list of instructions to go to the destination
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="lastStep"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{<a href="../symbols/RouteStep.html">RouteStep</a>}</span>
-					<b>lastStep</b>
-					
-					</div>
-					<div class="description">
-						- Last step
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="nodes"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{<a href="../symbols/Point.html">Point</a>[]}</span>
-					<b>nodes</b>
-					
-					</div>
-					<div class="description">
-						- A collection of points of the route (not ordered)
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="points"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{<a href="../symbols/Point.html">Point</a>[]}</span>
-					<b>points</b>
-					
-					</div>
-					<div class="description">
-						- List of ordered points of the route
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="steps"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{<a href="../symbols/RouteStep.html">RouteStep</a>[]}</span>
-					<b>steps</b>
-					
-					</div>
-					<div class="description">
-						- Ordered list of steps to go to the goal point
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="to"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{<a href="../symbols/Point.html">Point</a>}</span>
-					<b>to</b>
-					
-					</div>
-					<div class="description">
-						- Last point and goal of the route.
 						
 						
 					</div>
@@ -635,7 +731,7 @@ Route between two points.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Thu Mar 22 2018 13:55:51 GMT+0100 (CET)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Fri Mar 23 2018 14:35:10 GMT+0100 (CET)
 		</div>
 	</body>
 </html>

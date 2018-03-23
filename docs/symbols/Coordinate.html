@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - PoiCategory</title>
+		<title>JsDoc Reference - Coordinate</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -230,7 +230,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Namespace PoiCategory
+				Namespace Coordinate
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -238,8 +238,8 @@ ul.inheritsList
 				
 				
 			
-				<b>PoiCategory</b>
-Category of Point of Interest.
+				<b>Coordinate</b><br />
+A structure that contains geographical coordinate.
 				
 				
 					<br /><i>Defined in: </i> <a href="../symbols/src/docs_Interfaces.js.html">Interfaces.js</a>.
@@ -248,7 +248,7 @@ Category of Point of Interest.
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class PoiCategory.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Coordinate.">
 				<caption>Namespace Summary</caption>
 				<thead>
 					<tr>
@@ -261,7 +261,7 @@ Category of Point of Interest.
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/PoiCategory.html#constructor">PoiCategory</a></b>
+								<b><a href="../symbols/Coordinate.html#constructor">Coordinate</a></b>
 							</div>
 							<div class="description"></div>
 						</td>
@@ -274,7 +274,7 @@ Category of Point of Interest.
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class PoiCategory.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Coordinate.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -288,9 +288,9 @@ Category of Point of Interest.
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/PoiCategory.html#icon_selected">icon_selected</a></b>
+								<b><a href="../symbols/Coordinate.html#latitude">latitude</a></b>
 								</div>
-								<div class="description">- The selected icon url</div>
+								<div class="description">- Latitude in degrees</div>
 							</td>
 						</tr>
 					
@@ -298,39 +298,9 @@ Category of Point of Interest.
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/PoiCategory.html#icon_unselected">icon_unselected</a></b>
+								<b><a href="../symbols/Coordinate.html#longitude">longitude</a></b>
 								</div>
-								<div class="description">- The unselected icon url</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/PoiCategory.html#poiCategoryCode">poiCategoryCode</a></b>
-								</div>
-								<div class="description">- Unique code of the category</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/PoiCategory.html#poiCategoryName">poiCategoryName</a></b>
-								</div>
-								<div class="description">- The category name appropriate for display to the user</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/PoiCategory.html#public">public</a></b>
-								</div>
-								<div class="description">- Whether the category is public or not</div>
+								<div class="description">- Longitude in degrees</div>
 							</td>
 						</tr>
 					
@@ -354,7 +324,7 @@ Category of Point of Interest.
 				</div>
 				
 				<div class="fixedFont">
-						<b>PoiCategory</b>
+						<b>Coordinate</b>
 				</div>
 				
 				<div class="description">
@@ -382,15 +352,15 @@ Category of Point of Interest.
 					Field Detail
 				</div>
 				
-					<a name="icon_selected"> </a>
+					<a name="latitude"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{string}</span>
-					<b>icon_selected</b>
+					<span class="light">{float}</span>
+					<b>latitude</b>
 					
 					</div>
 					<div class="description">
-						- The selected icon url
+						- Latitude in degrees
 						
 						
 					</div>
@@ -404,81 +374,15 @@ Category of Point of Interest.
 
 					<hr />
 				
-					<a name="icon_unselected"> </a>
+					<a name="longitude"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{string}</span>
-					<b>icon_unselected</b>
+					<span class="light">{float}</span>
+					<b>longitude</b>
 					
 					</div>
 					<div class="description">
-						- The unselected icon url
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="poiCategoryCode"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{string}</span>
-					<b>poiCategoryCode</b>
-					
-					</div>
-					<div class="description">
-						- Unique code of the category
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="poiCategoryName"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{string}</span>
-					<b>poiCategoryName</b>
-					
-					</div>
-					<div class="description">
-						- The category name appropriate for display to the user
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="public"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{boolean}</span>
-					<b>public</b>
-					
-					</div>
-					<div class="description">
-						- Whether the category is public or not
+						- Longitude in degrees
 						
 						
 					</div>
@@ -507,7 +411,7 @@ Category of Point of Interest.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Thu Mar 22 2018 13:55:51 GMT+0100 (CET)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Fri Mar 23 2018 14:35:10 GMT+0100 (CET)
 		</div>
 	</body>
 </html>

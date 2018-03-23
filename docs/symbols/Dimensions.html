@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - CartesiansCoordinate</title>
+		<title>JsDoc Reference - Dimensions</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -191,11 +191,13 @@ ul.inheritsList
 	
 	<li><i><a href="../symbols/_global_.html">_global_</a></i></li>
 	
+	<li><a href="../symbols/Angle.html">Angle</a></li>
+	
 	<li><a href="../symbols/Bounds.html">Bounds</a></li>
 	
 	<li><a href="../symbols/Building.html">Building</a></li>
 	
-	<li><a href="../symbols/CartesiansCoordinate.html">CartesiansCoordinate</a></li>
+	<li><a href="../symbols/CartesianCoordinate.html">CartesianCoordinate</a></li>
 	
 	<li><a href="../symbols/Coordinate.html">Coordinate</a></li>
 	
@@ -203,7 +205,19 @@ ul.inheritsList
 	
 	<li><a href="../symbols/Floor.html">Floor</a></li>
 	
+	<li><a href="../symbols/Indication.html">Indication</a></li>
+	
+	<li><a href="../symbols/Location.html">Location</a></li>
+	
 	<li><a href="../symbols/Poi.html">Poi</a></li>
+	
+	<li><a href="../symbols/PoiCategory.html">PoiCategory</a></li>
+	
+	<li><a href="../symbols/Point.html">Point</a></li>
+	
+	<li><a href="../symbols/Route.html">Route</a></li>
+	
+	<li><a href="../symbols/RouteStep.html">RouteStep</a></li>
 	
 	<li><a href="../symbols/Situm.html">Situm</a></li>
 	
@@ -216,7 +230,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Namespace CartesiansCoordinate
+				Namespace Dimensions
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -224,8 +238,8 @@ ul.inheritsList
 				
 				
 			
-				<b>Cartesians Coordinate</b><br />
-Cartesisans Coordinate
+				<b>Dimensions</b><br />
+Define 2D dimensions of a rectangular area.
 				
 				
 					<br /><i>Defined in: </i> <a href="../symbols/src/docs_Interfaces.js.html">Interfaces.js</a>.
@@ -234,7 +248,7 @@ Cartesisans Coordinate
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class CartesiansCoordinate.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Dimensions.">
 				<caption>Namespace Summary</caption>
 				<thead>
 					<tr>
@@ -247,7 +261,7 @@ Cartesisans Coordinate
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/CartesiansCoordinate.html#constructor">CartesiansCoordinate</a></b>
+								<b><a href="../symbols/Dimensions.html#constructor">Dimensions</a></b>
 							</div>
 							<div class="description"></div>
 						</td>
@@ -260,7 +274,7 @@ Cartesisans Coordinate
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class CartesiansCoordinate.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Dimensions.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -274,9 +288,9 @@ Cartesisans Coordinate
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/CartesiansCoordinate.html#x">x</a></b>
+								<b><a href="../symbols/Dimensions.html#height">height</a></b>
 								</div>
-								<div class="description">- x</div>
+								<div class="description">- Height of rectangle in meters.</div>
 							</td>
 						</tr>
 					
@@ -284,9 +298,9 @@ Cartesisans Coordinate
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/CartesiansCoordinate.html#y">y</a></b>
+								<b><a href="../symbols/Dimensions.html#width">width</a></b>
 								</div>
-								<div class="description">- y</div>
+								<div class="description">- Width of rectangle in meters</div>
 							</td>
 						</tr>
 					
@@ -310,7 +324,7 @@ Cartesisans Coordinate
 				</div>
 				
 				<div class="fixedFont">
-						<b>CartesiansCoordinate</b>
+						<b>Dimensions</b>
 				</div>
 				
 				<div class="description">
@@ -338,15 +352,15 @@ Cartesisans Coordinate
 					Field Detail
 				</div>
 				
-					<a name="x"> </a>
+					<a name="height"> </a>
 					<div class="fixedFont">
 					
 					<span class="light">{float}</span>
-					<b>x</b>
+					<b>height</b>
 					
 					</div>
 					<div class="description">
-						- x
+						- Height of rectangle in meters.
 						
 						
 					</div>
@@ -360,15 +374,15 @@ Cartesisans Coordinate
 
 					<hr />
 				
-					<a name="y"> </a>
+					<a name="width"> </a>
 					<div class="fixedFont">
 					
 					<span class="light">{float}</span>
-					<b>y</b>
+					<b>width</b>
 					
 					</div>
 					<div class="description">
-						- y
+						- Width of rectangle in meters
 						
 						
 					</div>
@@ -397,7 +411,7 @@ Cartesisans Coordinate
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Mon Mar 19 2018 12:20:31 GMT+0100 (CET)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Fri Mar 23 2018 14:35:10 GMT+0100 (CET)
 		</div>
 	</body>
 </html>

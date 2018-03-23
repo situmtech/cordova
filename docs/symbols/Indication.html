@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - Dimensions</title>
+		<title>JsDoc Reference - Indication</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -230,7 +230,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Namespace Dimensions
+				Namespace Indication
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -238,8 +238,8 @@ ul.inheritsList
 				
 				
 			
-				<b>Dimensions</b><br />
-Define 2D dimensions of a rectangular area.
+				<b>Indication</b>
+Represents the instruction that a user should follow when on a RouteStep to continue the route.
 				
 				
 					<br /><i>Defined in: </i> <a href="../symbols/src/docs_Interfaces.js.html">Interfaces.js</a>.
@@ -248,7 +248,7 @@ Define 2D dimensions of a rectangular area.
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Dimensions.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Indication.">
 				<caption>Namespace Summary</caption>
 				<thead>
 					<tr>
@@ -261,7 +261,7 @@ Define 2D dimensions of a rectangular area.
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/Dimensions.html#constructor">Dimensions</a></b>
+								<b><a href="../symbols/Indication.html#constructor">Indication</a></b>
 							</div>
 							<div class="description"></div>
 						</td>
@@ -274,7 +274,7 @@ Define 2D dimensions of a rectangular area.
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Dimensions.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Indication.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -288,9 +288,9 @@ Define 2D dimensions of a rectangular area.
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Dimensions.html#height">height</a></b>
+								<b><a href="../symbols/Indication.html#distance">distance</a></b>
 								</div>
-								<div class="description">- Height of rectangle in meters.</div>
+								<div class="description">- The distance between the origin and destination</div>
 							</td>
 						</tr>
 					
@@ -298,9 +298,69 @@ Define 2D dimensions of a rectangular area.
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Dimensions.html#width">width</a></b>
+								<b><a href="../symbols/Indication.html#distanceToNextLevel">distanceToNextLevel</a></b>
 								</div>
-								<div class="description">- Width of rectangle in meters</div>
+								<div class="description">- The number of levels between the origin and destination</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/Indication.html#indicationType">indicationType</a></b>
+								</div>
+								<div class="description">- The Indication.Action of the instruction as String</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/Indication.html#neededLevelChange">neededLevelChange</a></b>
+								</div>
+								<div class="description">- If the user should change the level in order to arrive to destination</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/Indication.html#orientation">orientation</a></b>
+								</div>
+								<div class="description">- The angle a user should change his direction in order to go from the origin to the destination.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/Indication.html#orientationType">orientationType</a></b>
+								</div>
+								<div class="description">- The Indication.Orientation of the instruction as String</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/Indication.html#stepIdxDestination">stepIdxDestination</a></b>
+								</div>
+								<div class="description">- The index of the indication's step of destination.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/Indication.html#stepIdxOrigin">stepIdxOrigin</a></b>
+								</div>
+								<div class="description">- The index of the indication's step of origin</div>
 							</td>
 						</tr>
 					
@@ -324,7 +384,7 @@ Define 2D dimensions of a rectangular area.
 				</div>
 				
 				<div class="fixedFont">
-						<b>Dimensions</b>
+						<b>Indication</b>
 				</div>
 				
 				<div class="description">
@@ -352,15 +412,15 @@ Define 2D dimensions of a rectangular area.
 					Field Detail
 				</div>
 				
-					<a name="height"> </a>
+					<a name="distance"> </a>
 					<div class="fixedFont">
 					
 					<span class="light">{float}</span>
-					<b>height</b>
+					<b>distance</b>
 					
 					</div>
 					<div class="description">
-						- Height of rectangle in meters.
+						- The distance between the origin and destination
 						
 						
 					</div>
@@ -374,15 +434,147 @@ Define 2D dimensions of a rectangular area.
 
 					<hr />
 				
-					<a name="width"> </a>
+					<a name="distanceToNextLevel"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{float}</span>
-					<b>width</b>
+					<span class="light">{number}</span>
+					<b>distanceToNextLevel</b>
 					
 					</div>
 					<div class="description">
-						- Width of rectangle in meters
+						- The number of levels between the origin and destination
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="indicationType"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{string}</span>
+					<b>indicationType</b>
+					
+					</div>
+					<div class="description">
+						- The Indication.Action of the instruction as String
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="neededLevelChange"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{boolean}</span>
+					<b>neededLevelChange</b>
+					
+					</div>
+					<div class="description">
+						- If the user should change the level in order to arrive to destination
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="orientation"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{float}</span>
+					<b>orientation</b>
+					
+					</div>
+					<div class="description">
+						- The angle a user should change his direction in order to go from the origin to the destination.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="orientationType"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{string}</span>
+					<b>orientationType</b>
+					
+					</div>
+					<div class="description">
+						- The Indication.Orientation of the instruction as String
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="stepIdxDestination"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{number}</span>
+					<b>stepIdxDestination</b>
+					
+					</div>
+					<div class="description">
+						- The index of the indication's step of destination.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="stepIdxOrigin"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{number}</span>
+					<b>stepIdxOrigin</b>
+					
+					</div>
+					<div class="description">
+						- The index of the indication's step of origin
 						
 						
 					</div>
@@ -411,7 +603,7 @@ Define 2D dimensions of a rectangular area.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Thu Mar 22 2018 13:55:51 GMT+0100 (CET)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Fri Mar 23 2018 14:35:10 GMT+0100 (CET)
 		</div>
 	</body>
 </html>

@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - Bounds</title>
+		<title>JsDoc Reference - Point</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -230,7 +230,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Namespace Bounds
+				Namespace Point
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -238,8 +238,8 @@ ul.inheritsList
 				
 				
 			
-				<b>Bounds</b><br />
-Represents a rectangle bounds in a greographic 2D space.
+				<b>Point</b>
+Associate geographical coordinate (Location) with Building and Floor (Cartography) and cartesian coordinate relative to that building.
 				
 				
 					<br /><i>Defined in: </i> <a href="../symbols/src/docs_Interfaces.js.html">Interfaces.js</a>.
@@ -248,7 +248,7 @@ Represents a rectangle bounds in a greographic 2D space.
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Bounds.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Point.">
 				<caption>Namespace Summary</caption>
 				<thead>
 					<tr>
@@ -261,7 +261,7 @@ Represents a rectangle bounds in a greographic 2D space.
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/Bounds.html#constructor">Bounds</a></b>
+								<b><a href="../symbols/Point.html#constructor">Point</a></b>
 							</div>
 							<div class="description"></div>
 						</td>
@@ -274,7 +274,7 @@ Represents a rectangle bounds in a greographic 2D space.
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Bounds.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Point.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -288,9 +288,9 @@ Represents a rectangle bounds in a greographic 2D space.
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Bounds.html#northEast">northEast</a></b>
+								<b><a href="../symbols/Point.html#buildingIdentifier">buildingIdentifier</a></b>
 								</div>
-								<div class="description">- The coordinate of the north-east corner of the bound.</div>
+								<div class="description">- Unique identifier for the building to which this point belongs</div>
 							</td>
 						</tr>
 					
@@ -298,9 +298,9 @@ Represents a rectangle bounds in a greographic 2D space.
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Bounds.html#northWest">northWest</a></b>
+								<b><a href="../symbols/Point.html#cartesianCoordinate">cartesianCoordinate</a></b>
 								</div>
-								<div class="description">- The coordinate of the north-west corner of the bound.</div>
+								<div class="description">- Cartesian coordinate (in meters) relative to the Bounds of building's base.</div>
 							</td>
 						</tr>
 					
@@ -308,9 +308,9 @@ Represents a rectangle bounds in a greographic 2D space.
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Bounds.html#southEast">southEast</a></b>
+								<b><a href="../symbols/Point.html#coordinate">coordinate</a></b>
 								</div>
-								<div class="description">- The coordinate of the south-east corner of the bound.</div>
+								<div class="description">- Geographic coordinate (latitude, longitude) of the point, regardless of whether it's placed inside or outside the building.</div>
 							</td>
 						</tr>
 					
@@ -318,9 +318,29 @@ Represents a rectangle bounds in a greographic 2D space.
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Bounds.html#southWest">southWest</a></b>
+								<b><a href="../symbols/Point.html#floorIdentifier">floorIdentifier</a></b>
 								</div>
-								<div class="description">- The coordinate of the south-east corner of the bound.</div>
+								<div class="description">- Floor identifier (inside the building) where this point is placed.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/Point.html#idOutdoor">idOutdoor</a></b>
+								</div>
+								<div class="description">- If the POI is outside the building.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/Point.html#isIndoor">isIndoor</a></b>
+								</div>
+								<div class="description">- If the POI is inside the building.</div>
 							</td>
 						</tr>
 					
@@ -344,7 +364,7 @@ Represents a rectangle bounds in a greographic 2D space.
 				</div>
 				
 				<div class="fixedFont">
-						<b>Bounds</b>
+						<b>Point</b>
 				</div>
 				
 				<div class="description">
@@ -372,15 +392,15 @@ Represents a rectangle bounds in a greographic 2D space.
 					Field Detail
 				</div>
 				
-					<a name="northEast"> </a>
+					<a name="buildingIdentifier"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{<a href="../symbols/Coordinate.html">Coordinate</a>}</span>
-					<b>northEast</b>
+					<span class="light">{string}</span>
+					<b>buildingIdentifier</b>
 					
 					</div>
 					<div class="description">
-						- The coordinate of the north-east corner of the bound.
+						- Unique identifier for the building to which this point belongs
 						
 						
 					</div>
@@ -394,15 +414,15 @@ Represents a rectangle bounds in a greographic 2D space.
 
 					<hr />
 				
-					<a name="northWest"> </a>
+					<a name="cartesianCoordinate"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{<a href="../symbols/Coordinate.html">Coordinate</a>}</span>
-					<b>northWest</b>
+					<span class="light">{<a href="../symbols/CartesianCoordinate.html">CartesianCoordinate</a>}</span>
+					<b>cartesianCoordinate</b>
 					
 					</div>
 					<div class="description">
-						- The coordinate of the north-west corner of the bound.
+						- Cartesian coordinate (in meters) relative to the Bounds of building's base.
 						
 						
 					</div>
@@ -416,15 +436,15 @@ Represents a rectangle bounds in a greographic 2D space.
 
 					<hr />
 				
-					<a name="southEast"> </a>
+					<a name="coordinate"> </a>
 					<div class="fixedFont">
 					
 					<span class="light">{<a href="../symbols/Coordinate.html">Coordinate</a>}</span>
-					<b>southEast</b>
+					<b>coordinate</b>
 					
 					</div>
 					<div class="description">
-						- The coordinate of the south-east corner of the bound.
+						- Geographic coordinate (latitude, longitude) of the point, regardless of whether it's placed inside or outside the building.
 						
 						
 					</div>
@@ -438,15 +458,59 @@ Represents a rectangle bounds in a greographic 2D space.
 
 					<hr />
 				
-					<a name="southWest"> </a>
+					<a name="floorIdentifier"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{<a href="../symbols/Coordinate.html">Coordinate</a>}</span>
-					<b>southWest</b>
+					<span class="light">{string}</span>
+					<b>floorIdentifier</b>
 					
 					</div>
 					<div class="description">
-						- The coordinate of the south-east corner of the bound.
+						- Floor identifier (inside the building) where this point is placed.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="idOutdoor"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{boolean}</span>
+					<b>idOutdoor</b>
+					
+					</div>
+					<div class="description">
+						- If the POI is outside the building.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="isIndoor"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{boolean}</span>
+					<b>isIndoor</b>
+					
+					</div>
+					<div class="description">
+						- If the POI is inside the building.
 						
 						
 					</div>
@@ -475,7 +539,7 @@ Represents a rectangle bounds in a greographic 2D space.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Thu Mar 22 2018 13:55:51 GMT+0100 (CET)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Fri Mar 23 2018 14:35:10 GMT+0100 (CET)
 		</div>
 	</body>
 </html>
