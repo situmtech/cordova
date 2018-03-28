@@ -388,10 +388,10 @@ Types of results in success cases:
       "stepIdxDestination":0,
       "orientationType":"Left",
       "indicationType":"Turn",
-      "humanReadableMessage":"Turn left and go ahead for 2 meters", // Only iOS, Android version coming
+      "humanReadableMessage":"Turn left and go ahead for 2 meters",
       "orientation":1.8215326070785522, // radians
       "neededLevelChange":false, // True if change floor is needed
-      "nextLevel":3 // Floor number. The floor level to which the user need to go. Only Android for now. iOS version coming
+      "nextLevel":3 // Floor number. The floor level to which the user need to go.
    },
    "type":"progress",
    "timeToGoal":62.55179214477539
