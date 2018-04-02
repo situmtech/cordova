@@ -31,7 +31,7 @@
   "bugs": {
     "url": "https://github.com/situmtech/situm-cordova-plugin/issues"
   },
-  "homepage": "https://github.com/siteumtech/situm-cordova-plugin#readme",
+  "homepage": "https://github.com/situmtech/situm-cordova-plugin#readme",
   "dependencies": {
     "cordova-paramedic": "^0.5.0"
   }
