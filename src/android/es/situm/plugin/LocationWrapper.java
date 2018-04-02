@@ -176,6 +176,8 @@ class LocationWrapper {
     public static final String OUTSIDE_ROUTE_THRESHOLD = "outsideRouteThreshold";
     public static final String DISTANCE_TO_GOAL_THRESHOLD = "distanceToGoalThreshold";
     public static final String STARTING_ANGLE = "startingAngle";
+    public static final String DISTANCE_TO_CHANGE_INDICATION_THRESHOLD = "distanceToChangeIndicationThreshold";
+    public static final String DISTANCE_TO_CHANGE_FLOOR_THRESHOLD = "distanceToChangeFloorThreshold";
     
     static JSONObject buildingToJsonObject(Building building) throws JSONException {
         JSONObject jo = new JSONObject();
