@@ -1,4 +1,4 @@
-# Situm Cordova Plugin &middot; [![npm](https://img.shields.io/npm/dm/situm-cordova-plugin-official.svg)]() [![npm](https://img.shields.io/npm/v/situm-cordova-plugin-official.svg)]() [![npm](https://img.shields.io/npm/l/situm-cordova-plugin-official.svg)]()
+# Situm Cordova Plugin &middot; [![npm](https://img.shields.io/npm/dm/situm-cordova-plugin-official.svg)](https://www.npmjs.com/package/situm-cordova-plugin-official) [![npm](https://img.shields.io/npm/v/situm-cordova-plugin-official.svg)](https://www.npmjs.com/package/situm-cordova-plugin-official) [![npm](https://img.shields.io/npm/l/situm-cordova-plugin-official.svg)](https://opensource.org/licenses/MIT)
 
 [![](https://situm.es/assets/svg/logo-situm.svg)](https://www.situm.es)
 
