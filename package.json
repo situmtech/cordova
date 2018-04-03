@@ -33,6 +33,6 @@
   },
   "homepage": "https://github.com/situmtech/situm-cordova-plugin#readme",
   "dependencies": {
-    "cordova-paramedic": "^0.5.0"
+    "jsdoc-toolkit": "0.0.2"
   }
 }
