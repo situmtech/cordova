@@ -1377,6 +1377,4 @@ TODO CONTRIBUTORS ?
 
 ## :large_blue_diamond: License
 
-```
-TODO LICENSING (MIT) ?
-```
+Situm-Cordova-Plugin is licensed under [MIT License](https://opensource.org/licenses/MIT)
