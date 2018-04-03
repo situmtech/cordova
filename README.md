@@ -4,74 +4,75 @@
 
 ---
 
-## - Table of contents
+## Table of contents
 
-* [Description](#large_blue_diamond-description)
-* [Setup](#large_blue_diamond-setup-your-account)
-* [Pre-requisites](#large_blue_diamond-installing-pre-requisites)
-* [Install plugin](#large_blue_diamond-installing-the-plugin)
-* [Using plugin](#large_blue_diamond-using-the-plugin)
-  * [Accesing plugin object](#accessing-plugin-object)
-  * [Methods](#methods)
-    * [setApiKey](#--setapikey)
-    * [setUserPass](#--setuserpass)
-    * [setCacheMaxAge](#--setcachemaxAge)
-    * [startPositioning](#--startpositioning)
-    * [stopPositioning](#--stoppositioning)
-    * [fetchBuildings](#--fetchbuildings)
-    * [fetchFloorsFromBuilding](#--fetchfloorsfrombuilding)
-    * [fetchIndoorPOIsFromBuilding](#--fetchindoorpoisfrombuilding)
-    * [fetchOutdoorPOIsFromBuilding](#--fetchoutdoorpoisfrombuilding)
-    * [fetchEventsFromBuilding](#--fetcheventsfrombuilding)
-    * [fetchPoiCategories](#--fetchpoicategories)
-    * [fetchMapFromFloor](#--fetchmapfromFloor)
-    * [fetchPoiCategoryIconNormal](#--fetchpoicategoryiconnormal)
-    * [fetchPoiCategoryIconSelected](#--fetchpoicategoryiconselected)
-    * [invalidateCache](#--invalidatecache)
-    * [requestDirections](#--requestdirections)
-    * [requestNavigationUpdates](#--requestnavigationupdates)
-    * [updateNavigationWithLocation](#--updatenavigationwithlocation)
-    * [removeNavigationUpdates](#--removenavigationupdates)
-
----
-
-## :large_blue_diamond: Description
-
-###### Situm Cordova Plugin is a set of utilities that allow any developer to build Cordova location based apps using Situm's indoor positioning system. Among many other capabilities, apps developed with Situm Cordova Plugin will be able to:
-
-###### · Obtain information related to buildings where Situm's positioning system is already configured: floorplans, points of interest, geotriggered events, etc.
-
-###### · Retrieve the location of the smartphone inside these buildings (position, orientation, and floor where the smartphone is).
-
-###### · Compute a route from a point A (e.g. where the smartphone is) to a point B (e.g. any point of interest within the building).
-
-###### · Trigger notifications when the user enters a certain area.
+  * [Description](#description)
+  * [Setup your account](#setup-your-account)
+  * [Installing pre-requisites](#installing-pre-requisites)
+  * [Installing the plugin](#installing-the-plugin)
+  * [Using the Plugin](#using-the-plugin)
+    + [Accessing plugin object](#accessing-plugin-object)
+    + [Methods](#methods)
+      - [setApiKey](#--setapikey)
+      - [setUserPass](#--setuserpass)
+      - [setCacheMaxAge](#--setcachemaxage)
+      - [startPositioning](#--startpositioning)
+      - [stopPositioning](#--stoppositioning)
+      - [fetchBuildings](#--fetchbuildings)
+      - [fetchFloorsFromBuilding](#--fetchfloorsfrombuilding)
+      - [fetchIndoorPOIsFromBuilding](#--fetchindoorpoisfrombuilding)
+      - [fetchOutdoorPOIsFromBuilding](#--fetchoutdoorpoisfrombuilding)
+      - [fetchEventsFromBuilding](#--fetcheventsfrombuilding)
+      - [fetchPoiCategories](#--fetchpoicategories)
+      - [fetchMapFromFloor](#--fetchmapfromfloor)
+      - [fetchPoiCategoryIconNormal](#--fetchpoicategoryiconnormal)
+      - [fetchPoiCategoryIconSelected](#--fetchpoicategoryiconselected)
+      - [invalidateCache](#--invalidatecache)
+      - [requestDirections](#--requestdirections)
+      - [requestNavigationUpdates](#--requestnavigationupdates)
+      - [updateNavigationWithLocation](#--updatenavigationwithlocation)
+      - [removeNavigationUpdates](#--removenavigationupdates)
+  * [License](#license)
 
 ---
 
-## :large_blue_diamond: Setup your account
+## Description
 
-###### In this tutorial, we will guide you step by step to set up your first Cordova application using Cordova Situm Plugin. Before starting to write code, we recommend you to set up an account in our Dashboard (https://dashboard.situm.es), retrieve your API KEY and configure your first building.
+Situm Cordova Plugin is a set of utilities that allow any developer to build Cordova location based apps using Situm's indoor positioning system. Among many other capabilities, apps developed with Situm Cordova Plugin will be able to:
 
-###### 1. Go to the [sign in form](http://dashboard.situm.es/accounts/register) and enter your username and password to sign in.
+* Obtain information related to buildings where Situm's positioning system is already configured: floorplans, points of interest, geotriggered events, etc.
 
-###### 2. Go to the [account section](https://dashboard.situm.es/accounts/profile) and on the bottom, click on “generate one” to generate your API KEY.
+* Retrieve the location of the smartphone inside these buildings (position, orientation, and floor where the smartphone is).
 
-###### 3. Go to the [buildings section](http://dashboard.situm.es/buildings) and create your first building.
+* Compute a route from a point A (e.g. where the smartphone is) to a point B (e.g. any point of interest within the building).
 
-###### 4. Download Situm Mapping Tool in Play Store (Only Android devices) and calibrate your building. Check out our user guide for detailed information.
-
-###### 5. You are ready for building your own Cordova applications. Please check next steps about requirements
+* Trigger notifications when the user enters a certain area.
 
 ---
 
-## :large_blue_diamond: Installing pre-requisites
+## Setup your account
 
-###### - Configure cordova:
+In this tutorial, we will guide you step by step to set up your first Cordova application using Cordova Situm Plugin. Before starting to write code, we recommend you to set up an account in our Dashboard (https://dashboard.situm.es), retrieve your API KEY and configure your first building.
+
+1. Go to the [sign in form](http://dashboard.situm.es/accounts/register) and enter your username and password to sign in.
+
+2. Go to the [account section](https://dashboard.situm.es/accounts/profile) and on the bottom, click on “generate one” to generate your API KEY.
+
+3. Go to the [buildings section](http://dashboard.situm.es/buildings) and create your first building.
+
+4. Download Situm Mapping Tool in Play Store (Only Android devices) and calibrate your building. Check out our user guide for detailed information.
+
+5. You are ready for building your own Cordova applications. Please check next steps about requirements
+
+---
+
+## Installing pre-requisites
+
+### Configure cordova:
 
 * https://cordova.apache.org/docs/en/latest/guide/cli/index.html#installing-the-cordova-cli
 
-###### - Cordova requirements:
+### Cordova requirements:
 
 * Android: https://cordova.apache.org/docs/en/latest/guide/platforms/android/#installing-the-requirements
 
@@ -79,17 +80,17 @@
 
 ---
 
-## :large_blue_diamond: Installing the plugin
+## Installing the plugin
 
-###### In this we assume that you have already created an hybrid application with your favorite framework (Ionic, Phonegap, Appcelerator, Telerik...). After that there are some different ways to install the plugin:
+In this we assume that you have already created an hybrid application with your favorite framework (Ionic, Phonegap, Appcelerator, Telerik...). After that there are some different ways to install the plugin:
 
-#### 1) Manually from npm:
+### 1) Manually from npm:
 
 ```bash
 $ cordova plugin add situm-cordova-plugin-official-development
 ```
 
-#### 2) Defined in config.xml for automatic installation:
+### 2) Defined in config.xml for automatic installation:
 
 ```xml
   <plugin name="situm-cordova-plugin-official-development" source="npm">
@@ -97,15 +98,15 @@ $ cordova plugin add situm-cordova-plugin-official-development
   </plugin>
 ```
 
-#### 3) With Cordova CLI utility from master (or another branch):
+### 3) With Cordova CLI utility from master (or another branch):
 
 ```
 $ cordova plugin add https://github.com/situmtech/situm-cordova-plugin.git
 ```
 
-## :large_blue_diamond: Using the Plugin
+## Using the Plugin
 
-#### Accessing plugin object
+### Accessing plugin object
 
 When device ready event is fired, global cordova variable is injected in namespace. Plugins are available in this variable: cordova.plugins. The Situm Cordova Plugin is autowired within this object.
 
@@ -115,35 +116,35 @@ So, all methods are called in the same way, e.g. 'setApiKey':
   cordova.plugins.Situm.setApiKey(email, apiKey);
 ```
 
-#### Methods
+### Methods
 
-##### - setApiKey
+#### - setApiKey
 
-###### Log in into your Situm Account. This key is generated in Situm Dashboard. Return true if apiKey was set successfully, otherwise false
+Log in into your Situm Account. This key is generated in Situm Dashboard. Return true if apiKey was set successfully, otherwise false
 
 ```javascript
   setApiKey("your_email@domain.com", "YOUR_API_KEY");
 ```
 
-##### - setUserPass
+#### - setUserPass
 
-###### Provides user's email and password.
+Provides user's email and password.
 
 ```javascript
   setUserPass("email@domain.com", "ourPassword");
 ```
 
-##### - setCacheMaxAge
+#### - setCacheMaxAge
 
-###### Sets the maximum age of a cached response in seconds.
+Sets the maximum age of a cached response in seconds.
 
 ```javascript
   setCacheMaxAge(200);
 ```
 
-##### - startPositioning
+#### - startPositioning
 
-###### Starts listen onLocationChanged event on first [building](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Building.html) in array
+Starts listen onLocationChanged event on first [building](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Building.html) in array
 
 ```javascript
   var building = {
@@ -265,9 +266,9 @@ So, all methods are called in the same way, e.g. 'setApiKey':
   });
 ```
 
-##### - stopPositioning
+#### - stopPositioning
 
-###### Stop locationListener on current active listener.
+Stop locationListener on current active listener.
 
 ```javascript
   stopPositioning(() => {
@@ -281,9 +282,9 @@ So, all methods are called in the same way, e.g. 'setApiKey':
   });
 ```
 
-##### - fetchBuildings
+#### - fetchBuildings
 
-###### Download all the [buildings](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Building.html) for the current user.
+Download all the [buildings](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Building.html) for the current user.
 
 ```javascript
   fetchBuildings((buildings) => {
@@ -358,9 +359,9 @@ So, all methods are called in the same way, e.g. 'setApiKey':
   });
 ```
 
-##### - fetchFloorsFromBuilding
+#### - fetchFloorsFromBuilding
 
-###### Download all the [floors](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Floor.html) of a [building](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Building.html).
+Download all the [floors](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Floor.html) of a [building](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Building.html).
 
 ```javascript
   var building = {
@@ -444,9 +445,9 @@ So, all methods are called in the same way, e.g. 'setApiKey':
   });
 ```
 
-##### - fetchIndoorPOIsFromBuilding
+#### - fetchIndoorPOIsFromBuilding
 
-###### Download the indoor [POIs](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Poi.html) of a [building](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Building.html).
+Download the indoor [POIs](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Poi.html) of a [building](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Building.html).
 
 ```javascript
   var building = {
@@ -565,9 +566,9 @@ So, all methods are called in the same way, e.g. 'setApiKey':
   });
 ```
 
-##### - fetchOutdoorPOIsFromBuilding
+#### - fetchOutdoorPOIsFromBuilding
 
-###### Download the outdoor [POIs](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Poi.html) of a [building](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Building.html).
+Download the outdoor [POIs](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Poi.html) of a [building](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Building.html).
 
 ```javascript
   var building = {
@@ -686,9 +687,9 @@ So, all methods are called in the same way, e.g. 'setApiKey':
   });
 ```
 
-##### - fetchEventsFromBuilding
+#### - fetchEventsFromBuilding
 
-###### Download the events of a [building](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Building.html).
+Download the events of a [building](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Building.html).
 
 ```javascript
   var building = {
@@ -795,9 +796,9 @@ So, all methods are called in the same way, e.g. 'setApiKey':
   });
 ```
 
-##### - fetchPoiCategories
+#### - fetchPoiCategories
 
-###### Get all [POI categories](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/PoiCategory.html), download and cache their icons asynchronously.
+Get all [POI categories](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/PoiCategory.html), download and cache their icons asynchronously.
 
 ```javascript
   fetchPoiCategories((poiCategories) => {
@@ -820,9 +821,9 @@ So, all methods are called in the same way, e.g. 'setApiKey':
   });
 ```
 
-##### - fetchMapFromFloor
+#### - fetchMapFromFloor
 
-###### Download the map image of a [floor](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Floor.html).
+Download the map image of a [floor](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Floor.html).
 
 ```javascript
   var floors = {
@@ -845,9 +846,9 @@ So, all methods are called in the same way, e.g. 'setApiKey':
   });
 ```
 
-##### - fetchPoiCategoryIconNormal
+#### - fetchPoiCategoryIconNormal
 
-###### Get the normal category icon for a [category](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/PoiCategory.html).
+Get the normal category icon for a [category](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/PoiCategory.html).
 
 ```javascript
   var poiCategory = {
@@ -869,9 +870,9 @@ So, all methods are called in the same way, e.g. 'setApiKey':
   });
 ```
 
-##### - fetchPoiCategoryIconSelected
+#### - fetchPoiCategoryIconSelected
 
-###### Get the selected category icon for a [category](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/PoiCategory.html).
+Get the selected category icon for a [category](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/PoiCategory.html).
 
 ```javascript
   var poiCategory = {
@@ -893,9 +894,9 @@ So, all methods are called in the same way, e.g. 'setApiKey':
   });
 ```
 
-##### - invalidateCache
+#### - invalidateCache
 
-###### Invalidate all the resources in the cache.
+Invalidate all the resources in the cache.
 
 ```javascript
   invalidateCache((response) => {
@@ -905,9 +906,9 @@ So, all methods are called in the same way, e.g. 'setApiKey':
     }
   });
 ```
-##### - requestDirections
+#### - requestDirections
 
-###### Calculates a route between two [points](http://htmlpreview.github.io/?https://github.com/cocodinTech/situm-cordova-plugin/blob/master/www/android/docs/symbols/Point.html).
+Calculates a route between two [points](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Point.html).
 
 ```javascript
   var building = {
@@ -1229,9 +1230,9 @@ So, all methods are called in the same way, e.g. 'setApiKey':
   });
 ```
 
-##### - requestNavigationUpdates
+#### - requestNavigationUpdates
 
-###### Necessary step to request progress. Alone this method does not provide progress object. You must feed navigation API with location, as indicated on updateNavigationWithLocation section.
+Necessary step to request progress. Alone this method does not provide progress object. You must feed navigation API with location, as indicated on updateNavigationWithLocation section.
 
 ```javascript
   var navigationOptions = new Object();
@@ -1279,10 +1280,10 @@ So, all methods are called in the same way, e.g. 'setApiKey':
         stepIdxDestination: 0,
         orientationType: "Left",
         indicationType: "Turn",
-        humanReadableMessage: "Turn left and go ahead for 2 meters", // Only iOS, Android version coming
+        humanReadableMessage: "Turn left and go ahead for 2 meters",
         orientation: 1.8215326070785522, // radians
         neededLevelChange: false, // True if change floor is needed
-        nextLevel: 3 // Floor number. The floor level to which the user need to go. Only Android for now. iOS version coming
+        nextLevel: 3 // Floor number. The floor level to which the user need to go.
       },
       type: "progress",
       timeToGoal: 62.55179214477539
@@ -1296,9 +1297,9 @@ So, all methods are called in the same way, e.g. 'setApiKey':
   });
 ```
 
-##### - updateNavigationWithLocation
+#### - updateNavigationWithLocation
     
-###### Usually, position variable should be one of the locations provided by the system on the [startPositioning](#--startpositioning) function.
+Usually, position variable should be one of the locations provided by the system on the [startPositioning](#--startpositioning) function.
 
 ```javascript
   var position = {
@@ -1361,20 +1362,14 @@ So, all methods are called in the same way, e.g. 'setApiKey':
   });
 ```
 
-##### - removeNavigationUpdates
+#### - removeNavigationUpdates
 
-###### When you are no longer interested on Navigation Updates you should call this method to remove internal allocated resources.
+When you are no longer interested on Navigation Updates you should call this method to remove internal allocated resources.
 
 ```javascript
   removeNavigationUpdates();
 ```
 
-## :large_blue_diamond: Contributing
-
-```
-TODO CONTRIBUTORS ?
-```
-
-## :large_blue_diamond: License
+## License
 
 Situm-Cordova-Plugin is licensed under [MIT License](https://opensource.org/licenses/MIT)
