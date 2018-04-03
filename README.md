@@ -87,13 +87,13 @@ In this we assume that you have already created an hybrid application with your 
 ### 1) Manually from npm:
 
 ```bash
-$ cordova plugin add situm-cordova-plugin-official-development
+$ cordova plugin add situm-cordova-plugin-official
 ```
 
 ### 2) Defined in config.xml for automatic installation:
 
 ```xml
-  <plugin name="situm-cordova-plugin-official-development" source="npm">
+  <plugin name="situm-cordova-plugin-official" source="npm">
 
   </plugin>
 ```
