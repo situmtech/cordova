@@ -428,19 +428,19 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 {
     navigationProgressCallbackId = command.callbackId;
     
-    if (command.arguments.length > 0) {
+    // Insert here configuration options
+    /*if (command.arguments.length > 0) {
         // Processing configuration parameters
         NSDictionary *options = (NSDictionary*)[command.arguments objectAtIndex:0];
-        NSInteger distanceToGoalThreshold = [options objectForKey:@"distanceToGoalThreshold"];
-    }
+ 
+    }*/
+    // SITRoute *routeObj = (SITRoute*)[routesStored objectForKey:[route valueForKey:@"timeStamp"]];
     SITRoute *routeObj = self.computedRoute;
     if (routeObj) {
         SITNavigationRequest *navigationRequest = [[SITNavigationRequest alloc] initWithRoute:routeObj];
 
-        if (distanceToGoalThreshold != nil) {
-            NSLog([NSString stringWithFormat: @"%@", distanceToGoalThreshold]);
-            [navigationRequest setDistanceToGoalThreshold: distanceToGoalThreshold];
-        }
+        // Configure distanceToGoalThreshold
+        // Configure outsideRouteThreshold
 
         [[SITNavigationManager sharedManager]  setDelegate:self]; // Configure delegation first
         [[SITNavigationManager sharedManager] requestNavigationUpdates:navigationRequest];
