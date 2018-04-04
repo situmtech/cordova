@@ -147,122 +147,10 @@ Sets the maximum age of a cached response in seconds.
 Starts listen onLocationChanged event on first [building](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Building.html) in array
 
 ```javascript
-  var building = {
-    buildingIdentifier: "buildingIdentifier",
-    name: "buildingName",
-    address: "address",
-    bounds: {
-      northEast: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      northWest: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      southEast: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      southWest: {
-        latitude: 0.00,
-        longitude: 0.00
-      }
-    },
-    boundsRotated: {
-      northEast: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      northWest: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      southEast: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      southWest: {
-        latitude: 0.00,
-        longitude: 0.00
-      }
-    },
-    center: {
-      latitude: 0.00,
-      longitude: 0.00
-    },
-    dimensions: {
-      width: 0.00,
-      height: 0.00
-    },
-    infoHtml: "infoHtml",
-    pictureThumbUrl: "pictureThumbUrl",
-    pictureUrl: "pictureUrl",
-    rotation: 0.00,
-    userIdentifier: "userIdentifier",
-    customFields: {
-      name: "value",
-      name: "value",
-      ...
-    }
-  }
-
   startPositioning([building], position => {
     // position as location object:
-    position = {
-      accuracy: 0.00,
-      bearing: {
-        degrees: 0.00,
-        degreesClockwise: 0.00,
-        radians: 0.00,
-        radiansMinusPiPi: 0.00,
-      },
-      bearingQuality: "bearingQuality",
-      buildingIdentifier: "buildingIdentifier",
-      cartesianBearing: {
-        degrees: 0.00,
-        degreesClockwise: 0.00,
-        radians: 0.00,
-        radiansMinusPiPi: 0.00,
-      },
-      cartesianCoordinate: {
-        x: 0.00,
-        y: 0.00 
-      },
-      coordinate: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      floorIdentifier: "floorIdentifier",
-      position: {
-        buildingIdentifier: "buildingIdentifier",
-        cartesianCoordinate: {
-          x: 0.00,
-          y: 0.00 
-        },
-        coordinate: {
-          latitude: 0.00,
-          longitude: 0.00
-        }
-        floorIdentifier: "floorIdentifier"
-        isIndoor: true
-        isOutdoor: false
-      },
-      provider: "provider",
-      quality: "quality",
-      hasBearing: true,
-      timestamp: 000000000,
-      hasCartesianBearing: true,
-      isIndoor: true,
-      isOutdoor: false,
-      deviceId: "deviceId"
-    };
   }, (error) => {
     // If errors will come here
-    error = {
-      status: 1,
-      message: "message"
-    }
   });
 ```
 
@@ -275,10 +163,6 @@ Stop locationListener on current active listener.
     // Your code here
   }, (error) => {
     // If errors will come here
-    error = {
-      status: 1,
-      message: "message"
-    }
   });
 ```
 
@@ -288,74 +172,9 @@ Download all the [buildings](http://htmlpreview.github.io/?https://github.com/si
 
 ```javascript
   fetchBuildings((buildings) => {
-    // Array of buildings:
-    buildings = [{  
-      buildingIdentifier: "buildingIdentifier",
-      name: "buildingName",
-      address: "address",
-      bounds: {
-        northEast: {
-          latitude: 0.00,
-          longitude: 0.00
-        },
-        northWest: {
-          latitude: 0.00,
-          longitude: 0.00
-        },
-        southEast: {
-          latitude: 0.00,
-          longitude: 0.00
-        },
-        southWest: {
-          latitude: 0.00,
-          longitude: 0.00
-        }
-      },
-      boundsRotated: {
-        northEast: {
-          latitude: 0.00,
-          longitude: 0.00
-        },
-        northWest: {
-          latitude: 0.00,
-          longitude: 0.00
-        },
-        southEast: {
-          latitude: 0.00,
-          longitude: 0.00
-        },
-        southWest: {
-          latitude: 0.00,
-          longitude: 0.00
-        }
-      },
-      center: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      dimensions: {
-        width: 0.00,
-        height: 0.00
-      },
-      infoHtml: "infoHtml",
-      pictureThumbUrl: "pictureThumbUrl",
-      pictureUrl: "pictureUrl",
-      rotation: 0.00,
-      userIdentifier: "userIdentifier",
-      customFields: {
-        name: "value",
-        name: "value",
-        ...
-      }
-    }, {
-      ...
-    }];
+    // Array of buildings
   }, (error) => {
     // If errors will come here
-    error = {
-      status: 1,
-      message: "message"
-    }
   });
 ```
 
@@ -364,84 +183,10 @@ Download all the [buildings](http://htmlpreview.github.io/?https://github.com/si
 Download all the [floors](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Floor.html) of a [building](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Building.html).
 
 ```javascript
-  var building = {
-    buildingIdentifier: "buildingIdentifier",
-    name: "buildingName",
-    address: "address",
-    bounds: {
-      northEast: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      northWest: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      southEast: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      southWest: {
-        latitude: 0.00,
-        longitude: 0.00
-      }
-    },
-    boundsRotated: {
-      northEast: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      northWest: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      southEast: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      southWest: {
-        latitude: 0.00,
-        longitude: 0.00
-      }
-    },
-    center: {
-      latitude: 0.00,
-      longitude: 0.00
-    },
-    dimensions: {
-      width: 0.00,
-      height: 0.00
-    },
-    infoHtml: "infoHtml",
-    pictureThumbUrl: "pictureThumbUrl",
-    pictureUrl: "pictureUrl",
-    rotation: 0.00,
-    userIdentifier: "userIdentifier",
-    customFields: {
-      name: "value",
-      name: "value",
-      ...
-    }
-  }
-
   fetchFloorsFromBuilding(building, (floors) => {
     // Array of floors
-    floors = [{
-      altitude: 0.00,
-      buildingIdentifier: "buildingIdentifier",
-      level: 1,
-      mapUrl: "mapUrl",
-      scale: 0.00,
-      floorIdentifier: "floorIdentifier"
-    }, {
-      ...
-    }];
   }, (error) => {
     // If errors will come here
-    error = {
-      status: 1,
-      message: "message"
-    }
   });
 ```
 
@@ -450,119 +195,10 @@ Download all the [floors](http://htmlpreview.github.io/?https://github.com/situm
 Download the indoor [POIs](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Poi.html) of a [building](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Building.html).
 
 ```javascript
-  var building = {
-    buildingIdentifier: "buildingIdentifier",
-    name: "buildingName",
-    address: "address",
-    bounds: {
-      northEast: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      northWest: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      southEast: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      southWest: {
-        latitude: 0.00,
-        longitude: 0.00
-      }
-    },
-    boundsRotated: {
-      northEast: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      northWest: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      southEast: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      southWest: {
-        latitude: 0.00,
-        longitude: 0.00
-      }
-    },
-    center: {
-      latitude: 0.00,
-      longitude: 0.00
-    },
-    dimensions: {
-      width: 0.00,
-      height: 0.00
-    },
-    infoHtml: "infoHtml",
-    pictureThumbUrl: "pictureThumbUrl",
-    pictureUrl: "pictureUrl",
-    rotation: 0.00,
-    userIdentifier: "userIdentifier",
-    customFields: {
-      name: "value",
-      name: "value",
-      ...
-    }
-  }
-
   fetchIndoorPOIsFromBuilding(building, (pois) => {
     // Array of pois
-    pois = [{
-      identifier: "identifier",
-      buildingIdentifier: "buildingIdentifier",
-      cartesianCoordinate: {
-        x: 0.00,
-        y: 0.00 
-      },
-      coordinate: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      floorIdentifier: "floorIdentifier",
-      poiName: "poiName",
-      position: {
-        buildingIdentifier: "buildingIdentifier",
-        cartesianCoordinate: {
-          x: 0.00,
-          y: 0.00 
-        },
-        coordinate: {
-          latitude: 0.00,
-          longitude: 0.00
-        }
-        floorIdentifier: "floorIdentifier"
-        isIndoor: true
-        isOutdoor: false
-      },
-      isIndoor: true,
-      isOutdoor: false,
-      category: {
-        poiCategoryCode: "poiCategoryCode",
-        poiCategoryName: "poiCateogryName",
-        icon_selected: "iconSelectedUrl",
-        icon_unselected: "iconUnselectedUrl",
-        public: true
-      },
-      infoHtml: "infoHtml",
-      customFields: {
-        name: "value",
-        name: "value",
-        ...
-      }
-    }, {
-      ...
-    }]
   }, (error) => {
     // If errors will come here
-    error = {
-      status: 1,
-      message: "message"
-    }
   });
 ```
 
@@ -571,119 +207,10 @@ Download the indoor [POIs](http://htmlpreview.github.io/?https://github.com/situ
 Download the outdoor [POIs](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Poi.html) of a [building](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Building.html).
 
 ```javascript
-  var building = {
-    buildingIdentifier: "buildingIdentifier",
-    name: "buildingName",
-    address: "address",
-    bounds: {
-      northEast: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      northWest: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      southEast: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      southWest: {
-        latitude: 0.00,
-        longitude: 0.00
-      }
-    },
-    boundsRotated: {
-      northEast: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      northWest: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      southEast: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      southWest: {
-        latitude: 0.00,
-        longitude: 0.00
-      }
-    },
-    center: {
-      latitude: 0.00,
-      longitude: 0.00
-    },
-    dimensions: {
-      width: 0.00,
-      height: 0.00
-    },
-    infoHtml: "infoHtml",
-    pictureThumbUrl: "pictureThumbUrl",
-    pictureUrl: "pictureUrl",
-    rotation: 0.00,
-    userIdentifier: "userIdentifier",
-    customFields: {
-      name: "value",
-      name: "value",
-      ...
-    }
-  }
-
   fetchOutdoorPOIsFromBuilding(building, (pois) => {
     // Array of pois
-    pois = [{
-      identifier: "identifier",
-      buildingIdentifier: "buildingIdentifier",
-      cartesianCoordinate: {
-        x: 0.00,
-        y: 0.00 
-      },
-      coordinate: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      floorIdentifier: "floorIdentifier",
-      poiName: "poiName",
-      position: {
-        buildingIdentifier: "buildingIdentifier",
-        cartesianCoordinate: {
-          x: 0.00,
-          y: 0.00 
-        },
-        coordinate: {
-          latitude: 0.00,
-          longitude: 0.00
-        }
-        floorIdentifier: "floorIdentifier"
-        isIndoor: false
-        isOutdoor: true
-      },
-      isIndoor: false,
-      isOutdoor: true,
-      category: {
-        poiCategoryCode: "poiCategoryCode",
-        poiCategoryName: "poiCateogryName",
-        icon_selected: "iconSelectedUrl",
-        icon_unselected: "iconUnselectedUrl",
-        public: true
-      },
-      infoHtml: "infoHtml",
-      customFields: {
-        name: "value",
-        name: "value",
-        ...
-      }
-    }, {
-      ...
-    }]
   }, (error) => {
     // If errors will come here
-    error = {
-      status: 1,
-      message: "message"
-    }
   });
 ```
 
@@ -692,107 +219,10 @@ Download the outdoor [POIs](http://htmlpreview.github.io/?https://github.com/sit
 Download the events of a [building](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Building.html).
 
 ```javascript
-  var building = {
-    buildingIdentifier: "buildingIdentifier",
-    name: "buildingName",
-    address: "address",
-    bounds: {
-      northEast: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      northWest: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      southEast: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      southWest: {
-        latitude: 0.00,
-        longitude: 0.00
-      }
-    },
-    boundsRotated: {
-      northEast: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      northWest: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      southEast: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      southWest: {
-        latitude: 0.00,
-        longitude: 0.00
-      }
-    },
-    center: {
-      latitude: 0.00,
-      longitude: 0.00
-    },
-    dimensions: {
-      width: 0.00,
-      height: 0.00
-    },
-    infoHtml: "infoHtml",
-    pictureThumbUrl: "pictureThumbUrl",
-    pictureUrl: "pictureUrl",
-    rotation: 0.00,
-    userIdentifier: "userIdentifier",
-    customFields: {
-      name: "value",
-      name: "value",
-      ...
-    }
-  }
-
   fetchEventsFromBuilding(building, (events) => {
     // Array of Situm events
-    events = [{
-      buildingIdentifier: 1
-      identifier: 1
-      floorIdentifier: 1,
-      infoHtml: "infoHtml",
-      conversionArea: {
-        floorIdentifier: 1,
-        topLeft: {
-          x: 0.00,
-          y: 0.00
-        },
-        topRight: {
-          x: 0.00,
-          y: 0.00
-        },
-        bottomLeft: {
-          x: 0.00,
-          y: 0.00
-        },
-        bottomRight: {
-          x: 0.00,
-          y: 0.00
-        }
-      },
-      customFields: {
-        name: "value",
-        name: "value",
-        ...
-      },
-      radius: 0.00
-    }, {
-      ...
-    }];
   }, (error) => {
     // If errors will come here
-    error = {
-      status: 1,
-      message: "message"
-    }
   });
 ```
 
@@ -803,21 +233,8 @@ Get all [POI categories](http://htmlpreview.github.io/?https://github.com/situmt
 ```javascript
   fetchPoiCategories((poiCategories) => {
     // Array of POI cateogires
-    poiCategories = [{
-      poiCategoryCode: "poiCategoryCode",
-      poiCategoryName: "poiCategoryName",
-      icon_selected: "iconSelectedUrl",
-      icon_unselected: "iconUnselectedUrl",
-      public: true
-    }, {
-      ...
-    }];
   }, (error) => {
     // If errors will come here
-    error = {
-      status: 1,
-      message: "message"
-    }
   });
 ```
 
@@ -826,23 +243,10 @@ Get all [POI categories](http://htmlpreview.github.io/?https://github.com/situmt
 Download the map image of a [floor](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Floor.html).
 
 ```javascript
-  var floors = {
-    altitude: 0.00,
-    buildingIdentifier: "buildingIdentifier",
-    level: 1,
-    mapUrl: "mapUrl",
-    scale: 0.00,
-    floorIdentifier: "floorIdentifier"
-  }
-
   fetchMapFromFloor (floor, (mapImage) => {
     // Map image as a bitmap
   }, (error) => {
     // If errors will come here
-    error = {
-      status: 1,
-      message: "message"
-    }
   });
 ```
 
@@ -851,22 +255,10 @@ Download the map image of a [floor](http://htmlpreview.github.io/?https://github
 Get the normal category icon for a [category](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/PoiCategory.html).
 
 ```javascript
-  var poiCategory = {
-    poiCategoryCode: "poiCategoryCode",
-    poiCategoryName: "poiCategoryName",
-    icon_selected: "iconSelectedUrl",
-    icon_unselected: "iconUnselectedUrl",
-    public: true
-  }
-
   fetchPoiCategoryIconNormal (poiCategory, (iconNormal) => {
     // Icon as a bitmap
   }, (error) => {
     // If errors will come here
-    error = {
-      status: 1,
-      message: "message"
-    }
   });
 ```
 
@@ -875,22 +267,10 @@ Get the normal category icon for a [category](http://htmlpreview.github.io/?http
 Get the selected category icon for a [category](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/PoiCategory.html).
 
 ```javascript
-  var poiCategory = {
-    poiCategoryCode: "poiCategoryCode",
-    poiCategoryName: "poiCategoryName",
-    icon_selected: "iconSelectedUrl",
-    icon_unselected: "iconUnselectedUrl",
-    public: true
-  }
-
   fetchPoiCategoryIconSelected (poiCategory, (iconSelected) => {
     // Icon as a bitmap
   }, (error) => {
     // If errors will come here
-    error = {
-      status: 1,
-      message: "message"
-    }
   });
 ```
 
@@ -899,334 +279,17 @@ Get the selected category icon for a [category](http://htmlpreview.github.io/?ht
 Invalidate all the resources in the cache.
 
 ```javascript
-  invalidateCache((response) => {
-    response = {
-      status: 0,
-      message: "message"
-    }
-  });
+  invalidateCache((response) => {});
 ```
 #### - requestDirections
 
 Calculates a route between two [points](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Point.html).
 
 ```javascript
-  var building = {
-    buildingIdentifier: "buildingIdentifier",
-    name: "buildingName",
-    address: "address",
-    bounds: {
-      northEast: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      northWest: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      southEast: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      southWest: {
-        latitude: 0.00,
-        longitude: 0.00
-      }
-    },
-    boundsRotated: {
-      northEast: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      northWest: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      southEast: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      southWest: {
-        latitude: 0.00,
-        longitude: 0.00
-      }
-    },
-    center: {
-      latitude: 0.00,
-      longitude: 0.00
-    },
-    dimensions: {
-      width: 0.00,
-      height: 0.00
-    },
-    infoHtml: "infoHtml",
-    pictureThumbUrl: "pictureThumbUrl",
-    pictureUrl: "pictureUrl",
-    rotation: 0.00,
-    userIdentifier: "userIdentifier",
-    customFields: {
-      name: "value",
-      name: "value",
-      ...
-    }
-  }
-
-  var from = {
-    buildingIdentifier: "buildingIdentifier",
-    cartesianCoordinate: {
-      x: 0.00,
-      y: 0.00 
-    },
-    coordinate: {
-      latitude: 0.00,
-      longitude: 0.00
-    }
-    floorIdentifier: "floorIdentifier"
-    isIndoor: true
-    isOutdoor: false
-  }
-
-  var to = {
-    buildingIdentifier: "buildingIdentifier",
-    cartesianCoordinate: {
-      x: 0.00,
-      y: 0.00 
-    },
-    coordinate: {
-      latitude: 0.00,
-      longitude: 0.00
-    }
-    floorIdentifier: "floorIdentifier"
-    isIndoor: true
-    isOutdoor: false
-  }
-
   requestDirections([building, from, to], (route) => {
     // Route Situm object
-    route = {
-      edges: [{
-        distance: 0.00,
-        distanceToGoal: 0.00,
-        from: {
-          buildingIdentifier: "buildingIdentifier",
-          cartesianCoordinate: {
-            x: 0.00,
-            y: 0.00 
-          },
-          coordinate: {
-            latitude: 0.00,
-            longitude: 0.00
-          }
-          floorIdentifier: "floorIdentifier"
-          isIndoor: false
-          isOutdoor: true
-        },
-        id: 1,
-        to: {
-          buildingIdentifier: "buildingIdentifier",
-          cartesianCoordinate: {
-            x: 0.00,
-            y: 0.00 
-          },
-          coordinate: {
-            latitude: 0.00,
-            longitude: 0.00
-          }
-          floorIdentifier: "floorIdentifier"
-          isIndoor: false
-          isOutdoor: true
-        },
-        isFirst: true
-        isLast: false
-      }, {
-        ...
-      }],
-      firstStep: {
-        distance: 0.00
-        distanceToGoal: 0.00,
-        from: {
-          buildingIdentifier: "buildingIdentifier",
-          cartesianCoordinate: {
-            x: 0.00,
-            y: 0.00 
-          },
-          coordinate: {
-            latitude: 0.00,
-            longitude: 0.00
-          }
-          floorIdentifier: "floorIdentifier"
-          isIndoor: false
-          isOutdoor: true
-        },
-        id: 1,
-        to: {
-          buildingIdentifier: "buildingIdentifier",
-          cartesianCoordinate: {
-            x: 0.00,
-            y: 0.00 
-          },
-          coordinate: {
-            latitude: 0.00,
-            longitude: 0.00
-          },
-          floorIdentifier: "floorIdentifier",
-          isIndoor: false,
-          isOutdoor: true
-        },
-        isFirst: true,
-        isLast: false
-      },
-      from: {
-        buildingIdentifier: "buildingIdentifier",
-        cartesianCoordinate: {
-          x: 0.00,
-          y: 0.00 
-        },
-        coordinate: {
-          latitude: 0.00,
-          longitude: 0.00
-        },
-        floorIdentifier: "floorIdentifier",
-        isIndoor: false,
-        isOutdoor: true
-      },
-      indications: [{
-        distance: 0.00,
-        distanceToNextLevel: 2,
-        indicationType: "indicationType",
-        orientation: 0.00,
-        orientationType: "orientationType",
-        stepIdxDestination: 1,
-        stepIdxOrigin: 1,
-        neededLevelChange: true
-      }, {
-        ...
-      }],
-      lastStep: {
-        distance: 0.00,
-        distanceToGoal: 0.00,
-        from: {
-          buildingIdentifier: "buildingIdentifier",
-          cartesianCoordinate: {
-            x: 0.00,
-            y: 0.00 
-          },
-          coordinate: {
-            latitude: 0.00,
-            longitude: 0.00
-          },
-          floorIdentifier: "floorIdentifier",
-          isIndoor: false,
-          isOutdoor: true
-        },
-        id: 1,
-        to: {
-          buildingIdentifier: "buildingIdentifier",
-          cartesianCoordinate: {
-            x: 0.00,
-            y: 0.00 
-          },
-          coordinate: {
-            latitude: 0.00,
-            longitude: 0.00
-          },
-          floorIdentifier: "floorIdentifier",
-          isIndoor: false,
-          isOutdoor: true
-        },
-        isFirst: false
-        isLast: true
-      },
-      nodes: [{
-        buildingIdentifier: "buildingIdentifier",
-        cartesianCoordinate: {
-          x: 0.00,
-          y: 0.00 
-        },
-        coordinate: {
-          latitude: 0.00,
-          longitude: 0.00
-        },
-        floorIdentifier: "floorIdentifier",
-        isIndoor: false,
-        isOutdoor: true
-      }, {
-        ...
-      }],
-      points: [{
-        buildingIdentifier: "buildingIdentifier",
-        cartesianCoordinate: {
-          x: 0.00,
-          y: 0.00 
-        },
-        coordinate: {
-          latitude: 0.00,
-          longitude: 0.00
-        },
-        floorIdentifier: "floorIdentifier",
-        isIndoor: false,
-        isOutdoor: true
-      }, {
-        ...
-      }],
-      to: {
-        buildingIdentifier: "buildingIdentifier",
-        cartesianCoordinate: {
-          x: 0.00,
-          y: 0.00 
-        },
-        coordinate: {
-          latitude: 0.00,
-          longitude: 0.00
-        },
-        floorIdentifier: "floorIdentifier",
-        isIndoor: false,
-        isOutdoor: true
-      },
-      steps: [{
-        distance: 0.00,
-        distanceToGoal: 0.00,
-        from: {
-          buildingIdentifier: "buildingIdentifier",
-          cartesianCoordinate: {
-            x: 0.00,
-            y: 0.00 
-          },
-          coordinate: {
-            latitude: 0.00,
-            longitude: 0.00
-          },
-          floorIdentifier: "floorIdentifier",
-          isIndoor: false,
-          isOutdoor: true
-        },
-        id: 1,
-        to: {
-          buildingIdentifier: "buildingIdentifier",
-          cartesianCoordinate: {
-            x: 0.00,
-            y: 0.00 
-          },
-          coordinate: {
-            latitude: 0.00,
-            longitude: 0.00
-          },
-          floorIdentifier: "floorIdentifier",
-          isIndoor: false,
-          isOutdoor: true
-        },
-        isFirst: false,
-        isLast: false
-      }, {
-        ...
-      }]
-    }
   }, (error) => {
     // If errors will come here
-    error = {
-      status: 1,
-      message: "message"
-    }
   });
 ```
 
@@ -1235,65 +298,10 @@ Calculates a route between two [points](http://htmlpreview.github.io/?https://gi
 Necessary step to request progress. Alone this method does not provide progress object. You must feed navigation API with location, as indicated on updateNavigationWithLocation section.
 
 ```javascript
-  var navigationOptions = new Object();
-  navigationOptions["distanceToIgnoreFirstIndication"] = 0.3; // (Optional) meters;
-  navigationOptions["outsideRouteThreshold"] = 10; // (Optional) meters;
-  navigationOptions["distanceToGoalThreshold"] = 7; // (Optional) meters;
-
   requestNavigationUpdates([navigationOptions], (res: any) => {
     // Progress and other navigation status messages can be processed here  
-    // Types of results in success cases:
-    // 1 - User has arrived destination
-    res = {  
-      type: "destinationReached",
-      message: "Destination reached"
-    }
-    // 2 - User is outside the route
-    res = {  
-      type: "userOutsideRoute",
-      message: "User outside route"
-    }
-    // 3 - User is inside the route but has not arrived to destination.
-    res = {  
-      closestPointInRoute: {  
-        isIndoor: true,
-        buildingIdentifier: "3087",
-        coordinate: {  
-          latitude: 42.87227301416988,
-          longitude: -8.563636606983739
-        },
-        floorIdentifier: "4961",
-        cartesianCoordinate: {  
-          x: 67.91600036621094,
-          y: 24.05699920654297
-        },
-        isOutdoor: false
-      },
-      distanceToEndStep: 1.038121223449707, // meters
-      distanceToGoal: 62.55179214477539, // meters
-      currentStepIndex: 0,
-      timeToEndStep: 1.038121223449707, // seconds
-      currentIndication: {  
-        distanceToNextLevel: 0, // if this value is greater than 0 it represent the number of floor to go up. if this value is less than 0 it represents the number of floors to go down. If equal to 0 it means there is no need to change floor.
-        distance: 1.038121223449707, // meters
-        stepIdxOrigin: 0, // index of the route step (on of the steps on Route object provided by requestDirections)
-        stepIdxDestination: 0,
-        orientationType: "Left",
-        indicationType: "Turn",
-        humanReadableMessage: "Turn left and go ahead for 2 meters",
-        orientation: 1.8215326070785522, // radians
-        neededLevelChange: false, // True if change floor is needed
-        nextLevel: 3 // Floor number. The floor level to which the user need to go.
-      },
-      type: "progress",
-      timeToGoal: 62.55179214477539
-    }
   }, (error: any) => {
-    // If errors will come here
-    error = {
-      status: 1,
-      message: "message"
-    }  
+    // If errors will come here 
   });
 ```
 
@@ -1302,63 +310,10 @@ Necessary step to request progress. Alone this method does not provide progress 
 Usually, position variable should be one of the locations provided by the system on the [startPositioning](#--startpositioning) function.
 
 ```javascript
-  var position = {
-    accuracy: 0.00,
-    bearing: {
-      degrees: 0.00,
-      degreesClockwise: 0.00,
-      radians: 0.00,
-      radiansMinusPiPi: 0.00,
-    },
-    bearingQuality: "bearingQuality",
-    buildingIdentifier: "buildingIdentifier",
-    cartesianBearing: {
-      degrees: 0.00,
-      degreesClockwise: 0.00,
-      radians: 0.00,
-      radiansMinusPiPi: 0.00,
-    },
-    cartesianCoordinate: {
-      x: 0.00,
-      y: 0.00 
-    },
-    coordinate: {
-      latitude: 0.00,
-      longitude: 0.00
-    },
-    floorIdentifier: "floorIdentifier",
-    position: {
-      buildingIdentifier: "buildingIdentifier",
-      cartesianCoordinate: {
-        x: 0.00,
-        y: 0.00 
-      },
-      coordinate: {
-        latitude: 0.00,
-        longitude: 0.00
-      }
-      floorIdentifier: "floorIdentifier"
-      isIndoor: true
-      isOutdoor: false
-    },
-    provider: "provider",
-    quality: "quality",
-    hasBearing: true,
-    timestamp: 000000000,
-    hasCartesianBearing: true,
-    isIndoor: true,
-    isOutdoor: false,
-    deviceId: "deviceId"
-  };
-
   updateNavigationWithLocation([position], (result) => {
-    console.log(result);
+    // Result
   }, (error) => {
     // If errors will come here
-    error = {
-      status: 1,
-      message: "message"
-    }  
   });
 ```
 
