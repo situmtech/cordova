@@ -1,0 +1,350 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="COMM">/** @namespace &lt;b>Building&lt;/b>&lt;br />
+<span class='line'>  2</span>  * A Building object definition
+<span class='line'>  3</span>  * @property {string} buildingIdentifier - The unique identifier of the resource
+<span class='line'>  4</span>  * @property {string} name - The building name that is appropriate for display to the user.
+<span class='line'>  5</span>  * @property {string} address - Te building address.
+<span class='line'>  6</span>  * @property {Bounds} bounds - Compute corners of this building, without rotation, in earth coordinates.
+<span class='line'>  7</span>  * @property {Bounds} boundsRotated - Compute corners of this building, with rotation, in earth coordinates.
+<span class='line'>  8</span>  * @property {Coordinate} center - Center of the building's base, as geographical coordinate.
+<span class='line'>  9</span>  * @property {Dimensions} Dimensions - Dimensions of building's base (height and width) in meters.
+<span class='line'> 10</span>  * @property {string} infoHtml - Additional information about building, formatted with HTML
+<span class='line'> 11</span>  * @property {string} pictureThumbUrl - The URL of building thumbnail image
+<span class='line'> 12</span>  * @property {string} pictureUrl - The URL of building image
+<span class='line'> 13</span>  * @property {float} rotation - Rotation angle of the building's base, relative to the west-east axis, increasing in counter-clockwise, being 0 the west-east axis.
+<span class='line'> 14</span>  * @property {string} userIdentifier - Unique identifier of the owner user of the building
+<span class='line'> 15</span>  * @property {Object} customFields - Map of custom fields, indexed by their name.
+<span class='line'> 16</span>  */</span><span class="WHIT">
+<span class='line'> 17</span> 
+<span class='line'> 18</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">Building</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 19</span> </span><span class="WHIT">  </span><span class="NAME">buildingIdentifier</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 20</span> </span><span class="WHIT">  </span><span class="NAME">name</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 21</span> </span><span class="WHIT">  </span><span class="NAME">address</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 22</span> </span><span class="WHIT">  </span><span class="NAME">bounds</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 23</span> </span><span class="WHIT">  </span><span class="NAME">boundsRotated</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 24</span> </span><span class="WHIT">  </span><span class="NAME">center</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 25</span> </span><span class="WHIT">  </span><span class="NAME">dimensions</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 26</span> </span><span class="WHIT">  </span><span class="NAME">infoHtml</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 27</span> </span><span class="WHIT">  </span><span class="NAME">pictureThumbUrl</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 28</span> </span><span class="WHIT">  </span><span class="NAME">pictureUrl</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 29</span> </span><span class="WHIT">  </span><span class="NAME">rotation</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 30</span> </span><span class="WHIT">  </span><span class="NAME">userIdentifier</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 31</span> </span><span class="WHIT">  </span><span class="NAME">customFields</span><span class="WHIT">
+<span class='line'> 32</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 33</span> 
+<span class='line'> 34</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Building</span><span class="WHIT">
+<span class='line'> 35</span> 
+<span class='line'> 36</span> </span><span class="COMM">/**
+<span class='line'> 37</span>  * @namespace
+<span class='line'> 38</span>  * &lt;b>Floor&lt;/b>
+<span class='line'> 39</span>  * Floor of a building.
+<span class='line'> 40</span>  * @property {float} altitude - Altitude of the floor above ground level, in meters.
+<span class='line'> 41</span>  * @property {string} buildingIdentifier - The identifier of building which this floor belongs.
+<span class='line'> 42</span>  * @property {number} level - The number of the floor.
+<span class='line'> 43</span>  * @property {string} mapUrl - The floor map image url
+<span class='line'> 44</span>  * @property {float} scale - The scale of the floor image, in px/meters
+<span class='line'> 45</span>  * @property {string} floorIdentifier - The unique identifier of the resource
+<span class='line'> 46</span>  */</span><span class="WHIT">
+<span class='line'> 47</span> 
+<span class='line'> 48</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">Floor</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 49</span> </span><span class="WHIT">  </span><span class="NAME">altitude</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 50</span> </span><span class="WHIT">  </span><span class="NAME">buildingIdentifier</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 51</span> </span><span class="WHIT">  </span><span class="NAME">level</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 52</span> </span><span class="WHIT">  </span><span class="NAME">mapUrl</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 53</span> </span><span class="WHIT">  </span><span class="NAME">scale</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 54</span> </span><span class="WHIT">  </span><span class="NAME">floorIdentifier</span><span class="WHIT">
+<span class='line'> 55</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 56</span> 
+<span class='line'> 57</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Floor</span><span class="WHIT">
+<span class='line'> 58</span> 
+<span class='line'> 59</span> </span><span class="COMM">/** @namespace
+<span class='line'> 60</span>  * &lt;b>Dimensions&lt;/b>&lt;br />
+<span class='line'> 61</span>  * Define 2D dimensions of a rectangular area.
+<span class='line'> 62</span>  * @property {float} width - Width of rectangle in meters
+<span class='line'> 63</span>  * @property {float} height - Height of rectangle in meters.
+<span class='line'> 64</span>  */</span><span class="WHIT">
+<span class='line'> 65</span> 
+<span class='line'> 66</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">Dimensions</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 67</span> </span><span class="WHIT">  </span><span class="NAME">width</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 68</span> </span><span class="WHIT">  </span><span class="NAME">height</span><span class="WHIT">
+<span class='line'> 69</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 70</span> 
+<span class='line'> 71</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Dimensions</span><span class="WHIT">
+<span class='line'> 72</span> 
+<span class='line'> 73</span> </span><span class="COMM">/** @namespace
+<span class='line'> 74</span>  * &lt;b>Bounds&lt;/b>&lt;br />
+<span class='line'> 75</span>  * Represents a rectangle bounds in a greographic 2D space.
+<span class='line'> 76</span>  * @property {Coordinate} northEast - The coordinate of the north-east corner of the bound.
+<span class='line'> 77</span>  * @property {Coordinate} northWest - The coordinate of the north-west corner of the bound.
+<span class='line'> 78</span>  * @property {Coordinate} southEast - The coordinate of the south-east corner of the bound.
+<span class='line'> 79</span>  * @property {Coordinate} southWest - The coordinate of the south-east corner of the bound.
+<span class='line'> 80</span>  */</span><span class="WHIT">
+<span class='line'> 81</span> 
+<span class='line'> 82</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">Bounds</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 83</span> </span><span class="WHIT">  </span><span class="NAME">northEast</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 84</span> </span><span class="WHIT">  </span><span class="NAME">northWest</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 85</span> </span><span class="WHIT">  </span><span class="NAME">southEast</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 86</span> </span><span class="WHIT">  </span><span class="NAME">southWest</span><span class="WHIT">
+<span class='line'> 87</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 88</span> 
+<span class='line'> 89</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Bounds</span><span class="WHIT">
+<span class='line'> 90</span> 
+<span class='line'> 91</span> </span><span class="COMM">/**
+<span class='line'> 92</span>  * @namespace
+<span class='line'> 93</span>  * &lt;b>Coordinate&lt;/b>&lt;br />
+<span class='line'> 94</span>  * A structure that contains geographical coordinate.
+<span class='line'> 95</span>  * @property {float} latitude - Latitude in degrees
+<span class='line'> 96</span>  * @property {float} longitude - Longitude in degrees
+<span class='line'> 97</span>  */</span><span class="WHIT">
+<span class='line'> 98</span> 
+<span class='line'> 99</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">Coordinate</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>100</span> </span><span class="WHIT">  </span><span class="NAME">latitude</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>101</span> </span><span class="WHIT">  </span><span class="NAME">longitude</span><span class="WHIT">
+<span class='line'>102</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>103</span> 
+<span class='line'>104</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Coordinate</span><span class="WHIT">
+<span class='line'>105</span> 
+<span class='line'>106</span> </span><span class="COMM">/**
+<span class='line'>107</span>  * @namespace
+<span class='line'>108</span>  * &lt;b>Cartesian Coordinate&lt;/b>&lt;br />
+<span class='line'>109</span>  * A structure that contains cartesian coordinate.
+<span class='line'>110</span>  * @property {float} x - Value of coordinate at x-axis
+<span class='line'>111</span>  * @property {float} y - Value of coordinate at y-axis
+<span class='line'>112</span>  */</span><span class="WHIT">
+<span class='line'>113</span> 
+<span class='line'>114</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">CartesianCoordinate</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>115</span> </span><span class="WHIT">  </span><span class="NAME">x</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>116</span> </span><span class="WHIT">  </span><span class="NAME">y</span><span class="WHIT">
+<span class='line'>117</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>118</span> 
+<span class='line'>119</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">CartesianCoordinate</span><span class="WHIT">
+<span class='line'>120</span> 
+<span class='line'>121</span> </span><span class="COMM">/**
+<span class='line'>122</span>  * @namespace
+<span class='line'>123</span>  * &lt;b>POI (Point of Interest)&lt;/b>
+<span class='line'>124</span>  * Point of Interest, associated to a building, regardless of whether it's place inside or outside the building.
+<span class='line'>125</span>  * @property {string} identifier - The unique identifier of the resource
+<span class='line'>126</span>  * @property {string} buildingIdentifier - Identifier of building to which the POI belongs.
+<span class='line'>127</span>  * @property {CartesianCoordinate} cartesianCoordinate - Cartesian coordinate of this position, relative to building Bounds.
+<span class='line'>128</span>  * @property {Coordinate} coordinate - Geographical coordinate of this position
+<span class='line'>129</span>  * @property {string} floorIdentifier - If this POI is outside the building (isOutdoor == true), this field has no meaning.
+<span class='line'>130</span>  * @property {string} poiName - A name for the POI, appropriate for display to the user.
+<span class='line'>131</span>  * @property {Point} position
+<span class='line'>132</span>  * @property {boolean} isIndoor - Whether the POI is placed outside the building or not.
+<span class='line'>133</span>  * @property {boolean} isOutdoor - Whether the POI is placed outside the building or not.
+<span class='line'>134</span>  * @property {PoiCategory} category - Category of the POI
+<span class='line'>135</span>  * @property {string} infoHtml - Additional information about POI, in HTML
+<span class='line'>136</span>  * @property {Object} customFields - Map of custom fields, indexed by their name.
+<span class='line'>137</span>  */</span><span class="WHIT">
+<span class='line'>138</span> 
+<span class='line'>139</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">Poi</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>140</span> </span><span class="WHIT">  </span><span class="NAME">identifier</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>141</span> </span><span class="WHIT">  </span><span class="NAME">buildingIdentifier</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>142</span> </span><span class="WHIT">  </span><span class="NAME">cartesianCoordinate</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>143</span> </span><span class="WHIT">  </span><span class="NAME">coordinate</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>144</span> </span><span class="WHIT">  </span><span class="NAME">floorIdentifier</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>145</span> </span><span class="WHIT">  </span><span class="NAME">poiName</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>146</span> </span><span class="WHIT">  </span><span class="NAME">position</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>147</span> </span><span class="WHIT">  </span><span class="NAME">isIndoor</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>148</span> </span><span class="WHIT">  </span><span class="NAME">isOutdoor</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>149</span> </span><span class="WHIT">  </span><span class="NAME">category</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>150</span> </span><span class="WHIT">  </span><span class="NAME">infoHtml</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>151</span> </span><span class="WHIT">  </span><span class="NAME">customFields</span><span class="WHIT">
+<span class='line'>152</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>153</span> 
+<span class='line'>154</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Poi</span><span class="WHIT">
+<span class='line'>155</span> 
+<span class='line'>156</span> </span><span class="COMM">/**
+<span class='line'>157</span>  * @namespace
+<span class='line'>158</span>  * &lt;b>PoiCategory&lt;/b>
+<span class='line'>159</span>  * Category of Point of Interest.
+<span class='line'>160</span>  * @property {string} poiCategoryCode - Unique code of the category
+<span class='line'>161</span>  * @property {string} poiCategoryName - The category name appropriate for display to the user
+<span class='line'>162</span>  * @property {string} icon_selected - The selected icon url
+<span class='line'>163</span>  * @property {string} icon_unselected - The unselected icon url
+<span class='line'>164</span>  * @property {boolean} public - Whether the category is public or not
+<span class='line'>165</span>  */</span><span class="WHIT">
+<span class='line'>166</span> 
+<span class='line'>167</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">PoiCategory</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>168</span> </span><span class="WHIT">  </span><span class="NAME">poiCategoryCode</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>169</span> </span><span class="WHIT">  </span><span class="NAME">poiCategoryName</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>170</span> </span><span class="WHIT">  </span><span class="NAME">icon_selected</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>171</span> </span><span class="WHIT">  </span><span class="NAME">icon_unselected</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>172</span> </span><span class="WHIT">  </span><span class="NAME">public</span><span class="WHIT">
+<span class='line'>173</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>174</span> 
+<span class='line'>175</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">PoiCategory</span><span class="WHIT">
+<span class='line'>176</span> 
+<span class='line'>177</span> </span><span class="COMM">/**
+<span class='line'>178</span>  * @namespace
+<span class='line'>179</span>  * &lt;b>Point&lt;/b>
+<span class='line'>180</span>  * Associate geographical coordinate (Location) with Building and Floor (Cartography) and cartesian coordinate relative to that building.
+<span class='line'>181</span>  * @property {string} buildingIdentifier - Unique identifier for the building to which this point belongs
+<span class='line'>182</span>  * @property {CartesianCoordinate} cartesianCoordinate - Cartesian coordinate (in meters) relative to the Bounds of building's base.
+<span class='line'>183</span>  * @property {Coordinate} coordinate - Geographic coordinate (latitude, longitude) of the point, regardless of whether it's placed inside or outside the building.
+<span class='line'>184</span>  * @property {string} floorIdentifier - Floor identifier (inside the building) where this point is placed.
+<span class='line'>185</span>  * @property {boolean} isIndoor - If the POI is inside the building.
+<span class='line'>186</span>  * @property {boolean} idOutdoor - If the POI is outside the building.
+<span class='line'>187</span>  */</span><span class="WHIT">
+<span class='line'>188</span> 
+<span class='line'>189</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">Point</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>190</span> </span><span class="WHIT">  </span><span class="NAME">buildingIdentifier</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>191</span> </span><span class="WHIT">  </span><span class="NAME">cartesianCoordinate</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>192</span> </span><span class="WHIT">  </span><span class="NAME">coordinate</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>193</span> </span><span class="WHIT">  </span><span class="NAME">floorIdentifier</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>194</span> </span><span class="WHIT">  </span><span class="NAME">isIndoor</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>195</span> </span><span class="WHIT">  </span><span class="NAME">isOutdoor</span><span class="WHIT">
+<span class='line'>196</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>197</span> 
+<span class='line'>198</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Point</span><span class="WHIT">
+<span class='line'>199</span> 
+<span class='line'>200</span> </span><span class="COMM">/**
+<span class='line'>201</span>  * @namespace
+<span class='line'>202</span>  * &lt;b>Location&lt;/b>
+<span class='line'>203</span>  * A location. It can be indoor or outdoor, check isIndoor and isOutdoor. A valid indoor location has floorIdentifier and cartesianCoordinate.
+<span class='line'>204</span>  * @property {float} accuracy - The accuracy radius (in meters)
+<span class='line'>205</span>  * @property {Angle} bearing -  The bearing (in degrees) with respect to the Earth North.
+<span class='line'>206</span>  * @property {string} bearingQuality - The quality of the cartesian bearing.
+<span class='line'>207</span>  * @property {string} buildingIdentifier - Only used in indoor.
+<span class='line'>208</span>  * @property {Angle} cartesianBearing - Only used in indoor. In {@link Angle} object.
+<span class='line'>209</span>  * @property {CartesianCoordinate} cartesianCoordinate - Only used in indoor. In {@link CartesianCoordinate} object.
+<span class='line'>210</span>  * @property {Coordinate} coordinate - The {@link Coordinate} of the location
+<span class='line'>211</span>  * @property {string} floorIdentifier - Only used in indoor.
+<span class='line'>212</span>  * @property {Point} position - The position of the location as {@link Point}.
+<span class='line'>213</span>  * @property {string} provider - The device identifier that has generated the location
+<span class='line'>214</span>  * @property {string} quality - Only used in indoor.
+<span class='line'>215</span>  * @property {boolean} hasBearing - True if the location has bearing and the bearing quality is Location.Quality.HIGH, false otherwise.
+<span class='line'>216</span>  * @property {number} timestamp - The timestamp of the location.
+<span class='line'>217</span>  * @property {boolean} hasCartesianBearing - Only used in indoor.
+<span class='line'>218</span>  * @property {boolean} isIndoor - True if the location is indoor
+<span class='line'>219</span>  * @property {boolean} isOutdoor - True if the location is outdoor
+<span class='line'>220</span>  * @property {string} deviceId
+<span class='line'>221</span>  */</span><span class="WHIT">
+<span class='line'>222</span> 
+<span class='line'>223</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">Location</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>224</span> </span><span class="WHIT">  </span><span class="NAME">accuracy</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>225</span> </span><span class="WHIT">  </span><span class="NAME">bearing</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>226</span> </span><span class="WHIT">  </span><span class="NAME">bearingQuality</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>227</span> </span><span class="WHIT">  </span><span class="NAME">buildingIdentifier</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>228</span> </span><span class="WHIT">  </span><span class="NAME">cartesianBearing</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>229</span> </span><span class="WHIT">  </span><span class="NAME">cartesianCoordinate</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>230</span> </span><span class="WHIT">  </span><span class="NAME">coordinate</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>231</span> </span><span class="WHIT">  </span><span class="NAME">floorIdentifier</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>232</span> </span><span class="WHIT">  </span><span class="NAME">position</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>233</span> </span><span class="WHIT">  </span><span class="NAME">provider</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>234</span> </span><span class="WHIT">  </span><span class="NAME">quality</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>235</span> </span><span class="WHIT">  </span><span class="NAME">hasBearing</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>236</span> </span><span class="WHIT">  </span><span class="NAME">timestamp</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>237</span> </span><span class="WHIT">  </span><span class="NAME">hasCartesianBearing</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>238</span> </span><span class="WHIT">  </span><span class="NAME">isIndoor</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>239</span> </span><span class="WHIT">  </span><span class="NAME">isOutdoor</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>240</span> </span><span class="WHIT">  </span><span class="NAME">deviceId</span><span class="WHIT">
+<span class='line'>241</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>242</span> 
+<span class='line'>243</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Location</span><span class="WHIT">
+<span class='line'>244</span> 
+<span class='line'>245</span> </span><span class="COMM">/**
+<span class='line'>246</span>  * @namespace
+<span class='line'>247</span>  * &lt;b>Angle&lt;/b>
+<span class='line'>248</span>  * Representation of an angle.
+<span class='line'>249</span>  * @property {float} degrees - Angle in degrees, increasing in counter-clockwise 
+<span class='line'>250</span>  * @property {float} degreesClockwise - Angle in radians, increasing in clockwise
+<span class='line'>251</span>  * @property {float} radians - Angle in radians, increasing in counter-clockwise
+<span class='line'>252</span>  * @property {float} radiansMinusPiPi - Angle in radians in range (-pi,pi)
+<span class='line'>253</span>  */</span><span class="WHIT">
+<span class='line'>254</span> 
+<span class='line'>255</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">Angle</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>256</span> </span><span class="WHIT">  </span><span class="NAME">degrees</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>257</span> </span><span class="WHIT">  </span><span class="NAME">degreesClockwise</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>258</span> </span><span class="WHIT">  </span><span class="NAME">radians</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>259</span> </span><span class="WHIT">  </span><span class="NAME">radiansMinusPiPi</span><span class="WHIT">
+<span class='line'>260</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>261</span> 
+<span class='line'>262</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Angle</span><span class="WHIT">
+<span class='line'>263</span> 
+<span class='line'>264</span> </span><span class="COMM">/**
+<span class='line'>265</span>  * @namespace
+<span class='line'>266</span>  * &lt;b>Route&lt;/b>
+<span class='line'>267</span>  * Route between two points.
+<span class='line'>268</span>  * @property {RouteStep[]} edges - Ordered list of steps to go to the goal point
+<span class='line'>269</span>  * @property {RouteStep} firstStep - First step
+<span class='line'>270</span>  * @property {Point} from - Point where the route starts.
+<span class='line'>271</span>  * @property {Indication} indications - Ordered list of instructions to go to the destination
+<span class='line'>272</span>  * @property {RouteStep} lastStep - Last step
+<span class='line'>273</span>  * @property {Point[]} nodes - A collection of points of the route (not ordered)
+<span class='line'>274</span>  * @property {Point[]} points - List of ordered points of the route
+<span class='line'>275</span>  * @property {Point} to - Last point and goal of the route.
+<span class='line'>276</span>  * @property {RouteStep[]} steps - Ordered list of steps to go to the goal point
+<span class='line'>277</span>  */</span><span class="WHIT">
+<span class='line'>278</span> 
+<span class='line'>279</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">Route</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>280</span> </span><span class="WHIT">  </span><span class="NAME">edges</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>281</span> </span><span class="WHIT">  </span><span class="NAME">firstStep</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>282</span> </span><span class="WHIT">  </span><span class="NAME">from</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>283</span> </span><span class="WHIT">  </span><span class="NAME">indications</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>284</span> </span><span class="WHIT">  </span><span class="NAME">lastStep</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>285</span> </span><span class="WHIT">  </span><span class="NAME">nodes</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>286</span> </span><span class="WHIT">  </span><span class="NAME">points</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>287</span> </span><span class="WHIT">  </span><span class="NAME">to</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>288</span> </span><span class="WHIT">  </span><span class="NAME">steps</span><span class="WHIT">
+<span class='line'>289</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>290</span> 
+<span class='line'>291</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Route</span><span class="WHIT">
+<span class='line'>292</span> 
+<span class='line'>293</span> </span><span class="COMM">/**
+<span class='line'>294</span>  * @namespace
+<span class='line'>295</span>  * &lt;b>RouteStep&lt;/b>
+<span class='line'>296</span>  * A fragment of a route, described by the initial point from and the last point to of the fragment, and some information about the step within the route.
+<span class='line'>297</span>  * @property {float} distance - Distance between from and to in meters.
+<span class='line'>298</span>  * @property {float} distanceToGoal - Distance in meters between the start point of this step (from) and the last point in the route ('to' of the last step).
+<span class='line'>299</span>  * @property {Point} from - Start point of this step.
+<span class='line'>300</span>  * @property {number} id - Position of this RouteStep in the list of steps (Route.steps) of the route to which it belongs.
+<span class='line'>301</span>  * @property {Point} to: End point of this step.
+<span class='line'>302</span>  * @property {boolean} isFirst - Returns true if this is the first step in the route.
+<span class='line'>303</span>  * @property {boolean} isLast - Returns true if this is the last step in the route.
+<span class='line'>304</span>  */</span><span class="WHIT">
+<span class='line'>305</span> 
+<span class='line'>306</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">RouteStep</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>307</span> </span><span class="WHIT">  </span><span class="NAME">distance</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>308</span> </span><span class="WHIT">  </span><span class="NAME">distanceToGoal</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>309</span> </span><span class="WHIT">  </span><span class="NAME">from</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>310</span> </span><span class="WHIT">  </span><span class="NAME">id</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>311</span> </span><span class="WHIT">  </span><span class="NAME">to</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>312</span> </span><span class="WHIT">  </span><span class="NAME">isFirst</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>313</span> </span><span class="WHIT">  </span><span class="NAME">isLast</span><span class="WHIT">
+<span class='line'>314</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>315</span> 
+<span class='line'>316</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">RouteStep</span><span class="WHIT">
+<span class='line'>317</span> 
+<span class='line'>318</span> </span><span class="COMM">/**
+<span class='line'>319</span>  * @namespace
+<span class='line'>320</span>  * &lt;b>Indication&lt;/b>
+<span class='line'>321</span>  * Represents the instruction that a user should follow when on a RouteStep to continue the route.
+<span class='line'>322</span>  * @property {float} distance - The distance between the origin and destination
+<span class='line'>323</span>  * @property {number} distanceToNextLevel - The number of levels between the origin and destination
+<span class='line'>324</span>  * @property {string} indicationType - The Indication.Action of the instruction as String
+<span class='line'>325</span>  * @property {float} orientation - The angle a user should change his direction in order to go from the origin to the destination.
+<span class='line'>326</span>  * @property {string} orientationType - The Indication.Orientation of the instruction as String
+<span class='line'>327</span>  * @property {number} stepIdxDestination - The index of the indication's step of destination. 
+<span class='line'>328</span>  * @property {number} stepIdxOrigin - The index of the indication's step of origin
+<span class='line'>329</span>  * @property {boolean} neededLevelChange - If the user should change the level in order to arrive to destination
+<span class='line'>330</span>  */</span><span class="WHIT">
+<span class='line'>331</span> 
+<span class='line'>332</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">Indication</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>333</span> </span><span class="WHIT">  </span><span class="NAME">distance</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>334</span> </span><span class="WHIT">  </span><span class="NAME">distanceToNextLevel</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>335</span> </span><span class="WHIT">  </span><span class="NAME">indicationType</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>336</span> </span><span class="WHIT">  </span><span class="NAME">orientation</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>337</span> </span><span class="WHIT">  </span><span class="NAME">orientationType</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>338</span> </span><span class="WHIT">  </span><span class="NAME">stepIdxDestination</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>339</span> </span><span class="WHIT">  </span><span class="NAME">stepIdxOrigin</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>340</span> </span><span class="WHIT">  </span><span class="NAME">neededLevelChange</span><span class="WHIT">
+<span class='line'>341</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>342</span> 
+<span class='line'>343</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Indication</span></pre></body></html>

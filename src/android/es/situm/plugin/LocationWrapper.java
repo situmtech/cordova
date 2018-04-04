@@ -522,7 +522,7 @@ class LocationWrapper {
 
     /*static Route jsonRouteToRoute(JSONObject jo) throws JSONException {
         // Create a static route
-
+        
     }*/
 
     //RouteStep

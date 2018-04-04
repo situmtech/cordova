@@ -414,7 +414,6 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     if ([options valueForKey:Accessible] != nil) {
         accessible = [[options valueForKey:Accessible] boolValue];
     }
-
     float startingAngle = 0.0;
     if ([options valueForKey:StartingAngle] != nil) {
         startingAngle = [[options valueForKey:StartingAngle] floatValue];
