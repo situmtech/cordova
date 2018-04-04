@@ -34,6 +34,22 @@
 @property (nonatomic) NSInteger outsideRouteThreshold;
 
 /**
+ Distance in meters at which will be consider that the user has arrived to a change floor indication
+ 
+@return distance in meters.
+ @discussion Default value is 10 meters.
+ */
+@property (nonatomic) NSInteger distanceToFloorChangeThreshold;
+
+/**
+ Distance in meters at which will be consider that the user has arrived to the next indication
+ 
+ @return distance in meters.
+ @discussion Default value is 5 meters.
+ */
+@property (nonatomic) NSInteger distanceToChangeIndicationThreshold;
+
+/**
  SITRoute object considered to navigate
  */
 @property (nonatomic, strong) SITRoute *route;
@@ -46,6 +62,20 @@
  @discussion this request will have default values for the distanceToGoalThreshold and outsideRouteThreshold.
  */
 - (instancetype)initWithRoute:(SITRoute *)route;
+
+/**
+ Set a threshold within which the next indication will be returned
+ 
+ @param distanceToChangeIndicationThreshold distance to change indication threshold
+ */
+-(void)setDistanceToChangeIndicationThreshold:(NSInteger)distanceToChangeIndicationThreshold;
+
+/**
+ Set a threshold within which the next change floor indication will be returned
+ 
+ @param distanceToChangeFloorThreshold distance to change floor threshold
+ */
+-(void)setDistanceToChangeFloorThreshold:(NSInteger)distanceToChangeFloorThreshold;
 
 @end
 #endif

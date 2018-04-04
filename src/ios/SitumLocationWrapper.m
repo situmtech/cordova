@@ -346,12 +346,12 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
 - (SITLocation *) locationJsonObjectToLocation:(NSDictionary *) jo {
     NSTimeInterval timestamp = [(NSNumber*)[jo valueForKey:@"timestamp"] doubleValue];
     SITPoint *position = [self pointJsonObjectToPoint:[jo objectForKey:@"position"]];
-    float bearing = [(NSNumber*)[jo objectForKey:@"bearing"] floatValue];
-    float cartesianBearing = [(NSNumber*)[jo objectForKey:@"cartesianBearing"] floatValue];
+    
+    float bearing = [[[jo objectForKey:@"bearing"] valueForKey:@"degrees"] floatValue];
+    float cartesianBearing = [[[jo objectForKey:@"cartesianBearing"] valueForKey:@"radians"] floatValue];
+    
     kSITQualityValues quality = kSITHigh;
-    if ([(NSNumber*)[jo objectForKey:@"cartesianBearing"] integerValue] == 0) {
-        quality = kSITLow;
-    }
+
     float accuracy = [(NSNumber*)[jo objectForKey:@"accuracy"] floatValue];
     
     SITLocation *location = [[SITLocation alloc] initWithTimestamp:timestamp position:position bearing:bearing cartesianBearing:cartesianBearing quality:quality accuracy:accuracy provider:[jo objectForKey:@"provider"]];
@@ -528,6 +528,12 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:[NSNumber numberWithInteger:indication.destinationStepIndex] forKey:@"stepIdxDestination"];
     [jo setObject:[NSNumber numberWithInteger:indication.originStepIndex] forKey:@"stepIdxOrigin"];
     [jo setObject:[NSNumber numberWithBool:indication.needLevelChange] forKey:@"neededLevelChange"];
+    [jo setObject:[indication humanReadableMessage] forKey:@"humanReadableMessage"];
+    if (indication.nextLevel == nil) {
+        NSLog(@"Next level is nil");
+    } else {
+        [jo setObject:indication.nextLevel forKey:@"nextLevel"];
+    }
     return jo.copy;
 }
 
@@ -537,10 +543,11 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     float horizontalDistance = [(NSNumber*)[jo valueForKey:@"distance"] floatValue];
     float orientationChange = [(NSNumber*)[jo valueForKey:@"orientation"] floatValue];
     float verticalDistance = [(NSNumber*)[jo valueForKey:@"distanceToNextLevel"] floatValue];
+    NSNumber* nextLevel = (NSNumber*)[jo valueForKey:@"nextLevel"];
     kSITIndicationActions action = stringToIndicationType([jo valueForKey:@"indicationType"]);
     kSITIndicationOrientation orientation = stringToOrientationType([jo valueForKey:@"orientationType"]);
     
-    SITIndication *indication = [[SITIndication alloc] initWithOriginStepIndex:stepIdxOrigin destinationStepIndex:stepIdxDestination action:action horizontalDistance:horizontalDistance orientation:orientation orientationChange:orientationChange verticalDistance:verticalDistance];
+    SITIndication *indication = [[SITIndication alloc] initWithOriginStepIndex:stepIdxOrigin destinationStepIndex:stepIdxDestination action:action horizontalDistance:horizontalDistance orientation:orientation orientationChange:orientationChange verticalDistance:verticalDistance nextLevel:nextLevel];
     
     return indication;
 }
@@ -551,8 +558,9 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
     [jo setObject:[self pointToJsonObject:navigationProgress.closestPointToRoute] forKey:@"closestPointInRoute"];
     [jo setObject:[self indicationToJsonObject:navigationProgress.currentIndication] forKey:@"currentIndication"];
-    [jo setObject:[NSNumber numberWithFloat:navigationProgress.distanceToGoal] forKey:@"distanceToEndStep"];
-    [jo setObject:[NSNumber numberWithFloat:navigationProgress.distanceToEndStep] forKey:@"distanceToGoal"];
+    [jo setObject:[NSNumber numberWithInteger:navigationProgress.currentStepIndex] forKey:@"currentStepIndex"];
+    [jo setObject:[NSNumber numberWithFloat:navigationProgress.distanceToGoal] forKey:@"distanceToGoal"];
+    [jo setObject:[NSNumber numberWithFloat:navigationProgress.distanceToEndStep] forKey:@"distanceToEndStep"];
     [jo setObject:[NSNumber numberWithFloat:navigationProgress.timeToEndStep] forKey:@"timeToEndStep"];
     [jo setObject:[NSNumber numberWithFloat:navigationProgress.timeToGoal] forKey:@"timeToGoal"];
     return jo.copy;

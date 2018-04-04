@@ -180,6 +180,15 @@ var Situm = {
    */
   requestDirections: function (args, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'requestDirections', args);
+  },
+  requestNavigationUpdates: function (args, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'requestNavigationUpdates', args);
+  },
+  updateNavigationWithLocation: function (args, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'updateNavigationWithLocation', args);
+  },
+  removeNavigationUpdates: function (args, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'removeNavigationUpdates', args);
   }
 };
 module.exports = Situm;
