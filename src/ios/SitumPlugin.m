@@ -427,23 +427,48 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 - (void)requestNavigationUpdates:(CDVInvokedUrlCommand*)command
 {
     navigationProgressCallbackId = command.callbackId;
+    NSNumber* distanceToChangeFloorThreshold;
+    NSNumber* distanceToChangeIndicationThreshold;
+    NSNumber* distanceToGoalThreshold;
+    NSNumber* outsideRouteThreshold;
     
-    // Insert here configuration options
-    /*if (command.arguments.length > 0) {
+    if (command.arguments.count > 0) {
         // Processing configuration parameters
         NSDictionary *options = (NSDictionary*)[command.arguments objectAtIndex:0];
- 
-    }*/
-    // SITRoute *routeObj = (SITRoute*)[routesStored objectForKey:[route valueForKey:@"timeStamp"]];
+        distanceToChangeFloorThreshold = (NSNumber*)[options objectForKey:@"distanceToFloorChangeThreshold"];
+        distanceToChangeIndicationThreshold = (NSNumber*)[options objectForKey:@"distanceToChangeIndicationThreshold"];
+        distanceToGoalThreshold = (NSNumber*)[options objectForKey:@"distanceToGoalThreshold"];
+        outsideRouteThreshold = (NSNumber*)[options objectForKey:@"outsideRouteThreshold"];
+        
+    }
     SITRoute *routeObj = self.computedRoute;
     if (routeObj) {
         SITNavigationRequest *navigationRequest = [[SITNavigationRequest alloc] initWithRoute:routeObj];
-
-        // Configure distanceToGoalThreshold
-        // Configure outsideRouteThreshold
+        if (distanceToChangeIndicationThreshold != nil) {
+            NSInteger value = [distanceToChangeIndicationThreshold integerValue];
+            [navigationRequest setDistanceToChangeIndicationThreshold: value];
+            NSLog(@"%@", [NSString stringWithFormat: @"navigationRequest.distanceToChangeIndicationThreshold: %ld", navigationRequest.distanceToChangeIndicationThreshold]);
+        }
+        if (distanceToChangeFloorThreshold != nil) {
+            NSInteger value = [distanceToChangeFloorThreshold integerValue];
+            [navigationRequest setDistanceToChangeFloorThreshold: value];
+            NSLog(@"%@", [NSString stringWithFormat: @"navigationRequest.distanceToChangeFloorThreshold: %ld", navigationRequest.distanceToFloorChangeThreshold]);
+        }
+        if (distanceToGoalThreshold != nil) {
+            NSInteger value = [distanceToGoalThreshold integerValue];
+            [navigationRequest setDistanceToGoalThreshold: value];
+            NSLog(@"%@", [NSString stringWithFormat: @"navigationRequest.distanceToGoalThreshold: %ld", navigationRequest.distanceToGoalThreshold]);
+        }
+        if (outsideRouteThreshold != nil) {
+            NSInteger value = [outsideRouteThreshold integerValue];
+            [navigationRequest setOutsideRouteThreshold: value];
+            NSLog(@"%@", [NSString stringWithFormat: @"navigationRequest.outsideRouteThreshold: %ld", navigationRequest.outsideRouteThreshold]);
+        }
 
         [[SITNavigationManager sharedManager]  setDelegate:self]; // Configure delegation first
         [[SITNavigationManager sharedManager] requestNavigationUpdates:navigationRequest];
+        
+        
     }
 }
 
