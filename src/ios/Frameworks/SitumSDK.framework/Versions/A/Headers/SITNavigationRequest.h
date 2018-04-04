@@ -77,5 +77,19 @@
  */
 -(void)setDistanceToChangeFloorThreshold:(NSInteger)distanceToChangeFloorThreshold;
 
+/**
+ Set a threshold within which the goal change floor indication will be considered as reached
+ 
+ @param distanceToGoalThreshold distance to change goal threshold
+ */
+- (void)setDistanceToGoalThreshold:(NSInteger)distanceToGoalThreshold;
+
+/**
+ Set a threshold outise which the position will be considered out of the route
+ 
+ @param outsideRouteThreshold outside route threshold
+ */
+- (void)setOutsideRouteThreshold:(NSInteger)outsideRouteThreshold;
+
 @end
 #endif
