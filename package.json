@@ -33,6 +33,20 @@
   },
   "homepage": "https://github.com/situmtech/situm-cordova-plugin#readme",
   "dependencies": {
+    "describe": "^1.2.0",
     "jsdoc-toolkit": "0.0.2"
+  },
+  "scripts": {
+    "test": "npm run eslint",
+    "eslint": "node node_modules/eslint/bin/eslint www && node node_modules/eslint/bin/eslint src && node node_modules/eslint/bin/eslint tests"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-semistandard": "^11.0.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-node": "^5.0.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1"
   }
 }
