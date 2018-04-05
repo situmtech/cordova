@@ -158,6 +158,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     // [jo setObject:building.rotation forKey:@"rotation"];
     [jo setObject:[NSNumber numberWithFloat:[building.rotation degrees]] forKey:@"rotationDegrees"];
     [jo setObject:[NSNumber numberWithFloat:[building.rotation radians]] forKey:@"rotationRadians"];
+    [jo setObject:[NSNumber numberWithFloat:[building.rotation radians]] forKey:@"rotation"];
     [jo setObject:emptyStrCheck(building.userIdentifier) forKey:@"userIdentifier"];
     [jo setObject:emptyStrCheck(building.identifier) forKey:@"identifier"];
 
