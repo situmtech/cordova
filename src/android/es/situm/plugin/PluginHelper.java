@@ -680,6 +680,16 @@ public class PluginHelper {
                     builder.distanceToGoalThreshold(distanceToGoalThreshold);
                 }
 
+                if (navigationJSONOptions.has(LocationWrapper.DISTANCE_TO_CHANGE_FLOOR_THRESHOLD)) {
+                    Double distanceToChangeFloorThreshold = navigationJSONOptions.getDouble(LocationWrapper.DISTANCE_TO_CHANGE_FLOOR_THRESHOLD);
+                    builder.distanceToChangeFloorThreshold(distanceToChangeFloorThreshold);
+                }
+
+                if (navigationJSONOptions.has(LocationWrapper.DISTANCE_TO_CHANGE_INDICATION_THRESHOLD)) {
+                    Double distanceToChangeIndicationThreshold = navigationJSONOptions.getDouble(LocationWrapper.DISTANCE_TO_CHANGE_INDICATION_THRESHOLD);
+                    builder.distanceToChangeIndicationThreshold(distanceToChangeIndicationThreshold);
+                }
+
             } catch (Exception e) {
                 //TODO: handle exception
                 Log.d(TAG, "Situm >> Unable to retrieve navigation options. Applying default ones");
