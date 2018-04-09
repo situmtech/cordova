@@ -1239,6 +1239,8 @@ Necessary step to request progress. Alone this method does not provide progress 
   navigationOptions["distanceToIgnoreFirstIndication"] = 0.3; // (Optional) meters;
   navigationOptions["outsideRouteThreshold"] = 10; // (Optional) meters;
   navigationOptions["distanceToGoalThreshold"] = 7; // (Optional) meters;
+  navigationOptions["distanceToFloorChangeThreshold"] = 10; // (Optional) meters;
+  navigationOptions["distanceToChangeIndicationThreshold"] = 5; // (Optional) meters
 
   requestNavigationUpdates([navigationOptions], (res: any) => {
     // Progress and other navigation status messages can be processed here  
