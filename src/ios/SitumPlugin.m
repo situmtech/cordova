@@ -373,7 +373,13 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     locationCallbackId = command.callbackId;
     selectedBuildingJO = buildingJO;
     
-    SITLocationRequest *locationRequest = [[SITLocationRequest alloc] initWithPriority:kSITHighAccuracy provider:kSITHybridProvider updateInterval:2 buildingID:[buildingJO valueForKey:@"identifier"] operationQueue:[NSOperationQueue mainQueue] options:nil];
+    NSString *buildingId = [buildingJO valueForKey:@"identifier"];
+    
+    if (buildingId == nil) {
+        buildingId = [NSString stringWithFormat:@"%@", [buildingJO valueForKey:@"buildingIdentifier"]];
+    }
+    
+    SITLocationRequest *locationRequest = [[SITLocationRequest alloc] initWithPriority:kSITHighAccuracy provider:kSITHybridProvider updateInterval:2 buildingID:buildingId operationQueue:[NSOperationQueue mainQueue] options:nil];
     [[SITLocationManager sharedInstance] requestLocationUpdates:locationRequest];
     [[SITLocationManager sharedInstance] setDelegate:self];
 }
