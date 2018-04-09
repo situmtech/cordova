@@ -485,7 +485,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     [[SITNavigationManager sharedManager] updateWithLocation:location];
 }
 
-- (void) removeNavigationUpdates {
+- (void) removeNavigationUpdates:(CDVInvokedUrlCommand *)command {
     [[SITNavigationManager sharedManager] removeUpdates];
 }
 
