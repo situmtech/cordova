@@ -38,6 +38,7 @@
 
 - (NSDictionary *) locationToJsonObject:(SITLocation *) location;
 - (NSString*) locationStateToString:(SITLocationState) state;
+- (NSDictionary *) locationStateToJsonObject:(SITLocationState) state;
 
 - (SITLocation *) locationJsonObjectToLocation:(NSDictionary *) jo;
 

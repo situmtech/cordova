@@ -200,6 +200,15 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     return type;
 }
 
+- (NSDictionary *) locationStateToJsonObject:(SITLocationState) state {
+
+    NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
+    [jo setValue: [self locationStateToString:state] forKey: @"statusName"];
+    NSNumber *status = [NSNumber numberWithInt:state];
+    [jo setValue: status forKey: @"statusOrdinal"];
+    return jo;
+}
+
 //deprecated method
 
 - (NSDictionary *) buildingIndoorToJsonObject:(SITIndoorBuilding *) building __deprecated{
