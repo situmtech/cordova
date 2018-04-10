@@ -1,4 +1,6 @@
 exports.defineAutoTests = () => {
+  let buildings;
+  let building;
   // Basic tests to check if is correctly defined in cordova plugins
   describe('Situm object basic tests -> ', () => {
     it('Is Situm defined', () => {
@@ -64,8 +66,6 @@ exports.defineAutoTests = () => {
   });
 
   describe('Testing method fetchBuildings -> ', () => {
-    let buildings;
-    let building;
     beforeAll((done) => {
       cordova.plugins.Situm.setApiKey("oscar.fuentes@cocodin.com", "98a83630ce6667627f0e231cbde0f5052512290c9d52e7965f53486587cf7b22");
       cordova.plugins.Situm.fetchBuildings((response) => {
@@ -73,56 +73,144 @@ exports.defineAutoTests = () => {
         done();
       });
     });
-    it('Check reutrned value', (done) => {
+    it('Check reutrned value', () => {
       expect(buildings).toBeDefined();
       expect(buildings instanceof Array).toBeTruthy();
-      done();
     });
     it('Check building', () => {
       expect(building = buildings[0]);
-      expect(building).toBeDefined();
-      expect(typeof building === 'object').toBeTruthy();
-      expect(typeof building.address === 'string').toBeTruthy();
-      expect(typeof building.name === 'string').toBeTruthy();
-      expect(typeof building.buildingIdentifier === 'string').toBeTruthy();
-      expect(typeof building.userIdentifier === 'string').toBeTruthy();
-      expect(typeof building.infoHtml === 'string').toBeTruthy();
-      expect(typeof building.center === 'object').toBeTruthy();
-      expect(typeof building.rotation === 'number').toBeTruthy();
-      expect(typeof building.bounds === 'object').toBeTruthy();
-      expect(typeof building.boundsRotated === 'object').toBeTruthy();
+      expect(typeof building).toBe('object');
+      expect(typeof building.createdAt).toBe('string');
+      expect(typeof building.updatedAt).toBe('string');
+      expect(typeof building.address).toBe('string');
+      expect(typeof building.name).toBe('string');
+      expect(typeof building.buildingIdentifier).toBe('string');
+      expect(typeof building.userIdentifier).toBe('string');
+      expect(typeof building.infoHtml).toBe('string');
+      expect(typeof building.center).toBe('object');
+      expect(typeof building.rotation).toBe('number');
+      expect(typeof building.dimensions).toBe('object');
+      expect(typeof building.bounds).toBe('object');
+      expect(typeof building.boundsRotated).toBe('object');
+    });
+    it('Check bounds', () => {
+      expect(typeof building.bounds.northEast).toBe('object');
+      expect(typeof building.bounds.northEast.latitude).toBe('number');
+      expect(typeof building.bounds.northEast.longitude).toBe('number');
+      expect(typeof building.bounds.northWest).toBe('object');
+      expect(typeof building.bounds.northWest.latitude).toBe('number');
+      expect(typeof building.bounds.northWest.longitude).toBe('number');
+      expect(typeof building.bounds.southEast).toBe('object');
+      expect(typeof building.bounds.southEast.latitude).toBe('number');
+      expect(typeof building.bounds.southEast.longitude).toBe('number');
+      expect(typeof building.bounds.southWest).toBe('object');
+      expect(typeof building.bounds.southWest.latitude).toBe('number');
+      expect(typeof building.bounds.southWest.longitude).toBe('number');
+    });
+    it('Check bounds rotated', () => {
+      expect(typeof building.boundsRotated.northEast).toBe('object');
+      expect(typeof building.boundsRotated.northEast.latitude).toBe('number');
+      expect(typeof building.boundsRotated.northEast.longitude).toBe('number');
+      expect(typeof building.boundsRotated.northWest).toBe('object');
+      expect(typeof building.boundsRotated.northWest.latitude).toBe('number');
+      expect(typeof building.boundsRotated.northWest.longitude).toBe('number');
+      expect(typeof building.boundsRotated.southEast).toBe('object');
+      expect(typeof building.boundsRotated.southEast.latitude).toBe('number');
+      expect(typeof building.boundsRotated.southEast.longitude).toBe('number');
+      expect(typeof building.boundsRotated.southWest).toBe('object');
+      expect(typeof building.boundsRotated.southWest.latitude).toBe('number');
+      expect(typeof building.boundsRotated.southWest.longitude).toBe('number');
     });
     it('Check center property', () => {
-      expect(typeof building.center.latitude === 'number').toBeTruthy();
-      expect(typeof building.center.longitude === 'number').toBeTruthy();
+      expect(typeof building.center.latitude).toBe('number');
+      expect(typeof building.center.longitude).toBe('number');
     });
-    it('Check bounds property', () => {
-      expect(typeof building.bounds.northEast === 'object').toBeTruthy();
-      expect(typeof building.bounds.northEast.latitude === 'number').toBeTruthy();
-      expect(typeof building.bounds.northEast.longitude === 'number').toBeTruthy();
-      expect(typeof building.bounds.northWest === 'object').toBeTruthy();
-      expect(typeof building.bounds.northWest.latitude === 'number').toBeTruthy();
-      expect(typeof building.bounds.northWest.longitude === 'number').toBeTruthy();
-      expect(typeof building.bounds.southEast === 'object').toBeTruthy();
-      expect(typeof building.bounds.southEast.latitude === 'number').toBeTruthy();
-      expect(typeof building.bounds.southEast.longitude === 'number').toBeTruthy();
-      expect(typeof building.bounds.southWest === 'object').toBeTruthy();
-      expect(typeof building.bounds.southWest.latitude === 'number').toBeTruthy();
-      expect(typeof building.bounds.southWest.longitude === 'number').toBeTruthy();
+    it('Check dimensions property', () => {
+      expect(typeof building.dimensions.width).toBe('number');
+      expect(typeof building.dimensions.height).toBe('number');
     });
-    it('Check boundsRotated property', () => {
-      expect(typeof building.boundsRotated.northEast === 'object').toBeTruthy();
-      expect(typeof building.boundsRotated.northEast.latitude === 'number').toBeTruthy();
-      expect(typeof building.boundsRotated.northEast.longitude === 'number').toBeTruthy();
-      expect(typeof building.boundsRotated.northWest === 'object').toBeTruthy();
-      expect(typeof building.boundsRotated.northWest.latitude === 'number').toBeTruthy();
-      expect(typeof building.boundsRotated.northWest.longitude === 'number').toBeTruthy();
-      expect(typeof building.boundsRotated.southEast === 'object').toBeTruthy();
-      expect(typeof building.boundsRotated.southEast.latitude === 'number').toBeTruthy();
-      expect(typeof building.boundsRotated.southEast.longitude === 'number').toBeTruthy();
-      expect(typeof building.boundsRotated.southWest === 'object').toBeTruthy();
-      expect(typeof building.boundsRotated.southWest.latitude === 'number').toBeTruthy();
-      expect(typeof building.boundsRotated.southWest.longitude === 'number').toBeTruthy();
+  });
+
+  describe('Test method fetchFloorsFromBuilding ->', () => {
+    let floors;
+    let floor;
+    beforeAll((done) => {
+      cordova.plugins.Situm.fetchFloorsFromBuilding(building, (response) => {
+        floors = response;
+        done();
+      });
+    });
+    it('Check returned value', () => {
+      expect(floors).toBeDefined();
+      expect(floors instanceof Array).toBeTruthy();
+    });
+    it('Check floor object', () => {
+      expect(floor = floors[0]);
+      expect(typeof floor).toBe('object');
+      expect(typeof floor.altitude).toBe('number');
+      expect(typeof floor.buildingIdentifier).toBe('string');
+      expect(typeof floor.floorIdentifier).toBe('string');
+      expect(typeof floor.level).toBe('number');
+      expect(typeof floor.mapUrl).toBe('string');
+      expect(typeof floor.scale).toBe('number');
+      expect(typeof floor.createdAt).toBe('string');
+      expect(typeof floor.updatedAt).toBe('string');
+      expect(typeof floor.customFields).toBe('object');
+    });
+  });
+
+  describe('Test method fetchIndoorPOIsFromBuilding ->', () => {
+    let pois;
+    let poi;
+    beforeAll((done) => {
+      cordova.plugins.Situm.fetchIndoorPOIsFromBuilding(building, (response) => {
+        pois = response;
+        done();
+      });
+    });
+    it('Check returned value', () => {
+      expect(pois).toBeDefined();
+      expect(pois instanceof Array).toBeTruthy();
+    });
+    it('Check poi object', () => {
+      expect(poi = pois[0]);
+      expect(typeof poi).toBe('object');
+      expect(typeof poi.buildingIdentifier).toBe('string');
+      expect(typeof poi.cartesianCoordinate).toBe('object');
+      expect(typeof poi.category).toBe('string');
+      expect(typeof poi.coordinate).toBe('object');
+      expect(typeof poi.customFields).toBe('object');
+      expect(typeof poi.floorIdentifier).toBe('string');
+      expect(typeof poi.identifier).toBe('string');
+      expect(typeof poi.infoHtml).toBe('string');
+      expect(typeof poi.isIndoor).toBe('boolean');
+      expect(typeof poi.isOutdoor).toBe('boolean');
+      expect(typeof poi.poiName).toBe('string');
+      expect(typeof poi.position).toBe('object');
+    });
+    it('Check cartesiansCoordinate', () => {
+      expect(typeof poi.cartesianCoordinate.x).toBe('number');
+      expect(typeof poi.cartesianCoordinate.y).toBe('number');
+    });
+    it('Check coordinate', () => {
+      expect(typeof poi.coordinate.latitude).toBe('number');
+      expect(typeof poi.coordinate.longitude).toBe('number');
+    });
+    it('Check position', () => {
+      expect(typeof poi.position.buildingIdentifier).toBe('string');
+      expect(typeof poi.position.cartesianCoordinate).toBe('object');
+      expect(typeof poi.position.coordinate).toBe('object');
+      expect(typeof poi.position.floorIdentifier).toBe('string');
+      expect(typeof poi.position.isIndoor).toBe('boolean');
+      expect(typeof poi.position.isOutdoor).toBe('boolean');
+    });
+    it('Check cartesiansCoordinate of position property', () => {
+      expect(typeof poi.position.cartesianCoordinate.x).toBe('number');
+      expect(typeof poi.position.cartesianCoordinate.y).toBe('number');
+    });
+    it('Check coordinate of position property', () => {
+      expect(typeof poi.position.coordinate.latitude).toBe('number');
+      expect(typeof poi.position.coordinate.longitude).toBe('number');
     });
   });
 }
