@@ -568,6 +568,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
     [jo setObject:[self pointToJsonObject:navigationProgress.closestPointToRoute] forKey:@"closestPointInRoute"];
     [jo setObject:[self indicationToJsonObject:navigationProgress.currentIndication] forKey:@"currentIndication"];
+    [jo setObject:[self indicationToJsonObject:navigationProgress.nextIndication] forKey:@"nextIndication"];
     [jo setObject:[NSNumber numberWithInteger:navigationProgress.currentStepIndex] forKey:@"currentStepIndex"];
     [jo setObject:[NSNumber numberWithFloat:navigationProgress.distanceToGoal] forKey:@"distanceToGoal"];
     [jo setObject:[NSNumber numberWithFloat:navigationProgress.distanceToEndStep] forKey:@"distanceToEndStep"];
