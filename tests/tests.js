@@ -1,6 +1,8 @@
 exports.defineAutoTests = () => {
   let buildings;
   let building;
+  let floors;
+  let floor;
   // Basic tests to check if is correctly defined in cordova plugins
   describe('Situm object basic tests -> ', () => {
     it('Is Situm defined', () => {
@@ -65,7 +67,7 @@ exports.defineAutoTests = () => {
     });
   });
 
-  describe('Testing method fetchBuildings -> ', () => {
+  describe('Test method fetchBuildings -> ', () => {
     beforeAll((done) => {
       cordova.plugins.Situm.setApiKey("oscar.fuentes@cocodin.com", "98a83630ce6667627f0e231cbde0f5052512290c9d52e7965f53486587cf7b22");
       cordova.plugins.Situm.fetchBuildings((response) => {
@@ -132,8 +134,6 @@ exports.defineAutoTests = () => {
   });
 
   describe('Test method fetchFloorsFromBuilding ->', () => {
-    let floors;
-    let floor;
     beforeAll((done) => {
       cordova.plugins.Situm.fetchFloorsFromBuilding(building, (response) => {
         floors = response;
@@ -304,6 +304,42 @@ exports.defineAutoTests = () => {
       expect(typeof event.conversionArea.bottomRight).toBe('string');
       expect(typeof event.conversionArea.topLeft).toBe('string');
       expect(typeof event.conversionArea.topRight).toBe('string');
+    });
+  });
+  describe('Test method fetchPoiCategories ->', () => {
+    let poiCategories;
+    let poiCategory;
+    beforeAll((done) => {
+      cordova.plugins.Situm.fetchPoiCategories((response) => {
+        poiCategories = response;
+        done();
+      });
+    });
+    it('Check POICategories', () => {
+      expect(poiCategories).toBeDefined();
+      expect(poiCategories instanceof Array).toBeTruthy();
+    });
+    it('Check POICategory object', () => {
+      expect(poiCategory = poiCategories[0]);
+      expect(typeof poiCategory).toBe('object');
+      expect(typeof poiCategory.icon_selected).toBe('string');
+      expect(typeof poiCategory.icon_unselected).toBe('string');
+      expect(typeof poiCategory.poiCategoryCode).toBe('string');
+      expect(typeof poiCategory.poiCategoryName).toBe('string');
+      expect(typeof poiCategory.public).toBe('boolean');
+    });
+  });
+  describe('Test method fetchMapFromFloor ->', () => {
+    let map;
+    beforeAll((done) => {
+      cordova.plugins.Situm.fetchMapFromFloor(floor, (response) => {
+        map = response;
+        done();
+      });
+    });
+    it('Check map object', () => {
+      expect(map).toBeDefined();
+      expect(typeof map.data).toBe('string');
     });
   });
 }
