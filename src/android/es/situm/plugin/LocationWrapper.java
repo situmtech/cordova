@@ -178,6 +178,7 @@ class LocationWrapper {
   public static final String STARTING_ANGLE = "startingAngle";
   public static final String CREATED_AT = "createdAt";
   public static final String UPDATED_AT = "updatedAt";
+  public static final String NAME = "name";
 
   static JSONObject buildingToJsonObject(Building building) throws JSONException {
     JSONObject jo = new JSONObject();
@@ -255,6 +256,7 @@ class LocationWrapper {
     jo.put(CONVERSION_AREA, conversionAreaToJsonObject(situmEvent.getConversionArea()));
     jo.put(CUSTOM_FIELDS, mapStringToJsonObject(situmEvent.getCustomFields()));
     jo.put(RADIUS, situmEvent.getRadius());
+    jo.put(NAME, situmEvent.getName());
     return jo;
   }
 
@@ -284,6 +286,8 @@ class LocationWrapper {
     jo.put(POI_CATEGORY, poi.getCategory().getCode());
     jo.put(INFO_HTML, poi.getInfoHtml());
     jo.put(CUSTOM_FIELDS, mapStringToJsonObject(poi.getCustomFields()));
+    jo.put(CREATED_AT, poi.getCreatedAt());
+    jo.put(UPDATED_AT, poi.getUpdatedAt());
     return jo;
   }
 
@@ -523,7 +527,7 @@ class LocationWrapper {
 
   /*static Route jsonRouteToRoute(JSONObject jo) throws JSONException {
       // Create a static route
-
+  
   }*/
 
   //RouteStep

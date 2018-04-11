@@ -187,6 +187,9 @@ exports.defineAutoTests = () => {
       expect(typeof poi.isOutdoor).toBe('boolean');
       expect(typeof poi.poiName).toBe('string');
       expect(typeof poi.position).toBe('object');
+      expect(typeof poi.createdAt).toBe('string');
+      expect(typeof poi.updatedAt).toBe('string');
+      expect(typeof poi.customFields).toBe('object');
     });
     it('Check cartesiansCoordinate', () => {
       expect(typeof poi.cartesianCoordinate.x).toBe('number');
@@ -211,6 +214,96 @@ exports.defineAutoTests = () => {
     it('Check coordinate of position property', () => {
       expect(typeof poi.position.coordinate.latitude).toBe('number');
       expect(typeof poi.position.coordinate.longitude).toBe('number');
+    });
+  });
+  describe('Test method fetchOutdoorPOIsFromBuilding ->', () => {
+    let pois;
+    let poi;
+    beforeAll((done) => {
+      cordova.plugins.Situm.fetchOutdoorPOIsFromBuilding(building, (response) => {
+        pois = response;
+        done();
+      });
+    });
+    it('Check returned value', () => {
+      expect(pois).toBeDefined();
+      expect(pois instanceof Array).toBeTruthy();
+    });
+    it('Check poi object', () => {
+      expect(poi = pois[0]);
+      expect(typeof poi).toBe('object');
+      expect(typeof poi.buildingIdentifier).toBe('string');
+      expect(typeof poi.cartesianCoordinate).toBe('object');
+      expect(typeof poi.category).toBe('string');
+      expect(typeof poi.coordinate).toBe('object');
+      expect(typeof poi.customFields).toBe('object');
+      expect(typeof poi.floorIdentifier).toBe('string');
+      expect(typeof poi.identifier).toBe('string');
+      expect(typeof poi.infoHtml).toBe('string');
+      expect(typeof poi.isIndoor).toBe('boolean');
+      expect(typeof poi.isOutdoor).toBe('boolean');
+      expect(typeof poi.poiName).toBe('string');
+      expect(typeof poi.position).toBe('object');
+      expect(typeof poi.createdAt).toBe('string');
+      expect(typeof poi.updatedAt).toBe('string');
+      expect(typeof poi.customFields).toBe('object');
+    });
+    it('Check cartesiansCoordinate', () => {
+      expect(typeof poi.cartesianCoordinate.x).toBe('number');
+      expect(typeof poi.cartesianCoordinate.y).toBe('number');
+    });
+    it('Check coordinate', () => {
+      expect(typeof poi.coordinate.latitude).toBe('number');
+      expect(typeof poi.coordinate.longitude).toBe('number');
+    });
+    it('Check position', () => {
+      expect(typeof poi.position.buildingIdentifier).toBe('string');
+      expect(typeof poi.position.cartesianCoordinate).toBe('object');
+      expect(typeof poi.position.coordinate).toBe('object');
+      expect(typeof poi.position.floorIdentifier).toBe('string');
+      expect(typeof poi.position.isIndoor).toBe('boolean');
+      expect(typeof poi.position.isOutdoor).toBe('boolean');
+    });
+    it('Check cartesiansCoordinate of position property', () => {
+      expect(typeof poi.position.cartesianCoordinate.x).toBe('number');
+      expect(typeof poi.position.cartesianCoordinate.y).toBe('number');
+    });
+    it('Check coordinate of position property', () => {
+      expect(typeof poi.position.coordinate.latitude).toBe('number');
+      expect(typeof poi.position.coordinate.longitude).toBe('number');
+    });
+  });
+  describe('Test method fetchEventsFromBuilding ->', () => {
+    let evetns;
+    let event;
+    beforeAll((done) => {
+      cordova.plugins.Situm.fetchEventsFromBuilding(building, (response) => {
+        events = response;
+        done();
+      });
+    });
+    it('Check response', () => {
+      expect(events).toBeDefined();
+      expect(events instanceof Array).toBeTruthy();
+    });
+    it('Check event object', () => {
+      expect(event = events[0]);
+      expect(typeof event).toBe('object');
+      expect(typeof event.buildingIdentifier).toBe('number');
+      expect(typeof event.conversionArea).toBe('object');
+      expect(typeof event.customFields).toBe('object');
+      expect(typeof event.floorIdentifier).toBe('number');
+      expect(typeof event.identifier).toBe('number');
+      expect(typeof event.infoHtml).toBe('string');
+      expect(typeof event.radius).toBe('number');
+      expect(typeof event.name).toBe('string');
+    });
+    it('Check conversion area', () => {
+      expect(typeof event.conversionArea.floorIdentifier).toBe('number');
+      expect(typeof event.conversionArea.bottomLeft).toBe('string');
+      expect(typeof event.conversionArea.bottomRight).toBe('string');
+      expect(typeof event.conversionArea.topLeft).toBe('string');
+      expect(typeof event.conversionArea.topRight).toBe('string');
     });
   });
 }
