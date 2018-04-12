@@ -10,6 +10,7 @@
 
 #import "SITIndication.h"
 #import "SITPoint.h"
+#import "SITRouteStep.h"
 
 
 /**
@@ -51,5 +52,20 @@
  The indication a user should follow in order to arrive the destination following a route.
  */
 @property (nonatomic, strong) SITIndication *currentIndication;
+
+/**
+ The next indication a user should follow in order to arrive the destination following a route.
+ */
+@property (nonatomic, strong) SITIndication *nextIndication;
+
+/**
+ Distance in meters to the closest point in route
+ */
+@property (nonatomic) float distanceToClosestPointInRoute;
+
+/**
+ Current route step
+ */
+@property (nonatomic, strong) SITRouteStep *routeStep;
 
 @end
