@@ -13,31 +13,31 @@ NSString* orientationTypeToString(kSITIndicationOrientation orientation) {
     NSString *type = @"";
     switch (orientation) {
         case kSITInvalidOrientation:
-            type = @"Invalid";
+            type = @"INVALID_ORIENTATION";
             break;
         case kSITStraight:
-            type = @"Straight";
+            type = @"STRAIGHT";
             break;
         case kSITVeerRight:
-            type = @"VeerRight";
+            type = @"VEER_RIGHT";
             break;
         case kSITRight:
-            type = @"Right";
+            type = @"RIGHT";
             break;
         case kSITSharpRight:
-            type = @"SharpRight";
+            type = @"SHARP_RIGHT";
             break;
         case kSITVeerLeft:
-            type = @"VeerLeft";
+            type = @"VEER_LEFT";
             break;
         case kSITLeft:
-            type = @"Left";
+            type = @"LEFT";
             break;
         case kSITSharpLeft:
-            type = @"SharpLeft";
+            type = @"SHARP_LEFT";
             break;
         case kSITBackward:
-            type = @"Backward";
+            type = @"BACKWARD";
             break;
             
         default:
@@ -48,23 +48,23 @@ NSString* orientationTypeToString(kSITIndicationOrientation orientation) {
 
 kSITIndicationOrientation stringToOrientationType(NSString *orientation) {
     kSITIndicationOrientation type = kSITInvalidOrientation;
-    if ([orientation isEqualToString:@"Invalid"]) {
+    if ([orientation isEqualToString:@"INVALID_ORIENTATION"]) {
         type = kSITInvalidOrientation;
-    } else if ([orientation isEqualToString:@"Straight"]) {
+    } else if ([orientation isEqualToString:@"STRAIGHT"]) {
         type = kSITStraight;
-    } else if ([orientation isEqualToString:@"VeerRight"]) {
+    } else if ([orientation isEqualToString:@"VEER_RIGHT"]) {
         type = kSITVeerRight;
-    } else if ([orientation isEqualToString:@"Right"]) {
+    } else if ([orientation isEqualToString:@"RIGHT"]) {
         type = kSITRight;
-    } else if ([orientation isEqualToString:@"SharpRight"]) {
+    } else if ([orientation isEqualToString:@"SHARP_RIGHT"]) {
         type = kSITSharpRight;
-    } else if ([orientation isEqualToString:@"VeerLeft"]) {
+    } else if ([orientation isEqualToString:@"VEER_LEFT"]) {
         type = kSITVeerLeft;
-    } else if ([orientation isEqualToString:@"Left"]) {
+    } else if ([orientation isEqualToString:@"LEFT"]) {
         type = kSITLeft;
-    } else if ([orientation isEqualToString:@"SharpLeft"]) {
+    } else if ([orientation isEqualToString:@"SHARP_LEFT"]) {
         type = kSITSharpLeft;
-    } else if ([orientation isEqualToString:@"Backward"]) {
+    } else if ([orientation isEqualToString:@"BACKWARD"]) {
         type = kSITBackward;
     }
     return type;
@@ -76,19 +76,19 @@ NSString* indicationTypeToString(kSITIndicationActions action) {
     NSString *type = @"";
     switch (action) {
         case kSITInvalidAction:
-            type = @"Invalid";
+            type = @"INVALID_ACTION";
             break;
         case kSITTurn:
-            type = @"Turn";
+            type = @"TURN";
             break;
         case kSITGoAhead:
-            type = @"GoAhead";
+            type = @"GO_AHEAD";
             break;
         case kSITChangeFloor:
-            type = @"ChangeFloor";
+            type = @"CHANGE_FLOOR";
             break;
         case kSITEnd:
-            type = @"End";
+            type = @"END";
             break;
             
             
@@ -100,15 +100,15 @@ NSString* indicationTypeToString(kSITIndicationActions action) {
 
 kSITIndicationActions stringToIndicationType(NSString* action) {
     kSITIndicationActions type = kSITInvalidAction;
-    if ([action isEqualToString:@"Invalid"]) {
+    if ([action isEqualToString:@"INVALID_ACTION"]) {
         type = kSITInvalidAction;
-    } else if ([action isEqualToString:@"Turn"]) {
+    } else if ([action isEqualToString:@"TURN"]) {
         type = kSITTurn;
-    } else if ([action isEqualToString:@"GoAhead"]) {
+    } else if ([action isEqualToString:@"GO_AHEAD"]) {
         type = kSITGoAhead;
-    } else if ([action isEqualToString:@"ChangeFloor"]) {
+    } else if ([action isEqualToString:@"CHANGE_FLOOR"]) {
         type = kSITChangeFloor;
-    } else if ([action isEqualToString:@"End"]) {
+    } else if ([action isEqualToString:@"END"]) {
         type = kSITEnd;
     }
     return type;
@@ -198,6 +198,15 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
             break;
     }
     return type;
+}
+
+- (NSDictionary *) locationStateToJsonObject:(SITLocationState) state {
+
+    NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
+    [jo setValue: [self locationStateToString:state] forKey: @"statusName"];
+    NSNumber *status = [NSNumber numberWithInt:state];
+    [jo setValue: status forKey: @"statusOrdinal"];
+    return jo;
 }
 
 //deprecated method
@@ -501,7 +510,8 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:[NSNumber numberWithDouble:routeStep.distanceToGoal] forKey:@"distanceToGoal"];
     [jo setObject:[self pointToJsonObject:routeStep.from] forKey:@"from"];
     [jo setObject:[NSNumber numberWithInteger:routeStep.nextStepIndex] forKey:@"nextStepIndex"];
-    [jo setObject:[self pointToJsonObject:routeStep.from] forKey:@"to"];
+    [jo setObject:[self pointToJsonObject:routeStep.to] forKey:@"to"];
+    [jo setObject:[self pointToJsonObject:routeStep.to] forKey:@"TO"];
     [jo setObject:[NSNumber numberWithInteger:routeStep.index] forKey:@"id"];
     [jo setObject:[NSNumber numberWithBool:routeStep.isFirst] forKey:@"isFirst"];
     [jo setObject:[NSNumber numberWithBool:routeStep.isLast] forKey:@"isLast"];
@@ -558,12 +568,15 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
 - (NSDictionary *) navigationProgressToJsonObject:(SITNavigationProgress *) navigationProgress {
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
     [jo setObject:[self pointToJsonObject:navigationProgress.closestPointToRoute] forKey:@"closestPointInRoute"];
+    [jo setObject:[NSNumber numberWithFloat:navigationProgress.distanceToClosestPointInRoute] forKey:@"distanceToClosestPointInRoute"];
     [jo setObject:[self indicationToJsonObject:navigationProgress.currentIndication] forKey:@"currentIndication"];
+    [jo setObject:[self indicationToJsonObject:navigationProgress.nextIndication] forKey:@"nextIndication"];
     [jo setObject:[NSNumber numberWithInteger:navigationProgress.currentStepIndex] forKey:@"currentStepIndex"];
     [jo setObject:[NSNumber numberWithFloat:navigationProgress.distanceToGoal] forKey:@"distanceToGoal"];
     [jo setObject:[NSNumber numberWithFloat:navigationProgress.distanceToEndStep] forKey:@"distanceToEndStep"];
     [jo setObject:[NSNumber numberWithFloat:navigationProgress.timeToEndStep] forKey:@"timeToEndStep"];
     [jo setObject:[NSNumber numberWithFloat:navigationProgress.timeToGoal] forKey:@"timeToGoal"];
+    [jo setObject:[self routeStepToJsonObject:navigationProgress.routeStep] forKey:@"routeStep"];
     return jo.copy;
 }
 

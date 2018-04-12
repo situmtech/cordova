@@ -485,7 +485,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     [[SITNavigationManager sharedManager] updateWithLocation:location];
 }
 
-- (void) removeNavigationUpdates {
+- (void) removeNavigationUpdates:(CDVInvokedUrlCommand *)command {
     [[SITNavigationManager sharedManager] removeUpdates];
 }
 
@@ -523,7 +523,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 
 - (void)locationManager:(nonnull id<SITLocationInterface>)locationManager
          didUpdateState:(SITLocationState)state {
-    NSMutableDictionary *locationChanged = [[SitumLocationWrapper.shared locationStateToString:state] mutableCopy];
+    NSDictionary *locationChanged = [SitumLocationWrapper.shared locationStateToJsonObject:state];
     
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:locationChanged.copy];
     pluginResult.keepCallback = [NSNumber numberWithBool:true];
