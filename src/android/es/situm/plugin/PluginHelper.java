@@ -690,6 +690,21 @@ public class PluginHelper {
                     builder.distanceToChangeIndicationThreshold(distanceToChangeIndicationThreshold);
                 }
 
+                if (navigationJSONOptions.has(LocationWrapper.INDICATIONS_INTERVAL)) {
+                    Long indicationsInterval = navigationJSONOptions.getLong(LocationWrapper.INDICATIONS_INTERVAL);
+                    builder.indicationsInterval(indicationsInterval);
+                }
+
+                if (navigationJSONOptions.has(LocationWrapper.TIME_TO_FIRST_INDICATION)) {
+                    Long timeToFirstIndication = navigationJSONOptions.getLong(LocationWrapper.TIME_TO_FIRST_INDICATION);
+                    builder.timeToFirstIndication(timeToFirstIndication);
+                }
+
+                if (navigationJSONOptions.has(LocationWrapper.ROUND_INDICATION_STEP)) {
+                    Integer roundIndicationsStep = navigationJSONOptions.getInteger(LocationWrapper.ROUND_INDICATION_STEP);
+                    builder.roundIndicationsStep(roundIndicationsStep);
+                }
+
             } catch (Exception e) {
                 //TODO: handle exception
                 Log.d(TAG, "Situm >> Unable to retrieve navigation options. Applying default ones");
