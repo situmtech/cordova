@@ -464,6 +464,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:[NSNumber numberWithDouble:angle.degrees] forKey:@"degrees"];
     [jo setObject:[NSNumber numberWithDouble:angle.radians] forKey:@"radians"];
     [jo setObject:[NSNumber numberWithDouble:angle.degressClockwise] forKey:@"degressClockwise"];
+    [jo setObject:[NSNumber numberWithDouble:angle.degressClockwise] forKey:@"degreesClockwise"];
     [jo setObject:[NSNumber numberWithDouble:angle.radiansMinusPiPi] forKey:@"radiansMinusPiPi"];
     return jo.copy;
 }
