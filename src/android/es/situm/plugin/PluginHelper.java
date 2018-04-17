@@ -701,7 +701,7 @@ public class PluginHelper {
                 }
 
                 if (navigationJSONOptions.has(LocationWrapper.ROUND_INDICATION_STEP)) {
-                    Integer roundIndicationsStep = navigationJSONOptions.getInteger(LocationWrapper.ROUND_INDICATION_STEP);
+                    Integer roundIndicationsStep = navigationJSONOptions.getInt(LocationWrapper.ROUND_INDICATION_STEP);
                     builder.roundIndicationsStep(roundIndicationsStep);
                 }
 
