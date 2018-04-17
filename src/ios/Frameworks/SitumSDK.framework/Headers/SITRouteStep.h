@@ -132,4 +132,6 @@
                  stepDistance:(float)stepDistance
                distanceToGoal:(float)distanceToGoal;
 
+-(BOOL) hasFloorChange;
+
 @end

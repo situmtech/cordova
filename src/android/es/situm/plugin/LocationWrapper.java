@@ -178,7 +178,10 @@ class LocationWrapper {
     public static final String STARTING_ANGLE = "startingAngle";
     public static final String DISTANCE_TO_CHANGE_INDICATION_THRESHOLD = "distanceToChangeIndicationThreshold";
     public static final String DISTANCE_TO_CHANGE_FLOOR_THRESHOLD = "distanceToChangeFloorThreshold";
-    
+    public static final String INDICATIONS_INTERVAL = "indicationsInterval";
+    public static final String TIME_TO_FIRST_INDICATION = "timeToFirstIndication";
+    public static final String ROUND_INDICATION_STEP = "roundIndicationsStep";
+
     static JSONObject buildingToJsonObject(Building building) throws JSONException {
         JSONObject jo = new JSONObject();
         jo.put(ADDRESS, building.getAddress());
