@@ -12,6 +12,7 @@
 /**
  The type of action the user should perform in order to arrive to the destination.
 
+ - kSITCalculating: Calculating directions...
  - kSITInvalidAction: invalid action
  - kSITTurn: the user needs to turn
  - kSITGoAhead: the user needs to keep the same direction
@@ -19,6 +20,7 @@
  - kSITEnd: the user has arrived to the destination
  */
 typedef NS_ENUM(NSInteger, kSITIndicationActions) {
+    kSITCalculating,
     kSITInvalidAction,
     kSITTurn,
     kSITGoAhead,
@@ -199,6 +201,14 @@ typedef NS_ENUM(NSInteger, kSITIndicationOrientation) {
                             orientation:(kSITIndicationOrientation)orientation
                       orientationChange:(float)orientationChange
                        verticalDistance:(float)verticalDistance;
+
+/**
+ 
+ Creates an indication with calculating action.
+ 
+ @return an indication
+ */
++ (SITIndication*) indicationWithCalculatingAction;
 
 /**
  Private method to check if two indication can be chunked.

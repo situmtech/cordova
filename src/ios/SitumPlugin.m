@@ -437,7 +437,10 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     NSNumber* distanceToChangeIndicationThreshold;
     NSNumber* distanceToGoalThreshold;
     NSNumber* outsideRouteThreshold;
-    
+    NSNumber* indicationsInterval;
+    NSNumber* timeToFirstIndication;
+    NSNumber* roundIndicationsStep;
+
     if (command.arguments.count > 0) {
         // Processing configuration parameters
         NSDictionary *options = (NSDictionary*)[command.arguments objectAtIndex:0];
@@ -445,7 +448,10 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
         distanceToChangeIndicationThreshold = (NSNumber*)[options objectForKey:@"distanceToChangeIndicationThreshold"];
         distanceToGoalThreshold = (NSNumber*)[options objectForKey:@"distanceToGoalThreshold"];
         outsideRouteThreshold = (NSNumber*)[options objectForKey:@"outsideRouteThreshold"];
-        
+        indicationsInterval = (NSNumber*)[options objectForKey:@"indicationsInterval"];
+        timeToFirstIndication = (NSNumber*)[options objectForKey:@"timeToFirstIndication"];
+        roundIndicationsStep = (NSNumber*)[options objectForKey:@"roundIndicationsStep"];
+
     }
     SITRoute *routeObj = self.computedRoute;
     if (routeObj) {
@@ -469,6 +475,21 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
             NSInteger value = [outsideRouteThreshold integerValue];
             [navigationRequest setOutsideRouteThreshold: value];
             NSLog(@"%@", [NSString stringWithFormat: @"navigationRequest.outsideRouteThreshold: %ld", navigationRequest.outsideRouteThreshold]);
+        }
+        if (indicationsInterval != nil) {
+            NSInteger value = [indicationsInterval integerValue];
+            [navigationRequest setIndicationsInterval: value];
+            NSLog(@"%@", [NSString stringWithFormat: @"navigationRequest.indicationsInterval: %ld", navigationRequest.indicationsInterval]);
+        }
+        if (timeToFirstIndication != nil) {
+            NSInteger value = [timeToFirstIndication integerValue];
+            [navigationRequest setTimeToFirstIndication: value];
+            NSLog(@"%@", [NSString stringWithFormat: @"navigationRequest.timeToFirstIndication: %ld", navigationRequest.timeToFirstIndication]);
+        }
+        if (roundIndicationsStep != nil) {
+            NSInteger value = [roundIndicationsStep integerValue];
+            [navigationRequest setRoundIndicationsStep: value];
+            NSLog(@"%@", [NSString stringWithFormat: @"navigationRequest.roundIndicationsStep: %ld", navigationRequest.roundIndicationsStep]);
         }
 
         [[SITNavigationManager sharedManager]  setDelegate:self]; // Configure delegation first
