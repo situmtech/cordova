@@ -319,6 +319,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:[self pointToJsonObject:poi.position] forKey:@"position"];
     [jo setObject:[NSNumber numberWithBool:poi.position.isIndoor] forKey:@"isIndoor"];
     [jo setObject:[NSNumber numberWithBool:poi.position.isOutdoor] forKey:@"isOutdoor"];
+    [jo setObject: poi.category.code forKey:@"category"];
     if (poi.customFields) {
         [jo setObject:poi.customFields forKey:@"customFields"];
     }
@@ -463,6 +464,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:[NSNumber numberWithDouble:angle.degrees] forKey:@"degrees"];
     [jo setObject:[NSNumber numberWithDouble:angle.radians] forKey:@"radians"];
     [jo setObject:[NSNumber numberWithDouble:angle.degressClockwise] forKey:@"degressClockwise"];
+    [jo setObject:[NSNumber numberWithDouble:angle.degressClockwise] forKey:@"degreesClockwise"];
     [jo setObject:[NSNumber numberWithDouble:angle.radiansMinusPiPi] forKey:@"radiansMinusPiPi"];
     return jo.copy;
 }
