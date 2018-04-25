@@ -211,6 +211,13 @@ typedef NS_ENUM(NSInteger, kSITIndicationOrientation) {
 + (SITIndication*) indicationWithCalculatingAction;
 
 /**
+ 
+ Creates an indication with end action.
+ 
+ @return an indication
+ */
++ (SITIndication*) indicationWithEndAction;
+/**
  Private method to check if two indication can be chunked.
 
  @param indication the indication that needs to be chuncked.

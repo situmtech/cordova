@@ -90,8 +90,9 @@ NSString* indicationTypeToString(kSITIndicationActions action) {
         case kSITEnd:
             type = @"END";
             break;
-            
-            
+        case kSITCalculating:
+            type = @"CALCULATING";
+            break;
         default:
             break;
     }
