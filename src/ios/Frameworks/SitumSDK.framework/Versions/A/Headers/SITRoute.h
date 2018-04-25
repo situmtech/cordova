@@ -74,6 +74,14 @@
  */
 - (SITIndication *)indicationForStep:(SITRouteStep *)step;
 
+/**
+ Retrieve the next indication for a particular step of the route.
+ 
+ @param step step inside the route
+ @return next indication associated with the step (if valid step).
+ */
+- (SITIndication *)indicationForNextStep:(SITRouteStep *)step;
+
 
 /**
  Complete distance of the route.
