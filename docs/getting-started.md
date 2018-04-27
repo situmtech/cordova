@@ -1236,9 +1236,14 @@ Necessary step to request progress. Alone this method does not provide progress 
 
 ```javascript
   var navigationOptions = new Object();
-  navigationOptions["distanceToIgnoreFirstIndication"] = 0.3; // (Optional) meters;
-  navigationOptions["outsideRouteThreshold"] = 10; // (Optional) meters;
-  navigationOptions["distanceToGoalThreshold"] = 7; // (Optional) meters;
+  navigationOptions.distanceToFloorChangeThreshold = 0; // enteiro en metros
+  navigationOptions.distanceToChangeIndicationThreshold = 0; // enteiro en metros
+  navigationOptions.distanceToGoalThreshold = 0; // enteiro en metros
+  navigationOptions.outsideRouteThreshold = 0; // enteiro en metros
+  navigationOptions.indicationsInterval = 0; // long en milisegundos
+  navigationOptions.timeToFirstIndication = 0; // long en milisegundos
+  navigationOptions.roundIndicationsStep = 0; // enteiro en metros
+
 
   requestNavigationUpdates([navigationOptions], (res: any) => {
     // Progress and other navigation status messages can be processed here  
