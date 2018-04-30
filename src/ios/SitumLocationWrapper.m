@@ -150,6 +150,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
     [jo setObject:emptyStrCheck(building.address) forKey:@"address"];
     [jo setObject:[self boundsToJsonObject:building.bounds] forKey:@"bounds"];
+    [jo setObject:[self boundsToJsonObject:building.rotatedBounds] forKey:@"boundsRotated"];
     [jo setObject:[self dimensionsToJsonObject:building.dimensions] forKey:@"dimensions"];
     [jo setObject:[self coordinateToJsonObject:building.center] forKey:@"center"];
     [jo setObject:emptyStrCheck(building.name) forKey:@"name"];
