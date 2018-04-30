@@ -326,6 +326,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     if (poi.customFields) {
         [jo setObject:poi.customFields forKey:@"customFields"];
     }
+    [jo setObject:emptyStrCheck(poi.infoHTML) forKey:@"infoHtml"];
     return jo.copy;
 }
 
