@@ -33,6 +33,7 @@
       - [updateNavigationWithLocation](#--updatenavigationwithlocation)
       - [removeNavigationUpdates](#--removenavigationupdates)
   * [License](#license)
+  * [More information](#more-information)
 
 ---
 
@@ -1375,3 +1376,8 @@ When you are no longer interested on Navigation Updates you should call this met
 ## License
 
 Situm-Cordova-Plugin is licensed under [MIT License](https://opensource.org/licenses/MIT)
+
+## More information
+
+More info is available at our [Developers Page](http://developers.situm.es/pages/cordova/).
+For any other question, contact us [here](mailto:support@situm.es)
