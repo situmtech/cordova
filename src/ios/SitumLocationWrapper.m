@@ -150,6 +150,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
     [jo setObject:emptyStrCheck(building.address) forKey:@"address"];
     [jo setObject:[self boundsToJsonObject:building.bounds] forKey:@"bounds"];
+    [jo setObject:[self boundsToJsonObject:building.rotatedBounds] forKey:@"boundsRotated"];
     [jo setObject:[self dimensionsToJsonObject:building.dimensions] forKey:@"dimensions"];
     [jo setObject:[self coordinateToJsonObject:building.center] forKey:@"center"];
     [jo setObject:emptyStrCheck(building.name) forKey:@"name"];
@@ -162,6 +163,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:[NSNumber numberWithFloat:[building.rotation radians]] forKey:@"rotation"];
     [jo setObject:emptyStrCheck(building.userIdentifier) forKey:@"userIdentifier"];
     [jo setObject:emptyStrCheck(building.identifier) forKey:@"identifier"];
+    [jo setObject:emptyStrCheck(building.identifier) forKey:@"buildingIdentifier"];
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:DATEFORMAT];
@@ -324,6 +326,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     if (poi.customFields) {
         [jo setObject:poi.customFields forKey:@"customFields"];
     }
+    [jo setObject:emptyStrCheck(poi.infoHTML) forKey:@"infoHtml"];
     return jo.copy;
 }
 
