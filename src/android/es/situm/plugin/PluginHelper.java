@@ -288,7 +288,7 @@ public class PluginHelper {
         try {
             JSONObject jsonoCategory = args.getJSONObject(0);
             PoiCategory category = LocationWrapper.poiCategoryFromJsonObject(jsonoCategory);
-            SitumSdk.communicationManager().fetchPoiCategoryIconNormal(category, new Handler<Bitmap>() {
+            SitumSdk.communicationManager().fetchPoiCategoryIconSelected(category, new Handler<Bitmap>() {
                 @Override
                 public void onSuccess(Bitmap bitmap) {
                     try {

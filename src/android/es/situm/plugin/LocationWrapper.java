@@ -297,12 +297,15 @@ class LocationWrapper {
     }
 
     static PoiCategory poiCategoryFromJsonObject(JSONObject jo) throws JSONException {
-        PoiCategory category = null;
+        PoiCategory.Builder categoryBuilder = null;
         Map<String, String> mapName = new HashMap<String, String>();
         mapName.put("name", jo.getString(POI_CATEGORY_NAME));
-        category = new PoiCategory.Builder().code(jo.getString(POI_CATEGORY_CODE)).name(new I18nString(mapName))
-                .isPublic(jo.getBoolean(IS_PUBLIC)).build();
-        return category;
+        categoryBuilder = new PoiCategory.Builder().code(jo.getString(POI_CATEGORY_CODE)).name(new I18nString(mapName))
+                .isPublic(jo.getBoolean(IS_PUBLIC));
+        categoryBuilder.selectedIcon(new URL(jo.getString(POI_CATEGORY_ICON_SELECTED)));
+        categoryBuilder.unselectedIcon(new URL(jo.getString(POI_CATEGORY_ICON_UNSELECTED)));
+
+        return categoryBuilder.build();
     }
 
     // Location
