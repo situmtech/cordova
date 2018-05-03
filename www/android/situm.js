@@ -181,14 +181,37 @@ var Situm = {
   requestDirections: function (args, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'requestDirections', args);
   },
+  /**
+   * Set the navigation params, and the listener that receives the updated navigation progress.
+   * @description Set the navigation params, and the listener that receives the updated navigation progress. Can only exist one navigation with one listener at a time. If this method was previously invoked, but removeUpdates() wasn't, removeUpdates() is called internally.
+   * @param {args} request - request - non-null search parameters. Must be an object with next properties:
+   * - distanceToFloorChangeThreshold, integer in meters
+   * - distanceToChangeIndicationThreshold, integer in meters
+   * - distanceToGoalThreshold, integer in meters
+   * - outsideRouteThreshold, integer in meters
+   * - indicationsInterval, long in miliseconds
+   * - timeToFirstIndication, long in miliseconds
+   * - roundIndicationsStep, integer in meters
+   */
   requestNavigationUpdates: function (args, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'requestNavigationUpdates', args);
   },
-  updateNavigationWithLocation: function (args, cb, error) {
-    exec(cb, error, PLUGIN_NAME, 'updateNavigationWithLocation', args);
+  /**
+   * Informs NavigationManager object the change of the user's location.
+   * @description Informs NavigationManager object the change of the user's location.
+   * @param {location} location - new Location of the user. If null, nothing is done.
+   * @return {boolean} - true if there is a listener to which notify progress update. False if there isn't, so this method do nothing.
+   */
+  updateNavigationWithLocation: function (location, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'updateNavigationWithLocation', [location]);
   },
-  removeNavigationUpdates: function (args, cb, error) {
-    exec(cb, error, PLUGIN_NAME, 'removeNavigationUpdates', args);
+  /**
+   * Removes all location updates.
+   * @description Removes all location updates. This removes the internal state of the manager, including the listener provided in requestNavigationUpdates(NavigationRequest, NavigationListener), so it won't receive more progress updates.
+   * @return {boolean} - true if a listener was removed. False if there was no listener.
+   */
+  removeNavigationUpdates: function (cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'removeNavigationUpdates', []);
   }
 };
 module.exports = Situm;
