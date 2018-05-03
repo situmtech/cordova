@@ -309,6 +309,16 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     return jo.copy;
 }
 
+- (SITPOICategory *) poiCategoryFromJsonObject:(NSDictionary *) jo {
+    SITPOICategory *category = [[SITPOICategory alloc] init];
+    category.name = [[SITMultilanguageString alloc] initWithValue:[jo objectForKey:@"poiCategoryName"] defaultLocale:[NSLocale currentLocale]];
+    category.code = [jo objectForKey:@"poiCategoryCode"];
+    category.isPublic = [jo objectForKey:@"public"];
+    category.selectedIconURL = [[SITURL alloc] initWithDirection:[jo objectForKey:@"icon_selected"]];
+    category.iconURL = [[SITURL alloc] initWithDirection:[jo objectForKey:@"icon_unselected"]];
+    return category;
+}
+
 // POI
 
 - (NSDictionary *) poiToJsonObject:(SITPOI *) poi {

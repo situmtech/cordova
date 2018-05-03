@@ -295,24 +295,25 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 
 - (void)fetchPoiCategoryIconNormal:(CDVInvokedUrlCommand *)command
 {
-    NSDictionary* buildingJO = (NSDictionary*)[command.arguments objectAtIndex:0];
+    NSDictionary* categoryJO = (NSDictionary*)[command.arguments objectAtIndex:0];
     
     if (categoryStored == nil) {
         categoryStored = [[NSMutableDictionary alloc] init];
     }
     
-    [[SITCommunicationManager sharedManager] fetchCategoriesWithOptions:[buildingJO valueForKey:@"identifier"] withCompletion:^(NSArray *categories, NSError *error) {
+    SITPOICategory *category = [[SitumLocationWrapper shared] poiCategoryFromJsonObject:categoryJO];
+    
+    [[SITCommunicationManager sharedManager] fetchSelected:false iconForCategory:category withCompletion:^(NSData *data, NSError *error) {
         if (!error) {
-            NSMutableArray *ja = [[NSMutableArray alloc] init];
-            for (SITPOICategory *obj in categories) {
-                [ja addObject:[SitumLocationWrapper.shared poiCategoryToJsonObject:obj]];
-                [categoryStored setObject:obj forKey:[NSString stringWithFormat:@"%@", obj.name]];
-            }
             CDVPluginResult* pluginResult = nil;
-            if (categories.count == 0) {
-                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"You have no categories. Create one in the Dashboard"];
+            if (data == nil) {
+                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Icon not founc"];
             } else {
-                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:ja.copy];
+                UIImage *icon = [UIImage imageWithData:data];
+                NSString *base64 = [UIImagePNGRepresentation(icon) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+                NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+                [dict setObject:base64 forKey:@"data"];
+                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dict];
             }
             [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
         } else {
@@ -323,24 +324,25 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 
 - (void)fetchPoiCategoryIconSelected:(CDVInvokedUrlCommand *)command
 {
-    NSDictionary* buildingJO = (NSDictionary*)[command.arguments objectAtIndex:0];
+    NSDictionary* categoryJO = (NSDictionary*)[command.arguments objectAtIndex:0];
     
     if (categoryStored == nil) {
         categoryStored = [[NSMutableDictionary alloc] init];
     }
     
-    [[SITCommunicationManager sharedManager] fetchCategoriesWithOptions:[buildingJO valueForKey:@"identifier"] withCompletion:^(NSArray *categories, NSError *error) {
+    SITPOICategory *category = [[SitumLocationWrapper shared] poiCategoryFromJsonObject:categoryJO];
+    
+    [[SITCommunicationManager sharedManager] fetchSelected:true iconForCategory:category withCompletion:^(NSData *data, NSError *error) {
         if (!error) {
-            NSMutableArray *ja = [[NSMutableArray alloc] init];
-            for (SITPOICategory *obj in categories) {
-                [ja addObject:[SitumLocationWrapper.shared poiCategoryToJsonObject:obj]];
-                [categoryStored setObject:obj forKey:[NSString stringWithFormat:@"%@", obj.name]];
-            }
             CDVPluginResult* pluginResult = nil;
-            if (categories.count == 0) {
-                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"You have no categories. Create one in the Dashboard"];
+            if (data == nil) {
+                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Icon not found"];
             } else {
-                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:ja.copy];
+                UIImage *icon = [UIImage imageWithData:data];
+                NSString *base64 = [UIImagePNGRepresentation(icon) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+                NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+                [dict setObject:base64 forKey:@"data"];
+                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dict];
             }
             [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
         } else {
