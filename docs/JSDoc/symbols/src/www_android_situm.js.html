@@ -18,11 +18,11 @@
 <span class='line'> 11</span> </span><span class="WHIT">  </span><span class="COMM">/**
 <span class='line'> 12</span>    * Provides your API key to the Situm SDK.
 <span class='line'> 13</span>    * @description Provides your API key to the Situm SDK. This key is generated for your application in the Dashboard. Old credentials will be removed.
-<span class='line'> 14</span>    * @param {string} email - email that identifies the account. Can't be empty.
-<span class='line'> 15</span>    * @param {string} apiKey - key obtained at situm.es. Can't be empty.
-<span class='line'> 16</span>    * @param {callback} cb - Cordova native callback to recive data.
-<span class='line'> 17</span>    * @param {callback} error - Cordova native callback to recive errors.
-<span class='line'> 18</span>    * @returns {boolean} true if operation finished successfully, otherwise false
+<span class='line'> 14</span>    * @param {string} email Email that identifies the account. Can't be empty.
+<span class='line'> 15</span>    * @param {string} apiKey Key obtained at situm.es. Can't be empty.
+<span class='line'> 16</span>    * @param {function} cb Cordova native callback to recive data.
+<span class='line'> 17</span>    * @param {function} error Cordova native callback to recive errors.
+<span class='line'> 18</span>    * @return {boolean} success True if operation finished successfully, otherwise false
 <span class='line'> 19</span>    */</span><span class="WHIT">
 <span class='line'> 20</span> </span><span class="WHIT">  </span><span class="NAME">setApiKey</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">email</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">apiKey</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
 <span class='line'> 21</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'setApiKey'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">email</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">apiKey</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
@@ -30,11 +30,11 @@
 <span class='line'> 23</span> </span><span class="WHIT">  </span><span class="COMM">/**
 <span class='line'> 24</span>    * Provides user's email and password.
 <span class='line'> 25</span>    * @description Provides user's email and password. This credentials will be used to obtain a valid user token to authenticate the server request, when necessary. Token obtaining is not necessary done when this method is executed. Old credentials will be removed.
-<span class='line'> 26</span>    * @param {string} email - user's email. Can't be empty.
-<span class='line'> 27</span>    * @param {string} password - user's password. Can't be empty.
-<span class='line'> 28</span>    * @param {callback} cb - Cordova native callback to recive data.
-<span class='line'> 29</span>    * @param {callback} error - Cordova native callback to recive errors.
-<span class='line'> 30</span>    * @returns {boolean} true if operation finished successfully, otherwise false
+<span class='line'> 26</span>    * @param {string} email User's email. Can't be empty.
+<span class='line'> 27</span>    * @param {string} password User's password. Can't be empty.
+<span class='line'> 28</span>    * @param {function} cb Cordova native callback to recive data.
+<span class='line'> 29</span>    * @param {function} error Cordova native callback to recive errors.
+<span class='line'> 30</span>    * @return {boolean} success True if operation finished successfully, otherwise false
 <span class='line'> 31</span>    */</span><span class="WHIT">
 <span class='line'> 32</span> </span><span class="WHIT">  </span><span class="NAME">setUserPass</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">email</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">password</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
 <span class='line'> 33</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'setUserPass'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">email</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">password</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
@@ -42,40 +42,40 @@
 <span class='line'> 35</span> </span><span class="WHIT">  </span><span class="COMM">/**
 <span class='line'> 36</span>    * Sets the maximum age of a cached response.
 <span class='line'> 37</span>    * @description Sets the maximum age of a cached response. If the cache response's age exceeds maxAge, it will not be used and a network request will be made.
-<span class='line'> 38</span>    * @param {number} maxAge - a non-negative integer
-<span class='line'> 39</span>    * @param {callback} cb - Cordova native callback to recive data.
-<span class='line'> 40</span>    * @param {callback} error - Cordova native callback to recive errors.
-<span class='line'> 41</span>    * @returns {void}
+<span class='line'> 38</span>    * @param {number} cacheAge A non-negative integer
+<span class='line'> 39</span>    * @param {function} cb Cordova native callback to recive data.
+<span class='line'> 40</span>    * @param {function} error Cordova native callback to recive errors.
+<span class='line'> 41</span>    * @return {void}
 <span class='line'> 42</span>    */</span><span class="WHIT">
 <span class='line'> 43</span> </span><span class="WHIT">  </span><span class="NAME">setCacheMaxAge</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">cacheAge</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
 <span class='line'> 44</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'setCacheMaxAge'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">cacheAge</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 45</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
 <span class='line'> 46</span> </span><span class="WHIT">  </span><span class="COMM">/**
 <span class='line'> 47</span>    * Set callback and starts listen onLocationChanged event.
-<span class='line'> 48</span>    * @param {Building} arrBuilding - Array of buildings to activate locationListener, the plugin only uses the first building.
-<span class='line'> 49</span>    * @param {callback} cb - Cordova native callback to recive data.
-<span class='line'> 50</span>    * @param {callback} error - Cordova native callback to recive errors.
-<span class='line'> 51</span>    * @return {position} position - Current position of device.
+<span class='line'> 48</span>    * @param {Building} arrBuilding Array of buildings to activate locationListener, the plugin only uses the first building.
+<span class='line'> 49</span>    * @param {function} cb Cordova native callback to recive data.
+<span class='line'> 50</span>    * @param {function} error Cordova native callback to recive errors.
+<span class='line'> 51</span>    * @return {Location} position Current position of device.
 <span class='line'> 52</span>    */</span><span class="WHIT">
 <span class='line'> 53</span> </span><span class="WHIT">  </span><span class="NAME">startPositioning</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">arrBuilding</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
 <span class='line'> 54</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'startPositioning'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">arrBuilding</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 55</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
 <span class='line'> 56</span> </span><span class="WHIT">  </span><span class="COMM">/**
 <span class='line'> 57</span>    * Stop locationListener on current active listener.
-<span class='line'> 58</span>    * @param {callback} cb - Cordova native callback to recive data.
-<span class='line'> 59</span>    * @param {callback} error - Cordova native callback to recive errors.
-<span class='line'> 60</span>    * @returns {void}
-<span class='line'> 61</span>    */</span><span class="WHIT">
-<span class='line'> 62</span> </span><span class="WHIT">  </span><span class="NAME">stopPositioning</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'> 63</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'stopPositioning'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 64</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'> 65</span> </span><span class="WHIT">  </span><span class="COMM">/**
-<span class='line'> 66</span>    * @function fetchBuildings
+<span class='line'> 58</span>    * @description Stop locationListener on current active listener.
+<span class='line'> 59</span>    * @param {function} cb Cordova native callback to recive data.
+<span class='line'> 60</span>    * @param {function} error Cordova native callback to recive errors.
+<span class='line'> 61</span>    * @return {void}
+<span class='line'> 62</span>    */</span><span class="WHIT">
+<span class='line'> 63</span> </span><span class="WHIT">  </span><span class="NAME">stopPositioning</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 64</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'stopPositioning'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 65</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 66</span> </span><span class="WHIT">  </span><span class="COMM">/**
 <span class='line'> 67</span>    * Download all the buildings for the current user.
 <span class='line'> 68</span>    * @description Download all the buildings for the current user
-<span class='line'> 69</span>    * @param {callback} cb - Cordova native callback to recive data.
-<span class='line'> 70</span>    * @param {callback} error - Cordova native callback to recive errors.
-<span class='line'> 71</span>    * @returns {Building[]} - buildings array.
+<span class='line'> 69</span>    * @param {function} cb Cordova native callback to recive data.
+<span class='line'> 70</span>    * @param {function} error Cordova native callback to recive errors.
+<span class='line'> 71</span>    * @return {Building[]} buildings Array of buildings.
 <span class='line'> 72</span>    */</span><span class="WHIT">
 <span class='line'> 73</span> </span><span class="WHIT">  </span><span class="NAME">fetchBuildings</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
 <span class='line'> 74</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'fetchBuildings'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
@@ -83,10 +83,10 @@
 <span class='line'> 76</span> </span><span class="WHIT">  </span><span class="COMM">/**
 <span class='line'> 77</span>    * Download all the floors of a building.
 <span class='line'> 78</span>    * @description Download all the floors of a building
-<span class='line'> 79</span>    * @param {Building} building - the building. Not null.
-<span class='line'> 80</span>    * @param {callback} cb - Cordova native callback to recive data.
-<span class='line'> 81</span>    * @param {callback} error - Cordova native callback to recive errors.
-<span class='line'> 82</span>    * @returns {Floor[]} - floors array 
+<span class='line'> 79</span>    * @param {Building} building The building. Not null.
+<span class='line'> 80</span>    * @param {function} cb Cordova native callback to recive data.
+<span class='line'> 81</span>    * @param {function} error Cordova native callback to recive errors.
+<span class='line'> 82</span>    * @return {Floor[]} floors Array of floors. 
 <span class='line'> 83</span>    */</span><span class="WHIT">
 <span class='line'> 84</span> </span><span class="WHIT">  </span><span class="NAME">fetchFloorsFromBuilding</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">building</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
 <span class='line'> 85</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'fetchFloorsFromBuilding'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">building</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
@@ -94,10 +94,10 @@
 <span class='line'> 87</span> </span><span class="WHIT">  </span><span class="COMM">/**
 <span class='line'> 88</span>    * Download the indoor POIs of a building.
 <span class='line'> 89</span>    * @description Download the indoor POIs of a building
-<span class='line'> 90</span>    * @param {Building} building - the building. Not null.
-<span class='line'> 91</span>    * @param {callback} cb - Cordova native callback to recive data.
-<span class='line'> 92</span>    * @param {callback} error - Cordova native callback to recive errors.
-<span class='line'> 93</span>    * @returns {Poi[]} - Array of POIs
+<span class='line'> 90</span>    * @param {Building} building The building. Not null.
+<span class='line'> 91</span>    * @param {function} cb Cordova native callback to recive data.
+<span class='line'> 92</span>    * @param {function} error Cordova native callback to recive errors.
+<span class='line'> 93</span>    * @return {Poi[]} pois Array of POIs
 <span class='line'> 94</span>    */</span><span class="WHIT">
 <span class='line'> 95</span> </span><span class="WHIT">  </span><span class="NAME">fetchIndoorPOIsFromBuilding</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">building</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
 <span class='line'> 96</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'fetchIndoorPOIsFromBuilding'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">building</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
@@ -105,10 +105,10 @@
 <span class='line'> 98</span> </span><span class="WHIT">  </span><span class="COMM">/**
 <span class='line'> 99</span>    * Download the outdoor POIs of a building.
 <span class='line'>100</span>    * @description Download the outdoor POIs of a building
-<span class='line'>101</span>    * @param {Building} building - the building. Not null.
-<span class='line'>102</span>    * @param {callback} cb - Cordova native callback to recive data.
-<span class='line'>103</span>    * @param {callback} error - Cordova native callback to recive errors.
-<span class='line'>104</span>    * @returns {Poi[]} - Array of POIs
+<span class='line'>101</span>    * @param {Building} building The building. Not null.
+<span class='line'>102</span>    * @param {function} cb Cordova native callback to recive data.
+<span class='line'>103</span>    * @param {function} error Cordova native callback to recive errors.
+<span class='line'>104</span>    * @return {Poi[]} pois Array of POIs
 <span class='line'>105</span>    */</span><span class="WHIT">
 <span class='line'>106</span> </span><span class="WHIT">  </span><span class="NAME">fetchOutdoorPOIsFromBuilding</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">building</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
 <span class='line'>107</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'fetchOutdoorPOIsFromBuilding'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">building</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
@@ -116,10 +116,10 @@
 <span class='line'>109</span> </span><span class="WHIT">  </span><span class="COMM">/**
 <span class='line'>110</span>    * Download the events of a building.
 <span class='line'>111</span>    * @description Download the events of a building
-<span class='line'>112</span>    * @param {Building} building - the building. Not null.
-<span class='line'>113</span>    * @param {callback} cb - Cordova native callback to recive data.
-<span class='line'>114</span>    * @param {callback} error - Cordova native callback to recive errors.
-<span class='line'>115</span>    * @returns {event[]} The evetns of a building
+<span class='line'>112</span>    * @param {Building} building The building. Not null.
+<span class='line'>113</span>    * @param {function} cb Cordova native callback to recive data.
+<span class='line'>114</span>    * @param {function} error Cordova native callback to recive errors.
+<span class='line'>115</span>    * @return {event[]} events The evetns of a building
 <span class='line'>116</span>    */</span><span class="WHIT">
 <span class='line'>117</span> </span><span class="WHIT">  </span><span class="NAME">fetchEventsFromBuilding</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">building</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
 <span class='line'>118</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'fetchEventsFromBuilding'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">building</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
@@ -127,9 +127,9 @@
 <span class='line'>120</span> </span><span class="WHIT">  </span><span class="COMM">/**
 <span class='line'>121</span>    * Get all POI categories, download and cache their icons asynchronously.
 <span class='line'>122</span>    * @description Get all POI categories, download and cache their icons asynchronously. To get some of those icons from local storage @see {@link fetchPoiCategoryIconNormal(PoiCategory)} or {@link fetchPoiCategoryIconSelected(PoiCategory)}
-<span class='line'>123</span>    * @param {callback} cb - Cordova native callback to recive data.
-<span class='line'>124</span>    * @param {callback} error - Cordova native callback to recive errors.
-<span class='line'>125</span>    * @returns {PoiCategory[]} - poiCategories
+<span class='line'>123</span>    * @param {function} cb Cordova native callback to recive data.
+<span class='line'>124</span>    * @param {function} error Cordova native callback to recive errors.
+<span class='line'>125</span>    * @return {PoiCategory[]} poiCategories The poiCategories array
 <span class='line'>126</span>    */</span><span class="WHIT">
 <span class='line'>127</span> </span><span class="WHIT">  </span><span class="NAME">fetchPoiCategories</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
 <span class='line'>128</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'fetchPoiCategories'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
@@ -137,10 +137,10 @@
 <span class='line'>130</span> </span><span class="WHIT">  </span><span class="COMM">/**
 <span class='line'>131</span>    * Download the map image of a floor
 <span class='line'>132</span>    * @description Download the map image of a floor
-<span class='line'>133</span>    * @param {Floor} floor - the floor. Not null.
-<span class='line'>134</span>    * @param {callback} cb - Cordova native callback to recive data.
-<span class='line'>135</span>    * @param {callback} error - Cordova native callback to recive errors.
-<span class='line'>136</span>    * @returns {map} - The map image
+<span class='line'>133</span>    * @param {Floor} floor The floor. Not null.
+<span class='line'>134</span>    * @param {function} cb Cordova native callback to recive data.
+<span class='line'>135</span>    * @param {function} error Cordova native callback to recive errors.
+<span class='line'>136</span>    * @return {bitmap} map The map image
 <span class='line'>137</span>    */</span><span class="WHIT">
 <span class='line'>138</span> </span><span class="WHIT">  </span><span class="NAME">fetchMapFromFloor</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">floor</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
 <span class='line'>139</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'fetchMapFromFloor'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">floor</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
@@ -148,10 +148,10 @@
 <span class='line'>141</span> </span><span class="WHIT">  </span><span class="COMM">/**
 <span class='line'>142</span>    * Get the normal category icon for a category.
 <span class='line'>143</span>    * @description Get the normal category icon for a category
-<span class='line'>144</span>    * @param {PoiCategory} category - the category. Not null.
-<span class='line'>145</span>    * @param {callback} cb - Cordova native callback to recive data.
-<span class='line'>146</span>    * @param {callback} error - Cordova native callback to recive errors.
-<span class='line'>147</span>    * @returns {icon} - The category icon
+<span class='line'>144</span>    * @param {PoiCategory} category The category. Not null.
+<span class='line'>145</span>    * @param {function} cb Cordova native callback to recive data.
+<span class='line'>146</span>    * @param {function} error Cordova native callback to recive errors.
+<span class='line'>147</span>    * @return {bitmap} icon The category icon
 <span class='line'>148</span>    */</span><span class="WHIT">
 <span class='line'>149</span> </span><span class="WHIT">  </span><span class="NAME">fetchPoiCategoryIconNormal</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">category</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
 <span class='line'>150</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'fetchPoiCategoryIconNormal'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">category</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
@@ -159,10 +159,10 @@
 <span class='line'>152</span> </span><span class="WHIT">  </span><span class="COMM">/**
 <span class='line'>153</span>    * Get the selected category icon for a category.
 <span class='line'>154</span>    * @description Get the selected category icon for a category
-<span class='line'>155</span>    * @param {PoiCategory} - the category. Not null.
-<span class='line'>156</span>    * @param {callback} cb - Cordova native callback to recive data.
-<span class='line'>157</span>    * @param {callback} error - Cordova native callback to recive errors.
-<span class='line'>158</span>    * @returns {icon} - The category icon
+<span class='line'>155</span>    * @param {PoiCategory} category The category. Not null.
+<span class='line'>156</span>    * @param {function} cb Cordova native callback to recive data.
+<span class='line'>157</span>    * @param {function} error Cordova native callback to recive errors.
+<span class='line'>158</span>    * @return {bitmap} icon The category icon
 <span class='line'>159</span>    */</span><span class="WHIT">
 <span class='line'>160</span> </span><span class="WHIT">  </span><span class="NAME">fetchPoiCategoryIconSelected</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">category</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
 <span class='line'>161</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'fetchPoiCategoryIconSelected'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">category</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
@@ -170,9 +170,9 @@
 <span class='line'>163</span> </span><span class="WHIT">  </span><span class="COMM">/**
 <span class='line'>164</span>    * Invalidate all the resources in the cache.
 <span class='line'>165</span>    * @description Invalidate all the resources in the cache
-<span class='line'>166</span>    * @param {callback} cb - Cordova native callback to recive data.
-<span class='line'>167</span>    * @param {callback} error - Cordova native callback to recive errors.
-<span class='line'>168</span>    * @returns {void}
+<span class='line'>166</span>    * @param {function} cb Cordova native callback to recive data.
+<span class='line'>167</span>    * @param {function} error Cordova native callback to recive errors.
+<span class='line'>168</span>    * @return {void}
 <span class='line'>169</span>    */</span><span class="WHIT">
 <span class='line'>170</span> </span><span class="WHIT">  </span><span class="NAME">invalidateCache</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
 <span class='line'>171</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'invalidateCache'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
@@ -180,14 +180,56 @@
 <span class='line'>173</span> </span><span class="WHIT">  </span><span class="COMM">/**
 <span class='line'>174</span>    * Calculates a route between two points.
 <span class='line'>175</span>    * @description Calculates a route between two points.
-<span class='line'>176</span>    * @param {args} request - request - non-null search parameters. {@link Building building}, {@link Point from} and {@link Point to}. Points have to be inside the same building.
-<span class='line'>177</span>    * @param {callback} cb - Cordova native callback to recive data.
-<span class='line'>178</span>    * @param {callback} error - Cordova native callback to recive errors.
-<span class='line'>179</span>    * @return {Route} - The route between provided points
-<span class='line'>180</span>    */</span><span class="WHIT">
-<span class='line'>181</span> </span><span class="WHIT">  </span><span class="NAME">requestDirections</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">args</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'>182</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'requestDirections'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">args</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>183</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="WHIT">
-<span class='line'>184</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>185</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Situm</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>186</span> </span></pre></body></html>
+<span class='line'>176</span>    * @param {object} args Request - non-null search parameters.
+<span class='line'>177</span>    * @param {Building} args.building
+<span class='line'>178</span>    * @param {Point} args.from Points have to be inside the same building.
+<span class='line'>179</span>    * @param {Point} args.to Points have to be inside the same building.
+<span class='line'>180</span>    * @param {function} cb Cordova native callback to recive data.
+<span class='line'>181</span>    * @param {function} error Cordova native callback to recive errors.
+<span class='line'>182</span>    * @return {Route} route The route between provided points
+<span class='line'>183</span>    */</span><span class="WHIT">
+<span class='line'>184</span> </span><span class="WHIT">  </span><span class="NAME">requestDirections</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">args</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>185</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'requestDirections'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">args</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>186</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>187</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'>188</span>    * Set the navigation params, and the listener that receives the updated navigation progress.
+<span class='line'>189</span>    * @description Set the navigation params, and the listener that receives the updated navigation progress. Can only exist one navigation with one listener at a time. If this method was previously invoked, but removeUpdates() wasn't, removeUpdates() is called internally.
+<span class='line'>190</span>    * @param {object} args Request non-null search parameters. Must be an object with next properties:
+<span class='line'>191</span>    * @param {number} args.distanceToFloorChangeThreshold DistanceToFloorChangeThreshold, integer in meters
+<span class='line'>192</span>    * @param {number} args.distanceToChangeIndicationThreshold] DistanceToChangeIndicationThreshold, integer in meters
+<span class='line'>193</span>    * @param {number} args.distanceToGoalThreshold DistanceToGoalThreshold, integer in meters
+<span class='line'>194</span>    * @param {number} args.outsideRouteThreshold OutsideRouteThreshold, integer in meters
+<span class='line'>195</span>    * @param {number} args.indicationsInterval IndicationsInterval, long in miliseconds
+<span class='line'>196</span>    * @param {number} args.timeToFirstIndication TimeToFirstIndication, long in miliseconds
+<span class='line'>197</span>    * @param {number} args.roundIndicationsStep RoundIndicationsStep, integer in meters
+<span class='line'>198</span>    * @param {function} cb Cordova native callback to recive data.
+<span class='line'>199</span>    * @param {function} error Cordova native callback to recive errors.
+<span class='line'>200</span>    * @return {void}
+<span class='line'>201</span>    */</span><span class="WHIT">
+<span class='line'>202</span> </span><span class="WHIT">  </span><span class="NAME">requestNavigationUpdates</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">args</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>203</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'requestNavigationUpdates'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">args</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>204</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>205</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'>206</span>    * Informs NavigationManager object the change of the user's location.
+<span class='line'>207</span>    * @description Informs NavigationManager object the change of the user's location.
+<span class='line'>208</span>    * @param {Location} location New Location of the user. If null, nothing is done.
+<span class='line'>209</span>    * @param {function} cb Cordova native callback to recive data.
+<span class='line'>210</span>    * @param {function} error Cordova native callback to recive errors.
+<span class='line'>211</span>    * @return {boolean} success True if there is a listener to which notify progress update. False if there isn't, so this method do nothing.
+<span class='line'>212</span>    */</span><span class="WHIT">
+<span class='line'>213</span> </span><span class="WHIT">  </span><span class="NAME">updateNavigationWithLocation</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">location</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>214</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'updateNavigationWithLocation'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">location</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>215</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>216</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'>217</span>    * Removes all location updates.
+<span class='line'>218</span>    * @description Removes all location updates. This removes the internal state of the manager, including the listener provided in requestNavigationUpdates(NavigationRequest, NavigationListener), so it won't receive more progress updates.
+<span class='line'>219</span>    * @param {function} cb Cordova native callback to recive data.
+<span class='line'>220</span>    * @param {function} error Cordova native callback to recive errors.
+<span class='line'>221</span>    * @return {boolean} success True if a listener was removed. False if there was no listener.
+<span class='line'>222</span>    */</span><span class="WHIT">
+<span class='line'>223</span> </span><span class="WHIT">  </span><span class="NAME">removeNavigationUpdates</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>224</span> </span><span class="WHIT">    </span><span class="NAME">exec</span><span class="PUNC">(</span><span class="NAME">cb</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">error</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">PLUGIN_NAME</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'removeNavigationUpdates'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>225</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>226</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>227</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Situm</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>228</span> </span></pre></body></html>
