@@ -10,9 +10,9 @@
  * @property {string} infoHtml - Additional information about building, formatted with HTML
  * @property {string} pictureThumbUrl - The URL of building thumbnail image
  * @property {string} pictureUrl - The URL of building image
- * @property {float} rotation - Rotation angle of the building's base, relative to the west-east axis, increasing in counter-clockwise, being 0 the west-east axis.
+ * @property {number} rotation - Rotation angle of the building's base, relative to the west-east axis, increasing in counter-clockwise, being 0 the west-east axis.
  * @property {string} userIdentifier - Unique identifier of the owner user of the building
- * @property {Object} customFields - Map of custom fields, indexed by their name.
+ * @property {object} customFields - Map of custom fields, indexed by their name.
  */
 
 var Building = {
@@ -37,11 +37,11 @@ module.exports = Building
  * @namespace
  * <b>Floor</b>
  * Floor of a building.
- * @property {float} altitude - Altitude of the floor above ground level, in meters.
+ * @property {number} altitude - Altitude of the floor above ground level, in meters.
  * @property {string} buildingIdentifier - The identifier of building which this floor belongs.
  * @property {number} level - The number of the floor.
  * @property {string} mapUrl - The floor map image url
- * @property {float} scale - The scale of the floor image, in px/meters
+ * @property {number} scale - The scale of the floor image, in px/meters
  * @property {string} floorIdentifier - The unique identifier of the resource
  */
 
@@ -59,8 +59,8 @@ module.exports = Floor
 /** @namespace
  * <b>Dimensions</b><br />
  * Define 2D dimensions of a rectangular area.
- * @property {float} width - Width of rectangle in meters
- * @property {float} height - Height of rectangle in meters.
+ * @property {number} width - Width of rectangle in meters
+ * @property {number} height - Height of rectangle in meters.
  */
 
 var Dimensions = {
@@ -92,8 +92,8 @@ module.exports = Bounds
  * @namespace
  * <b>Coordinate</b><br />
  * A structure that contains geographical coordinate.
- * @property {float} latitude - Latitude in degrees
- * @property {float} longitude - Longitude in degrees
+ * @property {number} latitude - Latitude in degrees
+ * @property {number} longitude - Longitude in degrees
  */
 
 var Coordinate = {
@@ -107,8 +107,8 @@ module.exports = Coordinate
  * @namespace
  * <b>Cartesian Coordinate</b><br />
  * A structure that contains cartesian coordinate.
- * @property {float} x - Value of coordinate at x-axis
- * @property {float} y - Value of coordinate at y-axis
+ * @property {number} x - Value of coordinate at x-axis
+ * @property {number} y - Value of coordinate at y-axis
  */
 
 var CartesianCoordinate = {
@@ -133,7 +133,7 @@ module.exports = CartesianCoordinate
  * @property {boolean} isOutdoor - Whether the POI is placed outside the building or not.
  * @property {PoiCategory} category - Category of the POI
  * @property {string} infoHtml - Additional information about POI, in HTML
- * @property {Object} customFields - Map of custom fields, indexed by their name.
+ * @property {object} customFields - Map of custom fields, indexed by their name.
  */
 
 var Poi = {
@@ -201,7 +201,7 @@ module.exports = Point
  * @namespace
  * <b>Location</b>
  * A location. It can be indoor or outdoor, check isIndoor and isOutdoor. A valid indoor location has floorIdentifier and cartesianCoordinate.
- * @property {float} accuracy - The accuracy radius (in meters)
+ * @property {number} accuracy - The accuracy radius (in meters)
  * @property {Angle} bearing -  The bearing (in degrees) with respect to the Earth North.
  * @property {string} bearingQuality - The quality of the cartesian bearing.
  * @property {string} buildingIdentifier - Only used in indoor.
@@ -246,10 +246,10 @@ module.exports = Location
  * @namespace
  * <b>Angle</b>
  * Representation of an angle.
- * @property {float} degrees - Angle in degrees, increasing in counter-clockwise 
- * @property {float} degreesClockwise - Angle in radians, increasing in clockwise
- * @property {float} radians - Angle in radians, increasing in counter-clockwise
- * @property {float} radiansMinusPiPi - Angle in radians in range (-pi,pi)
+ * @property {number} degrees - Angle in degrees, increasing in counter-clockwise 
+ * @property {number} degreesClockwise - Angle in radians, increasing in clockwise
+ * @property {number} radians - Angle in radians, increasing in counter-clockwise
+ * @property {number} radiansMinusPiPi - Angle in radians in range (-pi,pi)
  */
 
 var Angle = {
@@ -294,8 +294,8 @@ module.exports = Route
  * @namespace
  * <b>RouteStep</b>
  * A fragment of a route, described by the initial point from and the last point to of the fragment, and some information about the step within the route.
- * @property {float} distance - Distance between from and to in meters.
- * @property {float} distanceToGoal - Distance in meters between the start point of this step (from) and the last point in the route ('to' of the last step).
+ * @property {number} distance - Distance between from and to in meters.
+ * @property {number} distanceToGoal - Distance in meters between the start point of this step (from) and the last point in the route ('to' of the last step).
  * @property {Point} from - Start point of this step.
  * @property {number} id - Position of this RouteStep in the list of steps (Route.steps) of the route to which it belongs.
  * @property {Point} to: End point of this step.
@@ -319,10 +319,10 @@ module.exports = RouteStep
  * @namespace
  * <b>Indication</b>
  * Represents the instruction that a user should follow when on a RouteStep to continue the route.
- * @property {float} distance - The distance between the origin and destination
+ * @property {number} distance - The distance between the origin and destination
  * @property {number} distanceToNextLevel - The number of levels between the origin and destination
  * @property {string} indicationType - The Indication.Action of the instruction as String
- * @property {float} orientation - The angle a user should change his direction in order to go from the origin to the destination.
+ * @property {number} orientation - The angle a user should change his direction in order to go from the origin to the destination.
  * @property {string} orientationType - The Indication.Orientation of the instruction as String
  * @property {number} stepIdxDestination - The index of the indication's step of destination. 
  * @property {number} stepIdxOrigin - The index of the indication's step of origin
@@ -341,3 +341,51 @@ var Indication = {
 }
 
 module.exports = Indication
+
+/**
+ * @namespace
+ * <b>SitumEvent</b>
+ * An event: POI with radius, conversion area and asociated statistics. It is intended for usage in marketing apps.
+ * @property {number} buildingIdentifier
+ * @property {number} identifier
+ * @property {number} floorIdentifier
+ * @property {string} infoHtml
+ * @property {SitumConversionArea} conversionArea
+ * @property {object} customFields
+ * @property {number} radius
+ * @property {string} name
+ */
+
+var SitumEvent = {
+  buildingIdentifier,
+  identifier,
+  floorIdentifier,
+  infoHtml,
+  conversionArea,
+  customFields,
+  radius,
+  name,
+}
+
+module.exports = SitumEvent
+
+/**
+ * @namespace
+ * <b>SitumConversionArea</b>
+ * A rectangular area of a floor defining the conversion area of an event
+ * @property {number} floorIdentifier
+ * @property {object} topLeft
+ * @property {object} topRight
+ * @property {object} bottomLeft
+ * @property {object} bottomRight
+ */
+
+var SitumConversionArea = {
+  floorIdentifier,
+  topLeft,
+  topRight,
+  bottomLeft,
+  bottomRight,
+}
+
+module.exports = SitumConversionArea

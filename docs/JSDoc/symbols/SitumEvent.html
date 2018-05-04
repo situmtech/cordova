@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - Point</title>
+		<title>JsDoc Reference - SitumEvent</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -234,7 +234,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Namespace Point
+				Namespace SitumEvent
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -242,8 +242,8 @@ ul.inheritsList
 				
 				
 			
-				<b>Point</b>
-Associate geographical coordinate (Location) with Building and Floor (Cartography) and cartesian coordinate relative to that building.
+				<b>SitumEvent</b>
+An event: POI with radius, conversion area and asociated statistics. It is intended for usage in marketing apps.
 				
 				
 					<br /><i>Defined in: </i> <a href="../symbols/src/docs_JSDoc_Interfaces.js.html">Interfaces.js</a>.
@@ -252,7 +252,7 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Point.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class SitumEvent.">
 				<caption>Namespace Summary</caption>
 				<thead>
 					<tr>
@@ -265,7 +265,7 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/Point.html#constructor">Point</a></b>
+								<b><a href="../symbols/SitumEvent.html#constructor">SitumEvent</a></b>
 							</div>
 							<div class="description"></div>
 						</td>
@@ -278,7 +278,7 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Point.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class SitumEvent.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -292,9 +292,9 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Point.html#buildingIdentifier">buildingIdentifier</a></b>
+								<b><a href="../symbols/SitumEvent.html#buildingIdentifier">buildingIdentifier</a></b>
 								</div>
-								<div class="description">- Unique identifier for the building to which this point belongs</div>
+								<div class="description"></div>
 							</td>
 						</tr>
 					
@@ -302,9 +302,9 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Point.html#cartesianCoordinate">cartesianCoordinate</a></b>
+								<b><a href="../symbols/SitumEvent.html#conversionArea">conversionArea</a></b>
 								</div>
-								<div class="description">- Cartesian coordinate (in meters) relative to the Bounds of building's base.</div>
+								<div class="description"></div>
 							</td>
 						</tr>
 					
@@ -312,9 +312,9 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Point.html#coordinate">coordinate</a></b>
+								<b><a href="../symbols/SitumEvent.html#customFields">customFields</a></b>
 								</div>
-								<div class="description">- Geographic coordinate (latitude, longitude) of the point, regardless of whether it's placed inside or outside the building.</div>
+								<div class="description"></div>
 							</td>
 						</tr>
 					
@@ -322,9 +322,9 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Point.html#floorIdentifier">floorIdentifier</a></b>
+								<b><a href="../symbols/SitumEvent.html#floorIdentifier">floorIdentifier</a></b>
 								</div>
-								<div class="description">- Floor identifier (inside the building) where this point is placed.</div>
+								<div class="description"></div>
 							</td>
 						</tr>
 					
@@ -332,9 +332,9 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Point.html#idOutdoor">idOutdoor</a></b>
+								<b><a href="../symbols/SitumEvent.html#identifier">identifier</a></b>
 								</div>
-								<div class="description">- If the POI is outside the building.</div>
+								<div class="description"></div>
 							</td>
 						</tr>
 					
@@ -342,9 +342,29 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Point.html#isIndoor">isIndoor</a></b>
+								<b><a href="../symbols/SitumEvent.html#infoHtml">infoHtml</a></b>
 								</div>
-								<div class="description">- If the POI is inside the building.</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/SitumEvent.html#name">name</a></b>
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/SitumEvent.html#radius">radius</a></b>
+								</div>
+								<div class="description"></div>
 							</td>
 						</tr>
 					
@@ -368,7 +388,7 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 				</div>
 				
 				<div class="fixedFont">
-						<b>Point</b>
+						<b>SitumEvent</b>
 				</div>
 				
 				<div class="description">
@@ -399,12 +419,12 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 					<a name="buildingIdentifier"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{string}</span>
+					<span class="light">{number}</span>
 					<b>buildingIdentifier</b>
 					
 					</div>
 					<div class="description">
-						- Unique identifier for the building to which this point belongs
+						
 						
 						
 					</div>
@@ -418,15 +438,15 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 
 					<hr />
 				
-					<a name="cartesianCoordinate"> </a>
+					<a name="conversionArea"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{<a href="../symbols/CartesianCoordinate.html">CartesianCoordinate</a>}</span>
-					<b>cartesianCoordinate</b>
+					<span class="light">{<a href="../symbols/SitumConversionArea.html">SitumConversionArea</a>}</span>
+					<b>conversionArea</b>
 					
 					</div>
 					<div class="description">
-						- Cartesian coordinate (in meters) relative to the Bounds of building's base.
+						
 						
 						
 					</div>
@@ -440,15 +460,15 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 
 					<hr />
 				
-					<a name="coordinate"> </a>
+					<a name="customFields"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{<a href="../symbols/Coordinate.html">Coordinate</a>}</span>
-					<b>coordinate</b>
+					<span class="light">{object}</span>
+					<b>customFields</b>
 					
 					</div>
 					<div class="description">
-						- Geographic coordinate (latitude, longitude) of the point, regardless of whether it's placed inside or outside the building.
+						
 						
 						
 					</div>
@@ -465,12 +485,12 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 					<a name="floorIdentifier"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{string}</span>
+					<span class="light">{number}</span>
 					<b>floorIdentifier</b>
 					
 					</div>
 					<div class="description">
-						- Floor identifier (inside the building) where this point is placed.
+						
 						
 						
 					</div>
@@ -484,15 +504,15 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 
 					<hr />
 				
-					<a name="idOutdoor"> </a>
+					<a name="identifier"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{boolean}</span>
-					<b>idOutdoor</b>
+					<span class="light">{number}</span>
+					<b>identifier</b>
 					
 					</div>
 					<div class="description">
-						- If the POI is outside the building.
+						
 						
 						
 					</div>
@@ -506,15 +526,59 @@ Associate geographical coordinate (Location) with Building and Floor (Cartograph
 
 					<hr />
 				
-					<a name="isIndoor"> </a>
+					<a name="infoHtml"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{boolean}</span>
-					<b>isIndoor</b>
+					<span class="light">{string}</span>
+					<b>infoHtml</b>
 					
 					</div>
 					<div class="description">
-						- If the POI is inside the building.
+						
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="name"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{string}</span>
+					<b>name</b>
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="radius"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{number}</span>
+					<b>radius</b>
+					
+					</div>
+					<div class="description">
+						
 						
 						
 					</div>
