@@ -42,7 +42,7 @@ import jdk.nashorn.internal.ir.ReturnNode;
 
 class LocationWrapper {
 
-  //public static final String TAG = "LocationWrapper";
+  // public static final String TAG = "LocationWrapper";
 
   public static final String ADDRESS = "address";
   public static final String BOUNDS = "bounds";
@@ -222,7 +222,7 @@ class LocationWrapper {
     return building;
   }
 
-  //Floor
+  // Floor
 
   static JSONObject floorToJsonObject(Floor floor) throws JSONException {
     JSONObject jo = new JSONObject();
@@ -245,7 +245,7 @@ class LocationWrapper {
     return floor;
   }
 
-  //Situm Events
+  // Situm Events
 
   static JSONObject situmEventToJsonObject(SitumEvent situmEvent) throws JSONException {
     JSONObject jo = new JSONObject();
@@ -525,12 +525,14 @@ class LocationWrapper {
     return jo;
   }
 
-  /*static Route jsonRouteToRoute(JSONObject jo) throws JSONException {
-      // Create a static route
-  
-  }*/
+  /*
+   * static Route jsonRouteToRoute(JSONObject jo) throws JSONException { // Create
+   * a static route
+   * 
+   * }
+   */
 
-  //RouteStep
+  // RouteStep
 
   static JSONObject routeStepToJsonObject(RouteStep routeStep) throws JSONException {
     JSONObject jo = new JSONObject();
@@ -544,14 +546,15 @@ class LocationWrapper {
     return jo;
   }
 
-  /*static RouteStep routeStepJsonObjectToRouteStep(JSONObject jo) throws JSONException {
-      RouteStep routeStep = null;
-      routeStep = new RouteStep.Builder().distance(jo.getDouble(DISTANCE))
-              .distanceToEnd(jo.getDouble(DISTANCE_TO_GOAL)).from(pointJsonObjectToPoint(jo.getJSONObject(FROM)))
-              .to(pointJsonObjectToPoint(jo.getJSONObject(TO))).id(jo.getInt(ID)).isLast(jo.getBoolean(IS_LAST))
-              .build();
-      return routeStep;
-  }*/
+  /*
+   * static RouteStep routeStepJsonObjectToRouteStep(JSONObject jo) throws
+   * JSONException { RouteStep routeStep = null; routeStep = new
+   * RouteStep.Builder().distance(jo.getDouble(DISTANCE))
+   * .distanceToEnd(jo.getDouble(DISTANCE_TO_GOAL)).from(pointJsonObjectToPoint(jo
+   * .getJSONObject(FROM)))
+   * .to(pointJsonObjectToPoint(jo.getJSONObject(TO))).id(jo.getInt(ID)).isLast(jo
+   * .getBoolean(IS_LAST)) .build(); return routeStep; }
+   */
 
   // Indication
 
