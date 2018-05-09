@@ -1,26 +1,9 @@
-/*
-       Licensed to the Apache Software Foundation (ASF) under one
-       or more contributor license agreements.  See the NOTICE file
-       distributed with this work for additional information
-       regarding copyright ownership.  The ASF licenses this file
-       to you under the Apache License, Version 2.0 (the
-       "License"); you may not use this file except in compliance
-       with the License.  You may obtain a copy of the License at
-
-         http://www.apache.org/licenses/LICENSE-2.0
-
-       Unless required by applicable law or agreed to in writing,
-       software distributed under the License is distributed on an
-       "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-       KIND, either express or implied.  See the License for the
-       specific language governing permissions and limitations
-       under the License.
-*/
-
 package es.plugin.situm.unittests;
 
+import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,9 +13,9 @@ import java.net.URL;
 
 public class PluginHelper{
 
-
   JSONParser parser;
   ClassLoader classLoader;
+
   @Before
   public void prepareTests() {
     parser = new JSONParser();
@@ -45,5 +28,47 @@ public class PluginHelper{
       File fetchBuildings = new File(resource.getFile());
       Object fileContent = parser.parse(new FileReader(fetchBuildings));
       JSONArray buildings = (JSONArray) fileContent;
+      for(int i = 0; i < buildings.size(); i++) {
+          Assert.assertEquals(buildings.get(i).getClass(), JSONObject.class);
+          JSONObject building = (JSONObject) buildings.get(i);
+          Assert.assertEquals(building.get("address").getClass(), String.class);
+          Assert.assertEquals(building.get("bounds").getClass(), JSONObject.class);
+          Assert.assertEquals(building.get("boundsRotated").getClass(), JSONObject.class);
+          Assert.assertEquals(building.get("center").getClass(), JSONObject.class);
+          Assert.assertEquals(building.get("dimensions").getClass(), JSONObject.class);
+          Assert.assertEquals(building.get("infoHtml").getClass(), String.class);
+          Assert.assertEquals(building.get("name").getClass(), String.class);
+          Assert.assertEquals(building.get("pictureThumbUrl").getClass(), String.class);
+          Assert.assertEquals(building.get("pictureUrl").getClass(), String.class);
+          Assert.assertEquals(building.get("rotation").getClass(), Double.class);
+          Assert.assertEquals(building.get("userIdentifier").getClass(), String.class);
+          Assert.assertEquals(building.get("buildingIdentifier").getClass(), String.class);
+          Assert.assertEquals(building.get("customFields").getClass(), JSONObject.class);
+          testBoundsJsonObject((JSONObject) building.get("bounds"));
+          testBoundsJsonObject((JSONObject) building.get("boundsRotated"));
+          testCoordinateJsonObject((JSONObject) building.get("center"));
+          testDimensionJsonObject((JSONObject) building.get("dimensions"));
+      }
+  }
+
+  public void testBoundsJsonObject(JSONObject bounds) {
+      Assert.assertEquals(bounds.get("northEast").getClass(), JSONObject.class);
+      Assert.assertEquals(bounds.get("northWest").getClass(), JSONObject.class);
+      Assert.assertEquals(bounds.get("southEast").getClass(), JSONObject.class);
+      Assert.assertEquals(bounds.get("southWest").getClass(), JSONObject.class);
+      testCoordinateJsonObject((JSONObject) bounds.get("northEast"));
+      testCoordinateJsonObject((JSONObject) bounds.get("northWest"));
+      testCoordinateJsonObject((JSONObject) bounds.get("southEast"));
+      testCoordinateJsonObject((JSONObject) bounds.get("southWest"));
+  }
+
+  public void testCoordinateJsonObject(JSONObject coordinate) {
+      Assert.assertEquals(coordinate.get("latitude").getClass(), Double.class);
+      Assert.assertEquals(coordinate.get("longitude").getClass(), Double.class);
+  }
+
+  public void testDimensionJsonObject(JSONObject dimensions) {
+      Assert.assertEquals(dimensions.get("width").getClass(), Double.class);
+      Assert.assertEquals(dimensions.get("height").getClass(), Double.class);
   }
 }
