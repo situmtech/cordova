@@ -51,6 +51,24 @@ public class PluginHelper{
       }
   }
 
+  @Test
+  public void fetchFloorsFromBuilding() throws Exception {
+      URL resource = classLoader.getResource("fetch_floors_from_building.json");
+      File fetchFloors = new File(resource.getFile());
+      Object fileContent = parser.parse(new FileReader(fetchFloors));
+      JSONArray floors = (JSONArray) fileContent;
+      for(int i = 0; i < floors.size(); i++) {
+          Assert.assertEquals(floors.get(i).getClass(), JSONObject.class);
+          JSONObject floor = (JSONObject) floors.get(i);
+          Assert.assertEquals(floor.get("altitude").getClass(), Long.class);
+          Assert.assertEquals(floor.get("buildingIdentifier").getClass(), String.class);
+          Assert.assertEquals(floor.get("level").getClass(), Long.class);
+          Assert.assertEquals(floor.get("mapUrl").getClass(), String.class);
+          Assert.assertEquals(floor.get("scale").getClass(), Double.class);
+          Assert.assertEquals(floor.get("floorIdentifier").getClass(), String.class);
+      }
+  }
+
   public void testBoundsJsonObject(JSONObject bounds) {
       Assert.assertEquals(bounds.get("northEast").getClass(), JSONObject.class);
       Assert.assertEquals(bounds.get("northWest").getClass(), JSONObject.class);
