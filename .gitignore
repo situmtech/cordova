@@ -38,3 +38,5 @@ package-lock\.json
 framework/
 
 bin/
+
+*.lock

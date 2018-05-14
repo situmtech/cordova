@@ -18,4 +18,4 @@
 
 include ':app'
 include ":CordovaLib"
-project(':CordovaLib').projectDir = new File('../framework')
+project(':CordovaLib').projectDir = new File('../../framework')
