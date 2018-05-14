@@ -27,6 +27,7 @@
 
 // Category
 
+- (SITPOICategory *) poiCategoryFromJsonObject:(NSDictionary *) jo;
 - (NSDictionary *) poiCategoryToJsonObject:(SITPOICategory *) category;
 
 // POI
@@ -38,6 +39,7 @@
 
 - (NSDictionary *) locationToJsonObject:(SITLocation *) location;
 - (NSString*) locationStateToString:(SITLocationState) state;
+- (NSDictionary *) locationStateToJsonObject:(SITLocationState) state;
 
 - (SITLocation *) locationJsonObjectToLocation:(NSDictionary *) jo;
 
