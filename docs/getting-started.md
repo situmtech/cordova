@@ -144,7 +144,7 @@ Sets the maximum age of a cached response in seconds.
 
 #### - startPositioning
 
-Starts listen onLocationChanged event on first [building](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Building.html) in array
+Starts listen onLocationChanged event on first [building](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html) in array, returns a [location](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Location.html) object.
 
 ```javascript
   var building = {
@@ -284,7 +284,7 @@ Stop locationListener on current active listener.
 
 #### - fetchBuildings
 
-Download all the [buildings](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Building.html) for the current user.
+Download all the [buildings](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html) for the current user.
 
 ```javascript
   fetchBuildings((buildings) => {
@@ -361,7 +361,7 @@ Download all the [buildings](http://htmlpreview.github.io/?https://github.com/si
 
 #### - fetchFloorsFromBuilding
 
-Download all the [floors](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Floor.html) of a [building](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Building.html).
+Download all the [floors](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Floor.html) of a [building](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html).
 
 ```javascript
   var building = {
@@ -447,7 +447,7 @@ Download all the [floors](http://htmlpreview.github.io/?https://github.com/situm
 
 #### - fetchIndoorPOIsFromBuilding
 
-Download the indoor [POIs](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Poi.html) of a [building](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Building.html).
+Download the indoor [POIs](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Poi.html) of a [building](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html).
 
 ```javascript
   var building = {
@@ -568,7 +568,7 @@ Download the indoor [POIs](http://htmlpreview.github.io/?https://github.com/situ
 
 #### - fetchOutdoorPOIsFromBuilding
 
-Download the outdoor [POIs](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Poi.html) of a [building](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Building.html).
+Download the outdoor [POIs](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Poi.html) of a [building](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html).
 
 ```javascript
   var building = {
@@ -689,7 +689,7 @@ Download the outdoor [POIs](http://htmlpreview.github.io/?https://github.com/sit
 
 #### - fetchEventsFromBuilding
 
-Download the events of a [building](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Building.html).
+Download the events of a [building](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html).
 
 ```javascript
   var building = {
@@ -798,7 +798,7 @@ Download the events of a [building](http://htmlpreview.github.io/?https://github
 
 #### - fetchPoiCategories
 
-Get all [POI categories](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/PoiCategory.html), download and cache their icons asynchronously.
+Get all [POI categories](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/PoiCategory.html), download and cache their icons asynchronously.
 
 ```javascript
   fetchPoiCategories((poiCategories) => {
@@ -823,7 +823,7 @@ Get all [POI categories](http://htmlpreview.github.io/?https://github.com/situmt
 
 #### - fetchMapFromFloor
 
-Download the map image of a [floor](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Floor.html).
+Download the map image of a [floor](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Floor.html).
 
 ```javascript
   var floors = {
@@ -848,7 +848,7 @@ Download the map image of a [floor](http://htmlpreview.github.io/?https://github
 
 #### - fetchPoiCategoryIconNormal
 
-Get the normal category icon for a [category](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/PoiCategory.html).
+Get the normal category icon for a [category](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/PoiCategory.html).
 
 ```javascript
   var poiCategory = {
@@ -872,7 +872,7 @@ Get the normal category icon for a [category](http://htmlpreview.github.io/?http
 
 #### - fetchPoiCategoryIconSelected
 
-Get the selected category icon for a [category](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/PoiCategory.html).
+Get the selected category icon for a [category](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/PoiCategory.html).
 
 ```javascript
   var poiCategory = {
@@ -908,7 +908,7 @@ Invalidate all the resources in the cache.
 ```
 #### - requestDirections
 
-Calculates a route between two [points](http://htmlpreview.github.io/?https://github.com/situmtech/situm-cordova-plugin/blob/master/docs/symbols/Point.html).
+Calculates a route between two [points](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Point.html).
 
 ```javascript
   var building = {
