@@ -36,3 +36,5 @@ tests/package-lock\.json
 package-lock\.json
 
 framework/
+
+bin/
