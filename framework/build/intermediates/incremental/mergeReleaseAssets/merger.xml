@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/home/oscar/Documentos/COCODIN/situm/situm-cordova-plugin/framework/assets"/><source path="/home/oscar/Documentos/COCODIN/situm/situm-cordova-plugin/framework/build/generated/assets/shaders/release"/></dataSet><dataSet config="release"><source path="/home/oscar/Documentos/COCODIN/situm/situm-cordova-plugin/framework/src/release/assets"/></dataSet></merger>
