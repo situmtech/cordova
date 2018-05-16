@@ -10,6 +10,7 @@ import android.util.Log;
 import android.webkit.WebSettings;
 import android.widget.Toast;
 import es.situm.sdk.SitumSdk;
+import es.situm.sdk.communication.CommunicationManager;
 import es.situm.sdk.directions.DirectionsManager;
 import es.situm.sdk.directions.DirectionsRequest;
 import es.situm.sdk.error.Error;
@@ -31,6 +32,7 @@ import es.situm.sdk.model.directions.Route;
 import es.situm.sdk.model.location.BeaconFilter;
 import es.situm.sdk.model.location.CartesianCoordinate;
 import es.situm.sdk.model.location.Location;
+import es.situm.sdk.navigation.NavigationManager;
 import es.situm.sdk.utils.Handler;
 import es.situm.sdk.v1.SitumEvent;
 import es.situm.sdk.navigation.NavigationRequest;
@@ -62,16 +64,48 @@ public class PluginHelper {
     private static NavigationListener navigationListener;
     private static NavigationRequest navigationRequest;
 
+    private static volatile CommunicationManager cmInstance;
+
+    private static volatile NavigationManager nmInstance;
+
     public static final float MIN_SNR = 10;
     public static final float MAX_SNR = 40;
 
     private static Route computedRoute;
     private static Location computedLocation;
 
+    private static CommunicationManager getCommunicationManagerInstance() {
+        if (cmInstance == null) { //Check for the first time
+            synchronized (CommunicationManager.class) {   //Check for the second time.
+                //if there is no instance available... create new one
+                if (cmInstance == null) cmInstance = SitumSdk.communicationManager();
+            }
+        }
+        return cmInstance;
+    }
+
+    public static void setCommunicationManager(CommunicationManager communicationManager) {
+        cmInstance = communicationManager;
+    }
+
+    private static NavigationManager getNavigationManagerInstance() {
+        if (nmInstance == null) { //Check for the first time
+            synchronized (NavigationManager.class) {   //Check for the second time.
+                //if there is no instance available... create new one
+                if (nmInstance == null) nmInstance = SitumSdk.navigationManager();
+            }
+        }
+        return nmInstance;
+    }
+
+    public static void setNavigationManager(NavigationManager navigationManager) {
+        nmInstance = navigationManager;
+    }
+
     public static void fetchBuildings(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
             final CallbackContext callbackContext) {
         try {
-            SitumSdk.communicationManager().fetchBuildings(new Handler<Collection<Building>>() {
+           getCommunicationManagerInstance().fetchBuildings(new Handler<Collection<Building>>() {
                 public void onSuccess(Collection<Building> buildings) {
                     try {
                         Log.d(PluginHelper.TAG, "onSuccess: Buildings fetched successfully.");
@@ -107,7 +141,7 @@ public class PluginHelper {
         try {
             JSONObject jsonoBuilding = args.getJSONObject(0);
             Building building = LocationWrapper.buildingJsonObjectToBuilding(jsonoBuilding);
-            SitumSdk.communicationManager().fetchFloorsFromBuilding(building, new Handler<Collection<Floor>>() {
+            getCommunicationManagerInstance().fetchFloorsFromBuilding(building, new Handler<Collection<Floor>>() {
                 @Override
                 public void onSuccess(Collection<Floor> floors) {
                     try {
@@ -145,7 +179,7 @@ public class PluginHelper {
         try {
             JSONObject jsonoBuilding = args.getJSONObject(0);
             Building building = LocationWrapper.buildingJsonObjectToBuilding(jsonoBuilding);
-            SitumSdk.communicationManager().fetchIndoorPOIsFromBuilding(building, new HashMap<String, Object>(),
+            getCommunicationManagerInstance().fetchIndoorPOIsFromBuilding(building, new HashMap<String, Object>(),
                     new Handler<Collection<Poi>>() {
                         @Override
                         public void onSuccess(Collection<Poi> pois) {
@@ -188,7 +222,7 @@ public class PluginHelper {
         try {
             JSONObject jsonoBuilding = args.getJSONObject(0);
             Building building = LocationWrapper.buildingJsonObjectToBuilding(jsonoBuilding);
-            SitumSdk.communicationManager().fetchOutdoorPOIsFromBuilding(building, new HashMap<String, Object>(),
+            getCommunicationManagerInstance().fetchOutdoorPOIsFromBuilding(building, new HashMap<String, Object>(),
                     new Handler<Collection<Poi>>() {
                         @Override
                         public void onSuccess(Collection<Poi> pois) {
@@ -226,7 +260,7 @@ public class PluginHelper {
 
     public static void fetchPoiCategories(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
             final CallbackContext callbackContext) {
-        SitumSdk.communicationManager().fetchPoiCategories(new Handler<Collection<PoiCategory>>() {
+        getCommunicationManagerInstance().fetchPoiCategories(new Handler<Collection<PoiCategory>>() {
             @Override
             public void onSuccess(Collection<PoiCategory> poiCategories) {
                 try {
@@ -259,7 +293,7 @@ public class PluginHelper {
         try {
             JSONObject jsonoCategory = args.getJSONObject(0);
             PoiCategory category = LocationWrapper.poiCategoryFromJsonObject(jsonoCategory);
-            SitumSdk.communicationManager().fetchPoiCategoryIconNormal(category, new Handler<Bitmap>() {
+            getCommunicationManagerInstance().fetchPoiCategoryIconNormal(category, new Handler<Bitmap>() {
                 @Override
                 public void onSuccess(Bitmap bitmap) {
                     try {
@@ -288,7 +322,7 @@ public class PluginHelper {
         try {
             JSONObject jsonoCategory = args.getJSONObject(0);
             PoiCategory category = LocationWrapper.poiCategoryFromJsonObject(jsonoCategory);
-            SitumSdk.communicationManager().fetchPoiCategoryIconSelected(category, new Handler<Bitmap>() {
+            getCommunicationManagerInstance().fetchPoiCategoryIconNormal(category, new Handler<Bitmap>() {
                 @Override
                 public void onSuccess(Bitmap bitmap) {
                     try {
@@ -317,7 +351,7 @@ public class PluginHelper {
         try {
             JSONObject jsonoBuilding = args.getJSONObject(0);
             Building building = LocationWrapper.buildingJsonObjectToBuilding(jsonoBuilding);
-            SitumSdk.communicationManager().fetchEventsFromBuilding(building, new HashMap<String, Object>(),
+            getCommunicationManagerInstance().fetchEventsFromBuilding(building, new HashMap<String, Object>(),
                     new Handler<Collection<es.situm.sdk.v1.SitumEvent>>() {
                         @Override
                         public void onSuccess(Collection<SitumEvent> situmEvents) {
@@ -356,7 +390,7 @@ public class PluginHelper {
         try {
             JSONObject jsonoFloor = args.getJSONObject(0);
             Floor floor = LocationWrapper.floorJsonObjectToFloor(jsonoFloor);
-            SitumSdk.communicationManager().fetchMapFromFloor(floor, new Handler<Bitmap>() {
+            getCommunicationManagerInstance().fetchMapFromFloor(floor, new Handler<Bitmap>() {
                 @Override
                 public void onSuccess(Bitmap bitmap) {
                     try {
@@ -640,11 +674,11 @@ public class PluginHelper {
     }
 
     public static void invalidateCache(CallbackContext callbackContext) {
-        SitumSdk.communicationManager().invalidateCache();
+        getCommunicationManagerInstance().invalidateCache();
         callbackContext.sendPluginResult(new PluginResult(Status.OK, "Cache invalidated"));
     }
 
-    public static void requestNavigationUpdates(final CordovaInterface cordova,
+    public static void requestNavigationUpdates(CordovaInterface cordova,
      CordovaWebView webView, 
      JSONArray args, 
      final CallbackContext callbackContext) {
@@ -680,31 +714,6 @@ public class PluginHelper {
                     builder.distanceToGoalThreshold(distanceToGoalThreshold);
                 }
 
-                if (navigationJSONOptions.has(LocationWrapper.DISTANCE_TO_CHANGE_FLOOR_THRESHOLD)) {
-                    Double distanceToChangeFloorThreshold = navigationJSONOptions.getDouble(LocationWrapper.DISTANCE_TO_CHANGE_FLOOR_THRESHOLD);
-                    builder.distanceToChangeFloorThreshold(distanceToChangeFloorThreshold);
-                }
-
-                if (navigationJSONOptions.has(LocationWrapper.DISTANCE_TO_CHANGE_INDICATION_THRESHOLD)) {
-                    Double distanceToChangeIndicationThreshold = navigationJSONOptions.getDouble(LocationWrapper.DISTANCE_TO_CHANGE_INDICATION_THRESHOLD);
-                    builder.distanceToChangeIndicationThreshold(distanceToChangeIndicationThreshold);
-                }
-
-                if (navigationJSONOptions.has(LocationWrapper.INDICATIONS_INTERVAL)) {
-                    Long indicationsInterval = navigationJSONOptions.getLong(LocationWrapper.INDICATIONS_INTERVAL);
-                    builder.indicationsInterval(indicationsInterval);
-                }
-
-                if (navigationJSONOptions.has(LocationWrapper.TIME_TO_FIRST_INDICATION)) {
-                    Long timeToFirstIndication = navigationJSONOptions.getLong(LocationWrapper.TIME_TO_FIRST_INDICATION);
-                    builder.timeToFirstIndication(timeToFirstIndication);
-                }
-
-                if (navigationJSONOptions.has(LocationWrapper.ROUND_INDICATION_STEP)) {
-                    Integer roundIndicationsStep = navigationJSONOptions.getInt(LocationWrapper.ROUND_INDICATION_STEP);
-                    builder.roundIndicationsStep(roundIndicationsStep);
-                }
-
             } catch (Exception e) {
                 //TODO: handle exception
                 Log.d(TAG, "Situm >> Unable to retrieve navigation options. Applying default ones");
@@ -717,7 +726,7 @@ public class PluginHelper {
                 public void onProgress(NavigationProgress progress) {
                     Log.d(TAG, "On progress received: " + progress);
                     try {
-                        JSONObject jsonProgress = LocationWrapper.navigationProgressToJsonObject(progress, cordova.getActivity());
+                        JSONObject jsonProgress = LocationWrapper.navigationProgressToJsonObject(progress);
                         try {
                             jsonProgress.put("type", "progress");
                         } catch (JSONException e) {
@@ -766,7 +775,7 @@ public class PluginHelper {
             };
             
             // 3)  Connect interfaces and connect callback back to js
-            SitumSdk.navigationManager().requestNavigationUpdates(navigationRequest, navigationListener); // Be carefull with exceptions
+            getNavigationManagerInstance().requestNavigationUpdates(navigationRequest, navigationListener); // Be carefull with exceptions
 
             PluginResult result = new PluginResult(Status.OK, "Requested navigation successfully"); // TODO: Change this to return an object with valid information
             result.setKeepCallback(true);
@@ -790,7 +799,7 @@ public class PluginHelper {
                 Log.i(TAG, "UpdateNavigation with Location: " + actualLocation);
 
                 // 3) Connect interfaces
-                SitumSdk.navigationManager().updateWithLocation(actualLocation); // TODO: Return a message (PluginResult)
+            getNavigationManagerInstance().updateWithLocation(actualLocation); // TODO: Return a message (PluginResult)
             } catch (Exception e) {
                 e.printStackTrace();
                 callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
@@ -804,7 +813,7 @@ public class PluginHelper {
     final CallbackContext callbackContext) {
         // 
         Log.i(TAG, "Remove navigation updates");
-        SitumSdk.navigationManager().removeUpdates(); // TODO: Incorporate sending a result to the exterior
+        getNavigationManagerInstance().removeUpdates(); // TODO: Incorporate sending a result to the exterior
     }
 
     public static void requestDirections(final CordovaInterface cordova, CordovaWebView webView, JSONArray args,
