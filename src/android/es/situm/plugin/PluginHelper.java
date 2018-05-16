@@ -706,7 +706,7 @@ public class PluginHelper {
                 }
 
                 if (navigationJSONOptions.has(LocationWrapper.TIME_TO_IGNORE_UNEXPECTED_FLOOR_CHANGES)) {
-                    Long timeToIgnoreUnexpectedFloorChanges = navigationJSONOptions.getLong(LocationWrapper.TIME_TO_IGNORE_UNEXPECTED_FLOOR_CHANGES);
+                    Integer timeToIgnoreUnexpectedFloorChanges = navigationJSONOptions.getInt(LocationWrapper.TIME_TO_IGNORE_UNEXPECTED_FLOOR_CHANGES);
                     builder.timeToIgnoreUnexpectedFloorChanges(timeToIgnoreUnexpectedFloorChanges);
                 }
 
