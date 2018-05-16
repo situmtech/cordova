@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AvailabilityMacros.h>
 
 #import "SITIndication.h"
 #import "SITPoint.h"
 #import "SITRouteStep.h"
+#import "SITLocation.h"
 
 
 /**
@@ -46,7 +48,12 @@
 /**
  Closest point inside the route closer to the user's location.
  */
-@property (nonatomic, strong) SITPoint *closestPointToRoute;
+@property (nonatomic, strong) SITPoint *closestPointToRoute __attribute__((deprecated))DEPRECATED_MSG_ATTRIBUTE("Use closestLocationInRoute.position instead");
+
+/**
+ Closest location inside the route closer to the user's location.
+ */
+@property (nonatomic, strong) SITLocation *closestLocationInRoute;
 
 /**
  The indication a user should follow in order to arrive the destination following a route.

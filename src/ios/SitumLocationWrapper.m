@@ -593,6 +593,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:[NSNumber numberWithFloat:navigationProgress.timeToEndStep] forKey:@"timeToEndStep"];
     [jo setObject:[NSNumber numberWithFloat:navigationProgress.timeToGoal] forKey:@"timeToGoal"];
     [jo setObject:[self routeStepToJsonObject:navigationProgress.routeStep] forKey:@"routeStep"];
+    [jo setObject:[self locationToJsonObject:navigationProgress.closestLocationInRoute] forKey:@"closestLocationInRoute"];
     return jo.copy;
 }
 
