@@ -11,7 +11,6 @@ log.txt
 *.sublime-workspace
 .vscode/
 npm-debug.log*
-
 .idea/
 .sass-cache/
 .tmp/
@@ -27,8 +26,17 @@ plugins/
 plugins/android.json
 plugins/ios.json
 $RECYCLE.BIN/
-
+.gradle/
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
 /.DS_Store
+tests/yarn\.lock
+tests/package-lock\.json
+package-lock\.json
+
+framework/
+
+bin/
+
+*.lock

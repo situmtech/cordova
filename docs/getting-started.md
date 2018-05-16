@@ -257,6 +257,15 @@ Calculates a route between two [points](/sdk_documentation/cordova/jsdoc/1.3.10/
 Requests navigation updates. This method should be called after `requestDirections` in order to provide navigation updates when a new position is computed.
 
 ```javascript
+  var navigationOptions = new Object();
+  navigationOptions.distanceToFloorChangeThreshold = 0; // enteiro en metros
+  navigationOptions.distanceToChangeIndicationThreshold = 0; // enteiro en metros
+  navigationOptions.distanceToGoalThreshold = 0; // enteiro en metros
+  navigationOptions.outsideRouteThreshold = 0; // enteiro en metros
+  navigationOptions.indicationsInterval = 0; // long en milisegundos
+  navigationOptions.timeToFirstIndication = 0; // long en milisegundos
+  navigationOptions.roundIndicationsStep = 0; // enteiro en metros
+
   requestNavigationUpdates([navigationOptions], (res: any) => {
     // Progress and other navigation status messages can be processed here  
   }, (error: any) => {

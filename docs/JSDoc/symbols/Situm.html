@@ -221,6 +221,10 @@ ul.inheritsList
 	
 	<li><a href="../symbols/Situm.html">Situm</a></li>
 	
+	<li><a href="../symbols/SitumConversionArea.html">SitumConversionArea</a></li>
+	
+	<li><a href="../symbols/SitumEvent.html">SitumEvent</a></li>
+	
 </ul>
 <hr />
 			<!-- end publish.classesIndex -->
@@ -291,7 +295,7 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.fetchBuildings">fetchBuildings</a></b>(cb, error)
 								</div>
-								<div class="description">Download all the buildings for the current user</div>
+								<div class="description">Download all the buildings for the current user.</div>
 							</td>
 						</tr>
 					
@@ -362,7 +366,7 @@ Download the map image of a floor</div>
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.fetchPoiCategoryIconSelected">fetchPoiCategoryIconSelected</a></b>(-, cb, error)
+								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.fetchPoiCategoryIconSelected">fetchPoiCategoryIconSelected</a></b>(category, cb, error)
 								</div>
 								<div class="description">Get the selected category icon for a category.</div>
 							</td>
@@ -380,9 +384,27 @@ Download the map image of a floor</div>
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.requestDirections">requestDirections</a></b>(request, cb, error)
+								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.removeNavigationUpdates">removeNavigationUpdates</a></b>(cb, error)
+								</div>
+								<div class="description">Removes all location updates.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.requestDirections">requestDirections</a></b>(args, cb, error)
 								</div>
 								<div class="description">Calculates a route between two points.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.requestNavigationUpdates">requestNavigationUpdates</a></b>(args, cb, error)
+								</div>
+								<div class="description">Set the navigation params, and the listener that receives the updated navigation progress.</div>
 							</td>
 						</tr>
 					
@@ -398,7 +420,7 @@ Download the map image of a floor</div>
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.setCacheMaxAge">setCacheMaxAge</a></b>(maxAge, cb, error)
+								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.setCacheMaxAge">setCacheMaxAge</a></b>(cacheAge, cb, error)
 								</div>
 								<div class="description">Sets the maximum age of a cached response.</div>
 							</td>
@@ -428,6 +450,15 @@ Download the map image of a floor</div>
 								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.stopPositioning">stopPositioning</a></b>(cb, error)
 								</div>
 								<div class="description">Stop locationListener on current active listener.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">Situm.<b><a href="../symbols/Situm.html#.updateNavigationWithLocation">updateNavigationWithLocation</a></b>(location, cb, error)
+								</div>
+								<div class="description">Informs NavigationManager object the change of the user's location.</div>
 							</td>
 						</tr>
 					
@@ -487,7 +518,8 @@ Download the map image of a floor</div>
 					
 					</div>
 					<div class="description">
-						Download all the buildings for the current user
+						Download all the buildings for the current user.
+Download all the buildings for the current user
 						
 						
 					</div>
@@ -499,16 +531,16 @@ Download the map image of a floor</div>
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>cb</b>
+									<span class="light fixedFont">{function}</span> <b>cb</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive data.</dd>
+								<dd>Cordova native callback to recive data.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>error</b>
+									<span class="light fixedFont">{function}</span> <b>error</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive errors.</dd>
+								<dd>Cordova native callback to recive errors.</dd>
 							
 							</dl>
 						
@@ -519,7 +551,7 @@ Download the map image of a floor</div>
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{<a href="../symbols/Building.html">Building</a>[]}</span> - buildings array.</dd>
+								<dd><span class="light fixedFont">{<a href="../symbols/Building.html">Building</a>[]}</span> buildings Array of buildings.</dd>
 							
 							</dl>
 						
@@ -552,19 +584,19 @@ Download the events of a building
 									<span class="light fixedFont">{<a href="../symbols/Building.html">Building</a>}</span> <b>building</b>
 									
 								</dt>
-								<dd>- the building. Not null.</dd>
+								<dd>The building. Not null.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>cb</b>
+									<span class="light fixedFont">{function}</span> <b>cb</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive data.</dd>
+								<dd>Cordova native callback to recive data.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>error</b>
+									<span class="light fixedFont">{function}</span> <b>error</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive errors.</dd>
+								<dd>Cordova native callback to recive errors.</dd>
 							
 							</dl>
 						
@@ -575,7 +607,7 @@ Download the events of a building
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{event[]}</span> The evetns of a building</dd>
+								<dd><span class="light fixedFont">{event[]}</span> events The evetns of a building</dd>
 							
 							</dl>
 						
@@ -608,19 +640,19 @@ Download all the floors of a building
 									<span class="light fixedFont">{<a href="../symbols/Building.html">Building</a>}</span> <b>building</b>
 									
 								</dt>
-								<dd>- the building. Not null.</dd>
+								<dd>The building. Not null.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>cb</b>
+									<span class="light fixedFont">{function}</span> <b>cb</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive data.</dd>
+								<dd>Cordova native callback to recive data.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>error</b>
+									<span class="light fixedFont">{function}</span> <b>error</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive errors.</dd>
+								<dd>Cordova native callback to recive errors.</dd>
 							
 							</dl>
 						
@@ -631,7 +663,7 @@ Download all the floors of a building
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{<a href="../symbols/Floor.html">Floor</a>[]}</span> - floors array</dd>
+								<dd><span class="light fixedFont">{<a href="../symbols/Floor.html">Floor</a>[]}</span> floors Array of floors.</dd>
 							
 							</dl>
 						
@@ -664,19 +696,19 @@ Download the indoor POIs of a building
 									<span class="light fixedFont">{<a href="../symbols/Building.html">Building</a>}</span> <b>building</b>
 									
 								</dt>
-								<dd>- the building. Not null.</dd>
+								<dd>The building. Not null.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>cb</b>
+									<span class="light fixedFont">{function}</span> <b>cb</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive data.</dd>
+								<dd>Cordova native callback to recive data.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>error</b>
+									<span class="light fixedFont">{function}</span> <b>error</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive errors.</dd>
+								<dd>Cordova native callback to recive errors.</dd>
 							
 							</dl>
 						
@@ -687,7 +719,7 @@ Download the indoor POIs of a building
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{<a href="../symbols/Poi.html">Poi</a>[]}</span> - Array of POIs</dd>
+								<dd><span class="light fixedFont">{<a href="../symbols/Poi.html">Poi</a>[]}</span> pois Array of POIs</dd>
 							
 							</dl>
 						
@@ -699,7 +731,7 @@ Download the indoor POIs of a building
 					<a name=".fetchMapFromFloor"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
-					<span class="light">{map}</span>
+					<span class="light">{bitmap}</span>
 					<span class="light">Situm.</span><b>fetchMapFromFloor</b>(floor, cb, error)
 					
 					</div>
@@ -720,19 +752,19 @@ Download the map image of a floor
 									<span class="light fixedFont">{<a href="../symbols/Floor.html">Floor</a>}</span> <b>floor</b>
 									
 								</dt>
-								<dd>- the floor. Not null.</dd>
+								<dd>The floor. Not null.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>cb</b>
+									<span class="light fixedFont">{function}</span> <b>cb</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive data.</dd>
+								<dd>Cordova native callback to recive data.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>error</b>
+									<span class="light fixedFont">{function}</span> <b>error</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive errors.</dd>
+								<dd>Cordova native callback to recive errors.</dd>
 							
 							</dl>
 						
@@ -743,7 +775,7 @@ Download the map image of a floor
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{map}</span> - The map image</dd>
+								<dd><span class="light fixedFont">{bitmap}</span> map The map image</dd>
 							
 							</dl>
 						
@@ -776,19 +808,19 @@ Download the outdoor POIs of a building
 									<span class="light fixedFont">{<a href="../symbols/Building.html">Building</a>}</span> <b>building</b>
 									
 								</dt>
-								<dd>- the building. Not null.</dd>
+								<dd>The building. Not null.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>cb</b>
+									<span class="light fixedFont">{function}</span> <b>cb</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive data.</dd>
+								<dd>Cordova native callback to recive data.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>error</b>
+									<span class="light fixedFont">{function}</span> <b>error</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive errors.</dd>
+								<dd>Cordova native callback to recive errors.</dd>
 							
 							</dl>
 						
@@ -799,7 +831,7 @@ Download the outdoor POIs of a building
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{<a href="../symbols/Poi.html">Poi</a>[]}</span> - Array of POIs</dd>
+								<dd><span class="light fixedFont">{<a href="../symbols/Poi.html">Poi</a>[]}</span> pois Array of POIs</dd>
 							
 							</dl>
 						
@@ -829,16 +861,16 @@ Get all POI categories, download and cache their icons asynchronously. To get so
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>cb</b>
+									<span class="light fixedFont">{function}</span> <b>cb</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive data.</dd>
+								<dd>Cordova native callback to recive data.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>error</b>
+									<span class="light fixedFont">{function}</span> <b>error</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive errors.</dd>
+								<dd>Cordova native callback to recive errors.</dd>
 							
 							</dl>
 						
@@ -849,7 +881,7 @@ Get all POI categories, download and cache their icons asynchronously. To get so
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{<a href="../symbols/PoiCategory.html">PoiCategory</a>[]}</span> - poiCategories</dd>
+								<dd><span class="light fixedFont">{<a href="../symbols/PoiCategory.html">PoiCategory</a>[]}</span> poiCategories The poiCategories array</dd>
 							
 							</dl>
 						
@@ -861,7 +893,7 @@ Get all POI categories, download and cache their icons asynchronously. To get so
 					<a name=".fetchPoiCategoryIconNormal"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
-					<span class="light">{icon}</span>
+					<span class="light">{bitmap}</span>
 					<span class="light">Situm.</span><b>fetchPoiCategoryIconNormal</b>(category, cb, error)
 					
 					</div>
@@ -882,19 +914,19 @@ Get the normal category icon for a category
 									<span class="light fixedFont">{<a href="../symbols/PoiCategory.html">PoiCategory</a>}</span> <b>category</b>
 									
 								</dt>
-								<dd>- the category. Not null.</dd>
+								<dd>The category. Not null.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>cb</b>
+									<span class="light fixedFont">{function}</span> <b>cb</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive data.</dd>
+								<dd>Cordova native callback to recive data.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>error</b>
+									<span class="light fixedFont">{function}</span> <b>error</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive errors.</dd>
+								<dd>Cordova native callback to recive errors.</dd>
 							
 							</dl>
 						
@@ -905,7 +937,7 @@ Get the normal category icon for a category
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{icon}</span> - The category icon</dd>
+								<dd><span class="light fixedFont">{bitmap}</span> icon The category icon</dd>
 							
 							</dl>
 						
@@ -917,8 +949,8 @@ Get the normal category icon for a category
 					<a name=".fetchPoiCategoryIconSelected"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
-					<span class="light">{icon}</span>
-					<span class="light">Situm.</span><b>fetchPoiCategoryIconSelected</b>(-, cb, error)
+					<span class="light">{bitmap}</span>
+					<span class="light">Situm.</span><b>fetchPoiCategoryIconSelected</b>(category, cb, error)
 					
 					</div>
 					<div class="description">
@@ -935,22 +967,22 @@ Get the selected category icon for a category
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{<a href="../symbols/PoiCategory.html">PoiCategory</a>}</span> <b>-</b>
+									<span class="light fixedFont">{<a href="../symbols/PoiCategory.html">PoiCategory</a>}</span> <b>category</b>
 									
 								</dt>
-								<dd>the category. Not null.</dd>
+								<dd>The category. Not null.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>cb</b>
+									<span class="light fixedFont">{function}</span> <b>cb</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive data.</dd>
+								<dd>Cordova native callback to recive data.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>error</b>
+									<span class="light fixedFont">{function}</span> <b>error</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive errors.</dd>
+								<dd>Cordova native callback to recive errors.</dd>
 							
 							</dl>
 						
@@ -961,7 +993,7 @@ Get the selected category icon for a category
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{icon}</span> - The category icon</dd>
+								<dd><span class="light fixedFont">{bitmap}</span> icon The category icon</dd>
 							
 							</dl>
 						
@@ -991,16 +1023,16 @@ Invalidate all the resources in the cache
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>cb</b>
+									<span class="light fixedFont">{function}</span> <b>cb</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive data.</dd>
+								<dd>Cordova native callback to recive data.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>error</b>
+									<span class="light fixedFont">{function}</span> <b>error</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive errors.</dd>
+								<dd>Cordova native callback to recive errors.</dd>
 							
 							</dl>
 						
@@ -1020,11 +1052,61 @@ Invalidate all the resources in the cache
 
 					<hr />
 				
+					<a name=".removeNavigationUpdates"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{boolean}</span>
+					<span class="light">Situm.</span><b>removeNavigationUpdates</b>(cb, error)
+					
+					</div>
+					<div class="description">
+						Removes all location updates.
+Removes all location updates. This removes the internal state of the manager, including the listener provided in requestNavigationUpdates(NavigationRequest, NavigationListener), so it won't receive more progress updates.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{function}</span> <b>cb</b>
+									
+								</dt>
+								<dd>Cordova native callback to recive data.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{function}</span> <b>error</b>
+									
+								</dt>
+								<dd>Cordova native callback to recive errors.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{boolean}</span> success True if a listener was removed. False if there was no listener.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
 					<a name=".requestDirections"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					<span class="light">{<a href="../symbols/Route.html">Route</a>}</span>
-					<span class="light">Situm.</span><b>requestDirections</b>(request, cb, error)
+					<span class="light">Situm.</span><b>requestDirections</b>(args, cb, error)
 					
 					</div>
 					<div class="description">
@@ -1041,22 +1123,40 @@ Calculates a route between two points.
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{args}</span> <b>request</b>
+									<span class="light fixedFont">{object}</span> <b>args</b>
 									
 								</dt>
-								<dd>- request - non-null search parameters. {@link Building building}, {@link Point from} and {@link Point to}. Points have to be inside the same building.</dd>
+								<dd>Request - non-null search parameters.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>cb</b>
+									<span class="light fixedFont">{<a href="../symbols/Building.html">Building</a>}</span> <b>args.building</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive data.</dd>
+								<dd></dd>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>error</b>
+									<span class="light fixedFont">{<a href="../symbols/Point.html">Point</a>}</span> <b>args.from</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive errors.</dd>
+								<dd>Points have to be inside the same building.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/Point.html">Point</a>}</span> <b>args.to</b>
+									
+								</dt>
+								<dd>Points have to be inside the same building.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{function}</span> <b>cb</b>
+									
+								</dt>
+								<dd>Cordova native callback to recive data.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{function}</span> <b>error</b>
+									
+								</dt>
+								<dd>Cordova native callback to recive errors.</dd>
 							
 							</dl>
 						
@@ -1067,7 +1167,105 @@ Calculates a route between two points.
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{<a href="../symbols/Route.html">Route</a>}</span> - The route between provided points</dd>
+								<dd><span class="light fixedFont">{<a href="../symbols/Route.html">Route</a>}</span> route The route between provided points</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".requestNavigationUpdates"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{void}</span>
+					<span class="light">Situm.</span><b>requestNavigationUpdates</b>(args, cb, error)
+					
+					</div>
+					<div class="description">
+						Set the navigation params, and the listener that receives the updated navigation progress.
+Set the navigation params, and the listener that receives the updated navigation progress. Can only exist one navigation with one listener at a time. If this method was previously invoked, but removeUpdates() wasn't, removeUpdates() is called internally.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{object}</span> <b>args</b>
+									
+								</dt>
+								<dd>Request non-null search parameters. Must be an object with next properties:</dd>
+							
+								<dt>
+									<span class="light fixedFont">{number}</span> <b>args.distanceToFloorChangeThreshold</b>
+									<i>Optional</i>
+								</dt>
+								<dd>DistanceToFloorChangeThreshold, integer in meters</dd>
+							
+								<dt>
+									<span class="light fixedFont">{number}</span> <b>args.distanceToChangeIndicationThreshold</b>
+									<i>Optional</i>
+								</dt>
+								<dd>DistanceToChangeIndicationThreshold, integer in meters</dd>
+							
+								<dt>
+									<span class="light fixedFont">{number}</span> <b>args.distanceToGoalThreshold</b>
+									<i>Optional</i>
+								</dt>
+								<dd>DistanceToGoalThreshold, integer in meters</dd>
+							
+								<dt>
+									<span class="light fixedFont">{number}</span> <b>args.outsideRouteThreshold</b>
+									<i>Optional</i>
+								</dt>
+								<dd>OutsideRouteThreshold, integer in meters</dd>
+							
+								<dt>
+									<span class="light fixedFont">{number}</span> <b>args.indicationsInterval</b>
+									<i>Optional</i>
+								</dt>
+								<dd>IndicationsInterval, long in miliseconds</dd>
+							
+								<dt>
+									<span class="light fixedFont">{number}</span> <b>args.timeToFirstIndication</b>
+									<i>Optional</i>
+								</dt>
+								<dd>TimeToFirstIndication, long in miliseconds</dd>
+							
+								<dt>
+									<span class="light fixedFont">{number}</span> <b>args.roundIndicationsStep</b>
+									<i>Optional</i>
+								</dt>
+								<dd>RoundIndicationsStep, integer in meters</dd>
+							
+								<dt>
+									<span class="light fixedFont">{function}</span> <b>cb</b>
+									
+								</dt>
+								<dd>Cordova native callback to recive data.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{function}</span> <b>error</b>
+									
+								</dt>
+								<dd>Cordova native callback to recive errors.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{void}</span> </dd>
 							
 							</dl>
 						
@@ -1100,25 +1298,25 @@ Provides your API key to the Situm SDK. This key is generated for your applicati
 									<span class="light fixedFont">{string}</span> <b>email</b>
 									
 								</dt>
-								<dd>- email that identifies the account. Can't be empty.</dd>
+								<dd>Email that identifies the account. Can't be empty.</dd>
 							
 								<dt>
 									<span class="light fixedFont">{string}</span> <b>apiKey</b>
 									
 								</dt>
-								<dd>- key obtained at situm.es. Can't be empty.</dd>
+								<dd>Key obtained at situm.es. Can't be empty.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>cb</b>
+									<span class="light fixedFont">{function}</span> <b>cb</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive data.</dd>
+								<dd>Cordova native callback to recive data.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>error</b>
+									<span class="light fixedFont">{function}</span> <b>error</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive errors.</dd>
+								<dd>Cordova native callback to recive errors.</dd>
 							
 							</dl>
 						
@@ -1129,7 +1327,7 @@ Provides your API key to the Situm SDK. This key is generated for your applicati
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{boolean}</span> true if operation finished successfully, otherwise false</dd>
+								<dd><span class="light fixedFont">{boolean}</span> success True if operation finished successfully, otherwise false</dd>
 							
 							</dl>
 						
@@ -1142,7 +1340,7 @@ Provides your API key to the Situm SDK. This key is generated for your applicati
 					<div class="fixedFont">&lt;static&gt; 
 					
 					<span class="light">{void}</span>
-					<span class="light">Situm.</span><b>setCacheMaxAge</b>(maxAge, cb, error)
+					<span class="light">Situm.</span><b>setCacheMaxAge</b>(cacheAge, cb, error)
 					
 					</div>
 					<div class="description">
@@ -1159,22 +1357,22 @@ Sets the maximum age of a cached response. If the cache response's age exceeds m
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{number}</span> <b>maxAge</b>
+									<span class="light fixedFont">{number}</span> <b>cacheAge</b>
 									
 								</dt>
-								<dd>- a non-negative integer</dd>
+								<dd>A non-negative integer</dd>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>cb</b>
+									<span class="light fixedFont">{function}</span> <b>cb</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive data.</dd>
+								<dd>Cordova native callback to recive data.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>error</b>
+									<span class="light fixedFont">{function}</span> <b>error</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive errors.</dd>
+								<dd>Cordova native callback to recive errors.</dd>
 							
 							</dl>
 						
@@ -1218,25 +1416,25 @@ Provides user's email and password. This credentials will be used to obtain a va
 									<span class="light fixedFont">{string}</span> <b>email</b>
 									
 								</dt>
-								<dd>- user's email. Can't be empty.</dd>
+								<dd>User's email. Can't be empty.</dd>
 							
 								<dt>
 									<span class="light fixedFont">{string}</span> <b>password</b>
 									
 								</dt>
-								<dd>- user's password. Can't be empty.</dd>
+								<dd>User's password. Can't be empty.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>cb</b>
+									<span class="light fixedFont">{function}</span> <b>cb</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive data.</dd>
+								<dd>Cordova native callback to recive data.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>error</b>
+									<span class="light fixedFont">{function}</span> <b>error</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive errors.</dd>
+								<dd>Cordova native callback to recive errors.</dd>
 							
 							</dl>
 						
@@ -1247,7 +1445,7 @@ Provides user's email and password. This credentials will be used to obtain a va
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{boolean}</span> true if operation finished successfully, otherwise false</dd>
+								<dd><span class="light fixedFont">{boolean}</span> success True if operation finished successfully, otherwise false</dd>
 							
 							</dl>
 						
@@ -1259,7 +1457,7 @@ Provides user's email and password. This credentials will be used to obtain a va
 					<a name=".startPositioning"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
-					<span class="light">{position}</span>
+					<span class="light">{<a href="../symbols/Location.html">Location</a>}</span>
 					<span class="light">Situm.</span><b>startPositioning</b>(arrBuilding, cb, error)
 					
 					</div>
@@ -1279,19 +1477,19 @@ Provides user's email and password. This credentials will be used to obtain a va
 									<span class="light fixedFont">{<a href="../symbols/Building.html">Building</a>}</span> <b>arrBuilding</b>
 									
 								</dt>
-								<dd>- Array of buildings to activate locationListener, the plugin only uses the first building.</dd>
+								<dd>Array of buildings to activate locationListener, the plugin only uses the first building.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>cb</b>
+									<span class="light fixedFont">{function}</span> <b>cb</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive data.</dd>
+								<dd>Cordova native callback to recive data.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>error</b>
+									<span class="light fixedFont">{function}</span> <b>error</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive errors.</dd>
+								<dd>Cordova native callback to recive errors.</dd>
 							
 							</dl>
 						
@@ -1302,7 +1500,7 @@ Provides user's email and password. This credentials will be used to obtain a va
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{position}</span> position - Current position of device.</dd>
+								<dd><span class="light fixedFont">{<a href="../symbols/Location.html">Location</a>}</span> position Current position of device.</dd>
 							
 							</dl>
 						
@@ -1320,6 +1518,7 @@ Provides user's email and password. This credentials will be used to obtain a va
 					</div>
 					<div class="description">
 						Stop locationListener on current active listener.
+Stop locationListener on current active listener.
 						
 						
 					</div>
@@ -1331,16 +1530,16 @@ Provides user's email and password. This credentials will be used to obtain a va
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>cb</b>
+									<span class="light fixedFont">{function}</span> <b>cb</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive data.</dd>
+								<dd>Cordova native callback to recive data.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{callback}</span> <b>error</b>
+									<span class="light fixedFont">{function}</span> <b>error</b>
 									
 								</dt>
-								<dd>- Cordova native callback to recive errors.</dd>
+								<dd>Cordova native callback to recive errors.</dd>
 							
 							</dl>
 						
@@ -1352,6 +1551,62 @@ Provides user's email and password. This credentials will be used to obtain a va
 							<dt class="heading">Returns:</dt>
 							
 								<dd><span class="light fixedFont">{void}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".updateNavigationWithLocation"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{boolean}</span>
+					<span class="light">Situm.</span><b>updateNavigationWithLocation</b>(location, cb, error)
+					
+					</div>
+					<div class="description">
+						Informs NavigationManager object the change of the user's location.
+Informs NavigationManager object the change of the user's location.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/Location.html">Location</a>}</span> <b>location</b>
+									
+								</dt>
+								<dd>New Location of the user. If null, nothing is done.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{function}</span> <b>cb</b>
+									
+								</dt>
+								<dd>Cordova native callback to recive data.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{function}</span> <b>error</b>
+									
+								</dt>
+								<dd>Cordova native callback to recive errors.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{boolean}</span> success True if there is a listener to which notify progress update. False if there isn't, so this method do nothing.</dd>
 							
 							</dl>
 						
@@ -1372,7 +1627,7 @@ Provides user's email and password. This credentials will be used to obtain a va
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Fri Mar 23 2018 14:35:10 GMT+0100 (CET)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Fri May 04 2018 09:24:12 GMT+0200 (CEST)
 		</div>
 	</body>
 </html>
