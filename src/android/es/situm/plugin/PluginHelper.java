@@ -705,6 +705,11 @@ public class PluginHelper {
                     builder.roundIndicationsStep(roundIndicationsStep);
                 }
 
+                if (navigationJSONOptions.has(LocationWrapper.TIME_TO_IGNORE_UNEXPECTED_FLOOR_CHANGES)) {
+                    Integer timeToIgnoreUnexpectedFloorChanges = navigationJSONOptions.getInt(LocationWrapper.TIME_TO_IGNORE_UNEXPECTED_FLOOR_CHANGES);
+                    builder.timeToIgnoreUnexpectedFloorChanges(timeToIgnoreUnexpectedFloorChanges);
+                }
+
             } catch (Exception e) {
                 //TODO: handle exception
                 Log.d(TAG, "Situm >> Unable to retrieve navigation options. Applying default ones");
