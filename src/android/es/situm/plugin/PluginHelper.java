@@ -288,7 +288,7 @@ public class PluginHelper {
         try {
             JSONObject jsonoCategory = args.getJSONObject(0);
             PoiCategory category = LocationWrapper.poiCategoryFromJsonObject(jsonoCategory);
-            SitumSdk.communicationManager().fetchPoiCategoryIconNormal(category, new Handler<Bitmap>() {
+            SitumSdk.communicationManager().fetchPoiCategoryIconSelected(category, new Handler<Bitmap>() {
                 @Override
                 public void onSuccess(Bitmap bitmap) {
                     try {
@@ -644,7 +644,7 @@ public class PluginHelper {
         callbackContext.sendPluginResult(new PluginResult(Status.OK, "Cache invalidated"));
     }
 
-    public static void requestNavigationUpdates(CordovaInterface cordova,
+    public static void requestNavigationUpdates(final CordovaInterface cordova,
      CordovaWebView webView, 
      JSONArray args, 
      final CallbackContext callbackContext) {
@@ -680,6 +680,31 @@ public class PluginHelper {
                     builder.distanceToGoalThreshold(distanceToGoalThreshold);
                 }
 
+                if (navigationJSONOptions.has(LocationWrapper.DISTANCE_TO_CHANGE_FLOOR_THRESHOLD)) {
+                    Double distanceToChangeFloorThreshold = navigationJSONOptions.getDouble(LocationWrapper.DISTANCE_TO_CHANGE_FLOOR_THRESHOLD);
+                    builder.distanceToChangeFloorThreshold(distanceToChangeFloorThreshold);
+                }
+
+                if (navigationJSONOptions.has(LocationWrapper.DISTANCE_TO_CHANGE_INDICATION_THRESHOLD)) {
+                    Double distanceToChangeIndicationThreshold = navigationJSONOptions.getDouble(LocationWrapper.DISTANCE_TO_CHANGE_INDICATION_THRESHOLD);
+                    builder.distanceToChangeIndicationThreshold(distanceToChangeIndicationThreshold);
+                }
+
+                if (navigationJSONOptions.has(LocationWrapper.INDICATIONS_INTERVAL)) {
+                    Long indicationsInterval = navigationJSONOptions.getLong(LocationWrapper.INDICATIONS_INTERVAL);
+                    builder.indicationsInterval(indicationsInterval);
+                }
+
+                if (navigationJSONOptions.has(LocationWrapper.TIME_TO_FIRST_INDICATION)) {
+                    Long timeToFirstIndication = navigationJSONOptions.getLong(LocationWrapper.TIME_TO_FIRST_INDICATION);
+                    builder.timeToFirstIndication(timeToFirstIndication);
+                }
+
+                if (navigationJSONOptions.has(LocationWrapper.ROUND_INDICATION_STEP)) {
+                    Integer roundIndicationsStep = navigationJSONOptions.getInt(LocationWrapper.ROUND_INDICATION_STEP);
+                    builder.roundIndicationsStep(roundIndicationsStep);
+                }
+
             } catch (Exception e) {
                 //TODO: handle exception
                 Log.d(TAG, "Situm >> Unable to retrieve navigation options. Applying default ones");
@@ -692,7 +717,7 @@ public class PluginHelper {
                 public void onProgress(NavigationProgress progress) {
                     Log.d(TAG, "On progress received: " + progress);
                     try {
-                        JSONObject jsonProgress = LocationWrapper.navigationProgressToJsonObject(progress);
+                        JSONObject jsonProgress = LocationWrapper.navigationProgressToJsonObject(progress, cordova.getActivity());
                         try {
                             jsonProgress.put("type", "progress");
                         } catch (JSONException e) {

@@ -33,6 +33,7 @@
       - [updateNavigationWithLocation](#--updatenavigationwithlocation)
       - [removeNavigationUpdates](#--removenavigationupdates)
   * [License](#license)
+  * [More information](#more-information)
 
 ---
 
@@ -299,6 +300,13 @@ Calculates a route between two [points](http://developers.situm.es/sdk_documenta
 Necessary step to request progress. Alone this method does not provide progress object. You must feed navigation API with location, as indicated on updateNavigationWithLocation section.
 
 ```javascript
+  var navigationOptions = new Object();
+  navigationOptions["distanceToIgnoreFirstIndication"] = 0.3; // (Optional) meters;
+  navigationOptions["outsideRouteThreshold"] = 10; // (Optional) meters;
+  navigationOptions["distanceToGoalThreshold"] = 7; // (Optional) meters;
+  navigationOptions["distanceToFloorChangeThreshold"] = 10; // (Optional) meters;
+  navigationOptions["distanceToChangeIndicationThreshold"] = 5; // (Optional) meters
+
   requestNavigationUpdates([navigationOptions], (res: any) => {
     // Progress and other navigation status messages can be processed here  
   }, (error: any) => {
@@ -329,3 +337,8 @@ When you are no longer interested on Navigation Updates you should call this met
 ## License
 
 Situm-Cordova-Plugin is licensed under [MIT License](https://opensource.org/licenses/MIT)
+
+## More information
+
+More info is available at our [Developers Page](http://developers.situm.es/pages/cordova/).
+For any other question, contact us [here](mailto:support@situm.es)
