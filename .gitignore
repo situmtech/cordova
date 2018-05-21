@@ -32,3 +32,9 @@ $RECYCLE.BIN/
 Thumbs.db
 UserInterfaceState.xcuserstate
 /.DS_Store
+
+tests/yarn\.lock
+
+tests/package-lock\.json
+
+package-lock\.json
