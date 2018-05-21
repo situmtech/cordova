@@ -118,17 +118,11 @@ class LocationWrapper {
     public static final String TO = "TO";
     public static final String STEPS = "steps";
 
-    public static final String DISTANCE_TO_GOAL = "distanceToGoal";
     public static final String DISTANCE = "distance";
     public static final String DISTANCE_TO_NEXT_LEVEL = "distanceToNextLevel";
-    public static final String DISTANCE_TO_CLOSEST_POINT_IN_ROUTE = "distanceToClosestPointInRoute";
-    public static final String DISTANCE_TO_END_STEP = "distanceToEndStep";
     public static final String INDICATION_TYPE = "indicationType";
-    public static final String CURRENT_INDICATION = "currentIndication";
-    public static final String NEXT_INDICATION = "nextIndication";
     public static final String IS_FIRST = "isFirst";
     public static final String IS_LAST = "isLast";
-    public static final String CLOSEST_POINT_IN_ROUTE = "closestPointInRoute";
     public static final String STEP_IDX_DESTINATION = "stepIdxDestination";
     public static final String STEP_IDX_ORIGIN = "stepIdxOrigin";
     public static final String NEEDED_LEVEL_CHANGE = "neededLevelChange";
@@ -181,6 +175,16 @@ class LocationWrapper {
     public static final String INDICATIONS_INTERVAL = "indicationsInterval";
     public static final String TIME_TO_FIRST_INDICATION = "timeToFirstIndication";
     public static final String ROUND_INDICATION_STEP = "roundIndicationsStep";
+    public static final String TIME_TO_IGNORE_UNEXPECTED_FLOOR_CHANGES = "timeToIgnoreUnexpectedFloorChanges";
+
+    public static final String CLOSEST_POINT_IN_ROUTE = "closestPointInRoute";
+    public static final String CURRENT_INDICATION = "currentIndication";
+    public static final String NEXT_INDICATION = "nextIndication";
+    public static final String DISTANCE_TO_CLOSEST_POINT_IN_ROUTE = "distanceToClosestPointInRoute";
+    public static final String DISTANCE_TO_END_STEP = "distanceToEndStep";
+    public static final String DISTANCE_TO_GOAL = "distanceToGoal";
+    public static final String CURRENT_STEP_INDEX = "currentStepIndex";
+    public static final String CLOSEST_LOCATION_IN_ROUTE = "closestLocationInRoute";    
 
     static JSONObject buildingToJsonObject(Building building) throws JSONException {
         JSONObject jo = new JSONObject();
@@ -607,7 +611,8 @@ class LocationWrapper {
         jo.put(ROUTE_STEP, routeStepToJsonObject(navigationProgress.getRouteStep()));
         jo.put(TIME_TO_END_STEP, navigationProgress.getTimeToEndStep());
         jo.put(TIME_TO_GOAL, navigationProgress.getTimeToGoal());
-        jo.put("currentStepIndex", navigationProgress.getRouteStep().getId());
+        jo.put(CURRENT_STEP_INDEX, navigationProgress.getRouteStep().getId());
+        jo.put(CLOSEST_LOCATION_IN_ROUTE, locationToJsonObject(navigationProgress.getClosestLocationInRoute()));
         return jo;
     }
 

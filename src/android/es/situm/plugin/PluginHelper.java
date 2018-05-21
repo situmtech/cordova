@@ -714,6 +714,36 @@ public class PluginHelper {
                     builder.distanceToGoalThreshold(distanceToGoalThreshold);
                 }
 
+                if (navigationJSONOptions.has(LocationWrapper.DISTANCE_TO_CHANGE_FLOOR_THRESHOLD)) {
+                    Double distanceToChangeFloorThreshold = navigationJSONOptions.getDouble(LocationWrapper.DISTANCE_TO_CHANGE_FLOOR_THRESHOLD);
+                    builder.distanceToChangeFloorThreshold(distanceToChangeFloorThreshold);
+                }
+
+                if (navigationJSONOptions.has(LocationWrapper.DISTANCE_TO_CHANGE_INDICATION_THRESHOLD)) {
+                    Double distanceToChangeIndicationThreshold = navigationJSONOptions.getDouble(LocationWrapper.DISTANCE_TO_CHANGE_INDICATION_THRESHOLD);
+                    builder.distanceToChangeIndicationThreshold(distanceToChangeIndicationThreshold);
+                }
+
+                if (navigationJSONOptions.has(LocationWrapper.INDICATIONS_INTERVAL)) {
+                    Long indicationsInterval = navigationJSONOptions.getLong(LocationWrapper.INDICATIONS_INTERVAL);
+                    builder.indicationsInterval(indicationsInterval);
+                }
+
+                if (navigationJSONOptions.has(LocationWrapper.TIME_TO_FIRST_INDICATION)) {
+                    Long timeToFirstIndication = navigationJSONOptions.getLong(LocationWrapper.TIME_TO_FIRST_INDICATION);
+                    builder.timeToFirstIndication(timeToFirstIndication);
+                }
+
+                if (navigationJSONOptions.has(LocationWrapper.ROUND_INDICATION_STEP)) {
+                    Integer roundIndicationsStep = navigationJSONOptions.getInt(LocationWrapper.ROUND_INDICATION_STEP);
+                    builder.roundIndicationsStep(roundIndicationsStep);
+                }
+
+                if (navigationJSONOptions.has(LocationWrapper.TIME_TO_IGNORE_UNEXPECTED_FLOOR_CHANGES)) {
+                    Integer timeToIgnoreUnexpectedFloorChanges = navigationJSONOptions.getInt(LocationWrapper.TIME_TO_IGNORE_UNEXPECTED_FLOOR_CHANGES);
+                    builder.timeToIgnoreUnexpectedFloorChanges(timeToIgnoreUnexpectedFloorChanges);
+                }
+
             } catch (Exception e) {
                 //TODO: handle exception
                 Log.d(TAG, "Situm >> Unable to retrieve navigation options. Applying default ones");
