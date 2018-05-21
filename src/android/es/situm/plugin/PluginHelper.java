@@ -59,22 +59,22 @@ public class PluginHelper {
 
     private static final String TAG = "PluginHelper";
 
-    private static LocationListener locationListener;
-    private static LocationRequest locationRequest;
-    private static NavigationListener navigationListener;
-    private static NavigationRequest navigationRequest;
+    private LocationListener locationListener;
+    private LocationRequest locationRequest;
+    private NavigationListener navigationListener;
+    private NavigationRequest navigationRequest;
 
-    private static volatile CommunicationManager cmInstance;
+    private volatile CommunicationManager cmInstance;
 
-    private static volatile NavigationManager nmInstance;
+    private volatile NavigationManager nmInstance;
 
     public static final float MIN_SNR = 10;
     public static final float MAX_SNR = 40;
 
-    private static Route computedRoute;
-    private static Location computedLocation;
+    private Route computedRoute;
+    private Location computedLocation;
 
-    private static CommunicationManager getCommunicationManagerInstance() {
+    private CommunicationManager getCommunicationManagerInstance() {
         if (cmInstance == null) { //Check for the first time
             synchronized (CommunicationManager.class) {   //Check for the second time.
                 //if there is no instance available... create new one
@@ -84,11 +84,11 @@ public class PluginHelper {
         return cmInstance;
     }
 
-    public static void setCommunicationManager(CommunicationManager communicationManager) {
+    public void setCommunicationManager(CommunicationManager communicationManager) {
         cmInstance = communicationManager;
     }
 
-    private static NavigationManager getNavigationManagerInstance() {
+    private NavigationManager getNavigationManagerInstance() {
         if (nmInstance == null) { //Check for the first time
             synchronized (NavigationManager.class) {   //Check for the second time.
                 //if there is no instance available... create new one
@@ -98,11 +98,11 @@ public class PluginHelper {
         return nmInstance;
     }
 
-    public static void setNavigationManager(NavigationManager navigationManager) {
+    public void setNavigationManager(NavigationManager navigationManager) {
         nmInstance = navigationManager;
     }
 
-    public static void fetchBuildings(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+    public void fetchBuildings(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
             final CallbackContext callbackContext) {
         try {
            getCommunicationManagerInstance().fetchBuildings(new Handler<Collection<Building>>() {
@@ -136,7 +136,7 @@ public class PluginHelper {
         }
     }
 
-    public static void fetchFloorsFromBuilding(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+    public void fetchFloorsFromBuilding(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
             final CallbackContext callbackContext) {
         try {
             JSONObject jsonoBuilding = args.getJSONObject(0);
@@ -174,7 +174,7 @@ public class PluginHelper {
         }
     }
 
-    public static void fetchIndoorPOIsFromBuilding(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+    public void fetchIndoorPOIsFromBuilding(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
             final CallbackContext callbackContext) {
         try {
             JSONObject jsonoBuilding = args.getJSONObject(0);
@@ -217,7 +217,7 @@ public class PluginHelper {
         }
     }
 
-    public static void fetchOutdoorPOIsFromBuilding(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+    public void fetchOutdoorPOIsFromBuilding(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
             final CallbackContext callbackContext) {
         try {
             JSONObject jsonoBuilding = args.getJSONObject(0);
@@ -258,7 +258,7 @@ public class PluginHelper {
         }
     }
 
-    public static void fetchPoiCategories(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+    public void fetchPoiCategories(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
             final CallbackContext callbackContext) {
         getCommunicationManagerInstance().fetchPoiCategories(new Handler<Collection<PoiCategory>>() {
             @Override
@@ -288,7 +288,7 @@ public class PluginHelper {
         });
     }
 
-    public static void fetchPoiCategoryIconNormal(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+    public void fetchPoiCategoryIconNormal(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
             final CallbackContext callbackContext) {
         try {
             JSONObject jsonoCategory = args.getJSONObject(0);
@@ -317,7 +317,7 @@ public class PluginHelper {
         }
     }
 
-    public static void fetchPoiCategoryIconSelected(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+    public void fetchPoiCategoryIconSelected(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
             final CallbackContext callbackContext) {
         try {
             JSONObject jsonoCategory = args.getJSONObject(0);
@@ -346,7 +346,7 @@ public class PluginHelper {
         }
     }
 
-    public static void fetchEventsFromBuilding(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+    public void fetchEventsFromBuilding(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
             final CallbackContext callbackContext) {
         try {
             JSONObject jsonoBuilding = args.getJSONObject(0);
@@ -385,7 +385,7 @@ public class PluginHelper {
         }
     }
 
-    public static void fetchMapFromFloor(CordovaInterface cordova, CordovaWebView webView, final JSONArray args,
+    public void fetchMapFromFloor(CordovaInterface cordova, CordovaWebView webView, final JSONArray args,
             final CallbackContext callbackContext) {
         try {
             JSONObject jsonoFloor = args.getJSONObject(0);
@@ -414,7 +414,7 @@ public class PluginHelper {
         }
     }
 
-    public static OutdoorLocationOptions buildOutdoorLocationOptions(JSONObject outdoorLocationOptions) throws JSONException{
+    public OutdoorLocationOptions buildOutdoorLocationOptions(JSONObject outdoorLocationOptions) throws JSONException{
         OutdoorLocationOptions.Builder optionsBuilder = new OutdoorLocationOptions.Builder();
 
         if (outdoorLocationOptions.has(LocationWrapper.CONTINUOUS_MODE)) {
@@ -446,7 +446,7 @@ public class PluginHelper {
      return optionsBuilder.build();
     }
 
-    public static LocationRequest buildLocationRequest(JSONArray args) throws JSONException {
+    public LocationRequest buildLocationRequest(JSONArray args) throws JSONException {
         Builder locationBuilder = new Builder();
         JSONObject jsonoBuilding = args.getJSONObject(0);
         String sBuildingId = jsonoBuilding.getString(LocationWrapper.BUILDING_IDENTIFIER);
@@ -570,7 +570,7 @@ public class PluginHelper {
         return locationRequest;
     }
 
-    public static void startPositioning(final CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+    public void startPositioning(final CordovaInterface cordova, CordovaWebView webView, JSONArray args,
             final CallbackContext callbackContext) {
         try {
             JSONObject jsonoBuilding = args.getJSONObject(0);
@@ -582,7 +582,7 @@ public class PluginHelper {
                 locationListener = new LocationListener() {
                     public void onLocationChanged(Location location) {
                         try {
-                            PluginHelper.computedLocation = location; // This is for testing purposes
+                            PluginHelper.this.computedLocation = location; // This is for testing purposes
                             Log.i(PluginHelper.TAG, "onLocationChanged() called with: location = [" + location + "]");
                             CartesianCoordinate cartesianCoordinate = location.getCartesianCoordinate();
                             String locationMessage = "building: " + location.getBuildingIdentifier() + "\nfloor: "
@@ -617,10 +617,10 @@ public class PluginHelper {
                         callbackContext.sendPluginResult(result);
                         switch (error.getCode()) {
                         case 8001:
-                            PluginHelper.requestLocationPermission(cordova);
+                            requestLocationPermission(cordova);
                             return;
                         case 8002:
-                            PluginHelper.showLocationSettings(cordova);
+                            showLocationSettings(cordova);
                             return;
                         default:
                             return;
@@ -641,7 +641,7 @@ public class PluginHelper {
         }
     }
 
-    public static void stopPositioning(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+    public void stopPositioning(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
             CallbackContext callbackContext) {
         if (locationListener != null) {
             try {
@@ -657,40 +657,40 @@ public class PluginHelper {
         }
     }
 
-    private static void showLocationSettings(CordovaInterface cordova) {
+    private void showLocationSettings(CordovaInterface cordova) {
         Toast.makeText(cordova.getActivity(), "You must enable location", Toast.LENGTH_LONG).show();
         cordova.getActivity().startActivityForResult(new Intent("android.settings.LOCATION_SOURCE_SETTINGS"), 0);
     }
 
-    private static void requestLocationPermission(CordovaInterface cordova) {
+    private void requestLocationPermission(CordovaInterface cordova) {
         ActivityCompat.requestPermissions(cordova.getActivity(),
                 new String[] { "android.permission.ACCESS_COARSE_LOCATION" }, 0);
     }
 
-    public static void returnDefaultResponse(CallbackContext callbackContext) {
+    public void returnDefaultResponse(CallbackContext callbackContext) {
         String message = "Error function name not found";
         Log.e(TAG, message);
         callbackContext.sendPluginResult(new PluginResult(Status.OK, message));
     }
 
-    public static void invalidateCache(CallbackContext callbackContext) {
+    public void invalidateCache(CallbackContext callbackContext) {
         getCommunicationManagerInstance().invalidateCache();
         callbackContext.sendPluginResult(new PluginResult(Status.OK, "Cache invalidated"));
     }
 
-    public static void requestNavigationUpdates(CordovaInterface cordova,
+    public void requestNavigationUpdates(CordovaInterface cordova,
      CordovaWebView webView, 
      JSONArray args, 
      final CallbackContext callbackContext) {
             // 1) Parse and check arguments
 
-            if (PluginHelper.computedRoute == null) {
+            if (this.computedRoute == null) {
                 Log.d(TAG, "Situm >> There is not an stored route so you are not allowed to navigate");
                 callbackContext.sendPluginResult(new PluginResult(Status.ERROR, "Compute a valid route with requestDirections before trying to navigate within a route"));
                 return;
             }
             // try??
-            Route route = PluginHelper.computedRoute; // args.getJSONObject(0); // Retrieve route from arguments, we do this since Route object has internal properties that we do not want to expose
+            Route route = this.computedRoute; // args.getJSONObject(0); // Retrieve route from arguments, we do this since Route object has internal properties that we do not want to expose
             // 2) Build Navigation Arguments
             // 2.1) Build Navigation Request
             Log.d(TAG,"requestNavigationUpdates executed: passed route: " +  route);
@@ -785,7 +785,7 @@ public class PluginHelper {
 
     // Initialize Navigation Component 
 
-    public static void updateNavigationWithLocation(CordovaInterface cordova,
+    public void updateNavigationWithLocation(CordovaInterface cordova,
     CordovaWebView webView, 
     JSONArray args, 
     final CallbackContext callbackContext) {
@@ -807,7 +807,7 @@ public class PluginHelper {
         
     }
 
-    public static void removeNavigationUpdates(CordovaInterface cordova,
+    public void removeNavigationUpdates(CordovaInterface cordova,
     CordovaWebView webView, 
     JSONArray args, 
     final CallbackContext callbackContext) {
@@ -816,7 +816,7 @@ public class PluginHelper {
         getNavigationManagerInstance().removeUpdates(); // TODO: Incorporate sending a result to the exterior
     }
 
-    public static void requestDirections(final CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+    public void requestDirections(final CordovaInterface cordova, CordovaWebView webView, JSONArray args,
             final CallbackContext callbackContext) {
         try {
             JSONObject jsonoBuilding = args.getJSONObject(0);
@@ -843,7 +843,7 @@ public class PluginHelper {
                 public void onSuccess(Route route) {
                     
                     // TODO: Remove this line before going to public (Just for development purposes)
-                    PluginHelper.computedRoute = route;
+                    PluginHelper.this.computedRoute = route;
                     try {
                         JSONObject jsonoRoute = LocationWrapper.routeToJsonObject(route, cordova.getActivity());
                         Log.i(TAG, "onSuccess: Route calculated successfully" + route);
