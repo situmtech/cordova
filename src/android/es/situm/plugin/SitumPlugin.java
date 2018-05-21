@@ -24,7 +24,7 @@ public class SitumPlugin extends CordovaPlugin {
 
   private static PluginHelper getPluginInstance() {
     if (pluginInstance == null) { //Check for the first time
-      synchronized (CommunicationManager.class) {   //Check for the second time.
+      synchronized (PluginHelper.class) {   //Check for the second time.
         //if there is no instance available... create new one
         if (pluginInstance == null) pluginInstance = new PluginHelper();
       }
