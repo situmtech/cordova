@@ -103,7 +103,7 @@ Sets the maximum age of a cached response in seconds. Some information, such as 
 
 #### - startPositioning
 
-Starts the positioning on the selected [building](/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html).
+Starts the positioning on the selected [building](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html) in array, returns a [location](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Location.html).
 
 ```javascript
   startPositioning([building], position => {
@@ -127,7 +127,7 @@ Stops locationListener on current active listener.
 
 #### - fetchBuildings
 
-Downloads all the [buildings](/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html) for the current user.
+Downloads all the [buildings](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html) for the current user.
 
 ```javascript
   fetchBuildings((buildings) => {
@@ -139,7 +139,7 @@ Downloads all the [buildings](/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Bu
 
 #### - fetchFloorsFromBuilding
 
-Downloads all the [floors](/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Floor.html) of a [building](/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html).
+Downloads all the [floors](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Floor.html) of a [building](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html).
 
 ```javascript
   fetchFloorsFromBuilding(building, (floors) => {
@@ -151,7 +151,7 @@ Downloads all the [floors](/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Floor
 
 #### - fetchIndoorPOIsFromBuilding
 
-Downloads the indoor [POIs](/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Poi.html) of a [building](/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html).
+Downloads the indoor [POIs](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Poi.html) of a [building](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html).
 
 ```javascript
   fetchIndoorPOIsFromBuilding(building, (pois) => {
@@ -163,7 +163,7 @@ Downloads the indoor [POIs](/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Poi.
 
 #### - fetchOutdoorPOIsFromBuilding
 
-Downloads the outdoor [POIs](/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Poi.html) of a [building](/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html).
+Downloads the outdoor [POIs](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Poi.html) of a [building](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html).
 
 ```javascript
   fetchOutdoorPOIsFromBuilding(building, (pois) => {
@@ -175,7 +175,7 @@ Downloads the outdoor [POIs](/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Poi
 
 #### - fetchEventsFromBuilding
 
-Downloads the events of a [building](/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html).
+Downloads the events of a [building](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html).
 
 ```javascript
   fetchEventsFromBuilding(building, (events) => {
@@ -187,7 +187,7 @@ Downloads the events of a [building](/sdk_documentation/cordova/jsdoc/1.3.10/sym
 
 #### - fetchPoiCategories
 
-Gets all [POI categories](/sdk_documentation/cordova/jsdoc/1.3.10/symbols/PoiCategory.html), download and cache their icons asynchronously.
+Gets all [POI categories](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/PoiCategory.html), download and cache their icons asynchronously.
 
 ```javascript
   fetchPoiCategories((poiCategories) => {
@@ -199,7 +199,7 @@ Gets all [POI categories](/sdk_documentation/cordova/jsdoc/1.3.10/symbols/PoiCat
 
 #### - fetchMapFromFloor
 
-Downloads the map image of a [floor](/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Floor.html).
+Downloads the map image of a [floor](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Floor.html).
 
 ```javascript
   fetchMapFromFloor (floor, (mapImage) => {
@@ -211,7 +211,7 @@ Downloads the map image of a [floor](/sdk_documentation/cordova/jsdoc/1.3.10/sym
 
 #### - fetchPoiCategoryIconNormal
 
-Gets the normal category icon for a [category](/sdk_documentation/cordova/jsdoc/1.3.10/symbols/PoiCategory.html).
+Gets the normal category icon for a [category](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/PoiCategory.html).
 
 ```javascript
   fetchPoiCategoryIconNormal (poiCategory, (iconNormal) => {
@@ -223,7 +223,7 @@ Gets the normal category icon for a [category](/sdk_documentation/cordova/jsdoc/
 
 #### - fetchPoiCategoryIconSelected
 
-Gets the selected category icon for a [category](/sdk_documentation/cordova/jsdoc/1.3.10/symbols/PoiCategory.html).
+Gets the selected category icon for a [category](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/PoiCategory.html).
 
 ```javascript
   fetchPoiCategoryIconSelected (poiCategory, (iconSelected) => {
@@ -242,7 +242,7 @@ Invalidates all the resources in the cache.
 ```
 #### - requestDirections
 
-Calculates a route between two [points](/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Point.html).
+Calculates a route between two [points](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Point.html).
 
 ```javascript
   requestDirections([building, from, to], (route) => {
@@ -257,6 +257,14 @@ Calculates a route between two [points](/sdk_documentation/cordova/jsdoc/1.3.10/
 Requests navigation updates. This method should be called after `requestDirections` in order to provide navigation updates when a new position is computed.
 
 ```javascript
+var navigationOptions = new Object();
+  navigationOptions.distanceToFloorChangeThreshold = 0; // number in meters
+  navigationOptions.distanceToChangeIndicationThreshold = 0; // number in meters
+  navigationOptions.distanceToGoalThreshold = 0; // number in meters
+  navigationOptions.outsideRouteThreshold = 0; // number in meters
+  navigationOptions.indicationsInterval = 0; // number in millis
+  navigationOptions.timeToFirstIndication = 0; // number in millis
+  navigationOptions.roundIndicationsStep = 0; // number in meters
   requestNavigationUpdates([navigationOptions], (res: any) => {
     // Progress and other navigation status messages can be processed here  
   }, (error: any) => {
@@ -283,3 +291,7 @@ Removes all location updates. This removes the internal state of the manager, in
 ```javascript
   removeNavigationUpdates();
 ```
+
+## License
+
+Situm-Cordova-Plugin is licensed under [MIT License](https://opensource.org/licenses/MIT)
