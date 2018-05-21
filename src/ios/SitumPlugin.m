@@ -371,17 +371,32 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 
 
 - (void)startPositioning:(CDVInvokedUrlCommand *)command {
-    NSDictionary* buildingJO = (NSDictionary*)[command.arguments objectAtIndex:0];
+    NSArray *params = (NSArray*)[command.arguments objectAtIndex:0];
+    NSDictionary *buildingJO = (NSDictionary*)[params objectAtIndex:0];
+    NSNumber *useDeadReckoning = nil;
+    NSString *buildingId;
+    if (params.count > 1) {
+        NSDictionary *requestJO = (NSDictionary*)[params objectAtIndex:1];
+        buildingId = [requestJO objectForKey:@"buildingIdentifier"];
+        useDeadReckoning = [requestJO objectForKey: @"useDeadReckoning"];
+    }
+    
     locationCallbackId = command.callbackId;
     selectedBuildingJO = buildingJO;
-    
-    NSString *buildingId = [buildingJO valueForKey:@"identifier"];
+    if (buildingId == nil) {
+        buildingId = [buildingJO valueForKey:@"identifier"];
+    }
     
     if (buildingId == nil) {
         buildingId = [NSString stringWithFormat:@"%@", [buildingJO valueForKey:@"buildingIdentifier"]];
     }
-    
-    SITLocationRequest *locationRequest = [[SITLocationRequest alloc] initWithPriority:kSITHighAccuracy provider:kSITHybridProvider updateInterval:2 buildingID:buildingId operationQueue:[NSOperationQueue mainQueue] options:nil];
+    SITLocationRequest *locationRequest;
+    if (useDeadReckoning != nil) {
+        locationRequest = [[SITLocationRequest alloc] initWithPriority:kSITHighAccuracy provider:kSITHybridProvider updateInterval:2 buildingID:buildingId operationQueue:[NSOperationQueue mainQueue] useDeadReckoning:[useDeadReckoning boolValue] options:nil];
+    } else {
+        locationRequest = [[SITLocationRequest alloc] initWithPriority:kSITHighAccuracy provider:kSITHybridProvider updateInterval:2 buildingID:buildingId operationQueue:[NSOperationQueue mainQueue] options:nil];
+    }
+     
     [[SITLocationManager sharedInstance] requestLocationUpdates:locationRequest];
     [[SITLocationManager sharedInstance] setDelegate:self];
 }

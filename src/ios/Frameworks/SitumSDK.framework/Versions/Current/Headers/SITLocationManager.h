@@ -22,6 +22,9 @@
  */
 @interface SITLocationManager : NSObject <SITLocationInterface>
 
+- (void) updateFromDeadReckoningWithX: (float) x
+                                    y: (float) y
+                                  yaw: (float) yaw;
 
 /**
  Singleton instance
