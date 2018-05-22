@@ -372,13 +372,21 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 
 - (void)startPositioning:(CDVInvokedUrlCommand *)command {
     NSArray *params = (NSArray*)[command.arguments objectAtIndex:0];
-    NSDictionary *buildingJO = (NSDictionary*)[params objectAtIndex:0];
+    
+    NSDictionary *buildingJO;
+    
     NSNumber *useDeadReckoning = nil;
     NSString *buildingId;
-    if (params.count > 1) {
-        NSDictionary *requestJO = (NSDictionary*)[params objectAtIndex:1];
-        buildingId = [requestJO objectForKey:@"buildingIdentifier"];
-        useDeadReckoning = [requestJO objectForKey: @"useDeadReckoning"];
+    
+    if ([params isKindOfClass:[NSArray class]]) {
+        buildingJO = (NSDictionary*)[params objectAtIndex:0];
+        if (params.count > 1) {
+            NSDictionary *requestJO = (NSDictionary*)[params objectAtIndex:1];
+            buildingId = [[requestJO objectForKey:@"buildingIdentifier"] stringValue];
+            useDeadReckoning = [requestJO objectForKey: @"useDeadReckoning"];
+        }
+    } else {
+        buildingJO = (NSDictionary*)params;
     }
     
     locationCallbackId = command.callbackId;
