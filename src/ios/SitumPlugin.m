@@ -378,6 +378,12 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     NSNumber *useDeadReckoning = nil;
     NSString *buildingId;
     
+/*
+ * The following if-else is necessary in order to mantain compatibility
+ * with the startPositioning[building] method. 
+ * If params is an array, then it contains both a building and a locationRequest
+ * If params is a dictionary, then it should only contain a building
+ */
     if ([params isKindOfClass:[NSArray class]]) {
         buildingJO = (NSDictionary*)[params objectAtIndex:0];
         if (params.count > 1) {
