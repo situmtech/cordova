@@ -395,4 +395,61 @@
 <span class='line'>388</span> </span><span class="WHIT">  </span><span class="NAME">bottomRight</span><span class="PUNC">,</span><span class="WHIT">
 <span class='line'>389</span> </span><span class="PUNC">}</span><span class="WHIT">
 <span class='line'>390</span> 
-<span class='line'>391</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">SitumConversionArea</span></pre></body></html>
+<span class='line'>391</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">SitumConversionArea</span><span class="WHIT">
+<span class='line'>392</span> 
+<span class='line'>393</span> </span><span class="COMM">/**
+<span class='line'>394</span>  * @namespace
+<span class='line'>395</span>  * &lt;b>LocationRequest&lt;/b>
+<span class='line'>396</span>  * A data object that contains parameters for the location service, LocationManager.
+<span class='line'>397</span>  * @property {number} buildingIdentifier
+<span class='line'>398</span>  * @property {number} interval Default interval (in milliseconds) to notify location updates
+<span class='line'>399</span>  * @property {string} indoorProvider Default indoor provider
+<span class='line'>400</span>  * @property {boolean} useBle
+<span class='line'>401</span>  * @property {boolean} useWifi
+<span class='line'>402</span>  * @property {string} motionMode Default motion mode
+<span class='line'>403</span>  * @property {boolean} useForegroundService
+<span class='line'>404</span>  * @property {boolean} useDeadReckoning
+<span class='line'>405</span>  * @property {OutdoorLocationOptions} outdoorLocationOptions
+<span class='line'>406</span>  * @property {BeaconFilter[]} beaconFilters
+<span class='line'>407</span>  * @property {number} smallestDisplacement Default smallest displacement to nofiy location updates
+<span class='line'>408</span>  * @property {number} readtimeUpdateInterval Default interval (in milliseconds) to send locations to the Realtime
+<span class='line'>409</span>  */</span><span class="WHIT">
+<span class='line'>410</span> 
+<span class='line'>411</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">LocationRequest</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>412</span> </span><span class="WHIT">  </span><span class="NAME">buildingIdentifier</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>413</span> </span><span class="WHIT">  </span><span class="NAME">interval</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>414</span> </span><span class="WHIT">  </span><span class="NAME">indoorProvider</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>415</span> </span><span class="WHIT">  </span><span class="NAME">useBle</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>416</span> </span><span class="WHIT">  </span><span class="NAME">useWifi</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>417</span> </span><span class="WHIT">  </span><span class="NAME">motionMode</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>418</span> </span><span class="WHIT">  </span><span class="NAME">useForegroundService</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>419</span> </span><span class="WHIT">  </span><span class="NAME">useDeadReckoning</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>420</span> </span><span class="WHIT">  </span><span class="NAME">outdoorLocationOptions</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>421</span> </span><span class="WHIT">  </span><span class="NAME">beaconFilters</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>422</span> </span><span class="WHIT">  </span><span class="NAME">smallestDisplacement</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>423</span> </span><span class="WHIT">  </span><span class="NAME">realtimeUpdateInterval</span><span class="WHIT">
+<span class='line'>424</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>425</span> 
+<span class='line'>426</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">LocationRequest</span><span class="WHIT">
+<span class='line'>427</span> 
+<span class='line'>428</span> </span><span class="COMM">/**
+<span class='line'>429</span>  * @namespace
+<span class='line'>430</span>  * &lt;b>OutdoorLocationOptions&lt;/b>
+<span class='line'>431</span>  * Outdoor location options used only in indoor-outdoor mode
+<span class='line'>432</span>  */</span><span class="WHIT">
+<span class='line'>433</span> 
+<span class='line'>434</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">OutdoorLocationOptions</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>435</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>436</span> 
+<span class='line'>437</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">OutdoorLocationOptions</span><span class="WHIT">
+<span class='line'>438</span> 
+<span class='line'>439</span> </span><span class="COMM">/**
+<span class='line'>440</span>  * @namespace
+<span class='line'>441</span>  * &lt;b>BeaconFilter&lt;/b>
+<span class='line'>442</span>  * Represents a BLE filter. Now the only field is the BLE proximity UUID
+<span class='line'>443</span>  */</span><span class="WHIT">
+<span class='line'>444</span> 
+<span class='line'>445</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">BeaconFilter</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>446</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>447</span> 
+<span class='line'>448</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">BeaconFilter</span></pre></body></html>

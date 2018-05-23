@@ -40,3 +40,5 @@ framework/
 bin/
 
 *.lock
+
+tests/android/\.project
