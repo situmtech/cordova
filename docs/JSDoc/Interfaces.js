@@ -429,9 +429,17 @@ module.exports = LocationRequest
  * @namespace
  * <b>OutdoorLocationOptions</b>
  * Outdoor location options used only in indoor-outdoor mode
+ * @property {boolean} continuousMode
+ * @property {boolean} userDefinedThreshold
+ * @property {number} burstInterval
+ * @property {number} averageSnrThreshold
  */
 
 var OutdoorLocationOptions = {
+  continuousMode,
+  userDefinedThreshold,
+  burstInterval,
+  averageSnrThreshold
 }
 
 module.exports = OutdoorLocationOptions
@@ -440,9 +448,11 @@ module.exports = OutdoorLocationOptions
  * @namespace
  * <b>BeaconFilter</b>
  * Represents a BLE filter. Now the only field is the BLE proximity UUID
+ * @property {string} uuid
  */
 
 var BeaconFilter = {
+  uuid
 }
 
 module.exports = BeaconFilter

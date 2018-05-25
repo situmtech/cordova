@@ -42,3 +42,5 @@ bin/
 *.lock
 
 tests/android/\.project
+
+tests/android/\.settings/
