@@ -3,6 +3,8 @@ exports.defineAutoTests = () => {
   let building;
   let floors;
   let floor;
+  let poiCategories;
+  let poiCategory;
   // Basic tests to check if is correctly defined in cordova plugins
   describe('Situm object basic tests -> ', () => {
     it('Is Situm defined', () => {
@@ -307,8 +309,6 @@ exports.defineAutoTests = () => {
     });
   });
   describe('Test method fetchPoiCategories ->', () => {
-    let poiCategories;
-    let poiCategory;
     beforeAll((done) => {
       cordova.plugins.Situm.fetchPoiCategories((response) => {
         poiCategories = response;
@@ -340,6 +340,52 @@ exports.defineAutoTests = () => {
     it('Check map object', () => {
       expect(map).toBeDefined();
       expect(typeof map.data).toBe('string');
+    });
+  });
+  describe('Test fetchPoiCategoryIconNormal', () => {
+    let icon;
+    beforeAll((done) => {
+      cordova.plugins.Situm.fetchPoiCategoryIconNormal(poiCategory, (response) => {
+        icon = response;
+        done();
+      });
+    });
+    it('Check icon object', () => {
+      expect(icon).toBeDefined();
+      expect(typeof icon.data).toBe('string')
+    });
+  });
+  describe('Has fetchPoiCategoryIconSelected method', () => {
+    let icon;
+    beforeAll((done) => {
+      cordova.plugins.Situm.fetchPoiCategoryIconSelected(poiCategory, (response) => {
+        icon = response;
+        done();
+      });
+    });
+    it('Chek icon object', () => {
+      expect(icon).toBeDefined();
+      expect(typeof icon.data).toBe('string');
+    });
+  });
+  describe('Has requestDirections method', () => {
+    beforeAll((done) => {
+      cordova.plugins.Situm.requestDirections();
+    });
+  });
+  describe('Has requestNavigationUpdates method', () => {
+    beforeAll((done) => {
+      cordova.plugins.Situm.requestNavigationUpdates();
+    });
+  });
+  describe('Has updateNavigationWithLocation method', () => {
+    beforeAll((done) => {
+      cordova.plugins.Situm.updateNavigationWithLocation();
+    });
+  });
+  describe('Has removeNavigationUpdates method', () => {
+    beforeAll((done) => {
+      cordova.plugins.Situm.removeNavigationUpdates();
     });
   });
 }

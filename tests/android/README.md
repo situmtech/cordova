@@ -19,14 +19,15 @@
 #
 -->
 
-# Situm Plugin Test Project
+# Cordova Android Test Project
 
 The project in this directory is an Android Test project that enables those
-interested in further developing situm-plugin to validate their changes.
+interested in further developing cordova-android to validate their changes.
 
 ## Requirements
 
-Ensure you have installed Gradle, and that it is (at the time of this
+The requirements in the [top-level README](../README.md) still apply. In
+addition, ensure you have installed Gradle, and that it is (at the time of this
 writing) at least version 3.3 or newer.
 
 ## Getting Started
@@ -42,8 +43,15 @@ you do not, you can run the following to generate it:
     $ cd cordova-android/test
     $ gradle :wrapper -b build.gradle
 
+You can then see a list of all tasks available to run with `gradlew tasks`.
+
+The two different kinds of tests one typically wants to run are unit tests and
+end-to-end, or instrumented, tests. Unit tests do not require any particular
+environment to run in, but the instrumented tests, however, require a connected
+Android device or emulator to run in.
+
 To run the unit tests, run: `gradlew test`.
-To run unit tests with node process, run: `node run_java_unit_tests.js`.
+To run the instrumented tests, run: `gradlew connectedAndroidTest`.
 
 ### Android Studio
 

@@ -24,7 +24,7 @@ var path = require('path');
 var superspawn = require('cordova-common').superspawn;
 
 // First we make sure the gradlew helper file is built and ready.
-var GradleBuilder = require('../../bin/templates/cordova/lib/builders/GradleBuilder');
+var GradleBuilder = require('../bin/templates/cordova/lib/builders/GradleBuilder');
 var builder = new GradleBuilder(__dirname);
 var needs_gradlew_built = builder.runGradleWrapper('gradle', 'build.gradle');
 
@@ -36,12 +36,12 @@ if (!needs_gradlew_built) {
     needs_gradlew_built = Q.fcall(function () { return true; });
 }
 
-needs_gradlew_built.then(() => {
-    return superspawn.spawn(path.join(__dirname, 'gradlew'), ['test']);
+needs_gradlew_built.then(function () {
+    return superspawn.spawn(path.join(__dirname, 'gradlew'), ['test'], {stdio: 'inherit'});
 }, function (err) {
     console.error('There was an error building the gradlew file:', err);
-}).then(() => {
-    console.log("Test finished successfully");
-}).catch((err) => {
-    console.error('Tests failed!', err.stderr);
+}).then(function () {
+    console.log('Tests completed successfully.');
+}).fail(function (err) {
+    console.error('Tests failed!', err);
 });
