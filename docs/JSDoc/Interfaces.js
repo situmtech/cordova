@@ -389,3 +389,70 @@ var SitumConversionArea = {
 }
 
 module.exports = SitumConversionArea
+
+/**
+ * @namespace
+ * <b>LocationRequest</b>
+ * A data object that contains parameters for the location service, LocationManager.
+ * @property {number} buildingIdentifier
+ * @property {number} interval Default interval (in milliseconds) to notify location updates
+ * @property {string} indoorProvider Default indoor provider
+ * @property {boolean} useBle
+ * @property {boolean} useWifi
+ * @property {string} motionMode Default motion mode
+ * @property {boolean} useForegroundService
+ * @property {boolean} useDeadReckoning
+ * @property {OutdoorLocationOptions} outdoorLocationOptions
+ * @property {BeaconFilter[]} beaconFilters
+ * @property {number} smallestDisplacement Default smallest displacement to nofiy location updates
+ * @property {number} readtimeUpdateInterval Default interval (in milliseconds) to send locations to the Realtime
+ */
+
+var LocationRequest = {
+  buildingIdentifier,
+  interval,
+  indoorProvider,
+  useBle,
+  useWifi,
+  motionMode,
+  useForegroundService,
+  useDeadReckoning,
+  outdoorLocationOptions,
+  beaconFilters,
+  smallestDisplacement,
+  realtimeUpdateInterval
+}
+
+module.exports = LocationRequest
+
+/**
+ * @namespace
+ * <b>OutdoorLocationOptions</b>
+ * Outdoor location options used only in indoor-outdoor mode
+ * @property {boolean} continuousMode
+ * @property {boolean} userDefinedThreshold
+ * @property {number} burstInterval
+ * @property {number} averageSnrThreshold
+ */
+
+var OutdoorLocationOptions = {
+  continuousMode,
+  userDefinedThreshold,
+  burstInterval,
+  averageSnrThreshold
+}
+
+module.exports = OutdoorLocationOptions
+
+/**
+ * @namespace
+ * <b>BeaconFilter</b>
+ * Represents a BLE filter. Now the only field is the BLE proximity UUID
+ * @property {string} uuid
+ */
+
+var BeaconFilter = {
+  uuid
+}
+
+module.exports = BeaconFilter
