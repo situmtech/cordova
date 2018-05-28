@@ -371,17 +371,46 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 
 
 - (void)startPositioning:(CDVInvokedUrlCommand *)command {
-    NSDictionary* buildingJO = (NSDictionary*)[command.arguments objectAtIndex:0];
+    NSArray *params = (NSArray*)[command.arguments objectAtIndex:0];
+    
+    NSDictionary *buildingJO;
+    
+    NSNumber *useDeadReckoning = nil;
+    NSString *buildingId;
+    
+/*
+ * The following if-else is necessary in order to mantain compatibility
+ * with the startPositioning[building] method. 
+ * If params is an array, then it contains both a building and a locationRequest
+ * If params is a dictionary, then it should only contain a building
+ */
+    if ([params isKindOfClass:[NSArray class]]) {
+        buildingJO = (NSDictionary*)[params objectAtIndex:0];
+        if (params.count > 1) {
+            NSDictionary *requestJO = (NSDictionary*)[params objectAtIndex:1];
+            buildingId = [[requestJO objectForKey:@"buildingIdentifier"] stringValue];
+            useDeadReckoning = [requestJO objectForKey: @"useDeadReckoning"];
+        }
+    } else {
+        buildingJO = (NSDictionary*)params;
+    }
+    
     locationCallbackId = command.callbackId;
     selectedBuildingJO = buildingJO;
-    
-    NSString *buildingId = [buildingJO valueForKey:@"identifier"];
+    if (buildingId == nil) {
+        buildingId = [buildingJO valueForKey:@"identifier"];
+    }
     
     if (buildingId == nil) {
         buildingId = [NSString stringWithFormat:@"%@", [buildingJO valueForKey:@"buildingIdentifier"]];
     }
-    
-    SITLocationRequest *locationRequest = [[SITLocationRequest alloc] initWithPriority:kSITHighAccuracy provider:kSITHybridProvider updateInterval:2 buildingID:buildingId operationQueue:[NSOperationQueue mainQueue] options:nil];
+    SITLocationRequest *locationRequest;
+    if (useDeadReckoning != nil) {
+        locationRequest = [[SITLocationRequest alloc] initWithPriority:kSITHighAccuracy provider:kSITHybridProvider updateInterval:2 buildingID:buildingId operationQueue:[NSOperationQueue mainQueue] useDeadReckoning:[useDeadReckoning boolValue] options:nil];
+    } else {
+        locationRequest = [[SITLocationRequest alloc] initWithPriority:kSITHighAccuracy provider:kSITHybridProvider updateInterval:2 buildingID:buildingId operationQueue:[NSOperationQueue mainQueue] options:nil];
+    }
+     
     [[SITLocationManager sharedInstance] requestLocationUpdates:locationRequest];
     [[SITLocationManager sharedInstance] setDelegate:self];
 }

@@ -70,6 +70,8 @@ typedef NS_ENUM(int, SITLocationProvider){
  */
 @property (nonatomic, readwrite) NSInteger updateInterval;
 
+@property (nonatomic, readwrite) BOOL useDeadReckoning;
+
 
 /**
  Unique identifier of the building in which you want to locate a user. (This property is mandatory).
@@ -109,6 +111,26 @@ typedef NS_ENUM(int, SITLocationProvider){
                   updateInterval:(NSInteger)updateInterval
                       buildingID:(NSString *)buildingID
                   operationQueue:(NSOperationQueue *)operationQueue
+                         options:(NSDictionary *)options;
+
+/**
+ Constructor.
+ 
+ @param priority one of SITLocationPriority
+ @param provider one of SITLocationProvider
+ @param updateInterval The time interval at which location will be delivered
+ @param buildingID unique identifier of the building in which you want to locate a user. (This property is mandatory).
+ @param operationQueue the thread where the location updates will be provided. If not provided, the main thread will be used.
+ @param useDeadReckoning determines if dead reckoning should be used
+ @param options additional options to modify the internal operation of the Location provider (private usage only).
+ @return initialized object.
+ */
+- (instancetype)initWithPriority:(SITLocationPriority)priority
+                        provider:(SITLocationProvider)provider
+                  updateInterval:(NSInteger)updateInterval
+                      buildingID:(NSString *)buildingID
+                  operationQueue:(NSOperationQueue *)operationQueue
+                useDeadReckoning:(BOOL)useDeadReckoning
                          options:(NSDictionary *)options;
 
 /**
