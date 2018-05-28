@@ -144,70 +144,10 @@ Sets the maximum age of a cached response in seconds.
 
 #### - startPositioning
 
-Starts listen onLocationChanged event on first [building](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html) in array, returns a [location](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Location.html) object.
+Starts the positioning on the [locationRequest](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/LocationRequest.html), a [building](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html) mey be send as first parameter (deprecated), returns a [location](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Location.html).
 
 ```javascript
-  var building = {
-    buildingIdentifier: "buildingIdentifier",
-    name: "buildingName",
-    address: "address",
-    bounds: {
-      northEast: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      northWest: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      southEast: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      southWest: {
-        latitude: 0.00,
-        longitude: 0.00
-      }
-    },
-    boundsRotated: {
-      northEast: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      northWest: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      southEast: {
-        latitude: 0.00,
-        longitude: 0.00
-      },
-      southWest: {
-        latitude: 0.00,
-        longitude: 0.00
-      }
-    },
-    center: {
-      latitude: 0.00,
-      longitude: 0.00
-    },
-    dimensions: {
-      width: 0.00,
-      height: 0.00
-    },
-    infoHtml: "infoHtml",
-    pictureThumbUrl: "pictureThumbUrl",
-    pictureUrl: "pictureUrl",
-    rotation: 0.00,
-    userIdentifier: "userIdentifier",
-    customFields: {
-      name: "value",
-      name: "value",
-      ...
-    }
-  }
-
-  startPositioning([building], position => {
+  startPositioning([building, locationRequest], position => {
     // position as location object:
     position = {
       accuracy: 0.00,

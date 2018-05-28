@@ -144,11 +144,10 @@ Sets the maximum age of a cached response in seconds.
 
 #### - startPositioning
 
-Starts listen onLocationChanged event on first [building](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html) in array,
-return a json bassed on [location](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Location.html) native object.
+Starts the positioning on the [locationRequest](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/LocationRequest.html), a [building](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html) mey be send as first parameter (deprecated), returns a [location](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Location.html).
 
 ```javascript
-  startPositioning([building], position => {
+  startPositioning([building, locationRequest], position => {
     // position as location object
   }, (error) => {
     // If errors will come here

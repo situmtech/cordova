@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - SitumEvent</title>
+		<title>JsDoc Reference - LocationRequest</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -240,7 +240,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Namespace SitumEvent
+				Namespace LocationRequest
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -248,8 +248,8 @@ ul.inheritsList
 				
 				
 			
-				<b>SitumEvent</b>
-An event: POI with radius, conversion area and asociated statistics. It is intended for usage in marketing apps.
+				<b>LocationRequest</b>
+A data object that contains parameters for the location service, LocationManager.
 				
 				
 					<br /><i>Defined in: </i> <a href="../symbols/src/docs_JSDoc_Interfaces.js.html">Interfaces.js</a>.
@@ -258,7 +258,7 @@ An event: POI with radius, conversion area and asociated statistics. It is inten
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class SitumEvent.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class LocationRequest.">
 				<caption>Namespace Summary</caption>
 				<thead>
 					<tr>
@@ -271,7 +271,7 @@ An event: POI with radius, conversion area and asociated statistics. It is inten
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/SitumEvent.html#constructor">SitumEvent</a></b>
+								<b><a href="../symbols/LocationRequest.html#constructor">LocationRequest</a></b>
 							</div>
 							<div class="description"></div>
 						</td>
@@ -284,7 +284,7 @@ An event: POI with radius, conversion area and asociated statistics. It is inten
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class SitumEvent.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class LocationRequest.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -298,7 +298,7 @@ An event: POI with radius, conversion area and asociated statistics. It is inten
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/SitumEvent.html#buildingIdentifier">buildingIdentifier</a></b>
+								<b><a href="../symbols/LocationRequest.html#beaconFilters">beaconFilters</a></b>
 								</div>
 								<div class="description"></div>
 							</td>
@@ -308,7 +308,7 @@ An event: POI with radius, conversion area and asociated statistics. It is inten
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/SitumEvent.html#conversionArea">conversionArea</a></b>
+								<b><a href="../symbols/LocationRequest.html#buildingIdentifier">buildingIdentifier</a></b>
 								</div>
 								<div class="description"></div>
 							</td>
@@ -318,7 +318,37 @@ An event: POI with radius, conversion area and asociated statistics. It is inten
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/SitumEvent.html#customFields">customFields</a></b>
+								<b><a href="../symbols/LocationRequest.html#indoorProvider">indoorProvider</a></b>
+								</div>
+								<div class="description">Default indoor provider</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/LocationRequest.html#interval">interval</a></b>
+								</div>
+								<div class="description">Default interval (in milliseconds) to notify location updates</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/LocationRequest.html#motionMode">motionMode</a></b>
+								</div>
+								<div class="description">Default motion mode</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/LocationRequest.html#outdoorLocationOptions">outdoorLocationOptions</a></b>
 								</div>
 								<div class="description"></div>
 							</td>
@@ -328,7 +358,27 @@ An event: POI with radius, conversion area and asociated statistics. It is inten
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/SitumEvent.html#floorIdentifier">floorIdentifier</a></b>
+								<b><a href="../symbols/LocationRequest.html#readtimeUpdateInterval">readtimeUpdateInterval</a></b>
+								</div>
+								<div class="description">Default interval (in milliseconds) to send locations to the Realtime</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/LocationRequest.html#smallestDisplacement">smallestDisplacement</a></b>
+								</div>
+								<div class="description">Default smallest displacement to nofiy location updates</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/LocationRequest.html#useBle">useBle</a></b>
 								</div>
 								<div class="description"></div>
 							</td>
@@ -338,7 +388,7 @@ An event: POI with radius, conversion area and asociated statistics. It is inten
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/SitumEvent.html#identifier">identifier</a></b>
+								<b><a href="../symbols/LocationRequest.html#useDeadReckoning">useDeadReckoning</a></b>
 								</div>
 								<div class="description"></div>
 							</td>
@@ -348,7 +398,7 @@ An event: POI with radius, conversion area and asociated statistics. It is inten
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/SitumEvent.html#infoHtml">infoHtml</a></b>
+								<b><a href="../symbols/LocationRequest.html#useForegroundService">useForegroundService</a></b>
 								</div>
 								<div class="description"></div>
 							</td>
@@ -358,17 +408,7 @@ An event: POI with radius, conversion area and asociated statistics. It is inten
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/SitumEvent.html#name">name</a></b>
-								</div>
-								<div class="description"></div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/SitumEvent.html#radius">radius</a></b>
+								<b><a href="../symbols/LocationRequest.html#useWifi">useWifi</a></b>
 								</div>
 								<div class="description"></div>
 							</td>
@@ -394,7 +434,7 @@ An event: POI with radius, conversion area and asociated statistics. It is inten
 				</div>
 				
 				<div class="fixedFont">
-						<b>SitumEvent</b>
+						<b>LocationRequest</b>
 				</div>
 				
 				<div class="description">
@@ -422,6 +462,28 @@ An event: POI with radius, conversion area and asociated statistics. It is inten
 					Field Detail
 				</div>
 				
+					<a name="beaconFilters"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{<a href="../symbols/BeaconFilter.html">BeaconFilter</a>[]}</span>
+					<b>beaconFilters</b>
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
 					<a name="buildingIdentifier"> </a>
 					<div class="fixedFont">
 					
@@ -444,103 +506,15 @@ An event: POI with radius, conversion area and asociated statistics. It is inten
 
 					<hr />
 				
-					<a name="conversionArea"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{<a href="../symbols/SitumConversionArea.html">SitumConversionArea</a>}</span>
-					<b>conversionArea</b>
-					
-					</div>
-					<div class="description">
-						
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="customFields"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{object}</span>
-					<b>customFields</b>
-					
-					</div>
-					<div class="description">
-						
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="floorIdentifier"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{number}</span>
-					<b>floorIdentifier</b>
-					
-					</div>
-					<div class="description">
-						
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="identifier"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{number}</span>
-					<b>identifier</b>
-					
-					</div>
-					<div class="description">
-						
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="infoHtml"> </a>
+					<a name="indoorProvider"> </a>
 					<div class="fixedFont">
 					
 					<span class="light">{string}</span>
-					<b>infoHtml</b>
+					<b>indoorProvider</b>
 					
 					</div>
 					<div class="description">
-						
+						Default indoor provider
 						
 						
 					</div>
@@ -554,33 +528,187 @@ An event: POI with radius, conversion area and asociated statistics. It is inten
 
 					<hr />
 				
-					<a name="name"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{string}</span>
-					<b>name</b>
-					
-					</div>
-					<div class="description">
-						
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="radius"> </a>
+					<a name="interval"> </a>
 					<div class="fixedFont">
 					
 					<span class="light">{number}</span>
-					<b>radius</b>
+					<b>interval</b>
+					
+					</div>
+					<div class="description">
+						Default interval (in milliseconds) to notify location updates
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="motionMode"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{string}</span>
+					<b>motionMode</b>
+					
+					</div>
+					<div class="description">
+						Default motion mode
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="outdoorLocationOptions"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{<a href="../symbols/OutdoorLocationOptions.html">OutdoorLocationOptions</a>}</span>
+					<b>outdoorLocationOptions</b>
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="readtimeUpdateInterval"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{number}</span>
+					<b>readtimeUpdateInterval</b>
+					
+					</div>
+					<div class="description">
+						Default interval (in milliseconds) to send locations to the Realtime
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="smallestDisplacement"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{number}</span>
+					<b>smallestDisplacement</b>
+					
+					</div>
+					<div class="description">
+						Default smallest displacement to nofiy location updates
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="useBle"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{boolean}</span>
+					<b>useBle</b>
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="useDeadReckoning"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{boolean}</span>
+					<b>useDeadReckoning</b>
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="useForegroundService"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{boolean}</span>
+					<b>useForegroundService</b>
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="useWifi"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{boolean}</span>
+					<b>useWifi</b>
 					
 					</div>
 					<div class="description">
@@ -613,7 +741,7 @@ An event: POI with radius, conversion area and asociated statistics. It is inten
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Wed May 23 2018 13:57:13 GMT+0200 (CEST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Wed May 23 2018 13:57:12 GMT+0200 (CEST)
 		</div>
 	</body>
 </html>
