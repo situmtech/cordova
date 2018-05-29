@@ -15,7 +15,7 @@ const map = require('./resources/fetchMapFromFloor.json');
 const iconNormal = require('./resources/fetchPoiCategoryIconNormal.json');
 const iconSelected = require('./resources/fetchPoiCategoryIconSelected.json');
 
-describe('Test building -> ', () => {
+describe('Test fetchBuildings -> ', () => {
   it('Check reutrned value', () => {
     expect(buildings).to.be.ok();
     expect(buildings instanceof Array).to.be(true);
@@ -24,55 +24,34 @@ describe('Test building -> ', () => {
     expect(building = buildings[0]);
     expect(typeof building).to.be('object');
     expect(typeof building.address).to.be('string');
-    expect(typeof building.name).to.be('string');
-    expect(typeof building.buildingIdentifier).to.be('string');
-    expect(typeof building.userIdentifier).to.be('string');
-    expect(typeof building.infoHtml).to.be('string');
-    expect(typeof building.center).to.be('object');
-    expect(typeof building.rotation).to.be('number');
-    expect(typeof building.dimensions).to.be('object');
     expect(typeof building.bounds).to.be('object');
     expect(typeof building.boundsRotated).to.be('object');
+    expect(typeof building.center).to.be('object');
+    expect(typeof building.dimensions).to.be('object');
+    expect(typeof building.infoHtml).to.be('string');
+    expect(typeof building.name).to.be('string');
+    expect(typeof building.pictureThumbUrl).to.be('string');
+    expect(typeof building.pictureUrl).to.be('string');
+    expect(typeof building.rotation).to.be('number');
+    expect(typeof building.userIdentifier).to.be('string');
+    expect(typeof building.buildingIdentifier).to.be('string');
+    expect(typeof building.customFields).to.be('object');
   });
-  it('Check bounds', () => {
-    expect(typeof building.bounds.northEast).to.be('object');
-    expect(typeof building.bounds.northEast.latitude).to.be('number');
-    expect(typeof building.bounds.northEast.longitude).to.be('number');
-    expect(typeof building.bounds.northWest).to.be('object');
-    expect(typeof building.bounds.northWest.latitude).to.be('number');
-    expect(typeof building.bounds.northWest.longitude).to.be('number');
-    expect(typeof building.bounds.southEast).to.be('object');
-    expect(typeof building.bounds.southEast.latitude).to.be('number');
-    expect(typeof building.bounds.southEast.longitude).to.be('number');
-    expect(typeof building.bounds.southWest).to.be('object');
-    expect(typeof building.bounds.southWest.latitude).to.be('number');
-    expect(typeof building.bounds.southWest.longitude).to.be('number');
+  it('Check building bounds', () => {
+    testBounds(building.bounds);
   });
-  it('Check bounds rotated', () => {
-    expect(typeof building.boundsRotated.northEast).to.be('object');
-    expect(typeof building.boundsRotated.northEast.latitude).to.be('number');
-    expect(typeof building.boundsRotated.northEast.longitude).to.be('number');
-    expect(typeof building.boundsRotated.northWest).to.be('object');
-    expect(typeof building.boundsRotated.northWest.latitude).to.be('number');
-    expect(typeof building.boundsRotated.northWest.longitude).to.be('number');
-    expect(typeof building.boundsRotated.southEast).to.be('object');
-    expect(typeof building.boundsRotated.southEast.latitude).to.be('number');
-    expect(typeof building.boundsRotated.southEast.longitude).to.be('number');
-    expect(typeof building.boundsRotated.southWest).to.be('object');
-    expect(typeof building.boundsRotated.southWest.latitude).to.be('number');
-    expect(typeof building.boundsRotated.southWest.longitude).to.be('number');
+  it('Check building boundsRotated', () => {
+    testBounds(building.boundsRotated);
   });
-  it('Check center property', () => {
-    expect(typeof building.center.latitude).to.be('number');
-    expect(typeof building.center.longitude).to.be('number');
+  it('Check building center', () => {
+    testCoordinate(building.center);
   });
-  it('Check dimensions property', () => {
-    expect(typeof building.dimensions.width).to.be('number');
-    expect(typeof building.dimensions.height).to.be('number');
+  it('Check building dimensions', () => {
+    testDimension(building.dimensions);
   });
 });
 
-describe('Test floor ->', () => {
+describe('Test fetchFloorsFromBuilding ->', () => {
   it('Check returned value', () => {
     expect(floors).to.be.ok();
     expect(floors instanceof Array).to.be(true);
@@ -82,108 +61,76 @@ describe('Test floor ->', () => {
     expect(typeof floor).to.be('object');
     expect(typeof floor.altitude).to.be('number');
     expect(typeof floor.buildingIdentifier).to.be('string');
-    expect(typeof floor.floorIdentifier).to.be('string');
     expect(typeof floor.level).to.be('number');
     expect(typeof floor.mapUrl).to.be('string');
     expect(typeof floor.scale).to.be('number');
+    expect(typeof floor.floorIdentifier).to.be('string');
   });
 });
 
-describe('Test method fetchIndoorPOIsFromBuilding ->', () => {
+describe('Test fetchIndoorPOIsFromBuilding ->', () => {
   it('Check returned value', () => {
     expect(indoorPois).to.be.ok();
     expect(indoorPois instanceof Array).to.be(true);
   });
-  it('Check poi object', () => {
+  it('Check indoorPOI object', () => {
     expect(indoorPoi = indoorPois[0]);
     expect(typeof indoorPoi).to.be('object');
+    expect(typeof indoorPoi.identifier).to.be('string');
     expect(typeof indoorPoi.buildingIdentifier).to.be('string');
     expect(typeof indoorPoi.cartesianCoordinate).to.be('object');
-    expect(typeof indoorPoi.category).to.be('string');
     expect(typeof indoorPoi.coordinate).to.be('object');
-    expect(typeof indoorPoi.customFields).to.be('object');
     expect(typeof indoorPoi.floorIdentifier).to.be('string');
-    expect(typeof indoorPoi.identifier).to.be('string');
-    expect(typeof indoorPoi.infoHtml).to.be('string');
-    expect(typeof indoorPoi.isIndoor).to.be('boolean');
-    expect(typeof indoorPoi.isOutdoor).to.be('boolean');
     expect(typeof indoorPoi.poiName).to.be('string');
     expect(typeof indoorPoi.position).to.be('object');
+    expect(typeof indoorPoi.isIndoor).to.be('boolean');
+    expect(typeof indoorPoi.isOutdoor).to.be('boolean');
+    expect(typeof indoorPoi.category).to.be('string');
+    expect(typeof indoorPoi.infoHtml).to.be('string');
     expect(typeof indoorPoi.customFields).to.be('object');
   });
-  it('Check cartesiansCoordinate', () => {
-    expect(typeof indoorPoi.cartesianCoordinate.x).to.be('number');
-    expect(typeof indoorPoi.cartesianCoordinate.y).to.be('number');
+  it('Check indoorPOI cartesiansCoordinate', () => {
+    testCartesianCoordinate(indoorPoi.cartesianCoordinate);
   });
-  it('Check coordinate', () => {
-    expect(typeof indoorPoi.coordinate.latitude).to.be('number');
-    expect(typeof indoorPoi.coordinate.longitude).to.be('number');
+  it('Check indoorPOI coordinate', () => {
+    testCoordinate(indoorPoi.coordinate);
   });
-  it('Check position', () => {
-    expect(typeof indoorPoi.position.buildingIdentifier).to.be('string');
-    expect(typeof indoorPoi.position.cartesianCoordinate).to.be('object');
-    expect(typeof indoorPoi.position.coordinate).to.be('object');
-    expect(typeof indoorPoi.position.floorIdentifier).to.be('string');
-    expect(typeof indoorPoi.position.isIndoor).to.be('boolean');
-    expect(typeof indoorPoi.position.isOutdoor).to.be('boolean');
-  });
-  it('Check cartesiansCoordinate of position property', () => {
-    expect(typeof indoorPoi.position.cartesianCoordinate.x).to.be('number');
-    expect(typeof indoorPoi.position.cartesianCoordinate.y).to.be('number');
-  });
-  it('Check coordinate of position property', () => {
-    expect(typeof indoorPoi.position.coordinate.latitude).to.be('number');
-    expect(typeof indoorPoi.position.coordinate.longitude).to.be('number');
+  it('Check indoorPOI position', () => {
+    testPoint(indoorPoi.position)
   });
 });
-describe('Test method fetchOutdoorPOIsFromBuilding ->', () => {
+describe('Test fetchOutdoorPOIsFromBuilding ->', () => {
   it('Check returned value', () => {
     expect(outdoorPois).to.be.ok();
     expect(outdoorPois instanceof Array).to.be(true);
   });
-  it('Check poi object', () => {
+  it('Check outdoorPOI object', () => {
     expect(outdoorPoi = outdoorPois[0]);
     expect(typeof outdoorPoi).to.be('object');
+    expect(typeof outdoorPoi.identifier).to.be('string');
     expect(typeof outdoorPoi.buildingIdentifier).to.be('string');
     expect(typeof outdoorPoi.cartesianCoordinate).to.be('object');
-    expect(typeof outdoorPoi.category).to.be('string');
     expect(typeof outdoorPoi.coordinate).to.be('object');
-    expect(typeof outdoorPoi.customFields).to.be('object');
     expect(typeof outdoorPoi.floorIdentifier).to.be('string');
-    expect(typeof outdoorPoi.identifier).to.be('string');
-    expect(typeof outdoorPoi.infoHtml).to.be('string');
-    expect(typeof outdoorPoi.isIndoor).to.be('boolean');
-    expect(typeof outdoorPoi.isOutdoor).to.be('boolean');
     expect(typeof outdoorPoi.poiName).to.be('string');
     expect(typeof outdoorPoi.position).to.be('object');
+    expect(typeof outdoorPoi.isIndoor).to.be('boolean');
+    expect(typeof outdoorPoi.isOutdoor).to.be('boolean');
+    expect(typeof outdoorPoi.category).to.be('string');
+    expect(typeof outdoorPoi.infoHtml).to.be('string');
     expect(typeof outdoorPoi.customFields).to.be('object');
   });
-  it('Check cartesiansCoordinate', () => {
-    expect(typeof outdoorPoi.cartesianCoordinate.x).to.be('number');
-    expect(typeof outdoorPoi.cartesianCoordinate.y).to.be('number');
+  it('Check outdoorPOI cartesiansCoordinate', () => {
+    testCartesianCoordinate(outdoorPoi.cartesianCoordinate);
   });
-  it('Check coordinate', () => {
-    expect(typeof outdoorPoi.coordinate.latitude).to.be('number');
-    expect(typeof outdoorPoi.coordinate.longitude).to.be('number');
+  it('Check outdoorPOI coordinate', () => {
+    testCoordinate(outdoorPoi.coordinate);
   });
-  it('Check position', () => {
-    expect(typeof outdoorPoi.position.buildingIdentifier).to.be('string');
-    expect(typeof outdoorPoi.position.cartesianCoordinate).to.be('object');
-    expect(typeof outdoorPoi.position.coordinate).to.be('object');
-    expect(typeof outdoorPoi.position.floorIdentifier).to.be('string');
-    expect(typeof outdoorPoi.position.isIndoor).to.be('boolean');
-    expect(typeof outdoorPoi.position.isOutdoor).to.be('boolean');
-  });
-  it('Check cartesiansCoordinate of position property', () => {
-    expect(typeof outdoorPoi.position.cartesianCoordinate.x).to.be('number');
-    expect(typeof outdoorPoi.position.cartesianCoordinate.y).to.be('number');
-  });
-  it('Check coordinate of position property', () => {
-    expect(typeof outdoorPoi.position.coordinate.latitude).to.be('number');
-    expect(typeof outdoorPoi.position.coordinate.longitude).to.be('number');
+  it('Check outdoorPOI position', () => {
+    testPoint(outdoorPoi.position);
   });
 });
-describe('Test method fetchEventsFromBuilding ->', () => {
+describe('Test fetchEventsFromBuilding ->', () => {
   it('Check response', () => {
     expect(events).to.be.ok();
     expect(events instanceof Array).to.be(true);
@@ -192,22 +139,18 @@ describe('Test method fetchEventsFromBuilding ->', () => {
     expect(event = events[0]);
     expect(typeof event).to.be('object');
     expect(typeof event.buildingIdentifier).to.be('number');
+    expect(typeof event.identifier).to.be('number');
+    expect(typeof event.floorIdentifier).to.be('number');
+    expect(typeof event.infoHtml).to.be('string');
     expect(typeof event.conversionArea).to.be('object');
     expect(typeof event.customFields).to.be('object');
-    expect(typeof event.floorIdentifier).to.be('number');
-    expect(typeof event.identifier).to.be('number');
-    expect(typeof event.infoHtml).to.be('string');
     expect(typeof event.radius).to.be('number');
   });
-  it('Check conversion area', () => {
-    expect(typeof event.conversionArea.floorIdentifier).to.be('number');
-    expect(typeof event.conversionArea.bottomLeft).to.be('string');
-    expect(typeof event.conversionArea.bottomRight).to.be('string');
-    expect(typeof event.conversionArea.topLeft).to.be('string');
-    expect(typeof event.conversionArea.topRight).to.be('string');
+  it('Check event conversionArea', () => {
+    testConversionArea(event.conversionArea);
   });
 });
-describe('Test method fetchPoiCategories ->', () => {
+describe('Test fetchPoiCategories ->', () => {
   it('Check POICategories', () => {
     expect(poiCategories).to.be.ok();
     expect(poiCategories instanceof Array).to.be(true);
@@ -215,40 +158,76 @@ describe('Test method fetchPoiCategories ->', () => {
   it('Check POICategory object', () => {
     expect(poiCategory = poiCategories[0]);
     expect(typeof poiCategory).to.be('object');
-    expect(typeof poiCategory.icon_selected).to.be('string');
-    expect(typeof poiCategory.icon_unselected).to.be('string');
     expect(typeof poiCategory.poiCategoryCode).to.be('string');
     expect(typeof poiCategory.poiCategoryName).to.be('string');
+    expect(typeof poiCategory.icon_selected).to.be('string');
+    expect(typeof poiCategory.icon_unselected).to.be('string');
     expect(typeof poiCategory.public).to.be('boolean');
   });
 });
-describe('Test method fetchMapFromFloor ->', () => {
+describe('Test fetchMapFromFloor ->', () => {
   it('Check map object', () => {
     expect(map).to.be.ok();
     expect(typeof map.data).to.be('string');
   });
 });
-describe('Test fetchPoiCategoryIconNormal', () => {
+describe('Test fetchPoiCategoryIconNormal ->', () => {
   it('Check icon object', () => {
     expect(iconNormal).to.be.ok();
     expect(typeof iconNormal.data).to.be('string')
   });
 });
-describe('Has fetchPoiCategoryIconSelected method', () => {
+describe('Test fetchPoiCategoryIconSelected ->', () => {
   it('Chek icon object', () => {
     expect(iconSelected).to.be.ok();
     expect(typeof iconSelected.data).to.be('string');
   });
 });
-describe('Has requestDirections method', () => {
+describe('Test requestDirections ->', () => {
 
 });
-describe('Has requestNavigationUpdates method', () => {
 
-});
-describe('Has updateNavigationWithLocation method', () => {
+const testBounds = bounds => {
+  expect(typeof bounds.northEast).to.be('object');
+  expect(typeof bounds.northWest).to.be('object');
+  expect(typeof bounds.southEast).to.be('object');
+  expect(typeof bounds.southWest).to.be('object');
+  testCoordinate(bounds.northEast);
+  testCoordinate(bounds.northWest);
+  testCoordinate(bounds.southEast);
+  testCoordinate(bounds.southWest);
+}
 
-});
-describe('Has removeNavigationUpdates method', () => {
+const testCoordinate = coordinate => {
+  expect(typeof coordinate.latitude).to.be('number');
+  expect(typeof coordinate.longitude).to.be('number');
+}
 
-});
+const testDimension = dimension => {
+  expect(typeof dimension.width).to.be('number');
+  expect(typeof dimension.height).to.be('number');
+}
+
+const testCartesianCoordinate = cartesianCoordinate => {
+  expect(typeof cartesianCoordinate.x).to.be('number');
+  expect(typeof cartesianCoordinate.y).to.be('number');
+}
+
+const testPoint = point => {
+  expect(typeof point.buildingIdentifier).to.be('string');
+  expect(typeof point.cartesianCoordinate).to.be('object');
+  expect(typeof point.coordinate).to.be('object');
+  expect(typeof point.floorIdentifier).to.be('string');
+  expect(typeof point.isIndoor).to.be('boolean');
+  expect(typeof point.isOutdoor).to.be('boolean');
+  testCartesianCoordinate(point.cartesianCoordinate);
+  testCoordinate(point.coordinate);
+}
+
+const testConversionArea = conversionArea => {
+  expect(typeof event.conversionArea.floorIdentifier).to.be('number');
+  expect(typeof event.conversionArea.topLeft).to.be('string');
+  expect(typeof event.conversionArea.topRight).to.be('string');
+  expect(typeof event.conversionArea.bottomLeft).to.be('string');
+  expect(typeof event.conversionArea.bottomRight).to.be('string');
+}

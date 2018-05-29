@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+//import java.util.Vector;
 
 import java.io.ByteArrayOutputStream;
 
@@ -37,7 +38,7 @@ import es.situm.sdk.model.navigation.NavigationProgress;
 import es.situm.sdk.v1.SitumConversionArea;
 import es.situm.sdk.v1.SitumEvent;
 
-class LocationWrapper {
+class SitumMapper {
 
   // public static final String TAG = "LocationWrapper";
 
