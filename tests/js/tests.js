@@ -1,19 +1,15 @@
 const expect = require("expect.js");
 const buildings = require('./resources/fetchBuildings.json');
-let building;
 const floors = require('./resources/fetchFloorsFromBuilding.json');
-let floor;
 const indoorPois = require('./resources/fetchIndoorPOIsFromBuilding.json');
-let indoorPoi;
 const outdoorPois = require('./resources/fetchOutdoorPOIsFromBuilding.json');
-let outdoorPoi;
 const events = require('./resources/fetchEventsFromBuilding.json');
-let event;
 const poiCategories = require('./resources/fetchPoiCategories.json');
-let poiCategory;
 const map = require('./resources/fetchMapFromFloor.json');
 const iconNormal = require('./resources/fetchPoiCategoryIconNormal.json');
 const iconSelected = require('./resources/fetchPoiCategoryIconSelected.json');
+const route = require('./resources/requestDirections.json');
+let building, floor, indoorPoi, outdoorPoi, event, poiCategory, edge, indication, node, point, step;
 
 describe('Test fetchBuildings -> ', () => {
   it('Check reutrned value', () => {
@@ -184,7 +180,56 @@ describe('Test fetchPoiCategoryIconSelected ->', () => {
   });
 });
 describe('Test requestDirections ->', () => {
-
+  it('Check route object', () => {
+    expect(route).to.be.ok();
+    expect(typeof route).to.be('object');
+    expect(route.edges instanceof Array).to.be(true);
+    expect(typeof route.firstStep).to.be('object');
+    expect(typeof route.from).to.be('object');
+    expect(route.indications instanceof Array).to.be(true);
+    expect(typeof route.lastStep).to.be('object');
+    expect(route.nodes instanceof Array).to.be(true);
+    expect(route.points instanceof Array).to.be(true);
+    expect(typeof route.TO).to.be('object');
+    expect(route.steps instanceof Array).to.be(true);
+  });
+  it('Check edge route', () => {
+    expect(edge = route.edges[0]);
+    expect(typeof edge).to.be('object');
+    testRouteStep(edge);
+  });
+  it('Check firstStep route', () => {
+    testRouteStep(route.firstStep);
+  });
+  it('Check from route', () => {
+    testPoint(route.from);
+  });
+  it('Check indication route', () => {
+    expect(indication = route.indications[0]);
+    expect(typeof indication).to.be('object');
+    testIndication(indication);
+  });
+  it('Check lastStep route', () => {
+    testRouteStep(route.lastStep);
+  });
+  it('Check node route', () => {
+    expect(node = route.nodes[0]);
+    expect(typeof node).to.be('object');
+    testPoint(node);
+  });
+  it('Check point route', () => {
+    expect(point = route.points[0]);
+    expect(typeof point).to.be('object');
+    testPoint(point);
+  });
+  it('Check TO route', () => {
+    testPoint(route.TO);
+  });
+  it('Check step route', () => {
+    expect(step = route.steps[0]);
+    expect(typeof step).to.be('object');
+    testRouteStep(step);
+  });
 });
 
 const testBounds = bounds => {
@@ -230,4 +275,28 @@ const testConversionArea = conversionArea => {
   expect(typeof event.conversionArea.topRight).to.be('string');
   expect(typeof event.conversionArea.bottomLeft).to.be('string');
   expect(typeof event.conversionArea.bottomRight).to.be('string');
+}
+
+const testRouteStep = routeStep => {
+  expect(typeof routeStep.distance).to.be('number');
+  expect(typeof routeStep.distanceToGoal).to.be('number');
+  expect(typeof routeStep.from).to.be('object');
+  expect(typeof routeStep.id).to.be('number');
+  expect(typeof routeStep.TO).to.be('object');
+  expect(typeof routeStep.isFirst).to.be('boolean');
+  expect(typeof routeStep.isLast).to.be('boolean');
+  testPoint(routeStep.from);
+  testPoint(routeStep.TO);
+}
+
+const testIndication = indication => {
+  expect(typeof indication.distance).to.be('number');
+  expect(typeof indication.distanceToNextLevel).to.be('number');
+  expect(typeof indication.indicationType).to.be('string');
+  expect(typeof indication.orientation).to.be('number');
+  expect(typeof indication.orientationType).to.be('string');
+  expect(typeof indication.stepIdxDestination).to.be('number');
+  expect(typeof indication.stepIdxOrigin).to.be('number');
+  expect(typeof indication.neededLevelChange).to.be('boolean');
+  expect(typeof indication.humanReadableMessage).to.be('string');
 }
