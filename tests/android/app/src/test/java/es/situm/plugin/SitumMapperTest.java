@@ -4,14 +4,16 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Base64;
 
+import junit.framework.Assert;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-//import java.util.Vector;
 
 import java.io.ByteArrayOutputStream;
 
@@ -178,24 +180,23 @@ class SitumMapperTest {
   public static final String UPDATED_AT = "updatedAt";
   public static final String NAME = "name";
 
-  static JSONObject buildingToJsonObject(Building building) throws JSONException {
-    JSONObject jo = new JSONObject();
-    jo.put(ADDRESS, building.getAddress());
-    jo.put(BOUNDS, boundsToJsonObject(building.getBounds()));
-    jo.put(BOUNDS_ROTATED, boundsToJsonObject(building.getBoundsRotated()));
-    jo.put(CENTER, coordinateToJsonObject(building.getCenter()));
-    jo.put(DIMENSIONS, dimensionsToJsonObject(building.getDimensions()));
-    jo.put(INFO_HTML, building.getInfoHtml());
-    jo.put(BUILDING_NAME, building.getName());
-    jo.put(PICTURE_THUMB_URL, building.getPictureThumbUrl().getValue());
-    jo.put(PICTURE_URL, building.getPictureUrl().getValue());
-    jo.put(ROTATION, building.getRotation().radians());
-    jo.put(USER_IDENTIFIER, building.getUserIdentifier());
-    jo.put(BUILDING_IDENTIFIER, building.getIdentifier());
-    jo.put(CUSTOM_FIELDS, mapStringToJsonObject(building.getCustomFields()));
-    jo.put(CREATED_AT, building.getCreatedAt());
-    jo.put(UPDATED_AT, building.getUpdatedAt());
-    return jo;
+  @Test
+  static void buildingToJsonObjectTest(Building building) throws JSONException {
+    Assert.assertEquals(String.class, building.getAddress().getClass());
+    Assert.assertEquals(Bounds.class, building.getBounds().getClass());
+    Assert.assertEquals("Bounds", building.getBoundsRotated().getClass());
+    Assert.assertEquals("Point", building.getCenter().getClass());
+    Assert.assertEquals("Dimensions", building.getDimensions().getClass());
+    System.out.println(building.getInfoHtml().getClass());
+    System.out.println(building.getName().getClass());
+    System.out.println(building.getPictureThumbUrl().getClass());
+    System.out.println(building.getPictureUrl().getClass());
+    System.out.println(building.getRotation().getClass());
+    System.out.println(building.getUserIdentifier().getClass());
+    System.out.println(building.getIdentifier().getClass());
+    System.out.println(building.getCustomFields().getClass());
+    System.out.println(building.getCreatedAt().getClass());
+    System.out.println(building.getUpdatedAt().getClass());
   }
 
   static JSONObject mapStringToJsonObject(Map<String, String> mp) throws JSONException {

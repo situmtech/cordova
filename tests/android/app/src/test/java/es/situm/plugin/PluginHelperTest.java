@@ -1,13 +1,25 @@
 package es.situm.plugin;
 
+import org.json.JSONException;
+import org.junit.Test;
 
-import android.support.test.runner.AndroidJUnit4;
+import es.situm.sdk.model.cartography.Building;
+import es.situm.sdk.model.location.Coordinate;
+import es.situm.sdk.model.location.Dimensions;
 
-import org.junit.runner.RunWith;;
-
-@RunWith(AndroidJUnit4.class)
 public class PluginHelperTest {
 
-
+    @Test
+    public void fetchBuildingsTest() {
+        try {
+            Building building = null;
+            Coordinate center = new Coordinate(15.84, 8.73);
+            Dimensions dimesnsions = new Dimensions(20.44, 9.81);
+            building = new Building.Builder().address("Camiño de adran 2").name("Cocodin").center(center).dimensions(dimesnsions).build();
+            SitumMapperTest.buildingToJsonObjectTest(building);
+        }catch(JSONException e) {
+            System.err.println(e.getMessage());
+        }
+    }
 
 }
