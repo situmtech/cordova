@@ -57,7 +57,7 @@ describe('Test fetchFloorsFromBuilding ->', () => {
     expect(floors).to.be.ok();
     expect(floors instanceof Array).to.be(true);
   });
-  it('Check floor object', () => {
+  it('Check floor', () => {
     expect(floor = floors[0]);
     expect(typeof floor).to.be('object');
     expect(typeof floor.altitude).to.be('number');
@@ -74,7 +74,7 @@ describe('Test fetchIndoorPOIsFromBuilding ->', () => {
     expect(indoorPois).to.be.ok();
     expect(indoorPois instanceof Array).to.be(true);
   });
-  it('Check indoorPOI object', () => {
+  it('Check indoorPOI', () => {
     expect(indoorPoi = indoorPois[0]);
     expect(typeof indoorPoi).to.be('object');
     expect(typeof indoorPoi.identifier).to.be('string');
@@ -105,7 +105,7 @@ describe('Test fetchOutdoorPOIsFromBuilding ->', () => {
     expect(outdoorPois).to.be.ok();
     expect(outdoorPois instanceof Array).to.be(true);
   });
-  it('Check outdoorPOI object', () => {
+  it('Check outdoorPOI', () => {
     expect(outdoorPoi = outdoorPois[0]);
     expect(typeof outdoorPoi).to.be('object');
     expect(typeof outdoorPoi.identifier).to.be('string');
@@ -132,11 +132,11 @@ describe('Test fetchOutdoorPOIsFromBuilding ->', () => {
   });
 });
 describe('Test fetchEventsFromBuilding ->', () => {
-  it('Check response', () => {
+  it('Check returned value', () => {
     expect(events).to.be.ok();
     expect(events instanceof Array).to.be(true);
   });
-  it('Check event object', () => {
+  it('Check event', () => {
     expect(event = events[0]);
     expect(typeof event).to.be('object');
     expect(typeof event.buildingIdentifier).to.be('number');
@@ -152,11 +152,11 @@ describe('Test fetchEventsFromBuilding ->', () => {
   });
 });
 describe('Test fetchPoiCategories ->', () => {
-  it('Check POICategories', () => {
+  it('Check returned value', () => {
     expect(poiCategories).to.be.ok();
     expect(poiCategories instanceof Array).to.be(true);
   });
-  it('Check POICategory object', () => {
+  it('Check POICategory', () => {
     expect(poiCategory = poiCategories[0]);
     expect(typeof poiCategory).to.be('object');
     expect(typeof poiCategory.poiCategoryCode).to.be('string');
@@ -167,27 +167,29 @@ describe('Test fetchPoiCategories ->', () => {
   });
 });
 describe('Test fetchMapFromFloor ->', () => {
-  it('Check map object', () => {
+  it('Check map', () => {
     expect(map).to.be.ok();
     expect(typeof map.data).to.be('string');
   });
 });
 describe('Test fetchPoiCategoryIconNormal ->', () => {
-  it('Check icon object', () => {
+  it('Check iconNormal', () => {
     expect(iconNormal).to.be.ok();
     expect(typeof iconNormal.data).to.be('string')
   });
 });
 describe('Test fetchPoiCategoryIconSelected ->', () => {
-  it('Chek icon object', () => {
+  it('Chek iconSelected', () => {
     expect(iconSelected).to.be.ok();
     expect(typeof iconSelected.data).to.be('string');
   });
 });
 describe('Test requestDirections ->', () => {
-  it('Check route object', () => {
+  it('Check returned value', () => {
     expect(route).to.be.ok();
     expect(typeof route).to.be('object');
+  });
+  it('Check route', () => {
     expect(route.edges instanceof Array).to.be(true);
     expect(typeof route.firstStep).to.be('object');
     expect(typeof route.from).to.be('object');
@@ -237,33 +239,43 @@ describe('Test requestDirections ->', () => {
   });
 });
 describe('Test startPositioning ->', () => {
-  it('Check starting', () => {
+  it('Check returned value', () => {
     expect(starting).to.be.ok();
     expect(typeof starting).to.be('object');
+  });
+  it('Check starting', () => {
     expect(typeof starting.statusName).to.be('string');
     expect(typeof starting.statusOrdinal).to.be('number');
   })
-  it('Check preparePositioningModel', () => {
+  it('Check returned value', () => {
     expect(preparePositioningModel).to.be.ok();
     expect(typeof preparePositioningModel).to.be('object');
+  });
+  it('Check preparePositioningModel', () => {
     expect(typeof preparePositioningModel.statusName).to.be('string');
     expect(typeof preparePositioningModel.statusOrdinal).to.be('number');
   });
-  it('Check startingPositioning', () => {
+  it('Check returned value', () => {
     expect(startingPositioning).to.be.ok();
     expect(typeof startingPositioning).to.be('object');
+  });
+  it('Check startingPositioning', () => {
     expect(typeof startingPositioning.statusName).to.be('string');
     expect(typeof startingPositioning.statusOrdinal).to.be('number');
   });
-  it('Check calculating', () => {
+  it('Check returned value', () => {
     expect(calculating).to.be.ok();
     expect(typeof calculating).to.be('object');
+  });
+  it('Check calculating', () => {
     expect(typeof calculating.statusName).to.be('string');
     expect(typeof calculating.statusOrdinal).to.be('number');
   });
-  it('Check position', () => {
+  it('Check returned value', () => {
     expect(position).to.be.ok();
     expect(typeof position).to.be('object');
+  });
+  it('Check position', () => {
     expect(typeof position.accuracy).to.be('number');
     expect(typeof position.bearing).to.be('object');
     expect(typeof position.bearingQuality).to.be('string');
@@ -294,7 +306,7 @@ describe('Test startPositioning ->', () => {
   it('Check position coordinate', () => {
     testCoordinate(position.coordinate);
   });
-  it('Checl position position', () => {
+  it('Check position position', () => {
     testPoint(position.position);
   });
 })
