@@ -184,9 +184,9 @@ class SitumMapperTest {
   static void buildingToJsonObjectTest(Building building) throws JSONException {
     Assert.assertEquals(String.class, building.getAddress().getClass());
     Assert.assertEquals(Bounds.class, building.getBounds().getClass());
-    Assert.assertEquals("Bounds", building.getBoundsRotated().getClass());
-    Assert.assertEquals("Point", building.getCenter().getClass());
-    Assert.assertEquals("Dimensions", building.getDimensions().getClass());
+    Assert.assertEquals(Bounds.class, building.getBoundsRotated().getClass());
+    Assert.assertEquals(Point.class, building.getCenter().getClass());
+    Assert.assertEquals(Dimensions.class, building.getDimensions().getClass());
     System.out.println(building.getInfoHtml().getClass());
     System.out.println(building.getName().getClass());
     System.out.println(building.getPictureThumbUrl().getClass());

@@ -15,7 +15,7 @@ public class PluginHelperTest {
             Building building = null;
             Coordinate center = new Coordinate(15.84, 8.73);
             Dimensions dimesnsions = new Dimensions(20.44, 9.81);
-            building = new Building.Builder().address("Camiño de adran 2").name("Cocodin").center(center).dimensions(dimesnsions).build();
+            building = new Building.Builder().address("Camiño de adran").name("Cocodin").center(center).dimensions(dimesnsions).build();
             SitumMapperTest.buildingToJsonObjectTest(building);
         }catch(JSONException e) {
             System.err.println(e.getMessage());
