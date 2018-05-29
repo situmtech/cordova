@@ -9,6 +9,11 @@ const map = require('./resources/fetchMapFromFloor.json');
 const iconNormal = require('./resources/fetchPoiCategoryIconNormal.json');
 const iconSelected = require('./resources/fetchPoiCategoryIconSelected.json');
 const route = require('./resources/requestDirections.json');
+const starting = require('./resources/startPositioning/0_starting.json');
+const preparePositioningModel = require('./resources/startPositioning/1_preparingPositioningModel.json');
+const startingPositioning = require('./resources/startPositioning/2_startingPositioning.json');
+const calculating = require('./resources/startPositioning/3_calculating.json');
+const position = require('./resources/startPositioning/4_position.json');
 let building, floor, indoorPoi, outdoorPoi, event, poiCategory, edge, indication, node, point, step;
 
 describe('Test fetchBuildings -> ', () => {
@@ -231,6 +236,68 @@ describe('Test requestDirections ->', () => {
     testRouteStep(step);
   });
 });
+describe('Test startPositioning ->', () => {
+  it('Check starting', () => {
+    expect(starting).to.be.ok();
+    expect(typeof starting).to.be('object');
+    expect(typeof starting.statusName).to.be('string');
+    expect(typeof starting.statusOrdinal).to.be('number');
+  })
+  it('Check preparePositioningModel', () => {
+    expect(preparePositioningModel).to.be.ok();
+    expect(typeof preparePositioningModel).to.be('object');
+    expect(typeof preparePositioningModel.statusName).to.be('string');
+    expect(typeof preparePositioningModel.statusOrdinal).to.be('number');
+  });
+  it('Check startingPositioning', () => {
+    expect(startingPositioning).to.be.ok();
+    expect(typeof startingPositioning).to.be('object');
+    expect(typeof startingPositioning.statusName).to.be('string');
+    expect(typeof startingPositioning.statusOrdinal).to.be('number');
+  });
+  it('Check calculating', () => {
+    expect(calculating).to.be.ok();
+    expect(typeof calculating).to.be('object');
+    expect(typeof calculating.statusName).to.be('string');
+    expect(typeof calculating.statusOrdinal).to.be('number');
+  });
+  it('Check position', () => {
+    expect(position).to.be.ok();
+    expect(typeof position).to.be('object');
+    expect(typeof position.accuracy).to.be('number');
+    expect(typeof position.bearing).to.be('object');
+    expect(typeof position.bearingQuality).to.be('string');
+    expect(typeof position.buildingIdentifier).to.be('string');
+    expect(typeof position.cartesianBearing).to.be('object');
+    expect(typeof position.cartesianCoordinate).to.be('object');
+    expect(typeof position.coordinate).to.be('object');
+    expect(typeof position.floorIdentifier).to.be('string');
+    expect(typeof position.position).to.be('object');
+    expect(typeof position.provider).to.be('string');
+    expect(typeof position.quality).to.be('string');
+    expect(typeof position.hasBearing).to.be('boolean');
+    expect(typeof position.timestamp).to.be('number');
+    expect(typeof position.hasCartesianBearing).to.be('boolean');
+    expect(typeof position.isIndoor).to.be('boolean');
+    expect(typeof position.isOutdoor).to.be('boolean');
+    expect(typeof position.deviceId).to.be('string');
+  });
+  it('Check position bearing', () => {
+    testBearing(position.bearing);
+  });
+  it('Check position cartesianBearing', () => {
+    testBearing(position.cartesianBearing);
+  });
+  it('Check position cartesianCoordinate', () => {
+    testCartesianCoordinate(position.cartesianCoordinate);
+  });
+  it('Check position coordinate', () => {
+    testCoordinate(position.coordinate);
+  });
+  it('Checl position position', () => {
+    testPoint(position.position);
+  });
+})
 
 const testBounds = bounds => {
   expect(typeof bounds.northEast).to.be('object');
@@ -299,4 +366,11 @@ const testIndication = indication => {
   expect(typeof indication.stepIdxOrigin).to.be('number');
   expect(typeof indication.neededLevelChange).to.be('boolean');
   expect(typeof indication.humanReadableMessage).to.be('string');
+}
+
+const testBearing = bearing => {
+  expect(typeof bearing.degrees).to.be('number');
+  expect(typeof bearing.degreesClockwise).to.be('number');
+  expect(typeof bearing.radians).to.be('number');
+  expect(typeof bearing.radiansMinusPiPi).to.be('number');
 }
