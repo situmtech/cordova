@@ -37,10 +37,8 @@ import es.situm.sdk.model.location.Location.Quality;
 import es.situm.sdk.model.navigation.NavigationProgress;
 import es.situm.sdk.v1.SitumConversionArea;
 import es.situm.sdk.v1.SitumEvent;
-import jdk.nashorn.api.scripting.JSObject;
-import jdk.nashorn.internal.ir.ReturnNode;
 
-class LocationWrapper {
+class SitumMapper {
 
   // public static final String TAG = "LocationWrapper";
 

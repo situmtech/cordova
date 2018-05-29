@@ -1,22 +1,32 @@
 package es.situm.plugin;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.telecom.Call;
 import android.util.Log;
-import android.webkit.WebSettings;
 import android.widget.Toast;
+
+import org.apache.cordova.CallbackContext;
+import org.apache.cordova.CordovaInterface;
+import org.apache.cordova.CordovaWebView;
+import org.apache.cordova.PluginResult;
+import org.apache.cordova.PluginResult.Status;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+
 import es.situm.sdk.SitumSdk;
 import es.situm.sdk.communication.CommunicationManager;
-import es.situm.sdk.directions.DirectionsManager;
 import es.situm.sdk.directions.DirectionsRequest;
 import es.situm.sdk.error.Error;
 import es.situm.sdk.location.LocationListener;
 import es.situm.sdk.location.LocationRequest;
-import es.situm.sdk.model.location.Angle;
 import es.situm.sdk.location.LocationRequest.Builder;
 import es.situm.sdk.location.LocationRequest.IndoorProvider;
 import es.situm.sdk.location.LocationRequest.MotionMode;
@@ -29,31 +39,16 @@ import es.situm.sdk.model.cartography.Poi;
 import es.situm.sdk.model.cartography.PoiCategory;
 import es.situm.sdk.model.cartography.Point;
 import es.situm.sdk.model.directions.Route;
+import es.situm.sdk.model.location.Angle;
 import es.situm.sdk.model.location.BeaconFilter;
 import es.situm.sdk.model.location.CartesianCoordinate;
 import es.situm.sdk.model.location.Location;
+import es.situm.sdk.model.navigation.NavigationProgress;
+import es.situm.sdk.navigation.NavigationListener;
 import es.situm.sdk.navigation.NavigationManager;
+import es.situm.sdk.navigation.NavigationRequest;
 import es.situm.sdk.utils.Handler;
 import es.situm.sdk.v1.SitumEvent;
-import es.situm.sdk.navigation.NavigationRequest;
-import es.situm.sdk.navigation.NavigationListener;
-import es.situm.sdk.model.navigation.NavigationProgress;
-
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-
-import org.apache.cordova.CallbackContext;
-import org.apache.cordova.CordovaInterface;
-import org.apache.cordova.CordovaWebView;
-import org.apache.cordova.PluginResult;
-import org.apache.cordova.PluginResult.Status;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import javax.xml.datatype.DatatypeFactory;
 
 public class PluginHelper {
 
@@ -114,7 +109,7 @@ public class PluginHelper {
                         for (Building building : buildings) {
                             Log.i(PluginHelper.TAG,
                                     "onSuccess: " + building.getIdentifier() + " - " + building.getName());
-                            JSONObject jsonoBuilding = LocationWrapper.buildingToJsonObject(building);
+                            JSONObject jsonoBuilding = SitumMapper.buildingToJsonObject(building);
                             jsonaBuildings.put(jsonoBuilding);
                         }
                         if (buildings.isEmpty()) {
@@ -140,7 +135,7 @@ public class PluginHelper {
             final CallbackContext callbackContext) {
         try {
             JSONObject jsonoBuilding = args.getJSONObject(0);
-            Building building = LocationWrapper.buildingJsonObjectToBuilding(jsonoBuilding);
+            Building building = SitumMapper.buildingJsonObjectToBuilding(jsonoBuilding);
             getCommunicationManagerInstance().fetchFloorsFromBuilding(building, new Handler<Collection<Floor>>() {
                 @Override
                 public void onSuccess(Collection<Floor> floors) {
@@ -150,7 +145,7 @@ public class PluginHelper {
 
                         for (Floor floor : floors) {
                             Log.i(PluginHelper.TAG, "onSuccess: " + floor.getIdentifier());
-                            JSONObject jsonoFloor = LocationWrapper.floorToJsonObject(floor);
+                            JSONObject jsonoFloor = SitumMapper.floorToJsonObject(floor);
                             jsonaFloors.put(jsonoFloor);
                         }
                         if (floors.isEmpty()) {
@@ -178,7 +173,7 @@ public class PluginHelper {
             final CallbackContext callbackContext) {
         try {
             JSONObject jsonoBuilding = args.getJSONObject(0);
-            Building building = LocationWrapper.buildingJsonObjectToBuilding(jsonoBuilding);
+            Building building = SitumMapper.buildingJsonObjectToBuilding(jsonoBuilding);
             getCommunicationManagerInstance().fetchIndoorPOIsFromBuilding(building, new HashMap<String, Object>(),
                     new Handler<Collection<Poi>>() {
                         @Override
@@ -192,7 +187,7 @@ public class PluginHelper {
                                             "onSuccess: " + poi.getIdentifier() + " - " + poi.getName() + "-" + poi.getCustomFields());
                                     
                                     Log.d(PluginHelper.TAG, "Some log that should appear");
-                                    JSONObject jsonoPoi = LocationWrapper.poiToJsonObject(poi);
+                                    JSONObject jsonoPoi = SitumMapper.poiToJsonObject(poi);
                                     jsonaPois.put(jsonoPoi);
                                 }
                                 if (pois.isEmpty()) {
@@ -221,7 +216,7 @@ public class PluginHelper {
             final CallbackContext callbackContext) {
         try {
             JSONObject jsonoBuilding = args.getJSONObject(0);
-            Building building = LocationWrapper.buildingJsonObjectToBuilding(jsonoBuilding);
+            Building building = SitumMapper.buildingJsonObjectToBuilding(jsonoBuilding);
             getCommunicationManagerInstance().fetchOutdoorPOIsFromBuilding(building, new HashMap<String, Object>(),
                     new Handler<Collection<Poi>>() {
                         @Override
@@ -233,7 +228,7 @@ public class PluginHelper {
                                 for (Poi poi : pois) {
                                     Log.i(PluginHelper.TAG,
                                             "onSuccess: " + poi.getIdentifier() + " - " + poi.getName());
-                                    JSONObject jsonoPoi = LocationWrapper.poiToJsonObject(poi);
+                                    JSONObject jsonoPoi = SitumMapper.poiToJsonObject(poi);
                                     jsonaPois.put(jsonoPoi);
                                 }
                                 if (pois.isEmpty()) {
@@ -268,7 +263,7 @@ public class PluginHelper {
                     JSONArray jsonaPoiCategories = new JSONArray();
                     for (PoiCategory poiCategory : poiCategories) {
                         Log.i(PluginHelper.TAG, "onSuccess: " + poiCategory.getCode() + " - " + poiCategory.getName());
-                        JSONObject jsonoPoiCategory = LocationWrapper.poiCategoryToJsonObject(poiCategory);
+                        JSONObject jsonoPoiCategory = SitumMapper.poiCategoryToJsonObject(poiCategory);
                         jsonaPoiCategories.put(jsonoPoiCategory);
                     }
                     if (poiCategories.isEmpty()) {
@@ -292,13 +287,13 @@ public class PluginHelper {
             final CallbackContext callbackContext) {
         try {
             JSONObject jsonoCategory = args.getJSONObject(0);
-            PoiCategory category = LocationWrapper.poiCategoryFromJsonObject(jsonoCategory);
+            PoiCategory category = SitumMapper.poiCategoryFromJsonObject(jsonoCategory);
             getCommunicationManagerInstance().fetchPoiCategoryIconNormal(category, new Handler<Bitmap>() {
                 @Override
                 public void onSuccess(Bitmap bitmap) {
                     try {
                         Log.d(PluginHelper.TAG, "onSuccess: Poi icon fetched successfully");
-                        JSONObject jsonoMap = LocationWrapper.bitmapToString(bitmap);
+                        JSONObject jsonoMap = SitumMapper.bitmapToString(bitmap);
                         callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonoMap));
                     } catch (JSONException e) {
                         callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
@@ -321,13 +316,13 @@ public class PluginHelper {
             final CallbackContext callbackContext) {
         try {
             JSONObject jsonoCategory = args.getJSONObject(0);
-            PoiCategory category = LocationWrapper.poiCategoryFromJsonObject(jsonoCategory);
+            PoiCategory category = SitumMapper.poiCategoryFromJsonObject(jsonoCategory);
             getCommunicationManagerInstance().fetchPoiCategoryIconNormal(category, new Handler<Bitmap>() {
                 @Override
                 public void onSuccess(Bitmap bitmap) {
                     try {
                         Log.d(PluginHelper.TAG, "onSuccess: Poi icon fetched successfully");
-                        JSONObject jsonoMap = LocationWrapper.bitmapToString(bitmap);
+                        JSONObject jsonoMap = SitumMapper.bitmapToString(bitmap);
                         callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonoMap));
                     } catch (JSONException e) {
                         callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
@@ -350,7 +345,7 @@ public class PluginHelper {
             final CallbackContext callbackContext) {
         try {
             JSONObject jsonoBuilding = args.getJSONObject(0);
-            Building building = LocationWrapper.buildingJsonObjectToBuilding(jsonoBuilding);
+            Building building = SitumMapper.buildingJsonObjectToBuilding(jsonoBuilding);
             getCommunicationManagerInstance().fetchEventsFromBuilding(building, new HashMap<String, Object>(),
                     new Handler<Collection<es.situm.sdk.v1.SitumEvent>>() {
                         @Override
@@ -361,7 +356,7 @@ public class PluginHelper {
                                 for (SitumEvent situmEvent : situmEvents) {
                                     Log.i(PluginHelper.TAG,
                                             "onSuccess: " + situmEvent.getId() + " - " + situmEvent.getName());
-                                    JSONObject jsonoSitumEvent = LocationWrapper.situmEventToJsonObject(situmEvent);
+                                    JSONObject jsonoSitumEvent = SitumMapper.situmEventToJsonObject(situmEvent);
                                     jsonaEvents.put(jsonoSitumEvent);
                                 }
                                 if (situmEvents.isEmpty()) {
@@ -389,13 +384,13 @@ public class PluginHelper {
             final CallbackContext callbackContext) {
         try {
             JSONObject jsonoFloor = args.getJSONObject(0);
-            Floor floor = LocationWrapper.floorJsonObjectToFloor(jsonoFloor);
+            Floor floor = SitumMapper.floorJsonObjectToFloor(jsonoFloor);
             getCommunicationManagerInstance().fetchMapFromFloor(floor, new Handler<Bitmap>() {
                 @Override
                 public void onSuccess(Bitmap bitmap) {
                     try {
                         Log.d(PluginHelper.TAG, "onSuccess: Map fetched successfully");
-                        JSONObject jsonoMap = LocationWrapper.bitmapToString(bitmap);
+                        JSONObject jsonoMap = SitumMapper.bitmapToString(bitmap);
                         callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonoMap));
                     } catch (JSONException e) {
                         callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
@@ -417,28 +412,28 @@ public class PluginHelper {
     public OutdoorLocationOptions buildOutdoorLocationOptions(JSONObject outdoorLocationOptions) throws JSONException{
         OutdoorLocationOptions.Builder optionsBuilder = new OutdoorLocationOptions.Builder();
 
-        if (outdoorLocationOptions.has(LocationWrapper.CONTINUOUS_MODE)) {
-            Boolean continuousMode = outdoorLocationOptions.getBoolean(LocationWrapper.CONTINUOUS_MODE);
+        if (outdoorLocationOptions.has(SitumMapper.CONTINUOUS_MODE)) {
+            Boolean continuousMode = outdoorLocationOptions.getBoolean(SitumMapper.CONTINUOUS_MODE);
             optionsBuilder.continuousMode(continuousMode);
             Log.i(TAG, "continuousMode: " + continuousMode);
         }
 
-        if (outdoorLocationOptions.has(LocationWrapper.USER_DEFINED_THRESHOLD)) {
-            Boolean userDefinedThreshold = outdoorLocationOptions.getBoolean(LocationWrapper.USER_DEFINED_THRESHOLD);
+        if (outdoorLocationOptions.has(SitumMapper.USER_DEFINED_THRESHOLD)) {
+            Boolean userDefinedThreshold = outdoorLocationOptions.getBoolean(SitumMapper.USER_DEFINED_THRESHOLD);
             optionsBuilder.userDefinedThreshold(userDefinedThreshold);
             Log.i(TAG, "userDefinedThreshold: " + userDefinedThreshold);
         }
 
-        if (outdoorLocationOptions.has(LocationWrapper.BURST_INTERVAL)) {
-            Integer burstInterval = outdoorLocationOptions.getInt(LocationWrapper.BURST_INTERVAL);
+        if (outdoorLocationOptions.has(SitumMapper.BURST_INTERVAL)) {
+            Integer burstInterval = outdoorLocationOptions.getInt(SitumMapper.BURST_INTERVAL);
             if (burstInterval != null && burstInterval >= 1) {
                 optionsBuilder.burstInterval(burstInterval);
                 Log.i(TAG, "burstInterval: " + burstInterval);
             }
         }
 
-        if (outdoorLocationOptions.has(LocationWrapper.AVERAGE_SNR_THRESHOLD));
-        Float averageSnrThreshold = new Float(outdoorLocationOptions.getDouble(LocationWrapper.AVERAGE_SNR_THRESHOLD));
+        if (outdoorLocationOptions.has(SitumMapper.AVERAGE_SNR_THRESHOLD));
+        Float averageSnrThreshold = new Float(outdoorLocationOptions.getDouble(SitumMapper.AVERAGE_SNR_THRESHOLD));
         if (averageSnrThreshold != null && averageSnrThreshold >= MIN_SNR && averageSnrThreshold <= MAX_SNR) {
             optionsBuilder.averageSnrThreshold(averageSnrThreshold);
             Log.i(TAG, "averageSnrThreshold: " + averageSnrThreshold);
@@ -449,25 +444,25 @@ public class PluginHelper {
     public LocationRequest buildLocationRequest(JSONArray args) throws JSONException {
         Builder locationBuilder = new Builder();
         JSONObject jsonoBuilding = args.getJSONObject(0);
-        String sBuildingId = jsonoBuilding.getString(LocationWrapper.BUILDING_IDENTIFIER);
+        String sBuildingId = jsonoBuilding.getString(SitumMapper.BUILDING_IDENTIFIER);
         if (args.length() > 1) {
             JSONObject request = args.getJSONObject(1);
-            if (request.has(LocationWrapper.BUILDING_IDENTIFIER)) {
-                String buildingIdentifier = request.getString(LocationWrapper.BUILDING_IDENTIFIER);
+            if (request.has(SitumMapper.BUILDING_IDENTIFIER)) {
+                String buildingIdentifier = request.getString(SitumMapper.BUILDING_IDENTIFIER);
                 locationBuilder.buildingIdentifier(buildingIdentifier);
                 Log.i(TAG, "buildingIdentifier: " + buildingIdentifier);
             }
 
-            if (request.has(LocationWrapper.INTERVAL)) {
-                Integer interval = request.getInt(LocationWrapper.INTERVAL);
+            if (request.has(SitumMapper.INTERVAL)) {
+                Integer interval = request.getInt(SitumMapper.INTERVAL);
                 if (interval != null && interval >= 1000) {
                     locationBuilder.interval(interval);
                     Log.i(TAG, "interval: " + interval);
                 }
             }
 
-            if (request.has(LocationWrapper.INDOOR_PROVIDER)) {
-                String indoorProvider = request.getString(LocationWrapper.INDOOR_PROVIDER);
+            if (request.has(SitumMapper.INDOOR_PROVIDER)) {
+                String indoorProvider = request.getString(SitumMapper.INDOOR_PROVIDER);
                 if (indoorProvider != null && !indoorProvider.isEmpty()) {
                     if (indoorProvider.equals(IndoorProvider.SUPPORT.name())) {
                         locationBuilder.indoorProvider(IndoorProvider.SUPPORT);
@@ -478,20 +473,20 @@ public class PluginHelper {
                 }
             }
 
-            if (request.has(LocationWrapper.USE_BLE)) {
-                Boolean useBle = request.getBoolean(LocationWrapper.USE_BLE);
+            if (request.has(SitumMapper.USE_BLE)) {
+                Boolean useBle = request.getBoolean(SitumMapper.USE_BLE);
                 locationBuilder.useBle(useBle);
                 Log.i(TAG, "useBle: " + useBle);
             }
 
-            if (request.has(LocationWrapper.USE_WIFI)) {
-                Boolean useWifi = request.getBoolean(LocationWrapper.USE_WIFI);
+            if (request.has(SitumMapper.USE_WIFI)) {
+                Boolean useWifi = request.getBoolean(SitumMapper.USE_WIFI);
                 locationBuilder.useWifi(useWifi);
                 Log.i(TAG, "useWifi: " + useWifi);
             }
             
-            if (request.has(LocationWrapper.MOTION_MODE)) {
-                String motionMode = request.getString(LocationWrapper.MOTION_MODE);
+            if (request.has(SitumMapper.MOTION_MODE)) {
+                String motionMode = request.getString(SitumMapper.MOTION_MODE);
                 if (motionMode != null) {
                     if (motionMode.equals(MotionMode.BY_FOOT.name())) {
                         locationBuilder.motionMode(MotionMode.BY_FOOT);
@@ -502,32 +497,32 @@ public class PluginHelper {
                 }
             }
 
-            if (request.has(LocationWrapper.USE_FOREGROUND_SERVICE)) {
-                Boolean useForegroundService = request.getBoolean(LocationWrapper.USE_FOREGROUND_SERVICE);
+            if (request.has(SitumMapper.USE_FOREGROUND_SERVICE)) {
+                Boolean useForegroundService = request.getBoolean(SitumMapper.USE_FOREGROUND_SERVICE);
                 locationBuilder.useForegroundService(useForegroundService);
                 Log.i(TAG, "useForegroundService: " + useForegroundService);
             }
 
-            if (request.has(LocationWrapper.USE_DEAD_RECKONING)) {
-                Boolean useDeadReckoning = request.getBoolean(LocationWrapper.USE_DEAD_RECKONING);
+            if (request.has(SitumMapper.USE_DEAD_RECKONING)) {
+                Boolean useDeadReckoning = request.getBoolean(SitumMapper.USE_DEAD_RECKONING);
                 locationBuilder.useDeadReckoning(useDeadReckoning);
                 Log.i(TAG, "useDeadReckoning: " + useDeadReckoning);
             }
 
-            if (request.has(LocationWrapper.OUTDOOR_LOCATION_OPTIONS)) {
-                JSONObject outdoorLocationOptions = request.getJSONObject(LocationWrapper.OUTDOOR_LOCATION_OPTIONS);
+            if (request.has(SitumMapper.OUTDOOR_LOCATION_OPTIONS)) {
+                JSONObject outdoorLocationOptions = request.getJSONObject(SitumMapper.OUTDOOR_LOCATION_OPTIONS);
                 if (outdoorLocationOptions != null) {
                     locationBuilder.outdoorLocationOptions(buildOutdoorLocationOptions(outdoorLocationOptions));
                 }
             }
 
-            if (request.has(LocationWrapper.BEACON_FILTERS)) {
-                JSONArray beaconFilters = request.getJSONArray(LocationWrapper.BEACON_FILTERS);
+            if (request.has(SitumMapper.BEACON_FILTERS)) {
+                JSONArray beaconFilters = request.getJSONArray(SitumMapper.BEACON_FILTERS);
                 List<BeaconFilter> filtersList = new ArrayList<BeaconFilter>();
                 for (int i = 0; i < beaconFilters.length(); i++) {
                     JSONObject beaconFilter = beaconFilters.getJSONObject(i);
-                    if (beaconFilter.has(LocationWrapper.UUID)) {
-                        String uuid = beaconFilter.getString(LocationWrapper.UUID);
+                    if (beaconFilter.has(SitumMapper.UUID)) {
+                        String uuid = beaconFilter.getString(SitumMapper.UUID);
                         if (uuid != null && !uuid.isEmpty()) {
                             BeaconFilter.Builder builder = new BeaconFilter.Builder().uuid(uuid);
                             filtersList.add(builder.build());
@@ -539,16 +534,16 @@ public class PluginHelper {
                 locationBuilder.addBeaconFilters(filtersList);
             }
 
-            if (request.has(LocationWrapper.SMALLEST_DISPLACEMENT)) {
-                Float smallestDisplacement = new Float(request.getDouble(LocationWrapper.SMALLEST_DISPLACEMENT));
+            if (request.has(SitumMapper.SMALLEST_DISPLACEMENT)) {
+                Float smallestDisplacement = new Float(request.getDouble(SitumMapper.SMALLEST_DISPLACEMENT));
                 if (smallestDisplacement != null && smallestDisplacement > 0) {
                     locationBuilder.smallestDisplacement(smallestDisplacement);
                     Log.i(TAG, "smallestDisplacement: " + smallestDisplacement);
                 }    
             }
 
-            if (request.has(LocationWrapper.REALTIME_UPDATE_INTERVAL)) {
-                Integer realtimeUpdateInterval = request.getInt(LocationWrapper.REALTIME_UPDATE_INTERVAL);
+            if (request.has(SitumMapper.REALTIME_UPDATE_INTERVAL)) {
+                Integer realtimeUpdateInterval = request.getInt(SitumMapper.REALTIME_UPDATE_INTERVAL);
                 if (realtimeUpdateInterval != null) {
                     if (realtimeUpdateInterval.equals(RealtimeUpdateInterval.REALTIME)) {
                         locationBuilder.realtimeUpdateInterval(RealtimeUpdateInterval.REALTIME);
@@ -574,7 +569,7 @@ public class PluginHelper {
             final CallbackContext callbackContext) {
         try {
             JSONObject jsonoBuilding = args.getJSONObject(0);
-            String sBuildingName = jsonoBuilding.getString(LocationWrapper.BUILDING_NAME);
+            String sBuildingName = jsonoBuilding.getString(SitumMapper.BUILDING_NAME);
             if (locationListener == null) {
                 LocationRequest locationRequest = buildLocationRequest(args);
 
@@ -589,7 +584,7 @@ public class PluginHelper {
                                     + location.getFloorIdentifier() + "\nx: " + cartesianCoordinate.getX() + "\ny: "
                                     + cartesianCoordinate.getY() + "\nyaw: " + location.getCartesianBearing()
                                     + "\naccuracy: " + location.getAccuracy();
-                            JSONObject jsonObject = LocationWrapper.locationToJsonObject(location);
+                            JSONObject jsonObject = SitumMapper.locationToJsonObject(location);
                             PluginResult result = new PluginResult(Status.OK, jsonObject);
                             result.setKeepCallback(true);
                             callbackContext.sendPluginResult(result);
@@ -601,7 +596,7 @@ public class PluginHelper {
                     public void onStatusChanged(@NonNull LocationStatus status) {
                         try {
                             Log.i(PluginHelper.TAG, "onStatusChanged() called with: status = [" + status + "]");
-                            JSONObject jsonObject = LocationWrapper.locationStatusToJsonObject(status);
+                            JSONObject jsonObject = SitumMapper.locationStatusToJsonObject(status);
                             PluginResult result = new PluginResult(Status.OK, jsonObject);
                             result.setKeepCallback(true);
                             callbackContext.sendPluginResult(result);
@@ -699,18 +694,18 @@ public class PluginHelper {
             try {
                 JSONObject navigationJSONOptions = args.getJSONObject(0); // Route should be the first parameter
 
-                if (navigationJSONOptions.has(LocationWrapper.DISTANCE_TO_IGNORE_FIRST_INDICATION)) {
-                    Double distanceToIgnoreFirstIndication = navigationJSONOptions.getDouble(LocationWrapper.DISTANCE_TO_IGNORE_FIRST_INDICATION);
+                if (navigationJSONOptions.has(SitumMapper.DISTANCE_TO_IGNORE_FIRST_INDICATION)) {
+                    Double distanceToIgnoreFirstIndication = navigationJSONOptions.getDouble(SitumMapper.DISTANCE_TO_IGNORE_FIRST_INDICATION);
                     builder.distanceToIgnoreFirstIndication(distanceToIgnoreFirstIndication);
                 }
 
-                if (navigationJSONOptions.has(LocationWrapper.OUTSIDE_ROUTE_THRESHOLD)) {
-                    Double outsideRouteThreshold = navigationJSONOptions.getDouble(LocationWrapper.OUTSIDE_ROUTE_THRESHOLD);
+                if (navigationJSONOptions.has(SitumMapper.OUTSIDE_ROUTE_THRESHOLD)) {
+                    Double outsideRouteThreshold = navigationJSONOptions.getDouble(SitumMapper.OUTSIDE_ROUTE_THRESHOLD);
                     builder.outsideRouteThreshold(outsideRouteThreshold);
                 }
 
-                if (navigationJSONOptions.has(LocationWrapper.DISTANCE_TO_GOAL_THRESHOLD)) {
-                    Double distanceToGoalThreshold = navigationJSONOptions.getDouble(LocationWrapper.DISTANCE_TO_GOAL_THRESHOLD);
+                if (navigationJSONOptions.has(SitumMapper.DISTANCE_TO_GOAL_THRESHOLD)) {
+                    Double distanceToGoalThreshold = navigationJSONOptions.getDouble(SitumMapper.DISTANCE_TO_GOAL_THRESHOLD);
                     builder.distanceToGoalThreshold(distanceToGoalThreshold);
                 }
 
@@ -726,7 +721,7 @@ public class PluginHelper {
                 public void onProgress(NavigationProgress progress) {
                     Log.d(TAG, "On progress received: " + progress);
                     try {
-                        JSONObject jsonProgress = LocationWrapper.navigationProgressToJsonObject(progress);
+                        JSONObject jsonProgress = SitumMapper.navigationProgressToJsonObject(progress);
                         try {
                             jsonProgress.put("type", "progress");
                         } catch (JSONException e) {
@@ -794,7 +789,7 @@ public class PluginHelper {
                 JSONObject jsonLocation = args.getJSONObject(0); // What if json is not specified?
 
                 // 2) Create a Location Object from argument
-                Location actualLocation = LocationWrapper.jsonLocationObjectToLocation(jsonLocation); // Location Objet from JSON
+                Location actualLocation = SitumMapper.jsonLocationObjectToLocation(jsonLocation); // Location Objet from JSON
                 // Location actualLocation = PluginHelper.computedLocation;
                 Log.i(TAG, "UpdateNavigation with Location: " + actualLocation);
 
@@ -822,19 +817,19 @@ public class PluginHelper {
             JSONObject jsonoBuilding = args.getJSONObject(0);
             JSONObject jsonoFrom = args.getJSONObject(1);
             JSONObject jsonoTo = args.getJSONObject(2);
-            Point from = LocationWrapper.pointJsonObjectToPoint(jsonoFrom, jsonoBuilding);
-            Point to = LocationWrapper.pointJsonObjectToPoint(jsonoTo, jsonoBuilding);
+            Point from = SitumMapper.pointJsonObjectToPoint(jsonoFrom, jsonoBuilding);
+            Point to = SitumMapper.pointJsonObjectToPoint(jsonoTo, jsonoBuilding);
             Boolean accessibleRoute = false;
             double startingAngle = 0.0;
             if (args.length() > 2) {
                 JSONObject options = args.getJSONObject(3);
                 Log.i(TAG, "request directions options" + options);
 
-                if (options.has(LocationWrapper.ACCESSIBLE)) {
-                    accessibleRoute = options.getBoolean(LocationWrapper.ACCESSIBLE);
+                if (options.has(SitumMapper.ACCESSIBLE)) {
+                    accessibleRoute = options.getBoolean(SitumMapper.ACCESSIBLE);
                 }
-                if (options.has(LocationWrapper.STARTING_ANGLE)) {
-                    startingAngle = options.getDouble(LocationWrapper.STARTING_ANGLE);
+                if (options.has(SitumMapper.STARTING_ANGLE)) {
+                    startingAngle = options.getDouble(SitumMapper.STARTING_ANGLE);
                 }
             }
             DirectionsRequest directionRequest = new DirectionsRequest.Builder().from(from, Angle.fromDegrees(startingAngle)).to(to).isAccessible(accessibleRoute).build();
@@ -845,7 +840,7 @@ public class PluginHelper {
                     // TODO: Remove this line before going to public (Just for development purposes)
                     PluginHelper.this.computedRoute = route;
                     try {
-                        JSONObject jsonoRoute = LocationWrapper.routeToJsonObject(route, cordova.getActivity());
+                        JSONObject jsonoRoute = SitumMapper.routeToJsonObject(route, cordova.getActivity());
                         Log.i(TAG, "onSuccess: Route calculated successfully" + route);
                         callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonoRoute));
                     } catch (JSONException e) {
