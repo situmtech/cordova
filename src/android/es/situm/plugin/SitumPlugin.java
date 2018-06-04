@@ -13,10 +13,24 @@ import org.apache.cordova.CordovaWebView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import es.situm.sdk.SitumSdk;
+import es.situm.sdk.communication.CommunicationManager;
+import es.situm.sdk.navigation.NavigationManager;
 
 public class SitumPlugin extends CordovaPlugin {
 
   private static final String TAG = "SitumPlugin";
+
+  private static volatile PluginHelper pluginInstance;
+
+  private static PluginHelper getPluginInstance() {
+    if (pluginInstance == null) { //Check for the first time
+      synchronized (PluginHelper.class) {   //Check for the second time.
+        //if there is no instance available... create new one
+        if (pluginInstance == null) pluginInstance = new PluginHelper();
+      }
+    }
+    return pluginInstance;
+  }
 
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     super.initialize(cordova, webView);
@@ -39,39 +53,39 @@ public class SitumPlugin extends CordovaPlugin {
       Log.d(TAG,"Setting cache max age to " + cacheAge + " seconds");
       es.situm.sdk.SitumSdk.configuration().setCacheMaxAge(cacheAge, TimeUnit.SECONDS);
     } else if (action.equalsIgnoreCase("fetchBuildings")) {
-      PluginHelper.fetchBuildings(cordova, webView, args, callbackContext);
+      getPluginInstance().fetchBuildings(cordova, webView, args, callbackContext);
     } else if (action.equalsIgnoreCase("startPositioning")) {
-      PluginHelper.startPositioning(cordova, webView, args, callbackContext);
+      getPluginInstance().startPositioning(cordova, webView, args, callbackContext);
     } else if (action.equalsIgnoreCase("stopPositioning")) {
-      PluginHelper.stopPositioning(cordova, webView, args, callbackContext);
+      getPluginInstance().stopPositioning(cordova, webView, args, callbackContext);
     } else if (action.equalsIgnoreCase("fetchPoiCategories")) {
-      PluginHelper.fetchPoiCategories(cordova, webView, args, callbackContext);
+      getPluginInstance().fetchPoiCategories(cordova, webView, args, callbackContext);
     } else if (action.equalsIgnoreCase("fetchFloorsFromBuilding")) {
-      PluginHelper.fetchFloorsFromBuilding(cordova, webView, args, callbackContext);
+      getPluginInstance().fetchFloorsFromBuilding(cordova, webView, args, callbackContext);
     } else if (action.equalsIgnoreCase("fetchIndoorPOIsFromBuilding")) {
-      PluginHelper.fetchIndoorPOIsFromBuilding(cordova, webView, args, callbackContext);
+      getPluginInstance().fetchIndoorPOIsFromBuilding(cordova, webView, args, callbackContext);
     } else if (action.equalsIgnoreCase("fetchOutdoorPOIsFromBuilding")) {
-      PluginHelper.fetchOutdoorPOIsFromBuilding(cordova, webView, args, callbackContext);
+      getPluginInstance().fetchOutdoorPOIsFromBuilding(cordova, webView, args, callbackContext);
     } else if (action.equalsIgnoreCase("fetchEventsFromBuilding")) {
-      PluginHelper.fetchEventsFromBuilding(cordova, webView, args, callbackContext);
+      getPluginInstance().fetchEventsFromBuilding(cordova, webView, args, callbackContext);
     } else if (action.equalsIgnoreCase("fetchMapFromFloor")) {
-      PluginHelper.fetchMapFromFloor(cordova, webView, args, callbackContext);
+      getPluginInstance().fetchMapFromFloor(cordova, webView, args, callbackContext);
     } else if (action.equalsIgnoreCase("fetchPoiCategoryIconNormal")) {
-      PluginHelper.fetchPoiCategoryIconNormal(cordova, webView, args, callbackContext);
+      getPluginInstance().fetchPoiCategoryIconNormal(cordova, webView, args, callbackContext);
     } else if (action.equalsIgnoreCase("fetchPoiCategoryIconSelected")) {
-      PluginHelper.fetchPoiCategoryIconSelected(cordova, webView, args, callbackContext);
+      getPluginInstance().fetchPoiCategoryIconSelected(cordova, webView, args, callbackContext);
     } else if (action.equalsIgnoreCase("invalidateCache")) {
-      PluginHelper.invalidateCache(callbackContext);
+      getPluginInstance().invalidateCache(callbackContext);
     } else if (action.equalsIgnoreCase("requestDirections")) {
-      PluginHelper.requestDirections(cordova, webView, args, callbackContext);
+      getPluginInstance().requestDirections(cordova, webView, args, callbackContext);
     } else  if(action.equalsIgnoreCase("requestNavigationUpdates")) {
-      PluginHelper.requestNavigationUpdates(cordova, webView, args, callbackContext);
+      getPluginInstance().requestNavigationUpdates(cordova, webView, args, callbackContext);
     } else  if(action.equalsIgnoreCase("updateNavigationWithLocation")) {
-      PluginHelper.updateNavigationWithLocation(cordova, webView, args, callbackContext);
+      getPluginInstance().updateNavigationWithLocation(cordova, webView, args, callbackContext);
     } else  if(action.equalsIgnoreCase("removeNavigationUpdates")) {
-      PluginHelper.removeNavigationUpdates(cordova, webView, args, callbackContext);
+      getPluginInstance().removeNavigationUpdates(cordova, webView, args, callbackContext);
     } else {
-      PluginHelper.returnDefaultResponse(callbackContext);
+      getPluginInstance().returnDefaultResponse(callbackContext);
     }
     return true;
   }
