@@ -34,9 +34,14 @@ UserInterfaceState.xcuserstate
 tests/yarn\.lock
 tests/package-lock\.json
 package-lock\.json
+package-lock.json
 
 framework/
 
 bin/
 
 *.lock
+
+tests/android/\.project
+
+tests/android/\.settings/

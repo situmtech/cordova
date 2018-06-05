@@ -295,24 +295,25 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 
 - (void)fetchPoiCategoryIconNormal:(CDVInvokedUrlCommand *)command
 {
-    NSDictionary* buildingJO = (NSDictionary*)[command.arguments objectAtIndex:0];
+    NSDictionary* categoryJO = (NSDictionary*)[command.arguments objectAtIndex:0];
     
     if (categoryStored == nil) {
         categoryStored = [[NSMutableDictionary alloc] init];
     }
     
-    [[SITCommunicationManager sharedManager] fetchCategoriesWithOptions:[buildingJO valueForKey:@"identifier"] withCompletion:^(NSArray *categories, NSError *error) {
+    SITPOICategory *category = [[SitumLocationWrapper shared] poiCategoryFromJsonObject:categoryJO];
+    
+    [[SITCommunicationManager sharedManager] fetchSelected:false iconForCategory:category withCompletion:^(NSData *data, NSError *error) {
         if (!error) {
-            NSMutableArray *ja = [[NSMutableArray alloc] init];
-            for (SITPOICategory *obj in categories) {
-                [ja addObject:[SitumLocationWrapper.shared poiCategoryToJsonObject:obj]];
-                [categoryStored setObject:obj forKey:[NSString stringWithFormat:@"%@", obj.name]];
-            }
             CDVPluginResult* pluginResult = nil;
-            if (categories.count == 0) {
-                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"You have no categories. Create one in the Dashboard"];
+            if (data == nil) {
+                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Icon not founc"];
             } else {
-                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:ja.copy];
+                UIImage *icon = [UIImage imageWithData:data];
+                NSString *base64 = [UIImagePNGRepresentation(icon) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+                NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+                [dict setObject:base64 forKey:@"data"];
+                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dict];
             }
             [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
         } else {
@@ -323,24 +324,25 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 
 - (void)fetchPoiCategoryIconSelected:(CDVInvokedUrlCommand *)command
 {
-    NSDictionary* buildingJO = (NSDictionary*)[command.arguments objectAtIndex:0];
+    NSDictionary* categoryJO = (NSDictionary*)[command.arguments objectAtIndex:0];
     
     if (categoryStored == nil) {
         categoryStored = [[NSMutableDictionary alloc] init];
     }
     
-    [[SITCommunicationManager sharedManager] fetchCategoriesWithOptions:[buildingJO valueForKey:@"identifier"] withCompletion:^(NSArray *categories, NSError *error) {
+    SITPOICategory *category = [[SitumLocationWrapper shared] poiCategoryFromJsonObject:categoryJO];
+    
+    [[SITCommunicationManager sharedManager] fetchSelected:true iconForCategory:category withCompletion:^(NSData *data, NSError *error) {
         if (!error) {
-            NSMutableArray *ja = [[NSMutableArray alloc] init];
-            for (SITPOICategory *obj in categories) {
-                [ja addObject:[SitumLocationWrapper.shared poiCategoryToJsonObject:obj]];
-                [categoryStored setObject:obj forKey:[NSString stringWithFormat:@"%@", obj.name]];
-            }
             CDVPluginResult* pluginResult = nil;
-            if (categories.count == 0) {
-                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"You have no categories. Create one in the Dashboard"];
+            if (data == nil) {
+                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Icon not found"];
             } else {
-                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:ja.copy];
+                UIImage *icon = [UIImage imageWithData:data];
+                NSString *base64 = [UIImagePNGRepresentation(icon) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+                NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+                [dict setObject:base64 forKey:@"data"];
+                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dict];
             }
             [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
         } else {
@@ -369,11 +371,46 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 
 
 - (void)startPositioning:(CDVInvokedUrlCommand *)command {
-    NSDictionary* buildingJO = (NSDictionary*)[command.arguments objectAtIndex:0];
+    NSArray *params = (NSArray*)[command.arguments objectAtIndex:0];
+    
+    NSDictionary *buildingJO;
+    
+    NSNumber *useDeadReckoning = nil;
+    NSString *buildingId;
+    
+/*
+ * The following if-else is necessary in order to mantain compatibility
+ * with the startPositioning[building] method. 
+ * If params is an array, then it contains both a building and a locationRequest
+ * If params is a dictionary, then it should only contain a building
+ */
+    if ([params isKindOfClass:[NSArray class]]) {
+        buildingJO = (NSDictionary*)[params objectAtIndex:0];
+        if (params.count > 1) {
+            NSDictionary *requestJO = (NSDictionary*)[params objectAtIndex:1];
+            buildingId = [[requestJO objectForKey:@"buildingIdentifier"] stringValue];
+            useDeadReckoning = [requestJO objectForKey: @"useDeadReckoning"];
+        }
+    } else {
+        buildingJO = (NSDictionary*)params;
+    }
+    
     locationCallbackId = command.callbackId;
     selectedBuildingJO = buildingJO;
+    if (buildingId == nil) {
+        buildingId = [buildingJO valueForKey:@"identifier"];
+    }
     
-    SITLocationRequest *locationRequest = [[SITLocationRequest alloc] initWithPriority:kSITHighAccuracy provider:kSITHybridProvider updateInterval:2 buildingID:[buildingJO valueForKey:@"identifier"] operationQueue:[NSOperationQueue mainQueue] options:nil];
+    if (buildingId == nil) {
+        buildingId = [NSString stringWithFormat:@"%@", [buildingJO valueForKey:@"buildingIdentifier"]];
+    }
+    SITLocationRequest *locationRequest;
+    if (useDeadReckoning != nil) {
+        locationRequest = [[SITLocationRequest alloc] initWithPriority:kSITHighAccuracy provider:kSITHybridProvider updateInterval:2 buildingID:buildingId operationQueue:[NSOperationQueue mainQueue] useDeadReckoning:[useDeadReckoning boolValue] options:nil];
+    } else {
+        locationRequest = [[SITLocationRequest alloc] initWithPriority:kSITHighAccuracy provider:kSITHybridProvider updateInterval:2 buildingID:buildingId operationQueue:[NSOperationQueue mainQueue] options:nil];
+    }
+     
     [[SITLocationManager sharedInstance] requestLocationUpdates:locationRequest];
     [[SITLocationManager sharedInstance] setDelegate:self];
 }
@@ -427,23 +464,69 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 - (void)requestNavigationUpdates:(CDVInvokedUrlCommand*)command
 {
     navigationProgressCallbackId = command.callbackId;
-    
-    // Insert here configuration options
-    /*if (command.arguments.length > 0) {
+    NSNumber* distanceToChangeFloorThreshold;
+    NSNumber* distanceToChangeIndicationThreshold;
+    NSNumber* distanceToGoalThreshold;
+    NSNumber* outsideRouteThreshold;
+    NSNumber* indicationsInterval;
+    NSNumber* timeToFirstIndication;
+    NSNumber* roundIndicationsStep;
+
+    if (command.arguments.count > 0) {
         // Processing configuration parameters
         NSDictionary *options = (NSDictionary*)[command.arguments objectAtIndex:0];
- 
-    }*/
-    // SITRoute *routeObj = (SITRoute*)[routesStored objectForKey:[route valueForKey:@"timeStamp"]];
+        distanceToChangeFloorThreshold = (NSNumber*)[options objectForKey:@"distanceToFloorChangeThreshold"];
+        distanceToChangeIndicationThreshold = (NSNumber*)[options objectForKey:@"distanceToChangeIndicationThreshold"];
+        distanceToGoalThreshold = (NSNumber*)[options objectForKey:@"distanceToGoalThreshold"];
+        outsideRouteThreshold = (NSNumber*)[options objectForKey:@"outsideRouteThreshold"];
+        indicationsInterval = (NSNumber*)[options objectForKey:@"indicationsInterval"];
+        timeToFirstIndication = (NSNumber*)[options objectForKey:@"timeToFirstIndication"];
+        roundIndicationsStep = (NSNumber*)[options objectForKey:@"roundIndicationsStep"];
+
+    }
     SITRoute *routeObj = self.computedRoute;
     if (routeObj) {
         SITNavigationRequest *navigationRequest = [[SITNavigationRequest alloc] initWithRoute:routeObj];
-
-        // Configure distanceToGoalThreshold
-        // Configure outsideRouteThreshold
+        if (distanceToChangeIndicationThreshold != nil) {
+            NSInteger value = [distanceToChangeIndicationThreshold integerValue];
+            [navigationRequest setDistanceToChangeIndicationThreshold: value];
+            NSLog(@"%@", [NSString stringWithFormat: @"navigationRequest.distanceToChangeIndicationThreshold: %ld", navigationRequest.distanceToChangeIndicationThreshold]);
+        }
+        if (distanceToChangeFloorThreshold != nil) {
+            NSInteger value = [distanceToChangeFloorThreshold integerValue];
+            [navigationRequest setDistanceToChangeFloorThreshold: value];
+            NSLog(@"%@", [NSString stringWithFormat: @"navigationRequest.distanceToChangeFloorThreshold: %ld", navigationRequest.distanceToFloorChangeThreshold]);
+        }
+        if (distanceToGoalThreshold != nil) {
+            NSInteger value = [distanceToGoalThreshold integerValue];
+            [navigationRequest setDistanceToGoalThreshold: value];
+            NSLog(@"%@", [NSString stringWithFormat: @"navigationRequest.distanceToGoalThreshold: %ld", navigationRequest.distanceToGoalThreshold]);
+        }
+        if (outsideRouteThreshold != nil) {
+            NSInteger value = [outsideRouteThreshold integerValue];
+            [navigationRequest setOutsideRouteThreshold: value];
+            NSLog(@"%@", [NSString stringWithFormat: @"navigationRequest.outsideRouteThreshold: %ld", navigationRequest.outsideRouteThreshold]);
+        }
+        if (indicationsInterval != nil) {
+            NSInteger value = [indicationsInterval integerValue];
+            [navigationRequest setIndicationsInterval: value];
+            NSLog(@"%@", [NSString stringWithFormat: @"navigationRequest.indicationsInterval: %ld", navigationRequest.indicationsInterval]);
+        }
+        if (timeToFirstIndication != nil) {
+            NSInteger value = [timeToFirstIndication integerValue];
+            [navigationRequest setTimeToFirstIndication: value];
+            NSLog(@"%@", [NSString stringWithFormat: @"navigationRequest.timeToFirstIndication: %ld", navigationRequest.timeToFirstIndication]);
+        }
+        if (roundIndicationsStep != nil) {
+            NSInteger value = [roundIndicationsStep integerValue];
+            [navigationRequest setRoundIndicationsStep: value];
+            NSLog(@"%@", [NSString stringWithFormat: @"navigationRequest.roundIndicationsStep: %ld", navigationRequest.roundIndicationsStep]);
+        }
 
         [[SITNavigationManager sharedManager]  setDelegate:self]; // Configure delegation first
         [[SITNavigationManager sharedManager] requestNavigationUpdates:navigationRequest];
+        
+        
     }
 }
 
@@ -454,7 +537,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     [[SITNavigationManager sharedManager] updateWithLocation:location];
 }
 
-- (void) removeNavigationUpdates {
+- (void) removeNavigationUpdates:(CDVInvokedUrlCommand *)command {
     [[SITNavigationManager sharedManager] removeUpdates];
 }
 
@@ -492,7 +575,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 
 - (void)locationManager:(nonnull id<SITLocationInterface>)locationManager
          didUpdateState:(SITLocationState)state {
-    NSMutableDictionary *locationChanged = [[SitumLocationWrapper.shared locationStateToString:state] mutableCopy];
+    NSDictionary *locationChanged = [SitumLocationWrapper.shared locationStateToJsonObject:state];
     
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:locationChanged.copy];
     pluginResult.keepCallback = [NSNumber numberWithBool:true];
