@@ -1,3 +1,5 @@
+package es.situm.plugin.models;
+
 import es.situm.sdk.model.location.CartesianCoordinate;
 
 public class CartesianCoordinateCreator {

@@ -1,3 +1,5 @@
+package es.situm.plugin.models;
+
 import es.situm.sdk.v1.Point2f;
 import es.situm.sdk.v1.SitumConversionArea;
 

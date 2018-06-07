@@ -1,3 +1,5 @@
+package es.situm.plugin.models;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,3 +1,5 @@
+package es.situm.plugin.models;
+
 import es.situm.sdk.model.cartography.Point;
 import es.situm.sdk.model.directions.Indication;
 import es.situm.sdk.model.directions.RouteStep;
