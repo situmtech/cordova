@@ -35,6 +35,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/angle'] } }
 }
 
 dependencies {
@@ -45,7 +46,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-web:3.0.2'
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.json:json:20140107'
-    implementation ('es.situm:situm-sdk:2.20.0@aar') {
+    implementation('es.situm:situm-sdk:2.20.0@aar') {
         transitive = true
     }
     implementation 'org.apache.cordova:framework:7.1.0'
@@ -53,4 +54,3 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.googlecode.json-simple:json-simple:1.1.1'
 }
-
