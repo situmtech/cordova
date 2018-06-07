@@ -1,23 +1,25 @@
 package es.situm.plugin;
 
-import org.json.JSONException;
 import org.junit.Test;
 
-import es.situm.sdk.model.cartography.Building;
+import es.situm.plugin.creators.PoiCategoryCreator;
+import es.situm.sdk.model.cartography.PoiCategory;
 import es.situm.sdk.model.location.Coordinate;
-import es.situm.sdk.model.location.Dimensions;
+import es.situm.plugin.creators.CoordinateCreator;
 
 public class PluginHelperTest {
+
+    CoordinateCreator coordinateCreator = new CoordinateCreator();
+    PoiCategoryCreator poiCategoryCreator = new PoiCategoryCreator();
 
     @Test
     public void fetchBuildingsTest() {
         try {
-            Building building = null;
-            Coordinate center = new Coordinate(15.84, 8.73);
-            Dimensions dimesnsions = new Dimensions(20.44, 9.81);
-            building = new Building.Builder().address("Camiño de adran").name("Cocodin").center(center).dimensions(dimesnsions).build();
-            SitumMapperTest.buildingToJsonObjectTest(building);
-        }catch(JSONException e) {
+            PoiCategory category = poiCategoryCreator.createPoiCategory();
+            System.out.println(category);
+            Coordinate center = coordinateCreator.createCoordinate();
+            System.out.println(center);
+        }catch(Exception e) {
             System.err.println(e.getMessage());
         }
     }

@@ -1,4 +1,4 @@
-package es.situm.plugin.models;
+package es.situm.plugin.creators;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package es.situm.plugin.models;
+package es.situm.plugin.creators;
 
 import es.situm.sdk.location.LocationStatus;
 
