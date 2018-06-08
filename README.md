@@ -333,6 +333,22 @@ When you are no longer interested on Navigation Updates you should call this met
   removeNavigationUpdates();
 ```
 
+## Run javascript tests
+
+  1.  Install mocha and expect.js:
+    ```javascript
+    npm install mocha --save
+    npm install expect.js --save
+    ```
+  2. In js tests folder run: 
+  ```javascript 
+  mocha test 
+  ```
+
+#### Dependencies
+  - [mocha](https://www.npmjs.com/package/mocha), needed to run tests.
+  - [expect.js](https://www.npmjs.com/package/expect.js), needed to do assertions.
+
 ## License
 
 Situm-Cordova-Plugin is licensed under [MIT License](https://opensource.org/licenses/MIT)
