@@ -12,8 +12,8 @@ import es.situm.sdk.model.location.Coordinate;
 
 public class BoundsCreator {
 
-    public final JSONParser parser = new JSONParser();
-    public final ClassLoader classLoader = getClass().getClassLoader();
+    private final JSONParser parser = new JSONParser();
+    private final ClassLoader classLoader = getClass().getClassLoader();
 
     public Bounds createBoundsWithArray() {
         Coordinate[] coordinates = {new Coordinate(2,4), new Coordinate(6,3),
@@ -28,10 +28,9 @@ public class BoundsCreator {
 
     public JSONObject getBounds1(){
         try{
-            URL resource = classLoader.getResource("bounds/bounds2.json");
+            URL resource = classLoader.getResource("bounds/bounds1.json");
             File file = new File(resource.getFile());
-            JSONObject angle = new JSONObject(parser.parse(new FileReader(file)).toString());
-            return angle;
+            return new JSONObject(parser.parse(new FileReader(file)).toString());
         }catch(Exception e){
             System.err.println(e.getMessage());
             return null;
@@ -42,8 +41,7 @@ public class BoundsCreator {
         try{
             URL resource = classLoader.getResource("bounds/bounds2.json");
             File file = new File(resource.getFile());
-            JSONObject angle = new JSONObject(parser.parse(new FileReader(file)).toString());
-            return angle;
+            return new JSONObject(parser.parse(new FileReader(file)).toString());
         }catch(Exception e){
             System.err.println(e.getMessage());
             return null;

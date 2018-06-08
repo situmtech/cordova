@@ -5,7 +5,7 @@ import org.junit.Test;
 import es.situm.plugin.creators.PoiCategoryCreator;
 import es.situm.sdk.model.cartography.PoiCategory;
 import es.situm.sdk.model.location.Coordinate;
-import es.situm.plugin.creators.CoordinateCreator;
+import es.situm.plugin.coordinate.CoordinateCreator;
 
 public class PluginHelperTest {
 

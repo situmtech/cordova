@@ -11,8 +11,8 @@ import es.situm.sdk.model.location.Angle;
 
 public class AngleCreator {
 
-    public final JSONParser parser = new JSONParser();
-    public final ClassLoader classLoader = getClass().getClassLoader();
+    private final JSONParser parser = new JSONParser();
+    private final ClassLoader classLoader = getClass().getClassLoader();
 
     public Angle createAngleFromDegrees() {
         return  Angle.fromDegrees(47);
@@ -26,8 +26,7 @@ public class AngleCreator {
         try{
             URL resource = classLoader.getResource("angle/angle1.json");
             File file = new File(resource.getFile());
-            JSONObject angle = new JSONObject(parser.parse(new FileReader(file)).toString());
-            return angle;
+            return new JSONObject(parser.parse(new FileReader(file)).toString());
         }catch(Exception e){
             System.err.println(e.getMessage());
             return null;
@@ -38,8 +37,7 @@ public class AngleCreator {
         try{
             URL resource = classLoader.getResource("angle/angle2.json");
             File file = new File(resource.getFile());
-            JSONObject angle = new JSONObject(parser.parse(new FileReader(file)).toString());
-            return angle;
+            return new JSONObject(parser.parse(new FileReader(file)).toString());
         }catch(Exception e){
             System.err.println(e.getMessage());
             return null;
