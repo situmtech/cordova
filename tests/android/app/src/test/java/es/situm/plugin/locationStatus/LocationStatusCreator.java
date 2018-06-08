@@ -98,4 +98,15 @@ public class LocationStatusCreator {
             return null;
         }
     }
+
+    public JSONObject getLocationStatus4(){
+        try{
+            URL resource = classLoader.getResource("locationStatus/locationStatus4.json");
+            File file = new File(resource.getFile());
+            return new JSONObject(parser.parse(new FileReader(file)).toString());
+        }catch(Exception e){
+            System.err.println(e.getMessage());
+            return null;
+        }
+    }
 }

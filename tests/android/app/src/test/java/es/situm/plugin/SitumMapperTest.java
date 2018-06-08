@@ -256,6 +256,10 @@ public class SitumMapperTest {
             JSONObject locationStatusCalculatingJSONObject = SitumMapper.locationStatusToJsonObject(locationStatusCalculating);
             JSONObject locationStatus3 = locationStatusCreator.getLocationStatus3();
             testLocationStatus(locationStatusCalculatingJSONObject, locationStatus3);
+            LocationStatus locationStatusCompassCalibrationNeeded = locationStatusCreator.createLocationStatusCompassCalibrationNeeded();
+            JSONObject locationStatusCompassCalibrationNeededJSONObject = SitumMapper.locationStatusToJsonObject(locationStatusCompassCalibrationNeeded);
+            JSONObject locationStatus4 = locationStatusCreator.getLocationStatus4();
+            testLocationStatus(locationStatusCompassCalibrationNeededJSONObject, locationStatus4);
         } catch (JSONException e) {
             System.out.println(e.getMessage());
         }
