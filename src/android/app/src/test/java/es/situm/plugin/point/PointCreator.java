@@ -35,27 +35,79 @@ public class PointCreator {
 
     public Point createPointWithBuildingWithAngleFromDegrees() {
         Coordinate coordinate = new Coordinate(12.3,14.0);
-        return new Point("101", "12",coordinate, new CartesianCoordinate(4,7));
+        Dimensions dimensions = new Dimensions( 40.5,60.2);
+        Building building = new Building.Builder()
+                .address("TEST_BUILDING")
+                .center(coordinate)
+                .dimensions(dimensions)
+                .infoHtml("TEST_INFO")
+                .name("TEST_NAME")
+                .pictureThumbUrl(new URL("TEST_URL"))
+                .pictureUrl(new URL("TEST_URL"))
+                .rotation(Angle.fromDegrees(45))
+                .userIdentifier("TEST_USER")
+                .build();
+        return new Point(building, "12",new CartesianCoordinate(4,7));
     }
 
     public Point createPointWithBuildingWithAngleFromRadians() {
         Coordinate coordinate = new Coordinate(12.3,14.0);
-        return new Point("101", "12",coordinate, new CartesianCoordinate(4,7));
+        Dimensions dimensions = new Dimensions( 40.5,60.2);
+        Building building = new Building.Builder()
+                .address("TEST_BUILDING")
+                .center(coordinate)
+                .dimensions(dimensions)
+                .infoHtml("TEST_INFO")
+                .name("TEST_NAME")
+                .pictureThumbUrl(new URL("TEST_URL"))
+                .pictureUrl(new URL("TEST_URL"))
+                .rotation(Angle.fromRadians(0.3))
+                .userIdentifier("TEST_USER")
+                .build();
+        return new Point(building, "12",new CartesianCoordinate(4,7));
     }
 
     public Point createPointWithBuildingWithAddress() {
         Coordinate coordinate = new Coordinate(12.3,14.0);
-        return new Point("101", "12",coordinate, new CartesianCoordinate(4,7));
+        Dimensions dimensions = new Dimensions( 40.5,60.2);
+        Building building = new Building.Builder()
+                .center(coordinate)
+                .dimensions(dimensions)
+                .name("TEST_NAME")
+                .address("TEST_ADDRESS")
+                .rotation(Angle.fromRadians(0.3))
+                .userIdentifier("TEST_USER")
+                .build();
+        return new Point(building, "12",new CartesianCoordinate(4,7));
     }
 
     public Point createPointWithBuildingWithInfo() {
         Coordinate coordinate = new Coordinate(12.3,14.0);
-        return new Point("101", "12",coordinate, new CartesianCoordinate(4,7));
+        Dimensions dimensions = new Dimensions( 40.5,60.2);
+        Building building = new Building.Builder()
+                .center(coordinate)
+                .dimensions(dimensions)
+                .name("TEST_NAME")
+                .rotation(Angle.fromRadians(0.3))
+                .userIdentifier("TEST_USER")
+                .infoHtml("TEST_INFO")
+                .build();
+        return new Point(building, "12",new CartesianCoordinate(4,7));
     }
 
     public Point createPointWithBuildingWithPicture() {
         Coordinate coordinate = new Coordinate(12.3,14.0);
-        return new Point("101", "12",coordinate, new CartesianCoordinate(4,7));
+        Dimensions dimensions = new Dimensions( 40.5,60.2);
+        Building building = new Building.Builder()
+                .center(coordinate)
+                .dimensions(dimensions)
+                .name("TEST_NAME")
+                .rotation(Angle.fromRadians(0.3))
+                .userIdentifier("TEST_USER")
+                .pictureUrl(new URL("TEST_URL"))
+                .pictureThumbUrl(new URL("TEST_URL"))
+                .build();
+        return new Point(building, "12",new CartesianCoordinate(4,7));
     }
 
     public JSONObject getPoint1(){

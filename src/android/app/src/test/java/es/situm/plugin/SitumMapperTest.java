@@ -457,7 +457,6 @@ public class SitumMapperTest {
         try{
             Route route = routeCreator.createRouteBuildingWithDegreesPointWithCoordinates();
             JSONObject routeJSONObject = SitumMapper.routeToJsonObject(route);
-            System.out.println(routeJSONObject);
         }catch(JSONException e){
             System.err.println(e.getMessage());
         }

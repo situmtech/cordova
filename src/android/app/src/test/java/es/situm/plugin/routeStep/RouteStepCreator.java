@@ -63,8 +63,21 @@ public class RouteStepCreator {
     }
 
     public RouteStep createRouteStepWithBuildingWithAngleFromDegree() {
-        Point from = new Point("101", new Coordinate(5,10));
-        Point to = new Point("101", new Coordinate(7,  3));
+        Coordinate coordinate = new Coordinate(12.3,14.0);
+        Dimensions dimensions = new Dimensions( 40.5,60.2);
+        Building building = new Building.Builder()
+                .address("TEST_BUILDING")
+                .center(coordinate)
+                .dimensions(dimensions)
+                .infoHtml("TEST_INFO")
+                .name("TEST_NAME")
+                .pictureThumbUrl(new URL("TEST_URL"))
+                .pictureUrl(new URL("TEST_URL"))
+                .rotation(Angle.fromDegrees(45))
+                .userIdentifier("TEST_USER")
+                .build();
+        Point from = new Point(building, "12", new CartesianCoordinate(3,5));
+        Point to = new Point(building, "12", new CartesianCoordinate(3,4));
         return new RouteStep.Builder()
                 .distance(23.4)
                 .distanceToEnd(27)
@@ -77,8 +90,21 @@ public class RouteStepCreator {
     }
 
     public RouteStep createRouteStepWithBuildingWithAngleFromRadians() {
-        Point from = new Point("101", new Coordinate(5, 7));
-        Point to = new Point("101", new Coordinate(6, 4));
+        Coordinate coordinate = new Coordinate(12.3,14.0);
+        Dimensions dimensions = new Dimensions( 40.5,60.2);
+        Building building = new Building.Builder()
+                .address("TEST_BUILDING")
+                .center(coordinate)
+                .dimensions(dimensions)
+                .infoHtml("TEST_INFO")
+                .name("TEST_NAME")
+                .pictureThumbUrl(new URL("TEST_URL"))
+                .pictureUrl(new URL("TEST_URL"))
+                .rotation(Angle.fromRadians(0.4))
+                .userIdentifier("TEST_USER")
+                .build();
+        Point from = new Point(building, "12", new CartesianCoordinate(3,5));
+        Point to = new Point(building, "12", new CartesianCoordinate(3,4));
         return new RouteStep.Builder()
                 .distance(23.4)
                 .distanceToEnd(27)

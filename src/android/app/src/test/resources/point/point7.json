@@ -1,7 +1,7 @@
 {
   "coordinate": {
-    "latitude": 12.3,
-    "longitude": 14
+    "latitude": 12.29979118583395,
+    "longitude": 13.999850616887485
   },
   "floorIdentifier": "12",
   "cartesianCoordinate": {
@@ -9,6 +9,6 @@
     "y": 7
   },
   "isIndoor": true,
-  "buildingIdentifier": "101",
+  "buildingIdentifier": "-1",
   "isOutdoor": false
 }

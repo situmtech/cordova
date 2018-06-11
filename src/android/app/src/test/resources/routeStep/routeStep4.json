@@ -5,8 +5,8 @@
   "distanceToGoal": 27,
   "from": {
     "coordinate": {
-      "latitude": 12.3,
-      "longitude": 14
+      "latitude": 12.299773106685375,
+      "longitude": 13.999841424080985
     },
     "floorIdentifier": "12",
     "cartesianCoordinate": {
@@ -14,14 +14,14 @@
       "y": 5
     },
     "isIndoor": true,
-    "buildingIdentifier": "101",
+    "buildingIdentifier": "-1",
     "isOutdoor": false
   },
   "id": 2,
   "TO": {
     "coordinate": {
-      "latitude": 12.3,
-      "longitude": 14
+      "latitude": 12.299764067111086,
+      "longitude": 13.999841424080985
     },
     "floorIdentifier": "12",
     "cartesianCoordinate": {
@@ -29,7 +29,7 @@
       "y": 4
     },
     "isIndoor": true,
-    "buildingIdentifier": "101",
+    "buildingIdentifier": "-1",
     "isOutdoor": false
   }
 }
