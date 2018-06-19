@@ -174,6 +174,7 @@ class SitumMapper {
   public static final String OUTSIDE_ROUTE_THRESHOLD = "outsideRouteThreshold";
   public static final String DISTANCE_TO_GOAL_THRESHOLD = "distanceToGoalThreshold";
   public static final String STARTING_ANGLE = "startingAngle";
+  public static final String MINIMIZE_FLOOR_CHANGES = "minimizeFloorChanges";
   public static final String CREATED_AT = "createdAt";
   public static final String UPDATED_AT = "updatedAt";
   public static final String NAME = "name";

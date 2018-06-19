@@ -820,6 +820,7 @@ public class PluginHelper {
             Point from = SitumMapper.pointJsonObjectToPoint(jsonoFrom, jsonoBuilding);
             Point to = SitumMapper.pointJsonObjectToPoint(jsonoTo, jsonoBuilding);
             Boolean accessibleRoute = false;
+            Boolean minimizeFloorChanges = false;
             double startingAngle = 0.0;
             if (args.length() > 2) {
                 JSONObject options = args.getJSONObject(3);
@@ -831,8 +832,11 @@ public class PluginHelper {
                 if (options.has(SitumMapper.STARTING_ANGLE)) {
                     startingAngle = options.getDouble(SitumMapper.STARTING_ANGLE);
                 }
+                if (options.has(SitumMapper.MINIMIZE_FLOOR_CHANGES)) {
+                    minimizeFloorChanges = options.getBoolean(SitumMapper.MINIMIZE_FLOOR_CHANGES);
+                }
             }
-            DirectionsRequest directionRequest = new DirectionsRequest.Builder().from(from, Angle.fromDegrees(startingAngle)).to(to).isAccessible(accessibleRoute).build();
+            DirectionsRequest directionRequest = new DirectionsRequest.Builder().from(from, Angle.fromDegrees(startingAngle)).to(to).isAccessible(accessibleRoute).minimizeFloorChanges(minimizeFloorChanges).build();
             SitumSdk.directionsManager().requestDirections(directionRequest, new Handler<Route>() {
                 @Override
                 public void onSuccess(Route route) {
