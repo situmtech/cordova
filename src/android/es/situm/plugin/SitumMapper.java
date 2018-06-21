@@ -173,7 +173,12 @@ class SitumMapper {
   public static final String DISTANCE_TO_IGNORE_FIRST_INDICATION = "distanceToIgnoreFirstIndication";
   public static final String OUTSIDE_ROUTE_THRESHOLD = "outsideRouteThreshold";
   public static final String DISTANCE_TO_GOAL_THRESHOLD = "distanceToGoalThreshold";
+
+  public static final String CURRENT_STEP_INDEX = "currentStepIndex";
+  public static final String CLOSEST_LOCATION_IN_ROUTE = "closestLocationInRoute";    
+
   public static final String STARTING_ANGLE = "startingAngle";
+  public static final String MINIMIZE_FLOOR_CHANGES = "minimizeFloorChanges";
   public static final String CREATED_AT = "createdAt";
   public static final String UPDATED_AT = "updatedAt";
   public static final String NAME = "name";
@@ -303,8 +308,13 @@ class SitumMapper {
     PoiCategory category = null;
     Map<String, String> mapName = new HashMap<String, String>();
     mapName.put("name", jo.getString(POI_CATEGORY_NAME));
-    category = new PoiCategory.Builder().code(jo.getString(POI_CATEGORY_CODE)).name(new I18nString(mapName))
-        .isPublic(jo.getBoolean(IS_PUBLIC)).build();
+    category = new PoiCategory.Builder()
+        .code(jo.getString(POI_CATEGORY_CODE))
+        .name(new I18nString(mapName))
+        .isPublic(jo.getBoolean(IS_PUBLIC))
+        .selectedIcon(new URL(jo.getString(POI_CATEGORY_ICON_SELECTED)))
+        .unselectedIcon(new URL(jo.getString(POI_CATEGORY_ICON_UNSELECTED)))
+        .build();
     return category;
   }
 
@@ -526,7 +536,7 @@ class SitumMapper {
   /*
    * static Route jsonRouteToRoute(JSONObject jo) throws JSONException { // Create
    * a static route
-   * 
+   *
    * }
    */
 
@@ -607,7 +617,8 @@ class SitumMapper {
     jo.put(ROUTE_STEP, routeStepToJsonObject(navigationProgress.getRouteStep()));
     jo.put(TIME_TO_END_STEP, navigationProgress.getTimeToEndStep());
     jo.put(TIME_TO_GOAL, navigationProgress.getTimeToGoal());
-    jo.put("currentStepIndex", navigationProgress.getRouteStep().getId());
+    jo.put(CURRENT_STEP_INDEX, navigationProgress.getRouteStep().getId());
+    jo.put(CLOSEST_LOCATION_IN_ROUTE, locationToJsonObject(navigationProgress.getClosestLocationInRoute()));
     return jo;
   }
 

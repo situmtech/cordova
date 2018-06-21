@@ -55,6 +55,12 @@ var Situm = {
     exec(cb, error, PLUGIN_NAME, 'requestNavigationUpdates', args);
   },
   updateNavigationWithLocation: function (args, cb, error) {
+    if (!args) {
+      args = []
+    } else if (!Array.isArray(args)) {
+      args = [args]
+    }
+
     exec(cb, error, PLUGIN_NAME, 'updateNavigationWithLocation', args);
   },
   removeNavigationUpdates: function (args, cb, error) {
