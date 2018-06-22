@@ -177,6 +177,7 @@ var Situm = {
    * @param {Building} args.building
    * @param {Point} args.from Points have to be inside the same building.
    * @param {Point} args.to Points have to be inside the same building.
+   * @param {boolean} [args.minimizeFloorChanges] Sets if you want to calculate a route minimizing the floor changes even if the route is longer. 
    * @param {function} cb Cordova native callback to recive data.
    * @param {function} error Cordova native callback to recive errors.
    * @return {Route} route The route between provided points
