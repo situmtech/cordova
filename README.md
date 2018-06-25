@@ -287,7 +287,9 @@ Invalidate all the resources in the cache.
 Calculates a route between two [points](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Point.html).
 
 ```javascript
-  requestDirections([building, from, to], (route) => {
+var directionsOptionsMap = new Object();
+directionsOptionsMap["minimizeFloorChanges"] = true;
+  requestDirections([building, from, to, directionsOptionsMap], (route) => {
     // Route Situm object
   }, (error) => {
     // If errors will come here
