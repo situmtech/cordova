@@ -1,6 +1,6 @@
 {
   "name": "situm-cordova-plugin-official",
-  "version": "1.5.10",
+  "version": "1.6.0",
   "cordova": {
     "id": "situm-cordova-plugin-official",
     "platforms": [
@@ -41,7 +41,8 @@
   },
   "scripts": {
     "test": "npm run eslint",
-    "eslint": "node node_modules/eslint/bin/eslint www && node node_modules/eslint/bin/eslint src && node node_modules/eslint/bin/eslint tests"
+    "eslint": "node node_modules/eslint/bin/eslint www && node node_modules/eslint/bin/eslint src && node node_modules/eslint/bin/eslint tests",
+    "jsdoc": "rm -rf docs/JSDoc && ./node_modules/.bin/jsdoc www/android/situm.js www/android/interfaces.js -d docs/JSDoc"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
@@ -50,6 +51,7 @@
     "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-node": "^5.0.0",
     "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1"
+    "eslint-plugin-standard": "^3.0.1",
+    "jsdoc": "^3.5.5"
   }
 }
