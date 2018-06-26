@@ -55,9 +55,9 @@ public class SitumMapperTest {
     private static final String DEGREES_CLOCKWISE = "degreesClockwise";
     private static final String DEGREES = "degrees";
     private static final String NORTH_WEST = "northWest";
-    private static final String SOUTH_WEST = "northWest";
-    private static final String NORTH_EAST = "northWest";
-    private static final String SOUTH_EAST = "northWest";
+    private static final String SOUTH_WEST = "southWest";
+    private static final String NORTH_EAST = "northEast";
+    private static final String SOUTH_EAST = "southEast";
     private static final String LATITUDE = "latitude";
     private static final String LONGITUDE = "longitude";
     private static final String X = "x";
@@ -152,7 +152,7 @@ public class SitumMapperTest {
             testAngle(angleFromDegreesJSONObject, angle1);
             testAngle(angleFromRadiansJSONObject, angle2);
         } catch (JSONException e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 
@@ -168,7 +168,7 @@ public class SitumMapperTest {
             testBounds(boundsJSONObject, bounds1);
             testBounds(boundsWithArrayJSONObject, bounds2);
         } catch (JSONException e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 
@@ -180,7 +180,7 @@ public class SitumMapperTest {
             JSONObject cartesianCoordinate1 = cartesianCoordinateCreator.getCartesianCoordinate1();
             testCartesianCoordinate(cartesianCoordinateJSONObject, cartesianCoordinate1);
         } catch (JSONException e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 
@@ -192,7 +192,7 @@ public class SitumMapperTest {
             JSONObject coordinate1 = coordinateCreator.getCoordinate1();
             testCoordinate(coordinateJSONObject, coordinate1);
         } catch (JSONException e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 
@@ -204,7 +204,7 @@ public class SitumMapperTest {
             JSONObject dimensions1 = dimensionsCreator.getDimensions1();
             testDimensions(dimessionsJSONObject, dimensions1);
         } catch (JSONException e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 
@@ -232,7 +232,7 @@ public class SitumMapperTest {
             JSONObject indication1 = indicationCreator.getIndication1();
             testIndication(indicationJSONObject, indication1);
         } catch (JSONException e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 
@@ -280,7 +280,7 @@ public class SitumMapperTest {
             JSONObject location10 = locationCreator.getLocation10();
             testLocation(outdoorLocationJSONObject, location10);
         } catch (JSONException e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 
@@ -475,13 +475,13 @@ public class SitumMapperTest {
 
     private void testBounds(JSONObject bounds, JSONObject defaultBounds) throws JSONException {
         Assert.assertEquals(JSONObject.class, bounds.get(NORTH_WEST).getClass());
-        testCoordinate(defaultBounds.getJSONObject(NORTH_WEST), bounds.getJSONObject(NORTH_WEST));
+        testCoordinate(bounds.getJSONObject(NORTH_WEST), defaultBounds.getJSONObject(NORTH_WEST));
         Assert.assertEquals(JSONObject.class, bounds.get(SOUTH_WEST).getClass());
-        testCoordinate(defaultBounds.getJSONObject(SOUTH_WEST), bounds.getJSONObject(SOUTH_WEST));
+        testCoordinate(bounds.getJSONObject(SOUTH_WEST), defaultBounds.getJSONObject(SOUTH_WEST));
         Assert.assertEquals(JSONObject.class, bounds.get(NORTH_EAST).getClass());
-        testCoordinate(defaultBounds.getJSONObject(NORTH_EAST), bounds.getJSONObject(NORTH_EAST));
+        testCoordinate(bounds.getJSONObject(NORTH_EAST), defaultBounds.getJSONObject(NORTH_EAST));
         Assert.assertEquals(JSONObject.class, bounds.get(SOUTH_EAST).getClass());
-        testCoordinate(defaultBounds.getJSONObject(SOUTH_EAST), bounds.getJSONObject(SOUTH_EAST));
+        testCoordinate(bounds.getJSONObject(SOUTH_EAST), defaultBounds.getJSONObject(SOUTH_EAST));
     }
 
     private void testCartesianCoordinate(JSONObject cartesianCoordinate, JSONObject defaultCartesianCoordinate) throws JSONException {
