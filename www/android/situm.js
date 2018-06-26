@@ -45,12 +45,14 @@ var Situm = {
   },
   /**
    * Set callback and starts listen onLocationChanged event.
-   * @param {Building} arrBuilding Array of buildings to activate locationListener, the plugin only uses the first building.
+   * @param {request} request Location Request. Must be an object with next properties:
+   * @param {request.building} building Building in which the positioning will be started.
+   * @param {request.locationRequest} locationRequest LocationRequest to activate locationListener.
    * @param {function} cb Cordova native callback to recive data.
    * @param {function} error Cordova native callback to recive errors.
    * @return {Location} position Current position of device.
    */
-  startPositioning: function (arrBuilding, cb, error) {
+  startPositioning: function (request, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'startPositioning', arrBuilding);
   },
   /**
