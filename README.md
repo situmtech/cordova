@@ -145,7 +145,7 @@ Sets the maximum age of a cached response in seconds.
 
 #### - startPositioning
 
-Starts the positioning on the [locationRequest](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/LocationRequest.html), a [building](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html) should be sent as the first parameter and a locationRequest should be sent as the sencond one. Returns a set of locationStatus and [location](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Location.html) through the success callback.
+Starts the positioning on the [locationRequest](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/LocationRequest.html), a [building](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html) should be sent as the first parameter and a locationRequest should be sent as the second one. Returns a set of locationStatus and [location](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Location.html) through the success callback.
 
 ```javascript
   startPositioning([building, locationRequest], position => {
