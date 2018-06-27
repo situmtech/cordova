@@ -1,0 +1,35 @@
+{
+  "isFirst": false,
+  "distance": 23.4,
+  "isLast": false,
+  "distanceToGoal": 27,
+  "from": {
+    "coordinate": {
+      "latitude": 2,
+      "longitude": 5
+    },
+    "floorIdentifier": "-1",
+    "cartesianCoordinate": {
+      "x": 0,
+      "y": 0
+    },
+    "isIndoor": false,
+    "buildingIdentifier": "-1",
+    "isOutdoor": true
+  },
+  "id": 2,
+  "TO": {
+    "coordinate": {
+      "latitude": 3,
+      "longitude": 4
+    },
+    "floorIdentifier": "-1",
+    "cartesianCoordinate": {
+      "x": 0,
+      "y": 0
+    },
+    "isIndoor": false,
+    "buildingIdentifier": "-1",
+    "isOutdoor": true
+  }
+}
