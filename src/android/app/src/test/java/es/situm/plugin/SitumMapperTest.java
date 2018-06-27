@@ -1,6 +1,7 @@
 package es.situm.plugin;
 
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -122,6 +123,13 @@ public class SitumMapperTest {
     private static final String FROM = "from";
     private static final String TO = "TO";
     private static final String ID = "id";
+    private static final String LAST_STEP = "lastStep";
+    private static final String FIRST_STEP = "firstStep";
+    private static final String INDICATIONS = "indications";
+    private static final String NODES = "nodes";
+    private static final String EDGES = "edges";
+    private static final String STEPS = "steps";
+    private static final String POINTS = "points";
 
     // Creators
     private AngleCreator angleCreator = new AngleCreator();
@@ -457,8 +465,56 @@ public class SitumMapperTest {
         try{
             Route route = routeCreator.createRouteBuildingWithDegreesPointWithCoordinates();
             JSONObject routeJSONObject = SitumMapper.routeToJsonObject(route);
+            JSONObject route1 = routeCreator.getRoute1();
+            testRoute(routeJSONObject, route1);
         }catch(JSONException e){
             System.err.println(e.getMessage());
+        }
+    }
+
+    private void testRoute(JSONObject route, JSONObject defaultRoute) throws JSONException {
+        Assert.assertEquals(JSONObject.class, route.get(LAST_STEP).getClass());
+        testRouteStep(route.getJSONObject(LAST_STEP), defaultRoute.getJSONObject(LAST_STEP));
+        Assert.assertEquals(JSONObject.class, route.get(FIRST_STEP).getClass());
+        testRouteStep(route.getJSONObject(FIRST_STEP), defaultRoute.getJSONObject(FIRST_STEP));
+        Assert.assertEquals(JSONArray.class, route.get(INDICATIONS).getClass());
+        JSONArray indications = route.getJSONArray(INDICATIONS);
+        JSONArray defaultIndications = defaultRoute.getJSONArray(INDICATIONS);
+        Assert.assertEquals(defaultIndications.length(), indications.length());
+        for(int i = 0; i < indications.length(); i++) {
+            testIndication(indications.getJSONObject(i), defaultIndications.getJSONObject(i));
+        }
+        Assert.assertEquals(JSONArray.class, route.get(NODES).getClass());
+        JSONArray nodes = route.getJSONArray(NODES);
+        JSONArray defaultNodes = defaultRoute.getJSONArray(NODES);
+        Assert.assertEquals(defaultNodes.length(), nodes.length());
+        for(int i = 0; i < nodes.length(); i++){
+            testPoint(nodes.getJSONObject(i), defaultNodes.getJSONObject(i));
+        }
+        Assert.assertEquals(JSONArray.class, route.get(EDGES).getClass());
+        JSONArray edges = route.getJSONArray(EDGES);
+        JSONArray defaultEdges = defaultRoute.getJSONArray(EDGES);
+        Assert.assertEquals(defaultEdges.length(), edges.length());
+        for(int i = 0; i < edges.length(); i++) {
+            testRouteStep(edges.getJSONObject(i), defaultEdges.getJSONObject(i));
+        }
+        Assert.assertEquals(JSONObject.class, route.get(FROM).getClass());
+        testPoint(route.getJSONObject(FROM), defaultRoute.getJSONObject(FROM));
+        Assert.assertEquals(JSONObject.class, route.get(TO).getClass());
+        testPoint(route.getJSONObject(TO),defaultRoute.getJSONObject(TO));
+        Assert.assertEquals(JSONArray.class, route.get(STEPS).getClass());
+        JSONArray steps = route.getJSONArray(STEPS);
+        JSONArray defaultSteps = defaultRoute.getJSONArray(STEPS);
+        Assert.assertEquals(defaultSteps.length(), steps.length());
+        for(int i = 0; i < steps.length(); i++) {
+            testRouteStep(steps.getJSONObject(i), defaultSteps.getJSONObject(i));
+        }
+        Assert.assertEquals(JSONArray.class, route.get(POINTS).getClass());
+        JSONArray points = route.getJSONArray(POINTS);
+        JSONArray defaultPoints = defaultRoute.getJSONArray(POINTS);
+        Assert.assertEquals(defaultPoints.length(), points.length());
+        for(int i = 0; i < points.length(); i++) {
+            testPoint(points.getJSONObject(i), defaultPoints.getJSONObject(i));
         }
     }
 

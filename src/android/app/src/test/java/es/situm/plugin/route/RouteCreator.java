@@ -1,5 +1,10 @@
 package es.situm.plugin.route;
 
+import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +22,9 @@ import es.situm.sdk.model.location.Coordinate;
 import es.situm.sdk.model.location.Dimensions;
 
 public class RouteCreator {
+
+    public final ClassLoader classLoader = getClass().getClassLoader();
+    public final JSONParser parser = new JSONParser();
 
     public Route createRouteBuildingWithDegreesPointWithCoordinates() {
         Coordinate coordinate = new Coordinate(12.3,14.0);
@@ -119,5 +127,16 @@ public class RouteCreator {
         floors.add(floor);
         return new Route(request, steps, indications, building, floors);
 
+    }
+
+    public JSONObject getRoute1(){
+        try{
+            java.net.URL resource = classLoader.getResource("route/route1.json");
+            File file = new File(resource.getFile());
+            return new JSONObject(parser.parse(new FileReader(file)).toString());
+        }catch(Exception e){
+            System.err.println(e.getMessage());
+            return null;
+        }
     }
 }
