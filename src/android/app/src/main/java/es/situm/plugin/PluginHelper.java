@@ -673,7 +673,7 @@ public class PluginHelper {
         callbackContext.sendPluginResult(new PluginResult(Status.OK, "Cache invalidated"));
     }
 
-    public void requestNavigationUpdates(CordovaInterface cordova,
+    public void requestNavigationUpdates(final CordovaInterface cordova,
      CordovaWebView webView, 
      JSONArray args, 
      final CallbackContext callbackContext) {
@@ -721,7 +721,7 @@ public class PluginHelper {
                 public void onProgress(NavigationProgress progress) {
                     Log.d(TAG, "On progress received: " + progress);
                     try {
-                        JSONObject jsonProgress = SitumMapper.navigationProgressToJsonObject(progress);
+                        JSONObject jsonProgress = SitumMapper.navigationProgressToJsonObject(progress, cordova.getActivity());
                         try {
                             jsonProgress.put("type", "progress");
                         } catch (JSONException e) {
