@@ -528,11 +528,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 - (void)locationManager:(nonnull id<SITLocationInterface>)locationManager
       didUpdateLocation:(nonnull SITLocation *)location {
     if (location) {
-        // [self updateWithLocation:location];
         NSDictionary *locationJO = [SitumLocationWrapper.shared locationToJsonObject:location];
-        // NSMutableDictionary *locationChanged = [[NSMutableDictionary alloc] init];
-        // [locationChanged setValue:@"locationChanged" forKey:@"type"];
-        // [locationChanged setValue:locationJO.copy forKey:@"value"];
         
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:locationJO.copy];
         pluginResult.keepCallback = [NSNumber numberWithBool:true];
