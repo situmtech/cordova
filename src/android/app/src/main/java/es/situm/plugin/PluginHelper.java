@@ -673,7 +673,7 @@ public class PluginHelper {
         callbackContext.sendPluginResult(new PluginResult(Status.OK, "Cache invalidated"));
     }
 
-    public void requestNavigationUpdates(CordovaInterface cordova,
+    public void requestNavigationUpdates(final CordovaInterface cordova,
      CordovaWebView webView, 
      JSONArray args, 
      final CallbackContext callbackContext) {
@@ -721,7 +721,7 @@ public class PluginHelper {
                 public void onProgress(NavigationProgress progress) {
                     Log.d(TAG, "On progress received: " + progress);
                     try {
-                        JSONObject jsonProgress = SitumMapper.navigationProgressToJsonObject(progress);
+                        JSONObject jsonProgress = SitumMapper.navigationProgressToJsonObject(progress, cordova.getActivity());
                         try {
                             jsonProgress.put("type", "progress");
                         } catch (JSONException e) {
@@ -785,21 +785,21 @@ public class PluginHelper {
     JSONArray args, 
     final CallbackContext callbackContext) {
         try {
-                // 1) Check for location arguments
-                JSONObject jsonLocation = args.getJSONObject(0); // What if json is not specified?
+            // 1) Check for location arguments
+            JSONObject jsonLocation = args.getJSONObject(0); // What if json is not specified?
 
-                // 2) Create a Location Object from argument
-                Location actualLocation = SitumMapper.jsonLocationObjectToLocation(jsonLocation); // Location Objet from JSON
+            // 2) Create a Location Object from argument
+            Location actualLocation = SitumMapper.jsonLocationObjectToLocation(jsonLocation); // Location Objet from JSON
                 // Location actualLocation = PluginHelper.computedLocation;
-                Log.i(TAG, "UpdateNavigation with Location: " + actualLocation);
+            Log.i(TAG, "UpdateNavigation with Location: " + actualLocation);
 
-                // 3) Connect interfaces
-            getNavigationManagerInstance().updateWithLocation(actualLocation); // TODO: Return a message (PluginResult)
-            } catch (Exception e) {
-                e.printStackTrace();
-                callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
-            }
-        
+            // 3) Connect interfaces
+            getNavigationManagerInstance().updateWithLocation(actualLocation); 
+            callbackContext.sendPluginResult(new PluginResult(Status.OK, "Navigation updated"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
+        }
     }
 
     public void removeNavigationUpdates(CordovaInterface cordova,
