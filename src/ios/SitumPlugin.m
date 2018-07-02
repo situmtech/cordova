@@ -506,6 +506,9 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     SITLocation *location = [SitumLocationWrapper.shared locationJsonObjectToLocation:(NSDictionary*)[command.arguments objectAtIndex:0]];
     
     [[SITNavigationManager sharedManager] updateWithLocation:location];
+
+    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Navigation updated"];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:locationCallbackId];
 }
 
 - (void) removeNavigationUpdates:(CDVInvokedUrlCommand *)command {
