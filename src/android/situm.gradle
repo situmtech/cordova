@@ -13,7 +13,7 @@ allprojects {
 dependencies {
     compile 'com.google.android.gms:play-services-maps:15.0.1'
     compile 'com.google.android.gms:play-services-location:15.0.1'
-    compile ('es.situm:situm-sdk:2.22.0@aar') {
+    compile ('es.situm:situm-sdk:2.23.0@aar') {
         transitive = true
     }
 }
