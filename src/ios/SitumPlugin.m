@@ -28,15 +28,13 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     NSString* apiKey = [command.arguments objectAtIndex:1];
     [SITServices provideAPIKey:apiKey forEmail:email];
 
-    if (IS_LOG_ENABLED)
-    {
-        /* code */
+    if (IS_LOG_ENABLED) {
         NSArray *allPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [allPaths objectAtIndex:0];
         NSString *pathForLog = [documentsDirectory stringByAppendingPathComponent:@"logging.txt"];
         freopen([pathForLog cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
 
-        NSLog([NSString stringWithFormat: @"%@ Logging ios calls", DEFAULT_SITUM_LOG]);
+        NSLog(@"%@", [NSString stringWithFormat: @"%@ Logging ios calls", DEFAULT_SITUM_LOG]);
     }
 
 }
@@ -52,11 +50,9 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     [[SITCommunicationManager sharedManager] setCacheMaxAge:[cacheMaxAge integerValue]]; 
     NSString *operation = [NSString stringWithFormat:@"Setting cache max age to :%@ seconds", cacheMaxAge];
 
-    if (IS_LOG_ENABLED)
-    {
-        NSLog([NSString stringWithFormat: @"%@ %@ ", DEFAULT_SITUM_LOG, operation]);
-        NSLog([NSString stringWithFormat: @"%@ Cache max age is %d seconds", DEFAULT_SITUM_LOG, [[SITCommunicationManager sharedManager] cacheMaxAge]]);
-        
+    if (IS_LOG_ENABLED) {
+        NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ ", DEFAULT_SITUM_LOG, operation]);
+        NSLog(@"%@", [NSString stringWithFormat: @"%@ Cache max age is %ld seconds", DEFAULT_SITUM_LOG, (long)[[SITCommunicationManager sharedManager] cacheMaxAge]]);
     }
 }
 
@@ -67,25 +63,22 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     }
 
     NSString *operation = @"Fetching buildings request";
-    if (IS_LOG_ENABLED)
-    {
-        NSLog([NSString stringWithFormat: @"%@ %@ ", DEFAULT_SITUM_LOG, operation]);
+    if (IS_LOG_ENABLED) {
+        NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ ", DEFAULT_SITUM_LOG, operation]);
     }
     
     // Forcing requests to go to the network instead of cache
     NSDictionary *options = @{@"forceRequest":@YES,};
     
     [[SITCommunicationManager sharedManager] fetchBuildingsWithOptions:options success:^(NSDictionary *mapping) {
-        if (IS_LOG_ENABLED)
-        {
-            NSLog([NSString stringWithFormat: @"%@ %@ Fetching buildings returned values", DEFAULT_SITUM_LOG, operation]);
+        if (IS_LOG_ENABLED) {
+            NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ Fetching buildings returned values", DEFAULT_SITUM_LOG, operation]);
         }
         NSArray *buildings = [mapping valueForKey:ResultsKey];
         CDVPluginResult* pluginResult = nil;
         if (buildings.count == 0) {
-            if (IS_LOG_ENABLED)
-            {
-                NSLog([NSString stringWithFormat: @"%@ %@ No buildings were retrieved", DEFAULT_SITUM_LOG, operation]);
+            if (IS_LOG_ENABLED) {
+                NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ No buildings were retrieved", DEFAULT_SITUM_LOG, operation]);
             }
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"There are no buildings on the account. Please go to dashboard http://dashboard.situm.es and learn more about the first step with Situm technology"];
         }
@@ -95,9 +88,8 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
                 [ja addObject:[SitumLocationWrapper.shared buildingToJsonObject:obj]];
                 [buildingsStored setObject:obj forKey:[NSString stringWithFormat:@"%@", obj.identifier]];
             }
-            if (IS_LOG_ENABLED)
-            {
-                NSLog([NSString stringWithFormat: @"%@ %@ Retrieved the following buildings: %@", DEFAULT_SITUM_LOG, operation, buildings]);
+            if (IS_LOG_ENABLED) {
+                NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ Retrieved the following buildings: %@", DEFAULT_SITUM_LOG, operation, buildings]);
             }
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:ja.copy];
         }
@@ -106,7 +98,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
                                                                failure:^(NSError *error) {
                                                                    if (IS_LOG_ENABLED)
                                                                     {
-                                                                        NSLog([NSString stringWithFormat: @"%@ %@ Error retrieving buildings: %@", DEFAULT_SITUM_LOG, operation, error]);
+                                                                        NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ Error retrieving buildings: %@", DEFAULT_SITUM_LOG, operation, error]);
                                                                     }
                                                                    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.description] callbackId:command.callbackId];
                                                                }];
@@ -118,9 +110,8 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     NSDictionary* buildingJO = (NSDictionary*)[command.arguments objectAtIndex:0];
     
     NSString *operation = @"Fetching floors request";
-    if (IS_LOG_ENABLED)
-    {
-        NSLog([NSString stringWithFormat: @"%@ %@ with parameters: %@", DEFAULT_SITUM_LOG, operation, buildingJO]);
+    if (IS_LOG_ENABLED) {
+        NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ with parameters: %@", DEFAULT_SITUM_LOG, operation, buildingJO]);
     }
 
     if (floorStored == nil) {
@@ -130,53 +121,45 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     NSString *buildingId = [buildingJO valueForKey:@"identifier"];
     
     [[SITCommunicationManager sharedManager] fetchFloorsForBuilding:buildingId withOptions:nil success:^(NSDictionary *mapping) {
-        if (IS_LOG_ENABLED)
-        {
-            NSLog([NSString stringWithFormat: @"%@ %@ responded", DEFAULT_SITUM_LOG, operation]);
+        if (IS_LOG_ENABLED) {
+            NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ responded", DEFAULT_SITUM_LOG, operation]);
         }
 
         NSMutableArray *ja = [[NSMutableArray alloc] init];
         NSArray *floors = [mapping objectForKey:@"results"];
-        if (IS_LOG_ENABLED)
-        {
-            NSLog([NSString stringWithFormat: @"%@ %@ results: %@", DEFAULT_SITUM_LOG, operation, floors]);
+        if (IS_LOG_ENABLED) {
+            NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ results: %@", DEFAULT_SITUM_LOG, operation, floors]);
         }
         for (SITFloor *obj in floors) {
             NSDictionary *floorJson = [SitumLocationWrapper.shared floorToJsonObject:obj];
-            if (IS_LOG_ENABLED)
-            {
-                NSLog([NSString stringWithFormat: @"%@ %@ parsed floor: %@", DEFAULT_SITUM_LOG, operation, floorJson]);
+            if (IS_LOG_ENABLED) {
+                NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ parsed floor: %@", DEFAULT_SITUM_LOG, operation, floorJson]);
             }
             [ja addObject:floorJson];
-            if (IS_LOG_ENABLED)
-            {
-                NSLog([NSString stringWithFormat: @"%@ %@ json array has : %@", DEFAULT_SITUM_LOG, operation, ja]);
+            if (IS_LOG_ENABLED) {
+                NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ json array has : %@", DEFAULT_SITUM_LOG, operation, ja]);
             }
             [floorStored setObject:obj forKey:[NSString stringWithFormat:@"%@", obj.identifier]];
-            if (IS_LOG_ENABLED)
-            {
-                NSLog([NSString stringWithFormat: @"%@ %@ added: %@ to dictionary results", DEFAULT_SITUM_LOG, operation, obj]);
+            if (IS_LOG_ENABLED) {
+                NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ added: %@ to dictionary results", DEFAULT_SITUM_LOG, operation, obj]);
             }
         }
         CDVPluginResult* pluginResult = nil;
         if (floors.count == 0) {
-            if (IS_LOG_ENABLED)
-            {
-                NSLog([NSString stringWithFormat: @"%@ %@ no floors on building: %@", DEFAULT_SITUM_LOG, operation, buildingJO]);
+            if (IS_LOG_ENABLED) {
+                NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ no floors on building: %@", DEFAULT_SITUM_LOG, operation, buildingJO]);
             }
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"The selected building does not have floors. Correct that on http://dashboard.situm.es"];
         } else {
-            if (IS_LOG_ENABLED)
-            {
-                NSLog([NSString stringWithFormat: @"%@ %@ retrieved floors: %@ on building: %@: %@", DEFAULT_SITUM_LOG, operation, floors, buildingJO]);
+            if (IS_LOG_ENABLED) {
+                NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ retrieved floors: %@ on building: %@", DEFAULT_SITUM_LOG, operation, floors, buildingJO]);
             }
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:ja.copy];
         }
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     } failure:^(NSError *error) {
-        if (IS_LOG_ENABLED)
-        {
-            NSLog([NSString stringWithFormat: @"%@ %@ error : %@ retrieving floors on building: %@", DEFAULT_SITUM_LOG, operation, error, buildingJO]);
+        if (IS_LOG_ENABLED) {
+            NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ error : %@ retrieving floors on building: %@", DEFAULT_SITUM_LOG, operation, error, buildingJO]);
         }
         [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.description] callbackId:command.callbackId];
     }];
@@ -426,7 +409,6 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     
     routeCallbackId = command.callbackId;
     
-    NSDictionary* building = (NSDictionary*)[command.arguments objectAtIndex:0]; //not used
     NSDictionary* fromLocation = (NSDictionary*)[command.arguments objectAtIndex:1];
     NSDictionary* toPOI = (NSDictionary*)[command.arguments objectAtIndex:2];
     NSDictionary* options = (NSDictionary*)[command.arguments objectAtIndex:3];
@@ -444,17 +426,6 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     } else {
         endPoint = [SitumLocationWrapper.shared pointJsonObjectToPoint:[toPOI objectForKey:@"position"]];
     }
-
-    /*
-    // Not neccessary
-    BOOL accessible = NO;
-    if ([options valueForKey:Accessible] != nil) {
-        accessible = [[options valueForKey:Accessible] boolValue];
-    }
-    float startingAngle = 0.0;
-    if ([options valueForKey:StartingAngle] != nil) {
-        startingAngle = [[options valueForKey:StartingAngle] floatValue];
-    }*/
     
     SITDirectionsRequest *directionsRequest = [[SITDirectionsRequest alloc] initWithRequestID:0 location:location destination:endPoint options:options];
     [[SITDirectionsManager sharedInstance] setDelegate:self];
@@ -535,6 +506,10 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     SITLocation *location = [SitumLocationWrapper.shared locationJsonObjectToLocation:(NSDictionary*)[command.arguments objectAtIndex:0]];
     
     [[SITNavigationManager sharedManager] updateWithLocation:location];
+
+    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Navigation updated"];
+    pluginResult.keepCallback = [NSNumber numberWithBool:true];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:locationCallbackId];
 }
 
 - (void) removeNavigationUpdates:(CDVInvokedUrlCommand *)command {
@@ -554,11 +529,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 - (void)locationManager:(nonnull id<SITLocationInterface>)locationManager
       didUpdateLocation:(nonnull SITLocation *)location {
     if (location) {
-        // [self updateWithLocation:location];
         NSDictionary *locationJO = [SitumLocationWrapper.shared locationToJsonObject:location];
-        // NSMutableDictionary *locationChanged = [[NSMutableDictionary alloc] init];
-        // [locationChanged setValue:@"locationChanged" forKey:@"type"];
-        // [locationChanged setValue:locationJO.copy forKey:@"value"];
         
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:locationJO.copy];
         pluginResult.keepCallback = [NSNumber numberWithBool:true];
@@ -602,7 +573,6 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     NSString * timestamp = [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
     
     NSMutableDictionary *routeJO = [[SitumLocationWrapper.shared routeToJsonObject:route] mutableCopy];
-    //[routeJO setValue:timestamp forKey:@"timeStamp"];
     [routesStored setObject:route forKey:timestamp];
 
     self.computedRoute = route; // We store the computed route in order to insert it into the navigation component if neccessary

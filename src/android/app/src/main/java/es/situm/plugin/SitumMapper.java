@@ -173,6 +173,12 @@ class SitumMapper {
   public static final String DISTANCE_TO_IGNORE_FIRST_INDICATION = "distanceToIgnoreFirstIndication";
   public static final String OUTSIDE_ROUTE_THRESHOLD = "outsideRouteThreshold";
   public static final String DISTANCE_TO_GOAL_THRESHOLD = "distanceToGoalThreshold";
+  public static final String DISTANCE_TO_CHANGE_INDICATION_THRESHOLD = "distanceToChangeIndicationThreshold";
+  public static final String DISTANCE_TO_CHANGE_FLOOR_THRESHOLD = "distanceToChangeFloorThreshold";
+  public static final String INDICATIONS_INTERVAL = "indicationsInterval";
+  public static final String TIME_TO_FIRST_INDICATION = "timeToFirstIndication";
+  public static final String ROUND_INDICATION_STEP = "roundIndicationsStep";
+  public static final String TIME_TO_IGNORE_UNEXPECTED_FLOOR_CHANGES = "timeToIgnoreUnexpectedFloorChanges";
 
   public static final String CURRENT_STEP_INDEX = "currentStepIndex";
   public static final String CLOSEST_LOCATION_IN_ROUTE = "closestLocationInRoute";    
