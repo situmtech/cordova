@@ -53,7 +53,7 @@ var Situm = {
    * @return {Location} position Current position of device.
    */
   startPositioning: function (request, cb, error) {
-    exec(cb, error, PLUGIN_NAME, 'startPositioning', arrBuilding);
+    exec(cb, error, PLUGIN_NAME, 'startPositioning', request);
   },
   /**
    * Stop locationListener on current active listener.
