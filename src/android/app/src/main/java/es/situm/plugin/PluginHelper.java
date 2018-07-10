@@ -673,7 +673,7 @@ public class PluginHelper {
         callbackContext.sendPluginResult(new PluginResult(Status.OK, "Cache invalidated"));
     }
 
-    public void requestNavigationUpdates(CordovaInterface cordova,
+    public void requestNavigationUpdates(final CordovaInterface cordova,
      CordovaWebView webView, 
      JSONArray args, 
      final CallbackContext callbackContext) {
@@ -709,6 +709,36 @@ public class PluginHelper {
                     builder.distanceToGoalThreshold(distanceToGoalThreshold);
                 }
 
+                if (navigationJSONOptions.has(SitumMapper.DISTANCE_TO_CHANGE_FLOOR_THRESHOLD)) {
+                    Double distanceToChangeFloorThreshold = navigationJSONOptions.getDouble(SitumMapper.DISTANCE_TO_CHANGE_FLOOR_THRESHOLD);
+                    builder.distanceToChangeFloorThreshold(distanceToChangeFloorThreshold);
+                }
+
+                if (navigationJSONOptions.has(SitumMapper.DISTANCE_TO_CHANGE_INDICATION_THRESHOLD)) {
+                    Double distanceToChangeIndicationThreshold = navigationJSONOptions.getDouble(SitumMapper.DISTANCE_TO_CHANGE_INDICATION_THRESHOLD);
+                    builder.distanceToChangeIndicationThreshold(distanceToChangeIndicationThreshold);
+                }
+
+                if (navigationJSONOptions.has(SitumMapper.INDICATIONS_INTERVAL)) {
+                    Long indicationsInterval = navigationJSONOptions.getLong(SitumMapper.INDICATIONS_INTERVAL);
+                    builder.indicationsInterval(indicationsInterval);
+                }
+
+                if (navigationJSONOptions.has(SitumMapper.TIME_TO_FIRST_INDICATION)) {
+                    Long timeToFirstIndication = navigationJSONOptions.getLong(SitumMapper.TIME_TO_FIRST_INDICATION);
+                    builder.timeToFirstIndication(timeToFirstIndication);
+                }
+
+                if (navigationJSONOptions.has(SitumMapper.ROUND_INDICATION_STEP)) {
+                    Integer roundIndicationsStep = navigationJSONOptions.getInt(SitumMapper.ROUND_INDICATION_STEP);
+                    builder.roundIndicationsStep(roundIndicationsStep);
+                }
+
+                if (navigationJSONOptions.has(SitumMapper.TIME_TO_IGNORE_UNEXPECTED_FLOOR_CHANGES)) {
+                    Integer timeToIgnoreUnexpectedFloorChanges = navigationJSONOptions.getInt(SitumMapper.TIME_TO_IGNORE_UNEXPECTED_FLOOR_CHANGES);
+                    builder.timeToIgnoreUnexpectedFloorChanges(timeToIgnoreUnexpectedFloorChanges);
+                }
+
             } catch (Exception e) {
                 //TODO: handle exception
                 Log.d(TAG, "Situm >> Unable to retrieve navigation options. Applying default ones");
@@ -721,7 +751,7 @@ public class PluginHelper {
                 public void onProgress(NavigationProgress progress) {
                     Log.d(TAG, "On progress received: " + progress);
                     try {
-                        JSONObject jsonProgress = SitumMapper.navigationProgressToJsonObject(progress);
+                        JSONObject jsonProgress = SitumMapper.navigationProgressToJsonObject(progress, cordova.getActivity());
                         try {
                             jsonProgress.put("type", "progress");
                         } catch (JSONException e) {
@@ -785,21 +815,21 @@ public class PluginHelper {
     JSONArray args, 
     final CallbackContext callbackContext) {
         try {
-                // 1) Check for location arguments
-                JSONObject jsonLocation = args.getJSONObject(0); // What if json is not specified?
+            // 1) Check for location arguments
+            JSONObject jsonLocation = args.getJSONObject(0); // What if json is not specified?
 
-                // 2) Create a Location Object from argument
-                Location actualLocation = SitumMapper.jsonLocationObjectToLocation(jsonLocation); // Location Objet from JSON
+            // 2) Create a Location Object from argument
+            Location actualLocation = SitumMapper.jsonLocationObjectToLocation(jsonLocation); // Location Objet from JSON
                 // Location actualLocation = PluginHelper.computedLocation;
-                Log.i(TAG, "UpdateNavigation with Location: " + actualLocation);
+            Log.i(TAG, "UpdateNavigation with Location: " + actualLocation);
 
-                // 3) Connect interfaces
-            getNavigationManagerInstance().updateWithLocation(actualLocation); // TODO: Return a message (PluginResult)
-            } catch (Exception e) {
-                e.printStackTrace();
-                callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
-            }
-        
+            // 3) Connect interfaces
+            getNavigationManagerInstance().updateWithLocation(actualLocation); 
+            callbackContext.sendPluginResult(new PluginResult(Status.OK, "Navigation updated"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
+        }
     }
 
     public void removeNavigationUpdates(CordovaInterface cordova,
