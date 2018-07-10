@@ -23,13 +23,14 @@ android {
 }
 
 dependencies {
+    implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:support-media-compat:27.1.1'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-web:3.0.2'
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.json:json:20140107'
-    androidTestImplementation 'com.android.support:support-annotations:27.1.1'
     implementation ('com.googlecode.json-simple:json-simple:1.1.1'){
         exclude group: 'junit', module:'junit'
     }
@@ -38,4 +39,11 @@ dependencies {
         transitive = true
     }
     implementation 'org.apache.cordova:framework:7.1.0'
+
+    androidTestImplementation 'com.android.support:support-annotations:27.1.1'
+
+    // required if you want to use Mockito for unit tests
+    testImplementation 'org.mockito:mockito-core:2.7.22'
+    // required if you want to use Mockito for Android tests
+    androidTestImplementation 'org.mockito:mockito-android:2.7.22'
 }

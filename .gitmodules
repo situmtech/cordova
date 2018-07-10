@@ -1,0 +1,3 @@
+[submodule "src/ios/situmcordovaplugin"]
+	path = src/ios/situmcordovaplugin
+	url = /Users/alberto.doval/Proyectos/cocodin/git/situm/situm-cordova-plugin/src/ios/situmcordovaplugin
