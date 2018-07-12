@@ -15,6 +15,7 @@ import java.util.Date;
 
 import es.situm.plugin.angle.AngleCreator;
 import es.situm.plugin.bounds.BoundsCreator;
+import es.situm.plugin.building.BuildingCreator;
 import es.situm.plugin.cartesianCoordinate.CartesianCoordinateCreator;
 import es.situm.plugin.coordinate.CoordinateCreator;
 import es.situm.plugin.point.PointCreator;
@@ -29,6 +30,7 @@ import es.situm.plugin.route.RouteCreator;
 import es.situm.plugin.routeStep.RouteStepCreator;
 import es.situm.plugin.situmConversionArea.SitumConversionAreaCreator;
 import es.situm.sdk.location.LocationStatus;
+import es.situm.sdk.model.cartography.Building;
 import es.situm.sdk.model.cartography.Floor;
 import es.situm.sdk.model.cartography.PoiCategory;
 import es.situm.sdk.model.cartography.Point;
@@ -130,10 +132,22 @@ public class SitumMapperTest {
     private static final String EDGES = "edges";
     private static final String STEPS = "steps";
     private static final String POINTS = "points";
+    private static final String ADDRESS = "address";
+    private static final String CENTER = "center";
+    private static final String PICTURE_URL = "pictureUrl";
+    private static final String ROTATION = "rotation";
+    private static final String BOUNDS_ROTATED = "boundsRotated";
+    private static final String INFO_HTML = "infoHtml";
+    private static final String PICTURE_THUMB_URL = "pictureThumbUrl";
+    private static final String USER_IDENTIFIER = "userIdentifier";
+    private static final String BOUNDS = "bounds";
+    private static final String NAME = "name";
+    private static final String DIMENSIONS = "dimensions";
 
     // Creators
     private AngleCreator angleCreator = new AngleCreator();
     private BoundsCreator boundsCreator = new BoundsCreator();
+    private BuildingCreator buildingCreator = new BuildingCreator();
     private CartesianCoordinateCreator cartesianCoordinateCreator = new CartesianCoordinateCreator();
     private CoordinateCreator coordinateCreator = new CoordinateCreator();
     private DimensionsCreator dimensionsCreator = new DimensionsCreator();
@@ -168,14 +182,26 @@ public class SitumMapperTest {
     public void boundsJSONObjectTest() {
         try {
             Bounds bounds = boundsCreator.createBounds();
-            Bounds boundsWithArray = boundsCreator.createBoundsWithArray();
             JSONObject boundsJSONObject = SitumMapper.boundsToJsonObject(bounds);
-            JSONObject boundsWithArrayJSONObject = SitumMapper.boundsToJsonObject(boundsWithArray);
             JSONObject bounds1 = boundsCreator.getBounds1();
-            JSONObject bounds2 = boundsCreator.getBounds2();
             testBounds(boundsJSONObject, bounds1);
+            Bounds boundsWithArray = boundsCreator.createBoundsWithArray();
+            JSONObject boundsWithArrayJSONObject = SitumMapper.boundsToJsonObject(boundsWithArray);
+            JSONObject bounds2 = boundsCreator.getBounds2();
             testBounds(boundsWithArrayJSONObject, bounds2);
         } catch (JSONException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void buildingJSONObjectTest() {
+        try{
+            Building building = buildingCreator.createBuilding();
+            JSONObject buildingJSONObject = SitumMapper.buildingToJsonObject(building);
+            JSONObject building1 = buildingCreator.getBuilding1();
+            testBuilding(buildingJSONObject, building1);
+        }catch(JSONException e){
             System.err.println(e.getMessage());
         }
     }
@@ -724,5 +750,38 @@ public class SitumMapperTest {
         Assert.assertEquals(defaultRouteStep.getInt(ID), routeStep.getInt(ID));
         Assert.assertEquals(JSONObject.class, routeStep.get(TO).getClass());
         testPoint(routeStep.getJSONObject(TO), defaultRouteStep.getJSONObject(TO));
+    }
+
+    private void testBuilding(JSONObject building, JSONObject defaultBuilding) throws JSONException {
+        Assert.assertEquals(String.class, building.get(ADDRESS).getClass());
+        Assert.assertEquals(defaultBuilding.getString(ADDRESS), building.getString(ADDRESS));
+        Assert.assertEquals(JSONObject.class, building.get(CUSTOM_FIELDS).getClass());
+        Assert.assertEquals(defaultBuilding.getJSONObject(CUSTOM_FIELDS).toString(), building.getJSONObject(CUSTOM_FIELDS).toString());
+        Assert.assertEquals(JSONObject.class, building.get(CENTER).getClass());
+        testCoordinate(building.getJSONObject(CENTER), defaultBuilding.getJSONObject(CENTER));
+        Assert.assertEquals(String.class, building.get(PICTURE_URL).getClass());
+        Assert.assertEquals(defaultBuilding.getString(PICTURE_URL), building.getString(PICTURE_URL));
+        Assert.assertEquals(Double.class, building.get(ROTATION).getClass());
+        Assert.assertEquals(defaultBuilding.getDouble(ROTATION), building.getDouble(ROTATION), 0);
+        Assert.assertEquals(JSONObject.class, building.get(BOUNDS_ROTATED).getClass());
+        testBounds(building.getJSONObject(BOUNDS_ROTATED), defaultBuilding.getJSONObject(BOUNDS_ROTATED));
+        Assert.assertEquals(String.class, building.get(INFO_HTML).getClass());
+        Assert.assertEquals(defaultBuilding.getString(INFO_HTML), building.getString(INFO_HTML));
+        Assert.assertEquals(String.class, building.get(PICTURE_THUMB_URL).getClass());
+        Assert.assertEquals(defaultBuilding.getString(PICTURE_THUMB_URL), building.getString(PICTURE_THUMB_URL));
+        Assert.assertEquals(String.class, building.get(BUILDING_IDENTIFIER).getClass());
+        Assert.assertEquals(defaultBuilding.getString(BUILDING_IDENTIFIER), building.getString(BUILDING_IDENTIFIER));
+        Assert.assertEquals(Date.class, building.get(CREATED_AT).getClass());
+        Assert.assertEquals(dateFormat.parseObject(defaultBuilding.get(CREATED_AT).toString(), new ParsePosition(0)), dateFormat.parseObject(building.get(CREATED_AT).toString(), new ParsePosition(0)));
+        Assert.assertEquals(String.class, building.get(USER_IDENTIFIER).getClass());
+        Assert.assertEquals(defaultBuilding.getString(USER_IDENTIFIER), building.getString(USER_IDENTIFIER));
+        Assert.assertEquals(JSONObject.class, building.get(BOUNDS).getClass());
+        testBounds(building.getJSONObject(BOUNDS), defaultBuilding.getJSONObject(BOUNDS));
+        Assert.assertEquals(String.class, building.get(NAME).getClass());
+        Assert.assertEquals(defaultBuilding.getString(NAME), building.getString(NAME));
+        Assert.assertEquals(JSONObject.class, building.get(DIMENSIONS).getClass());
+        testDimensions(building.getJSONObject(DIMENSIONS), defaultBuilding.getJSONObject(DIMENSIONS));
+        Assert.assertEquals(Date.class, building.get(UPDATED_AT).getClass());
+        Assert.assertEquals(dateFormat.parseObject(defaultBuilding.get(UPDATED_AT).toString(), new ParsePosition(0)), dateFormat.parseObject(building.get(UPDATED_AT).toString(), new ParsePosition(0)));
     }
 }
