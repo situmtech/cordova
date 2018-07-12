@@ -18,6 +18,7 @@ import es.situm.plugin.bounds.BoundsCreator;
 import es.situm.plugin.building.BuildingCreator;
 import es.situm.plugin.cartesianCoordinate.CartesianCoordinateCreator;
 import es.situm.plugin.coordinate.CoordinateCreator;
+import es.situm.plugin.poi.PoiCreator;
 import es.situm.plugin.point.PointCreator;
 import es.situm.plugin.locationStatus.LocationStatusCreator;
 import es.situm.plugin.dimensions.DimensionsCreator;
@@ -32,6 +33,7 @@ import es.situm.plugin.situmConversionArea.SitumConversionAreaCreator;
 import es.situm.sdk.location.LocationStatus;
 import es.situm.sdk.model.cartography.Building;
 import es.situm.sdk.model.cartography.Floor;
+import es.situm.sdk.model.cartography.Poi;
 import es.situm.sdk.model.cartography.PoiCategory;
 import es.situm.sdk.model.cartography.Point;
 import es.situm.sdk.model.directions.Indication;
@@ -143,6 +145,9 @@ public class SitumMapperTest {
     private static final String BOUNDS = "bounds";
     private static final String NAME = "name";
     private static final String DIMENSIONS = "dimensions";
+    private static final String IDENTIFIER = "identifier";
+    private static final String POI_NAME = "poiName";
+    private static final String CATEGORY = "category";
 
     // Creators
     private AngleCreator angleCreator = new AngleCreator();
@@ -159,6 +164,7 @@ public class SitumMapperTest {
     private SitumConversionAreaCreator situmConversionAreaCreator = new SitumConversionAreaCreator();
     private NavigationProgressCreator navigationProgressCreator = new NavigationProgressCreator();
     private RouteStepCreator routeStepCreator = new RouteStepCreator();
+    private PoiCreator poiCreator = new PoiCreator();
     private PointCreator pointCreator = new PointCreator();
     private RouteCreator routeCreator = new RouteCreator();
 
@@ -374,6 +380,18 @@ public class SitumMapperTest {
             JSONObject locationStatus13 = locationStatusCreator.getLocationStatus13();
             testLocationStatus(locationStatusUserNotInBuildingJSONObject, locationStatus13);
         } catch (JSONException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void poiJSONObjectTest() {
+        try{
+            Poi poi = poiCreator.createPoi();
+            JSONObject poiJSONObject = SitumMapper.poiToJsonObject(poi);
+            JSONObject poi1 = poiCreator.getPoi1();
+            testPoi(poiJSONObject, poi1);
+        }catch(JSONException e){
             System.err.println(e.getMessage());
         }
     }
@@ -783,5 +801,36 @@ public class SitumMapperTest {
         testDimensions(building.getJSONObject(DIMENSIONS), defaultBuilding.getJSONObject(DIMENSIONS));
         Assert.assertEquals(Date.class, building.get(UPDATED_AT).getClass());
         Assert.assertEquals(dateFormat.parseObject(defaultBuilding.get(UPDATED_AT).toString(), new ParsePosition(0)), dateFormat.parseObject(building.get(UPDATED_AT).toString(), new ParsePosition(0)));
+    }
+
+    private void testPoi(JSONObject poi, JSONObject defaultPoi) throws JSONException {
+        Assert.assertEquals(String.class, poi.get(IDENTIFIER).getClass());
+        Assert.assertEquals(defaultPoi.getString(IDENTIFIER), poi.getString(IDENTIFIER));
+        Assert.assertEquals(JSONObject.class, poi.get(COORDINATE).getClass());
+        testCoordinate(poi.getJSONObject(COORDINATE), defaultPoi.getJSONObject(COORDINATE));
+        Assert.assertEquals(String.class, poi.get(POI_NAME).getClass());
+        Assert.assertEquals(defaultPoi.getString(POI_NAME), poi.getString(POI_NAME));
+        Assert.assertEquals(JSONObject.class, poi.get(CUSTOM_FIELDS).getClass());
+        Assert.assertEquals(defaultPoi.getJSONObject(CUSTOM_FIELDS).toString(), poi.getJSONObject(CUSTOM_FIELDS).toString());
+        Assert.assertEquals(Boolean.class, poi.get(IS_INDOOR).getClass());
+        Assert.assertEquals(defaultPoi.getBoolean(IS_INDOOR), poi.getBoolean(IS_INDOOR));
+        Assert.assertEquals(String.class, poi.get(INFO_HTML).getClass());
+        Assert.assertEquals(defaultPoi.getString(INFO_HTML), poi.getString(INFO_HTML));
+        Assert.assertEquals(String.class, poi.get(BUILDING_IDENTIFIER).getClass());
+        Assert.assertEquals(defaultPoi.getString(BUILDING_IDENTIFIER), poi.getString(BUILDING_IDENTIFIER));
+        Assert.assertEquals(Boolean.class, poi.get(IS_OUTDOOR).getClass());
+        Assert.assertEquals(defaultPoi.getBoolean(IS_OUTDOOR), poi.getBoolean(IS_OUTDOOR));
+        Assert.assertEquals(Date.class, poi.get(CREATED_AT).getClass());
+        Assert.assertEquals(dateFormat.parseObject(defaultPoi.get(CREATED_AT).toString(), new ParsePosition(0)), dateFormat.parseObject(poi.get(CREATED_AT).toString(), new ParsePosition(0)));
+        Assert.assertEquals(String.class, poi.get(FLOOR_IDENTIFIER).getClass());
+        Assert.assertEquals(defaultPoi.getString(FLOOR_IDENTIFIER), poi.getString(FLOOR_IDENTIFIER));
+        Assert.assertEquals(JSONObject.class, poi.get(CARTESIAN_COORDINATE).getClass());
+        testCartesianCoordinate(poi.getJSONObject(CARTESIAN_COORDINATE), defaultPoi.getJSONObject(CARTESIAN_COORDINATE));
+        Assert.assertEquals(JSONObject.class, poi.get(POSITION).getClass());
+        testPoint(poi.getJSONObject(POSITION), defaultPoi.getJSONObject(POSITION));
+        Assert.assertEquals(String.class, poi.get(CATEGORY).getClass());
+        Assert.assertEquals(defaultPoi.getString(CATEGORY), poi.getString(CATEGORY));
+        Assert.assertEquals(Date.class, poi.get(UPDATED_AT).getClass());
+        Assert.assertEquals(dateFormat.parseObject(defaultPoi.get(UPDATED_AT).toString(), new ParsePosition(0)), dateFormat.parseObject(poi.get(UPDATED_AT).toString(), new ParsePosition(0)));
     }
 }

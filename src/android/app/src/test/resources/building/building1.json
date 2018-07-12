@@ -1,11 +1,11 @@
 {
-  "address":"Dirección 1",
+  "address":"TEST_ADDRESS",
   "customFields":{},
   "center":{
     "latitude":23,
     "longitude":43
   },
-  "pictureUrl":"URL picture",
+  "pictureUrl":"TEST_PICTURE_URL",
   "rotation":0.8203047484373349,
   "boundsRotated":{
     "northWest":{
@@ -25,11 +25,11 @@
       "longitude":43.00002438489047
     }
   },
-  "infoHtml":"Additional Info",
-  "pictureThumbUrl":"URL thumbnail",
+  "infoHtml":"TEST_INFO",
+  "pictureThumbUrl":"TEST_PICTURE_THUMB_URL",
   "buildingIdentifier":"-1",
   "createdAt":"Thu Jul 12 09:35:30 CEST 2018",
-  "userIdentifier":"User ID",
+  "userIdentifier":"TEST_USER_ID",
   "bounds":{
     "northWest":{
       "latitude":23.000031604421846,
@@ -48,7 +48,7 @@
       "longitude":43.00002438489047
     }
   },
-  "name":"Building Name",
+  "name":"TEST_NAME",
   "dimensions":{
     "width":5,
     "height":7

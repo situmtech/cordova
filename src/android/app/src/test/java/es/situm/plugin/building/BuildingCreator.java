@@ -23,15 +23,15 @@ public class BuildingCreator {
         Dimensions dimensions = new Dimensions(5,7);
         Angle rotation = Angle.fromDegrees(47);
         return  new Building.Builder()
-                .address("Dirección 1")
+                .address("TEST_ADDRESS")
                 .center(center)
                 .dimensions(dimensions)
-                .infoHtml("Additional Info")
-                .name("Building Name")
-                .pictureThumbUrl(new es.situm.sdk.model.URL("URL thumbnail"))
-                .pictureUrl(new es.situm.sdk.model.URL("URL picture"))
+                .infoHtml("TEST_INFO")
+                .name("TEST_NAME")
+                .pictureThumbUrl(new es.situm.sdk.model.URL("TEST_PICTURE_THUMB_URL"))
+                .pictureUrl(new es.situm.sdk.model.URL("TEST_PICTURE_URL"))
                 .rotation(rotation)
-                .userIdentifier("User ID")
+                .userIdentifier("TEST_USER_ID")
                 .createdAt(new Date())
                 .updatedAt(new Date())
                 .build();
