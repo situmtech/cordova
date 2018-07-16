@@ -17,17 +17,10 @@ ARTIFACTORY_PUBLIC_ID = "-1505608236@1461239289844"
  */
 
 node('androidci') {
-    stage('Clone sources') {
-        git url: 'https://github.com/situmtech/situm-cordova-plugin.git'
-    }
-  
-    /*stage('Checkout SCM') {
-        checkout scm
-    }*/
 
-    /*stage('Read Properties'){
-        readProperties(PROPERTIES_FILE)
-    }*/
+    stage('Checkout SCM') {
+        checkout scm
+    }
 
     stage('Clean Android'){
         sh "ls"
@@ -46,9 +39,6 @@ node('androidci') {
 }
 
 node('vm1-docker') {
-    stage('Clone sources') {
-        git url: 'https://github.com/situmtech/situm-cordova-plugin.git'
-    }
 
     stage('Checkout SCM') {
         checkout scm
