@@ -1,21 +1,3 @@
-import java.nio.file.NoSuchFileException
-
-PROPERTIES_FILE = 'SitumService/gradle.properties'
-
-VERSION_NAME = ""
-
-ARTIFACTORY_INTERNAL_ID = "-1505608236@1461239289843"
-ARTIFACTORY_PUBLIC_ID = "-1505608236@1461239289844"
-
-/**
- * Organización de los diferentes productos
- * ----------------------------------------
- * - Rama master
- *  Publica el plugin en npm
- * - Resto de ramas
- +  No se publican
- */
-
 node('androidci') {
 
     stage('Checkout SCM') {
@@ -23,7 +5,6 @@ node('androidci') {
     }
 
     stage('Clean Android'){
-        sh "ls"
         sh "cd src/android && ./gradlew clean"
     }
 
