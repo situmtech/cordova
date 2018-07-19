@@ -40,7 +40,7 @@
   "scripts": {
     "test": "cd tests/js && mocha",
     "eslint": "node node_modules/eslint/bin/eslint www && node node_modules/eslint/bin/eslint src && node node_modules/eslint/bin/eslint tests",
-    "jsdoc": "rm -rf docs/JSDoc && ./node_modules/.bin/jsdoc www/android/situm.js www/android/interfaces.js -d docs/JSDoc"
+    "jsdoc": "rm -rf docs/JSDoc && ./node_modules/.bin/jsdoc www/android/situm.js www/android/Interfaces.js -d docs/JSDoc"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
