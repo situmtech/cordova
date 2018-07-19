@@ -1,0 +1,11 @@
+{
+    "sourceType": "script",
+    "templates": {
+        "referenceTitle": "Situm Cordova Plugin",
+        "disableSort": false
+    },
+    "opts": {
+        "destination": "docs/JSDoc",
+        "encoding": "utf8"
+    }
+}
