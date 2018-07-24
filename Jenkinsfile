@@ -37,9 +37,6 @@ node('vm1-docker') {
     stage('Generate JSDoc') {
       def kubectl = docker.image('node:10.6-slim')
       kubectl.pull()
-      kubectl.inside("-u 0") {
-          sh "cp ./docs/conf.json ./node_modules/jsdoc/"
-      }
       kubectl.inside() {
           sh "npm run jsdoc"
       }
