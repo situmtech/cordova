@@ -445,7 +445,7 @@ module.exports = LocationRequest
 
 /**
  * @name
- * NavigationRequest
+ * LocationRequest
  * @description
  * A data object that contains parameters for the navigation service, NavigationManager.
  * @property {number} distanceToGoalThreshold Distance threshold from when the goal is considered reached.
@@ -474,6 +474,34 @@ var LocationRequest = {
 }
 
 module.exports = LocationRequest
+
+/**
+ * @name
+ * NavigationRequest
+ * @description
+ * A data object that contains parameters for the navigation service, NavigationManager.
+ * @property {number} distanceToGoalThreshold Distance threshold from when the goal is considered reached.
+ * @property {number} outsideRouteThreshold OutsideRouteThreshold.
+ * @property {number} distanceToFloorChangeThreshold Distance threshold from when a floor change is considered reached.
+ * @property {number} distanceToChangeIndicationThreshold Distance threshold from when the next indication is considered reached.
+ * @property {number} indicationsInterval Time to wait between indications.
+ * @property {number} timeToFirstIndication Time to wait until the first indication is returned.
+ * @property {number} roundIndicationsStep Step that will be used to round indications distance.
+ * @property {number} timeToIgnoreUnexpectedFloorChanges Time (in millis) to ignore the locations received during navigation, when the next indication is a floor change, if the locations are in a wrong floor (not in origin or destination floors).
+ */
+
+var NavigationRequest = {
+  distanceToGoalThreshold,
+  outsideRouteThreshold,
+  distanceToFloorChangeThreshold,
+  distanceToChangeIndicationThreshold,
+  indicationsInterval,
+  timeToFirstIndication,
+  roundIndicationsStep,
+  timeToIgnoreUnexpectedFloorChanges
+}
+
+module.exports = NavigationRequest
 
 /**
  * @name
