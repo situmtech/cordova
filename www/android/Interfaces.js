@@ -132,11 +132,11 @@ module.exports = CartesianCoordinate
  * Point of Interest, associated to a building, regardless of whether it's place inside or outside the building.
  * @property {string} identifier - The unique identifier of the resource
  * @property {string} buildingIdentifier - Identifier of building to which the POI belongs.
- * @property {CartesianCoordinate} cartesianCoordinate - Cartesian coordinate of this position, relative to building Bounds.
+ * @property {CartesianCoordinate} cartesianCoordinate - Cartesian coordinate of this position, relative to building {@link Bounds}.
  * @property {Coordinate} coordinate - Geographical coordinate of this position
  * @property {string} floorIdentifier - If this POI is outside the building (isOutdoor == true), this field has no meaning.
  * @property {string} poiName - A name for the POI, appropriate for display to the user.
- * @property {Point} position
+ * @property {Point} position - {@link Point} where the point is located.
  * @property {boolean} isIndoor - Whether the POI is placed outside the building or not.
  * @property {boolean} isOutdoor - Whether the POI is placed outside the building or not.
  * @property {PoiCategory} category - Category of the POI
@@ -222,13 +222,13 @@ module.exports = Point
  * @property {string} floorIdentifier - Only used in indoor.
  * @property {Point} position - The position of the location as {@link Point}.
  * @property {string} provider - The device identifier that has generated the location
- * @property {string} quality - Only used in indoor.
+ * @property {string} quality - Only used in indoor. Possible values are HIGH and LOW.
  * @property {boolean} hasBearing - True if the location has bearing and the bearing quality is Location.Quality.HIGH, false otherwise.
  * @property {number} timestamp - The timestamp of the location.
  * @property {boolean} hasCartesianBearing - Only used in indoor.
  * @property {boolean} isIndoor - True if the location is indoor
  * @property {boolean} isOutdoor - True if the location is outdoor
- * @property {string} deviceId
+ * @property {string} deviceId - Identifier of the device that has generated the location
  */
 
 var Location = {
@@ -312,7 +312,7 @@ module.exports = Route
  * @property {number} distanceToGoal - Distance in meters between the start point of this step (from) and the last point in the route ('to' of the last step).
  * @property {Point} from - Start point of this step.
  * @property {number} id - Position of this RouteStep in the list of steps (Route.steps) of the route to which it belongs.
- * @property {Point} to: End point of this step.
+ * @property {Point} to - End point of this step.
  * @property {boolean} isFirst - Returns true if this is the first step in the route.
  * @property {boolean} isLast - Returns true if this is the last step in the route.
  */
@@ -362,14 +362,14 @@ module.exports = Indication
  * SitumEvent
  * @description
  * An event: POI with radius, conversion area and asociated statistics. It is intended for usage in marketing apps.
- * @property {number} buildingIdentifier
- * @property {number} identifier
- * @property {number} floorIdentifier
- * @property {string} infoHtml
- * @property {SitumConversionArea} conversionArea
- * @property {object} customFields
- * @property {number} radius
- * @property {string} name
+ * @property {number} buildingIdentifier - The identifier of the building this floor belongs to.
+ * @property {number} identifier - Unique identifier of the SitumEvent
+ * @property {number} floorIdentifier - The identifier of the floor this event is located at.
+ * @property {string} infoHtml - Information contained into the event, in HTML format.
+ * @property {SitumConversionArea} conversionArea - Location where the event is located.
+ * @property {object} customFields - Key-value pairs that allow to extend and fully customize the information associated with the event.
+ * @property {number} radius - Radius of the event associated area
+ * @property {string} name - Name of the event
  */
 
 var SitumEvent = {
@@ -390,11 +390,11 @@ module.exports = SitumEvent
  * SitumConversionArea
  * @description
  * A rectangular area of a floor defining the conversion area of an event
- * @property {number} floorIdentifier
- * @property {object} topLeft
- * @property {object} topRight
- * @property {object} bottomLeft
- * @property {object} bottomRight
+ * @property {number} floorIdentifier - The identifier of the floor the SitumConversionArea is located at.
+ * @property {object} topLeft - Top-left corner
+ * @property {object} topRight - Top-right corner
+ * @property {object} bottomLeft - Bottom-left corner
+ * @property {object} bottomRight - Bottom-right corner
  */
 
 var SitumConversionArea = {
@@ -412,18 +412,18 @@ module.exports = SitumConversionArea
  * LocationRequest
  * @description
  * A data object that contains parameters for the location service, LocationManager.
- * @property {number} buildingIdentifier
- * @property {number} interval Default interval (in milliseconds) to notify location updates
- * @property {string} indoorProvider Default indoor provider
- * @property {boolean} useBle
- * @property {boolean} useWifi
- * @property {string} motionMode Default motion mode
- * @property {boolean} useForegroundService
- * @property {boolean} useDeadReckoning
- * @property {OutdoorLocationOptions} outdoorLocationOptions
- * @property {BeaconFilter[]} beaconFilters
- * @property {number} smallestDisplacement Default smallest displacement to nofiy location updates
- * @property {number} readtimeUpdateInterval Default interval (in milliseconds) to send locations to the Realtime
+ * @property {number} buildingIdentifier - Identifier of the building on which the positioning will be started
+ * @property {number} interval - Default interval (in milliseconds) to notify location updates
+ * @property {string} indoorProvider - Default indoor provider. Possible values are INPHONE and SUPPORT
+ * @property {boolean} useBle - Defines whether or not to use BLE for positioning
+ * @property {boolean} useWifi - Defines whether or not to use Wi-Fi for positioning
+ * @property {string} motionMode - Default motion mode. Possible values are BY_CAR, BY_FOOT and RADIOMAX
+ * @property {boolean} useForegroundService - Defines whether or not to activate the {@link http://developers.situm.es/pages/android/using_situm_sdk_background.html foreground service}
+ * @property {boolean} useDeadReckoning - Defines whether ot not to use dead reckoning to get fast position updates using only the inertial sensors, between the server position updates.
+ * @property {OutdoorLocationOptions} outdoorLocationOptions - Outdoor location options. Only used in an indoor/outdoor request
+ * @property {BeaconFilter[]} beaconFilters - Beacon filters to be handled during scan time, otherwise only Situm beacons will be scanned. Can be invoked multiple times to add as much beacon filters as you want
+ * @property {number} smallestDisplacement - Default smallest displacement to nofiy location updates
+ * @property {number} readtimeUpdateInterval - Default interval (in milliseconds) to send locations to the Realtime
  */
 
 var LocationRequest = {
@@ -448,14 +448,14 @@ module.exports = LocationRequest
  * LocationRequest
  * @description
  * A data object that contains parameters for the navigation service, NavigationManager.
- * @property {number} distanceToGoalThreshold Distance threshold from when the goal is considered reached.
- * @property {number} outsideRouteThreshold OutsideRouteThreshold.
- * @property {number} distanceToFloorChangeThreshold Distance threshold from when a floor change is considered reached.
- * @property {number} distanceToChangeIndicationThreshold Distance threshold from when the next indication is considered reached.
- * @property {number} indicationsInterval Time to wait between indications.
- * @property {number} timeToFirstIndication Time to wait until the first indication is returned.
- * @property {number} roundIndicationsStep Step that will be used to round indications distance.
- * @property {number} timeToIgnoreUnexpectedFloorChanges Time (in millis) to ignore the locations received during navigation, when the next indication is a floor change, if the locations are in a wrong floor (not in origin or destination floors).
+ * @property {number} distanceToGoalThreshold - Distance threshold from when the goal is considered reached.
+ * @property {number} outsideRouteThreshold - OutsideRouteThreshold.
+ * @property {number} distanceToFloorChangeThreshold - Distance threshold from when a floor change is considered reached.
+ * @property {number} distanceToChangeIndicationThreshold - Distance threshold from when the next indication is considered reached.
+ * @property {number} indicationsInterval - Time to wait between indications.
+ * @property {number} timeToFirstIndication - Time to wait until the first indication is returned.
+ * @property {number} roundIndicationsStep - Step that will be used to round indications distance.
+ * @property {number} timeToIgnoreUnexpectedFloorChanges - Time (in millis) to ignore the locations received during navigation, when the next indication is a floor change, if the locations are in a wrong floor (not in origin or destination floors).
  */
 
 var LocationRequest = {
@@ -480,14 +480,14 @@ module.exports = LocationRequest
  * NavigationRequest
  * @description
  * A data object that contains parameters for the navigation service, NavigationManager.
- * @property {number} distanceToGoalThreshold Distance threshold from when the goal is considered reached.
- * @property {number} outsideRouteThreshold OutsideRouteThreshold.
- * @property {number} distanceToFloorChangeThreshold Distance threshold from when a floor change is considered reached.
- * @property {number} distanceToChangeIndicationThreshold Distance threshold from when the next indication is considered reached.
- * @property {number} indicationsInterval Time to wait between indications.
- * @property {number} timeToFirstIndication Time to wait until the first indication is returned.
- * @property {number} roundIndicationsStep Step that will be used to round indications distance.
- * @property {number} timeToIgnoreUnexpectedFloorChanges Time (in millis) to ignore the locations received during navigation, when the next indication is a floor change, if the locations are in a wrong floor (not in origin or destination floors).
+ * @property {number} distanceToGoalThreshold - Distance threshold from when the goal is considered reached.
+ * @property {number} outsideRouteThreshold - OutsideRouteThreshold.
+ * @property {number} distanceToFloorChangeThreshold - Distance threshold from when a floor change is considered reached.
+ * @property {number} distanceToChangeIndicationThreshold - Distance threshold from when the next indication is considered reached.
+ * @property {number} indicationsInterval - Time to wait between indications.
+ * @property {number} timeToFirstIndication - Time to wait until the first indication is returned.
+ * @property {number} roundIndicationsStep - Step that will be used to round indications distance.
+ * @property {number} timeToIgnoreUnexpectedFloorChanges - Time (in millis) to ignore the locations received during navigation, when the next indication is a floor change, if the locations are in a wrong floor (not in origin or destination floors).
  */
 
 var NavigationRequest = {
@@ -507,10 +507,10 @@ module.exports = NavigationRequest
  * @name
  * OutdoorLocationOptions
  * @description
- * Outdoor location options used only in indoor-outdoor mode
- * @property {boolean} continuousMode
- * @property {boolean} userDefinedThreshold
- * @property {number} burstInterval
+ * Outdoor location options are only used in indoor-outdoor mode (Only available for Android)
+ * @property {boolean} continuousMode - Environment detection continuous mode (true) or burst mode (false).
+ * @property {boolean} userDefinedThreshold 
+ * @property {number} burstInterval - Interval to scan for GPS and detect the environment (in seconds).
  * @property {number} averageSnrThreshold
  */
 
@@ -528,7 +528,7 @@ module.exports = OutdoorLocationOptions
  * BeaconFilter
  * @description
  * Represents a BLE filter. Now the only field is the BLE proximity UUID
- * @property {string} uuid
+ * @property {string} uuid - Assigns the proximity UUID
  */
 
 var BeaconFilter = {
