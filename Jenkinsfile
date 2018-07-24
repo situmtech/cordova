@@ -40,8 +40,13 @@ node('vm1-docker') {
       kubectl.inside("-u 0") {
           sh "cp ./docs/conf.json ./node_modules/jsdoc/"
       }
-      kubectl.inside() {          
+      kubectl.inside() {
           sh "npm run jsdoc"
       }
+    }
+
+    stage('Archive artifacts'){
+        sh "zip JSDoc ./docs/JSDoc/*"
+        archiveArtifacts "JSDoc.zip"
     }
 }
