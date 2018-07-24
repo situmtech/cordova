@@ -40,8 +40,17 @@ node('vm1-docker') {
       kubectl.inside("-u 0") {
           sh "cp ./docs/conf.json ./node_modules/jsdoc/"
       }
-      kubectl.inside() {          
+      kubectl.inside() {
           sh "npm run jsdoc"
+      }
+    }
+
+    stage('Archive artifacts'){
+      def kubectl = docker.image('node:10.6-slim')
+      kubectl.inside("-u 0") {
+        sh "apt-get update && apt-get --assume-yes install zip"
+        sh "zip JSDoc ./docs/JSDoc/*"
+        archiveArtifacts "JSDoc.zip"
       }
     }
 }
