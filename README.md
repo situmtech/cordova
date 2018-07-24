@@ -307,6 +307,7 @@ Necessary step to request progress. Alone this method does not provide progress 
   navigationOptions["distanceToGoalThreshold"] = 7; // (Optional) meters;
   navigationOptions["distanceToFloorChangeThreshold"] = 10; // (Optional) meters;
   navigationOptions["distanceToChangeIndicationThreshold"] = 5; // (Optional) meters
+  navigationOptions["timeToIgnoreUnexpectedFloorChanges"] = 25000;
 
   requestNavigationUpdates([navigationOptions], (res: any) => {
     // Progress and other navigation status messages can be processed here  
