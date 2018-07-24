@@ -442,6 +442,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     NSNumber* indicationsInterval;
     NSNumber* timeToFirstIndication;
     NSNumber* roundIndicationsStep;
+    NSNumber* timeToIgnoreUnexpectedFloorChanges;
 
     if (command.arguments.count > 0) {
         // Processing configuration parameters
@@ -453,7 +454,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
         indicationsInterval = (NSNumber*)[options objectForKey:@"indicationsInterval"];
         timeToFirstIndication = (NSNumber*)[options objectForKey:@"timeToFirstIndication"];
         roundIndicationsStep = (NSNumber*)[options objectForKey:@"roundIndicationsStep"];
-
+        timeToIgnoreUnexpectedFloorChanges = (NSNumber*)[options objectForKey:@"timeToIgnoreUnexpectedFloorChanges"];
     }
     SITRoute *routeObj = self.computedRoute;
     if (routeObj) {
@@ -492,6 +493,11 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
             NSInteger value = [roundIndicationsStep integerValue];
             [navigationRequest setRoundIndicationsStep: value];
             NSLog(@"%@", [NSString stringWithFormat: @"navigationRequest.roundIndicationsStep: %ld", navigationRequest.roundIndicationsStep]);
+        }
+        if (timeToIgnoreUnexpectedFloorChanges != nil) {
+            NSInteger value = [timeToIgnoreUnexpectedFloorChanges integerValue];
+            [navigationRequest setTimeToIgnoreUnexpectedFloorChanges: value];
+            NSLog(@"%@", [NSString stringWithFormat: @"navigationRequest.timeToIgnoreUnexpectedFloorChanges: %ld", navigationRequest.timeToIgnoreUnexpectedFloorChanges]);
         }
 
         [[SITNavigationManager sharedManager]  setDelegate:self]; // Configure delegation first
