@@ -445,7 +445,7 @@ module.exports = LocationRequest
 
 /**
  * @name
- * NavigationRequest
+ * LocationRequest
  * @description
  * A data object that contains parameters for the navigation service, NavigationManager.
  * @property {number} distanceToGoalThreshold Distance threshold from when the goal is considered reached.
