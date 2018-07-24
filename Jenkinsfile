@@ -46,7 +46,11 @@ node('vm1-docker') {
     }
 
     stage('Archive artifacts'){
+      def kubectl = docker.image('node:10.6-slim')
+      kubectl.inside("-u 0") {
+        sh "apt-get update && sudo apt-get --assume-yes install zip"
         sh "zip JSDoc ./docs/JSDoc/*"
         archiveArtifacts "JSDoc.zip"
+      }
     }
 }
