@@ -49,7 +49,7 @@ node('vm1-docker') {
       def kubectl = docker.image('node:10.6-slim')
       kubectl.inside("-u 0") {
         sh "apt-get update && apt-get --assume-yes install zip"
-        sh "zip JSDoc ./docs/JSDoc/*"
+        sh "zip -r JSDoc ./docs/JSDoc/*"
         archiveArtifacts "JSDoc.zip"
       }
     }
