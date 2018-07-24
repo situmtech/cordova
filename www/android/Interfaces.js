@@ -111,7 +111,7 @@ module.exports = Coordinate
 
 /**
  * @name
- * Cartesian Coordinate
+ * CartesianCoordinate
  * @description
  * A structure that contains cartesian coordinate.
  * @property {number} x - Value of coordinate at x-axis
