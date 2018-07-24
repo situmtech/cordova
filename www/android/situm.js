@@ -198,6 +198,7 @@ var Situm = {
    * @param {number} [args.indicationsInterval] IndicationsInterval, long in miliseconds
    * @param {number} [args.timeToFirstIndication] TimeToFirstIndication, long in miliseconds
    * @param {number} [args.roundIndicationsStep] RoundIndicationsStep, integer in meters
+   * @param {number} [args.timeToIgnoreUnexpectedFloorChanges] TimeToIgnoreUnexpectedFloorChanges, long in milliseconds
    * @param {function} cb Cordova native callback to recive data.
    * @param {function} error Cordova native callback to recive errors.
    * @return {void}

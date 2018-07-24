@@ -80,6 +80,17 @@
 @property (nonatomic) NSInteger roundIndicationsStep;
 
 /**
+ Time (in millis) to ignore the locations received during navigation, when the
+ next indication is a floor change, if the locations are in a wrong floor (not in origin
+ or destination floors).
+ With a value of 0 it won't ignore any location.
+ 
+ @return time in millis
+ @discussion Default value is 0, which means unexpected floor changes will not be ignored.
+ */
+@property (nonatomic) NSInteger timeToIgnoreUnexpectedFloorChanges;
+
+/**
  The distance that will be taken into account in order to return the next N indications
  
  @return distance in meters

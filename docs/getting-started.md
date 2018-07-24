@@ -265,6 +265,7 @@ var navigationOptions = new Object();
   navigationOptions.indicationsInterval = 0; // number in millis
   navigationOptions.timeToFirstIndication = 0; // number in millis
   navigationOptions.roundIndicationsStep = 0; // number in meters
+  navigationOptions.timeToIgnoreUnexpectedFloorChanges = 0; // number in millis
   requestNavigationUpdates([navigationOptions], (res: any) => {
     // Progress and other navigation status messages can be processed here  
   }, (error: any) => {
