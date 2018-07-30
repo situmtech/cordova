@@ -473,6 +473,44 @@ module.exports = NavigationRequest
 
 /**
  * @name
+ * DirectionsRequest
+ * @description
+ * A data object that contains the request for directions.
+ * @property {Building} positioningBuilding
+ * @property {Point|Location} from - Current user's position as the starting point of the route.
+ * @property {Point|Poi} to - Point to, where the route should end.
+ * @property {DirectionsOptions} options - Options that can be added to the request.
+ */
+
+var DirectionsRequest = {
+  positioningBuilding,
+  from,
+  to,
+  options
+}
+
+module.exports = DirectionsRequest
+
+/**
+ * @name
+ * DirectionsOptions
+ * @description
+ * A data object that contains the directions options.
+ * @property {boolean} minimizeFloorChanges - Defines wheter or not the route should be calculated minimizing the floor changes even if the result is longer.
+ * @property {boolean} accessibleRoute - Defines wheter or not the route has to be suitable for wheel chairs (true) or not (false).
+ * @property {number} startingAngle - Current user's orientation in degrees.
+ */
+
+var DirectionsOptions = {
+  minimizeFloorChanges,
+  accessibleRoute,
+  startingAngle
+}
+
+module.exports = DirectionsOptions
+
+/**
+ * @name
  * OutdoorLocationOptions
  * @description
  * Outdoor location options are only used in indoor-outdoor mode (Only available for Android)
