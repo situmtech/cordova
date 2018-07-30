@@ -173,24 +173,24 @@ var Situm = {
   /**
    * Calculates a route between two points.
    * @description Calculates a route between two points.
-   * @param {DirectionsRequest} args Request - non-null search parameters.
+   * @param {DirectionsRequest} directionsRequest Request - non-null search parameters.
    * @param {function} cb Cordova native callback to recive data.
    * @param {function} error Cordova native callback to recive errors.
    * @return {Route} route The route between provided points
    */
-  requestDirections: function (args, cb, error) {
-    exec(cb, error, PLUGIN_NAME, 'requestDirections', args);
+  requestDirections: function (directionsRequest, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'requestDirections', directionsRequest);
   },
   /**
    * Set the navigation params, and the listener that receives the updated navigation progress.
    * @description Set the navigation params, and the listener that receives the updated navigation progress. Can only exist one navigation with one listener at a time. If this method was previously invoked, but removeUpdates() wasn't, removeUpdates() is called internally.
-   * @param {NavigationRequest} args Request non-null search parameters.
+   * @param {NavigationRequest} navigationRequest Request non-null search parameters.
    * @param {function} cb Cordova native callback to recive data.
    * @param {function} error Cordova native callback to recive errors.
    * @return {void}
    */
-  requestNavigationUpdates: function (args, cb, error) {
-    exec(cb, error, PLUGIN_NAME, 'requestNavigationUpdates', args);
+  requestNavigationUpdates: function (navigationRequest, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'requestNavigationUpdates', navigationRequest);
   },
   /**
    * Informs NavigationManager object the change of the user's location.
