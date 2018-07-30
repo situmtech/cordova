@@ -4,6 +4,7 @@
         "referenceTitle": "Situm Cordova Plugin",
         "disableSort": false,
         "name": "Situm",
+        "footerText": "COPYRIGHT © SITUM TECHNOLOGIES 2014 - 2018",
         "logo": {
             "url": "https://github.com/situmtech/situm-cordova-plugin/blob/feature/update-docs/docs/imagotype-SITUM-transparent-90.png?raw=true",
             "width": "90px",
