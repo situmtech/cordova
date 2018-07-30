@@ -3,7 +3,12 @@
     "templates": {
         "referenceTitle": "Situm Cordova Plugin",
         "disableSort": false,
-        "name": "Situm Cordova Plugin"
+        "name": "Situm Cordova Plugin",
+        "logo": {
+            "url": "https://avatars0.githubusercontent.com/u/18311590?s=400&u=2cd509400b25d2bed6a5392ed65021675e48eac8&v=4",
+            "width": "30px",
+            "height": "30px"
+        }
     },
     "opts": {
         "destination": "docs/JSDoc",
