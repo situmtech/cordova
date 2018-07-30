@@ -423,7 +423,7 @@ module.exports = SitumConversionArea
  * @property {OutdoorLocationOptions} outdoorLocationOptions - Outdoor location options. Only used in an indoor/outdoor request
  * @property {BeaconFilter[]} beaconFilters - Beacon filters to be handled during scan time, otherwise only Situm beacons will be scanned. Can be invoked multiple times to add as much beacon filters as you want
  * @property {number} smallestDisplacement - Default smallest displacement to nofiy location updates
- * @property {number} readtimeUpdateInterval - Default interval (in milliseconds) to send locations to the Realtime
+ * @property {number} realtimeUpdateInterval - Default interval (in milliseconds) to send locations to the Realtime
  */
 
 var LocationRequest = {
