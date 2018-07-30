@@ -45,9 +45,7 @@ var Situm = {
   },
   /**
    * Set callback and starts listen onLocationChanged event.
-   * @param {request} request Location Request. Must be an object with next properties:
-   * @param {request.building} building Building in which the positioning will be started.
-   * @param {request.locationRequest} locationRequest LocationRequest to activate locationListener.
+   * @param {LocationRequest} request Location Request.
    * @param {function} cb Cordova native callback to recive data.
    * @param {function} error Cordova native callback to recive errors.
    * @return {Location} position Current position of device.
@@ -186,15 +184,7 @@ var Situm = {
   /**
    * Set the navigation params, and the listener that receives the updated navigation progress.
    * @description Set the navigation params, and the listener that receives the updated navigation progress. Can only exist one navigation with one listener at a time. If this method was previously invoked, but removeUpdates() wasn't, removeUpdates() is called internally.
-   * @param {object} args Request non-null search parameters. Must be an object with next properties:
-   * @param {number} [args.distanceToFloorChangeThreshold] DistanceToFloorChangeThreshold, integer in meters
-   * @param {number} [args.distanceToChangeIndicationThreshold] DistanceToChangeIndicationThreshold, integer in meters
-   * @param {number} [args.distanceToGoalThreshold] DistanceToGoalThreshold, integer in meters
-   * @param {number} [args.outsideRouteThreshold] OutsideRouteThreshold, integer in meters
-   * @param {number} [args.indicationsInterval] IndicationsInterval, long in miliseconds
-   * @param {number} [args.timeToFirstIndication] TimeToFirstIndication, long in miliseconds
-   * @param {number} [args.roundIndicationsStep] RoundIndicationsStep, integer in meters
-   * @param {number} [args.timeToIgnoreUnexpectedFloorChanges] TimeToIgnoreUnexpectedFloorChanges, long in milliseconds
+   * @param {NavigationRequest} args Request non-null search parameters.
    * @param {function} cb Cordova native callback to recive data.
    * @param {function} error Cordova native callback to recive errors.
    * @return {void}
