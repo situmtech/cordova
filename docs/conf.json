@@ -2,10 +2,12 @@
     "sourceType": "script",
     "templates": {
         "referenceTitle": "Situm Cordova Plugin",
-        "disableSort": false
+        "disableSort": false,
+        "name": "Situm Cordova Plugin"
     },
     "opts": {
         "destination": "docs/JSDoc",
-        "encoding": "utf8"
+        "encoding": "utf8",
+        "template": "node_modules/tui-jsdoc-template"
     }
 }
