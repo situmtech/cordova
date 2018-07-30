@@ -127,7 +127,7 @@ module.exports = CartesianCoordinate
 
 /**
  * @name
- * POI (Point of Interest)
+ * POI
  * @description
  * Point of Interest, associated to a building, regardless of whether it's place inside or outside the building.
  * @property {string} identifier - The unique identifier of the resource
@@ -423,39 +423,7 @@ module.exports = SitumConversionArea
  * @property {OutdoorLocationOptions} outdoorLocationOptions - Outdoor location options. Only used in an indoor/outdoor request
  * @property {BeaconFilter[]} beaconFilters - Beacon filters to be handled during scan time, otherwise only Situm beacons will be scanned. Can be invoked multiple times to add as much beacon filters as you want
  * @property {number} smallestDisplacement - Default smallest displacement to nofiy location updates
- * @property {number} readtimeUpdateInterval - Default interval (in milliseconds) to send locations to the Realtime
- */
-
-var LocationRequest = {
-  buildingIdentifier,
-  interval,
-  indoorProvider,
-  useBle,
-  useWifi,
-  motionMode,
-  useForegroundService,
-  useDeadReckoning,
-  outdoorLocationOptions,
-  beaconFilters,
-  smallestDisplacement,
-  realtimeUpdateInterval
-}
-
-module.exports = LocationRequest
-
-/**
- * @name
- * LocationRequest
- * @description
- * A data object that contains parameters for the navigation service, NavigationManager.
- * @property {number} distanceToGoalThreshold - Distance threshold from when the goal is considered reached.
- * @property {number} outsideRouteThreshold - OutsideRouteThreshold.
- * @property {number} distanceToFloorChangeThreshold - Distance threshold from when a floor change is considered reached.
- * @property {number} distanceToChangeIndicationThreshold - Distance threshold from when the next indication is considered reached.
- * @property {number} indicationsInterval - Time to wait between indications.
- * @property {number} timeToFirstIndication - Time to wait until the first indication is returned.
- * @property {number} roundIndicationsStep - Step that will be used to round indications distance.
- * @property {number} timeToIgnoreUnexpectedFloorChanges - Time (in millis) to ignore the locations received during navigation, when the next indication is a floor change, if the locations are in a wrong floor (not in origin or destination floors).
+ * @property {number} realtimeUpdateInterval - Default interval (in milliseconds) to send locations to the Realtime
  */
 
 var LocationRequest = {
@@ -502,6 +470,44 @@ var NavigationRequest = {
 }
 
 module.exports = NavigationRequest
+
+/**
+ * @name
+ * DirectionsRequest
+ * @description
+ * A data object that contains the request for directions.
+ * @property {Building} positioningBuilding
+ * @property {Point|Location} from - Current user's position as the starting point of the route.
+ * @property {Point|POI} to - Point to, where the route should end.
+ * @property {DirectionsOptions} options - Options that can be added to the request.
+ */
+
+var DirectionsRequest = {
+  positioningBuilding,
+  from,
+  to,
+  options
+}
+
+module.exports = DirectionsRequest
+
+/**
+ * @name
+ * DirectionsOptions
+ * @description
+ * A data object that contains the directions options.
+ * @property {boolean} minimizeFloorChanges - Defines wheter or not the route should be calculated minimizing the floor changes even if the result is longer.
+ * @property {boolean} accessibleRoute - Defines wheter or not the route has to be suitable for wheel chairs (true) or not (false).
+ * @property {number} startingAngle - Current user's orientation in degrees.
+ */
+
+var DirectionsOptions = {
+  minimizeFloorChanges,
+  accessibleRoute,
+  startingAngle
+}
+
+module.exports = DirectionsOptions
 
 /**
  * @name
