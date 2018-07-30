@@ -127,7 +127,7 @@ module.exports = CartesianCoordinate
 
 /**
  * @name
- * POI (Point of Interest)
+ * POI
  * @description
  * Point of Interest, associated to a building, regardless of whether it's place inside or outside the building.
  * @property {string} identifier - The unique identifier of the resource
@@ -478,7 +478,7 @@ module.exports = NavigationRequest
  * A data object that contains the request for directions.
  * @property {Building} positioningBuilding
  * @property {Point|Location} from - Current user's position as the starting point of the route.
- * @property {Point|Poi} to - Point to, where the route should end.
+ * @property {Point|POI} to - Point to, where the route should end.
  * @property {DirectionsOptions} options - Options that can be added to the request.
  */
 
