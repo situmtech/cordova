@@ -10,7 +10,15 @@
             "width": "90px",
             "height": "90px",
             "link": "https://github.com/situmtech/situm-cordova-plugin"
-        }
+        },
+        "default": {
+            "staticFiles": {
+                "include": ["docs/static/"]
+            }
+        },
+        "css": [
+            "styles/custom.css"
+        ]
     },
     "opts": {
         "destination": "docs/JSDoc",
