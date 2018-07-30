@@ -7,7 +7,8 @@
         "logo": {
             "url": "https://github.com/situmtech/situm-cordova-plugin/blob/feature/update-docs/docs/imagotype-SITUM-transparent-90.png?raw=true",
             "width": "90px",
-            "height": "90px"
+            "height": "90px",
+            "link": "https://github.com/situmtech/situm-cordova-plugin"
         }
     },
     "opts": {
