@@ -1,0 +1,35 @@
+{
+  "identifier": "-1",
+  "coordinate": {
+    "latitude": 23,
+    "longitude": 43
+  },
+  "poiName": "TEST_NAME",
+  "customFields": {},
+  "isIndoor": true,
+  "infoHtml": "TEST_INFO",
+  "buildingIdentifier": "101",
+  "isOutdoor": false,
+  "createdAt": "Thu Jan 01 01:00:00 CET 1970",
+  "floorIdentifier": "12",
+  "cartesianCoordinate": {
+    "x": 5,
+    "y": 7
+  },
+  "position": {
+    "coordinate": {
+      "latitude": 23,
+      "longitude": 43
+    },
+    "floorIdentifier": "12",
+    "cartesianCoordinate": {
+      "x": 5,
+      "y": 7
+    },
+    "isIndoor": true,
+    "buildingIdentifier": "101",
+    "isOutdoor": false
+  },
+  "category": "TEST_CODE",
+  "updatedAt": "Thu Jan 01 01:00:00 CET 1970"
+}

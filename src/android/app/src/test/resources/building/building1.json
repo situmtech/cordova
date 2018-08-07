@@ -1,0 +1,57 @@
+{
+  "address":"TEST_ADDRESS",
+  "customFields":{},
+  "center":{
+    "latitude":23,
+    "longitude":43
+  },
+  "pictureUrl":"TEST_PICTURE_URL",
+  "rotation":0.8203047484373349,
+  "boundsRotated":{
+    "northWest":{
+      "latitude":23.000031604421846,
+      "longitude":42.999975615109506
+    },
+    "southWest":{
+      "latitude":22.99996839557815,
+      "longitude":42.999975615109506
+    },
+    "northEast":{
+      "latitude":23.000031604421846,
+      "longitude":43.00002438489047
+    },
+    "southEast":{
+      "latitude":22.99996839557815,
+      "longitude":43.00002438489047
+    }
+  },
+  "infoHtml":"TEST_INFO",
+  "pictureThumbUrl":"TEST_PICTURE_THUMB_URL",
+  "buildingIdentifier":"-1",
+  "createdAt":"Thu Jul 12 09:35:30 CEST 2018",
+  "userIdentifier":"TEST_USER_ID",
+  "bounds":{
+    "northWest":{
+      "latitude":23.000031604421846,
+      "longitude":42.999975615109506
+    },
+    "southWest":{
+      "latitude":22.99996839557815,
+      "longitude":42.999975615109506
+    },
+    "northEast":{
+      "latitude":23.000031604421846,
+      "longitude":43.00002438489047
+    },
+    "southEast":{
+      "latitude":22.99996839557815,
+      "longitude":43.00002438489047
+    }
+  },
+  "name":"TEST_NAME",
+  "dimensions":{
+    "width":5,
+    "height":7
+  },
+  "updatedAt":"Thu Jul 12 09:35:30 CEST 2018"
+}
