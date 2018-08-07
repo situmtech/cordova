@@ -1,6 +1,6 @@
 {
   "name": "situm-cordova-plugin-official",
-  "version": "1.7.2",
+  "version": "1.7.3",
   "cordova": {
     "id": "situm-cordova-plugin-official",
     "platforms": [
@@ -35,14 +35,13 @@
   "dependencies": {
     "cordova-common": "^2.2.1",
     "describe": "^1.2.0",
-    "expect.js": "^0.3.1",
-    "jsdoc-toolkit": "0.0.2",
-    "q": "^1.5.1"
+    "q": "^1.5.1",
+    "tui-jsdoc-template": "^1.2.2"
   },
   "scripts": {
-    "test": "npm run eslint",
+    "test": "cd tests/js && mocha",
     "eslint": "node node_modules/eslint/bin/eslint www && node node_modules/eslint/bin/eslint src && node node_modules/eslint/bin/eslint tests",
-    "jsdoc": "rm -rf docs/JSDoc && ./node_modules/.bin/jsdoc www/android/situm.js www/android/interfaces.js -d docs/JSDoc"
+    "jsdoc": "rm -rf docs/JSDoc && ./node_modules/.bin/jsdoc www/android/situm.js www/android/Interfaces.js -c ./docs/conf.json -d docs/JSDoc"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
@@ -52,6 +51,9 @@
     "eslint-plugin-node": "^5.0.0",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
-    "jsdoc": "^3.5.5"
+    "jsdoc": "^3.5.5",
+    "mocha": "^5.2.0",
+    "expect.js": "^0.3.1",
+    "jsdoc-toolkit": "0.0.2"
   }
 }

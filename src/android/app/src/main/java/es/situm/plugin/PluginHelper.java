@@ -317,7 +317,7 @@ public class PluginHelper {
         try {
             JSONObject jsonoCategory = args.getJSONObject(0);
             PoiCategory category = SitumMapper.poiCategoryFromJsonObject(jsonoCategory);
-            getCommunicationManagerInstance().fetchPoiCategoryIconNormal(category, new Handler<Bitmap>() {
+            getCommunicationManagerInstance().fetchPoiCategoryIconSelected(category, new Handler<Bitmap>() {
                 @Override
                 public void onSuccess(Bitmap bitmap) {
                     try {
