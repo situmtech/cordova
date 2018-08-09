@@ -82,7 +82,6 @@
  */
 - (SITIndication *)indicationForNextStep:(SITRouteStep *)step;
 
-
 /**
  Complete distance of the route.
 

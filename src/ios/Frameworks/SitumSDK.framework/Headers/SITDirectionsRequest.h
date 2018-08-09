@@ -39,6 +39,7 @@
  Additional options to be considered when computing a route.
  You can use the following keys to modify the behaviour of computing a route:
  key: accessible -> BOOL value that indicates if route has to be suitable for wheel chairs (YES) or not (NO) (this is the default case)
+ key: minimizeFloorChanges -> BOOL value that indicates if the route should have as less floor changes as possible
  */
 @property (nonatomic, readonly) NSDictionary *options;
 

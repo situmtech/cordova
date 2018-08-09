@@ -13,7 +13,6 @@
 #import "SITDimensions.h"
 #import "SITResource.h"
 #import "SITURL.h"
-
 #import "SITBounds.h"
 
 /**
@@ -64,7 +63,6 @@
                           rotation:(SITAngle *)rotation
                         pictureURL:(SITURL *)pictureURL
                    pictureThumbURL:(SITURL *)pictureThumbURL;
-
 
 // TODO: Complete these methods
 
