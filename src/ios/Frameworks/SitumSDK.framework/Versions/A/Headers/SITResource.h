@@ -17,24 +17,24 @@
 /**
  Unique identifier of the resource
  */
-@property (nonatomic, strong) NSString *identifier;
+@property(nonatomic, strong) NSString *identifier;
 
 
 /**
  Date containing the time when a resource was first created.
  */
-@property (nonatomic, strong) NSDate *createdAt;
+@property(nonatomic, strong) NSDate *createdAt;
 
 /**
  Date containing the time when a resource was last updated.
  */
-@property (nonatomic, strong) NSDate *updatedAt;
+@property(nonatomic, strong) NSDate *updatedAt;
 
 /**
  A dictionary containing additional information not managed by Situm SDK
  @discussion You can use this property to insert personalized content for your application. It will be loaded with the contents inserted on the web app.
  */
-@property (nonatomic, strong) NSDictionary *customFields;
+@property(nonatomic, strong) NSDictionary *customFields;
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
                          createdAt:(NSDate *)createdAt

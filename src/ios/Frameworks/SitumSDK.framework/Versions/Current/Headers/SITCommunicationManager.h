@@ -116,8 +116,8 @@
  @discussion Keys of the options dictionary: forceRequest boolean value that determines if the operation should hit the server (YES) or the cachesystem (NO)
  */
 - (NSError *)fetchBuildingsWithOptions:(NSDictionary *)options
-                          success:(SITSuccessHandler)success
-                          failure:(SITFailureCompletion)failure;
+                               success:(SITSuccessHandler)success
+                               failure:(SITFailureCompletion)failure;
 
 
 /**
@@ -191,11 +191,6 @@
 
 
 - (BOOL)fetchInfoOfIndoorBuilding:(SITIndoorBuilding *)indoorBuilding
-                      withOptions:(NSDictionary *)options
-                   withCompletion:(SITBuildingInfoFetchHandler)completion;
-
-
-- (BOOL)fetchInfoOfIndoorBuilding:(SITIndoorBuilding *)indoorBuilding
                    withCompletion:(SITBuildingInfoFetchHandler)completion;
 
 /*!
@@ -260,7 +255,7 @@
  *
  */
 - (BOOL)fetchPOIsFromIndoorBuilding:(SITIndoorBuilding *)indoorBuilding
-                     withOptions:(NSDictionary *)options
+                        withOptions:(NSDictionary *)options
                      withCompletion:(SITPOIFetchHandler)POIFetchHandler DEPRECATED_MSG_ATTRIBUTE("Use - (BOOL)fetchPoisOfBuilding:withOptions:success:failure:");;
 
 /**
@@ -326,8 +321,8 @@
  */
 
 - (BOOL)fetchOutdoorPOIsFromIndoorBuilding:(SITIndoorBuilding *)indoorBuilding
-                                withOptions:(NSDictionary *)options
-                             withCompletion:(SITExteriorPOIFetchHandler)exteriorPOIFetchHandler;
+                               withOptions:(NSDictionary *)options
+                            withCompletion:(SITExteriorPOIFetchHandler)exteriorPOIFetchHandler;
 
 
 /*!
@@ -418,7 +413,7 @@
  *  @discussion This method is restricted to private use.
  */
 
-- (BOOL)pushCalibrationsForFloorIdentifier:(NSInteger )indoorLevelIdentifier
+- (BOOL)pushCalibrationsForFloorIdentifier:(NSInteger)indoorLevelIdentifier
                               filesAtPaths:(NSArray *)paths
                             withCompletion:(SITCalibrationsPushHandler)calibrationsPushHandler;
 
@@ -445,4 +440,5 @@
                          failure:(nonnull SITFailureCompletion)failureCompletion;
 
 @end
+
 #endif

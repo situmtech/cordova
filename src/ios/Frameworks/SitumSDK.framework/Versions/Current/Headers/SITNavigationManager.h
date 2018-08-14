@@ -18,7 +18,7 @@
 /**
  Delegate for progress callbacks
  */
-@property (nonatomic, strong) id<SITNavigationDelegate> delegate;
+@property(nonatomic, strong) id <SITNavigationDelegate> delegate;
 
 /**
  Call this method to receive a reference to an initialized object of this class
