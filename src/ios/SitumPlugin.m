@@ -430,17 +430,12 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     SITDirectionsRequest *directionsRequest = [[SITDirectionsRequest alloc] initWithLocation: location withDestination: endPoint];
     
     BOOL accessible = false;
-    BOOL optionsHasValidAccessibleParam = options && [[options allKeys] containsObject: @"accessibleRoute"] && [[options valueForKey: @"accessibleRoute"] isKindOfClass: [NSNumber class]];
-    if(optionsHasValidAccessibleParam) {
-            accessible = [(NSNumber*)[options valueForKey: @"accessibleRoute"] boolValue];
-    }
-    [directionsRequest setAccessible: accessible];
-    
     BOOL minimizeFloorChanges = false;
-    BOOL optionsHasValidMinimizeFCParam = options && [[options allKeys] containsObject: @"minimizeFloorChanges"] && [[options valueForKey: @"minimizeFloorChanges"] isKindOfClass: [NSNumber class]];
-    if(optionsHasValidMinimizeFCParam) {
+    if(options) {
+        accessible = [(NSNumber*)[options valueForKey: @"accessibleRoute"] boolValue];
         minimizeFloorChanges = [(NSNumber*)[options valueForKey: @"minimizeFloorChanges"] boolValue];
     }
+    [directionsRequest setAccessible: accessible];
     [directionsRequest setMinimizeFloorChanges: minimizeFloorChanges];
     
     [[SITDirectionsManager sharedInstance] setDelegate:self];
