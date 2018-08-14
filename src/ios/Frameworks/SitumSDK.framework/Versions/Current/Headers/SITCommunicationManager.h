@@ -189,9 +189,12 @@
 - (BOOL)fetchIndoorBuildingsWithOptions:(NSDictionary *)options
                          withCompletion:(SITBuildingFetchHandler)buildindFetchHandler;
 
+- (BOOL)fetchInfoOfIndoorBuilding: (SITIndoorBuilding *) indoorBuilding
+                   withCompletion: (SITBuildingInfoFetchHandler) completion;
 
-- (BOOL)fetchInfoOfIndoorBuilding:(SITIndoorBuilding *)indoorBuilding
-                   withCompletion:(SITBuildingInfoFetchHandler)completion;
+- (BOOL)fetchInfoOfIndoorBuilding: (SITIndoorBuilding *) indoorBuilding
+                      withOptions: (NSDictionary *) options
+                   withCompletion: (SITBuildingInfoFetchHandler) completion;
 
 /*!
  *  Retrieve levels of a building.
