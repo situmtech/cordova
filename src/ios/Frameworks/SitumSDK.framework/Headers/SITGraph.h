@@ -12,7 +12,6 @@
 #import <Foundation/Foundation.h>
 
 #import "SITIndoorPoint.h"
-
 #import "SITIndoorRoute.h"
 
 @class PESGraph;
@@ -37,15 +36,12 @@
                                    toIndoorPoint:(SITIndoorPoint *)destinationPoint
                                     isAccessible:(BOOL)isAccessible;
 
-
-
 #pragma mark - private methods
 - (NSArray *)links;
 
 - (NSArray *)nodes;
 
 - (void)prepareGraph;
-
 
 #pragma mark - Hide this methods before commit
 - (void)setNodes:(NSArray *)nodes;
@@ -55,4 +51,5 @@
 - (PESGraph *)internalGraphAccessible:(BOOL)accessible;
 
 @end
+
 #endif

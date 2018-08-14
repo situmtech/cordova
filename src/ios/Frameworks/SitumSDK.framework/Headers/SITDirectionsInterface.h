@@ -55,7 +55,7 @@
  @param request the SITDirectionsRequest that caused the error.
  @param error error that describes the problem.
  */
-- (void)directionsManager:(id<SITDirectionsInterface>)manager
+- (void)directionsManager:(id <SITDirectionsInterface>)manager
  didFailProcessingRequest:(SITDirectionsRequest *)request
                 withError:(NSError *)error;
 
@@ -66,7 +66,7 @@
  @param request the SITDirectionsRequest that has been processed.
  @param route SITRoute that best match the request.
  */
-- (void)directionsManager:(id<SITDirectionsInterface>)manager
+- (void)directionsManager:(id <SITDirectionsInterface>)manager
         didProcessRequest:(SITDirectionsRequest *)request
              withResponse:(SITRoute *)route;
 
