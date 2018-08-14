@@ -23,33 +23,33 @@
 /**
  Identifier of the user who created the building
  */
-@property (nonatomic, strong) NSString *userIdentifier;
+@property(nonatomic, strong) NSString *userIdentifier;
 
 /**
  *  Name of the building.
  */
-@property (nonatomic, strong) NSString *name;
+@property(nonatomic, strong) NSString *name;
 
 
 /**
  *  Address of the building.
  */
-@property (nonatomic, strong) NSString *address;
+@property(nonatomic, strong) NSString *address;
 
 /**
  *  Detailed information in HTML format
  */
-@property (nonatomic, strong) NSString *infoHTML;
+@property(nonatomic, strong) NSString *infoHTML;
 
 /**
  Rotation angle of the building's base, relative to the west-east axis,
  increasing in counter-clockwise, being 0 the west-east axis.
  */
-@property (nonatomic, strong) SITAngle *rotation;
+@property(nonatomic, strong) SITAngle *rotation;
 
-@property (nonatomic, strong) SITURL *pictureURL;
+@property(nonatomic, strong) SITURL *pictureURL;
 
-@property (nonatomic, strong) SITURL *pictureThumbURL; // nail TODO: Complete names??
+@property(nonatomic, strong) SITURL *pictureThumbURL; // nail TODO: Complete names??
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
                          createdAt:(NSDate *)createdAt
@@ -82,7 +82,6 @@
  Geographical coordinate of the building
  */
 - (CLLocationCoordinate2D)center;
-
 
 
 @end

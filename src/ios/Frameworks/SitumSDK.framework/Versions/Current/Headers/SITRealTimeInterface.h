@@ -47,7 +47,7 @@
  @param realTimeManager manager object
  @param realTimeData encapsulate object with locations of the users
  */
-- (void)realTimeManager:(id<SITRealTimeInterface>)realTimeManager
+- (void)realTimeManager:(id <SITRealTimeInterface>)realTimeManager
  didUpdateUserLocations:(SITRealTimeData *)realTimeData;
 
 
@@ -57,8 +57,8 @@
  @param realTimeManager manager object
  @param error error object
  */
-- (void)realTimeManager:(id<SITRealTimeInterface>)realTimeManager
- didFailWithError:(NSError *)error;
+- (void)realTimeManager:(id <SITRealTimeInterface>)realTimeManager
+       didFailWithError:(NSError *)error;
 
 @end
 
