@@ -20,5 +20,5 @@
 /**
  The object conforming to the SITDirectionsDelegate protocol where updates will be provided
  */
-@property (nonatomic, weak) id<SITDirectionsDelegate> delegate;
+@property(nonatomic, weak) id <SITDirectionsDelegate> delegate;
 @end

@@ -17,26 +17,26 @@
  *
  *  @discussion: Represents the current state of the SITLocationManager.
  */
-typedef NS_ENUM(int, SITLocationState){
+typedef NS_ENUM(int, SITLocationState) {
     /**
      *  Localization is not running.
      */
-    kSITLocationStopped = 0,
-    
+            kSITLocationStopped = 0,
+
     /*
      System is still calculating.
      */
-    kSITLocationCalculating,
-    
+            kSITLocationCalculating,
+
     /*
      System cannot determine where the user is in that building.
      */
-    kSITLocationUserNotInBuilding,
-    
+            kSITLocationUserNotInBuilding,
+
     /**
      *  Localization is running.
      */
-    kSITLocationStarted,
+            kSITLocationStarted,
 };
 
 
@@ -85,7 +85,7 @@ typedef NS_ENUM(int, SITLocationState){
  @param locationManager location provider
  @param location current location
  */
-- (void)locationManager:(nonnull id<SITLocationInterface>)locationManager
+- (void)locationManager:(nonnull id <SITLocationInterface>)locationManager
       didUpdateLocation:(nonnull SITLocation *)location;
 
 
@@ -96,7 +96,7 @@ typedef NS_ENUM(int, SITLocationState){
  @param error error description
  @discussion Invoked when an error has occurred. Error types are defined in "SITLocationError.h".
  */
-- (void)locationManager:(nonnull id<SITLocationInterface>)locationManager
+- (void)locationManager:(nonnull id <SITLocationInterface>)locationManager
        didFailWithError:(nonnull NSError *)error;
 
 /**
@@ -105,7 +105,7 @@ typedef NS_ENUM(int, SITLocationState){
  @param locationManager location provider
  @param state state of the system (one of SITLocationState enum values)
  */
-- (void)locationManager:(nonnull id<SITLocationInterface>)locationManager
+- (void)locationManager:(nonnull id <SITLocationInterface>)locationManager
          didUpdateState:(SITLocationState)state;
 @end
 

@@ -21,26 +21,26 @@
 /**
  Unique identifier of the SITBuilding.
  */
-@property (nonatomic, strong) NSString *buildingIdentifier;
+@property(nonatomic, strong) NSString *buildingIdentifier;
 
 
 /**
  Unique identifier of the SITFloor.
  */
-@property (nonatomic, strong) NSString *floorIdentifier;
+@property(nonatomic, strong) NSString *floorIdentifier;
 
 
 /**
  Returns cartesian coordinate (in meters) relative to the bounds of building's base.
  
  */
-@property (nonatomic, strong) SITCartesianCoordinate *cartesianCoordinate;
+@property(nonatomic, strong) SITCartesianCoordinate *cartesianCoordinate;
 
 
 /**
  Name associated with the point (can be nil).
  */
-@property (nonatomic, strong) NSString *name;
+@property(nonatomic, strong) NSString *name;
 
 
 /**
@@ -79,7 +79,7 @@
 - (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate
                 buildingIdentifier:(NSString *)buildingIdentifier
                    floorIdentifier:(NSString *)floorIdentifier
-              cartesianCoordinate:(SITCartesianCoordinate *)cartesianCoordinate;
+               cartesianCoordinate:(SITCartesianCoordinate *)cartesianCoordinate;
 
 
 /**

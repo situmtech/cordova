@@ -62,8 +62,8 @@ typedef NS_ENUM(int, kSITKeyValueFilterBy) {
 /**
  *  Determines if the filter is valid
  *
- *  @return BOOL value indicating if the filter is valid YES (pattern is valid) or no (NO).
- *  NOTE: This only checks if the pattern is Sincatically valid, nor Semantically valid
+ *  @return BOOL value indicating if the filter is valid YES (pattern is valid) or not (NO).
+ *  NOTE: This only checks if the pattern is syntactically valid, not semantically valid
  */
 - (BOOL)isValid; // error
 

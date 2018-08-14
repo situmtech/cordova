@@ -98,23 +98,23 @@ typedef enum {
 
 #pragma mark - Private Methods
 
-+ (NSString *)parse: (NSString *) token;
++ (NSString *)parse:(NSString *)token;
 
 + (SITToken *)token;
 
-+ (Auth) auth;
++ (Auth)auth;
 
-+ (NSString *) authHeader;
++ (NSString *)authHeader;
 
-+ (NSString *) tokenHeader;
++ (NSString *)tokenHeader;
 
-+ (void) clearData;
++ (void)clearData;
 
-+ (void) clearAllData;
++ (void)clearAllData;
 
-+ (BOOL) provideToken:(SITToken *)token;
++ (BOOL)provideToken:(SITToken *)token;
 
-+ (void) provideAuth:(Auth) authMode;
++ (void)provideAuth:(Auth)authMode;
 
 + (BOOL)isConfigured;
 

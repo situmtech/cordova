@@ -59,7 +59,7 @@
  @param navigationManager navigation provider.
  @param error error that describes the problematic situation.
  */
-- (void)navigationManager:(id<SITNavigationInterface>)navigationManager
+- (void)navigationManager:(id <SITNavigationInterface>)navigationManager
          didFailWithError:(NSError *)error;
 
 
@@ -70,7 +70,7 @@
  @param progress object containing information about current progress on route
  @param route SITRoute that the user is following
  */
-- (void)navigationManager:(id<SITNavigationInterface>)navigationManager
+- (void)navigationManager:(id <SITNavigationInterface>)navigationManager
         didUpdateProgress:(SITNavigationProgress *)progress
                   onRoute:(SITRoute *)route;
 
@@ -82,7 +82,7 @@
  @param route SITRoute that the user is following.
  @discussion arriving to the destination means the user is less than distanceToGoalThreshold meters (defined in SITNavigationRequest) to the goal.
  */
-- (void)navigationManager:(id<SITNavigationInterface>)navigationManager
+- (void)navigationManager:(id <SITNavigationInterface>)navigationManager
 destinationReachedOnRoute:(SITRoute *)route;
 
 
@@ -93,7 +93,7 @@ destinationReachedOnRoute:(SITRoute *)route;
  @param route SITRoute that the user is following.
  @discussion outside the route means the user is more the outsideRouteThreshold meters (defined in SITNavigationRequest) to the route.
  */
-- (void)navigationManager:(id<SITNavigationInterface>)navigationManager
+- (void)navigationManager:(id <SITNavigationInterface>)navigationManager
          userOutsideRoute:(SITRoute *)route;
 @end
 

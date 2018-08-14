@@ -89,8 +89,8 @@ typedef NS_ENUM(NSInteger, kSITQualityValues)
 
  @param timestamp when the location was determined.
  @param position geographical coordinate information.
- @param bearing the direction in which the device is traveling in geographical coordinate system.
- @param cartesianBearing The direction in which the device is traveling in cartesian coordinate system.
+ @param bearing the direction in which the device is traveling in geographical coordinate system (degrees)
+ @param cartesianBearing The direction in which the device is traveling in cartesian coordinate system (radians)
  @param quality indicative of quality calculated with accuracy and building size.
  @param accuracy ccuracy radius (in meters).
  @param provider multiple providers can create locations. Determines which one has determined the location.
@@ -110,8 +110,8 @@ typedef NS_ENUM(NSInteger, kSITQualityValues)
  
  @param timestamp when the location was determined.
  @param position geographical coordinate information.
- @param bearing the direction in which the device is traveling in geographical coordinate system.
- @param cartesianBearing The direction in which the device is traveling in cartesian coordinate system.
+ @param bearing the direction in which the device is traveling in geographical coordinate system (degrees)
+ @param cartesianBearing The direction in which the device is traveling in cartesian coordinate system (radians)
  @param quality indicative of quality calculated with accuracy and building size.
  @param bearingQuality indication of the quality of the bearing value
  @param accuracy ccuracy radius (in meters).

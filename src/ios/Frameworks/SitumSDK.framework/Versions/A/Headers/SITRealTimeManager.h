@@ -28,7 +28,7 @@
 /**
  Delegate property to receive callbacks
  */
-@property (nonatomic, assign) id <SITRealTimeDelegate> delegate;
+@property(nonatomic, assign) id <SITRealTimeDelegate> delegate;
 
 /**
  Rate at which information will be refreshed (in seconds)
