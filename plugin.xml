@@ -71,10 +71,10 @@
 
         <framework src="src/ios/Frameworks/SitumSDK.framework" custom="true"/>
 
-        <header-file src="src/ios/SitumPlugin.h" />
-        <header-file src="src/ios/SitumLocationWrapper.h" />
-        <source-file src="src/ios/SitumPlugin.m" />
-        <source-file src="src/ios/SitumLocationWrapper.m" />
+        <header-file src="src/ios/situmcordovaplugin/SitumPlugin.h" />
+        <header-file src="src/ios/situmcordovaplugin/SitumLocationWrapper.h" />
+        <source-file src="src/ios/situmcordovaplugin/SitumPlugin.m" />
+        <source-file src="src/ios/situmcordovaplugin/SitumLocationWrapper.m" />
 
 		<!--<pods-config ios-min-version="9.0" use-frameworks="false">
 	    </pods-config>
