@@ -294,8 +294,7 @@
 				0D5CFD46212C275E00C6E436 /* CDVLocalStorage */,
 				0D5CFD49212C275E00C6E436 /* CDVUIWebViewEngine */,
 			);
-			name = CDVPlugins;
-			path = "../../../../../situm-cordova-plugin2/src/ios/Classes/Private/CDVPlugins";
+			path = CDVPlugins;
 			sourceTree = "<group>";
 		};
 		0D5CFD3A212C275E00C6E436 /* CDVGestureHandler */ = {
