@@ -1,3 +1,12 @@
+node('ios') {
+    stage('Checkout SCM') {
+        checkout scm
+    }
+    
+    stage ('iOS test') {
+        sh "cd src/ios && xcodebuild test -project SitumCordovaPlugin.xcodeproj -scheme CordovaLib -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.4'"
+    }
+}
 
 node('androidci') {
     stage('Checkout SCM') {
@@ -9,7 +18,7 @@ node('androidci') {
     }
 
     try {
-        stage('Test Android') {
+        stage('Android test') {
             sh "cd src/android && ./gradlew test --continue"
         }
     } finally {
@@ -25,7 +34,7 @@ node('vm1-docker') {
         checkout scm
     }
 
-    stage('Test JS') {
+    stage('JS test') {
         def kubectl = docker.image('node:10.6-slim')
         kubectl.pull()
         kubectl.inside("-u 0") {
