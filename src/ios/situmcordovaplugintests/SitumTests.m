@@ -16,7 +16,7 @@
 {
     XCTAssertEqualObjects(jsonLocationFile[@"accuracy"], locationJO[@"accuracy"]);
     XCTAssertEqualObjects(jsonLocationFile[@"provider"], locationJO[@"provider"]);
-    //TODO REVIEW always returning true when creating object from file
+    //always returning true when creating object from file due to ios sdk restriction in hasBearing functionality
     XCTAssertTrue(jsonLocationFile[@"hasBearing"]);
 }
 

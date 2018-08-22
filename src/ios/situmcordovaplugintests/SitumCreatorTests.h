@@ -10,7 +10,15 @@
 
 @interface SitumCreatorTests : NSObject
 
-+(SITLocation *) createLocationWithBuildingFloorAndCartesianCoordinates;
-
++ (SITLocation *) createLocationWithBuildingFloorAndCartesianCoordinates; //location1.json
++ (SITLocation *) createLocationWithCoordinate; //location2.json
++ (SITLocation *) createLocationWithBuildingAndCoordinate; //location3.json
++ (SITLocation *) locationWithCartesianBearing; //location4.json
++ (SITLocation *) locationWithoutCartesianBearing; //location5.json
++ (SITLocation *) locationWithBearing; //location6.json
++ (SITLocation *) locationWithouthBearing; //location7.json
++ (SITLocation *) indoorLocationWithIndoorBearingQualityLow; //location8.json
++ (SITLocation *) indoorLocationWithIndoorBearingQualityHigh; //location9.json
++ (SITLocation *) outdoorLocation; //location10.json
 
 @end
