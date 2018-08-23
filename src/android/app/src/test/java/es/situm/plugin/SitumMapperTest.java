@@ -12,19 +12,21 @@ import org.junit.runners.JUnit4;
 import java.text.DateFormat;
 import java.text.ParsePosition;
 import java.util.Date;
+import java.util.Map;
 
 import es.situm.plugin.angle.AngleCreator;
 import es.situm.plugin.bounds.BoundsCreator;
 import es.situm.plugin.cartesianCoordinate.CartesianCoordinateCreator;
 import es.situm.plugin.coordinate.CoordinateCreator;
-import es.situm.plugin.point.PointCreator;
-import es.situm.plugin.locationStatus.LocationStatusCreator;
 import es.situm.plugin.dimensions.DimensionsCreator;
+import es.situm.plugin.event.EventCreator;
 import es.situm.plugin.floor.FloorCreator;
 import es.situm.plugin.indication.IndicationCreator;
 import es.situm.plugin.location.LocationCreator;
+import es.situm.plugin.locationStatus.LocationStatusCreator;
 import es.situm.plugin.navigationProgress.NavigationProgressCreator;
 import es.situm.plugin.poiCategory.PoiCategoryCreator;
+import es.situm.plugin.point.PointCreator;
 import es.situm.plugin.route.RouteCreator;
 import es.situm.plugin.routeStep.RouteStepCreator;
 import es.situm.plugin.situmConversionArea.SitumConversionAreaCreator;
@@ -44,6 +46,10 @@ import es.situm.sdk.model.location.Location;
 import es.situm.sdk.model.navigation.NavigationProgress;
 import es.situm.sdk.v1.Point2f;
 import es.situm.sdk.v1.SitumConversionArea;
+import es.situm.sdk.v1.SitumEvent;
+
+import static com.google.common.truth.Truth.assertThat;
+import static es.situm.plugin.SitumMapper.conversionAreaToJsonObject;
 
 @RunWith(JUnit4.class)
 public class SitumMapperTest {
@@ -130,6 +136,11 @@ public class SitumMapperTest {
     private static final String EDGES = "edges";
     private static final String STEPS = "steps";
     private static final String POINTS = "points";
+    public static final String IDENTIFIER = "identifier";
+    public static final String INFO_HTML = "infoHtml";
+    public static final String CONVERSION_AREA = "conversionArea";
+    public static final String RADIUS = "radius";
+    public static final String NAME = "name";
 
     // Creators
     private AngleCreator angleCreator = new AngleCreator();
@@ -147,6 +158,7 @@ public class SitumMapperTest {
     private RouteStepCreator routeStepCreator = new RouteStepCreator();
     private PointCreator pointCreator = new PointCreator();
     private RouteCreator routeCreator = new RouteCreator();
+    private EventCreator eventCreator = new EventCreator();
 
     @Test
     public void angleJSONObjectTest() {
@@ -368,7 +380,7 @@ public class SitumMapperTest {
     public void situmConversionAreaJSONObjectTest() {
         try{
             SitumConversionArea situmConversionArea = situmConversionAreaCreator.createSitumConversionArea();
-            JSONObject situmConversionAreaJSONObject = SitumMapper.conversionAreaToJsonObject(situmConversionArea);
+            JSONObject situmConversionAreaJSONObject = conversionAreaToJsonObject(situmConversionArea);
             JSONObject situmConversionArea1 = situmConversionAreaCreator.getSitumConversionArea1();
             testSitumConversionArea(situmConversionAreaJSONObject, situmConversionArea1);
         }catch(JSONException e){
@@ -469,6 +481,45 @@ public class SitumMapperTest {
             testRoute(routeJSONObject, route1);
         }catch(JSONException e){
             System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void eventJSONObjectTest() throws JSONException {
+        SitumEvent event = eventCreator.createEvent();
+        JSONObject jsonObject = SitumMapper.situmEventToJsonObject(event);
+        assertEvent(jsonObject, event);
+    }
+
+    private void assertEvent(JSONObject jsonObject, SitumEvent event) throws JSONException {
+        assertThat(jsonObject.getInt(BUILDING_IDENTIFIER)).isEqualTo(event.getBuildingId());
+        assertThat(jsonObject.getInt(IDENTIFIER)).isEqualTo(event.getId());
+        assertThat(jsonObject.getInt(FLOOR_IDENTIFIER)).isEqualTo(event.getFloor_id());
+        assertThat(jsonObject.getString(INFO_HTML)).isEqualTo(event.getHtml());
+        assertConversionArea(jsonObject.getJSONObject(CONVERSION_AREA), event.getConversionArea());
+        assertCustomFields(jsonObject.getJSONObject(CUSTOM_FIELDS), event.getCustomFields());
+        assertThat(jsonObject.getDouble(RADIUS)).isEqualTo((double) event.getRadius());
+        assertThat(jsonObject.getString(NAME)).isEqualTo(event.getName());
+        assertThat(jsonObject.getDouble(X)).isEqualTo((double) event.getX());
+        assertThat(jsonObject.getDouble(Y)).isEqualTo((double) event.getY());
+    }
+
+    private void assertConversionArea(JSONObject jsonObject, SitumConversionArea conversionArea) throws JSONException {
+        assertThat(jsonObject.getInt(FLOOR_IDENTIFIER)).isEqualTo(conversionArea.getFloor_id());
+        assertPoint2f(jsonObject.getJSONObject(TOP_LEFT), conversionArea.getTopLeft());
+        assertPoint2f(jsonObject.getJSONObject(TOP_RIGHT), conversionArea.getTopRight());
+        assertPoint2f(jsonObject.getJSONObject(BOTTOM_LEFT), conversionArea.getBottomLeft());
+        assertPoint2f(jsonObject.getJSONObject(BOTTOM_RIGHT), conversionArea.getBottomRight());
+    }
+
+    private void assertPoint2f(JSONObject jsonObject, Point2f point) throws JSONException {
+        assertThat(jsonObject.getDouble(X)).isEqualTo(point.getX());
+        assertThat(jsonObject.getDouble(Y)).isEqualTo(point.getY());
+    }
+
+    private void assertCustomFields(JSONObject jsonObject, Map<String, String> customFields) throws JSONException {
+        for (Map.Entry<String, String> entry : customFields.entrySet()) {
+            assertThat(jsonObject.getString(entry.getKey())).isEqualTo(entry.getValue());
         }
     }
 
@@ -674,15 +725,15 @@ public class SitumMapperTest {
     }
 
     private void testSitumConversionArea(JSONObject situmConversionArea, JSONObject defaultSitumConversionArea) throws JSONException {
-        Assert.assertEquals(Point2f.class, situmConversionArea.get(BOTTOM_LEFT).getClass());
+        Assert.assertEquals(JSONObject.class, situmConversionArea.get(BOTTOM_LEFT).getClass());
         Assert.assertEquals(defaultSitumConversionArea.get(BOTTOM_LEFT).toString(), situmConversionArea.get(BOTTOM_LEFT).toString());
         Assert.assertEquals(Integer.class, situmConversionArea.get(FLOOR_IDENTIFIER).getClass());
         Assert.assertEquals(defaultSitumConversionArea.getInt(FLOOR_IDENTIFIER), situmConversionArea.getInt(FLOOR_IDENTIFIER));
-        Assert.assertEquals(Point2f.class, situmConversionArea.get(BOTTOM_RIGHT).getClass());
+        Assert.assertEquals(JSONObject.class, situmConversionArea.get(BOTTOM_RIGHT).getClass());
         Assert.assertEquals(defaultSitumConversionArea.get(BOTTOM_RIGHT).toString(), situmConversionArea.get(BOTTOM_RIGHT).toString());
-        Assert.assertEquals(Point2f.class, situmConversionArea.get(TOP_LEFT).getClass());
+        Assert.assertEquals(JSONObject.class, situmConversionArea.get(TOP_LEFT).getClass());
         Assert.assertEquals(defaultSitumConversionArea.get(TOP_LEFT).toString(), situmConversionArea.get(TOP_LEFT).toString());
-        Assert.assertEquals(Point2f.class, situmConversionArea.get(TOP_RIGHT).getClass());
+        Assert.assertEquals(JSONObject.class, situmConversionArea.get(TOP_RIGHT).getClass());
         Assert.assertEquals(defaultSitumConversionArea.get(TOP_RIGHT).toString(), situmConversionArea.get(TOP_RIGHT).toString());
     }
 
