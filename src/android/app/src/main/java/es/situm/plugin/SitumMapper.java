@@ -35,6 +35,7 @@ import es.situm.sdk.model.location.Dimensions;
 import es.situm.sdk.model.location.Location;
 import es.situm.sdk.model.location.Location.Quality;
 import es.situm.sdk.model.navigation.NavigationProgress;
+import es.situm.sdk.v1.Point2f;
 import es.situm.sdk.v1.SitumConversionArea;
 import es.situm.sdk.v1.SitumEvent;
 
@@ -274,10 +275,17 @@ class SitumMapper {
   static JSONObject conversionAreaToJsonObject(SitumConversionArea situmCA) throws JSONException {
     JSONObject jo = new JSONObject();
     jo.put(FLOOR_IDENTIFIER, situmCA.getFloor_id());
-    jo.put(TOP_LEFT, situmCA.getTopLeft());
-    jo.put(TOP_RIGHT, situmCA.getTopRight());
-    jo.put(BOTTOM_LEFT, situmCA.getBottomLeft());
-    jo.put(BOTTOM_RIGHT, situmCA.getBottomRight());
+    jo.put(TOP_LEFT, convertPoint2fToJsonObject(situmCA.getTopLeft()));
+    jo.put(TOP_RIGHT, convertPoint2fToJsonObject(situmCA.getTopRight()));
+    jo.put(BOTTOM_LEFT, convertPoint2fToJsonObject(situmCA.getBottomLeft()));
+    jo.put(BOTTOM_RIGHT, convertPoint2fToJsonObject(situmCA.getBottomRight()));
+    return jo;
+  }
+
+  static JSONObject convertPoint2fToJsonObject(Point2f point) throws JSONException{
+    JSONObject jo = new JSONObject();
+    jo.put(X, point.getX());
+    jo.put(Y, point.getY());
     return jo;
   }
 

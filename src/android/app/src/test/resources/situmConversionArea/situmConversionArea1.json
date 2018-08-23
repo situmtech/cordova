@@ -1,7 +1,19 @@
 {
-  "bottomLeft": "Point2f{ x=3.0, y=4.0}",
+  "bottomLeft": {
+    "x": 3,
+    "y": 4
+  },
   "floorIdentifier": 12,
-  "bottomRight": "Point2f{ x=3.0, y=6.0}",
-  "topLeft": "Point2f{ x=5.0, y=4.0}",
-  "topRight": "Point2f{ x=5.0, y=6.0}"
+  "bottomRight": {
+    "x": 3,
+    "y": 6
+  },
+  "topLeft": {
+    "x": 5,
+    "y": 4
+  },
+  "topRight": {
+    "x": 5,
+    "y": 6
+  }
 }
