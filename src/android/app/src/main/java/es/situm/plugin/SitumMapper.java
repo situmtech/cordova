@@ -266,6 +266,8 @@ class SitumMapper {
     jo.put(CUSTOM_FIELDS, mapStringToJsonObject(situmEvent.getCustomFields()));
     jo.put(RADIUS, situmEvent.getRadius());
     jo.put(NAME, situmEvent.getName());
+    jo.put(X, situmEvent.getX());
+    jo.put(Y, situmEvent.getY());
     return jo;
   }
 
