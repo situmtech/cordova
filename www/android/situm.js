@@ -112,7 +112,7 @@ var Situm = {
    * @param {Building} building The building. Not null.
    * @param {function} cb Cordova native callback to recive data.
    * @param {function} error Cordova native callback to recive errors.
-   * @return {event[]} events The evetns of a building
+   * @return {event[]} events The events of a building
    */
   fetchEventsFromBuilding: function (building, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'fetchEventsFromBuilding', [building]);

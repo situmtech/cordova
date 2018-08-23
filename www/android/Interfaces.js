@@ -370,6 +370,8 @@ module.exports = Indication
  * @property {object} customFields - Key-value pairs that allow to extend and fully customize the information associated with the event.
  * @property {number} radius - Radius of the event associated area
  * @property {string} name - Name of the event
+ * @property {number} x - Center of the event in the x-axis
+ * @property {number} y - Center of the event in the y-axis
  */
 
 var SitumEvent = {
@@ -381,6 +383,8 @@ var SitumEvent = {
   customFields,
   radius,
   name,
+  x,
+  y
 }
 
 module.exports = SitumEvent
