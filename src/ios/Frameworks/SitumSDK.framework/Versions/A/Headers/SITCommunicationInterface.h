@@ -17,6 +17,7 @@
 #import "SITPOICategory.h"
 #import "SITPOI.h"
 #import "SITPOIExterior.h"
+#import "SITEvent.h"
 
 static NSString* const kSITBuildingInfoKey = @"indoorBuilding";
 static NSString* const kSITFloorsInfoKey = @"levels";
@@ -40,6 +41,7 @@ typedef void (^SITFailureOperationHandler)(NSError *error);
  */
 typedef void (^SITSuccessHandler)(NSDictionary *mapping);
 
+typedef void (^SITHandler)(id result, NSError *error);
 
 /*!=
  *  The type of block callback for handling indoor buildings data
@@ -102,7 +104,7 @@ typedef void (^SITGraphFetchHandler)(NSArray *graphs, NSError *error);
  *  @param events array containing the events inside a building
  *  @param error  An error object representing a problem while retrieving information from Internet
  */
-typedef void (^SITEventsFetchHandler)(NSArray *events, NSError *error);
+typedef void (^SITEventsFetchHandler)(NSArray<SITEvent*> *events, NSError *error);
 
 /**
  *  The type of block that will be called after the method - fetchCategoriesWithCompletion: is executed

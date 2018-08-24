@@ -16,6 +16,7 @@
 #import "SITCommunicationConstants.h"
 
 #import "SITFloor.h"
+#import "SITBuilding.h"
 
 /*!
  * This class is the interface to perform operations related with Situm Servers.
@@ -364,7 +365,7 @@
  *  @return This method gives the user a flag that indicates if the operation has been performed or not.
  */
 - (BOOL)fetchEventsFromIndoorBuilding:(SITIndoorBuilding *)indoorBuilding
-                       withCompletion:(SITEventsFetchHandler)eventsFetchHandler DEPRECATED_MSG_ATTRIBUTE("Use - (BOOL)fetchEventsFromIndoorBuilding:withOptions:withCompletion:");
+                       withCompletion:(SITEventsFetchHandler)eventsFetchHandler DEPRECATED_MSG_ATTRIBUTE("Use - (BOOL)fetchEventsFromBuilding:withCompletion:");
 
 
 /**
@@ -377,10 +378,36 @@
  *  @return This method gives the user a flag that indicates if the operation has been performed or not.
  *  @discussion Valid options for this method are: SITForceRequestKey. The value of this key is a NSNumber with a bool value on it. The value of YES means that the request will be directed to the network system directly without checking the cache system. The value of NO means the request will be directed to the cache system and if not found it will be redirected to the network system.
  */
+
 - (BOOL)fetchEventsFromIndoorBuilding:(SITIndoorBuilding *)indoorBuilding
                           withOptions:(NSDictionary *)options
-                       withCompletion:(SITEventsFetchHandler)eventsFetchHandler;
+                       withCompletion:(SITEventsFetchHandler)eventsFetchHandler DEPRECATED_MSG_ATTRIBUTE("Use - (BOOL)fetchEventsFromBuilding:withOptions:withCompletion:");;
 
+/**
+ *  Retrieve the events of a SITBuilding
+ *
+ *  @param building           SITBuilding object
+ *  @param options            additional parameters to customize the internal operation of the method
+ *  @param completion         SITHandler
+ *
+ *  @return This method gives the user a flag that indicates if the operation has been performed or not.
+ *  @discussion Valid options for this method are: SITForceRequestKey. The value of this key is a NSNumber with a bool value on it. The value of YES means that the request will be directed to the network system directly without checking the cache system. The value of NO means the request will be directed to the cache system and if not found it will be redirected to the network system.
+ */
+- (BOOL) fetchEventsFromBuilding:(SITBuilding *) building
+                     withOptions:(NSDictionary *)options
+                  withCompletion:(SITHandler (^)(NSArray<SITEvent*> *result, NSError *error))completion;
+
+/**
+ *  Retrieve the events of a SITBuilding
+ *
+ *  @param building           SITBuilding object
+ *  @param completion         SITHandler
+ *
+ *  @return This method gives the user a flag that indicates if the operation has been performed or not.
+ *  @discussion Valid options for this method are: SITForceRequestKey. The value of this key is a NSNumber with a bool value on it. The value of YES means that the request will be directed to the network system directly without checking the cache system. The value of NO means the request will be directed to the cache system and if not found it will be redirected to the network system.
+ */
+- (BOOL) fetchEventsFromBuilding:(SITBuilding *) building
+                  withCompletion:(SITHandler (^)(NSArray<SITEvent*> *result, NSError *error))completion;
 /**
  *  Authenticate with user and password
  *
