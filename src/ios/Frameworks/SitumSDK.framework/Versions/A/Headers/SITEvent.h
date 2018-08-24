@@ -59,4 +59,9 @@
  */
 @property (nonatomic, strong) SITRectangularArea *conversionArea;
 
+/**
+ * Custom fields that can be added from the Dashboard
+ */
+@property (nonatomic, strong) NSDictionary<NSString*, NSString*> *customFields;
+
 @end

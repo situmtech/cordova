@@ -228,7 +228,10 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
         eventStored = [[NSMutableDictionary alloc] init];
     }
     
-    [[SITCommunicationManager sharedManager] fetchEventsFromIndoorBuilding:[buildingJO valueForKey:@"identifier"] withOptions:nil withCompletion:^(NSArray *events, NSError *error) {
+    SITBuilding *building = [SITBuilding new];
+    building.identifier = buildingJO[@"identifier"];
+    
+    [[SITCommunicationManager sharedManager] fetchEventsFromBuilding:building withOptions:nil withCompletion:^SITHandler(NSArray<SITEvent *> *events, NSError *error) {
         if (!error) {
             NSMutableArray *ja = [[NSMutableArray alloc] init];
             for (SITEvent *obj in events) {
@@ -245,6 +248,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
         } else {
             [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.description] callbackId:command.callbackId];
         }
+        return false;
     }];
 }
 
