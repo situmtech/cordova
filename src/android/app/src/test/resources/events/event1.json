@@ -1,0 +1,32 @@
+{
+  "identifier": 12,
+  "floorIdentifier": 1000,
+  "customFields": {
+    "lang": "en"
+  },
+  "conversionArea": {
+    "bottomLeft": {
+      "x": 5,
+      "y": 6
+    },
+    "floorIdentifier": 1000,
+    "bottomRight": {
+      "x": 7,
+      "y": 8
+    },
+    "topLeft": {
+      "x": 3,
+      "y": 4
+    },
+    "topRight": {
+      "x": 1,
+      "y": 2
+    }
+  },
+  "name": "Event",
+  "x": 5,
+  "y": 10,
+  "infoHtml": "<p>Test html<\/p>",
+  "radius": 15,
+  "buildingIdentifier": 1
+}

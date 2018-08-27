@@ -370,6 +370,8 @@ public class SitumMapperTest {
             PoiCategory poiCategory = poiCategoryCreator.createPoiCategory();
             JSONObject poiCategoryJSONObject = SitumMapper.poiCategoryToJsonObject(poiCategory);
             JSONObject poiCategory1 = poiCategoryCreator.getPoiCategory1();
+            System.out.println(poiCategoryJSONObject.toString());
+            System.out.println(poiCategory1.toString());
             testPoiCategory(poiCategoryJSONObject, poiCategory1);
         }catch(JSONException e){
             System.err.println(e.getMessage());
@@ -486,41 +488,10 @@ public class SitumMapperTest {
 
     @Test
     public void eventJSONObjectTest() throws JSONException {
-        SitumEvent event = eventCreator.createEvent();
+        SitumEvent event = eventCreator.createEvent1();
         JSONObject jsonObject = SitumMapper.situmEventToJsonObject(event);
-        assertEvent(jsonObject, event);
-    }
-
-    private void assertEvent(JSONObject jsonObject, SitumEvent event) throws JSONException {
-        assertThat(jsonObject.getInt(BUILDING_IDENTIFIER)).isEqualTo(event.getBuildingId());
-        assertThat(jsonObject.getInt(IDENTIFIER)).isEqualTo(event.getId());
-        assertThat(jsonObject.getInt(FLOOR_IDENTIFIER)).isEqualTo(event.getFloor_id());
-        assertThat(jsonObject.getString(INFO_HTML)).isEqualTo(event.getHtml());
-        assertConversionArea(jsonObject.getJSONObject(CONVERSION_AREA), event.getConversionArea());
-        assertCustomFields(jsonObject.getJSONObject(CUSTOM_FIELDS), event.getCustomFields());
-        assertThat(jsonObject.getDouble(RADIUS)).isEqualTo((double) event.getRadius());
-        assertThat(jsonObject.getString(NAME)).isEqualTo(event.getName());
-        assertThat(jsonObject.getDouble(X)).isEqualTo((double) event.getX());
-        assertThat(jsonObject.getDouble(Y)).isEqualTo((double) event.getY());
-    }
-
-    private void assertConversionArea(JSONObject jsonObject, SitumConversionArea conversionArea) throws JSONException {
-        assertThat(jsonObject.getInt(FLOOR_IDENTIFIER)).isEqualTo(conversionArea.getFloor_id());
-        assertPoint2f(jsonObject.getJSONObject(TOP_LEFT), conversionArea.getTopLeft());
-        assertPoint2f(jsonObject.getJSONObject(TOP_RIGHT), conversionArea.getTopRight());
-        assertPoint2f(jsonObject.getJSONObject(BOTTOM_LEFT), conversionArea.getBottomLeft());
-        assertPoint2f(jsonObject.getJSONObject(BOTTOM_RIGHT), conversionArea.getBottomRight());
-    }
-
-    private void assertPoint2f(JSONObject jsonObject, Point2f point) throws JSONException {
-        assertThat(jsonObject.getDouble(X)).isEqualTo(point.getX());
-        assertThat(jsonObject.getDouble(Y)).isEqualTo(point.getY());
-    }
-
-    private void assertCustomFields(JSONObject jsonObject, Map<String, String> customFields) throws JSONException {
-        for (Map.Entry<String, String> entry : customFields.entrySet()) {
-            assertThat(jsonObject.getString(entry.getKey())).isEqualTo(entry.getValue());
-        }
+        JSONObject event1 = eventCreator.getEvent1();
+        assertThat(jsonObject.toString()).isEqualTo(event1.toString());
     }
 
     private void testRoute(JSONObject route, JSONObject defaultRoute) throws JSONException {
