@@ -55,6 +55,8 @@
 //navigationProgress
 + (SITNavigationProgress *) createNavigationProgressOutdoor; //navigationProgress1.json
 + (SITNavigationProgress *) createNavigationProgressIndoor; //navigationProgress2.json
+//poiCategory
+- (SITPOICategory *) createPoiCategory; //poiCategory1.json
 //point
 + (SITPoint *) createPointWithCoordinate; //point1.json
 + (SITPoint *) createPointWithCoordinateAndBuildingId; //point2.json
@@ -64,12 +66,14 @@
 + (SITPoint *) createPointWithBuildingWithAddress; //point6.json
 + (SITPoint *) createPointWithBuildingWithInfo; //point7.json
 + (SITPoint *) createPointWithBuildingWithPicture; //point8.json
-//poiCategory
-
-
 //route
-
++ (SITRoute *) createRouteBuildingWithDegreesPointWithCoordinates; //route1.json
 //routeStep
-
++ (SITRouteStep *) createRouteStepWithCoordinate; //routeStep1.json
++ (SITRouteStep *) createRouteStepWithCoordinateAndBuildingId; //routeStep2.json
++ (SITRouteStep *) createRouteStepWithCoordinateBuildingIdAndFloor; //routeStep13.json
++ (SITRouteStep *) createRouteStepWithBuildingWithAngleFromDegree; //routeStep4.json
++ (SITRouteStep *) createRouteStepWithBuildingWithAngleFromRadians; //routeStep5.json
 //situmConversionArea
++ (SITRectangularArea *) createSitumConversionArea; //situmConversionArea1.json
 @end

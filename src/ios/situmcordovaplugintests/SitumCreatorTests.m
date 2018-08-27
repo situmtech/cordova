@@ -343,8 +343,8 @@
     float currentOrientationChange = 14.5;
     float currentVerticalDistance = 15;
     NSNumber* currentNextLevel = nil;
-    kSITIndicationActions currentAction = kSITGoAhead;
-    kSITIndicationOrientation currentOrientation = kSITStraight;
+    kSITIndicationActions currentAction = kSITTurn;
+    kSITIndicationOrientation currentOrientation = kSITBackward;
     SITIndication *currentIndication = [[SITIndication alloc] initWithOriginStepIndex:currentStepIdxOrigin destinationStepIndex:currentStepIdxDestination action:currentAction horizontalDistance:currentHorizontalDistance orientation:currentOrientation orientationChange:currentOrientationChange verticalDistance:currentVerticalDistance nextLevel:currentNextLevel];
     navigationProgress.currentIndication = currentIndication;
     
@@ -364,7 +364,7 @@
     navigationProgress.currentStepIndex = 1;
     navigationProgress.distanceToGoal = 24;
     navigationProgress.distanceToEndStep = 16;
-    navigationProgress.timeToEndStep = 16
+    navigationProgress.timeToEndStep = 16;
     navigationProgress.timeToGoal = 24;
     
     //routeStep
@@ -408,8 +408,8 @@
     float currentOrientationChange = 14.5;
     float currentVerticalDistance = 15;
     NSNumber* currentNextLevel = nil;
-    kSITIndicationActions currentAction = kSITGoAhead;
-    kSITIndicationOrientation currentOrientation = kSITStraight;
+    kSITIndicationActions currentAction = kSITTurn;
+    kSITIndicationOrientation currentOrientation = kSITBackward;
     SITIndication *currentIndication = [[SITIndication alloc] initWithOriginStepIndex:currentStepIdxOrigin destinationStepIndex:currentStepIdxDestination action:currentAction horizontalDistance:currentHorizontalDistance orientation:currentOrientation orientationChange:currentOrientationChange verticalDistance:currentVerticalDistance nextLevel:currentNextLevel];
     navigationProgress.currentIndication = currentIndication;
     
@@ -459,6 +459,17 @@
     navigationProgress.closestLocationInRoute = location;
     
     return navigationProgress;
+}
+
+//poiCategory1.json
+- (SITPOICategory *) createPoiCategory {
+    SITPOICategory *category = [[SITPOICategory alloc] init];
+    category.name = [[SITMultilanguageString alloc] initWithValue:@"TEST_STRING" defaultLocale:[NSLocale currentLocale]];
+    category.code = @"TEST_CODE";
+    category.isPublic = true;
+    category.selectedIconURL = [[SITURL alloc] initWithDirection:@"TEST_URL"];
+    category.iconURL = [[SITURL alloc] initWithDirection:@"TEST_URL"];
+    return category;
 }
 
 //point1.json
@@ -523,6 +534,181 @@
     SITPoint *point  = [[SITPoint alloc]  initWithCoordinate:coordinate buildingIdentifier:@"-1" floorIdentifier:@"12" cartesianCoordinate: cartesianCoordinate];
     return point;
 }
+
+//route1.json
++ (SITRoute *) createRouteBuildingWithDegreesPointWithCoordinates {
+    //from
+    CLLocationCoordinate2D fromCoordinate = CLLocationCoordinate2DMake(12.3,14.0);
+    SITCartesianCoordinate *fromCartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:4 y:7];
+    SITPoint *from  = [[SITPoint alloc]  initWithCoordinate:fromCoordinate buildingIdentifier:@"-1" floorIdentifier:@"12" cartesianCoordinate: fromCartesianCoordinate];
+    //to
+    CLLocationCoordinate2D toCoordinate = CLLocationCoordinate2DMake(12.3,14.0);
+    SITCartesianCoordinate *toCartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:2 y:5];
+    SITPoint *to  = [[SITPoint alloc]  initWithCoordinate:toCoordinate buildingIdentifier:@"-1" floorIdentifier:@"12" cartesianCoordinate: toCartesianCoordinate];
+
+    //routeSteps
+    //step1
+    CLLocationCoordinate2D fromCoordinateStep1 = CLLocationCoordinate2DMake(12.3,14.0);
+    SITCartesianCoordinate *fromCartesianCoordinateStep1 = [[SITCartesianCoordinate alloc] initWithX:4 y:7];
+    SITPoint *fromStep1  = [[SITPoint alloc]  initWithCoordinate:fromCoordinateStep1 buildingIdentifier:@"101" floorIdentifier:@"-1" cartesianCoordinate: fromCartesianCoordinateStep1];
+    CLLocationCoordinate2D toCoordinateStep1 = CLLocationCoordinate2DMake(12.3,14.0);
+    SITCartesianCoordinate *toCartesianCoordinateStep1 = [[SITCartesianCoordinate alloc] initWithX:6 y:6];
+    SITPoint *toStep1  = [[SITPoint alloc]  initWithCoordinate:toCoordinateStep1 buildingIdentifier:@"101" floorIdentifier:@"-1" cartesianCoordinate: toCartesianCoordinateStep1];
+    SITRouteStep *step1 = [[SITRouteStep alloc] initWithIndex:1 from:fromStep1 to:toStep1 isFirst:true isLast:false nextStepIndex:1 stepDistance:11.4 distanceToGoal:27];
+    
+    //step2
+    CLLocationCoordinate2D fromCoordinateStep2 = CLLocationCoordinate2DMake(12.3,14.0);
+    SITCartesianCoordinate *fromCartesianCoordinateStep2 = [[SITCartesianCoordinate alloc] initWithX:6 y:6];
+    SITPoint *fromStep2  = [[SITPoint alloc]  initWithCoordinate:fromCoordinateStep2 buildingIdentifier:@"101" floorIdentifier:@"-1" cartesianCoordinate: fromCartesianCoordinateStep2];
+    CLLocationCoordinate2D toCoordinateStep2 = CLLocationCoordinate2DMake(12.3,14.0);
+    SITCartesianCoordinate *toCartesianCoordinateStep2 = [[SITCartesianCoordinate alloc] initWithX:3 y:5];
+    SITPoint *toStep2  = [[SITPoint alloc]  initWithCoordinate:toCoordinateStep2 buildingIdentifier:@"101" floorIdentifier:@"-1" cartesianCoordinate: toCartesianCoordinateStep2];
+    SITRouteStep *step2 = [[SITRouteStep alloc] initWithIndex:1 from:fromStep2 to:toStep2 isFirst:false isLast:false nextStepIndex:1 stepDistance:8.6 distanceToGoal:15.6];
+    
+    //step3
+    CLLocationCoordinate2D fromCoordinateStep3 = CLLocationCoordinate2DMake(12.3,14.0);
+    SITCartesianCoordinate *fromCartesianCoordinateStep3 = [[SITCartesianCoordinate alloc] initWithX:3 y:5];
+    SITPoint *fromStep3  = [[SITPoint alloc]  initWithCoordinate:fromCoordinateStep3 buildingIdentifier:@"101" floorIdentifier:@"-1" cartesianCoordinate: fromCartesianCoordinateStep3];
+    CLLocationCoordinate2D toCoordinateStep3 = CLLocationCoordinate2DMake(12.3,14.0);
+    SITCartesianCoordinate *toCartesianCoordinateStep3 = [[SITCartesianCoordinate alloc] initWithX:2 y:5];
+    SITPoint *toStep3  = [[SITPoint alloc]  initWithCoordinate:toCoordinateStep3 buildingIdentifier:@"101" floorIdentifier:@"-1" cartesianCoordinate: toCartesianCoordinateStep3];
+    SITRouteStep *step3 = [[SITRouteStep alloc] initWithIndex:1 from:fromStep3 to:toStep3 isFirst:false isLast:true nextStepIndex:1 stepDistance:7 distanceToGoal:7];
+    
+    NSMutableArray *routeSteps = [[NSMutableArray alloc] init];
+    [routeSteps addObject:step1];
+    [routeSteps addObject:step2];
+    [routeSteps addObject:step3];
+
+    //indications
+    //indication1
+    NSInteger stepIdxOrigin1 = 4;
+    NSInteger stepIdxDestination1 = 5;
+    float horizontalDistance1 = 11.4;
+    float orientationChange1 = 14.5;
+    float verticalDistance1 = 15;
+    NSNumber* nextLevel1 = nil;
+    kSITIndicationActions action1 = kSITTurn;
+    kSITIndicationOrientation orientation1 = kSITBackward;
+    SITIndication *indication1 = [[SITIndication alloc] initWithOriginStepIndex:stepIdxOrigin1 destinationStepIndex:stepIdxDestination1 action:action1 horizontalDistance:horizontalDistance1 orientation:orientation1 orientationChange:orientationChange1 verticalDistance:verticalDistance1 nextLevel:nextLevel1];
+    
+    //indication2
+    NSInteger stepIdxOrigin2 = 4;
+    NSInteger stepIdxDestination2 = 5;
+    float horizontalDistance2 = 8.6;
+    float orientationChange2 = 3.5;
+    float verticalDistance2 = 24;
+    NSNumber* nextLevel2 = nil;
+    kSITIndicationActions action2 = kSITGoAhead;
+    kSITIndicationOrientation orientation2 = kSITStraight;
+    SITIndication *indication2 = [[SITIndication alloc] initWithOriginStepIndex:stepIdxOrigin2 destinationStepIndex:stepIdxDestination2 action:action2 horizontalDistance:horizontalDistance2 orientation:orientation2 orientationChange:orientationChange2 verticalDistance:verticalDistance2 nextLevel:nextLevel2];
+    
+    //indication3
+    NSInteger stepIdxOrigin3 = 4;
+    NSInteger stepIdxDestination3 = 5;
+    float horizontalDistance3 = 7;
+    float orientationChange3 = 3.5;
+    float verticalDistance3 = 30;
+    NSNumber* nextLevel3 = nil;
+    kSITIndicationActions action3 = kSITEnd;
+    kSITIndicationOrientation orientation3 = kSITLeft;
+    SITIndication *indication3 = [[SITIndication alloc] initWithOriginStepIndex:stepIdxOrigin3 destinationStepIndex:stepIdxDestination3 action:action3 horizontalDistance:horizontalDistance3 orientation:orientation3 orientationChange:orientationChange3 verticalDistance:verticalDistance3 nextLevel:nextLevel3];
+    
+    NSMutableArray *indications = [[NSMutableArray alloc] init];
+    [indications addObject:indication1];
+    [indications addObject:indication2];
+    [indications addObject:indication3];
+    
+    //options
+    NSMutableDictionary *options  = [[NSMutableDictionary alloc] init];
+    SITRoute *route = [[SITRoute alloc] initWithOrigin:from destination:to routeSteps:routeSteps indications:indications distance:7 options:options];
+    return route;
+}
+
+//routeStep1.json
++ (SITRouteStep *) createRouteStepWithCoordinate {
+    //from
+    CLLocationCoordinate2D fromCoordinate = CLLocationCoordinate2DMake(2, 5);
+    SITCartesianCoordinate *fromCartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:0 y:0];
+    SITPoint *from  = [[SITPoint alloc]  initWithCoordinate:fromCoordinate buildingIdentifier:@"-1" floorIdentifier:@"-1" cartesianCoordinate: fromCartesianCoordinate];
+    //to
+    CLLocationCoordinate2D toCoordinate = CLLocationCoordinate2DMake(3, 4);
+    SITCartesianCoordinate *toCartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:0 y:0];
+    SITPoint *to  = [[SITPoint alloc]  initWithCoordinate:toCoordinate buildingIdentifier:@"-1" floorIdentifier:@"-1" cartesianCoordinate: toCartesianCoordinate];
+    
+    SITRouteStep *routeStep = [[SITRouteStep alloc] initWithIndex:2 from:from to:to isFirst:false isLast:false nextStepIndex:3 stepDistance:23.4 distanceToGoal:27];
+    return routeStep;
+}
+
+//routeStep2.json
++ (SITRouteStep *) createRouteStepWithCoordinateAndBuildingId {
+    //from
+    CLLocationCoordinate2D fromCoordinate = CLLocationCoordinate2DMake(2, 5);
+    SITCartesianCoordinate *fromCartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:0 y:0];
+    SITPoint *from  = [[SITPoint alloc]  initWithCoordinate:fromCoordinate buildingIdentifier:@"101" floorIdentifier:@"-1" cartesianCoordinate: fromCartesianCoordinate];
+    //to
+    CLLocationCoordinate2D toCoordinate = CLLocationCoordinate2DMake(3, 4);
+    SITCartesianCoordinate *toCartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:0 y:0];
+    SITPoint *to  = [[SITPoint alloc]  initWithCoordinate:toCoordinate buildingIdentifier:@"101" floorIdentifier:@"-1" cartesianCoordinate: toCartesianCoordinate];
+    
+    SITRouteStep *routeStep = [[SITRouteStep alloc] initWithIndex:2 from:from to:to isFirst:false isLast:false nextStepIndex:3 stepDistance:23.4 distanceToGoal:27];
+    return routeStep;
+}
+
+//routeStep3.json
++ (SITRouteStep *) createRouteStepWithCoordinateBuildingIdAndFloor {
+    //from
+    CLLocationCoordinate2D fromCoordinate = CLLocationCoordinate2DMake(0, 0);
+    SITCartesianCoordinate *fromCartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:3 y:5];
+    SITPoint *from  = [[SITPoint alloc]  initWithCoordinate:fromCoordinate buildingIdentifier:@"101" floorIdentifier:@"12" cartesianCoordinate: fromCartesianCoordinate];
+    //to
+    CLLocationCoordinate2D toCoordinate = CLLocationCoordinate2DMake(0, 0);
+    SITCartesianCoordinate *toCartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:3 y:4];
+    SITPoint *to  = [[SITPoint alloc]  initWithCoordinate:toCoordinate buildingIdentifier:@"101" floorIdentifier:@"12" cartesianCoordinate: toCartesianCoordinate];
+    
+    SITRouteStep *routeStep = [[SITRouteStep alloc] initWithIndex:2 from:from to:to isFirst:false isLast:false nextStepIndex:3 stepDistance:23.4 distanceToGoal:27];
+    return routeStep;
+}
+
+//routeStep4.json
++ (SITRouteStep *) createRouteStepWithBuildingWithAngleFromDegree {
+    //from
+    CLLocationCoordinate2D fromCoordinate = CLLocationCoordinate2DMake(12.3, 14);
+    SITCartesianCoordinate *fromCartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:3 y:5];
+    SITPoint *from  = [[SITPoint alloc]  initWithCoordinate:fromCoordinate buildingIdentifier:@"-1" floorIdentifier:@"12" cartesianCoordinate: fromCartesianCoordinate];
+    //to
+    CLLocationCoordinate2D toCoordinate = CLLocationCoordinate2DMake(12.3, 14);
+    SITCartesianCoordinate *toCartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:3 y:4];
+    SITPoint *to  = [[SITPoint alloc]  initWithCoordinate:toCoordinate buildingIdentifier:@"-1" floorIdentifier:@"12" cartesianCoordinate: toCartesianCoordinate];
+    
+    SITRouteStep *routeStep = [[SITRouteStep alloc] initWithIndex:2 from:from to:to isFirst:false isLast:false nextStepIndex:3 stepDistance:23.4 distanceToGoal:27];
+    return routeStep;
+}
+
+//routeStep5.json
++ (SITRouteStep *) createRouteStepWithBuildingWithAngleFromRadians {
+    //from
+    CLLocationCoordinate2D fromCoordinate = CLLocationCoordinate2DMake(12.3, 14);
+    SITCartesianCoordinate *fromCartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:3 y:5];
+    SITPoint *from  = [[SITPoint alloc]  initWithCoordinate:fromCoordinate buildingIdentifier:@"-1" floorIdentifier:@"12" cartesianCoordinate: fromCartesianCoordinate];
+    //to
+    CLLocationCoordinate2D toCoordinate = CLLocationCoordinate2DMake(12.3, 14);
+    SITCartesianCoordinate *toCartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:3 y:4];
+    SITPoint *to  = [[SITPoint alloc]  initWithCoordinate:toCoordinate buildingIdentifier:@"-1" floorIdentifier:@"12" cartesianCoordinate: toCartesianCoordinate];
+    
+    SITRouteStep *routeStep = [[SITRouteStep alloc] initWithIndex:2 from:from to:to isFirst:false isLast:false nextStepIndex:3 stepDistance:23.4 distanceToGoal:27];
+    return routeStep;
+}
+
+//situmConversionArea1.json
++ (SITRectangularArea *) createSitumConversionArea {
+    SITRectangularArea *ca = [[SITRectangularArea alloc] init];
+    ca.bottomLeft = [[SITIndoorPoint alloc] initWithX:[NSNumber numberWithInt:3] y:[NSNumber numberWithInt:4] level_identifier:[NSNumber numberWithInt:12]];
+    ca.bottomRight = [[SITIndoorPoint alloc] initWithX:[NSNumber numberWithInt:3] y:[NSNumber numberWithInt:6] level_identifier:[NSNumber numberWithInt:12]];
+    ca.topLeft = [[SITIndoorPoint alloc] initWithX:[NSNumber numberWithInt:5] y:[NSNumber numberWithInt:4] level_identifier:[NSNumber numberWithInt:12]];
+    ca.topRight = [[SITIndoorPoint alloc] initWithX:[NSNumber numberWithInt:5] y:[NSNumber numberWithInt:6] level_identifier:[NSNumber numberWithInt:12]];
+    return ca;
+}
+
 
 @end
 
