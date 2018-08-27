@@ -20,6 +20,7 @@ import es.situm.sdk.location.util.CoordinateConverter;
 import es.situm.sdk.model.I18nString;
 import es.situm.sdk.model.URL;
 import es.situm.sdk.model.cartography.Building;
+import es.situm.sdk.model.cartography.Circle;
 import es.situm.sdk.model.cartography.Floor;
 import es.situm.sdk.model.cartography.Poi;
 import es.situm.sdk.model.cartography.PoiCategory;
@@ -140,6 +141,8 @@ class SitumMapper {
   public static final String NEXT_LEVEL = "nextLevel";
 
   public static final String CONVERSION_AREA = "conversionArea";
+  public static final String CONVERSION = "conversion";
+  public static final String TRIGGER = "trigger";
   public static final String IDENTIFIER = "identifier";
   public static final String CUSTOM_FIELDS = "customFields";
   public static final String TOP_LEFT = "topLeft";
@@ -269,6 +272,18 @@ class SitumMapper {
     jo.put(NAME, situmEvent.getName());
     jo.put(X, situmEvent.getX());
     jo.put(Y, situmEvent.getY());
+    if (situmEvent.getConversion() != null) {
+      jo.put(CONVERSION, circleToJsonObject(situmEvent.getConversion()));
+    }
+    jo.put(TRIGGER, circleToJsonObject(situmEvent.getTrigger()));
+
+    return jo;
+  }
+
+  static  JSONObject circleToJsonObject(Circle circle) throws JSONException {
+    JSONObject jo = new JSONObject();
+    jo.put(CENTER, circle != null ? pointToJsonObject(circle.getCenter()) : null);
+    jo.put(RADIUS, circle != null ? circle.getRadius(): null);
     return jo;
   }
 

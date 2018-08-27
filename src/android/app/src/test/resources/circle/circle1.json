@@ -1,0 +1,17 @@
+{
+  "center": {
+    "coordinate": {
+      "latitude": 42.8723364829157,
+      "longitude": -8.56308907270432
+    },
+    "floorIdentifier": "2767",
+    "cartesianCoordinate": {
+      "x": 22.5865678493934,
+      "y": 24.8444747467106
+    },
+    "isIndoor": true,
+    "buildingIdentifier": "1051",
+    "isOutdoor": false
+  },
+  "radius" : 2.7458453630437
+}

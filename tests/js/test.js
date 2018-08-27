@@ -149,9 +149,17 @@ describe('Test fetchEventsFromBuilding ->', () => {
     expect(typeof event.x).to.be('number');
     expect(typeof event.y).to.be('number');
     expect(typeof event.name).to.be('string');
+    expect(typeof event.trigger).to.be('object');
+    expect(typeof event.conversion).to.be('object');
   });
   it('Check event conversionArea', () => {
     testConversionArea(event.conversionArea);
+  });
+  it('Check event conversion', () => {
+    testCircle(event.conversion);
+  });
+  it('Check event trigger', () => {
+    testCircle(event.trigger);
   });
 });
 describe('Test fetchPoiCategories ->', () => {
@@ -357,6 +365,12 @@ const testConversionArea = conversionArea => {
   expect(typeof event.conversionArea.topRight).to.be('string');
   expect(typeof event.conversionArea.bottomLeft).to.be('string');
   expect(typeof event.conversionArea.bottomRight).to.be('string');
+}
+
+const testCircle = conversionArea => {
+  expect(typeof event.conversion.radius).to.be('number');
+  expect(typeof event.conversion.center).to.be('object');
+  testPoint(event.conversion.center);
 }
 
 const testRouteStep = routeStep => {
