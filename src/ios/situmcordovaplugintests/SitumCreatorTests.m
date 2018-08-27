@@ -61,6 +61,126 @@
     return dimensions;
 }
 
+//floor1.json
++ (SITFloor *) createFloorWithAltitude {
+    SITFloor *floor = [[SITFloor alloc] init];
+    /*NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:DATEFORMAT];
+    
+    floor.createdAt = [dateFormatter dateFromString:floor.createdAt];
+    
+    floor.updatedAt = [dateFormatter dateFromString:floor.updatedAt];*/
+    floor.altitude = 2.5;
+    floor.scale = 10.2;
+    floor.mapURL = [[SITURL alloc] initWithDirection:@"TEST_URL"];
+    floor.level = 1;
+    floor.identifier = @"-1";
+    floor.buildingIdentifier = @"101";
+    return floor;
+}
+
+//floor2.json
++ (SITFloor *) createFloorWithoutAltitude {
+    SITFloor *floor = [[SITFloor alloc] init];
+    
+    /*NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:DATEFORMAT];
+    floor.createdAt = [dateFormatter dateFromString:floor.createdAt];
+    floor.updatedAt = [dateFormatter dateFromString:floor.updatedAt];*/
+    
+    floor.altitude = 0;
+    floor.scale = 10.2;
+    floor.mapURL = [[SITURL alloc] initWithDirection:@"TEST_URL"];
+    floor.level = 1;
+    floor.identifier = @"-1";
+    floor.buildingIdentifier = @"101";
+    return floor;
+}
+
+//indication1.json
++ (SITIndication *) createIndication {
+    NSInteger stepIdxOrigin = 4;
+    NSInteger stepIdxDestination = 5;
+    float horizontalDistance = 5;
+    float orientationChange = 14.5;
+    float verticalDistance = 16;
+    NSNumber* nextLevel = nil;
+    kSITIndicationActions action = kSITGoAhead;
+    kSITIndicationOrientation orientation = kSITStraight;
+    SITIndication *indication = [[SITIndication alloc] initWithOriginStepIndex:stepIdxOrigin destinationStepIndex:stepIdxDestination action:action horizontalDistance:horizontalDistance orientation:orientation orientationChange:orientationChange verticalDistance:verticalDistance nextLevel:nextLevel];
+    
+    return indication;
+}
+
+
+//kSITLocationStopped,kSITLocationStarted not implemented in tests.
+//-1 default value for values not implemented in ios
+
+//locationStatus1.json
++ (SITLocationState) createLocationStatusStarting {
+ return -1;
+}
+
+//locationStatus2.json
++ (SITLocationState) createLocationStatusBLENotAvailable {
+    return -1;
+}
+
+//locationStatus3.json
++ (SITLocationState) createLocationStatusCalculating {
+    return kSITLocationCalculating;
+}
+
+//locationStatus4.json
++ (SITLocationState) createLocationStatusCompassCalibrationNeeded {
+    return -1;
+}
+
+//locationStatus5.json
++ (SITLocationState) createLocationStatusCompassCalibrationNotNeeded {
+    return -1;
+}
+
+//locationStatus6.json
++ (SITLocationState) createLocationStatusNoConnection {
+    return -1;
+}
+
+//locationStatus7.json
++ (SITLocationState) createLocationStatusPreparingPositioningModel {
+    return -1;
+}
+
+//locationStatus8.json
++ (SITLocationState) createLocationStatusProcessingPositioningModel {
+    return -1;
+}
+
+//locationStatus9.json
++ (SITLocationState) createLocationStatusRetryDownloadPositioningModel {
+    return -1;
+}
+
+//locationStatus10.json
++ (SITLocationState) createLocationStatusStartDownloadPositioningModel {
+    return -1;
+}
+
+//locationStatus11.json
++ (SITLocationState) createLocationStatusStartingPositioning {
+    return -1;
+}
+
+//locationStatus12.json
++ (SITLocationState) createLocationStatusTimeSettingsManual {
+    return -1;
+}
+
+//locationStatus13.json
++ (SITLocationState) createLocationStatusUserNotInBuilding {
+    return kSITLocationUserNotInBuilding;
+}
+
 //location1.json
 + (SITLocation *) createLocationWithBuildingFloorAndCartesianCoordinates {
     NSTimeInterval timestamp = 14676784;
@@ -210,6 +330,135 @@
     float accuracy = 5;
     SITLocation *location = [[SITLocation alloc] initWithTimestamp:timestamp position:position bearing: bearing cartesianBearing:cartesianBearing quality:quality accuracy:accuracy provider:provider];
     return location;
+}
+
+//navigationProgress1.json
++ (SITNavigationProgress *) createNavigationProgressOutdoor {
+    SITNavigationProgress *navigationProgress = [[SITNavigationProgress alloc] init];
+    
+    //currentIndication
+    NSInteger currentStepIdxOrigin = 4;
+    NSInteger currentStepIdxDestination = 5;
+    float currentHorizontalDistance = 11.4;
+    float currentOrientationChange = 14.5;
+    float currentVerticalDistance = 15;
+    NSNumber* currentNextLevel = nil;
+    kSITIndicationActions currentAction = kSITGoAhead;
+    kSITIndicationOrientation currentOrientation = kSITStraight;
+    SITIndication *currentIndication = [[SITIndication alloc] initWithOriginStepIndex:currentStepIdxOrigin destinationStepIndex:currentStepIdxDestination action:currentAction horizontalDistance:currentHorizontalDistance orientation:currentOrientation orientationChange:currentOrientationChange verticalDistance:currentVerticalDistance nextLevel:currentNextLevel];
+    navigationProgress.currentIndication = currentIndication;
+    
+    //nextIndication
+    NSInteger nextStepIdxOrigin = 4;
+    NSInteger nextStepIdxDestination = 5;
+    float nextHorizontalDistance = 8.6;
+    float nextOrientationChange = 3.5;
+    float nextVerticalDistance = 24;
+    NSNumber* nextNextLevel = nil;
+    kSITIndicationActions nextAction = kSITGoAhead;
+    kSITIndicationOrientation nextOrientation = kSITStraight;
+    SITIndication *nextIndication = [[SITIndication alloc] initWithOriginStepIndex:nextStepIdxOrigin destinationStepIndex:nextStepIdxDestination action:nextAction horizontalDistance:nextHorizontalDistance orientation:nextOrientation orientationChange:nextOrientationChange verticalDistance:nextVerticalDistance nextLevel:nextNextLevel];
+    navigationProgress.nextIndication = nextIndication;
+    
+    navigationProgress.distanceToClosestPointInRoute = 12;
+    navigationProgress.currentStepIndex = 1;
+    navigationProgress.distanceToGoal = 24;
+    navigationProgress.distanceToEndStep = 16;
+    navigationProgress.timeToEndStep = 16
+    navigationProgress.timeToGoal = 24;
+    
+    //routeStep
+    //from
+    CLLocationCoordinate2D fromCoordinate = CLLocationCoordinate2DMake(2, 5);
+    SITCartesianCoordinate *fromCartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:0 y:0];
+    SITPoint *from  = [[SITPoint alloc]  initWithCoordinate:fromCoordinate buildingIdentifier:@"101" floorIdentifier:@"-1" cartesianCoordinate: fromCartesianCoordinate];
+    //to
+    CLLocationCoordinate2D toCoordinate = CLLocationCoordinate2DMake(3, 4);
+    SITCartesianCoordinate *toCartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:0 y:0];
+    SITPoint *to  = [[SITPoint alloc]  initWithCoordinate:toCoordinate buildingIdentifier:@"101" floorIdentifier:@"-1" cartesianCoordinate: toCartesianCoordinate];
+    
+    SITRouteStep *routeStep = [[SITRouteStep alloc] initWithIndex:1 from:from to:to isFirst:true isLast:false nextStepIndex:1 stepDistance:23.4 distanceToGoal:27];
+    navigationProgress.routeStep = routeStep;
+    
+    //closestLocation
+    NSTimeInterval timestamp = 1242142142;
+    //empty coordinate 0,0
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(2, 4);
+    SITCartesianCoordinate *cartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:0 y:0];
+    SITPoint *position  = [[SITPoint alloc]  initWithCoordinate:coordinate buildingIdentifier:@"101" floorIdentifier:@"12" cartesianCoordinate: cartesianCoordinate];
+    float bearing = 0; //degrees
+    float cartesianBearing = 0; //radians
+    kSITQualityValues quality = kSITLow;
+    NSString *provider = @"TEST_PROVIDER";
+    float accuracy = 0;
+    SITLocation *location = [[SITLocation alloc] initWithTimestamp:timestamp position:position bearing: bearing cartesianBearing:cartesianBearing quality:quality accuracy:accuracy provider:provider];
+    navigationProgress.closestLocationInRoute = location;
+    
+    return navigationProgress;
+}
+
+//navigationProgress2.json
++ (SITNavigationProgress *) createNavigationProgressIndoor {
+    SITNavigationProgress *navigationProgress = [[SITNavigationProgress alloc] init];
+    
+    //currentIndication
+    NSInteger currentStepIdxOrigin = 4;
+    NSInteger currentStepIdxDestination = 5;
+    float currentHorizontalDistance = 11.4;
+    float currentOrientationChange = 14.5;
+    float currentVerticalDistance = 15;
+    NSNumber* currentNextLevel = nil;
+    kSITIndicationActions currentAction = kSITGoAhead;
+    kSITIndicationOrientation currentOrientation = kSITStraight;
+    SITIndication *currentIndication = [[SITIndication alloc] initWithOriginStepIndex:currentStepIdxOrigin destinationStepIndex:currentStepIdxDestination action:currentAction horizontalDistance:currentHorizontalDistance orientation:currentOrientation orientationChange:currentOrientationChange verticalDistance:currentVerticalDistance nextLevel:currentNextLevel];
+    navigationProgress.currentIndication = currentIndication;
+    
+    //nextIndication
+    NSInteger nextStepIdxOrigin = 4;
+    NSInteger nextStepIdxDestination = 5;
+    float nextHorizontalDistance = 8.6;
+    float nextOrientationChange = 3.5;
+    float nextVerticalDistance = 24;
+    NSNumber* nextNextLevel = nil;
+    kSITIndicationActions nextAction = kSITGoAhead;
+    kSITIndicationOrientation nextOrientation = kSITStraight;
+    SITIndication *nextIndication = [[SITIndication alloc] initWithOriginStepIndex:nextStepIdxOrigin destinationStepIndex:nextStepIdxDestination action:nextAction horizontalDistance:nextHorizontalDistance orientation:nextOrientation orientationChange:nextOrientationChange verticalDistance:nextVerticalDistance nextLevel:nextNextLevel];
+    navigationProgress.nextIndication = nextIndication;
+    
+    navigationProgress.distanceToClosestPointInRoute = 12;
+    navigationProgress.currentStepIndex = 1;
+    navigationProgress.distanceToGoal = 24;
+    navigationProgress.distanceToEndStep = 16;
+    navigationProgress.timeToEndStep = 16;
+    navigationProgress.timeToGoal = 24;
+    
+    //routeStep
+    //from
+    CLLocationCoordinate2D fromCoordinate = CLLocationCoordinate2DMake(0, 0);
+    SITCartesianCoordinate *fromCartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:5 y:6];
+    SITPoint *from  = [[SITPoint alloc]  initWithCoordinate:fromCoordinate buildingIdentifier:@"101" floorIdentifier:@"12" cartesianCoordinate: fromCartesianCoordinate];
+    //to
+    CLLocationCoordinate2D toCoordinate = CLLocationCoordinate2DMake(0, 0);
+    SITCartesianCoordinate *toCartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:3 y:5];
+    SITPoint *to  = [[SITPoint alloc]  initWithCoordinate:toCoordinate buildingIdentifier:@"101" floorIdentifier:@"12" cartesianCoordinate: toCartesianCoordinate];
+    
+    SITRouteStep *routeStep = [[SITRouteStep alloc] initWithIndex:1 from:from to:to isFirst:true isLast:false nextStepIndex:1 stepDistance:23.4 distanceToGoal:27];
+    navigationProgress.routeStep = routeStep;
+    
+    //closestLocation
+    NSTimeInterval timestamp = 1242142142;
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(2, 4);
+    SITCartesianCoordinate *cartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:2 y:5];
+    SITPoint *position  = [[SITPoint alloc]  initWithCoordinate:coordinate buildingIdentifier:@"101" floorIdentifier:@"12" cartesianCoordinate: cartesianCoordinate];
+    float bearing = 0; //degrees
+    float cartesianBearing = 0; //radians
+    kSITQualityValues quality = kSITLow;
+    NSString *provider = @"TEST_PROVIDER";
+    float accuracy = 0;
+    SITLocation *location = [[SITLocation alloc] initWithTimestamp:timestamp position:position bearing: bearing cartesianBearing:cartesianBearing quality:quality accuracy:accuracy provider:provider];
+    navigationProgress.closestLocationInRoute = location;
+    
+    return navigationProgress;
 }
 
 //point1.json
