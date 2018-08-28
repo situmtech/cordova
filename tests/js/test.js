@@ -146,6 +146,9 @@ describe('Test fetchEventsFromBuilding ->', () => {
     expect(typeof event.conversionArea).to.be('object');
     expect(typeof event.customFields).to.be('object');
     expect(typeof event.radius).to.be('number');
+    expect(typeof event.x).to.be('number');
+    expect(typeof event.y).to.be('number');
+    expect(typeof event.name).to.be('string');
   });
   it('Check event conversionArea', () => {
     testConversionArea(event.conversionArea);
