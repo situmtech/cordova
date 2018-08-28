@@ -156,10 +156,10 @@ describe('Test fetchEventsFromBuilding ->', () => {
     testConversionArea(event.conversionArea);
   });
   it('Check event conversion', () => {
-    testCircle(event.conversion);
+      testCircle(event.conversion);
   });
   it('Check event trigger', () => {
-    testCircle(event.trigger);
+      testCircle(event.trigger);
   });
 });
 describe('Test fetchPoiCategories ->', () => {
@@ -360,17 +360,17 @@ const testPoint = point => {
 }
 
 const testConversionArea = conversionArea => {
-  expect(typeof event.conversionArea.floorIdentifier).to.be('number');
-  expect(typeof event.conversionArea.topLeft).to.be('string');
-  expect(typeof event.conversionArea.topRight).to.be('string');
-  expect(typeof event.conversionArea.bottomLeft).to.be('string');
-  expect(typeof event.conversionArea.bottomRight).to.be('string');
+  expect(typeof conversionArea.floorIdentifier).to.be('number');
+  expect(typeof conversionArea.topLeft).to.be('string');
+  expect(typeof conversionArea.topRight).to.be('string');
+  expect(typeof conversionArea.bottomLeft).to.be('string');
+  expect(typeof conversionArea.bottomRight).to.be('string');
 }
 
-const testCircle = conversionArea => {
-  expect(typeof event.conversion.radius).to.be('number');
-  expect(typeof event.conversion.center).to.be('object');
-  testPoint(event.conversion.center);
+const testCircle = circle => {
+  expect(typeof circle.radius).to.be('number');
+  expect(typeof circle.center).to.be('object');
+  testPoint(circle.center);
 }
 
 const testRouteStep = routeStep => {
