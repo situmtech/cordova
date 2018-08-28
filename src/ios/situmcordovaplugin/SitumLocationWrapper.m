@@ -283,14 +283,23 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
 
 - (NSDictionary *) eventToJsonObject:(SITEvent *) event {
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
-    [jo setObject:[NSString stringWithFormat:@"%@", event.identifier] forKey:@"identifier"];
-    [jo setObject:[NSString stringWithFormat:@"%@", event.project_identifier] forKey:@"buildingIdentifier"];
-    [jo setObject:[NSString stringWithFormat:@"%@", event.info] forKey:@"infoHtml"];
-    //[jo setObject:[NSNumber numberWithDouble:event.conversionArea] forKey:@"radius"];
+    jo[@"identifier"] = event.identifier;
+    jo[@"buildingIdentifier"] = event.project_identifier;
+    jo[@"floorIdentifier"] = event.trigger.center.floorIdentifier;
+    jo[@"infoHtml"] = event.info;
+    jo[@"name"] = event.name;
+    jo[@"radius"] = event.trigger.radius;
+    jo[@"x"] = @(event.trigger.center.cartesianCoordinate.x);
+    jo[@"y"] = @(event.trigger.center.cartesianCoordinate.y);
+    
+    jo[@"trigger"] = [self circleAreaToJsonObject:event.trigger];
+    if (event.conversion != nil) {
+        jo[@"conversion"] = [self circleAreaToJsonObject:event.conversion];
+    }
 
-    //floorIdentifier not presented in ios platform
-    //radius not presented in ios platform
-
+    jo[@"conversionArea"] = [self conversionAreaToJsonObject:event.conversionArea];
+    jo[@"customFields"] = event.customFields != nil ? event.customFields : [NSDictionary new];
+    
     return jo.copy;
 }
 
@@ -394,8 +403,14 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
 
 - (NSDictionary *) indoorPointToJsonObject:(SITIndoorPoint *) iPoint {
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
-    //[jo setObject:[iPoint.x doubleValue  forKey:@"x"];
-    //[jo setObject:[iPoint.y doubleValue  forKey:@"y"];
+    
+    if (iPoint == nil) {
+        iPoint = [SITIndoorPoint new];
+        iPoint.x = @(0);
+        iPoint.y = @(0);
+    }
+    jo[@"x"] = iPoint.x;
+    jo[@"y"] = iPoint.y;
     return jo.copy;
 }
 
@@ -462,14 +477,31 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     return jo.copy;
 }
 
-- (NSDictionary *) conversionAreaToJsonObject:(SITRectangularArea *) ca {
+- (NSDictionary *) circleAreaToJsonObject:(SITCircularArea *) ca {
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
-    //[jo setObject:[self coordinateToJsonObject:ca.topLeft] forKey:@"topLeft"];
-    //[jo setObject:[self coordinateToJsonObject:bounds.northWest] forKey:@"top"];
-    //[jo setObject:[self coordinateToJsonObject:bounds.southEast] forKey:@"center"];
-    //[jo setObject:[self coordinateToJsonObject:bounds.southWest] forKey:@"right"];
+    
+    jo[@"center"] = ca != nil ? [self pointToJsonObject:ca.center] : nil;
+    jo[@"radius"] = ca != nil ? ca.radius : nil;
+    
     return jo.copy;
 }
+
+- (NSDictionary *) conversionAreaToJsonObject:(SITRectangularArea *) ca {
+    NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
+        
+    if (ca == nil) {
+            ca = [SITRectangularArea new];
+       }
+
+    jo[@"topLeft"] = [self indoorPointToJsonObject:ca.topLeft];
+    jo[@"topRight"] = [self indoorPointToJsonObject:ca.topRight];
+    jo[@"bottomRight"] = [self indoorPointToJsonObject:ca.bottomRight];
+    jo[@"bottomLeft"] = [self indoorPointToJsonObject:ca.bottomLeft];
+    jo[@"floorIdentifier"] = ca.center.level_identifier != nil ? ca.center.level_identifier : @(0);
+        
+    return jo.copy;
+}
+
 
 // Angle
 

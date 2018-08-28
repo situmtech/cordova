@@ -1,0 +1,66 @@
+{
+  "identifier": 12,
+  "floorIdentifier": 1000,
+  "customFields": {
+    "lang": "en"
+  },
+  "conversionArea": {
+    "bottomLeft": {
+      "x": 5,
+      "y": 6
+    },
+    "floorIdentifier": 1000,
+    "bottomRight": {
+      "x": 7,
+      "y": 8
+    },
+    "topLeft": {
+      "x": 3,
+      "y": 4
+    },
+    "topRight": {
+      "x": 1,
+      "y": 2
+    }
+  },
+  "conversion" : {
+    "center": {
+      "coordinate": {
+        "latitude": 50,
+        "longitude": 100
+      },
+      "floorIdentifier": "1000",
+      "cartesianCoordinate": {
+        "x": 5,
+        "y": 10
+      },
+      "isIndoor": true,
+      "buildingIdentifier": "1",
+      "isOutdoor": false
+    },
+    "radius" : 3
+  },
+  "trigger" : {
+    "center": {
+      "coordinate": {
+        "latitude": 25,
+        "longitude": 50
+      },
+      "floorIdentifier": "1000",
+      "cartesianCoordinate": {
+        "x": 2,
+        "y": 5
+      },
+      "isIndoor": true,
+      "buildingIdentifier": "1",
+      "isOutdoor": false
+    },
+    "radius" : 6
+  }
+  "name": "Event",
+  "x": 5,
+  "y": 10,
+  "infoHtml": "<p>Test html<\/p>",
+  "radius": 15,
+  "buildingIdentifier": 1
+}

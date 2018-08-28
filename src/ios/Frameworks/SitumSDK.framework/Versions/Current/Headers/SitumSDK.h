@@ -120,8 +120,6 @@
  *  External Dependencies
  *  ---------------------
  *  Additionally, you will have to include some external dependencies.
- *  
- *  **RestKit** - The quickest way is to install it through Cocoapods.  In order to install RestKit (https://github.com/RestKit/RestKit) manually  you should check the installation page and follow its instructions (https://github.com/RestKit/RestKit/wiki/Installing-RestKit-v0.20.x-as-a-Git-Submodule) 
  *
  *  **GCDAsyncUdpSocket** - Under the external-dependencies folder inside the general framework folder you can see the header and implementation files you should add to your project. Drag and drop them to your project and make sure you enable the **Copy Items if needed** option.
  *

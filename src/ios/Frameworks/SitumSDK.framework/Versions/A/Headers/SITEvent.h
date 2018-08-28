@@ -20,9 +20,9 @@
 @property (nonatomic, strong) NSNumber *identifier;
 
 /**
- *  The unique identifier indicating the SITIndoorBuilding which belongs to
+ *  The unique identifier indicating the SITIndoorBuilding which belongs to. Deprecated, use trigger.center.buildingIdentifier
  */
-@property (nonatomic, strong) NSNumber *project_identifier;
+@property (nonatomic, strong) NSNumber *project_identifier DEPRECATED_MSG_ATTRIBUTE("Deprecated, use trigger.center.buildingIdentifier");
 
 /**
  *  Name
@@ -50,13 +50,23 @@
 @property (nonatomic, strong) NSString *url;
 
 /**
- *  The area inside the SITIndoorBuilding where the event should be fired
+ *  The area inside the SITIndoorBuilding where the event should be fired.
  */
-@property (nonatomic, strong) SITCircularArea *positionArea;
+@property (nonatomic, strong) SITCircularArea *trigger;
 
 /**
  *  The area inside the SITIndoorBuilding where the event should be considered as converted
  */
-@property (nonatomic, strong) SITRectangularArea *conversionArea;
+@property (nonatomic, strong) SITCircularArea *conversion;
+
+/**
+ *  The area inside the SITIndoorBuilding where the event should be considered as converted. Deprecated, use conversion instead
+ */
+@property (nonatomic, strong) SITRectangularArea *conversionArea DEPRECATED_MSG_ATTRIBUTE("Deprecated, use conversion instead");
+
+/**
+ * Custom fields that can be added from the Dashboard
+ */
+@property (nonatomic, strong) NSDictionary<NSString*, NSString*> *customFields;
 
 @end
