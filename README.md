@@ -362,4 +362,6 @@ Situm-Cordova-Plugin is licensed under [MIT License](https://opensource.org/lice
 ## More information
 
 More info is available at our [Developers Page](http://developers.situm.es/pages/cordova/).
-For any other question, contact us [here](mailto:support@situm.es)
+
+## Support information
+For any question or bug report, please send an email to [situm@situm.es](mailto:support@situm.es)
