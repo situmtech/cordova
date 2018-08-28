@@ -34,6 +34,7 @@
       - [removeNavigationUpdates](#--removenavigationupdates)
   * [License](#license)
   * [More information](#more-information)
+  * [Support information](#support-information)
 
 ---
 
