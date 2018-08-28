@@ -1,6 +1,7 @@
 package es.situm.plugin.event;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -10,6 +11,10 @@ import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 
+import es.situm.sdk.model.cartography.Circle;
+import es.situm.sdk.model.cartography.Point;
+import es.situm.sdk.model.location.CartesianCoordinate;
+import es.situm.sdk.model.location.Coordinate;
 import es.situm.sdk.v1.Point2f;
 import es.situm.sdk.v1.SitumConversionArea;
 import es.situm.sdk.v1.SitumEvent;
@@ -59,6 +64,19 @@ public class EventCreator {
             @Override
             public String getHtml() {
                 return "<p>Test html</p>";
+            }
+
+            @Nullable
+            @Override
+            public Circle getConversion() {
+                Point point = new Point("1", "1000", new Coordinate(50, 100), new CartesianCoordinate(5, 10));
+                return new Circle(point, 3);
+            }
+
+            @Override
+            public Circle getTrigger() {
+                Point point = new Point("1", "1000", new Coordinate(25, 50), new CartesianCoordinate(2, 5));
+                return new Circle(point, 6);
             }
 
             @Override

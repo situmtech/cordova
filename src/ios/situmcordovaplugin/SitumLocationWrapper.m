@@ -285,12 +285,18 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
     jo[@"identifier"] = event.identifier;
     jo[@"buildingIdentifier"] = event.project_identifier;
-    jo[@"floorIdentifier"] = event.positionArea.center.level_identifier;
+    jo[@"floorIdentifier"] = event.trigger.center.floorIdentifier;
     jo[@"infoHtml"] = event.info;
     jo[@"name"] = event.name;
-    jo[@"radius"] = event.positionArea.radius;
-    jo[@"x"] = event.positionArea.center.x;
-    jo[@"y"] = event.positionArea.center.y;
+    jo[@"radius"] = event.trigger.radius;
+    jo[@"x"] = @(event.trigger.center.cartesianCoordinate.x);
+    jo[@"y"] = @(event.trigger.center.cartesianCoordinate.y);
+    
+    jo[@"trigger"] = [self circleAreaToJsonObject:event.trigger];
+    if (event.conversion != nil) {
+        jo[@"conversion"] = [self circleAreaToJsonObject:event.conversion];
+    }
+
     jo[@"conversionArea"] = [self conversionAreaToJsonObject:event.conversionArea];
     jo[@"customFields"] = event.customFields != nil ? event.customFields : [NSDictionary new];
     
@@ -471,21 +477,31 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     return jo.copy;
 }
 
-- (NSDictionary *) conversionAreaToJsonObject:(SITRectangularArea *) ca {
+- (NSDictionary *) circleAreaToJsonObject:(SITCircularArea *) ca {
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
     
-    if (ca == nil) {
-        ca = [SITRectangularArea new];
-    }
+    jo[@"center"] = ca != nil ? [self pointToJsonObject:ca.center] : nil;
+    jo[@"radius"] = ca != nil ? ca.radius : nil;
     
+    return jo.copy;
+}
+
+- (NSDictionary *) conversionAreaToJsonObject:(SITRectangularArea *) ca {
+    NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
+        
+    if (ca == nil) {
+            ca = [SITRectangularArea new];
+       }
+
     jo[@"topLeft"] = [self indoorPointToJsonObject:ca.topLeft];
     jo[@"topRight"] = [self indoorPointToJsonObject:ca.topRight];
     jo[@"bottomRight"] = [self indoorPointToJsonObject:ca.bottomRight];
     jo[@"bottomLeft"] = [self indoorPointToJsonObject:ca.bottomLeft];
     jo[@"floorIdentifier"] = ca.center.level_identifier != nil ? ca.center.level_identifier : @(0);
-    
+        
     return jo.copy;
 }
+
 
 // Angle
 

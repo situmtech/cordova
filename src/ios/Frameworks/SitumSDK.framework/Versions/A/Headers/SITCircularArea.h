@@ -10,11 +10,18 @@
 
 #import "SITArea.h"
 #import "SITIndoorPoint.h"
+#import "SITPoint.h"
 
 @interface SITCircularArea : SITArea
 
-@property (nonatomic, strong) SITIndoorPoint *center;
+/**
+ * Center of the circle
+ */
+@property (nonatomic, strong) SITPoint *center;
 
+/**
+ * Radius of the circle
+ */
 @property (nonatomic, strong) NSNumber *radius;
 
 @end
