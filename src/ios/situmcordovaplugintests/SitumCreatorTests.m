@@ -25,10 +25,10 @@
 //bounds1.json
 + (SITBounds) createBoundsWithArray {
     SITBounds Bounds;
-    Bounds.southWest = CLLocationCoordinate2DMake(2, 4);
-    Bounds.southEast = CLLocationCoordinate2DMake(6, 3);
     Bounds.northWest = CLLocationCoordinate2DMake(2, 6);
-    Bounds.northEast = CLLocationCoordinate2DMake(5, 8);
+    Bounds.southWest = CLLocationCoordinate2DMake(2, 4);
+    Bounds.northEast = CLLocationCoordinate2DMake(6, 3);
+    Bounds.southEast = CLLocationCoordinate2DMake(5, 8);
     return Bounds;
 }
 
@@ -36,10 +36,10 @@
 //NOTE: it is redundant in ios, it is equals to previous bounds1.json
 + (SITBounds) createBounds {
     SITBounds Bounds;
-    Bounds.southWest = CLLocationCoordinate2DMake(2, 4);
-    Bounds.southEast = CLLocationCoordinate2DMake(6, 3);
     Bounds.northWest = CLLocationCoordinate2DMake(2, 6);
-    Bounds.northEast = CLLocationCoordinate2DMake(5, 8);
+    Bounds.southWest = CLLocationCoordinate2DMake(2, 4);
+    Bounds.northEast = CLLocationCoordinate2DMake(6, 3);
+    Bounds.southEast = CLLocationCoordinate2DMake(5, 8);
     return Bounds;
 }
 

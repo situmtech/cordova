@@ -17,6 +17,12 @@
 - (void) setUp;
 - (void) tearDown;
 - (void) testLocation;
-
+- (void) testAngle;
+- (void) testBound;
+- (void) testCartesianCoordinate;
+- (void) testCoordinate;
+- (void) testDimension;
+- (void) testFloor;
+- (void) testIndication;
 
 @end

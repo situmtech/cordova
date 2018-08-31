@@ -241,7 +241,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
 
 - (NSDictionary *) floorToJsonObject:(SITFloor *) floor {
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
-    //    [jo setObject:[NSNumber numberWithDouble:floor.altitude] forKey:@"altitude"];
+    //[jo setObject:[NSNumber numberWithDouble:floor.altitude] forKey:@"altitude"];
     [jo setObject:emptyStrCheck([NSString stringWithFormat:@"%@", floor.buildingIdentifier]) forKey:@"buildingIdentifier"];
     [jo setObject:[NSNumber numberWithInteger: floor.level] forKey:@"level"];
     [jo setObject:floor.mapURL.direction forKey:@"mapUrl"];
