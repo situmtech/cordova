@@ -22,6 +22,8 @@
 + (CLLocationCoordinate2D) createCoordinate; //coordinate1.json
 //dimensions
 + (SITDimensions *) createDimensions; //dimensions1.json
+//dimensions
++ (SITEvent *) createEvent; //event1.json
 //floor
 + (SITFloor *) createFloorWithAltitude; //floor1.json
 + (SITFloor *) createFloorWithoutAltitude; //floor2.json
@@ -56,7 +58,7 @@
 + (SITNavigationProgress *) createNavigationProgressOutdoor; //navigationProgress1.json
 + (SITNavigationProgress *) createNavigationProgressIndoor; //navigationProgress2.json
 //poiCategory
-- (SITPOICategory *) createPoiCategory; //poiCategory1.json
++ (SITPOICategory *) createPoiCategory; //poiCategory1.json
 //point
 + (SITPoint *) createPointWithCoordinate; //point1.json
 + (SITPoint *) createPointWithCoordinateAndBuildingId; //point2.json
@@ -71,7 +73,7 @@
 //routeStep
 + (SITRouteStep *) createRouteStepWithCoordinate; //routeStep1.json
 + (SITRouteStep *) createRouteStepWithCoordinateAndBuildingId; //routeStep2.json
-+ (SITRouteStep *) createRouteStepWithCoordinateBuildingIdAndFloor; //routeStep13.json
++ (SITRouteStep *) createRouteStepWithCoordinateBuildingIdAndFloor; //routeStep3.json
 + (SITRouteStep *) createRouteStepWithBuildingWithAngleFromDegree; //routeStep4.json
 + (SITRouteStep *) createRouteStepWithBuildingWithAngleFromRadians; //routeStep5.json
 //situmConversionArea

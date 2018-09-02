@@ -241,7 +241,8 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
 
 - (NSDictionary *) floorToJsonObject:(SITFloor *) floor {
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
-    //[jo setObject:[NSNumber numberWithDouble:floor.altitude] forKey:@"altitude"];
+    //TODO review added altitude key
+    [jo setObject:[NSNumber numberWithDouble:floor.altitude] forKey:@"altitude"];
     [jo setObject:emptyStrCheck([NSString stringWithFormat:@"%@", floor.buildingIdentifier]) forKey:@"buildingIdentifier"];
     [jo setObject:[NSNumber numberWithInteger: floor.level] forKey:@"level"];
     [jo setObject:floor.mapURL.direction forKey:@"mapUrl"];
@@ -464,10 +465,14 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
 
 - (NSDictionary *) conversionAreaToJsonObject:(SITRectangularArea *) ca {
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
-    //[jo setObject:[self coordinateToJsonObject:ca.topLeft] forKey:@"topLeft"];
-    //[jo setObject:[self coordinateToJsonObject:bounds.northWest] forKey:@"top"];
-    //[jo setObject:[self coordinateToJsonObject:bounds.southEast] forKey:@"center"];
-    //[jo setObject:[self coordinateToJsonObject:bounds.southWest] forKey:@"right"];
+    SITCartesianCoordinate *cartesianCoordinateBottomLeft = [[SITCartesianCoordinate alloc] initWithX: [ca.bottomLeft.x doubleValue] y: [ca.bottomLeft.y doubleValue]];
+    [jo setObject:[self cartesianCoordinateToJsonObject:cartesianCoordinateBottomLeft] forKey:@"bottomLeft"];
+    SITCartesianCoordinate *cartesianCoordinateBottomRight = [[SITCartesianCoordinate alloc] initWithX: [ca.bottomRight.x doubleValue] y: [ca.bottomRight.y doubleValue]];
+    [jo setObject:[self cartesianCoordinateToJsonObject:cartesianCoordinateBottomRight] forKey:@"bottomRight"];
+    SITCartesianCoordinate *cartesianCoordinateTopLeft = [[SITCartesianCoordinate alloc] initWithX: [ca.topLeft.x doubleValue] y: [ca.topLeft.y doubleValue]];
+    [jo setObject:[self cartesianCoordinateToJsonObject:cartesianCoordinateTopLeft] forKey:@"topLeft"];
+    SITCartesianCoordinate *cartesianCoordinateTopRight = [[SITCartesianCoordinate alloc] initWithX: [ca.topRight.x doubleValue] y: [ca.topRight.y doubleValue]];
+    [jo setObject:[self cartesianCoordinateToJsonObject:cartesianCoordinateTopRight] forKey:@"topRight"];
     return jo.copy;
 }
 
