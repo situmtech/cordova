@@ -1,6 +1,8 @@
 package es.situm.plugin;
 
 
+import com.google.common.truth.Truth;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,6 +19,7 @@ import java.util.Map;
 import es.situm.plugin.angle.AngleCreator;
 import es.situm.plugin.bounds.BoundsCreator;
 import es.situm.plugin.cartesianCoordinate.CartesianCoordinateCreator;
+import es.situm.plugin.circle.CircleCreator;
 import es.situm.plugin.coordinate.CoordinateCreator;
 import es.situm.plugin.dimensions.DimensionsCreator;
 import es.situm.plugin.event.EventCreator;
@@ -31,6 +34,7 @@ import es.situm.plugin.route.RouteCreator;
 import es.situm.plugin.routeStep.RouteStepCreator;
 import es.situm.plugin.situmConversionArea.SitumConversionAreaCreator;
 import es.situm.sdk.location.LocationStatus;
+import es.situm.sdk.model.cartography.Circle;
 import es.situm.sdk.model.cartography.Floor;
 import es.situm.sdk.model.cartography.PoiCategory;
 import es.situm.sdk.model.cartography.Point;
@@ -44,11 +48,12 @@ import es.situm.sdk.model.location.Coordinate;
 import es.situm.sdk.model.location.Dimensions;
 import es.situm.sdk.model.location.Location;
 import es.situm.sdk.model.navigation.NavigationProgress;
-import es.situm.sdk.v1.Point2f;
 import es.situm.sdk.v1.SitumConversionArea;
 import es.situm.sdk.v1.SitumEvent;
 
 import static com.google.common.truth.Truth.assertThat;
+import static es.situm.plugin.SitumMapper.CENTER;
+import static es.situm.plugin.SitumMapper.circleToJsonObject;
 import static es.situm.plugin.SitumMapper.conversionAreaToJsonObject;
 
 @RunWith(JUnit4.class)
@@ -159,6 +164,7 @@ public class SitumMapperTest {
     private PointCreator pointCreator = new PointCreator();
     private RouteCreator routeCreator = new RouteCreator();
     private EventCreator eventCreator = new EventCreator();
+    private CircleCreator circleCreator = new CircleCreator();
 
     @Test
     public void angleJSONObjectTest() {
@@ -370,6 +376,8 @@ public class SitumMapperTest {
             PoiCategory poiCategory = poiCategoryCreator.createPoiCategory();
             JSONObject poiCategoryJSONObject = SitumMapper.poiCategoryToJsonObject(poiCategory);
             JSONObject poiCategory1 = poiCategoryCreator.getPoiCategory1();
+            System.out.println(poiCategoryJSONObject.toString());
+            System.out.println(poiCategory1.toString());
             testPoiCategory(poiCategoryJSONObject, poiCategory1);
         }catch(JSONException e){
             System.err.println(e.getMessage());
@@ -383,6 +391,18 @@ public class SitumMapperTest {
             JSONObject situmConversionAreaJSONObject = conversionAreaToJsonObject(situmConversionArea);
             JSONObject situmConversionArea1 = situmConversionAreaCreator.getSitumConversionArea1();
             testSitumConversionArea(situmConversionAreaJSONObject, situmConversionArea1);
+        }catch(JSONException e){
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void situmCircleJSONObjectTest() {
+        try{
+            Circle circle = circleCreator.createCircle();
+            JSONObject circleJSONObject = circleToJsonObject(circle);
+            JSONObject circle1 = circleCreator.getCircle1();
+            testCircle(circleJSONObject, circle1);
         }catch(JSONException e){
             System.err.println(e.getMessage());
         }
@@ -486,41 +506,10 @@ public class SitumMapperTest {
 
     @Test
     public void eventJSONObjectTest() throws JSONException {
-        SitumEvent event = eventCreator.createEvent();
+        SitumEvent event = eventCreator.createEvent1();
         JSONObject jsonObject = SitumMapper.situmEventToJsonObject(event);
-        assertEvent(jsonObject, event);
-    }
-
-    private void assertEvent(JSONObject jsonObject, SitumEvent event) throws JSONException {
-        assertThat(jsonObject.getInt(BUILDING_IDENTIFIER)).isEqualTo(event.getBuildingId());
-        assertThat(jsonObject.getInt(IDENTIFIER)).isEqualTo(event.getId());
-        assertThat(jsonObject.getInt(FLOOR_IDENTIFIER)).isEqualTo(event.getFloor_id());
-        assertThat(jsonObject.getString(INFO_HTML)).isEqualTo(event.getHtml());
-        assertConversionArea(jsonObject.getJSONObject(CONVERSION_AREA), event.getConversionArea());
-        assertCustomFields(jsonObject.getJSONObject(CUSTOM_FIELDS), event.getCustomFields());
-        assertThat(jsonObject.getDouble(RADIUS)).isEqualTo((double) event.getRadius());
-        assertThat(jsonObject.getString(NAME)).isEqualTo(event.getName());
-        assertThat(jsonObject.getDouble(X)).isEqualTo((double) event.getX());
-        assertThat(jsonObject.getDouble(Y)).isEqualTo((double) event.getY());
-    }
-
-    private void assertConversionArea(JSONObject jsonObject, SitumConversionArea conversionArea) throws JSONException {
-        assertThat(jsonObject.getInt(FLOOR_IDENTIFIER)).isEqualTo(conversionArea.getFloor_id());
-        assertPoint2f(jsonObject.getJSONObject(TOP_LEFT), conversionArea.getTopLeft());
-        assertPoint2f(jsonObject.getJSONObject(TOP_RIGHT), conversionArea.getTopRight());
-        assertPoint2f(jsonObject.getJSONObject(BOTTOM_LEFT), conversionArea.getBottomLeft());
-        assertPoint2f(jsonObject.getJSONObject(BOTTOM_RIGHT), conversionArea.getBottomRight());
-    }
-
-    private void assertPoint2f(JSONObject jsonObject, Point2f point) throws JSONException {
-        assertThat(jsonObject.getDouble(X)).isEqualTo(point.getX());
-        assertThat(jsonObject.getDouble(Y)).isEqualTo(point.getY());
-    }
-
-    private void assertCustomFields(JSONObject jsonObject, Map<String, String> customFields) throws JSONException {
-        for (Map.Entry<String, String> entry : customFields.entrySet()) {
-            assertThat(jsonObject.getString(entry.getKey())).isEqualTo(entry.getValue());
-        }
+        JSONObject event1 = eventCreator.getEvent1();
+        assertThat(jsonObject.toString()).isEqualTo(event1.toString());
     }
 
     private void testRoute(JSONObject route, JSONObject defaultRoute) throws JSONException {
@@ -735,6 +724,12 @@ public class SitumMapperTest {
         Assert.assertEquals(defaultSitumConversionArea.get(TOP_LEFT).toString(), situmConversionArea.get(TOP_LEFT).toString());
         Assert.assertEquals(JSONObject.class, situmConversionArea.get(TOP_RIGHT).getClass());
         Assert.assertEquals(defaultSitumConversionArea.get(TOP_RIGHT).toString(), situmConversionArea.get(TOP_RIGHT).toString());
+    }
+
+    private void testCircle(JSONObject circle, JSONObject defaultCircle) throws JSONException {
+        testPoint(circle.getJSONObject(CENTER), defaultCircle.getJSONObject(CENTER));
+        Assert.assertEquals(Float.class, circle.get(RADIUS).getClass());
+        Truth.assertThat(defaultCircle.getDouble(RADIUS)).isWithin(0.00001).of(circle.getDouble(RADIUS));
     }
 
     private void testNavigationProgress(JSONObject navigationProgress, JSONObject defaultNavigationProgress) throws JSONException {

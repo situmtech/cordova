@@ -5,12 +5,46 @@
     "name": "Evento de prueba con conversión",
     "floorIdentifier": 5765,
     "infoHtml": "<p>Fuuuu</p>",
+    "trigger": {
+      "center": {
+        "isIndoor": true,
+        "buildingIdentifier": "1051",
+        "coordinate": {
+          "longitude": -8.563611030578613,
+          "latitude": 42.872196197509766
+        },
+        "floorIdentifier": "1571",
+        "cartesianCoordinate": {
+          "x": 67.97866821289062,
+          "y": 32.9793701171875
+        },
+        "isOutdoor": false
+      },
+      "radius": 7.65508486729126
+    },
     "conversionArea": {
       "floorIdentifier": 5765,
       "topLeft": "Point2f{ x=16.6862409484321, y=29.2273399479374}",
       "topRight": "Point2f{ x=24.2493074510489, y=29.2273399479374}",
       "bottomLeft": "Point2f{ x=16.6862409484321, y=21.6642734453206}",
       "bottomRight": "Point2f{ x=24.2493074510489, y=21.6642734453206}"
+    },
+    "conversion": {
+      "center": {
+        "isIndoor": true,
+        "buildingIdentifier": "1051",
+        "coordinate": {
+          "longitude": -8.56306225061417,
+          "latitude": 42.8723345172012
+        },
+        "floorIdentifier": "1571",
+        "cartesianCoordinate": {
+          "x": 21.1289754744656,
+          "y": 25.849879822643
+        },
+        "isOutdoor": false
+      },
+      "radius": 3.7815332513084
     },
     "customFields": {},
     "radius": 7.65508508682251,
@@ -23,6 +57,23 @@
     "name": "Zone_A",
     "floorIdentifier": 5765,
     "infoHtml": "<p>&nbsp;</p>",
+    "trigger": {
+      "center": {
+        "isIndoor": true,
+        "buildingIdentifier": "1051",
+        "coordinate": {
+          "longitude": -8.563283920288086,
+          "latitude": 42.87220764160156
+        },
+        "floorIdentifier": "1571",
+        "cartesianCoordinate": {
+          "x": 41.45732879638672,
+          "y": 36.58069610595703
+        },
+        "isOutdoor": false
+      },
+      "radius": 4.63736758529235
+    },
     "conversionArea": {
       "floorIdentifier": 0,
       "topLeft": "Point2f{ x=0.0, y=0.0}",

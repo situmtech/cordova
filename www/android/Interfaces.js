@@ -362,16 +362,18 @@ module.exports = Indication
  * SitumEvent
  * @description
  * An event: POI with radius, conversion area and asociated statistics. It is intended for usage in marketing apps.
- * @property {number} buildingIdentifier - The identifier of the building this floor belongs to.
- * @property {number} identifier - Unique identifier of the SitumEvent
- * @property {number} floorIdentifier - The identifier of the floor this event is located at.
+ * @property {number} buildingIdentifier - The identifier of the building this floor belongs to. Deprecated, use trigger.center.buildingIdentifier instead
+ * @property {number} identifier - Unique identifier of the SitumEvent.
+ * @property {number} floorIdentifier - The identifier of the floor this event is located at. @deprecated, use trigger.center.floorIdentifier instead
  * @property {string} infoHtml - Information contained into the event, in HTML format.
- * @property {SitumConversionArea} conversionArea - Location where the event is located.
+ * @property {SitumConversionArea} conversionArea - Location where the event is located. @deprecated, use conversion instead
+ * @property {Circle} conversion - Location where the event is located.
+ * @property {Circle} trigger - Location where the event should be fired
  * @property {object} customFields - Key-value pairs that allow to extend and fully customize the information associated with the event.
- * @property {number} radius - Radius of the event associated area
+ * @property {number} radius - Radius of the event associated area. @deprecated, use trigger.radius instead
  * @property {string} name - Name of the event
- * @property {number} x - Center of the event in the x-axis
- * @property {number} y - Center of the event in the y-axis
+ * @property {number} x - Center of the event in the x-axis. @deprecated, use trigger.center.cartesianCoordinate.x instead
+ * @property {number} y - Center of the event in the y-axis. @deprecated, use trigger.center.cartesianCoordinate.y instead
  */
 
 var SitumEvent = {
@@ -407,6 +409,22 @@ var SitumConversionArea = {
   topRight,
   bottomLeft,
   bottomRight,
+}
+
+module.exports = Circle
+
+/**
+ * @name
+ * Circle
+ * @description
+ * A circular area
+ * @property {Point} center - The center of the circle
+ * @property {number} radius - The radius of the circle
+ */
+
+var Circle = {
+  center,
+  radius,
 }
 
 module.exports = SitumConversionArea
