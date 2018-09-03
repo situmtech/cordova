@@ -13,6 +13,8 @@
 
 - (NSDictionary *) buildingIndoorToJsonObject:(SITIndoorBuilding *) building __deprecated;
 
+- (NSDictionary *) conversionAreaToJsonObject:(SITRectangularArea *) ca;
+
 
 //Floor
 

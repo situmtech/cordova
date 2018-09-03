@@ -16,7 +16,21 @@
 
 - (void) setUp;
 - (void) tearDown;
+- (void) testAngle;
+- (void) testBound;
+- (void) testCartesianCoordinate;
+- (void) testCoordinate;
+- (void) testDimension;
+- (void) testEvent;
+- (void) testFloor;
+- (void) testIndication;
 - (void) testLocation;
-
+- (void) testLocationStatus;
+- (void) testNavigationProgress;
+- (void) testPoiCategory;
+- (void) testPoint;
+- (void) testRoute;
+- (void) testRouteStep;
+- (void) testSitumConversionArea;
 
 @end
