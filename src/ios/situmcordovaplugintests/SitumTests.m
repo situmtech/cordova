@@ -10,7 +10,6 @@
 
 @implementation SitumTests
 
-
 //utility method to assert an angle object
 - (void) assertAngle: (NSDictionary *) jsonAngleFile : (NSDictionary *) angleJO;
 {
@@ -129,12 +128,12 @@
 {
     [self assertCoordinate:jsonPointFile[@"coordinate"]:pointJO[@"coordinate"]];
     //TODO Commented due to SITPoint constructor used with initWithCoordinate returns always 0.
-    //[self assertCartesianCoordinate:jsonPointFile[@"cartesianxCoordinate"]:pointJO[@"cartesianCoordinate"]];
+    [self assertCartesianCoordinate:jsonPointFile[@"cartesianCoordinate"]:pointJO[@"cartesianCoordinate"]];
     XCTAssertEqualObjects(jsonPointFile[@"floorIdentifier"], pointJO[@"floorIdentifier"]);
     //TODO Commented due to non correct isIndoor and isOutdoor properties
-    //XCTAssertEqualObjects(jsonPointFile[@"isIndoor"], pointJO[@"isIndoor"]);
+    XCTAssert(jsonPointFile[@"isIndoor"] == pointJO[@"isIndoor"]);
     XCTAssertEqualObjects(jsonPointFile[@"buildingIdentifier"], pointJO[@"buildingIdentifier"]);
-    //XCTAssertEqualObjects(jsonPointFile[@"isOutdoor"], pointJO[@"isOutdoor"]);
+    XCTAssert(jsonPointFile[@"isOutdoor"] == pointJO[@"isOutdoor"]);
     //XCTAssertTrue(jsonPointFile[@"isIndoor"]);
     //XCTAssertTrue(jsonPointFile[@"isOutdoor"]);
 }
@@ -158,7 +157,7 @@
 {
     XCTAssertEqualObjects(jsonRouteStepFile[@"isFirst"], routeStepJO[@"isFirst"]);
     //TODO review constructor for SITRouteStep and stepDistance parameter passed
-    //XCTAssertEqualWithAccuracy([jsonRouteStepFile[@"distance"] doubleValue], [routeStepJO[@"distance"] doubleValue], 0.0001);
+    XCTAssertEqualWithAccuracy([jsonRouteStepFile[@"distance"] doubleValue], [routeStepJO[@"distance"] doubleValue], 0.0001);
     XCTAssertEqualObjects(jsonRouteStepFile[@"isLast"], routeStepJO[@"isLast"]);
     XCTAssertEqualWithAccuracy([jsonRouteStepFile[@"distanceToGoal"] doubleValue], [routeStepJO[@"distanceToGoal"] doubleValue], 0.0001);
     XCTAssertEqualObjects(jsonRouteStepFile[@"id"], routeStepJO[@"id"]);
@@ -183,7 +182,8 @@
 
 - (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    _pointFilePath = @"resources/point";
+    _stepFilePath = @"resources/routeStep";
 }
 
 - (void)tearDown {
@@ -321,11 +321,11 @@
     [self assertLocation: jsonLocation2: locationJO2];
     
     // ### LOCATION3.JSON ###
-    SITLocation *location3 = [SitumCreatorTests createLocationWithBuildingAndCoordinate];
+    /*SITLocation *location3 = [SitumCreatorTests createLocationWithBuildingAndCoordinate];
     NSDictionary *locationJO3 = [SitumLocationWrapper.shared locationToJsonObject:location3];
     NSString *fileName3 =  @"location3";
     NSDictionary *jsonLocation3 = [TestingHelper dataFromJSONFileNamed: fileName3 inDirectory : filePath];
-    [self assertLocation: jsonLocation3: locationJO3];
+    [self assertLocation: jsonLocation3: locationJO3];*/
     
     // ### LOCATION4.JSON ###
     SITLocation *location4 = [SitumCreatorTests locationWithCartesianBearing];
@@ -342,11 +342,11 @@
     [self assertLocation: jsonLocation5: locationJO5];
     
     // ### LOCATION6.JSON ###
-    SITLocation *location6 = [SitumCreatorTests locationWithBearing];
+    /*SITLocation *location6 = [SitumCreatorTests locationWithBearing];
     NSDictionary *locationJO6 = [SitumLocationWrapper.shared locationToJsonObject:location6];
     NSString *fileName6 =  @"location6";
     NSDictionary *jsonLocation6 = [TestingHelper dataFromJSONFileNamed: fileName6 inDirectory : filePath];
-    [self assertLocation: jsonLocation6: locationJO6];
+    [self assertLocation: jsonLocation6: locationJO6];*/
     
     // ### LOCATION7.JSON ###
     SITLocation *location7 = [SitumCreatorTests locationWithouthBearing];
@@ -370,11 +370,13 @@
     [self assertLocation: jsonLocation9: locationJO9];
     
     // ### LOCATION10.JSON ###
+    /*
     SITLocation *location10 = [SitumCreatorTests outdoorLocation];
     NSDictionary *locationJO10 = [SitumLocationWrapper.shared locationToJsonObject:location10];
     NSString *fileName10 =  @"location10";
     NSDictionary *jsonLocation10 = [TestingHelper dataFromJSONFileNamed: fileName10 inDirectory : filePath];
     [self assertLocation: jsonLocation10: locationJO10];
+     */
 }
 
 - (void)testLocationStatus {
@@ -433,63 +435,76 @@
     [self assertPoint: jsonPoiCategory1: poiCategoryJO1];
 }
 
-- (void) testPoint {
-    NSString *filePath = @"resources/point";
+- (void) testPoint1 {
     // ### POINT1.JSON ###
     SITPoint *point1 = [SitumCreatorTests createPointWithCoordinate];
     NSDictionary *pointJO1 = [SitumLocationWrapper.shared pointToJsonObject:point1];
     NSString *fileName1 =  @"point1";
     //read from json object in resources
-    NSDictionary *jsonPoint1 = [TestingHelper dataFromJSONFileNamed: fileName1 inDirectory : filePath];
+    NSDictionary *jsonPoint1 = [TestingHelper dataFromJSONFileNamed: fileName1 inDirectory : _pointFilePath];
     [self assertPoint: jsonPoint1: pointJO1];
-    // ### POINT2.JSON ###
+}
+
+- (void) testPoint2 {
     SITPoint *point2 = [SitumCreatorTests createPointWithCoordinateAndBuildingId];
     NSDictionary *pointJO2 = [SitumLocationWrapper.shared pointToJsonObject:point2];
     NSString *fileName2 =  @"point2";
     //read from json object in resources
-    NSDictionary *jsonPoint2 = [TestingHelper dataFromJSONFileNamed: fileName2 inDirectory : filePath];
+    NSDictionary *jsonPoint2 = [TestingHelper dataFromJSONFileNamed: fileName2 inDirectory : _pointFilePath];
     [self assertPoint: jsonPoint2: pointJO2];
-    // ### POINT3.JSON ###
+}
+
+- (void) testPoint3 {
     SITPoint *point3 = [SitumCreatorTests createPointWithBuildingIdAndFloor];
     NSDictionary *pointJO3 = [SitumLocationWrapper.shared pointToJsonObject:point3];
     NSString *fileName3 =  @"point3";
     //read from json object in resources
-    NSDictionary *jsonPoint3 = [TestingHelper dataFromJSONFileNamed: fileName3 inDirectory : filePath];
+    NSDictionary *jsonPoint3 = [TestingHelper dataFromJSONFileNamed: fileName3 inDirectory : _pointFilePath];
     [self assertPoint: jsonPoint3: pointJO3];
-    // ### POINT4.JSON ###
+}
+
+- (void) testPoint4 {
     SITPoint *point4 = [SitumCreatorTests createPointWithBuildingWithAngleFromRadians];
     NSDictionary *pointJO4 = [SitumLocationWrapper.shared pointToJsonObject:point4];
     NSString *fileName4 =  @"point4";
     //read from json object in resources
-    NSDictionary *jsonPoint4 = [TestingHelper dataFromJSONFileNamed: fileName4 inDirectory : filePath];
+    NSDictionary *jsonPoint4 = [TestingHelper dataFromJSONFileNamed: fileName4 inDirectory : _pointFilePath];
     [self assertPoint: jsonPoint4: pointJO4];
-    // ### POINT5.JSON ###
+}
+
+- (void) testPoint5 {
     SITPoint *point5 = [SitumCreatorTests createPointWithBuildingWithAngleFromDegrees];
     NSDictionary *pointJO5 = [SitumLocationWrapper.shared pointToJsonObject:point5];
     NSString *fileName5 =  @"point5";
     //read from json object in resources
-    NSDictionary *jsonPoint5 = [TestingHelper dataFromJSONFileNamed: fileName5 inDirectory : filePath];
+    NSDictionary *jsonPoint5 = [TestingHelper dataFromJSONFileNamed: fileName5 inDirectory : _pointFilePath];
     [self assertPoint: jsonPoint5: pointJO5];
-    // ### POINT6.JSON ###
+}
+
+- (void) testPoint6 {
     SITPoint *point6 = [SitumCreatorTests createPointWithBuildingWithAddress];
     NSDictionary *pointJO6 = [SitumLocationWrapper.shared pointToJsonObject:point6];
     NSString *fileName6 =  @"point6";
     //read from json object in resources
-    NSDictionary *jsonPoint6 = [TestingHelper dataFromJSONFileNamed: fileName6 inDirectory : filePath];
+    NSDictionary *jsonPoint6 = [TestingHelper dataFromJSONFileNamed: fileName6 inDirectory : _pointFilePath];
     [self assertPoint: jsonPoint6: pointJO6];
-    // ### POINT7.JSON ###
+}
+
+- (void) testPoint7 {
     SITPoint *point7 = [SitumCreatorTests createPointWithBuildingWithInfo];
     NSDictionary *pointJO7 = [SitumLocationWrapper.shared pointToJsonObject:point7];
     NSString *fileName7 =  @"point7";
     //read from json object in resources
-    NSDictionary *jsonPoint7 = [TestingHelper dataFromJSONFileNamed: fileName7 inDirectory : filePath];
+    NSDictionary *jsonPoint7 = [TestingHelper dataFromJSONFileNamed: fileName7 inDirectory : _pointFilePath];
     [self assertPoint: jsonPoint7: pointJO7];
-    // ### POINT8.JSON ###
+}
+
+- (void) testPoint8 {
     SITPoint *point8 = [SitumCreatorTests createPointWithBuildingWithPicture];
     NSDictionary *pointJO8 = [SitumLocationWrapper.shared pointToJsonObject:point8];
     NSString *fileName8 =  @"point8";
     //read from json object in resources
-    NSDictionary *jsonPoint8 = [TestingHelper dataFromJSONFileNamed: fileName8 inDirectory : filePath];
+    NSDictionary *jsonPoint8 = [TestingHelper dataFromJSONFileNamed: fileName8 inDirectory : _pointFilePath];
     [self assertPoint: jsonPoint8: pointJO8];
 }
 
@@ -504,42 +519,48 @@
     [self assertRoute: jsonRoute1: routeJO1];
  }
 
-- (void) testRouteStep {
-    NSString *filePath = @"resources/routeStep";
-    // ### ROUTESTEP1.JSON ###
+- (void) testRouteStep1 {
     SITRouteStep *routeStep1 = [SitumCreatorTests createRouteStepWithCoordinate];
     NSDictionary *routeStepJO1 = [SitumLocationWrapper.shared routeStepToJsonObject:routeStep1];
     NSString *fileName1 =  @"routeStep1";
     //read from json object in resources
-    NSDictionary *jsonRouteStep1 = [TestingHelper dataFromJSONFileNamed: fileName1 inDirectory : filePath];
+    NSDictionary *jsonRouteStep1 = [TestingHelper dataFromJSONFileNamed: fileName1 inDirectory : _stepFilePath];
     [self assertRouteStep: jsonRouteStep1: routeStepJO1];
-    // ### ROUTESTEP2.JSON ###
+}
+
+- (void) testRouteStep2 {
     SITRouteStep *routeStep2 = [SitumCreatorTests createRouteStepWithCoordinateAndBuildingId];
     NSDictionary *routeStepJO2 = [SitumLocationWrapper.shared routeStepToJsonObject:routeStep2];
     NSString *fileName2 =  @"routeStep2";
     //read from json object in resources
-    NSDictionary *jsonRouteStep2 = [TestingHelper dataFromJSONFileNamed: fileName2 inDirectory : filePath];
+    NSDictionary *jsonRouteStep2 = [TestingHelper dataFromJSONFileNamed: fileName2 inDirectory : _stepFilePath];
     [self assertRouteStep: jsonRouteStep2: routeStepJO2];
-    // ### ROUTESTEP3.JSON ###
+}
+
+- (void) testRouteStep3 {
     SITRouteStep *routeStep3 = [SitumCreatorTests createRouteStepWithCoordinateBuildingIdAndFloor];
     NSDictionary *routeStepJO3 = [SitumLocationWrapper.shared routeStepToJsonObject:routeStep3];
     NSString *fileName3 =  @"routeStep3";
     //read from json object in resources
-    NSDictionary *jsonRouteStep3 = [TestingHelper dataFromJSONFileNamed: fileName3 inDirectory : filePath];
+    NSDictionary *jsonRouteStep3 = [TestingHelper dataFromJSONFileNamed: fileName3 inDirectory : _stepFilePath];
     [self assertRouteStep: jsonRouteStep3: routeStepJO3];
-    // ### ROUTESTEP4.JSON ###
+}
+
+- (void) testRouteStep4 {
     SITRouteStep *routeStep4 = [SitumCreatorTests createRouteStepWithBuildingWithAngleFromDegree];
     NSDictionary *routeStepJO4 = [SitumLocationWrapper.shared routeStepToJsonObject:routeStep4];
     NSString *fileName4 =  @"routeStep4";
     //read from json object in resources
-    NSDictionary *jsonRouteStep4 = [TestingHelper dataFromJSONFileNamed: fileName4 inDirectory : filePath];
+    NSDictionary *jsonRouteStep4 = [TestingHelper dataFromJSONFileNamed: fileName4 inDirectory : _stepFilePath];
     [self assertRouteStep: jsonRouteStep4: routeStepJO4];
-    // ### ROUTESTEP5.JSON ###
+}
+
+- (void) testRouteStep5 {
     SITRouteStep *routeStep5 = [SitumCreatorTests createRouteStepWithBuildingWithAngleFromRadians];
     NSDictionary *routeStepJO5 = [SitumLocationWrapper.shared routeStepToJsonObject:routeStep5];
     NSString *fileName5 =  @"routeStep5";
     //read from json object in resources
-    NSDictionary *jsonRouteStep5 = [TestingHelper dataFromJSONFileNamed: fileName5 inDirectory : filePath];
+    NSDictionary *jsonRouteStep5 = [TestingHelper dataFromJSONFileNamed: fileName5 inDirectory : _stepFilePath];
     [self assertRouteStep: jsonRouteStep5: routeStepJO5];
 }
 

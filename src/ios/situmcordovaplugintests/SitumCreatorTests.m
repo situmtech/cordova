@@ -158,6 +158,7 @@
 + (SITLocation *) createLocationWithBuildingAndCoordinate {
     NSTimeInterval timestamp = 14676784;
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(8.6, 10.5);
+    //TODO: iOS does not provide constructor for this case
     SITCartesianCoordinate *cartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:0 y:0];
     SITPoint *position  = [[SITPoint alloc]  initWithCoordinate:coordinate buildingIdentifier:@"101" floorIdentifier:@"-1" cartesianCoordinate: cartesianCoordinate];
     float bearing = 0; //degrees
@@ -204,6 +205,7 @@
 + (SITLocation *) locationWithBearing {
     NSTimeInterval timestamp = 14676784;
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(8.6, 10.5);
+    //TODO: iOS does not provide constructor for this case
     SITCartesianCoordinate *cartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:0 y:0];
     SITPoint *position  = [[SITPoint alloc]  initWithCoordinate:coordinate buildingIdentifier:@"-1" floorIdentifier:@"-1" cartesianCoordinate: cartesianCoordinate];
     float bearing = 92; //degrees
@@ -264,6 +266,7 @@
 + (SITLocation *) outdoorLocation {
     NSTimeInterval timestamp = 14676784;
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(8.6, 10.5);
+    //TODO: iOS does not provide constructor for this case
     SITCartesianCoordinate *cartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:0 y:0];
     SITPoint *position  = [[SITPoint alloc]  initWithCoordinate:coordinate buildingIdentifier:@"-1" floorIdentifier:@"-1" cartesianCoordinate: cartesianCoordinate];
     float bearing = 92; //degrees
@@ -438,16 +441,14 @@
 //point1.json
 + (SITPoint *) createPointWithCoordinate {
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(3, 6);
-    SITCartesianCoordinate *cartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:0 y:0];
-    SITPoint *point  = [[SITPoint alloc] initWithCoordinate:coordinate buildingIdentifier:@"-1" floorIdentifier:@"-1" cartesianCoordinate: cartesianCoordinate];
+    SITPoint *point  = [[SITPoint alloc] initWihtCoordinate:coordinate];
     return point;
 }
 
 //point2.json
 + (SITPoint *) createPointWithCoordinateAndBuildingId {
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(54, 64);
-    SITCartesianCoordinate *cartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:0 y:0];
-    SITPoint *point  = [[SITPoint alloc]  initWithCoordinate:coordinate buildingIdentifier:@"101" floorIdentifier:@"-1" cartesianCoordinate: cartesianCoordinate];
+    SITPoint * point = [[SITPoint alloc] initWithCoordinate:coordinate buildingIdentifier:@"101"];
     return point;
 }
 
@@ -535,8 +536,7 @@
     SITCartesianCoordinate *fromCartesianCoordinateStep3 = [[SITCartesianCoordinate alloc] initWithX:3 y:5];
     SITPoint *fromStep3  = [[SITPoint alloc]  initWithCoordinate:fromCoordinateStep3 buildingIdentifier:@"-1" floorIdentifier:@"12" cartesianCoordinate: fromCartesianCoordinateStep3];
     CLLocationCoordinate2D toCoordinateStep3 = CLLocationCoordinate2DMake(2,5);
-    SITCartesianCoordinate *toCartesianCoordinateStep3 = [[SITCartesianCoordinate alloc] initWithX:0 y:0];
-    SITPoint *toStep3  = [[SITPoint alloc]  initWithCoordinate:toCoordinateStep3 buildingIdentifier:@"101" floorIdentifier:@"-1" cartesianCoordinate: toCartesianCoordinateStep3];
+    SITPoint *toStep3 = [[SITPoint alloc] initWithCoordinate:toCoordinateStep3 buildingIdentifier:@"101"];
     SITRouteStep *step3 = [[SITRouteStep alloc] initWithIndex:3 from:fromStep3 to:toStep3 isFirst:false isLast:true nextStepIndex:3 stepDistance:7 distanceToGoal:7];
     
     NSMutableArray *routeSteps = [[NSMutableArray alloc] init];
@@ -595,12 +595,10 @@
 + (SITRouteStep *) createRouteStepWithCoordinate {
     //from
     CLLocationCoordinate2D fromCoordinate = CLLocationCoordinate2DMake(2, 5);
-    SITCartesianCoordinate *fromCartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:0 y:0];
-    SITPoint *from  = [[SITPoint alloc]  initWithCoordinate:fromCoordinate buildingIdentifier:@"-1" floorIdentifier:@"-1" cartesianCoordinate: fromCartesianCoordinate];
+    SITPoint *from  = [[SITPoint alloc]  initWithCoordinate:fromCoordinate buildingIdentifier:@"-1"];
     //to
     CLLocationCoordinate2D toCoordinate = CLLocationCoordinate2DMake(3, 4);
-    SITCartesianCoordinate *toCartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:0 y:0];
-    SITPoint *to  = [[SITPoint alloc]  initWithCoordinate:toCoordinate buildingIdentifier:@"-1" floorIdentifier:@"-1" cartesianCoordinate: toCartesianCoordinate];
+    SITPoint *to  = [[SITPoint alloc]  initWithCoordinate:toCoordinate buildingIdentifier:@"-1"];
     
     SITRouteStep *routeStep = [[SITRouteStep alloc] initWithIndex:2 from:from to:to isFirst:false isLast:false nextStepIndex:3 stepDistance:23.4 distanceToGoal:27];
     return routeStep;
@@ -610,12 +608,10 @@
 + (SITRouteStep *) createRouteStepWithCoordinateAndBuildingId {
     //from
     CLLocationCoordinate2D fromCoordinate = CLLocationCoordinate2DMake(2, 5);
-    SITCartesianCoordinate *fromCartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:0 y:0];
-    SITPoint *from  = [[SITPoint alloc]  initWithCoordinate:fromCoordinate buildingIdentifier:@"101" floorIdentifier:@"-1" cartesianCoordinate: fromCartesianCoordinate];
+    SITPoint *from  = [[SITPoint alloc]  initWithCoordinate:fromCoordinate buildingIdentifier:@"101"];
     //to
     CLLocationCoordinate2D toCoordinate = CLLocationCoordinate2DMake(3, 4);
-    SITCartesianCoordinate *toCartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:0 y:0];
-    SITPoint *to  = [[SITPoint alloc]  initWithCoordinate:toCoordinate buildingIdentifier:@"101" floorIdentifier:@"-1" cartesianCoordinate: toCartesianCoordinate];
+    SITPoint *to  = [[SITPoint alloc]  initWithCoordinate:toCoordinate buildingIdentifier:@"101"];
     
     SITRouteStep *routeStep = [[SITRouteStep alloc] initWithIndex:2 from:from to:to isFirst:false isLast:false nextStepIndex:3 stepDistance:23.4 distanceToGoal:27];
     return routeStep;
