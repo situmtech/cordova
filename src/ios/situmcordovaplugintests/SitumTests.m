@@ -107,10 +107,7 @@
 //utility method to assert a Coordinate
 - (void) assertLocationStatus: (NSDictionary *) jsonLocationStatusFile : (NSDictionary *) locationStatusJO;
 {
-    //XCTAssertEqualWithAccuracy([jsonLocationStatusFile[@"statusOrdinal"] doubleValue], [locationStatusJO[@"statusOrdinal"] doubleValue], 0.0001);
-    //XCTAssertEqualObjects(jsonLocationStatusFile[@"statusName"], locationStatusJO[@"statusName"]);
-    XCTAssertTrue(jsonLocationStatusFile[@"statusOrdinal"]);
-    XCTAssertTrue(jsonLocationStatusFile[@"statusName"]);
+    XCTAssert([jsonLocationStatusFile[@"statusName"] isEqualToString: locationStatusJO[@"statusName"]]);
 }
 
 //utility method to assert a NavigationProgress
@@ -389,13 +386,7 @@
     //read from json object in resources
     NSDictionary *jsonLocationStatus1 = [TestingHelper dataFromJSONFileNamed: fileName1 inDirectory : filePath];
     [self assertLocationStatus: jsonLocationStatus1: locationStatusJO1];
-    // ### LOCATIONSTATUS2.JSON ###
-    SITLocationState locationStatus2 = [SitumCreatorTests createLocationStatusBLENotAvailable];
-    NSDictionary *locationStatusJO2 = [SitumLocationWrapper.shared locationStateToJsonObject:locationStatus2];
-    NSString *fileName2 =  @"locationStatus2";
-    //read from json object in resources
-    NSDictionary *jsonLocationStatus2 = [TestingHelper dataFromJSONFileNamed: fileName2 inDirectory : filePath];
-    [self assertLocationStatus: jsonLocationStatus2: locationStatusJO2];
+
     // ### LOCATIONSTATUS3.JSON ###
     SITLocationState locationStatus3 = [SitumCreatorTests createLocationStatusCalculating];
     NSDictionary *locationStatusJO3 = [SitumLocationWrapper.shared locationStateToJsonObject:locationStatus3];
@@ -403,69 +394,7 @@
     //read from json object in resources
     NSDictionary *jsonLocationStatus3 = [TestingHelper dataFromJSONFileNamed: fileName3 inDirectory : filePath];
     [self assertLocationStatus: jsonLocationStatus3: locationStatusJO3];
-    // ### LOCATIONSTATUS4.JSON ###
-    SITLocationState locationStatus4 = [SitumCreatorTests createLocationStatusCompassCalibrationNeeded];
-    NSDictionary *locationStatusJO4 = [SitumLocationWrapper.shared locationStateToJsonObject:locationStatus4];
-    NSString *fileName4 =  @"locationStatus4";
-    //read from json object in resources
-    NSDictionary *jsonLocationStatus4 = [TestingHelper dataFromJSONFileNamed: fileName4 inDirectory : filePath];
-    [self assertLocationStatus: jsonLocationStatus4: locationStatusJO4];
-    // ### LOCATIONSTATUS5.JSON ###
-    SITLocationState locationStatus5 = [SitumCreatorTests createLocationStatusCompassCalibrationNotNeeded];
-    NSDictionary *locationStatusJO5 = [SitumLocationWrapper.shared locationStateToJsonObject:locationStatus5];
-    NSString *fileName5 =  @"locationStatus5";
-    //read from json object in resources
-    NSDictionary *jsonLocationStatus5 = [TestingHelper dataFromJSONFileNamed: fileName5 inDirectory : filePath];
-    [self assertLocationStatus: jsonLocationStatus5: locationStatusJO5];
-    // ### LOCATIONSTATUS6.JSON ###
-    SITLocationState locationStatus6 = [SitumCreatorTests createLocationStatusNoConnection];
-    NSDictionary *locationStatusJO6 = [SitumLocationWrapper.shared locationStateToJsonObject:locationStatus6];
-    NSString *fileName6 =  @"locationStatus6";
-    //read from json object in resources
-    NSDictionary *jsonLocationStatus6 = [TestingHelper dataFromJSONFileNamed: fileName6 inDirectory : filePath];
-    [self assertLocationStatus: jsonLocationStatus6: locationStatusJO6];
-    // ### LOCATIONSTATUS7.JSON ###
-    SITLocationState locationStatus7 = [SitumCreatorTests createLocationStatusPreparingPositioningModel];
-    NSDictionary *locationStatusJO7 = [SitumLocationWrapper.shared locationStateToJsonObject:locationStatus7];
-    NSString *fileName7 =  @"locationStatus7";
-    //read from json object in resources
-    NSDictionary *jsonLocationStatus7 = [TestingHelper dataFromJSONFileNamed: fileName7 inDirectory : filePath];
-    [self assertLocationStatus: jsonLocationStatus7: locationStatusJO7];
-    // ### LOCATIONSTATUS8.JSON ###
-    SITLocationState locationStatus8 = [SitumCreatorTests createLocationStatusProcessingPositioningModel];
-    NSDictionary *locationStatusJO8 = [SitumLocationWrapper.shared locationStateToJsonObject:locationStatus8];
-    NSString *fileName8 =  @"locationStatus8";
-    //read from json object in resources
-    NSDictionary *jsonLocationStatus8 = [TestingHelper dataFromJSONFileNamed: fileName8 inDirectory : filePath];
-    [self assertLocationStatus: jsonLocationStatus8: locationStatusJO8];
-    // ### LOCATIONSTATUS9.JSON ###
-    SITLocationState locationStatus9 = [SitumCreatorTests createLocationStatusRetryDownloadPositioningModel];
-    NSDictionary *locationStatusJO9 = [SitumLocationWrapper.shared locationStateToJsonObject:locationStatus9];
-    NSString *fileName9 =  @"locationStatus9";
-    //read from json object in resources
-    NSDictionary *jsonLocationStatus9 = [TestingHelper dataFromJSONFileNamed: fileName9 inDirectory : filePath];
-    [self assertLocationStatus: jsonLocationStatus9: locationStatusJO9];
-    // ### LOCATIONSTATUS10.JSON ###
-    SITLocationState locationStatus10 = [SitumCreatorTests createLocationStatusStartDownloadPositioningModel];
-    NSDictionary *locationStatusJO10 = [SitumLocationWrapper.shared locationStateToJsonObject:locationStatus10];
-    NSString *fileName10 =  @"locationStatus10";
-    //read from json object in resources
-    NSDictionary *jsonLocationStatus10 = [TestingHelper dataFromJSONFileNamed: fileName10 inDirectory : filePath];
-    [self assertLocationStatus: jsonLocationStatus10: locationStatusJO10];
-    // ### LOCATIONSTATUS11.JSON ###
-    SITLocationState locationStatus11 = [SitumCreatorTests createLocationStatusTimeSettingsManual];
-    NSDictionary *locationStatusJO11 = [SitumLocationWrapper.shared locationStateToJsonObject:locationStatus11];
-    NSString *fileName11 =  @"locationStatus11";
-    //read from json object in resources
-    NSDictionary *jsonLocationStatus11 = [TestingHelper dataFromJSONFileNamed: fileName11 inDirectory : filePath];
-    [self assertLocationStatus: jsonLocationStatus11: locationStatusJO11];
-    // ### LOCATIONSTATUS12.JSON ###
-    SITLocationState locationStatus12 = [SitumCreatorTests createLocationStatusTimeSettingsManual];
-    NSDictionary *locationStatusJO12 = [SitumLocationWrapper.shared locationStateToJsonObject:locationStatus12];
-    NSString *fileName12 =  @"locationStatus12";
-    //read from json object in resources
-    NSDictionary *jsonLocationStatus12 = [TestingHelper dataFromJSONFileNamed: fileName12 inDirectory : filePath];
-    [self assertLocationStatus: jsonLocationStatus12: locationStatusJO12];
+
     // ### LOCATIONSTATUS13.JSON ###
     SITLocationState locationStatus13 = [SitumCreatorTests createLocationStatusUserNotInBuilding];
     NSDictionary *locationStatusJO13 = [SitumLocationWrapper.shared locationStateToJsonObject:locationStatus13];

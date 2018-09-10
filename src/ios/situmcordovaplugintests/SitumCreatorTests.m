@@ -285,64 +285,14 @@
     return kSITLocationStarted;
 }
 
-//locationStatus2.json
-+ (SITLocationState) createLocationStatusBLENotAvailable {
-    return -1;
-}
-
 //locationStatus3.json
 + (SITLocationState) createLocationStatusCalculating {
-    return -1;//kSITLocationCalculating;
-}
-
-//locationStatus4.json
-+ (SITLocationState) createLocationStatusCompassCalibrationNeeded {
-    return -1;
-}
-
-//locationStatus5.json
-+ (SITLocationState) createLocationStatusCompassCalibrationNotNeeded {
-    return -1;
-}
-
-//locationStatus6.json
-+ (SITLocationState) createLocationStatusNoConnection {
-    return -1;
-}
-
-//locationStatus7.json
-+ (SITLocationState) createLocationStatusPreparingPositioningModel {
-    return -1;
-}
-
-//locationStatus8.json
-+ (SITLocationState) createLocationStatusProcessingPositioningModel {
-    return -1;
-}
-
-//locationStatus9.json
-+ (SITLocationState) createLocationStatusRetryDownloadPositioningModel {
-    return -1;
-}
-
-//locationStatus10.json
-+ (SITLocationState) createLocationStatusStartDownloadPositioningModel {
-    return -1;
-}
-
-//locationStatus11.json
-+ (SITLocationState) createLocationStatusStartingPositioning {
-    return -1;
-}
-
-//locationStatus12.json
-+ (SITLocationState) createLocationStatusTimeSettingsManual {
-    return -1;
+    return kSITLocationCalculating;
 }
 
 //locationStatus13.json
 + (SITLocationState) createLocationStatusUserNotInBuilding {
-    return kSITLocationUserNotInBuilding;//kSITLocationUserNotInBuilding;
+    return kSITLocationUserNotInBuilding;
 }
 
 //navigationProgress1.json
