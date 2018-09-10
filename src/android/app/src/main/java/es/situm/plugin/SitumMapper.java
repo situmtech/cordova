@@ -159,6 +159,7 @@ class SitumMapper {
   public static final String MOTION_MODE = "motionMode";
   public static final String USE_FOREGROUND_SERVICE = "useForegroundService";
   public static final String USE_DEAD_RECKONING = "useDeadReckoning";
+  public static final String USE_GPS = "useGps";
 
   public static final String OUTDOOR_LOCATION_OPTIONS = "outdoorLocationOptions";
   public static final String CONTINUOUS_MODE = "continuousMode";

@@ -439,6 +439,7 @@ module.exports = SitumConversionArea
  * @property {string} indoorProvider - Default indoor provider. Possible values are INPHONE and SUPPORT
  * @property {boolean} useBle - Defines whether or not to use BLE for positioning
  * @property {boolean} useWifi - Defines whether or not to use Wi-Fi for positioning
+ * @property {boolean} useGps - Defines whether or not to use the GPS for indoor positioning
  * @property {string} motionMode - Default motion mode. Possible values are BY_CAR, BY_FOOT and RADIOMAX
  * @property {boolean} useForegroundService - Defines whether or not to activate the {@link http://developers.situm.es/pages/android/using_situm_sdk_background.html foreground service}
  * @property {boolean} useDeadReckoning - Defines whether ot not to use dead reckoning to get fast position updates using only the inertial sensors, between the server position updates.
@@ -454,6 +455,7 @@ var LocationRequest = {
   indoorProvider,
   useBle,
   useWifi,
+  useGps,
   motionMode,
   useForegroundService,
   useDeadReckoning,
