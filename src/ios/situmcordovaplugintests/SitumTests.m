@@ -321,11 +321,11 @@
     [self assertLocation: jsonLocation2: locationJO2];
     
     // ### LOCATION3.JSON ###
-    /*SITLocation *location3 = [SitumCreatorTests createLocationWithBuildingAndCoordinate];
+    SITLocation *location3 = [SitumCreatorTests createLocationWithBuildingAndCoordinate];
     NSDictionary *locationJO3 = [SitumLocationWrapper.shared locationToJsonObject:location3];
     NSString *fileName3 =  @"location3";
     NSDictionary *jsonLocation3 = [TestingHelper dataFromJSONFileNamed: fileName3 inDirectory : filePath];
-    [self assertLocation: jsonLocation3: locationJO3];*/
+    [self assertLocation: jsonLocation3: locationJO3];
     
     // ### LOCATION4.JSON ###
     SITLocation *location4 = [SitumCreatorTests locationWithCartesianBearing];
@@ -342,11 +342,11 @@
     [self assertLocation: jsonLocation5: locationJO5];
     
     // ### LOCATION6.JSON ###
-    /*SITLocation *location6 = [SitumCreatorTests locationWithBearing];
+    SITLocation *location6 = [SitumCreatorTests locationWithBearing];
     NSDictionary *locationJO6 = [SitumLocationWrapper.shared locationToJsonObject:location6];
     NSString *fileName6 =  @"location6";
     NSDictionary *jsonLocation6 = [TestingHelper dataFromJSONFileNamed: fileName6 inDirectory : filePath];
-    [self assertLocation: jsonLocation6: locationJO6];*/
+    [self assertLocation: jsonLocation6: locationJO6];
     
     // ### LOCATION7.JSON ###
     SITLocation *location7 = [SitumCreatorTests locationWithouthBearing];

@@ -158,9 +158,7 @@
 + (SITLocation *) createLocationWithBuildingAndCoordinate {
     NSTimeInterval timestamp = 14676784;
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(8.6, 10.5);
-    //TODO: iOS does not provide constructor for this case
-    SITCartesianCoordinate *cartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:0 y:0];
-    SITPoint *position  = [[SITPoint alloc]  initWithCoordinate:coordinate buildingIdentifier:@"101" floorIdentifier:@"-1" cartesianCoordinate: cartesianCoordinate];
+    SITPoint *position  = [[SITPoint alloc]  initWithCoordinate:coordinate buildingIdentifier:@"101"];
     float bearing = 0; //degrees
     float cartesianBearing = 0; //radians
     kSITQualityValues quality = kSITLow;
@@ -205,9 +203,7 @@
 + (SITLocation *) locationWithBearing {
     NSTimeInterval timestamp = 14676784;
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(8.6, 10.5);
-    //TODO: iOS does not provide constructor for this case
-    SITCartesianCoordinate *cartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:0 y:0];
-    SITPoint *position  = [[SITPoint alloc]  initWithCoordinate:coordinate buildingIdentifier:@"-1" floorIdentifier:@"-1" cartesianCoordinate: cartesianCoordinate];
+    SITPoint *position  = [[SITPoint alloc]  initWithCoordinate:coordinate buildingIdentifier:@"-1"];
     float bearing = 92; //degrees
     float cartesianBearing = 0; //radians
     kSITQualityValues quality = kSITLow;
