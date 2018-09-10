@@ -262,7 +262,6 @@
 + (SITLocation *) outdoorLocation {
     NSTimeInterval timestamp = 14676784;
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(8.6, 10.5);
-    //TODO: iOS does not provide constructor for this case
     SITCartesianCoordinate *cartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:0 y:0];
     SITPoint *position  = [[SITPoint alloc]  initWithCoordinate:coordinate buildingIdentifier:@"-1" floorIdentifier:@"-1" cartesianCoordinate: cartesianCoordinate];
     float bearing = 92; //degrees
