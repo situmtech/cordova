@@ -484,6 +484,12 @@ public class PluginHelper {
                 locationBuilder.useWifi(useWifi);
                 Log.i(TAG, "useWifi: " + useWifi);
             }
+
+            if (request.has(SitumMapper.USE_GPS)) {
+                Boolean useGps = request.getBoolean(SitumMapper.USE_GPS);
+                locationBuilder.useGps(useGps);
+                Log.i(TAG, "useGps: " + useGps);
+            }
             
             if (request.has(SitumMapper.MOTION_MODE)) {
                 String motionMode = request.getString(SitumMapper.MOTION_MODE);
