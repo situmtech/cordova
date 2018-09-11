@@ -42,17 +42,7 @@
 + (SITLocation *) outdoorLocation; //location10.json
 //locationStatus
 + (SITLocationState) createLocationStatusStarting; //locationStatus1.json
-+ (SITLocationState) createLocationStatusBLENotAvailable; //locationStatus2.json
 + (SITLocationState) createLocationStatusCalculating; //locationStatus3.json
-+ (SITLocationState) createLocationStatusCompassCalibrationNeeded; //locationStatus4.json
-+ (SITLocationState) createLocationStatusCompassCalibrationNotNeeded; //locationStatus5.json
-+ (SITLocationState) createLocationStatusNoConnection; //locationStatus6.json
-+ (SITLocationState) createLocationStatusPreparingPositioningModel; //locationStatus7.json
-+ (SITLocationState) createLocationStatusProcessingPositioningModel; //locationStatus8.json
-+ (SITLocationState) createLocationStatusRetryDownloadPositioningModel; //locationStatus9.json
-+ (SITLocationState) createLocationStatusStartDownloadPositioningModel; //locationStatus10.json
-+ (SITLocationState) createLocationStatusStartingPositioning; //locationStatus11.json
-+ (SITLocationState) createLocationStatusTimeSettingsManual; //locationStatus12.json
 + (SITLocationState) createLocationStatusUserNotInBuilding; //locationStatus13.json
 //navigationProgress
 + (SITNavigationProgress *) createNavigationProgressOutdoor; //navigationProgress1.json

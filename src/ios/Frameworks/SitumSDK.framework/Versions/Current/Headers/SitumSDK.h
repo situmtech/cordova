@@ -92,6 +92,8 @@
 
 #import "SITBounds.h"
 
+#import "SITCoordinateUtil.h"
+
 #ifndef PublicSDK_h
 #import "SITBeaconManager.h"
 #import "SITCalibrationManager.h"
