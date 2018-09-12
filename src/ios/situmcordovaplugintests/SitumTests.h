@@ -14,6 +14,9 @@
 
 @interface SitumTests: XCTestCase
 
+@property (nonatomic, strong) NSString *pointFilePath;
+@property (nonatomic, strong)  NSString *stepFilePath;
+
 - (void) setUp;
 - (void) tearDown;
 - (void) testAngle;
@@ -29,8 +32,19 @@
 - (void) testNavigationProgress;
 - (void) testPoiCategory;
 - (void) testPoint;
-- (void) testRoute;
-- (void) testRouteStep;
+- (void) testPoint1;
+- (void) testPoint2;
+- (void) testPoint3;
+- (void) testPoint4;
+- (void) testPoint5;
+- (void) testPoint6;
+- (void) testPoint7;
+- (void) testRoute8;
+- (void) testRouteStep1;
+- (void) testRouteStep2;
+- (void) testRouteStep3;
+- (void) testRouteStep4;
+- (void) testRouteStep5;
 - (void) testSitumConversionArea;
 
 @end

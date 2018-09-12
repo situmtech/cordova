@@ -132,6 +132,50 @@
                  stepDistance:(float)stepDistance
                distanceToGoal:(float)distanceToGoal;
 
+/**
+ Private method
+ 
+ @param index index of the step.
+ @param from origin of the step.
+ @param to destination of the step.
+ @param isFirst indicates if the step is the first of the route.
+ @param isLast indicates if the step is the last of the route.
+ @param nextStepIndex index of the next step of the route (if any).
+ @param distanceToGoal distance between from of the step and destination of the route
+ @return SITRouteStep object
+ @discussion You should not create instances of this class directly. You you use the ones returned by SITDirectionsManager instead.
+ */
+- (instancetype)initWithIndex:(NSInteger)index
+                         from:(SITPoint *)from
+                           to:(SITPoint *)to
+                      isFirst:(BOOL)isFirst
+                       isLast:(BOOL)isLast
+                nextStepIndex:(NSInteger)nextStepIndex
+               distanceToGoal:(float)distanceToGoal;
+
+/**
+ Private method
+ 
+ @param index index of the step.
+ @param from origin of the step.
+ @param to destination of the step.
+ @param isFirst indicates if the step is the first of the route.
+ @param isLast indicates if the step is the last of the route.
+ @param nextStepIndex index of the next step of the route (if any).
+ @param distanceToGoal distance between from of the step and destination of the route
+ @param distanceToFloorChange distance to the next floor change
+ @return SITRouteStep object
+ @discussion You should not create instances of this class directly. You you use the ones returned by SITDirectionsManager instead.
+ */
+- (instancetype)initWithIndex:(NSInteger)index
+                         from:(SITPoint *)from
+                           to:(SITPoint *)to
+                      isFirst:(BOOL)isFirst
+                       isLast:(BOOL)isLast
+                nextStepIndex:(NSInteger)nextStepIndex
+               distanceToGoal:(float)distanceToGoal
+        distanceToFloorChange:(NSNumber *)distanceToFloorChange;
+
 -(BOOL) hasFloorChange;
 
 @end

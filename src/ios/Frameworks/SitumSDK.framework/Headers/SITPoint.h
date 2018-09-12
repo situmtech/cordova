@@ -10,6 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 
 #import "SITCartesianCoordinate.h"
+#import "SITBuilding.h"
 
 
 /**
@@ -81,6 +82,15 @@
                    floorIdentifier:(NSString *)floorIdentifier
                cartesianCoordinate:(SITCartesianCoordinate *)cartesianCoordinate;
 
+/**
+ Create an outdoor point
+ 
+ @param coordinate Geographical coordinate of the point
+ @param buildingIdentifier unique identifier of the building
+ @return initialized outdoor point
+ */
+- (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate
+                buildingIdentifier: (NSString *) buildingIdentifier;
 
 /**
  Create an outdoor point with a coordinate
@@ -89,6 +99,18 @@
  @return initialized point
  */
 - (instancetype)initWihtCoordinate:(CLLocationCoordinate2D)coordinate;
+
+/**
+ Create a point placed indoors. The geographical coordinate is calculated using the building
+ 
+ @param building Building
+ @param floorIdentifier unique identifier of the floor
+ @param cartesianCoordinate coordinate in cartesian coordinate system
+ @return initialized point
+ */
+- (instancetype) initWithBuilding: (SITBuilding *) building
+                  floorIdentifier: (NSString *) floorIdentifier
+              cartesianCoordinate: (SITCartesianCoordinate *) cartesianCoordinate;
 
 /**
  Geographical coordinate
