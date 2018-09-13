@@ -43,6 +43,29 @@
     return Bounds;
 }
 
+//building1.json
++ (SITBuilding *) createBuilding {
+    NSDictionary<NSString*, NSString*> *customFields = [[NSDictionary alloc] initWithObjectsAndKeys:
+        @"http://testUrl.com", @"notification_url",
+        @"1234", @"pin",
+        @"Trilateration", @"positioning-mode",
+        @"56C98FAD0C9, D5784F5A73CA", @"filter-beacon",
+        @"7f6cc424-aae2-47fd-b5e9-476ad15e4733, fa4b8d11-9c13-4ad9-9859-cecd41c58000, 1876b5fa-3e4b-4d09-9252-627032fe9312", @"beacons_uuids",
+        @"True", @"asset-localization",
+        nil] ;
+    CLLocationCoordinate2D center = CLLocationCoordinate2DMake(42.8723472943445, -8.56325268745422);
+    SITDimensions *dimensions = [[SITDimensions alloc] initWithWidth:71.0686153823893 height:42.6106416714803];
+    SITAngle *angle = [[SITAngle alloc] initWithRadians:-3.31881803875501];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"EEE MMM dd HH:mm:ss ZZZZ yyyy"];
+    NSDate *createdAt = [dateFormatter dateFromString:@"Wed Jan 04 18:41:43 GMT+01:00 2017"];
+    NSDate *updatedAt = [dateFormatter dateFromString:@"Wed Sep 12 12:10:25 GMT+02:00 2018"];
+    
+    SITBuilding *building = [[SITBuilding alloc] initWithIdentifier:@"1051" createdAt:createdAt updatedAt:updatedAt customFields:customFields userIdentifier:@"-1" name:@"Ed. Emprendia - Situm" center:center info:@"<p>http://Prueba/actualizador/recibirAlarmas</p>" dimensions:dimensions rotation:angle pictureURL:nil pictureThumbURL:nil];
+    building.infoHTML = @"<p>http://Prueba/actualizador/recibirAlarmas</p>";
+    return building;
+}
+
 //cartesianCoordinate1.json
 + (SITCartesianCoordinate *) createCartesianCoordinate {
     SITCartesianCoordinate *cartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:5 y:7];

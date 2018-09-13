@@ -74,6 +74,30 @@
     XCTAssertEqualWithAccuracy([jsonBoundFile[@"southEast"][@"longitude"] doubleValue], [boundJO[@"southEast"][@"longitude"] doubleValue], 0.0001);
 }
 
+- (void) assertBuilding: (NSDictionary *) jsonBuildingFile : (NSDictionary *) buildingJO {
+    XCTAssertEqualObjects(jsonBuildingFile[@"address"], buildingJO[@"address"]);
+    [self assertBound: jsonBuildingFile[@"bounds"][@"northEast"]: buildingJO[@"bounds"][@"northEast"]];
+    [self assertBound: jsonBuildingFile[@"bounds"][@"northWest"]: buildingJO[@"bounds"][@"northWest"]];
+    [self assertBound: jsonBuildingFile[@"bounds"][@"southEast"]: buildingJO[@"bounds"][@"southEast"]];
+    [self assertBound: jsonBuildingFile[@"bounds"][@"southWest"]: buildingJO[@"bounds"][@"southWest"]];
+    [self assertBound: jsonBuildingFile[@"boundsRotated"][@"northEast"]: buildingJO[@"boundsRotated"][@"northEast"]];
+    [self assertBound: jsonBuildingFile[@"boundsRotated"][@"northWest"]: buildingJO[@"boundsRotated"][@"northWest"]];
+    [self assertBound: jsonBuildingFile[@"boundsRotated"][@"southEast"]: buildingJO[@"boundsRotated"][@"southEast"]];
+    [self assertBound: jsonBuildingFile[@"boundsRotated"][@"southWest"]: buildingJO[@"boundsRotated"][@"southWest"]];
+    [self assertBound: jsonBuildingFile[@"center"]: buildingJO[@"center"]];
+    [self assertDimension: jsonBuildingFile[@"dimensions"]: buildingJO[@"dimensions"]];
+    XCTAssertEqualObjects(jsonBuildingFile[@"infoHtml"], buildingJO[@"infoHtml"]);
+    XCTAssertEqualObjects(jsonBuildingFile[@"pictureThumbUrl"], buildingJO[@"pictureThumbUrl"]);
+    XCTAssertEqualObjects(jsonBuildingFile[@"pictureUrl"], buildingJO[@"pictureUrl"]);
+    XCTAssertEqualWithAccuracy([jsonBuildingFile[@"pictureUrl"] doubleValue], [buildingJO[@"pictureUrl"] doubleValue], 0.0001);
+    XCTAssertEqualObjects(jsonBuildingFile[@"name"], buildingJO[@"name"]);
+    XCTAssertEqualWithAccuracy([jsonBuildingFile[@"rotation"] doubleValue], [buildingJO[@"rotation"] doubleValue], 0.0001);
+    XCTAssertEqualObjects(jsonBuildingFile[@"updatedAt"], buildingJO[@"updatedAt"]);
+    XCTAssertEqualObjects(jsonBuildingFile[@"createdAt"], buildingJO[@"createdAt"]);
+    XCTAssertEqualObjects(jsonBuildingFile[@"userIdentifier"], buildingJO[@"userIdentifier"]);
+    XCTAssertEqualObjects(jsonBuildingFile[@"customFields"], buildingJO[@"customFields"]);
+}
+
 - (void) assertDimension: (NSDictionary *) jsonDimensionFile : (NSDictionary *) dimensionJO {
     XCTAssertEqualWithAccuracy([jsonDimensionFile[@"width"] doubleValue], [dimensionJO[@"width"] doubleValue], 0.0001);
     XCTAssertEqualWithAccuracy([jsonDimensionFile[@"height"] doubleValue], [dimensionJO[@"height"] doubleValue], 0.0001);

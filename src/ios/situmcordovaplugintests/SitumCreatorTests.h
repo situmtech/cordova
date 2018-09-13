@@ -16,6 +16,8 @@
 //bounds
 + (SITBounds) createBoundsWithArray; //bounds1.json
 + (SITBounds) createBounds; //bounds2.json
+//building
++ (SITBuilding *) createBuilding;
 //cartesianCoordinate
 + (SITCartesianCoordinate *) createCartesianCoordinate; //cartesianCoordinate1.json
 //coordinate

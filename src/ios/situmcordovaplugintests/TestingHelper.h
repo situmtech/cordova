@@ -18,6 +18,7 @@
 - (void) assertCartesianCoordinate: (NSDictionary *) jsonCartesianCoordinateFile : (NSDictionary *) cartesianCoordinateJO;
 - (void) assertAngle: (NSDictionary *) jsonAngleFile : (NSDictionary *) angleJO;
 - (void) assertBound: (NSDictionary *) jsonBoundFile : (NSDictionary *) boundJO;
+- (void) assertBuilding: (NSDictionary *) jsonBuildingFile : (NSDictionary *) buildingJO;
 - (void) assertDimension: (NSDictionary *) jsonDimensionFile : (NSDictionary *) dimensionJO;
 - (void) assertEvent: (NSDictionary *) jsonEventFile : (NSDictionary *) eventJO;
 - (void) assertFloor: (NSDictionary *) jsonFloorFile : (NSDictionary *) floorJO;
