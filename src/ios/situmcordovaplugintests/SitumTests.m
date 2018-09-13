@@ -143,17 +143,6 @@
     [super tearDown];
 }
 
-- (void) testCoordinate {
-    NSString *filePath = @"resources/coordinate";
-    // ### COORDINATE1.JSON ###
-    CLLocationCoordinate2D coordinate1 = [SitumCreatorTests createCoordinate];
-    NSDictionary *coordinateJO1 = [SitumLocationWrapper.shared coordinateToJsonObject:coordinate1];
-    NSString *fileName1 =  @"coordinate1";
-    //read from json object in resources
-    NSDictionary *jsonCoordinate1 = [TestingHelper dataFromJSONFileNamed: fileName1 inDirectory : filePath];
-    [_helper assertCoordinate: jsonCoordinate1: coordinateJO1];
-}
-
 - (void) testDimension {
     NSString *filePath = @"resources/dimensions";
     // ### DIMENSIONS1.JSON ###
