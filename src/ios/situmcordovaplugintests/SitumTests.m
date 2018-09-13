@@ -63,16 +63,6 @@
     [super tearDown];
 }
 
-- (void) testPoiCategory {
-    NSString *filePath = @"resources/poiCategory";
-    // ### POICATEGORY1.JSON ###
-    SITPOICategory *poiCategory1 = [SitumCreatorTests createPoiCategory];
-    NSDictionary *poiCategoryJO1 = [SitumLocationWrapper.shared poiCategoryToJsonObject:poiCategory1];
-    NSString *fileName1 =  @"poiCategory1";
-    //read from json object in resources
-    NSDictionary *jsonPoiCategory1 = [TestingHelper dataFromJSONFileNamed: fileName1 inDirectory : filePath];
-    [_helper assertPoint: jsonPoiCategory1: poiCategoryJO1];
-}
 
 
 

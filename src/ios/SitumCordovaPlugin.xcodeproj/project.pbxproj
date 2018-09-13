@@ -103,6 +103,7 @@
 		95B14A3F214A4AED0073A9E1 /* LocationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B14A3E214A4AED0073A9E1 /* LocationTests.m */; };
 		95B14A41214A4CF20073A9E1 /* LocationStatusTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B14A40214A4CF20073A9E1 /* LocationStatusTests.m */; };
 		95B14A43214A4E550073A9E1 /* NavigationProgressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B14A42214A4E550073A9E1 /* NavigationProgressTests.m */; };
+		95B14A45214A50E60073A9E1 /* PoiCategoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B14A44214A50E60073A9E1 /* PoiCategoryTests.m */; };
 		C0C01EB61E3911D50056E6CB /* Cordova.h in Headers */ = {isa = PBXBuildFile; fileRef = C0C01EB41E3911D50056E6CB /* Cordova.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C0C01EBA1E39120F0056E6CB /* libCordova.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A32D7114102E1C006B237C /* libCordova.a */; };
 		C0C01EBB1E39131A0056E6CB /* CDV.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ED95D0F1AB9029B008C4574 /* CDV.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -240,6 +241,7 @@
 		95B14A3E214A4AED0073A9E1 /* LocationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationTests.m; sourceTree = "<group>"; };
 		95B14A40214A4CF20073A9E1 /* LocationStatusTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationStatusTests.m; sourceTree = "<group>"; };
 		95B14A42214A4E550073A9E1 /* NavigationProgressTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavigationProgressTests.m; sourceTree = "<group>"; };
+		95B14A44214A50E60073A9E1 /* PoiCategoryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoiCategoryTests.m; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* SitumCordovaPlugin_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SitumCordovaPlugin_Prefix.pch; path = ../../SitumCordovaPlugin_Prefix.pch; sourceTree = "<group>"; };
 		C0C01EB21E3911D50056E6CB /* Cordova.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cordova.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0C01EB41E3911D50056E6CB /* Cordova.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cordova.h; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 				95B14A3E214A4AED0073A9E1 /* LocationTests.m */,
 				95B14A40214A4CF20073A9E1 /* LocationStatusTests.m */,
 				95B14A42214A4E550073A9E1 /* NavigationProgressTests.m */,
+				95B14A44214A50E60073A9E1 /* PoiCategoryTests.m */,
 			);
 			path = situmcordovaplugintests;
 			sourceTree = "<group>";
@@ -725,6 +728,7 @@
 				0D884A202114634E0066C765 /* SitumCreatorTests.m in Sources */,
 				95B14A3B214A48F80073A9E1 /* FloorTests.m in Sources */,
 				0D5CFD54212C275E00C6E436 /* CDVIntentAndNavigationFilter.m in Sources */,
+				95B14A45214A50E60073A9E1 /* PoiCategoryTests.m in Sources */,
 				0D5CFD5B212C275E00C6E436 /* CDVLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
