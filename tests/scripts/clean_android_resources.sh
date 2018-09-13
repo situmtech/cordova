@@ -1,3 +1,3 @@
 #! /bin/bash
 
-rm -rf app/src/test/resources/
+rm -rf src/android/app/src/test/resources/

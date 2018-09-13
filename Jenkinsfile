@@ -6,7 +6,7 @@ node('ios') {
     stage ('iOS test') {
         sh "tests/scripts/copy_ios_resources.sh"
         sh "cd src/ios && xcodebuild test -project SitumCordovaPlugin.xcodeproj -scheme CordovaLib -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.4'"
-        sh "tests/scripts/clean_ios_resources.sh"
+        sh "tests/scripts/self-destruct.sh"
     }
 }
 
@@ -23,7 +23,7 @@ node('androidci') {
         stage('Android test') {
             sh "tests/scripts/copy_android_resources.sh"
             sh "cd src/android && ./gradlew test --continue"
-            sh "tests/scripts/clean_android_resources.sh"
+            sh "tests/scripts/self-destruct.sh"
         }
     } finally {
         stage('Publish tests') {
