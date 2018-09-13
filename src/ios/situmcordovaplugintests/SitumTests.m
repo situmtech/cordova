@@ -10,23 +10,6 @@
 
 @implementation SitumTests
 
-
-//utility method to assert a location object
-- (void) assertLocation: (NSDictionary *) jsonLocationFile : (NSDictionary *) locationJO;
-{
-    XCTAssertEqualObjects(jsonLocationFile[@"accuracy"], locationJO[@"accuracy"]);
-    XCTAssertEqualObjects(jsonLocationFile[@"provider"], locationJO[@"provider"]);
-    XCTAssertEqualObjects(jsonLocationFile[@"buildingIdentifier"], locationJO[@"buildingIdentifier"]);
-    XCTAssertEqualObjects(jsonLocationFile[@"floorIdentifier"], locationJO[@"floorIdentifier"]);
-    [_helper assertPoint:jsonLocationFile[@"position"]:locationJO[@"position"]];
-    [_helper assertCoordinate:jsonLocationFile[@"coordinate"]:locationJO[@"coordinate"]];
-    [_helper assertCartesianCoordinate:jsonLocationFile[@"cartesianCoordinate"]:locationJO[@"cartesianCoordinate"]];
-    [_helper assertAngle:jsonLocationFile[@"cartesianBearing"]:locationJO[@"cartesianBearing"]];
-
-    //always returning true when creating object from file due to ios sdk restriction in hasBearing functionality
-    XCTAssertTrue(jsonLocationFile[@"hasBearing"]);
-}
-
 //utility method to assert a Coordinate
 - (void) assertLocationStatus: (NSDictionary *) jsonLocationStatusFile : (NSDictionary *) locationStatusJO;
 {
@@ -101,82 +84,6 @@
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
-}
-
-- (void)testLocation {
-    NSString *filePath = @"resources/location";
-    // ### LOCATION1.JSON ###
-    SITLocation *location1 = [SitumCreatorTests createLocationWithBuildingFloorAndCartesianCoordinates];
-    NSDictionary *locationJO1 = [SitumLocationWrapper.shared locationToJsonObject:location1];
-    NSString *fileName1 =  @"location1";
-    //read from json object in resources
-    NSDictionary *jsonLocation1 = [TestingHelper dataFromJSONFileNamed: fileName1 inDirectory : filePath];
-    [self assertLocation: jsonLocation1: locationJO1];
-    
-    // ### LOCATION2.JSON ###
-    SITLocation *location2 = [SitumCreatorTests createLocationWithCoordinate];
-    NSDictionary *locationJO2 = [SitumLocationWrapper.shared locationToJsonObject:location2];
-    NSString *fileName2 =  @"location2";
-    NSDictionary *jsonLocation2 = [TestingHelper dataFromJSONFileNamed: fileName2 inDirectory : filePath];
-    [self assertLocation: jsonLocation2: locationJO2];
-    
-    // ### LOCATION3.JSON ###
-    SITLocation *location3 = [SitumCreatorTests createLocationWithBuildingAndCoordinate];
-    NSDictionary *locationJO3 = [SitumLocationWrapper.shared locationToJsonObject:location3];
-    NSString *fileName3 =  @"location3";
-    NSDictionary *jsonLocation3 = [TestingHelper dataFromJSONFileNamed: fileName3 inDirectory : filePath];
-    [self assertLocation: jsonLocation3: locationJO3];
-    
-    // ### LOCATION4.JSON ###
-    SITLocation *location4 = [SitumCreatorTests locationWithCartesianBearing];
-    NSDictionary *locationJO4 = [SitumLocationWrapper.shared locationToJsonObject:location4];
-    NSString *fileName4 =  @"location4";
-    NSDictionary *jsonLocation4 = [TestingHelper dataFromJSONFileNamed: fileName4 inDirectory : filePath];
-    [self assertLocation: jsonLocation4: locationJO4];
-    
-    // ### LOCATION5.JSON ###
-    SITLocation *location5 = [SitumCreatorTests locationWithoutCartesianBearing];
-    NSDictionary *locationJO5 = [SitumLocationWrapper.shared locationToJsonObject:location5];
-    NSString *fileName5 =  @"location5";
-    NSDictionary *jsonLocation5 = [TestingHelper dataFromJSONFileNamed: fileName5 inDirectory : filePath];
-    [self assertLocation: jsonLocation5: locationJO5];
-    
-    // ### LOCATION6.JSON ###
-    SITLocation *location6 = [SitumCreatorTests locationWithBearing];
-    NSDictionary *locationJO6 = [SitumLocationWrapper.shared locationToJsonObject:location6];
-    NSString *fileName6 =  @"location6";
-    NSDictionary *jsonLocation6 = [TestingHelper dataFromJSONFileNamed: fileName6 inDirectory : filePath];
-    [self assertLocation: jsonLocation6: locationJO6];
-    
-    // ### LOCATION7.JSON ###
-    SITLocation *location7 = [SitumCreatorTests locationWithouthBearing];
-    NSDictionary *locationJO7 = [SitumLocationWrapper.shared locationToJsonObject:location7];
-    NSString *fileName7 =  @"location7";
-    NSDictionary *jsonLocation7 = [TestingHelper dataFromJSONFileNamed: fileName7 inDirectory : filePath];
-    [self assertLocation: jsonLocation7: locationJO7];
-    
-    // ### LOCATION8.JSON ###
-    SITLocation *location8 = [SitumCreatorTests indoorLocationWithIndoorBearingQualityLow];
-    NSDictionary *locationJO8 = [SitumLocationWrapper.shared locationToJsonObject:location8];
-    NSString *fileName8 =  @"location8";
-    NSDictionary *jsonLocation8 = [TestingHelper dataFromJSONFileNamed: fileName8 inDirectory : filePath];
-    [self assertLocation: jsonLocation8: locationJO8];
-    
-    // ### LOCATION9.JSON ###
-    SITLocation *location9 = [SitumCreatorTests indoorLocationWithIndoorBearingQualityHigh];
-    NSDictionary *locationJO9 = [SitumLocationWrapper.shared locationToJsonObject:location9];
-    NSString *fileName9 =  @"location9";
-    NSDictionary *jsonLocation9 = [TestingHelper dataFromJSONFileNamed: fileName9 inDirectory : filePath];
-    [self assertLocation: jsonLocation9: locationJO9];
-    
-    // ### LOCATION10.JSON ###
-    
-    SITLocation *location10 = [SitumCreatorTests outdoorLocation];
-    NSDictionary *locationJO10 = [SitumLocationWrapper.shared locationToJsonObject:location10];
-    NSString *fileName10 =  @"location10";
-    NSDictionary *jsonLocation10 = [TestingHelper dataFromJSONFileNamed: fileName10 inDirectory : filePath];
-    [self assertLocation: jsonLocation10: locationJO10];
-     
 }
 
 - (void)testLocationStatus {

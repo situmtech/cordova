@@ -22,5 +22,6 @@
 - (void) assertEvent: (NSDictionary *) jsonEventFile : (NSDictionary *) eventJO;
 - (void) assertFloor: (NSDictionary *) jsonFloorFile : (NSDictionary *) floorJO;
 - (void) assertIndication: (NSDictionary *) jsonIndicationFile : (NSDictionary *) indicationJO;
+- (void) assertLocation: (NSDictionary *) jsonLocationFile : (NSDictionary *) locationJO;
 
 @end

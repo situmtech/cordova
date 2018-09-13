@@ -107,4 +107,18 @@
     XCTAssertEqualObjects(jsonIndicationFile[@"neededLevelChange"], indicationJO[@"neededLevelChange"]);
 }
 
+- (void) assertLocation: (NSDictionary *) jsonLocationFile : (NSDictionary *) locationJO {
+    XCTAssertEqualObjects(jsonLocationFile[@"accuracy"], locationJO[@"accuracy"]);
+    XCTAssertEqualObjects(jsonLocationFile[@"provider"], locationJO[@"provider"]);
+    XCTAssertEqualObjects(jsonLocationFile[@"buildingIdentifier"], locationJO[@"buildingIdentifier"]);
+    XCTAssertEqualObjects(jsonLocationFile[@"floorIdentifier"], locationJO[@"floorIdentifier"]);
+    [self assertPoint:jsonLocationFile[@"position"]:locationJO[@"position"]];
+    [self assertCoordinate:jsonLocationFile[@"coordinate"]:locationJO[@"coordinate"]];
+    [self assertCartesianCoordinate:jsonLocationFile[@"cartesianCoordinate"]:locationJO[@"cartesianCoordinate"]];
+    [self assertAngle:jsonLocationFile[@"cartesianBearing"]:locationJO[@"cartesianBearing"]];
+    
+    //always returning true when creating object from file due to ios sdk restriction in hasBearing functionality
+    XCTAssertTrue(jsonLocationFile[@"hasBearing"]);
+}
+
 @end
