@@ -27,5 +27,6 @@
 - (void) assertNavigationProgress: (NSDictionary *) jsonNavigationProgressFile : (NSDictionary *) navigationProgressJO;
 - (void) assertRoute: (NSDictionary *) jsonRouteFile : (NSDictionary *) routeJO;
 - (void) assertRouteStep: (NSDictionary *) jsonRouteStepFile : (NSDictionary *) routeStepJO;
+- (void) assertConversionArea:(NSDictionary *) jsonConversionAreaFile : (NSDictionary *) conversionAreaJO;
 
 @end
