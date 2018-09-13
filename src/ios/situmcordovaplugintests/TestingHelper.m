@@ -139,6 +139,29 @@
     XCTAssertEqualWithAccuracy([jsonNavigationProgressFile[@"distanceToGoal"] doubleValue], [navigationProgressJO[@"distanceToGoal"] doubleValue], 0.0001);
 }
 
+- (void) assertRoute: (NSDictionary *) jsonRouteFile : (NSDictionary *) routeJO {
+    [self assertRouteStep:[jsonRouteFile[@"steps"] objectAtIndex:0]:[routeJO[@"steps"] objectAtIndex:0]];
+    [self assertRouteStep:[jsonRouteFile[@"steps"] objectAtIndex:1]:[routeJO[@"steps"] objectAtIndex:1]];
+    [self assertRouteStep:[jsonRouteFile[@"steps"] objectAtIndex:2]:[routeJO[@"steps"] objectAtIndex:2]];
+    [self assertIndication:[jsonRouteFile[@"indications"] objectAtIndex:0]:[routeJO[@"indications"] objectAtIndex:0]];
+    [self assertIndication:[jsonRouteFile[@"indications"] objectAtIndex:1]:[routeJO[@"indications"] objectAtIndex:1]];
+    [self assertIndication:[jsonRouteFile[@"indications"] objectAtIndex:2]:[routeJO[@"indications"] objectAtIndex:2]];
+    [self assertPoint:jsonRouteFile[@"from"]:routeJO[@"from"]];
+    //TODO review TO vs to
+    [self assertPoint:jsonRouteFile[@"TO"]:routeJO[@"to"]];
+}
+
+- (void) assertRouteStep: (NSDictionary *) jsonRouteStepFile : (NSDictionary *) routeStepJO;
+{
+    XCTAssertEqualObjects(jsonRouteStepFile[@"isFirst"], routeStepJO[@"isFirst"]);
+    //TODO review constructor for SITRouteStep and stepDistance parameter passed
+    XCTAssertEqualWithAccuracy([jsonRouteStepFile[@"distance"] doubleValue], [routeStepJO[@"distance"] doubleValue], 0.0001);
+    XCTAssertEqualObjects(jsonRouteStepFile[@"isLast"], routeStepJO[@"isLast"]);
+    XCTAssertEqualWithAccuracy([jsonRouteStepFile[@"distanceToGoal"] doubleValue], [routeStepJO[@"distanceToGoal"] doubleValue], 0.0001);
+    XCTAssertEqualObjects(jsonRouteStepFile[@"id"], routeStepJO[@"id"]);
+    [self assertPoint:jsonRouteStepFile[@"from"]:routeStepJO[@"from"]];
+    [self assertPoint:jsonRouteStepFile[@"TO"]:routeStepJO[@"TO"]];
+}
 
 
 @end

@@ -19,12 +19,6 @@
 
 - (void) setUp;
 - (void) tearDown;
-- (void) testRoute8;
-- (void) testRouteStep1;
-- (void) testRouteStep2;
-- (void) testRouteStep3;
-- (void) testRouteStep4;
-- (void) testRouteStep5;
 - (void) testSitumConversionArea;
 
 @end
