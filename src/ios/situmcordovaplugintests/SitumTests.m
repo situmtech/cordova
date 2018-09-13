@@ -10,19 +10,6 @@
 
 @implementation SitumTests
 
-//utility method to assert a bound object
-- (void) assertBound: (NSDictionary *) jsonBoundFile : (NSDictionary *) boundJO;
-{
-    XCTAssertEqualWithAccuracy([jsonBoundFile[@"northWest"][@"latitude"] doubleValue], [boundJO[@"northWest"][@"latitude"] doubleValue], 0.0001);
-    XCTAssertEqualWithAccuracy([jsonBoundFile[@"northWest"][@"longitude"] doubleValue], [boundJO[@"northWest"][@"longitude"] doubleValue], 0.0001);
-    XCTAssertEqualWithAccuracy([jsonBoundFile[@"northEast"][@"latitude"] doubleValue], [boundJO[@"northEast"][@"latitude"] doubleValue], 0.0001);
-    XCTAssertEqualWithAccuracy([jsonBoundFile[@"northEast"][@"longitude"] doubleValue], [boundJO[@"northEast"][@"longitude"] doubleValue], 0.0001);
-    XCTAssertEqualWithAccuracy([jsonBoundFile[@"southWest"][@"latitude"] doubleValue], [boundJO[@"southWest"][@"latitude"] doubleValue], 0.0001);
-    XCTAssertEqualWithAccuracy([jsonBoundFile[@"southWest"][@"longitude"] doubleValue], [boundJO[@"southWest"][@"longitude"] doubleValue], 0.0001);
-    XCTAssertEqualWithAccuracy([jsonBoundFile[@"southEast"][@"latitude"] doubleValue], [boundJO[@"southEast"][@"latitude"] doubleValue], 0.0001);
-    XCTAssertEqualWithAccuracy([jsonBoundFile[@"southEast"][@"longitude"] doubleValue], [boundJO[@"southEast"][@"longitude"] doubleValue], 0.0001);
-}
-
 //utility method to assert a Dimension Coordinate
 - (void) assertDimension: (NSDictionary *) jsonDimensionFile : (NSDictionary *) dimensionJO;
 {
@@ -154,25 +141,6 @@
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
-}
-
-- (void) testBound {
-    NSString *filePath = @"resources/bounds";
-    // ### BOUNDS1.JSON ###
-    SITBounds bound1 = [SitumCreatorTests createBoundsWithArray];
-    NSDictionary *boundJO1 = [SitumLocationWrapper.shared boundsToJsonObject:bound1];
-    NSString *fileName1 =  @"bounds1";
-    //read from json object in resources
-    NSDictionary *jsonBound1 = [TestingHelper dataFromJSONFileNamed: fileName1 inDirectory : filePath];
-    [self assertBound: jsonBound1: boundJO1];
-    
-    // ### BOUNDS2.JSON ###
-    SITBounds bound2 = [SitumCreatorTests createBounds];
-    NSDictionary *boundJO2 = [SitumLocationWrapper.shared boundsToJsonObject:bound2];
-    NSString *fileName2 =  @"bounds2";
-    //read from json object in resources
-    NSDictionary *jsonBound2 = [TestingHelper dataFromJSONFileNamed: fileName2 inDirectory : filePath];
-    [self assertBound: jsonBound2: boundJO2];
 }
 
 - (void) testCartesianCoordinate {
