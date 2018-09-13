@@ -34,7 +34,6 @@
 		0D884A0921145E510066C765 /* SitumSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D884A0821145E510066C765 /* SitumSDK.framework */; };
 		0D884A1321145F820066C765 /* libCordova.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A32D7114102E1C006B237C /* libCordova.a */; };
 		0D884A202114634E0066C765 /* SitumCreatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D884A1B2114634D0066C765 /* SitumCreatorTests.m */; };
-		0D884A212114634E0066C765 /* SitumTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D884A1C2114634D0066C765 /* SitumTests.m */; };
 		0D884A222114634E0066C765 /* TestingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D884A1D2114634E0066C765 /* TestingHelper.m */; };
 		0D884A232114644C0066C765 /* SitumSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D884A0821145E510066C765 /* SitumSDK.framework */; };
 		0D884E7D2116FAA20066C765 /* resources in Resources */ = {isa = PBXBuildFile; fileRef = 0D884E7C2116FAA20066C765 /* resources */; };
@@ -171,9 +170,7 @@
 		0D884A1221145F820066C765 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0D884A192114634D0066C765 /* SitumCreatorTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SitumCreatorTests.h; sourceTree = "<group>"; };
 		0D884A1B2114634D0066C765 /* SitumCreatorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SitumCreatorTests.m; sourceTree = "<group>"; };
-		0D884A1C2114634D0066C765 /* SitumTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SitumTests.m; sourceTree = "<group>"; };
 		0D884A1D2114634E0066C765 /* TestingHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestingHelper.m; sourceTree = "<group>"; };
-		0D884A1E2114634E0066C765 /* SitumTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SitumTests.h; sourceTree = "<group>"; };
 		0D884A1F2114634E0066C765 /* TestingHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestingHelper.h; sourceTree = "<group>"; };
 		0D884E7C2116FAA20066C765 /* resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = resources; sourceTree = "<group>"; };
 		0DF4AB0621143D5700D81A31 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -393,8 +390,6 @@
 				0D884E7C2116FAA20066C765 /* resources */,
 				0D884A192114634D0066C765 /* SitumCreatorTests.h */,
 				0D884A1B2114634D0066C765 /* SitumCreatorTests.m */,
-				0D884A1E2114634E0066C765 /* SitumTests.h */,
-				0D884A1C2114634D0066C765 /* SitumTests.m */,
 				0D884A1F2114634E0066C765 /* TestingHelper.h */,
 				0D884A1D2114634E0066C765 /* TestingHelper.m */,
 				0D884A1221145F820066C765 /* Info.plist */,
@@ -718,7 +713,6 @@
 				0D5CFD52212C275E00C6E436 /* CDVGestureHandler.m in Sources */,
 				0D5CFD5D212C275E00C6E436 /* CDVLocalStorage.m in Sources */,
 				0D884A222114634E0066C765 /* TestingHelper.m in Sources */,
-				0D884A212114634E0066C765 /* SitumTests.m in Sources */,
 				95B14A3F214A4AED0073A9E1 /* LocationTests.m in Sources */,
 				95B14A43214A4E550073A9E1 /* NavigationProgressTests.m in Sources */,
 				0D5CFD67212C275E00C6E436 /* CDVUIWebViewEngine.m in Sources */,
