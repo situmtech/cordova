@@ -126,5 +126,19 @@
     XCTAssert([jsonLocationStatusFile[@"statusName"] isEqualToString: locationStatusJO[@"statusName"]]);
 }
 
+- (void) assertNavigationProgress: (NSDictionary *) jsonNavigationProgressFile : (NSDictionary *) navigationProgressJO;
+{
+    [self assertIndication:jsonNavigationProgressFile[@"currentIndication"]:navigationProgressJO[@"currentIndication"]];
+    [self assertIndication:jsonNavigationProgressFile[@"nextIndication"]:navigationProgressJO[@"nextIndication"]];
+    XCTAssertEqualWithAccuracy([jsonNavigationProgressFile[@"distanceToEndStep"] doubleValue], [navigationProgressJO[@"distanceToEndStep"] doubleValue], 0.0001);
+    XCTAssertEqualWithAccuracy([jsonNavigationProgressFile[@"distanceToClosestPointInRoute"] doubleValue], [navigationProgressJO[@"distanceToClosestPointInRoute"] doubleValue], 0.0001);
+    XCTAssertEqualObjects(jsonNavigationProgressFile[@"closestPointInRoute"], jsonNavigationProgressFile[@"closestPointInRoute"]);
+    XCTAssertEqualWithAccuracy([jsonNavigationProgressFile[@"timeToEndStep"] doubleValue], [navigationProgressJO[@"timeToEndStep"] doubleValue], 0.0001);
+    XCTAssertEqualWithAccuracy([jsonNavigationProgressFile[@"timeToGoal"] doubleValue], [navigationProgressJO[@"timeToGoal"] doubleValue], 0.0001);
+    XCTAssertEqualWithAccuracy([jsonNavigationProgressFile[@"currentStepIndex"] doubleValue], [navigationProgressJO[@"currentStepIndex"] doubleValue], 0.0001);
+    XCTAssertEqualWithAccuracy([jsonNavigationProgressFile[@"distanceToGoal"] doubleValue], [navigationProgressJO[@"distanceToGoal"] doubleValue], 0.0001);
+}
+
+
 
 @end

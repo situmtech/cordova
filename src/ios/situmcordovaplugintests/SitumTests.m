@@ -10,23 +10,6 @@
 
 @implementation SitumTests
 
-//utility method to assert a NavigationProgress
-- (void) assertNavigationProgress: (NSDictionary *) jsonNavigationProgressFile : (NSDictionary *) navigationProgressJO;
-{
-    [_helper assertIndication:jsonNavigationProgressFile[@"currentIndication"]:navigationProgressJO[@"currentIndication"]];
-    [_helper assertIndication:jsonNavigationProgressFile[@"nextIndication"]:navigationProgressJO[@"nextIndication"]];
-    XCTAssertEqualWithAccuracy([jsonNavigationProgressFile[@"distanceToEndStep"] doubleValue], [navigationProgressJO[@"distanceToEndStep"] doubleValue], 0.0001);
-    XCTAssertEqualWithAccuracy([jsonNavigationProgressFile[@"distanceToClosestPointInRoute"] doubleValue], [navigationProgressJO[@"distanceToClosestPointInRoute"] doubleValue], 0.0001);
-    XCTAssertEqualObjects(jsonNavigationProgressFile[@"closestPointInRoute"], jsonNavigationProgressFile[@"closestPointInRoute"]);
-    XCTAssertEqualWithAccuracy([jsonNavigationProgressFile[@"timeToEndStep"] doubleValue], [navigationProgressJO[@"timeToEndStep"] doubleValue], 0.0001);
-    XCTAssertEqualWithAccuracy([jsonNavigationProgressFile[@"timeToGoal"] doubleValue], [navigationProgressJO[@"timeToGoal"] doubleValue], 0.0001);
-    XCTAssertEqualWithAccuracy([jsonNavigationProgressFile[@"currentStepIndex"] doubleValue], [navigationProgressJO[@"currentStepIndex"] doubleValue], 0.0001);
-    XCTAssertEqualWithAccuracy([jsonNavigationProgressFile[@"distanceToGoal"] doubleValue], [navigationProgressJO[@"distanceToGoal"] doubleValue], 0.0001);
-}
-
-//utility method to assert a Point
-
-
 //utility method to assert a Route
 - (void) assertRoute: (NSDictionary *) jsonRouteFile : (NSDictionary *) routeJO;
 {
@@ -78,24 +61,6 @@
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
-}
-
-- (void) testNavigationProgress {
-    NSString *filePath = @"resources/navigationProgress";
-    // ### NAVIGATIONPROGRESS1.JSON ###
-    SITNavigationProgress *navigationProgress1 = [SitumCreatorTests createNavigationProgressOutdoor];
-    NSDictionary *navigationProgressJO1 = [SitumLocationWrapper.shared navigationProgressToJsonObject:navigationProgress1];
-    NSString *fileName1 =  @"navigationProgress1";
-    //read from json object in resources
-    NSDictionary *jsonNavigationProgress1 = [TestingHelper dataFromJSONFileNamed: fileName1 inDirectory : filePath];
-    [self assertNavigationProgress: jsonNavigationProgress1: navigationProgressJO1];
-    // ### NAVIGATIONPROGRESS2.JSON ###
-    SITNavigationProgress *navigationProgress2 = [SitumCreatorTests createNavigationProgressIndoor];
-    NSDictionary *navigationProgressJO2 = [SitumLocationWrapper.shared navigationProgressToJsonObject:navigationProgress2];
-    NSString *fileName2 =  @"navigationProgress2";
-    //read from json object in resources
-    NSDictionary *jsonNavigationProgress2 = [TestingHelper dataFromJSONFileNamed: fileName2 inDirectory : filePath];
-    [self assertNavigationProgress: jsonNavigationProgress2: navigationProgressJO2];
 }
 
 - (void) testPoiCategory {

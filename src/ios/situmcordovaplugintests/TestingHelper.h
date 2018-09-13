@@ -24,6 +24,7 @@
 - (void) assertIndication: (NSDictionary *) jsonIndicationFile : (NSDictionary *) indicationJO;
 - (void) assertLocation: (NSDictionary *) jsonLocationFile : (NSDictionary *) locationJO;
 - (void) assertLocationStatus: (NSDictionary *) jsonLocationStatusFile : (NSDictionary *) locationStatusJO;
+- (void) assertNavigationProgress: (NSDictionary *) jsonNavigationProgressFile : (NSDictionary *) navigationProgressJO;
 
 
 @end
