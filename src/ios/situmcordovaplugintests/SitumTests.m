@@ -10,14 +10,6 @@
 
 @implementation SitumTests
 
-//utility method to assert a Cartesian Coordinate
-- (void) assertEvent: (NSDictionary *) jsonEventFile : (NSDictionary *) eventJO;
-{
-    XCTAssertEqualWithAccuracy([jsonEventFile[@"identifier"] doubleValue], [eventJO[@"identifier"] doubleValue], 0.0001);
-    XCTAssertEqualWithAccuracy([jsonEventFile[@"buildingIdentifier"] doubleValue], [eventJO[@"buildingIdentifier"] doubleValue], 0.0001);
-    XCTAssertEqualObjects(jsonEventFile[@"infoHtml"], eventJO[@"infoHtml"]);
-}
-
 //utility method to assert a floor
 - (void) assertFloor: (NSDictionary *) jsonFloorFile : (NSDictionary *) floorJO;
 {
@@ -134,17 +126,6 @@
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
-}
-
-- (void) testEvent {
-    NSString *filePath = @"resources/events";
-    // ### EVENT1.JSON ###
-    SITEvent *event1 = [SitumCreatorTests createEvent];
-    NSDictionary *eventJO1 = [SitumLocationWrapper.shared eventToJsonObject:event1];
-    NSString *fileName1 =  @"event1";
-    //read from json object in resources
-    NSDictionary *jsonEvent1 = [TestingHelper dataFromJSONFileNamed: fileName1 inDirectory : filePath];
-    [self assertEvent: jsonEvent1: eventJO1];
 }
 
 - (void) testFloor {

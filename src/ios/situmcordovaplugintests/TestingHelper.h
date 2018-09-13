@@ -19,5 +19,6 @@
 - (void) assertAngle: (NSDictionary *) jsonAngleFile : (NSDictionary *) angleJO;
 - (void) assertBound: (NSDictionary *) jsonBoundFile : (NSDictionary *) boundJO;
 - (void) assertDimension: (NSDictionary *) jsonDimensionFile : (NSDictionary *) dimensionJO;
+- (void) assertEvent: (NSDictionary *) jsonEventFile : (NSDictionary *) eventJO;
 
 @end
