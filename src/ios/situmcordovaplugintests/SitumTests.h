@@ -15,7 +15,6 @@
 @interface SitumTests: XCTestCase
 
 @property (nonatomic, strong) TestingHelper *helper;
-@property (nonatomic, strong)  NSString *stepFilePath;
 
 - (void) setUp;
 - (void) tearDown;
