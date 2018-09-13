@@ -10,13 +10,6 @@
 
 @implementation SitumTests
 
-//utility method to assert a Dimension Coordinate
-- (void) assertDimension: (NSDictionary *) jsonDimensionFile : (NSDictionary *) dimensionJO;
-{
-    XCTAssertEqualWithAccuracy([jsonDimensionFile[@"width"] doubleValue], [dimensionJO[@"width"] doubleValue], 0.0001);
-    XCTAssertEqualWithAccuracy([jsonDimensionFile[@"height"] doubleValue], [dimensionJO[@"height"] doubleValue], 0.0001);
-}
-
 //utility method to assert a Cartesian Coordinate
 - (void) assertEvent: (NSDictionary *) jsonEventFile : (NSDictionary *) eventJO;
 {
@@ -141,17 +134,6 @@
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
-}
-
-- (void) testDimension {
-    NSString *filePath = @"resources/dimensions";
-    // ### DIMENSIONS1.JSON ###
-    SITDimensions *dimension1 = [SitumCreatorTests createDimensions];
-    NSDictionary *dimensionJO1 = [SitumLocationWrapper.shared dimensionsToJsonObject:dimension1];
-    NSString *fileName1 =  @"dimensions1";
-    //read from json object in resources
-    NSDictionary *jsonDimension1 = [TestingHelper dataFromJSONFileNamed: fileName1 inDirectory : filePath];
-    [self assertDimension: jsonDimension1: dimensionJO1];
 }
 
 - (void) testEvent {

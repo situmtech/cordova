@@ -19,7 +19,6 @@
 
 - (void) setUp;
 - (void) tearDown;
-- (void) testDimension;
 - (void) testEvent;
 - (void) testFloor;
 - (void) testIndication;
