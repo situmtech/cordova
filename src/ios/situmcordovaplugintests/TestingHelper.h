@@ -16,5 +16,6 @@
 - (void) assertPoint: (NSDictionary *) jsonPointFile : (NSDictionary *) pointJO;
 - (void) assertCoordinate: (NSDictionary *) jsonCoordinateFile : (NSDictionary *) coordinateJO;
 - (void) assertCartesianCoordinate: (NSDictionary *) jsonCartesianCoordinateFile : (NSDictionary *) cartesianCoordinateJO;
+- (void) assertAngle: (NSDictionary *) jsonAngleFile : (NSDictionary *) angleJO;
 
 @end

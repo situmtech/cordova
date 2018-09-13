@@ -10,15 +10,6 @@
 
 @implementation SitumTests
 
-//utility method to assert an angle object
-- (void) assertAngle: (NSDictionary *) jsonAngleFile : (NSDictionary *) angleJO;
-{
-    XCTAssertEqualWithAccuracy([jsonAngleFile[@"radiansMinusPiPi"] doubleValue], [angleJO[@"radiansMinusPiPi"] doubleValue], 0.0001);
-    XCTAssertEqualWithAccuracy([jsonAngleFile[@"radians"] doubleValue], [angleJO[@"radians"] doubleValue], 0.0001);
-    XCTAssertEqualWithAccuracy([jsonAngleFile[@"degreesClockwise"] doubleValue], [angleJO[@"degreesClockwise"] doubleValue], 0.0001);
-    XCTAssertEqualWithAccuracy([jsonAngleFile[@"degrees"] doubleValue], [angleJO[@"degrees"] doubleValue], 0.0001);
-}
-
 //utility method to assert a bound object
 - (void) assertBound: (NSDictionary *) jsonBoundFile : (NSDictionary *) boundJO;
 {
@@ -83,7 +74,7 @@
     [_helper assertPoint:jsonLocationFile[@"position"]:locationJO[@"position"]];
     [_helper assertCoordinate:jsonLocationFile[@"coordinate"]:locationJO[@"coordinate"]];
     [_helper assertCartesianCoordinate:jsonLocationFile[@"cartesianCoordinate"]:locationJO[@"cartesianCoordinate"]];
-    [self assertAngle:jsonLocationFile[@"cartesianBearing"]:locationJO[@"cartesianBearing"]];
+    [_helper assertAngle:jsonLocationFile[@"cartesianBearing"]:locationJO[@"cartesianBearing"]];
 
     //always returning true when creating object from file due to ios sdk restriction in hasBearing functionality
     XCTAssertTrue(jsonLocationFile[@"hasBearing"]);
@@ -163,25 +154,6 @@
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
-}
-
-- (void) testAngle {
-    NSString *filePath = @"resources/angle";
-    // ### ANGLE1.JSON ###
-    SITAngle *angle1 = [SitumCreatorTests createAngleFromDegrees];
-    NSDictionary *angleJO1 = [SitumLocationWrapper.shared angleToJsonObject:angle1];
-    NSString *fileName1 =  @"angle1";
-    //read from json object in resources
-    NSDictionary *jsonAngle1 = [TestingHelper dataFromJSONFileNamed: fileName1 inDirectory : filePath];
-    [self assertAngle: jsonAngle1: angleJO1];
-    
-    // ### ANGLE2.JSON ###
-    SITAngle *angle2 = [SitumCreatorTests createAngleFromRadians];
-    NSDictionary *angleJO2 = [SitumLocationWrapper.shared angleToJsonObject:angle2];
-    NSString *fileName2 =  @"angle2";
-    //read from json object in resources
-    NSDictionary *jsonAngle2 = [TestingHelper dataFromJSONFileNamed: fileName2 inDirectory : filePath];
-    [self assertAngle: jsonAngle2: angleJO2];
 }
 
 - (void) testBound {
