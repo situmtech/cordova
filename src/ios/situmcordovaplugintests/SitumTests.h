@@ -19,7 +19,6 @@
 
 - (void) setUp;
 - (void) tearDown;
-- (void) testLocationStatus;
 - (void) testNavigationProgress;
 - (void) testPoiCategory;
 - (void) testRoute8;

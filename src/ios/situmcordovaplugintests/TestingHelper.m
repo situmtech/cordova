@@ -121,4 +121,10 @@
     XCTAssertTrue(jsonLocationFile[@"hasBearing"]);
 }
 
+- (void) assertLocationStatus: (NSDictionary *) jsonLocationStatusFile : (NSDictionary *) locationStatusJO;
+{
+    XCTAssert([jsonLocationStatusFile[@"statusName"] isEqualToString: locationStatusJO[@"statusName"]]);
+}
+
+
 @end

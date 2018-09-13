@@ -10,12 +10,6 @@
 
 @implementation SitumTests
 
-//utility method to assert a Coordinate
-- (void) assertLocationStatus: (NSDictionary *) jsonLocationStatusFile : (NSDictionary *) locationStatusJO;
-{
-    XCTAssert([jsonLocationStatusFile[@"statusName"] isEqualToString: locationStatusJO[@"statusName"]]);
-}
-
 //utility method to assert a NavigationProgress
 - (void) assertNavigationProgress: (NSDictionary *) jsonNavigationProgressFile : (NSDictionary *) navigationProgressJO;
 {
@@ -84,33 +78,6 @@
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
-}
-
-- (void)testLocationStatus {
-    NSString *filePath = @"resources/locationStatus";
-    // ### LOCATIONSTATUS1.JSON ###
-    SITLocationState locationStatus1 = [SitumCreatorTests createLocationStatusStarting];
-    NSDictionary *locationStatusJO1 = [SitumLocationWrapper.shared locationStateToJsonObject:locationStatus1];
-    NSString *fileName1 =  @"locationStatus1";
-    //read from json object in resources
-    NSDictionary *jsonLocationStatus1 = [TestingHelper dataFromJSONFileNamed: fileName1 inDirectory : filePath];
-    [self assertLocationStatus: jsonLocationStatus1: locationStatusJO1];
-
-    // ### LOCATIONSTATUS3.JSON ###
-    SITLocationState locationStatus3 = [SitumCreatorTests createLocationStatusCalculating];
-    NSDictionary *locationStatusJO3 = [SitumLocationWrapper.shared locationStateToJsonObject:locationStatus3];
-    NSString *fileName3 =  @"locationStatus3";
-    //read from json object in resources
-    NSDictionary *jsonLocationStatus3 = [TestingHelper dataFromJSONFileNamed: fileName3 inDirectory : filePath];
-    [self assertLocationStatus: jsonLocationStatus3: locationStatusJO3];
-
-    // ### LOCATIONSTATUS13.JSON ###
-    SITLocationState locationStatus13 = [SitumCreatorTests createLocationStatusUserNotInBuilding];
-    NSDictionary *locationStatusJO13 = [SitumLocationWrapper.shared locationStateToJsonObject:locationStatus13];
-    NSString *fileName13 =  @"locationStatus13";
-    //read from json object in resources
-    NSDictionary *jsonLocationStatus13 = [TestingHelper dataFromJSONFileNamed: fileName13 inDirectory : filePath];
-    [self assertLocationStatus: jsonLocationStatus13: locationStatusJO13];
 }
 
 - (void) testNavigationProgress {
