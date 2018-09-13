@@ -1,6 +1,6 @@
 #import "SitumLocationWrapper.h"
 
-NSString *DATEFORMAT = @"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZ";
+NSString *DATEFORMAT = @"EEE MMM dd HH:mm:ss ZZZZ yyyy";
 
 NSString* emptyStrCheck(NSString *str) {
     if (!str || str == nil) {

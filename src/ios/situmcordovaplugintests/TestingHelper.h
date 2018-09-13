@@ -6,13 +6,28 @@
 //  Copyright © 2018 Situm. All rights reserved.
 //
 
+#import <XCTest/XCTest.h>
 #import <Foundation/Foundation.h>
 
-@interface TestingHelper : NSObject {
-}
+@interface TestingHelper : XCTestCase 
 
 
-+(id)dataFromJSONFileNamed:(NSString *)fileName inDirectory:(NSString *) pathResources;
-//-(id)assertLocation:(NSDictionary *)jsonLocation :(NSDictionary*) locationJO;
++ (id)dataFromJSONFileNamed:(NSString *)fileName inDirectory:(NSString *) pathResources;
+- (void) assertPoint: (NSDictionary *) jsonPointFile : (NSDictionary *) pointJO;
+- (void) assertCoordinate: (NSDictionary *) jsonCoordinateFile : (NSDictionary *) coordinateJO;
+- (void) assertCartesianCoordinate: (NSDictionary *) jsonCartesianCoordinateFile : (NSDictionary *) cartesianCoordinateJO;
+- (void) assertAngle: (NSDictionary *) jsonAngleFile : (NSDictionary *) angleJO;
+- (void) assertBound: (NSDictionary *) jsonBoundFile : (NSDictionary *) boundJO;
+- (void) assertBuilding: (NSDictionary *) jsonBuildingFile : (NSDictionary *) buildingJO;
+- (void) assertDimension: (NSDictionary *) jsonDimensionFile : (NSDictionary *) dimensionJO;
+- (void) assertEvent: (NSDictionary *) jsonEventFile : (NSDictionary *) eventJO;
+- (void) assertFloor: (NSDictionary *) jsonFloorFile : (NSDictionary *) floorJO;
+- (void) assertIndication: (NSDictionary *) jsonIndicationFile : (NSDictionary *) indicationJO;
+- (void) assertLocation: (NSDictionary *) jsonLocationFile : (NSDictionary *) locationJO;
+- (void) assertLocationStatus: (NSDictionary *) jsonLocationStatusFile : (NSDictionary *) locationStatusJO;
+- (void) assertNavigationProgress: (NSDictionary *) jsonNavigationProgressFile : (NSDictionary *) navigationProgressJO;
+- (void) assertRoute: (NSDictionary *) jsonRouteFile : (NSDictionary *) routeJO;
+- (void) assertRouteStep: (NSDictionary *) jsonRouteStepFile : (NSDictionary *) routeStepJO;
+- (void) assertConversionArea:(NSDictionary *) jsonConversionAreaFile : (NSDictionary *) conversionAreaJO;
 
 @end
