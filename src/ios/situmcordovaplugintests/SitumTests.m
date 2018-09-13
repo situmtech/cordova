@@ -143,17 +143,6 @@
     [super tearDown];
 }
 
-- (void) testCartesianCoordinate {
-    NSString *filePath = @"resources/cartesianCoordinate";
-    // ### CARTESIANCOORDINATE1.JSON ###
-    SITCartesianCoordinate *cartesianCoordinate1 = [SitumCreatorTests createCartesianCoordinate];
-    NSDictionary *cartesianCoordinateJO1 = [SitumLocationWrapper.shared cartesianCoordinateToJsonObject:cartesianCoordinate1];
-    NSString *fileName1 =  @"cartesianCoordinate1";
-    //read from json object in resources
-    NSDictionary *jsoncartesianCoordinate1 = [TestingHelper dataFromJSONFileNamed: fileName1 inDirectory : filePath];
-    [_helper assertCartesianCoordinate: jsoncartesianCoordinate1: cartesianCoordinateJO1];
-}
-
 - (void) testCoordinate {
     NSString *filePath = @"resources/coordinate";
     // ### COORDINATE1.JSON ###

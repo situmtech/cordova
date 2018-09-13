@@ -19,7 +19,6 @@
 
 - (void) setUp;
 - (void) tearDown;
-- (void) testCartesianCoordinate;
 - (void) testCoordinate;
 - (void) testDimension;
 - (void) testEvent;
