@@ -28,6 +28,7 @@ import es.situm.plugin.indication.IndicationCreator;
 import es.situm.plugin.location.LocationCreator;
 import es.situm.plugin.locationStatus.LocationStatusCreator;
 import es.situm.plugin.navigationProgress.NavigationProgressCreator;
+import es.situm.plugin.poi.PoiCreator;
 import es.situm.plugin.poiCategory.PoiCategoryCreator;
 import es.situm.plugin.point.PointCreator;
 import es.situm.plugin.route.RouteCreator;
@@ -36,6 +37,7 @@ import es.situm.plugin.situmConversionArea.SitumConversionAreaCreator;
 import es.situm.sdk.location.LocationStatus;
 import es.situm.sdk.model.cartography.Circle;
 import es.situm.sdk.model.cartography.Floor;
+import es.situm.sdk.model.cartography.Poi;
 import es.situm.sdk.model.cartography.PoiCategory;
 import es.situm.sdk.model.cartography.Point;
 import es.situm.sdk.model.directions.Indication;
@@ -53,6 +55,7 @@ import es.situm.sdk.v1.SitumEvent;
 
 import static com.google.common.truth.Truth.assertThat;
 import static es.situm.plugin.SitumMapper.CENTER;
+import static es.situm.plugin.SitumMapper.POI_NAME;
 import static es.situm.plugin.SitumMapper.circleToJsonObject;
 import static es.situm.plugin.SitumMapper.conversionAreaToJsonObject;
 
@@ -146,6 +149,7 @@ public class SitumMapperTest {
     public static final String CONVERSION_AREA = "conversionArea";
     public static final String RADIUS = "radius";
     public static final String NAME = "name";
+    public static final String CATEGORY = "category";
 
     // Creators
     private AngleCreator angleCreator = new AngleCreator();
@@ -165,6 +169,7 @@ public class SitumMapperTest {
     private RouteCreator routeCreator = new RouteCreator();
     private EventCreator eventCreator = new EventCreator();
     private CircleCreator circleCreator = new CircleCreator();
+    private PoiCreator poiCreator = new PoiCreator();
 
     @Test
     public void angleJSONObjectTest() {
@@ -366,6 +371,66 @@ public class SitumMapperTest {
             JSONObject locationStatus13 = locationStatusCreator.getLocationStatus13();
             testLocationStatus(locationStatusUserNotInBuildingJSONObject, locationStatus13);
         } catch (JSONException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void poiJSONObjectTest1() {
+        try{
+            Poi poiOutdoorWithCategory = poiCreator.createOutdoorPoiWithCategory();
+            JSONObject poiOutdoorWithCategoryJSONObject = SitumMapper.poiToJsonObject(poiOutdoorWithCategory);
+            testPoi(poiOutdoorWithCategoryJSONObject, poiCreator.getPoi1());
+            System.out.println(poiOutdoorWithCategoryJSONObject.toString());
+        }catch (JSONException e){
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void poiJSONObjectTest2() {
+        try{
+            Poi poi = poiCreator.createPoiWithBuildingFloorAndCoordinateWithCategory();
+            JSONObject poiJSONObject = SitumMapper.poiToJsonObject(poi);
+            testPoi(poiJSONObject,poiCreator.getPoi2());
+            System.out.println(poiJSONObject.toString());
+        }catch (JSONException e){
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void poiJSONObjectTest3() {
+        try{
+            Poi poi = poiCreator.createPoiWithCoordinateAndBuildingId();
+            JSONObject poiJSONObject = SitumMapper.poiToJsonObject(poi);
+            testPoi(poiJSONObject,poiCreator.getPoi3());
+            System.out.println(poiJSONObject.toString());
+        }catch (JSONException e){
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void poiJSONObjectTest4() {
+        try{
+            Poi poi = poiCreator.createPoiWithBuildingFloorCoordinateAndCartesian();
+            JSONObject poiJSONObject = SitumMapper.poiToJsonObject(poi);
+            testPoi(poiJSONObject,poiCreator.getPoi4());
+            System.out.println(poiJSONObject.toString());
+        }catch (JSONException e){
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void poiJSONObjectTest5() {
+        try{
+            Poi poi = poiCreator.createPoiWithBuildingFloorAndCoordinates();
+            JSONObject poiJSONObject = SitumMapper.poiToJsonObject(poi);
+            testPoi(poiJSONObject,poiCreator.getPoi5());
+            System.out.println(poiJSONObject.toString());
+        }catch (JSONException e){
             System.err.println(e.getMessage());
         }
     }
@@ -698,6 +763,35 @@ public class SitumMapperTest {
         Assert.assertEquals(defaultLocationStatus.getInt(STATUS_ORDINAL), locationStatus.getInt(STATUS_ORDINAL));
         Assert.assertEquals(String.class, locationStatus.get(STATUS_NAME).getClass());
         Assert.assertEquals(defaultLocationStatus.getString(STATUS_NAME), locationStatus.getString(STATUS_NAME));
+    }
+
+    private void testPoi(JSONObject poi, JSONObject defaultPoi) throws JSONException {
+        Assert.assertEquals(String.class, poi.get(IDENTIFIER).getClass());
+        Assert.assertEquals(defaultPoi.getString(IDENTIFIER),poi.getString(IDENTIFIER));
+        testCoordinate(poi.getJSONObject(COORDINATE),defaultPoi.getJSONObject(COORDINATE));
+        Assert.assertEquals(String.class, poi.get(POI_NAME).getClass());
+        Assert.assertEquals(defaultPoi.getString(POI_NAME),poi.getString(POI_NAME));
+        //CustomFields
+        Assert.assertEquals(Boolean.class, poi.get(IS_INDOOR).getClass());
+        Assert.assertEquals(defaultPoi.getBoolean(IS_INDOOR),poi.getBoolean(IS_INDOOR));
+        Assert.assertEquals(String.class, poi.get(INFO_HTML).getClass());
+        Assert.assertEquals(defaultPoi.getString(INFO_HTML),poi.getString(INFO_HTML));
+        Assert.assertEquals(String.class, poi.get(BUILDING_IDENTIFIER).getClass());
+        Assert.assertEquals(defaultPoi.getString(BUILDING_IDENTIFIER),poi.getString(BUILDING_IDENTIFIER));
+        Assert.assertEquals(Boolean.class, poi.get(IS_OUTDOOR).getClass());
+        Assert.assertEquals(defaultPoi.getBoolean(IS_OUTDOOR),poi.getBoolean(IS_OUTDOOR));
+        Assert.assertEquals(Date.class, poi.get(CREATED_AT).getClass());
+        Assert.assertEquals(dateFormat.parseObject(defaultPoi.get(CREATED_AT).toString(),new ParsePosition(0)),dateFormat.parseObject(poi.get(CREATED_AT).toString(),new ParsePosition(0)));
+        Assert.assertEquals(String.class, poi.get(FLOOR_IDENTIFIER).getClass());
+        Assert.assertEquals(defaultPoi.getString(FLOOR_IDENTIFIER),poi.getString(FLOOR_IDENTIFIER));
+        testCartesianCoordinate(poi.getJSONObject(CARTESIAN_COORDINATE),defaultPoi.getJSONObject(CARTESIAN_COORDINATE));
+        testPoint(poi.getJSONObject(POSITION), poi.getJSONObject(POSITION));
+        Assert.assertEquals(String.class, poi.get(CATEGORY).getClass());
+        Assert.assertEquals(defaultPoi.getString(CATEGORY),poi.getString(CATEGORY));
+        Assert.assertEquals(Date.class, poi.get(UPDATED_AT).getClass());
+        Assert.assertEquals(dateFormat.parseObject(defaultPoi.get(UPDATED_AT).toString(),new ParsePosition(0)),dateFormat.parseObject(poi.get(UPDATED_AT).toString(),new ParsePosition(0)));
+
+
     }
 
     private void testPoiCategory(JSONObject poiCategory, JSONObject defaultPoiCategory) throws JSONException {
