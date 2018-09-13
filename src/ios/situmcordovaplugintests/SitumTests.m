@@ -10,17 +10,6 @@
 
 @implementation SitumTests
 
-//utility method to assert a floor
-- (void) assertFloor: (NSDictionary *) jsonFloorFile : (NSDictionary *) floorJO;
-{
-    XCTAssertEqualWithAccuracy([jsonFloorFile[@"altitude"] doubleValue], [floorJO[@"altitude"] doubleValue], 0.0001);
-    XCTAssertEqualWithAccuracy([jsonFloorFile[@"level"] doubleValue], [floorJO[@"level"] doubleValue], 0.0001);
-    XCTAssertEqualWithAccuracy([jsonFloorFile[@"scale"] doubleValue], [floorJO[@"scale"] doubleValue], 0.0001);
-    XCTAssertEqualObjects(jsonFloorFile[@"floorIdentifier"], jsonFloorFile[@"floorIdentifier"]);
-    XCTAssertEqualObjects(jsonFloorFile[@"mapUrl"], jsonFloorFile[@"mapUrl"]);
-    XCTAssertEqualObjects(jsonFloorFile[@"buildingIdentifier"], jsonFloorFile[@"buildingIdentifier"]);
-}
-
 //utility method to assert an indication
 - (void) assertIndication: (NSDictionary *) jsonIndicationFile : (NSDictionary *) indicationJO;
 {
@@ -126,25 +115,6 @@
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
-}
-
-- (void) testFloor {
-    NSString *filePath = @"resources/floor";
-    // ### FLOOR1.JSON ###
-    SITFloor *floor1 = [SitumCreatorTests createFloorWithAltitude];
-    NSDictionary *floorJO1 = [SitumLocationWrapper.shared floorToJsonObject:floor1];
-    NSString *fileName1 =  @"floor1";
-    //read from json object in resources
-    NSDictionary *jsonFloor1 = [TestingHelper dataFromJSONFileNamed: fileName1 inDirectory : filePath];
-    [self assertFloor: jsonFloor1: floorJO1];
-    
-    // ### FLOOR2.JSON ###
-    SITFloor *floor2 = [SitumCreatorTests createFloorWithoutAltitude];
-    NSDictionary *floorJO2 = [SitumLocationWrapper.shared floorToJsonObject:floor2];
-    NSString *fileName2 =  @"floor2";
-    //read from json object in resources
-    NSDictionary *jsonFloor2 = [TestingHelper dataFromJSONFileNamed: fileName2 inDirectory : filePath];
-    [self assertFloor: jsonFloor2: floorJO2];
 }
 
 - (void) testIndication {

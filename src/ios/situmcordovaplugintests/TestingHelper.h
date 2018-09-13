@@ -20,5 +20,6 @@
 - (void) assertBound: (NSDictionary *) jsonBoundFile : (NSDictionary *) boundJO;
 - (void) assertDimension: (NSDictionary *) jsonDimensionFile : (NSDictionary *) dimensionJO;
 - (void) assertEvent: (NSDictionary *) jsonEventFile : (NSDictionary *) eventJO;
+- (void) assertFloor: (NSDictionary *) jsonFloorFile : (NSDictionary *) floorJO;
 
 @end
