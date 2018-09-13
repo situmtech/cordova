@@ -36,5 +36,23 @@
     return json.copy;
 }
 
+- (void) assertPoint: (NSDictionary *) jsonPointFile : (NSDictionary *) pointJO {
+    [self assertCoordinate:jsonPointFile[@"coordinate"]:pointJO[@"coordinate"]];
+    [self assertCartesianCoordinate:jsonPointFile[@"cartesianCoordinate"]:pointJO[@"cartesianCoordinate"]];
+    XCTAssertEqualObjects(jsonPointFile[@"floorIdentifier"], pointJO[@"floorIdentifier"]);
+    XCTAssert(jsonPointFile[@"isIndoor"] == pointJO[@"isIndoor"]);
+    XCTAssertEqualObjects(jsonPointFile[@"buildingIdentifier"], pointJO[@"buildingIdentifier"]);
+    XCTAssert(jsonPointFile[@"isOutdoor"] == pointJO[@"isOutdoor"]);
+}
+
+- (void) assertCoordinate: (NSDictionary *) jsonCoordinateFile : (NSDictionary *) coordinateJO {
+    XCTAssertEqualWithAccuracy([jsonCoordinateFile[@"longitude"] doubleValue], [coordinateJO[@"longitude"] doubleValue], 0.001);
+    XCTAssertEqualWithAccuracy([jsonCoordinateFile[@"latitude"] doubleValue], [coordinateJO[@"latitude"] doubleValue], 0.001);
+}
+
+- (void) assertCartesianCoordinate: (NSDictionary *) jsonCartesianCoordinateFile : (NSDictionary *) cartesianCoordinateJO {
+    XCTAssertEqualWithAccuracy([jsonCartesianCoordinateFile[@"x"] doubleValue], [cartesianCoordinateJO[@"x"] doubleValue], 0.0001);
+    XCTAssertEqualWithAccuracy([jsonCartesianCoordinateFile[@"y"] doubleValue], [cartesianCoordinateJO[@"y"] doubleValue], 0.0001);
+}
 
 @end

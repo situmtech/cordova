@@ -32,20 +32,6 @@
     XCTAssertEqualWithAccuracy([jsonBoundFile[@"southEast"][@"longitude"] doubleValue], [boundJO[@"southEast"][@"longitude"] doubleValue], 0.0001);
 }
 
-//utility method to assert a Cartesian Coordinate
-- (void) assertCartesianCoordinate: (NSDictionary *) jsonCartesianCoordinateFile : (NSDictionary *) cartesianCoordinateJO;
-{
-    XCTAssertEqualWithAccuracy([jsonCartesianCoordinateFile[@"x"] doubleValue], [cartesianCoordinateJO[@"x"] doubleValue], 0.0001);
-    XCTAssertEqualWithAccuracy([jsonCartesianCoordinateFile[@"y"] doubleValue], [cartesianCoordinateJO[@"y"] doubleValue], 0.0001);
-}
-
-//utility method to assert a Coordinate
-- (void) assertCoordinate: (NSDictionary *) jsonCoordinateFile : (NSDictionary *) coordinateJO;
-{
-    XCTAssertEqualWithAccuracy([jsonCoordinateFile[@"longitude"] doubleValue], [coordinateJO[@"longitude"] doubleValue], 0.001);
-    XCTAssertEqualWithAccuracy([jsonCoordinateFile[@"latitude"] doubleValue], [coordinateJO[@"latitude"] doubleValue], 0.001);
-}
-
 //utility method to assert a Dimension Coordinate
 - (void) assertDimension: (NSDictionary *) jsonDimensionFile : (NSDictionary *) dimensionJO;
 {
@@ -94,9 +80,9 @@
     XCTAssertEqualObjects(jsonLocationFile[@"provider"], locationJO[@"provider"]);
     XCTAssertEqualObjects(jsonLocationFile[@"buildingIdentifier"], locationJO[@"buildingIdentifier"]);
     XCTAssertEqualObjects(jsonLocationFile[@"floorIdentifier"], locationJO[@"floorIdentifier"]);
-    [self assertPoint:jsonLocationFile[@"position"]:locationJO[@"position"]];
-    [self assertCoordinate:jsonLocationFile[@"coordinate"]:locationJO[@"coordinate"]];
-    [self assertCartesianCoordinate:jsonLocationFile[@"cartesianCoordinate"]:locationJO[@"cartesianCoordinate"]];
+    [_helper assertPoint:jsonLocationFile[@"position"]:locationJO[@"position"]];
+    [_helper assertCoordinate:jsonLocationFile[@"coordinate"]:locationJO[@"coordinate"]];
+    [_helper assertCartesianCoordinate:jsonLocationFile[@"cartesianCoordinate"]:locationJO[@"cartesianCoordinate"]];
     [self assertAngle:jsonLocationFile[@"cartesianBearing"]:locationJO[@"cartesianBearing"]];
 
     //always returning true when creating object from file due to ios sdk restriction in hasBearing functionality
@@ -124,19 +110,7 @@
 }
 
 //utility method to assert a Point
-- (void) assertPoint: (NSDictionary *) jsonPointFile : (NSDictionary *) pointJO;
-{
-    [self assertCoordinate:jsonPointFile[@"coordinate"]:pointJO[@"coordinate"]];
-    //TODO Commented due to SITPoint constructor used with initWithCoordinate returns always 0.
-    [self assertCartesianCoordinate:jsonPointFile[@"cartesianCoordinate"]:pointJO[@"cartesianCoordinate"]];
-    XCTAssertEqualObjects(jsonPointFile[@"floorIdentifier"], pointJO[@"floorIdentifier"]);
-    //TODO Commented due to non correct isIndoor and isOutdoor properties
-    XCTAssert(jsonPointFile[@"isIndoor"] == pointJO[@"isIndoor"]);
-    XCTAssertEqualObjects(jsonPointFile[@"buildingIdentifier"], pointJO[@"buildingIdentifier"]);
-    XCTAssert(jsonPointFile[@"isOutdoor"] == pointJO[@"isOutdoor"]);
-    //XCTAssertTrue(jsonPointFile[@"isIndoor"]);
-    //XCTAssertTrue(jsonPointFile[@"isOutdoor"]);
-}
+
 
 //utility method to assert a Route
 - (void) assertRoute: (NSDictionary *) jsonRouteFile : (NSDictionary *) routeJO;
@@ -147,9 +121,9 @@
     [self assertIndication:[jsonRouteFile[@"indications"] objectAtIndex:0]:[routeJO[@"indications"] objectAtIndex:0]];
     [self assertIndication:[jsonRouteFile[@"indications"] objectAtIndex:1]:[routeJO[@"indications"] objectAtIndex:1]];
     [self assertIndication:[jsonRouteFile[@"indications"] objectAtIndex:2]:[routeJO[@"indications"] objectAtIndex:2]];
-    [self assertPoint:jsonRouteFile[@"from"]:routeJO[@"from"]];
+    [_helper assertPoint:jsonRouteFile[@"from"]:routeJO[@"from"]];
     //TODO review TO vs to
-    [self assertPoint:jsonRouteFile[@"TO"]:routeJO[@"to"]];
+    [_helper assertPoint:jsonRouteFile[@"TO"]:routeJO[@"to"]];
 }
 
 //utility method to assert a Route Step
@@ -161,8 +135,8 @@
     XCTAssertEqualObjects(jsonRouteStepFile[@"isLast"], routeStepJO[@"isLast"]);
     XCTAssertEqualWithAccuracy([jsonRouteStepFile[@"distanceToGoal"] doubleValue], [routeStepJO[@"distanceToGoal"] doubleValue], 0.0001);
     XCTAssertEqualObjects(jsonRouteStepFile[@"id"], routeStepJO[@"id"]);
-    [self assertPoint:jsonRouteStepFile[@"from"]:routeStepJO[@"from"]];
-    [self assertPoint:jsonRouteStepFile[@"TO"]:routeStepJO[@"TO"]];
+    [_helper assertPoint:jsonRouteStepFile[@"from"]:routeStepJO[@"from"]];
+    [_helper assertPoint:jsonRouteStepFile[@"TO"]:routeStepJO[@"TO"]];
 }
 
 //utility method to assert a ConversionArea
@@ -182,7 +156,7 @@
 
 - (void)setUp {
     [super setUp];
-    _pointFilePath = @"resources/point";
+    _helper = [TestingHelper new];
     _stepFilePath = @"resources/routeStep";
 }
 
@@ -237,7 +211,7 @@
     NSString *fileName1 =  @"cartesianCoordinate1";
     //read from json object in resources
     NSDictionary *jsoncartesianCoordinate1 = [TestingHelper dataFromJSONFileNamed: fileName1 inDirectory : filePath];
-    [self assertCartesianCoordinate: jsoncartesianCoordinate1: cartesianCoordinateJO1];
+    [_helper assertCartesianCoordinate: jsoncartesianCoordinate1: cartesianCoordinateJO1];
 }
 
 - (void) testCoordinate {
@@ -248,7 +222,7 @@
     NSString *fileName1 =  @"coordinate1";
     //read from json object in resources
     NSDictionary *jsonCoordinate1 = [TestingHelper dataFromJSONFileNamed: fileName1 inDirectory : filePath];
-    [self assertCoordinate: jsonCoordinate1: coordinateJO1];
+    [_helper assertCoordinate: jsonCoordinate1: coordinateJO1];
 }
 
 - (void) testDimension {
@@ -370,13 +344,13 @@
     [self assertLocation: jsonLocation9: locationJO9];
     
     // ### LOCATION10.JSON ###
-    /*
+    
     SITLocation *location10 = [SitumCreatorTests outdoorLocation];
     NSDictionary *locationJO10 = [SitumLocationWrapper.shared locationToJsonObject:location10];
     NSString *fileName10 =  @"location10";
     NSDictionary *jsonLocation10 = [TestingHelper dataFromJSONFileNamed: fileName10 inDirectory : filePath];
     [self assertLocation: jsonLocation10: locationJO10];
-     */
+     
 }
 
 - (void)testLocationStatus {
@@ -432,81 +406,10 @@
     NSString *fileName1 =  @"poiCategory1";
     //read from json object in resources
     NSDictionary *jsonPoiCategory1 = [TestingHelper dataFromJSONFileNamed: fileName1 inDirectory : filePath];
-    [self assertPoint: jsonPoiCategory1: poiCategoryJO1];
+    [_helper assertPoint: jsonPoiCategory1: poiCategoryJO1];
 }
 
-- (void) testPoint1 {
-    // ### POINT1.JSON ###
-    SITPoint *point1 = [SitumCreatorTests createPointWithCoordinate];
-    NSDictionary *pointJO1 = [SitumLocationWrapper.shared pointToJsonObject:point1];
-    NSString *fileName1 =  @"point1";
-    //read from json object in resources
-    NSDictionary *jsonPoint1 = [TestingHelper dataFromJSONFileNamed: fileName1 inDirectory : _pointFilePath];
-    [self assertPoint: jsonPoint1: pointJO1];
-}
 
-- (void) testPoint2 {
-    SITPoint *point2 = [SitumCreatorTests createPointWithCoordinateAndBuildingId];
-    NSDictionary *pointJO2 = [SitumLocationWrapper.shared pointToJsonObject:point2];
-    NSString *fileName2 =  @"point2";
-    //read from json object in resources
-    NSDictionary *jsonPoint2 = [TestingHelper dataFromJSONFileNamed: fileName2 inDirectory : _pointFilePath];
-    [self assertPoint: jsonPoint2: pointJO2];
-}
-
-- (void) testPoint3 {
-    SITPoint *point3 = [SitumCreatorTests createPointWithBuildingIdAndFloor];
-    NSDictionary *pointJO3 = [SitumLocationWrapper.shared pointToJsonObject:point3];
-    NSString *fileName3 =  @"point3";
-    //read from json object in resources
-    NSDictionary *jsonPoint3 = [TestingHelper dataFromJSONFileNamed: fileName3 inDirectory : _pointFilePath];
-    [self assertPoint: jsonPoint3: pointJO3];
-}
-
-- (void) testPoint4 {
-    SITPoint *point4 = [SitumCreatorTests createPointWithBuildingWithAngleFromRadians];
-    NSDictionary *pointJO4 = [SitumLocationWrapper.shared pointToJsonObject:point4];
-    NSString *fileName4 =  @"point4";
-    //read from json object in resources
-    NSDictionary *jsonPoint4 = [TestingHelper dataFromJSONFileNamed: fileName4 inDirectory : _pointFilePath];
-    [self assertPoint: jsonPoint4: pointJO4];
-}
-
-- (void) testPoint5 {
-    SITPoint *point5 = [SitumCreatorTests createPointWithBuildingWithAngleFromDegrees];
-    NSDictionary *pointJO5 = [SitumLocationWrapper.shared pointToJsonObject:point5];
-    NSString *fileName5 =  @"point5";
-    //read from json object in resources
-    NSDictionary *jsonPoint5 = [TestingHelper dataFromJSONFileNamed: fileName5 inDirectory : _pointFilePath];
-    [self assertPoint: jsonPoint5: pointJO5];
-}
-
-- (void) testPoint6 {
-    SITPoint *point6 = [SitumCreatorTests createPointWithBuildingWithAddress];
-    NSDictionary *pointJO6 = [SitumLocationWrapper.shared pointToJsonObject:point6];
-    NSString *fileName6 =  @"point6";
-    //read from json object in resources
-    NSDictionary *jsonPoint6 = [TestingHelper dataFromJSONFileNamed: fileName6 inDirectory : _pointFilePath];
-    [self assertPoint: jsonPoint6: pointJO6];
-}
-
-- (void) testPoint7 {
-    SITPoint *point7 = [SitumCreatorTests createPointWithBuildingWithInfo];
-    NSDictionary *pointJO7 = [SitumLocationWrapper.shared pointToJsonObject:point7];
-    NSString *fileName7 =  @"point7";
-    //read from json object in resources
-    NSDictionary *jsonPoint7 = [TestingHelper dataFromJSONFileNamed: fileName7 inDirectory : _pointFilePath];
-    [self assertPoint: jsonPoint7: pointJO7];
-}
-
-- (void) testPoint8 {
-    SITPoint *point8 = [SitumCreatorTests createPointWithBuildingWithPicture];
-    NSDictionary *pointJO8 = [SitumLocationWrapper.shared pointToJsonObject:point8];
-    NSString *fileName8 =  @"point8";
-    //read from json object in resources
-    NSDictionary *jsonPoint8 = [TestingHelper dataFromJSONFileNamed: fileName8 inDirectory : _pointFilePath];
-    [self assertPoint: jsonPoint8: pointJO8];
-}
 
 - (void) testRoute {
     NSString *filePath = @"resources/route";

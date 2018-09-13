@@ -6,13 +6,15 @@
 //  Copyright © 2018 Situm. All rights reserved.
 //
 
+#import <XCTest/XCTest.h>
 #import <Foundation/Foundation.h>
 
-@interface TestingHelper : NSObject {
-}
+@interface TestingHelper : XCTestCase 
 
 
-+(id)dataFromJSONFileNamed:(NSString *)fileName inDirectory:(NSString *) pathResources;
-//-(id)assertLocation:(NSDictionary *)jsonLocation :(NSDictionary*) locationJO;
++ (id)dataFromJSONFileNamed:(NSString *)fileName inDirectory:(NSString *) pathResources;
+- (void) assertPoint: (NSDictionary *) jsonPointFile : (NSDictionary *) pointJO;
+- (void) assertCoordinate: (NSDictionary *) jsonCoordinateFile : (NSDictionary *) coordinateJO;
+- (void) assertCartesianCoordinate: (NSDictionary *) jsonCartesianCoordinateFile : (NSDictionary *) cartesianCoordinateJO;
 
 @end

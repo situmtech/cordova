@@ -262,8 +262,7 @@
 + (SITLocation *) outdoorLocation {
     NSTimeInterval timestamp = 14676784;
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(8.6, 10.5);
-    SITCartesianCoordinate *cartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:0 y:0];
-    SITPoint *position  = [[SITPoint alloc]  initWithCoordinate:coordinate buildingIdentifier:@"-1" floorIdentifier:@"-1" cartesianCoordinate: cartesianCoordinate];
+    SITPoint *position  = [[SITPoint alloc]  initWithCoordinate:coordinate buildingIdentifier:@"-1"];
     float bearing = 92; //degrees
     float cartesianBearing = 0; //radians
     kSITQualityValues quality = kSITHigh;
