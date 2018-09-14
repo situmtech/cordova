@@ -51,6 +51,10 @@
 + (SITNavigationProgress *) createNavigationProgressIndoor; //navigationProgress2.json
 //poi
 + (SITPOI *) createOutdoorPoiWithCategory;
++ (SITPOI *) createPoiWithBuildingFloorAndCoordinateWithCategory;
++ (SITPOI *) createPoiWithCoordinateAndBuildingId;
++ (SITPOI *) createPoiWithBuildingFloorCoordinateAndCartesian;
++ (SITPOI *) createPoiWithBuildingFloorAndCoordinates;
 //poiCategory
 + (SITPOICategory *) createPoiCategory; //poiCategory1.json
 //point

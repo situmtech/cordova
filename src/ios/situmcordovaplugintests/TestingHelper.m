@@ -155,7 +155,20 @@
 }
 
 - (void) assertPoi: (NSDictionary *) jsonPoiFile : (NSDictionary *) poiJO {
+    XCTAssertEqualObjects(jsonPoiFile[@"identifier"], poiJO[@"identifier"]);
+    [self assertCoordinate:jsonPoiFile[@"coordinate"]:poiJO[@"coordinate"]];
+    XCTAssertEqualObjects(jsonPoiFile[@"poiName"], poiJO[@"poiName"]);
+    XCTAssertEqualObjects(jsonPoiFile[@"customFields"], poiJO[@"customFields"]);
+    XCTAssertEqualObjects(jsonPoiFile[@"isIndoor"], poiJO[@"isIndoor"]);
+    XCTAssertEqualObjects(jsonPoiFile[@"infoHtml"], poiJO[@"infoHtml"]);
+    XCTAssertEqualObjects(jsonPoiFile[@"buildingIdentifier"], poiJO[@"buildingIdentifier"]);
+    XCTAssertEqualObjects(jsonPoiFile[@"isOutdoor"], poiJO[@"isOutdoor"]);
+    XCTAssertEqualObjects(jsonPoiFile[@"createdAt"], poiJO[@"createdAt"]);
+    XCTAssertEqualObjects(jsonPoiFile[@"floorIdentifier"], poiJO[@"floorIdentifier"]);
+    [self assertCartesianCoordinate:jsonPoiFile[@"cartesianCoordinate"] :poiJO[@"cartesianCoordinate"]];
     [self assertPoint: jsonPoiFile[@"position"]:poiJO[@"position"]];
+    XCTAssertEqualObjects(jsonPoiFile[@"category"], poiJO[@"category"]);
+    XCTAssertEqualObjects(jsonPoiFile[@"updatedAt"], poiJO[@"updatedAt"]);
 }
 
 - (void) assertPoint: (NSDictionary *) jsonPointFile : (NSDictionary *) pointJO {

@@ -30,14 +30,54 @@
     [super tearDown];
 }
 
-- (void) testPoi {
+- (void) testOutdoorPoiWithCategory {
     SITPOI *poi = [SitumCreatorTests createOutdoorPoiWithCategory];
     
-    NSDictionary *poiJO1 = [SitumLocationWrapper.shared poiToJsonObject:poi];
-    NSString *fileName1 =  @"poi1";
+    NSDictionary *poiJO = [SitumLocationWrapper.shared poiToJsonObject:poi];
+    NSString *fileName =  @"poi1";
     //read from json object in resources
-    NSDictionary *jsonPoi1 = [TestingHelper dataFromJSONFileNamed: fileName1 inDirectory : _filePath];
-    [_helper assertPoi: jsonPoi1: poiJO1];
+    NSDictionary *jsonPoi = [TestingHelper dataFromJSONFileNamed: fileName inDirectory : _filePath];
+    [_helper assertPoi: jsonPoi: poiJO];
+}
+
+- (void) testPoiWithBuildingFloorAndCoordinateWithCategory {
+    SITPOI *poi = [SitumCreatorTests createPoiWithBuildingFloorAndCoordinateWithCategory];
+    
+    NSDictionary *poiJO = [SitumLocationWrapper.shared poiToJsonObject:poi];
+    NSString *fileName =  @"poi2";
+    //read from json object in resources
+    NSDictionary *jsonPoi = [TestingHelper dataFromJSONFileNamed: fileName inDirectory : _filePath];
+    [_helper assertPoi: jsonPoi: poiJO];
+}
+
+- (void) testPoiWithCoordinateAndBuildingId {
+    SITPOI *poi = [SitumCreatorTests createPoiWithCoordinateAndBuildingId];
+    
+    NSDictionary *poiJO = [SitumLocationWrapper.shared poiToJsonObject:poi];
+    NSString *fileName =  @"poi3";
+    //read from json object in resources
+    NSDictionary *jsonPoi = [TestingHelper dataFromJSONFileNamed: fileName inDirectory : _filePath];
+    [_helper assertPoi: jsonPoi: poiJO];
+}
+
+- (void) testPoiWithBuildingFloorCoordinateAndCartesian {
+    SITPOI *poi = [SitumCreatorTests createPoiWithBuildingFloorCoordinateAndCartesian];
+    
+    NSDictionary *poiJO = [SitumLocationWrapper.shared poiToJsonObject:poi];
+    NSString *fileName =  @"poi4";
+    //read from json object in resources
+    NSDictionary *jsonPoi = [TestingHelper dataFromJSONFileNamed: fileName inDirectory : _filePath];
+    [_helper assertPoi: jsonPoi: poiJO];
+}
+
+- (void) testPoiWithBuildingFloorAndCoordinates {
+    SITPOI *poi = [SitumCreatorTests createPoiWithBuildingFloorAndCoordinates];
+    
+    NSDictionary *poiJO = [SitumLocationWrapper.shared poiToJsonObject:poi];
+    NSString *fileName =  @"poi5";
+    //read from json object in resources
+    NSDictionary *jsonPoi = [TestingHelper dataFromJSONFileNamed: fileName inDirectory : _filePath];
+    [_helper assertPoi: jsonPoi: poiJO];
 }
 
 @end

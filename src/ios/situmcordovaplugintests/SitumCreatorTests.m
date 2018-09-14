@@ -452,17 +452,112 @@
     category.name = string;
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(5, 2);
     SITPoint *point = [[SITPoint alloc] initWithCoordinate:coordinate buildingIdentifier:@"101"];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"EEE MMM dd HH:mm:ss ZZZZ yyyy"];
+    NSDate *createdAt = [NSDate dateWithTimeIntervalSince1970:0];
+    
     SITPOI *poi = [[SITPOI alloc] init];
     [poi setValue:point
            forKey:@"outdoorPosition"];
-    poi.identifier = @"-1";
-    poi.buildingIdentifier = @"101";
     poi.category = category;
     poi.infoHTML = @"TEST_INFO";
     poi.name = @"TEST_NAME";
+    poi.identifier = @"-1";
+    poi.createdAt = createdAt;
+    poi.buildingIdentifier = @"101";
     return poi;
-    
 }
+
+//poi2.json
++ (SITPOI *) createPoiWithBuildingFloorAndCoordinateWithCategory {
+    SITCartesianCoordinate *cartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:2 y:9];
+    SITBuilding *building = [[SITBuilding alloc] init];
+    building.identifier = @"101";
+    SITPoint *point = [[SITPoint alloc] initWithBuilding:building floorIdentifier:@"12" cartesianCoordinate:cartesianCoordinate];
+    
+    SITPOICategory *category = [SITPOICategory new];
+    category.code = @"situm-no-category";
+    SITMultilanguageString *string = [[SITMultilanguageString alloc] initWithValue:@"Sin categoría" defaultLocale:[NSLocale localeWithLocaleIdentifier:@"es_ES"]];
+    category.name = string;
+    
+    SITPOI *poi = [SITPOI new];
+    [poi setValue:point
+           forKey:@"indoorPosition"];
+    poi.category = category;
+    poi.infoHTML = @"TEST_INFO";
+    poi.name = @"TEST_NAME";
+    poi.identifier = @"-1";
+    poi.buildingIdentifier = @"101";
+    return poi;
+}
+
+//poi3.json
++ (SITPOI *) createPoiWithCoordinateAndBuildingId {
+    SITPOICategory *category = [SITPOICategory new];
+    category.code = @"situm-no-category";
+    SITMultilanguageString *string = [[SITMultilanguageString alloc] initWithValue:@"Sin categoría" defaultLocale:[NSLocale localeWithLocaleIdentifier:@"es_ES"]];
+    category.name = string;
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(5, 7);
+    SITPoint *point = [[SITPoint alloc] initWithCoordinate:coordinate buildingIdentifier:@"101"];
+    SITPOI *poi = [[SITPOI alloc] init];
+    [poi setValue:point
+           forKey:@"outdoorPosition"];
+    poi.category = category;
+    poi.infoHTML = @"TEST_INFO";
+    poi.name = @"TEST_NAME";
+    poi.identifier = @"-1";
+    poi.buildingIdentifier = @"101";
+    return poi;
+}
+
+//poi4.json
++ (SITPOI *) createPoiWithBuildingFloorCoordinateAndCartesian {
+    SITCartesianCoordinate *cartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:2 y:9];
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(37, 45);
+    SITBuilding *building = [[SITBuilding alloc] init];
+    building.identifier = @"101";
+    SITPoint *point = [[SITPoint alloc] initWithCoordinate:coordinate buildingIdentifier:@"101" floorIdentifier:@"12" cartesianCoordinate:cartesianCoordinate];
+    
+    SITPOICategory *category = [SITPOICategory new];
+    category.code = @"situm-no-category";
+    SITMultilanguageString *string = [[SITMultilanguageString alloc] initWithValue:@"Sin categoría" defaultLocale:[NSLocale localeWithLocaleIdentifier:@"es_ES"]];
+    category.name = string;
+    
+    SITPOI *poi = [SITPOI new];
+    [poi setValue:point
+           forKey:@"indoorPosition"];
+    poi.category = category;
+    poi.infoHTML = @"TEST_INFO";
+    poi.name = @"TEST_NAME";
+    poi.identifier = @"-1";
+    poi.buildingIdentifier = @"101";
+    return poi;
+}
+
+//poi5.json
++ (SITPOI *) createPoiWithBuildingFloorAndCoordinates {
+    SITCartesianCoordinate *cartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:2 y:9];
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(37.4534534534,54.65464564534);
+    SITBuilding *building = [[SITBuilding alloc] init];
+    building.identifier = @"101";
+    SITPoint *point = [[SITPoint alloc] initWithCoordinate:coordinate buildingIdentifier:@"101" floorIdentifier:@"12" cartesianCoordinate:cartesianCoordinate];
+    
+    SITPOICategory *category = [SITPOICategory new];
+    category.code = @"situm-no-category";
+    SITMultilanguageString *string = [[SITMultilanguageString alloc] initWithValue:@"Sin categoría" defaultLocale:[NSLocale localeWithLocaleIdentifier:@"es_ES"]];
+    category.name = string;
+    
+    SITPOI *poi = [SITPOI new];
+    [poi setValue:point
+           forKey:@"indoorPosition"];
+    poi.category = category;
+    poi.infoHTML = @"TEST_INFO";
+    poi.name = @"TEST_NAME";
+    poi.buildingIdentifier = @"101";
+    poi.identifier = @"-1";
+    return poi;
+}
+
 //poiCategory1.json
 + (SITPOICategory *) createPoiCategory {
     SITPOICategory *category = [[SITPOICategory alloc] init];

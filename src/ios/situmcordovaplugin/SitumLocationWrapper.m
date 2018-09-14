@@ -343,8 +343,11 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:[NSNumber numberWithBool:poi.position.isIndoor] forKey:@"isIndoor"];
     [jo setObject:[NSNumber numberWithBool:poi.position.isOutdoor] forKey:@"isOutdoor"];
     [jo setObject: poi.category.code forKey:@"category"];
+
     if (poi.customFields) {
         [jo setObject:poi.customFields forKey:@"customFields"];
+    } else {
+        [jo setObject:[NSDictionary new] forKey:@"customFields"];
     }
     [jo setObject:emptyStrCheck(poi.infoHTML) forKey:@"infoHtml"];
     return jo.copy;
