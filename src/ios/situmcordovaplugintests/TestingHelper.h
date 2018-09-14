@@ -13,7 +13,6 @@
 
 
 + (id)dataFromJSONFileNamed:(NSString *)fileName inDirectory:(NSString *) pathResources;
-- (void) assertPoint: (NSDictionary *) jsonPointFile : (NSDictionary *) pointJO;
 - (void) assertCoordinate: (NSDictionary *) jsonCoordinateFile : (NSDictionary *) coordinateJO;
 - (void) assertCartesianCoordinate: (NSDictionary *) jsonCartesianCoordinateFile : (NSDictionary *) cartesianCoordinateJO;
 - (void) assertAngle: (NSDictionary *) jsonAngleFile : (NSDictionary *) angleJO;
@@ -26,6 +25,8 @@
 - (void) assertLocation: (NSDictionary *) jsonLocationFile : (NSDictionary *) locationJO;
 - (void) assertLocationStatus: (NSDictionary *) jsonLocationStatusFile : (NSDictionary *) locationStatusJO;
 - (void) assertNavigationProgress: (NSDictionary *) jsonNavigationProgressFile : (NSDictionary *) navigationProgressJO;
+- (void) assertPoi: (NSDictionary *) jsonPoiFile : (NSDictionary *) poiJO;
+- (void) assertPoint: (NSDictionary *) jsonPointFile : (NSDictionary *) pointJO;
 - (void) assertRoute: (NSDictionary *) jsonRouteFile : (NSDictionary *) routeJO;
 - (void) assertRouteStep: (NSDictionary *) jsonRouteStepFile : (NSDictionary *) routeStepJO;
 - (void) assertConversionArea:(NSDictionary *) jsonConversionAreaFile : (NSDictionary *) conversionAreaJO;

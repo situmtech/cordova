@@ -36,15 +36,6 @@
     return json.copy;
 }
 
-- (void) assertPoint: (NSDictionary *) jsonPointFile : (NSDictionary *) pointJO {
-    [self assertCoordinate:jsonPointFile[@"coordinate"]:pointJO[@"coordinate"]];
-    [self assertCartesianCoordinate:jsonPointFile[@"cartesianCoordinate"]:pointJO[@"cartesianCoordinate"]];
-    XCTAssertEqualObjects(jsonPointFile[@"floorIdentifier"], pointJO[@"floorIdentifier"]);
-    XCTAssert(jsonPointFile[@"isIndoor"] == pointJO[@"isIndoor"]);
-    XCTAssertEqualObjects(jsonPointFile[@"buildingIdentifier"], pointJO[@"buildingIdentifier"]);
-    XCTAssert(jsonPointFile[@"isOutdoor"] == pointJO[@"isOutdoor"]);
-}
-
 - (void) assertCoordinate: (NSDictionary *) jsonCoordinateFile : (NSDictionary *) coordinateJO {
     XCTAssertEqualWithAccuracy([jsonCoordinateFile[@"longitude"] doubleValue], [coordinateJO[@"longitude"] doubleValue], 0.001);
     XCTAssertEqualWithAccuracy([jsonCoordinateFile[@"latitude"] doubleValue], [coordinateJO[@"latitude"] doubleValue], 0.001);
@@ -161,6 +152,19 @@
     XCTAssertEqualWithAccuracy([jsonNavigationProgressFile[@"timeToGoal"] doubleValue], [navigationProgressJO[@"timeToGoal"] doubleValue], 0.0001);
     XCTAssertEqualWithAccuracy([jsonNavigationProgressFile[@"currentStepIndex"] doubleValue], [navigationProgressJO[@"currentStepIndex"] doubleValue], 0.0001);
     XCTAssertEqualWithAccuracy([jsonNavigationProgressFile[@"distanceToGoal"] doubleValue], [navigationProgressJO[@"distanceToGoal"] doubleValue], 0.0001);
+}
+
+- (void) assertPoi: (NSDictionary *) jsonPoiFile : (NSDictionary *) poiJO {
+    [self assertPoint: jsonPoiFile[@"position"]:poiJO[@"position"]];
+}
+
+- (void) assertPoint: (NSDictionary *) jsonPointFile : (NSDictionary *) pointJO {
+    [self assertCoordinate:jsonPointFile[@"coordinate"]:pointJO[@"coordinate"]];
+    [self assertCartesianCoordinate:jsonPointFile[@"cartesianCoordinate"]:pointJO[@"cartesianCoordinate"]];
+    XCTAssertEqualObjects(jsonPointFile[@"floorIdentifier"], pointJO[@"floorIdentifier"]);
+    XCTAssert(jsonPointFile[@"isIndoor"] == pointJO[@"isIndoor"]);
+    XCTAssertEqualObjects(jsonPointFile[@"buildingIdentifier"], pointJO[@"buildingIdentifier"]);
+    XCTAssert(jsonPointFile[@"isOutdoor"] == pointJO[@"isOutdoor"]);
 }
 
 - (void) assertRoute: (NSDictionary *) jsonRouteFile : (NSDictionary *) routeJO {

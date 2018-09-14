@@ -444,6 +444,25 @@
     return navigationProgress;
 }
 
+//poi1.json
++ (SITPOI *) createOutdoorPoiWithCategory {
+    SITPOICategory *category = [SITPOICategory new];
+    category.code = @"situm-no-category";
+    SITMultilanguageString *string = [[SITMultilanguageString alloc] initWithValue:@"Sin categoría" defaultLocale:[NSLocale localeWithLocaleIdentifier:@"es_ES"]];
+    category.name = string;
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(5, 2);
+    SITPoint *point = [[SITPoint alloc] initWithCoordinate:coordinate buildingIdentifier:@"101"];
+    SITPOI *poi = [[SITPOI alloc] init];
+    [poi setValue:point
+           forKey:@"outdoorPosition"];
+    poi.identifier = @"-1";
+    poi.buildingIdentifier = @"101";
+    poi.category = category;
+    poi.infoHTML = @"TEST_INFO";
+    poi.name = @"TEST_NAME";
+    return poi;
+    
+}
 //poiCategory1.json
 + (SITPOICategory *) createPoiCategory {
     SITPOICategory *category = [[SITPOICategory alloc] init];

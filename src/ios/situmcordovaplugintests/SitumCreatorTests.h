@@ -49,6 +49,8 @@
 //navigationProgress
 + (SITNavigationProgress *) createNavigationProgressOutdoor; //navigationProgress1.json
 + (SITNavigationProgress *) createNavigationProgressIndoor; //navigationProgress2.json
+//poi
++ (SITPOI *) createOutdoorPoiWithCategory;
 //poiCategory
 + (SITPOICategory *) createPoiCategory; //poiCategory1.json
 //point
