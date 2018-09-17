@@ -26,6 +26,7 @@
 - (void) assertLocationStatus: (NSDictionary *) jsonLocationStatusFile : (NSDictionary *) locationStatusJO;
 - (void) assertNavigationProgress: (NSDictionary *) jsonNavigationProgressFile : (NSDictionary *) navigationProgressJO;
 - (void) assertPoi: (NSDictionary *) jsonPoiFile : (NSDictionary *) poiJO;
+- (void) assertImage: (NSDictionary *) jsonImageFile : (NSDictionary *) imageJO;
 - (void) assertPoint: (NSDictionary *) jsonPointFile : (NSDictionary *) pointJO;
 - (void) assertRoute: (NSDictionary *) jsonRouteFile : (NSDictionary *) routeJO;
 - (void) assertRouteStep: (NSDictionary *) jsonRouteStepFile : (NSDictionary *) routeStepJO;

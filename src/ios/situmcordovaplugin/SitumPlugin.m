@@ -294,12 +294,10 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
         if (!error) {
             CDVPluginResult* pluginResult = nil;
             if (data == nil) {
-                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Icon not founc"];
+                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Icon not found"];
             } else {
                 UIImage *icon = [UIImage imageWithData:data];
-                NSString *base64 = [UIImagePNGRepresentation(icon) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-                NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-                [dict setObject:base64 forKey:@"data"];
+                NSDictionary * dict = [[SitumLocationWrapper shared] bitmapToJsonObject:icon];
                 pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dict];
             }
             [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
@@ -325,7 +323,8 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
             if (data == nil) {
                 pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Icon not found"];
             } else {
-                NSDictionary * dict = [[SitumLocationWrapper shared] bitmapToJsonObject:data];
+                UIImage *icon = [UIImage imageWithData:data];
+                NSDictionary * dict = [[SitumLocationWrapper shared] bitmapToJsonObject:icon];
                 pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dict];
             }
             [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];

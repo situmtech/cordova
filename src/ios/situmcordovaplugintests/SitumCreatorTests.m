@@ -599,6 +599,14 @@
     return category;
 }
 
++ (UIImage *) createPoiCategoryIcon {
+    NSString *filePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"poiCategoryIcon1"
+                                                                          ofType:@"png"
+                                                                     inDirectory:@"resources/poiCategoryIcon"];
+    UIImage *image = [UIImage imageWithContentsOfFile:filePath];
+    return image;
+}
+
 //point1.json
 + (SITPoint *) createPointWithCoordinate {
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(3, 6);

@@ -328,8 +328,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     return category;
 }
 
-- (NSDictionary *)bitmapToJsonObject:(NSData *)data {
-    UIImage *icon = [UIImage imageWithData:data];
+- (NSDictionary *)bitmapToJsonObject:(UIImage *)icon {
     NSString *base64 = [UIImagePNGRepresentation(icon) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     [dict setObject:base64 forKey:@"data"];

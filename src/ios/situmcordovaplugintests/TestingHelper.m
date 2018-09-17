@@ -173,6 +173,10 @@
     XCTAssertEqualObjects(jsonPoiFile[@"updatedAt"], poiJO[@"updatedAt"]);
 }
 
+- (void) assertImage: (NSDictionary *) jsonImageFile : (NSDictionary *) imageJO {
+    XCTAssert([jsonImageFile[@"data"] isEqualToString: imageJO[@"data"]]);
+}
+
 - (void) assertPoint: (NSDictionary *) jsonPointFile : (NSDictionary *) pointJO {
     [self assertCoordinate:jsonPointFile[@"coordinate"]:pointJO[@"coordinate"]];
     [self assertCartesianCoordinate:jsonPointFile[@"cartesianCoordinate"]:pointJO[@"cartesianCoordinate"]];

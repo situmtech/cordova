@@ -31,7 +31,7 @@
 
 - (SITPOICategory *) poiCategoryFromJsonObject:(NSDictionary *) jo;
 - (NSDictionary *) poiCategoryToJsonObject:(SITPOICategory *) category;
-- (NSDictionary *)bitmapToJsonObject:(NSData *)data;
+- (NSDictionary *)bitmapToJsonObject:(UIImage *)icon;
 
 // POI
 

@@ -57,6 +57,7 @@
 + (SITPOI *) createPoiWithBuildingFloorAndCoordinates;
 //poiCategory
 + (SITPOICategory *) createPoiCategory; //poiCategory1.json
++ (UIImage *) createPoiCategoryIcon;
 //point
 + (SITPoint *) createPointWithCoordinate; //point1.json
 + (SITPoint *) createPointWithCoordinateAndBuildingId; //point2.json
