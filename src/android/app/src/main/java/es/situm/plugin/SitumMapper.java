@@ -12,6 +12,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Map;
 //import java.util.Vector;
 
@@ -196,7 +197,7 @@ class SitumMapper {
   public static final String UPDATED_AT = "updatedAt";
   public static final String NAME = "name";
 
-  public static final DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZZ yyyy");
+  public static final DateFormat dateFormat = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy", Locale.US);
 
   static JSONObject buildingToJsonObject(Building building) throws JSONException {
     JSONObject jo = new JSONObject();

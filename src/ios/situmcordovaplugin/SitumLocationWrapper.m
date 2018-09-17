@@ -1,6 +1,5 @@
 #import "SitumLocationWrapper.h"
-
-NSString *DATEFORMAT = @"EEE MMM dd HH:mm:ss ZZZZ yyyy";
+#import "Constants.h"
 
 NSString* emptyStrCheck(NSString *str) {
     if (!str || str == nil) {
@@ -166,7 +165,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:emptyStrCheck(building.identifier) forKey:@"buildingIdentifier"];
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:DATEFORMAT];
+    [dateFormatter setDateFormat:kDateFormat];
 
     [jo setObject:emptyStrCheck([dateFormatter stringFromDate:building.createdAt])
            forKey:@"createdAt"];
@@ -251,7 +250,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:emptyStrCheck(floor.identifier) forKey:@"identifier"];
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:DATEFORMAT];
+    [dateFormatter setDateFormat:kDateFormat];
 
     [jo setObject:emptyStrCheck([dateFormatter stringFromDate:floor.createdAt])
            forKey:@"createdAt"];
@@ -266,7 +265,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     SITFloor *floor  = [[SITFloor alloc] init];
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:DATEFORMAT];
+    [dateFormatter setDateFormat:kDateFormat];
 
     floor.createdAt = [dateFormatter dateFromString:floor.createdAt];
 
@@ -329,6 +328,14 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     return category;
 }
 
+- (NSDictionary *)bitmapToJsonObject:(NSData *)data {
+    UIImage *icon = [UIImage imageWithData:data];
+    NSString *base64 = [UIImagePNGRepresentation(icon) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    [dict setObject:base64 forKey:@"data"];
+    return dict;
+}
+
 // POI
 
 - (NSDictionary *) poiToJsonObject:(SITPOI *) poi {
@@ -343,6 +350,15 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:[NSNumber numberWithBool:poi.position.isIndoor] forKey:@"isIndoor"];
     [jo setObject:[NSNumber numberWithBool:poi.position.isOutdoor] forKey:@"isOutdoor"];
     [jo setObject: poi.category.code forKey:@"category"];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:kDateFormat];
+    
+    [jo setObject:emptyStrCheck([dateFormatter stringFromDate:poi.createdAt])
+           forKey:@"createdAt"];
+    
+    [jo setObject:emptyStrCheck([dateFormatter stringFromDate:poi.updatedAt])
+           forKey:@"updatedAt"];
 
     if (poi.customFields) {
         [jo setObject:poi.customFields forKey:@"customFields"];

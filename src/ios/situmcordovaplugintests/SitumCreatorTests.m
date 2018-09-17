@@ -7,6 +7,7 @@
 //
 
 #import "SitumCreatorTests.h"
+#import "Constants.h"
 
 @implementation SitumCreatorTests
 
@@ -57,9 +58,9 @@
     SITDimensions *dimensions = [[SITDimensions alloc] initWithWidth:71.0686153823893 height:42.6106416714803];
     SITAngle *angle = [[SITAngle alloc] initWithRadians:-3.31881803875501];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"EEE MMM dd HH:mm:ss ZZZZ yyyy"];
-    NSDate *createdAt = [dateFormatter dateFromString:@"Wed Jan 04 18:41:43 GMT+01:00 2017"];
-    NSDate *updatedAt = [dateFormatter dateFromString:@"Wed Sep 12 12:10:25 GMT+02:00 2018"];
+    [dateFormatter setDateFormat:kDateFormat];
+    NSDate *createdAt = [dateFormatter dateFromString:@"Wed Jan 04 18:41:43 +0100 2017"];
+    NSDate *updatedAt = [dateFormatter dateFromString:@"Wed Sep 12 12:10:25 +0200 2018"];
     
     SITBuilding *building = [[SITBuilding alloc] initWithIdentifier:@"1051" createdAt:createdAt updatedAt:updatedAt customFields:customFields userIdentifier:@"-1" name:@"Ed. Emprendia - Situm" center:center info:@"<p>http://Prueba/actualizador/recibirAlarmas</p>" dimensions:dimensions rotation:angle pictureURL:nil pictureThumbURL:nil];
     building.infoHTML = @"<p>http://Prueba/actualizador/recibirAlarmas</p>";
@@ -452,9 +453,10 @@
     category.name = string;
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(5, 2);
     SITPoint *point = [[SITPoint alloc] initWithCoordinate:coordinate buildingIdentifier:@"101"];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"EEE MMM dd HH:mm:ss ZZZZ yyyy"];
-    NSDate *createdAt = [NSDate dateWithTimeIntervalSince1970:0];
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    [formatter setDateFormat:kDateFormat];
+    NSDate *createdAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    NSDate *updatedAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
     
     SITPOI *poi = [[SITPOI alloc] init];
     [poi setValue:point
@@ -464,6 +466,7 @@
     poi.name = @"TEST_NAME";
     poi.identifier = @"-1";
     poi.createdAt = createdAt;
+    poi.updatedAt = updatedAt;
     poi.buildingIdentifier = @"101";
     return poi;
 }
@@ -480,6 +483,11 @@
     SITMultilanguageString *string = [[SITMultilanguageString alloc] initWithValue:@"Sin categoría" defaultLocale:[NSLocale localeWithLocaleIdentifier:@"es_ES"]];
     category.name = string;
     
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    [formatter setDateFormat:kDateFormat];
+    NSDate *createdAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    NSDate *updatedAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    
     SITPOI *poi = [SITPOI new];
     [poi setValue:point
            forKey:@"indoorPosition"];
@@ -487,6 +495,8 @@
     poi.infoHTML = @"TEST_INFO";
     poi.name = @"TEST_NAME";
     poi.identifier = @"-1";
+    poi.createdAt = createdAt;
+    poi.updatedAt = updatedAt;
     poi.buildingIdentifier = @"101";
     return poi;
 }
@@ -499,6 +509,12 @@
     category.name = string;
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(5, 7);
     SITPoint *point = [[SITPoint alloc] initWithCoordinate:coordinate buildingIdentifier:@"101"];
+    
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    [formatter setDateFormat:kDateFormat];
+    NSDate *createdAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    NSDate *updatedAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    
     SITPOI *poi = [[SITPOI alloc] init];
     [poi setValue:point
            forKey:@"outdoorPosition"];
@@ -506,6 +522,8 @@
     poi.infoHTML = @"TEST_INFO";
     poi.name = @"TEST_NAME";
     poi.identifier = @"-1";
+    poi.createdAt = createdAt;
+    poi.updatedAt = updatedAt;
     poi.buildingIdentifier = @"101";
     return poi;
 }
@@ -518,6 +536,11 @@
     building.identifier = @"101";
     SITPoint *point = [[SITPoint alloc] initWithCoordinate:coordinate buildingIdentifier:@"101" floorIdentifier:@"12" cartesianCoordinate:cartesianCoordinate];
     
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    [formatter setDateFormat:kDateFormat];
+    NSDate *createdAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    NSDate *updatedAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    
     SITPOICategory *category = [SITPOICategory new];
     category.code = @"situm-no-category";
     SITMultilanguageString *string = [[SITMultilanguageString alloc] initWithValue:@"Sin categoría" defaultLocale:[NSLocale localeWithLocaleIdentifier:@"es_ES"]];
@@ -530,6 +553,8 @@
     poi.infoHTML = @"TEST_INFO";
     poi.name = @"TEST_NAME";
     poi.identifier = @"-1";
+    poi.createdAt = createdAt;
+    poi.updatedAt = updatedAt;
     poi.buildingIdentifier = @"101";
     return poi;
 }
@@ -542,6 +567,11 @@
     building.identifier = @"101";
     SITPoint *point = [[SITPoint alloc] initWithCoordinate:coordinate buildingIdentifier:@"101" floorIdentifier:@"12" cartesianCoordinate:cartesianCoordinate];
     
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    [formatter setDateFormat:kDateFormat];
+    NSDate *createdAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    NSDate *updatedAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    
     SITPOICategory *category = [SITPOICategory new];
     category.code = @"situm-no-category";
     SITMultilanguageString *string = [[SITMultilanguageString alloc] initWithValue:@"Sin categoría" defaultLocale:[NSLocale localeWithLocaleIdentifier:@"es_ES"]];
@@ -553,6 +583,8 @@
     poi.category = category;
     poi.infoHTML = @"TEST_INFO";
     poi.name = @"TEST_NAME";
+    poi.createdAt = createdAt;
+    poi.updatedAt = updatedAt;
     poi.buildingIdentifier = @"101";
     poi.identifier = @"-1";
     return poi;
