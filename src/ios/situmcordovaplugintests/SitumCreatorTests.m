@@ -98,12 +98,10 @@
 //floor1.json
 + (SITFloor *) createFloorWithAltitude {
     SITFloor *floor = [[SITFloor alloc] init];
-    /*NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:DATEFORMAT];
-    
-    floor.createdAt = [dateFormatter dateFromString:floor.createdAt];
-    
-    floor.updatedAt = [dateFormatter dateFromString:floor.updatedAt];*/
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:kDateFormat];
+    floor.createdAt = [dateFormatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    floor.updatedAt = [dateFormatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
     floor.altitude = 2.5;
     floor.scale = 10.2;
     floor.mapURL = [[SITURL alloc] initWithDirection:@"TEST_URL"];
@@ -117,10 +115,10 @@
 + (SITFloor *) createFloorWithoutAltitude {
     SITFloor *floor = [[SITFloor alloc] init];
     
-    /*NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:DATEFORMAT];
-    floor.createdAt = [dateFormatter dateFromString:floor.createdAt];
-    floor.updatedAt = [dateFormatter dateFromString:floor.updatedAt];*/
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:kDateFormat];
+    floor.createdAt = [dateFormatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    floor.updatedAt = [dateFormatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
     
     floor.altitude = 0;
     floor.scale = 10.2;

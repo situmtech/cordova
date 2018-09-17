@@ -107,6 +107,8 @@
     XCTAssertEqualObjects(jsonFloorFile[@"floorIdentifier"], jsonFloorFile[@"floorIdentifier"]);
     XCTAssertEqualObjects(jsonFloorFile[@"mapUrl"], jsonFloorFile[@"mapUrl"]);
     XCTAssertEqualObjects(jsonFloorFile[@"buildingIdentifier"], jsonFloorFile[@"buildingIdentifier"]);
+    XCTAssertEqualObjects(jsonFloorFile[@"createdAt"], jsonFloorFile[@"createdAt"]);
+    XCTAssertEqualObjects(jsonFloorFile[@"updatedAt"], jsonFloorFile[@"updatedAt"]);
 }
 
 - (void) assertIndication: (NSDictionary *) jsonIndicationFile : (NSDictionary *) indicationJO {
