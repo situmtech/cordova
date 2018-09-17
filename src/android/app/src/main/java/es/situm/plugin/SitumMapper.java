@@ -8,6 +8,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -194,6 +196,8 @@ class SitumMapper {
   public static final String UPDATED_AT = "updatedAt";
   public static final String NAME = "name";
 
+  public static final DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZZ yyyy");
+
   static JSONObject buildingToJsonObject(Building building) throws JSONException {
     JSONObject jo = new JSONObject();
     jo.put(ADDRESS, building.getAddress());
@@ -209,8 +213,8 @@ class SitumMapper {
     jo.put(USER_IDENTIFIER, building.getUserIdentifier());
     jo.put(BUILDING_IDENTIFIER, building.getIdentifier());
     jo.put(CUSTOM_FIELDS, mapStringToJsonObject(building.getCustomFields()));
-    jo.put(CREATED_AT, building.getCreatedAt());
-    jo.put(UPDATED_AT, building.getUpdatedAt());
+    jo.put(CREATED_AT, dateFormat.format(building.getCreatedAt()));
+    jo.put(UPDATED_AT, dateFormat.format(building.getUpdatedAt()));
     return jo;
   }
 
@@ -247,8 +251,8 @@ class SitumMapper {
     jo.put(SCALE, floor.getScale());
     jo.put(FLOOR_IDENTIFIER, floor.getIdentifier());
     jo.put(CUSTOM_FIELDS, mapStringToJsonObject(floor.getCustomFields()));
-    jo.put(CREATED_AT, floor.getCreatedAt());
-    jo.put(UPDATED_AT, floor.getUpdatedAt());
+    jo.put(CREATED_AT, dateFormat.format(floor.getCreatedAt()));
+    jo.put(UPDATED_AT, dateFormat.format(floor.getUpdatedAt()));
     return jo;
   }
 
@@ -321,8 +325,8 @@ class SitumMapper {
     jo.put(POI_CATEGORY, poi.getCategory().getCode());
     jo.put(INFO_HTML, poi.getInfoHtml());
     jo.put(CUSTOM_FIELDS, mapStringToJsonObject(poi.getCustomFields()));
-    jo.put(CREATED_AT, poi.getCreatedAt());
-    jo.put(UPDATED_AT, poi.getUpdatedAt());
+    jo.put(CREATED_AT, dateFormat.format(poi.getCreatedAt()));
+    jo.put(UPDATED_AT, dateFormat.format(poi.getUpdatedAt()));
     return jo;
   }
 

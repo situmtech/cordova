@@ -669,8 +669,8 @@ public class SitumMapperTest {
     private void testFloor(JSONObject floor, JSONObject defaultFloor) throws JSONException {
         Assert.assertEquals(Double.class, floor.get(ALTITUDE).getClass());
         Assert.assertEquals(defaultFloor.getDouble(ALTITUDE), floor.getDouble(ALTITUDE), 0);
-        Assert.assertEquals(Date.class, floor.get(CREATED_AT).getClass());
-        Assert.assertEquals(dateFormat.parseObject(defaultFloor.get(CREATED_AT).toString(), new ParsePosition(0)), dateFormat.parseObject(floor.get(CREATED_AT).toString(), new ParsePosition(0)));
+        Assert.assertEquals(String.class, floor.get(CREATED_AT).getClass());
+        Assert.assertEquals(defaultFloor.getString(CREATED_AT), floor.getString(CREATED_AT));
         Assert.assertEquals(String.class, floor.get(FLOOR_IDENTIFIER).getClass());
         Assert.assertEquals(defaultFloor.getString(FLOOR_IDENTIFIER), floor.getString(FLOOR_IDENTIFIER));
         Assert.assertEquals(Integer.class, floor.get(LEVEL).getClass());
@@ -683,8 +683,8 @@ public class SitumMapperTest {
         Assert.assertEquals(defaultFloor.getDouble(SCALE), floor.getDouble(SCALE), 0);
         Assert.assertEquals(String.class, floor.get(BUILDING_IDENTIFIER).getClass());
         Assert.assertEquals(defaultFloor.getString(BUILDING_IDENTIFIER), floor.getString(BUILDING_IDENTIFIER));
-        Assert.assertEquals(Date.class, floor.get(UPDATED_AT).getClass());
-        Assert.assertEquals(dateFormat.parseObject(defaultFloor.get(UPDATED_AT).toString(), new ParsePosition(0)), dateFormat.parseObject(floor.get(UPDATED_AT).toString(), new ParsePosition(0)));
+        Assert.assertEquals(String.class, floor.get(UPDATED_AT).getClass());
+        Assert.assertEquals(defaultFloor.getString(UPDATED_AT), floor.getString(UPDATED_AT));
     }
 
     private void testIndication(JSONObject indication, JSONObject defaultIndication) throws JSONException {
@@ -780,18 +780,16 @@ public class SitumMapperTest {
         Assert.assertEquals(defaultPoi.getString(BUILDING_IDENTIFIER),poi.getString(BUILDING_IDENTIFIER));
         Assert.assertEquals(Boolean.class, poi.get(IS_OUTDOOR).getClass());
         Assert.assertEquals(defaultPoi.getBoolean(IS_OUTDOOR),poi.getBoolean(IS_OUTDOOR));
-        Assert.assertEquals(Date.class, poi.get(CREATED_AT).getClass());
-        Assert.assertEquals(dateFormat.parseObject(defaultPoi.get(CREATED_AT).toString(),new ParsePosition(0)),dateFormat.parseObject(poi.get(CREATED_AT).toString(),new ParsePosition(0)));
+        Assert.assertEquals(String.class, poi.get(CREATED_AT).getClass());
+        Assert.assertEquals(defaultPoi.getString(CREATED_AT), poi.getString(CREATED_AT));
         Assert.assertEquals(String.class, poi.get(FLOOR_IDENTIFIER).getClass());
         Assert.assertEquals(defaultPoi.getString(FLOOR_IDENTIFIER),poi.getString(FLOOR_IDENTIFIER));
         testCartesianCoordinate(poi.getJSONObject(CARTESIAN_COORDINATE),defaultPoi.getJSONObject(CARTESIAN_COORDINATE));
         testPoint(poi.getJSONObject(POSITION), poi.getJSONObject(POSITION));
         Assert.assertEquals(String.class, poi.get(CATEGORY).getClass());
         Assert.assertEquals(defaultPoi.getString(CATEGORY),poi.getString(CATEGORY));
-        Assert.assertEquals(Date.class, poi.get(UPDATED_AT).getClass());
-        Assert.assertEquals(dateFormat.parseObject(defaultPoi.get(UPDATED_AT).toString(),new ParsePosition(0)),dateFormat.parseObject(poi.get(UPDATED_AT).toString(),new ParsePosition(0)));
-
-
+        Assert.assertEquals(String.class, poi.get(UPDATED_AT).getClass());
+        Assert.assertEquals(defaultPoi.getString(UPDATED_AT), poi.getString(UPDATED_AT));
     }
 
     private void testPoiCategory(JSONObject poiCategory, JSONObject defaultPoiCategory) throws JSONException {
