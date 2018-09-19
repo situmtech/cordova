@@ -95,9 +95,18 @@
 }
 
 - (void) assertEvent: (NSDictionary *) jsonEventFile : (NSDictionary *) eventJO {
-    XCTAssertEqualWithAccuracy([jsonEventFile[@"identifier"] doubleValue], [eventJO[@"identifier"] doubleValue], 0.0001);
-    XCTAssertEqualWithAccuracy([jsonEventFile[@"buildingIdentifier"] doubleValue], [eventJO[@"buildingIdentifier"] doubleValue], 0.0001);
+    XCTAssertEqualObjects(jsonEventFile[@"identifier"], eventJO[@"identifier"]);
+    XCTAssertEqualObjects(jsonEventFile[@"buildingIdentifier"], eventJO[@"buildingIdentifier"]);
     XCTAssertEqualObjects(jsonEventFile[@"infoHtml"], eventJO[@"infoHtml"]);
+    [self assertCircularArea:jsonEventFile[@"trigger"] :eventJO[@"trigger"]];
+    [self assertCircularArea:jsonEventFile[@"conversion"] :eventJO[@"conversion"]];
+    XCTAssertEqualObjects(jsonEventFile[@"name"], eventJO[@"name"]);
+    XCTAssertEqualObjects(jsonEventFile[@"customFields"], eventJO[@"customFields"]);
+}
+
+- (void) assertCircularArea: (NSDictionary *) jsonCircularAreaFile : (NSDictionary *) circularAreaJO {
+    [self assertPoint:jsonCircularAreaFile[@"center"] :circularAreaJO[@"center"]];
+    XCTAssertEqualObjects(jsonCircularAreaFile[@"radius"], circularAreaJO[@"radius"]);
 }
 
 - (void) assertFloor: (NSDictionary *) jsonFloorFile : (NSDictionary *) floorJO {
