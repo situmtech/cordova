@@ -89,9 +89,24 @@
 + (SITEvent *) createEvent {
     SITEvent *event = [[SITEvent alloc] init];
     event.identifier = [NSNumber numberWithDouble:12];
+    event.customFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"en", @"lang", nil];
     event.info = @"<p>Test html</p>";
-    //building identifier
-    event.project_identifier = [NSNumber numberWithDouble:1];;
+    event.project_identifier = @(1);
+    SITCircularArea *conversion = [SITCircularArea new];
+    CLLocationCoordinate2D conversionCenterCoordinate = CLLocationCoordinate2DMake(50, 100);
+    SITCartesianCoordinate *conversionCenterCartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:5 y:10];
+    SITPoint *conversionCenterPoint = [[SITPoint alloc] initWithCoordinate:conversionCenterCoordinate buildingIdentifier:@"1" floorIdentifier:@"1000" cartesianCoordinate:conversionCenterCartesianCoordinate];
+    conversion.center = conversionCenterPoint;
+    conversion.radius = @(3);
+    event.conversion = conversion;
+    SITCircularArea *trigger = [SITCircularArea new];
+    CLLocationCoordinate2D triggerCenterCoordinate = CLLocationCoordinate2DMake(25, 50);
+    SITCartesianCoordinate *triggerCenterCartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:2 y:5];
+    SITPoint *triggerCenterPoint = [[SITPoint alloc] initWithCoordinate:triggerCenterCoordinate buildingIdentifier:@"1" floorIdentifier:@"1000" cartesianCoordinate:triggerCenterCartesianCoordinate];
+    trigger.center = triggerCenterPoint;
+    trigger.radius = @(6);
+    event.trigger = trigger;
+    event.name = @"Event";
     return event;
 }
 
