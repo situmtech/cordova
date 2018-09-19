@@ -1,6 +1,8 @@
 package es.situm.plugin;
 
 
+import android.graphics.Bitmap;
+
 import com.google.common.truth.Truth;
 
 import org.json.JSONArray;
@@ -13,11 +15,10 @@ import org.junit.runners.JUnit4;
 
 import java.text.DateFormat;
 import java.text.ParsePosition;
-import java.util.Date;
-import java.util.Map;
 
 import es.situm.plugin.angle.AngleCreator;
 import es.situm.plugin.bounds.BoundsCreator;
+import es.situm.plugin.building.BuildingCreator;
 import es.situm.plugin.cartesianCoordinate.CartesianCoordinateCreator;
 import es.situm.plugin.circle.CircleCreator;
 import es.situm.plugin.coordinate.CoordinateCreator;
@@ -30,11 +31,13 @@ import es.situm.plugin.locationStatus.LocationStatusCreator;
 import es.situm.plugin.navigationProgress.NavigationProgressCreator;
 import es.situm.plugin.poi.PoiCreator;
 import es.situm.plugin.poiCategory.PoiCategoryCreator;
+import es.situm.plugin.poiCategoryIcon.PoiCategoryIconCreator;
 import es.situm.plugin.point.PointCreator;
 import es.situm.plugin.route.RouteCreator;
 import es.situm.plugin.routeStep.RouteStepCreator;
 import es.situm.plugin.situmConversionArea.SitumConversionAreaCreator;
 import es.situm.sdk.location.LocationStatus;
+import es.situm.sdk.model.cartography.Building;
 import es.situm.sdk.model.cartography.Circle;
 import es.situm.sdk.model.cartography.Floor;
 import es.situm.sdk.model.cartography.Poi;
@@ -54,8 +57,16 @@ import es.situm.sdk.v1.SitumConversionArea;
 import es.situm.sdk.v1.SitumEvent;
 
 import static com.google.common.truth.Truth.assertThat;
+import static es.situm.plugin.SitumMapper.ADDRESS;
+import static es.situm.plugin.SitumMapper.BOUNDS;
+import static es.situm.plugin.SitumMapper.BOUNDS_ROTATED;
 import static es.situm.plugin.SitumMapper.CENTER;
+import static es.situm.plugin.SitumMapper.DIMENSIONS;
+import static es.situm.plugin.SitumMapper.PICTURE_THUMB_URL;
+import static es.situm.plugin.SitumMapper.PICTURE_URL;
 import static es.situm.plugin.SitumMapper.POI_NAME;
+import static es.situm.plugin.SitumMapper.ROTATION;
+import static es.situm.plugin.SitumMapper.USER_IDENTIFIER;
 import static es.situm.plugin.SitumMapper.circleToJsonObject;
 import static es.situm.plugin.SitumMapper.conversionAreaToJsonObject;
 
@@ -170,6 +181,8 @@ public class SitumMapperTest {
     private EventCreator eventCreator = new EventCreator();
     private CircleCreator circleCreator = new CircleCreator();
     private PoiCreator poiCreator = new PoiCreator();
+    private BuildingCreator buildingCreator = new BuildingCreator();
+    private PoiCategoryIconCreator poiCategoryIconCreator = new PoiCategoryIconCreator();
 
     @Test
     public void angleJSONObjectTest() {
@@ -198,6 +211,18 @@ public class SitumMapperTest {
             JSONObject bounds2 = boundsCreator.getBounds2();
             testBounds(boundsJSONObject, bounds1);
             testBounds(boundsWithArrayJSONObject, bounds2);
+        } catch (JSONException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void buildingJSONObjectTest() {
+        try {
+            Building building = buildingCreator.createBuilding1();
+            JSONObject buildingJSONObject = SitumMapper.buildingToJsonObject(building);
+            JSONObject building1 = buildingCreator.getBuilding1();
+            testBuilding(buildingJSONObject,building1);
         } catch (JSONException e) {
             System.err.println(e.getMessage());
         }
@@ -645,6 +670,39 @@ public class SitumMapperTest {
         testCoordinate(bounds.getJSONObject(SOUTH_EAST), defaultBounds.getJSONObject(SOUTH_EAST));
     }
 
+    private void testBuilding(JSONObject building, JSONObject defaultBuilding) throws JSONException {
+        Assert.assertEquals(String.class, building.get(ADDRESS).getClass());
+        Assert.assertEquals(defaultBuilding.getString(ADDRESS),building.getString(ADDRESS));
+        Assert.assertEquals(JSONObject.class, building.get(BOUNDS).getClass());
+        testBounds(building.getJSONObject(BOUNDS), defaultBuilding.getJSONObject(BOUNDS));
+        Assert.assertEquals(JSONObject.class, building.get(BOUNDS_ROTATED).getClass());
+//        testBounds(building.getJSONObject(BOUNDS_ROTATED), defaultBuilding.getJSONObject(BOUNDS_ROTATED));
+        Assert.assertEquals(JSONObject.class, building.get(CENTER).getClass());
+        testCoordinate(building.getJSONObject(CENTER),defaultBuilding.getJSONObject(CENTER));
+        Assert.assertEquals(JSONObject.class, building.get(DIMENSIONS).getClass());
+        testDimensions(building.getJSONObject(DIMENSIONS), defaultBuilding.getJSONObject(DIMENSIONS));
+        Assert.assertEquals(String.class, building.get(INFO_HTML).getClass());
+        Assert.assertEquals(defaultBuilding.getString(INFO_HTML),building.getString(INFO_HTML));
+        Assert.assertEquals(String.class, building.get(NAME).getClass());
+        Assert.assertEquals(defaultBuilding.getString(NAME),building.getString(NAME));
+        Assert.assertEquals(String.class, building.get(PICTURE_THUMB_URL).getClass());
+        Assert.assertEquals(defaultBuilding.getString(PICTURE_THUMB_URL),building.getString(PICTURE_THUMB_URL));
+        Assert.assertEquals(String.class, building.get(PICTURE_URL).getClass());
+        Assert.assertEquals(defaultBuilding.getString(PICTURE_URL),building.getString(PICTURE_URL));
+        Assert.assertEquals(Double.class, building.get(ROTATION).getClass());
+        Assert.assertEquals(defaultBuilding.getLong(ROTATION),building.getLong(ROTATION));
+        Assert.assertEquals(String.class, building.get(USER_IDENTIFIER).getClass());
+        Assert.assertEquals(defaultBuilding.getString(USER_IDENTIFIER),building.getString(USER_IDENTIFIER));
+        Assert.assertEquals(String.class, building.get(BUILDING_IDENTIFIER).getClass());
+        Assert.assertEquals(defaultBuilding.getString(BUILDING_IDENTIFIER),building.getString(BUILDING_IDENTIFIER));
+        testCustomFields(defaultBuilding.getJSONObject(CUSTOM_FIELDS).toString(),building.getJSONObject(CUSTOM_FIELDS).toString());
+        Assert.assertEquals(String.class, building.get(UPDATED_AT).getClass());
+        Assert.assertEquals(dateFormat.parseObject(defaultBuilding.get(UPDATED_AT).toString(),new ParsePosition(0)),dateFormat.parseObject(building.get(UPDATED_AT).toString(),new ParsePosition(0)));
+        Assert.assertEquals(String.class, building.get(CREATED_AT).getClass());
+        Assert.assertEquals(dateFormat.parseObject(defaultBuilding.get(CREATED_AT).toString(),new ParsePosition(0)),dateFormat.parseObject(building.get(CREATED_AT).toString(),new ParsePosition(0)));
+
+    }
+
     private void testCartesianCoordinate(JSONObject cartesianCoordinate, JSONObject defaultCartesianCoordinate) throws JSONException {
         Assert.assertEquals(Double.class, cartesianCoordinate.get(X).getClass());
         Assert.assertEquals(defaultCartesianCoordinate.getDouble(X), cartesianCoordinate.getDouble(X), 0);
@@ -657,6 +715,10 @@ public class SitumMapperTest {
         Assert.assertEquals(defaultCoordinate.getDouble(LATITUDE), coordinate.getDouble(LATITUDE), 0);
         Assert.assertEquals(Double.class, coordinate.get(LONGITUDE).getClass());
         Assert.assertEquals(defaultCoordinate.getDouble(LONGITUDE), coordinate.getDouble(LONGITUDE), 0);
+    }
+
+    private void testCustomFields(String  customFields,String defaultCustomFields) {
+        Assert.assertEquals(customFields,defaultCustomFields);
     }
 
     private void testDimensions(JSONObject dimensions, JSONObject defaultDimensions) throws JSONException {
@@ -771,7 +833,7 @@ public class SitumMapperTest {
         testCoordinate(poi.getJSONObject(COORDINATE),defaultPoi.getJSONObject(COORDINATE));
         Assert.assertEquals(String.class, poi.get(POI_NAME).getClass());
         Assert.assertEquals(defaultPoi.getString(POI_NAME),poi.getString(POI_NAME));
-        //CustomFields
+        testCustomFields(defaultPoi.getJSONObject(CUSTOM_FIELDS).toString(),poi.getJSONObject(CUSTOM_FIELDS).toString());
         Assert.assertEquals(Boolean.class, poi.get(IS_INDOOR).getClass());
         Assert.assertEquals(defaultPoi.getBoolean(IS_INDOOR),poi.getBoolean(IS_INDOOR));
         Assert.assertEquals(String.class, poi.get(INFO_HTML).getClass());
@@ -803,6 +865,11 @@ public class SitumMapperTest {
         Assert.assertEquals(defaultPoiCategory.getString(POI_CATEGORY_CODE), poiCategory.getString(POI_CATEGORY_CODE));
         Assert.assertEquals(String.class, poiCategory.get(ICON_UNSELECTED).getClass());
         Assert.assertEquals(defaultPoiCategory.getString(ICON_UNSELECTED), poiCategory.getString(ICON_UNSELECTED));
+    }
+
+    private void testPoiCategoryIcon(JSONObject poiCategoryIcon, JSONObject defaultPoiCategoryIcon) throws JSONException {
+        Assert.assertEquals(String.class, poiCategoryIcon.get("data").getClass());
+        Assert.assertEquals(defaultPoiCategoryIcon.getString("data"), poiCategoryIcon.getString("data"));
     }
 
     private void testSitumConversionArea(JSONObject situmConversionArea, JSONObject defaultSitumConversionArea) throws JSONException {

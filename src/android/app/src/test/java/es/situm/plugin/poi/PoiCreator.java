@@ -5,6 +5,8 @@ import org.json.simple.parser.JSONParser;
 
 import java.io.File;
 import java.io.FileReader;
+import java.util.HashMap;
+
 
 import es.situm.sdk.model.cartography.Poi;
 import es.situm.sdk.model.cartography.PoiCategory;
@@ -45,10 +47,14 @@ public class PoiCreator {
     }
 
     public Poi createPoiWithBuildingFloorCoordinateAndCartesian() {
+        HashMap<String, String> customFields = new HashMap<>();
+        customFields.put("building", "101");
+        customFields.put("test_field","test");
         Point point = new Point( "101", "12", new Coordinate(37,45), new CartesianCoordinate(2,9));
         return new Poi.Builder(point)
                 .category(PoiCategory.DEFAULT)
                 .infoHtml("TEST_INFO")
+                .customFields(customFields)
                 .name("TEST_NAME")
                 .build();
     }

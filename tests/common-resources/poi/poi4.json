@@ -5,7 +5,10 @@
     "longitude": 45
   },
   "poiName": "TEST_NAME",
-  "customFields": {},
+  "customFields": {
+    "test_field": "test",
+    "building": "101"
+  },
   "isIndoor": true,
   "infoHtml": "TEST_INFO",
   "buildingIdentifier": "101",
