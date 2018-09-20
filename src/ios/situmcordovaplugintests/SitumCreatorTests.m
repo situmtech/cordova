@@ -172,6 +172,7 @@
     NSString *provider = @"TEST_PROVIDER";
     float accuracy = 5;
     SITLocation *location = [[SITLocation alloc] initWithTimestamp:timestamp position:position bearing: bearing cartesianBearing:cartesianBearing quality:quality accuracy:accuracy provider:provider];
+    location.bearingQuality = kSITLow;
     return location;
 }
 
@@ -188,6 +189,7 @@
     NSString *provider = @"TEST_PROVIDER";
     float accuracy = 5;
     SITLocation *location = [[SITLocation alloc] initWithTimestamp:timestamp position:position bearing: bearing cartesianBearing:cartesianBearing quality:quality accuracy:accuracy provider:provider];
+    location.bearingQuality = kSITHigh;
     return location;
 }
 
@@ -202,6 +204,7 @@
     NSString *provider = @"TEST_PROVIDER";
     float accuracy = 5;
     SITLocation *location = [[SITLocation alloc] initWithTimestamp:timestamp position:position bearing: bearing cartesianBearing:cartesianBearing quality:quality accuracy:accuracy provider:provider];
+    location.bearingQuality = kSITHigh;
     return location;
 }
 
@@ -217,6 +220,7 @@
     NSString *provider = @"TEST_PROVIDER";
     float accuracy = 5;
     SITLocation *location = [[SITLocation alloc] initWithTimestamp:timestamp position:position bearing: bearing cartesianBearing:cartesianBearing quality:quality accuracy:accuracy provider:provider];
+    location.bearingQuality = kSITHigh;
     return location;
 }
 
@@ -233,6 +237,7 @@
     NSString *provider = @"TEST_PROVIDER";
     float accuracy = 5;
     SITLocation *location = [[SITLocation alloc] initWithTimestamp:timestamp position:position bearing: bearing cartesianBearing:cartesianBearing quality:quality accuracy:accuracy provider:provider];
+    location.bearingQuality = kSITLow;
     return location;
 }
 
@@ -262,6 +267,7 @@
     NSString *provider = @"TEST_PROVIDER";
     float accuracy = 5;
     SITLocation *location = [[SITLocation alloc] initWithTimestamp:timestamp position:position bearing: bearing cartesianBearing:cartesianBearing quality:quality accuracy:accuracy provider:provider];
+    location.bearingQuality = kSITLow;
     return location;
 }
 
@@ -277,6 +283,7 @@
     NSString *provider = @"TEST_PROVIDER";
     float accuracy = 5;
     SITLocation *location = [[SITLocation alloc] initWithTimestamp:timestamp position:position bearing: bearing cartesianBearing:cartesianBearing quality:quality accuracy:accuracy provider:provider];
+    location.bearingQuality = kSITLow;
     return location;
 }
 

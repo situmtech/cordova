@@ -24,8 +24,8 @@
     "degreesClockwise": 360,
     "degrees": 0
   },
-  "bearingQuality": "LOW",
-  "hasBearing": false,
+  "bearingQuality": "HIGH",
+  "hasBearing": true,
   "cartesianCoordinate": {
     "x": 0,
     "y": 0
