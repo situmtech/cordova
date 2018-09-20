@@ -325,7 +325,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     category.code = [jo objectForKey:@"poiCategoryCode"];
     category.isPublic = [jo objectForKey:@"public"];
     category.selectedIconURL = [[SITURL alloc] initWithDirection:[jo objectForKey:@"icon_selected"]];
-    category.iconURL = [[SITURL alloc] initWithDirection:[jo objectForKey:@"icon_deselected"]];
+    category.iconURL = [[SITURL alloc] initWithDirection:[jo objectForKey:@"icon_unselected"]];
     return category;
 }
 
@@ -404,7 +404,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     float bearing = [[[jo objectForKey:@"bearing"] valueForKey:@"degrees"] floatValue];
     float cartesianBearing = [[[jo objectForKey:@"cartesianBearing"] valueForKey:@"radians"] floatValue];
     
-    kSITQualityValues quality = kSITHigh;
+    kSITQualityValues quality = [(NSString*)[jo valueForKey: @"quality"] isEqualToString: @"HIGH"] ? kSITHigh : kSITLow;
 
     float accuracy = [(NSNumber*)[jo objectForKey:@"accuracy"] floatValue];
     
