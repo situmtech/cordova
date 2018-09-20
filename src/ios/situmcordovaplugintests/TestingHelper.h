@@ -35,6 +35,7 @@
 
 #pragma MARK Input tests methods
 
+- (void) assertCoordinate: (CLLocationCoordinate2D) coordinateA isEqualToCoordinate: (CLLocationCoordinate2D) coordinateB;
 - (void) assertCartesianCoordinate: (SITCartesianCoordinate*) coordinateA isEqualToCartesianCoordinate: (SITCartesianCoordinate*) coordinateB;
 - (void) assertPoint: (SITPoint*) pointA isEqualToPoint: (SITPoint*) pointB;
 
