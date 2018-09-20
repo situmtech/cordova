@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[InputPointTests testInputPointWithBuildingAndFloor]:InputPointTests.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[InputPointTests testInputPointWithCoordinate]:InputPointTests.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "(BOOL)jsonPoint[@&quot;isOutdoor&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[TestingHelper assertPoint:isEqualToPoint:]:TestingHelper.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[InputPointTests testInputPoint1]:InputPointTests.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "(BOOL)jsonPoint1[&quot;isOutdoor&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "+[TestingHelper dataFromJSONFileNamed:inDirectory:]:TestingHelper.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "(BOOL)json[@&quot;isIndoor&quot;]">
+            </PersistentString>
+            <PersistentString
+               value = "">
+            </PersistentString>
+            <PersistentString
+               value = "(bool)json[@&quot;isIndoor&quot;]">
+            </PersistentString>
+            <PersistentString
+               value = "(BOOL)json[@&quot;isOutdoor&quot;]">
+            </PersistentString>
+            <PersistentString
+               value = "(bool)json[@&quot;isOutdoor&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[SitumLocationWrapper pointJsonObjectToPoint:]:SitumLocationWrapper.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "(BOOL)[jo valueForKey: @&quot;isOutdoor&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

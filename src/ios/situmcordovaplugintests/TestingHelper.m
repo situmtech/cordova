@@ -6,6 +6,8 @@
 //  Copyright © 2018 Situm. All rights reserved.
 //
 #import "TestingHelper.h"
+#import <XCTest/XCTest.h>
+
 
 
 @implementation TestingHelper
@@ -233,5 +235,23 @@
     //XCTAssertEqualWithAccuracy([jsonConversionAreaFile[@"floorIdentifier"] doubleValue], [conversionAreaJO[@"floorIdentifier"] doubleValue], 0.0001);
 }
 
+- (void) assertCoordinate: (CLLocationCoordinate2D) coordinateA isEqualToCoordinate: (CLLocationCoordinate2D) coordinateB {
+    XCTAssertEqualWithAccuracy(coordinateA.latitude, coordinateB.latitude, 0.001, @"Coordinate: latitude wasn't equal.");
+    XCTAssertEqualWithAccuracy(coordinateA.longitude, coordinateB.longitude, 0.001, @"Coordinate: longitude wasn't equal.");
+}
+
+- (void) assertCartesianCoordinate: (SITCartesianCoordinate*) coordinateA isEqualToCartesianCoordinate: (SITCartesianCoordinate*) coordinateB {
+    XCTAssertEqualWithAccuracy(coordinateA.x, coordinateB.x, 0.0001, @"SITCartesianCoordinate: X value wasn't equal.");
+    XCTAssertEqualWithAccuracy(coordinateA.y, coordinateB.y, 0.0001, @"SITCartesianCoordinate: Y value wasn't equal.");
+}
+
+- (void) assertPoint: (SITPoint*) pointA isEqualToPoint: (SITPoint*) pointB {
+    [self assertCoordinate: pointA.coordinate isEqualToCoordinate: pointB.coordinate];
+    [self assertCartesianCoordinate: pointA.cartesianCoordinate isEqualToCartesianCoordinate: pointB.cartesianCoordinate];
+    XCTAssertEqualObjects(pointA.buildingIdentifier, pointB.buildingIdentifier, @"SITPoint: building identifier wasn't equal.");
+    XCTAssertEqualObjects(pointA.floorIdentifier, pointB.floorIdentifier, @"SITPoint: floor identifier wasn't equal.");
+    XCTAssertTrue(pointA.isIndoor == pointB.isIndoor, @"SITPoint: isIndoor bool wasn't equal.");
+    XCTAssertTrue(pointA.isOutdoor == pointB.isOutdoor, @"SITPoint: isOutdoor bool  wasn't equal.");
+}
 
 @end

@@ -457,7 +457,14 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
 }
 
 - (SITPoint *) pointJsonObjectToPoint:(NSDictionary *) jo {
-    SITPoint *point = [[SITPoint alloc] initWithCoordinate:[self coordinateJsonObjectToCoordinate:[jo objectForKey:@"coordinate"]] buildingIdentifier:[jo valueForKey:@"buildingIdentifier"] floorIdentifier:[jo valueForKey:@"floorIdentifier"] cartesianCoordinate:[self cartesianCoordinateJsonObjectToCartesianCoordinate:[jo objectForKey:@"cartesianCoordinate"]]];
+    SITPoint *point = nil;
+    BOOL isOutdoor = [(NSNumber*)jo[@"isOutdoor"] boolValue];
+    if(isOutdoor) {
+        point = [[SITPoint alloc] initWithCoordinate: [self coordinateJsonObjectToCoordinate:[jo objectForKey:@"coordinate"]]
+                                  buildingIdentifier:  [jo valueForKey:@"buildingIdentifier"]];
+    } else {
+        point = [[SITPoint alloc] initWithCoordinate:[self coordinateJsonObjectToCoordinate:[jo objectForKey:@"coordinate"]] buildingIdentifier:[jo valueForKey:@"buildingIdentifier"] floorIdentifier:[jo valueForKey:@"floorIdentifier"] cartesianCoordinate:[self cartesianCoordinateJsonObjectToCartesianCoordinate:[jo objectForKey:@"cartesianCoordinate"]]];
+    }
     return point;
 }
 

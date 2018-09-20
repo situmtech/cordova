@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import <Foundation/Foundation.h>
+#import "SitumLocationWrapper.h"
 
 @interface TestingHelper : XCTestCase 
 
@@ -31,5 +32,10 @@
 - (void) assertRoute: (NSDictionary *) jsonRouteFile : (NSDictionary *) routeJO;
 - (void) assertRouteStep: (NSDictionary *) jsonRouteStepFile : (NSDictionary *) routeStepJO;
 - (void) assertConversionArea:(NSDictionary *) jsonConversionAreaFile : (NSDictionary *) conversionAreaJO;
+
+#pragma MARK Input tests methods
+
+- (void) assertCartesianCoordinate: (SITCartesianCoordinate*) coordinateA isEqualToCartesianCoordinate: (SITCartesianCoordinate*) coordinateB;
+- (void) assertPoint: (SITPoint*) pointA isEqualToPoint: (SITPoint*) pointB;
 
 @end

@@ -50,6 +50,8 @@
 		0DF4AB1E21143D5800D81A31 /* SitumPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF4AB1421143D5700D81A31 /* SitumPlugin.m */; };
 		0DF4AB1F21143D5800D81A31 /* ViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DF4AB1521143D5700D81A31 /* ViewController.h */; };
 		0DF4AB2021143D5800D81A31 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF4AB1621143D5700D81A31 /* ViewController.m */; };
+		3A4D721721525B970038ED55 /* InputPointTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D721621525B970038ED55 /* InputPointTests.m */; };
+		3A4D721B215276660038ED55 /* InputCartesianCoordinateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D721A215276660038ED55 /* InputCartesianCoordinateTests.m */; };
 		7ED95D021AB9028C008C4574 /* CDVDebug.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ED95CF21AB9028C008C4574 /* CDVDebug.h */; };
 		7ED95D031AB9028C008C4574 /* CDVJSON_private.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ED95CF31AB9028C008C4574 /* CDVJSON_private.h */; };
 		7ED95D041AB9028C008C4574 /* CDVJSON_private.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED95CF41AB9028C008C4574 /* CDVJSON_private.m */; };
@@ -194,6 +196,8 @@
 		0DF4AB1521143D5700D81A31 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		0DF4AB1621143D5700D81A31 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		30325A0B136B343700982B63 /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = "<group>"; };
+		3A4D721621525B970038ED55 /* InputPointTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputPointTests.m; sourceTree = "<group>"; };
+		3A4D721A215276660038ED55 /* InputCartesianCoordinateTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputCartesianCoordinateTests.m; sourceTree = "<group>"; };
 		68A32D7114102E1C006B237C /* libCordova.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCordova.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ED95CF21AB9028C008C4574 /* CDVDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDVDebug.h; sourceTree = "<group>"; };
 		7ED95CF31AB9028C008C4574 /* CDVJSON_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDVJSON_private.h; sourceTree = "<group>"; };
@@ -398,6 +402,7 @@
 		0D884A0F21145F820066C765 /* situmcordovaplugintests */ = {
 			isa = PBXGroup;
 			children = (
+				3A4D721521525AB20038ED55 /* InputTests */,
 				0D884E7C2116FAA20066C765 /* resources */,
 				0D884A192114634D0066C765 /* SitumCreatorTests.h */,
 				0D884A1B2114634D0066C765 /* SitumCreatorTests.m */,
@@ -448,6 +453,15 @@
 				954995EF214F8BBB007F3C28 /* Constants.m */,
 			);
 			path = situmcordovaplugin;
+			sourceTree = "<group>";
+		};
+		3A4D721521525AB20038ED55 /* InputTests */ = {
+			isa = PBXGroup;
+			children = (
+				3A4D721621525B970038ED55 /* InputPointTests.m */,
+				3A4D721A215276660038ED55 /* InputCartesianCoordinateTests.m */,
+			);
+			path = InputTests;
 			sourceTree = "<group>";
 		};
 		7ED95CF11AB9028C008C4574 /* Private */ = {
@@ -752,7 +766,9 @@
 				95B14A33214A46E20073A9E1 /* CartesianCoordinateTests.m in Sources */,
 				95B14A4B214A54CA0073A9E1 /* ConversionAreaTests.m in Sources */,
 				95B14A2B214A402E0073A9E1 /* PointTests.m in Sources */,
+				3A4D721B215276660038ED55 /* InputCartesianCoordinateTests.m in Sources */,
 				0D884A202114634E0066C765 /* SitumCreatorTests.m in Sources */,
+				3A4D721721525B970038ED55 /* InputPointTests.m in Sources */,
 				95B14A3B214A48F80073A9E1 /* FloorTests.m in Sources */,
 				0D5CFD54212C275E00C6E436 /* CDVIntentAndNavigationFilter.m in Sources */,
 				95B14A45214A50E60073A9E1 /* PoiCategoryTests.m in Sources */,
