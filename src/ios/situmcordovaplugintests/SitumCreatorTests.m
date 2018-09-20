@@ -168,7 +168,7 @@
     SITPoint *position  = [[SITPoint alloc]  initWithCoordinate:coordinate buildingIdentifier:@"101" floorIdentifier:@"12" cartesianCoordinate: cartesianCoordinate];
     float bearing = 0; //degrees
     float cartesianBearing = 0; //radians
-    kSITQualityValues quality = kSITLow;
+    kSITQualityValues quality = kSITHigh;
     NSString *provider = @"TEST_PROVIDER";
     float accuracy = 5;
     SITLocation *location = [[SITLocation alloc] initWithTimestamp:timestamp position:position bearing: bearing cartesianBearing:cartesianBearing quality:quality accuracy:accuracy provider:provider];
@@ -184,7 +184,7 @@
     position.floorIdentifier = @"-1";
     float bearing = 0; //degrees
     float cartesianBearing = 0; //radians
-    kSITQualityValues quality = kSITLow;
+    kSITQualityValues quality = kSITHigh;
     NSString *provider = @"TEST_PROVIDER";
     float accuracy = 5;
     SITLocation *location = [[SITLocation alloc] initWithTimestamp:timestamp position:position bearing: bearing cartesianBearing:cartesianBearing quality:quality accuracy:accuracy provider:provider];
@@ -198,7 +198,7 @@
     SITPoint *position  = [[SITPoint alloc]  initWithCoordinate:coordinate buildingIdentifier:@"101"];
     float bearing = 0; //degrees
     float cartesianBearing = 0; //radians
-    kSITQualityValues quality = kSITLow;
+    kSITQualityValues quality = kSITHigh;
     NSString *provider = @"TEST_PROVIDER";
     float accuracy = 5;
     SITLocation *location = [[SITLocation alloc] initWithTimestamp:timestamp position:position bearing: bearing cartesianBearing:cartesianBearing quality:quality accuracy:accuracy provider:provider];
@@ -229,7 +229,7 @@
     SITPoint *position  = [[SITPoint alloc]  initWithCoordinate:coordinate buildingIdentifier:@"101" floorIdentifier:@"12" cartesianCoordinate: cartesianCoordinate];
     float bearing = 0; //degrees
     float cartesianBearing = 0; //radians
-    kSITQualityValues quality = kSITLow;
+    kSITQualityValues quality = kSITHigh;
     NSString *provider = @"TEST_PROVIDER";
     float accuracy = 5;
     SITLocation *location = [[SITLocation alloc] initWithTimestamp:timestamp position:position bearing: bearing cartesianBearing:cartesianBearing quality:quality accuracy:accuracy provider:provider];
@@ -243,7 +243,7 @@
     SITPoint *position  = [[SITPoint alloc]  initWithCoordinate:coordinate buildingIdentifier:@"-1"];
     float bearing = 92; //degrees
     float cartesianBearing = 0; //radians
-    kSITQualityValues quality = kSITLow;
+    kSITQualityValues quality = kSITHigh;
     NSString *provider = @"TEST_PROVIDER";
     float accuracy = 5;
     SITLocation *location = [[SITLocation alloc] initWithTimestamp:timestamp position:position bearing: bearing cartesianBearing:cartesianBearing quality:quality accuracy:accuracy provider:provider];
@@ -258,7 +258,7 @@
     SITPoint *position  = [[SITPoint alloc]  initWithCoordinate:coordinate buildingIdentifier:@"101" floorIdentifier:@"12" cartesianCoordinate: cartesianCoordinate];
     float bearing = 0; //degrees
     float cartesianBearing = 0; //radians
-    kSITQualityValues quality = kSITLow;
+    kSITQualityValues quality = kSITHigh;
     NSString *provider = @"TEST_PROVIDER";
     float accuracy = 5;
     SITLocation *location = [[SITLocation alloc] initWithTimestamp:timestamp position:position bearing: bearing cartesianBearing:cartesianBearing quality:quality accuracy:accuracy provider:provider];
@@ -273,7 +273,7 @@
     SITPoint *position  = [[SITPoint alloc]  initWithCoordinate:coordinate buildingIdentifier:@"101" floorIdentifier:@"12" cartesianCoordinate: cartesianCoordinate];
     float bearing = 92; //degrees
     float cartesianBearing = 2; //radians
-    kSITQualityValues quality = kSITLow;
+    kSITQualityValues quality = kSITHigh;
     NSString *provider = @"TEST_PROVIDER";
     float accuracy = 5;
     SITLocation *location = [[SITLocation alloc] initWithTimestamp:timestamp position:position bearing: bearing cartesianBearing:cartesianBearing quality:quality accuracy:accuracy provider:provider];

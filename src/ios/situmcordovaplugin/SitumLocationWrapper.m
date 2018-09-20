@@ -403,7 +403,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     float bearing = [[[jo objectForKey:@"bearing"] valueForKey:@"degrees"] floatValue];
     float cartesianBearing = [[[jo objectForKey:@"cartesianBearing"] valueForKey:@"radians"] floatValue];
     
-    kSITQualityValues quality = kSITHigh;
+    kSITQualityValues quality = [(NSString*)[jo valueForKey: @"quality"] isEqualToString: @"HIGH"] ? kSITHigh : kSITLow;
 
     float accuracy = [(NSNumber*)[jo objectForKey:@"accuracy"] floatValue];
     

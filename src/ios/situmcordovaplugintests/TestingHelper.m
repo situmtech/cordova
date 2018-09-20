@@ -245,6 +245,13 @@
     XCTAssertEqualWithAccuracy(coordinateA.y, coordinateB.y, 0.0001, @"SITCartesianCoordinate: Y value wasn't equal.");
 }
 
+- (void) assertAngle: (SITAngle*) angleA isEqualToAngle: (SITAngle*) angleB {
+    XCTAssertEqualWithAccuracy(angleA.degrees, angleB.degrees, 0.0001);
+    XCTAssertEqualWithAccuracy(angleA.radians, angleB.radians, 0.0001);
+    XCTAssertEqualWithAccuracy(angleA.degressClockwise, angleB.degressClockwise, 0.0001);
+    XCTAssertEqualWithAccuracy(angleA.radiansMinusPiPi, angleB.radiansMinusPiPi, 0.0001);
+}
+
 - (void) assertPoint: (SITPoint*) pointA isEqualToPoint: (SITPoint*) pointB {
     [self assertCoordinate: pointA.coordinate isEqualToCoordinate: pointB.coordinate];
     [self assertCartesianCoordinate: pointA.cartesianCoordinate isEqualToCartesianCoordinate: pointB.cartesianCoordinate];
@@ -252,6 +259,17 @@
     XCTAssertEqualObjects(pointA.floorIdentifier, pointB.floorIdentifier, @"SITPoint: floor identifier wasn't equal.");
     XCTAssertTrue(pointA.isIndoor == pointB.isIndoor, @"SITPoint: isIndoor bool wasn't equal.");
     XCTAssertTrue(pointA.isOutdoor == pointB.isOutdoor, @"SITPoint: isOutdoor bool  wasn't equal.");
+}
+
+- (void) assertLocation: (SITLocation *) locationA isEqualToLocation:(SITLocation *)locationB {
+    XCTAssertEqualWithAccuracy(locationA.accuracy, locationB.accuracy, 0.001);
+    XCTAssertEqualObjects(locationA.provider, locationB.provider);
+    XCTAssertEqualObjects(locationA.deviceId, locationB.deviceId);
+    XCTAssertEqual(locationA.quality, locationB.quality);
+    XCTAssertEqual(locationA.hasBearing, locationB.hasBearing);
+    [self assertPoint: locationA.position isEqualToPoint: locationB.position];
+    [self assertAngle: locationA.bearing isEqualToAngle: locationB.bearing];
+    [self assertAngle: locationA.cartesianBearing isEqualToAngle: locationB.cartesianBearing];
 }
 
 @end
