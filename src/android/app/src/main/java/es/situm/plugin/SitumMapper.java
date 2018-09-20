@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
@@ -229,6 +230,15 @@ class SitumMapper {
     return jo;
   }
 
+  static Map<String,String> jsonObjectToMapString(JSONObject jo) throws JSONException {
+    Map<String,String> map = new HashMap<>();
+    int length = jo.length();
+    for(int i = 0; i<length; i++){
+      map.put(jo.names().get(i).toString(),jo.getString(jo.names().get(i).toString()));
+    }
+    return map;
+  }
+
   static Building buildingJsonObjectToBuilding(JSONObject jo) throws JSONException {
     Building building = null;
     Coordinate center = new Coordinate(jo.getJSONObject(CENTER).getDouble(LATITUDE),
@@ -236,6 +246,8 @@ class SitumMapper {
     Dimensions dimesnsions = new Dimensions(jo.getJSONObject(DIMENSIONS).getDouble(WIDTH),
         jo.getJSONObject(DIMENSIONS).getDouble(HEIGHT));
     building = new Building.Builder().identifier(jo.getString(BUILDING_IDENTIFIER)).address(jo.getString(ADDRESS))
+            .rotation(Angle.fromRadians(jo.getDouble(ROTATION))).updatedAt(new Date(jo.getString(UPDATED_AT)))
+            .createdAt(new Date(jo.getString(CREATED_AT))).customFields(jsonObjectToMapString(jo.getJSONObject(CUSTOM_FIELDS)))
         .name(jo.getString(BUILDING_NAME)).userIdentifier(jo.getString(USER_IDENTIFIER)).center(center)
         .dimensions(dimesnsions).infoHtml(jo.getString(INFO_HTML)).build();
     return building;
@@ -260,6 +272,7 @@ class SitumMapper {
   static Floor floorJsonObjectToFloor(JSONObject jo) throws JSONException {
     Floor floor = null;
     floor = new Floor.Builder().buildingIdentifier(jo.getString(BUILDING_IDENTIFIER)).altitude(jo.getDouble(ALTITUDE))
+            .customFields(jsonObjectToMapString(jo.getJSONObject(CUSTOM_FIELDS)))
         .level(jo.getInt(LEVEL)).mapUrl(new URL(jo.getString(MAP_URL))).scale(jo.getDouble(SCALE)).build();
     return floor;
   }
@@ -347,7 +360,7 @@ class SitumMapper {
     mapName.put("name", jo.getString(POI_CATEGORY_NAME));
     category = new PoiCategory.Builder()
         .code(jo.getString(POI_CATEGORY_CODE))
-        .name(new I18nString(mapName))
+        .name(new I18nString.Builder(jo.getString(POI_CATEGORY_NAME)).build())//
         .isPublic(jo.getBoolean(IS_PUBLIC))
         .selectedIcon(new URL(jo.getString(POI_CATEGORY_ICON_SELECTED)))
         .unselectedIcon(new URL(jo.getString(POI_CATEGORY_ICON_UNSELECTED)))

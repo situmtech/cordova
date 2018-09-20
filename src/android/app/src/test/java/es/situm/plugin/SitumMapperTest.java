@@ -31,7 +31,6 @@ import es.situm.plugin.locationStatus.LocationStatusCreator;
 import es.situm.plugin.navigationProgress.NavigationProgressCreator;
 import es.situm.plugin.poi.PoiCreator;
 import es.situm.plugin.poiCategory.PoiCategoryCreator;
-import es.situm.plugin.poiCategoryIcon.PoiCategoryIconCreator;
 import es.situm.plugin.point.PointCreator;
 import es.situm.plugin.route.RouteCreator;
 import es.situm.plugin.routeStep.RouteStepCreator;
@@ -182,7 +181,30 @@ public class SitumMapperTest {
     private CircleCreator circleCreator = new CircleCreator();
     private PoiCreator poiCreator = new PoiCreator();
     private BuildingCreator buildingCreator = new BuildingCreator();
-    private PoiCategoryIconCreator poiCategoryIconCreator = new PoiCategoryIconCreator();
+
+    @Test
+    public void angleTest1() {
+        try {
+            JSONObject jo = angleCreator.getAngle1();
+            Angle angle = SitumMapper.angleJSONObjectToAngle(jo);
+            Angle angle1 = angleCreator.createAngleFromDegrees();
+            testAngle(angle, angle1);
+        } catch (JSONException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void angleTest2() {
+        try {
+            JSONObject jo = angleCreator.getAngle2();
+            Angle angle = SitumMapper.angleJSONObjectToAngle(jo);
+            Angle angle1 = angleCreator.createAngleFromRadians();
+            testAngle(angle, angle1);
+        } catch (JSONException e) {
+            System.err.println(e.getMessage());
+        }
+    }
 
     @Test
     public void angleJSONObjectTest() {
@@ -217,6 +239,18 @@ public class SitumMapperTest {
     }
 
     @Test
+    public void buildingTest() {
+        try{
+            JSONObject jo = buildingCreator.getBuilding1();
+            Building building = SitumMapper.buildingJsonObjectToBuilding(jo);
+            Building building1 = buildingCreator.createBuilding1();
+            testBuilding(building, building1);
+        } catch (JSONException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
     public void buildingJSONObjectTest() {
         try {
             Building building = buildingCreator.createBuilding1();
@@ -229,12 +263,36 @@ public class SitumMapperTest {
     }
 
     @Test
+    public void cartesianCoordinateTest() {
+        try {
+            JSONObject jo = cartesianCoordinateCreator.getCartesianCoordinate1();
+            CartesianCoordinate cartesianCoordinate = SitumMapper.cartesianCoordinateJsonObjectToCartesianCoordinate(jo);
+            CartesianCoordinate cartesianCoordinate1 = cartesianCoordinateCreator.createCartesianCoordinate();
+            testCartesianCoordinate(cartesianCoordinate,cartesianCoordinate1);
+        } catch (JSONException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
     public void cartesianCoordinateJSONObjectTest() {
         try {
             CartesianCoordinate cartesianCoordinate = cartesianCoordinateCreator.createCartesianCoordinate();
             JSONObject cartesianCoordinateJSONObject = SitumMapper.cartesianCoordinateToJsonObject(cartesianCoordinate);
             JSONObject cartesianCoordinate1 = cartesianCoordinateCreator.getCartesianCoordinate1();
             testCartesianCoordinate(cartesianCoordinateJSONObject, cartesianCoordinate1);
+        } catch (JSONException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void coordinateTest() {
+        try {
+            JSONObject jo = coordinateCreator.getCoordinate1();
+            Coordinate coordinate = SitumMapper.coordinateJsonObjectToCoordinate(jo);
+            Coordinate coordinate1 = coordinateCreator.createCoordinate();
+            testCoordinate(coordinate, coordinate1);
         } catch (JSONException e) {
             System.err.println(e.getMessage());
         }
@@ -265,6 +323,30 @@ public class SitumMapperTest {
     }
 
     @Test
+    public void floorTest1() {
+        try {
+            JSONObject jo = floorCreator.getFloor1();
+            Floor floor = SitumMapper.floorJsonObjectToFloor(jo);
+            Floor floor1 = floorCreator.createFloorWithAltitude();
+            testFloor(floor, floor1);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void floorTest2() {
+        try {
+            JSONObject jo = floorCreator.getFloor2();
+            Floor floor = SitumMapper.floorJsonObjectToFloor(jo);
+            Floor floor1 = floorCreator.createFloorWithoutAltitude();
+            testFloor(floor, floor1);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
     public void floorJSONObjectTest() {
         try {
             Floor floor = floorCreator.createFloorWithAltitude();
@@ -287,6 +369,126 @@ public class SitumMapperTest {
             JSONObject indicationJSONObject = SitumMapper.indicationToJsonObject(indication);
             JSONObject indication1 = indicationCreator.getIndication1();
             testIndication(indicationJSONObject, indication1);
+        } catch (JSONException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void locationTest1() {
+        try {
+            JSONObject jo = locationCreator.getLocation1();
+            Location location = SitumMapper.jsonLocationObjectToLocation(jo);
+            Location location1 = locationCreator.createLocationWithBuildingFloorAndCartesianCoordinates();
+            testLocation(location, location1);
+        } catch (JSONException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void locationTest2() {
+        try {
+            JSONObject jo = locationCreator.getLocation2();
+            Location location = SitumMapper.jsonLocationObjectToLocation(jo);
+            Location location1 = locationCreator.createLocationWithCoordinate();
+            testLocation(location, location1);
+        } catch (JSONException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void locationTest3() {
+        try {
+            JSONObject jo = locationCreator.getLocation3();
+            Location location = SitumMapper.jsonLocationObjectToLocation(jo);
+            Location location1 = locationCreator.createLocationWithBuildingAndCoordinate();
+            testLocation(location, location1);
+        } catch (JSONException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void locationTest4() {
+        try {
+            JSONObject jo = locationCreator.getLocation4();
+            Location location = SitumMapper.jsonLocationObjectToLocation(jo);
+            Location location1 = locationCreator.locationWithCartesianBearing();
+            testLocation(location, location1);
+        } catch (JSONException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void locationTest5() {
+        try {
+            JSONObject jo = locationCreator.getLocation5();
+            Location location = SitumMapper.jsonLocationObjectToLocation(jo);
+            Location location1 = locationCreator.locationWithoutCartesianBearing();
+            testLocation(location, location1);
+        } catch (JSONException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void locationTest6() {
+        try {
+            JSONObject jo = locationCreator.getLocation6();
+            Location location = SitumMapper.jsonLocationObjectToLocation(jo);
+            Location location1 = locationCreator.locationWithBearing();
+            testLocation(location, location1);
+        } catch (JSONException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void locationTest7() {
+        try {
+            JSONObject jo = locationCreator.getLocation7();
+            Location location = SitumMapper.jsonLocationObjectToLocation(jo);
+            Location location1 = locationCreator.locationWithoutBearing();
+            testLocation(location, location1);
+        } catch (JSONException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void locationTest8() {
+        try {
+            JSONObject jo = locationCreator.getLocation8();
+            Location location = SitumMapper.jsonLocationObjectToLocation(jo);
+            Location location1 = locationCreator.indoorLocationWithIndoorBearingQualityLow();
+            testLocation(location, location1);
+        } catch (JSONException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void locationTest9() {
+        try {
+            JSONObject jo = locationCreator.getLocation9();
+            Location location = SitumMapper.jsonLocationObjectToLocation(jo);
+            Location location1 = locationCreator.indoorLocationWithIndoorBearingQualityHigh();
+            testLocation(location, location1);
+        } catch (JSONException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void locationTest10() {
+        try {
+            JSONObject jo = locationCreator.getLocation10();
+            Location location = SitumMapper.jsonLocationObjectToLocation(jo);
+            Location location1 = locationCreator.outdoorLocation();
+            testLocation(location, location1);
         } catch (JSONException e) {
             System.err.println(e.getMessage());
         }
@@ -461,6 +663,18 @@ public class SitumMapperTest {
     }
 
     @Test
+    public void poiCategoryTest() {
+        try{
+            JSONObject jo = poiCategoryCreator.getPoiCategory1();
+            PoiCategory poiCategory = SitumMapper.poiCategoryFromJsonObject(jo);
+            PoiCategory poiCategory1 = poiCategoryCreator.createPoiCategory();
+            testPoiCategory(poiCategory, poiCategory1);
+        }catch (JSONException e){
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
     public void poiCategoryJSONObjectTest() {
         try{
             PoiCategory poiCategory = poiCategoryCreator.createPoiCategory();
@@ -538,6 +752,102 @@ public class SitumMapperTest {
             JSONObject routeStep5 = routeStepCreator.getRouteStep5();
             testRouteStep(routeStepWithBuildingWithAngleFromRadiansJSONObject, routeStep5);
         }catch(JSONException e){
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void pointTest1() {
+        try{
+            JSONObject jo = pointCreator.getPoint1();
+            Point point = SitumMapper.jsonPointToPoint(jo);
+            Point point1 = pointCreator.createPointWithCoordinate();
+            testPoint(point, point1);
+        } catch (JSONException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void pointTest2() {
+        try{
+            JSONObject jo = pointCreator.getPoint2();
+            Point point = SitumMapper.jsonPointToPoint(jo);
+            Point point1 = pointCreator.createPointWithCoordinateAndBuildingId();
+            testPoint(point, point1);
+        } catch (JSONException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void pointTest3() {
+        try{
+            JSONObject jo = pointCreator.getPoint3();
+            Point point = SitumMapper.jsonPointToPoint(jo);
+            Point point1 = pointCreator.createPointWithBuildingIdAndFloor();
+            testPoint(point, point1);
+        } catch (JSONException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void pointTest4() {
+        try{
+            JSONObject jo = pointCreator.getPoint4();
+            Point point = SitumMapper.pointJsonObjectToPoint(jo, buildingCreator.getBuilding1());
+            Point point1 = pointCreator.createPointWithBuildingWithAngleFromDegrees();
+            testPoint(point, point1);
+        } catch (JSONException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void pointTest5() {
+        try{
+            JSONObject jo = pointCreator.getPoint5();
+            Point point = SitumMapper.pointJsonObjectToPoint(jo, buildingCreator.getBuilding1());
+            Point point1 = pointCreator.createPointWithBuildingWithAngleFromRadians();
+            testPoint(point, point1);
+        } catch (JSONException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void pointTest6() {
+        try{
+            JSONObject jo = pointCreator.getPoint6();
+            Point point = SitumMapper.jsonPointToPoint(jo);
+            Point point1 = pointCreator.createPointWithBuildingWithAddress();
+            testPoint(point, point1);
+        } catch (JSONException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void pointTest7() {
+        try{
+            JSONObject jo = pointCreator.getPoint7();
+            Point point = SitumMapper.jsonPointToPoint(jo);
+            Point point1 = pointCreator.createPointWithBuildingWithInfo();
+            testPoint(point, point1);
+        } catch (JSONException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void pointTest8() {
+        try{
+            JSONObject jo = pointCreator.getPoint8();
+            Point point = SitumMapper.jsonPointToPoint(jo);
+            Point point1 = pointCreator.createPointWithBuildingWithPicture();
+            testPoint(point, point1);
+        } catch (JSONException e) {
             System.err.println(e.getMessage());
         }
     }
@@ -648,6 +958,13 @@ public class SitumMapperTest {
         }
     }
 
+    private void testAngle(Angle angle, Angle defaultAngle) {
+        Assert.assertEquals(defaultAngle.degrees(), angle.degrees(),0.0000001);
+        Assert.assertEquals(defaultAngle.degreesClockwise(), angle.degreesClockwise(),0.0000001);
+        Assert.assertEquals(defaultAngle.radians(), angle.radians(),0.0000001);
+        Assert.assertEquals(defaultAngle.radiansMinusPiPi(), angle.radiansMinusPiPi(),0.0000001);
+    }
+
     private void testAngle(JSONObject angle, JSONObject defaultAngle) throws JSONException {
         Assert.assertEquals(Double.class, angle.get(RADIANS_MINUS_PI_PI).getClass());
         Assert.assertEquals(defaultAngle.getDouble(RADIANS_MINUS_PI_PI), angle.getDouble(RADIANS_MINUS_PI_PI), 0);
@@ -659,6 +976,13 @@ public class SitumMapperTest {
         Assert.assertEquals(defaultAngle.getDouble(DEGREES), angle.getDouble(DEGREES),0);
     }
 
+    private void testBounds(Bounds bounds, Bounds defaultBounds) {
+        testCoordinate(defaultBounds.getNorthEast(), bounds.getNorthEast());
+        testCoordinate(defaultBounds.getNorthWest(), bounds.getNorthWest());
+        testCoordinate(defaultBounds.getSouthEast(), bounds.getSouthEast());
+        testCoordinate(defaultBounds.getSouthWest(), bounds.getSouthWest());
+    }
+
     private void testBounds(JSONObject bounds, JSONObject defaultBounds) throws JSONException {
         Assert.assertEquals(JSONObject.class, bounds.get(NORTH_WEST).getClass());
         testCoordinate(bounds.getJSONObject(NORTH_WEST), defaultBounds.getJSONObject(NORTH_WEST));
@@ -668,6 +992,25 @@ public class SitumMapperTest {
         testCoordinate(bounds.getJSONObject(NORTH_EAST), defaultBounds.getJSONObject(NORTH_EAST));
         Assert.assertEquals(JSONObject.class, bounds.get(SOUTH_EAST).getClass());
         testCoordinate(bounds.getJSONObject(SOUTH_EAST), defaultBounds.getJSONObject(SOUTH_EAST));
+    }
+
+    private void testBuilding(Building building, Building defaultBuilding) {
+        Assert.assertEquals(defaultBuilding.getAddress(), building.getAddress());
+        testBounds(defaultBuilding.getBounds(), building.getBounds());
+        testBounds(defaultBuilding.getBoundsRotated(), building.getBoundsRotated());
+        testCoordinate(defaultBuilding.getCenter(), building.getCenter());
+        testDimensions(defaultBuilding.getDimensions(), building.getDimensions());
+        Assert.assertEquals(defaultBuilding.getInfoHtml(), building.getInfoHtml());
+        Assert.assertEquals(defaultBuilding.getName(), building.getName());
+        Assert.assertEquals(defaultBuilding.getPictureThumbUrl(), building.getPictureThumbUrl());
+        Assert.assertEquals(defaultBuilding.getPictureUrl(), building.getPictureUrl());
+        testAngle(defaultBuilding.getRotation(), building.getRotation());
+        Assert.assertEquals(defaultBuilding.getUserIdentifier(), building.getUserIdentifier());
+        Assert.assertEquals(defaultBuilding.getIdentifier(), building.getIdentifier());
+        Assert.assertEquals(defaultBuilding.getCustomFields(), building.getCustomFields());
+        Assert.assertEquals(defaultBuilding.getUpdatedAt(), building.getUpdatedAt());
+        Assert.assertEquals(defaultBuilding.getCreatedAt(), building.getCreatedAt());
+
     }
 
     private void testBuilding(JSONObject building, JSONObject defaultBuilding) throws JSONException {
@@ -703,11 +1046,21 @@ public class SitumMapperTest {
 
     }
 
+    private void testCartesianCoordinate(CartesianCoordinate cartesianCoordinate, CartesianCoordinate defaultCartesianCoordinate) {
+        Assert.assertEquals(defaultCartesianCoordinate.getX(), cartesianCoordinate.getX(), 0);
+        Assert.assertEquals(defaultCartesianCoordinate.getY(), cartesianCoordinate.getY(), 0);
+    }
+
     private void testCartesianCoordinate(JSONObject cartesianCoordinate, JSONObject defaultCartesianCoordinate) throws JSONException {
         Assert.assertEquals(Double.class, cartesianCoordinate.get(X).getClass());
         Assert.assertEquals(defaultCartesianCoordinate.getDouble(X), cartesianCoordinate.getDouble(X), 0);
         Assert.assertEquals(Double.class, cartesianCoordinate.get(Y).getClass());
         Assert.assertEquals(defaultCartesianCoordinate.getDouble(Y), cartesianCoordinate.getDouble(Y), 0);
+    }
+
+    private void testCoordinate(Coordinate coordinate, Coordinate defaultCoordinate) {
+        Assert.assertEquals(defaultCoordinate.getLongitude(), coordinate.getLongitude(), 0);
+        Assert.assertEquals(defaultCoordinate.getLatitude(), coordinate.getLatitude(), 0);
     }
 
     private void testCoordinate(JSONObject coordinate, JSONObject defaultCoordinate) throws JSONException {
@@ -721,11 +1074,28 @@ public class SitumMapperTest {
         Assert.assertEquals(customFields,defaultCustomFields);
     }
 
+    private void testDimensions(Dimensions dimensions, Dimensions defaultDimensions) {
+        Assert.assertEquals(defaultDimensions.getHeight(), dimensions.getHeight(), 0);
+        Assert.assertEquals(defaultDimensions.getWidth(), dimensions.getWidth(),0);
+    }
+
     private void testDimensions(JSONObject dimensions, JSONObject defaultDimensions) throws JSONException {
         Assert.assertEquals(Double.class, dimensions.get(WIDTH).getClass());
         Assert.assertEquals(defaultDimensions.getDouble(WIDTH), dimensions.getDouble(WIDTH), 0);
         Assert.assertEquals(Double.class, dimensions.get(HEIGHT).getClass());
         Assert.assertEquals(defaultDimensions.getDouble(HEIGHT), dimensions.getDouble(HEIGHT), 0);
+    }
+
+    private void testFloor(Floor floor, Floor defaultFloor) {
+        Assert.assertEquals(defaultFloor.getAltitude(), floor.getAltitude(), 0);
+        Assert.assertEquals(defaultFloor.getCreatedAt(), floor.getCreatedAt());
+        Assert.assertEquals(defaultFloor.getIdentifier(), floor.getIdentifier());
+        Assert.assertEquals(defaultFloor.getLevel(), floor.getLevel());
+        Assert.assertEquals(defaultFloor.getCustomFields(), floor.getCustomFields());
+        Assert.assertEquals(defaultFloor.getMapUrl(), floor.getMapUrl());
+        Assert.assertEquals(defaultFloor.getScale(), floor.getScale(), 0);
+        Assert.assertEquals(defaultFloor.getBuildingIdentifier(), floor.getBuildingIdentifier());
+        Assert.assertEquals(defaultFloor.getUpdatedAt(), floor.getUpdatedAt());
     }
 
     private void testFloor(JSONObject floor, JSONObject defaultFloor) throws JSONException {
@@ -768,6 +1138,26 @@ public class SitumMapperTest {
         Assert.assertEquals(defaultIndication.getBoolean(NEEDED_LEVEL_CHANGE), indication.getBoolean(NEEDED_LEVEL_CHANGE));
     }
 
+    private void testLocation(Location location,Location defaultLocation) {
+        Assert.assertEquals(defaultLocation.hasCartesianBearing(), location.hasCartesianBearing());
+        testCoordinate(defaultLocation.getCoordinate(), location.getCoordinate());
+        testAngle(defaultLocation.getBearing(), location.getBearing());
+        Assert.assertEquals(defaultLocation.getAccuracy(), location.getAccuracy(), 0);
+        Assert.assertEquals(defaultLocation.isIndoor(), location.isIndoor());
+        Assert.assertEquals(defaultLocation.getDeviceId(), location.getDeviceId());
+        Assert.assertEquals(defaultLocation.getBuildingIdentifier(), location.getBuildingIdentifier());
+        Assert.assertEquals(defaultLocation.getQuality(), location.getQuality());
+        Assert.assertEquals(defaultLocation.isOutdoor(), location.isOutdoor());
+        Assert.assertEquals(defaultLocation.getFloorIdentifier(), location.getFloorIdentifier());
+        Assert.assertEquals(defaultLocation.getProvider(), location.getProvider());
+        testAngle(defaultLocation.getCartesianBearing(), location.getCartesianBearing());
+        Assert.assertEquals(defaultLocation.getBearingQuality(), location.getBearingQuality());
+        Assert.assertEquals(defaultLocation.hasBearing(), location.hasBearing());
+        testCartesianCoordinate(defaultLocation.getCartesianCoordinate(), location.getCartesianCoordinate());
+        testPoint(defaultLocation.getPosition(), location.getPosition());
+        Assert.assertEquals(defaultLocation.getTime(), location.getTime());
+    }
+
     private void testLocation(JSONObject location, JSONObject defaultLocation) throws JSONException {
         Assert.assertEquals(Boolean.class, location.get(HAS_CARTESIAN_BEARING).getClass());
         Assert.assertEquals(defaultLocation.getBoolean(HAS_CARTESIAN_BEARING), location.getBoolean(HAS_CARTESIAN_BEARING));
@@ -803,6 +1193,19 @@ public class SitumMapperTest {
         testPoint(location.getJSONObject(POSITION), defaultLocation.getJSONObject(POSITION));
         Assert.assertEquals(Long.class, location.get(TIMESTAMP).getClass());
         Assert.assertEquals(defaultLocation.getLong(TIMESTAMP), location.getLong(TIMESTAMP));
+    }
+
+    private void testPoint(Point point, Point defaultPoint) {
+        testCoordinate(defaultPoint.getCoordinate(), point.getCoordinate());
+        testCartesianCoordinate(defaultPoint.getCartesianCoordinate(), point.getCartesianCoordinate());
+        Assert.assertEquals(defaultPoint.getFloorIdentifier(), point.getFloorIdentifier());
+        Assert.assertEquals(defaultPoint.getBuildingIdentifier(), point.getBuildingIdentifier());
+        Assert.assertEquals(defaultPoint.isIndoor(), point.isIndoor());
+        Assert.assertEquals(defaultPoint.isOutdoor(), point.isOutdoor());
+    }
+
+    private void testQuality(Location.Quality quality, Location.Quality defaultQuality) {
+        Assert.assertEquals(defaultQuality, quality);
     }
 
     private void testPoint(JSONObject point, JSONObject defaultPoint) throws JSONException {
@@ -852,6 +1255,14 @@ public class SitumMapperTest {
         Assert.assertEquals(defaultPoi.getString(CATEGORY),poi.getString(CATEGORY));
         Assert.assertEquals(String.class, poi.get(UPDATED_AT).getClass());
         Assert.assertEquals(defaultPoi.getString(UPDATED_AT), poi.getString(UPDATED_AT));
+    }
+
+    private void testPoiCategory(PoiCategory poiCategory, PoiCategory defaultPoiCategory) {
+        Assert.assertEquals(defaultPoiCategory.getSelectedIconUrl(), poiCategory.getSelectedIconUrl());
+        Assert.assertEquals(defaultPoiCategory.isPublic(), poiCategory.isPublic());
+        Assert.assertEquals(defaultPoiCategory.getName(), poiCategory.getName());
+        Assert.assertEquals(defaultPoiCategory.getCode(), poiCategory.getCode());
+        Assert.assertEquals(defaultPoiCategory.getUnselectedIconUrl(), poiCategory.getUnselectedIconUrl());
     }
 
     private void testPoiCategory(JSONObject poiCategory, JSONObject defaultPoiCategory) throws JSONException {
