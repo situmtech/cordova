@@ -267,15 +267,16 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:kDateFormat];
 
-    floor.createdAt = [dateFormatter dateFromString:floor.createdAt];
+    floor.createdAt = [dateFormatter dateFromString:nsFloor[@"createdAt"]];
 
-    floor.updatedAt = [dateFormatter dateFromString:floor.updatedAt];
+    floor.updatedAt = [dateFormatter dateFromString:nsFloor[@"updatedAt"]];
 
     floor.scale = [[nsFloor objectForKey:@"scale"] doubleValue];
     floor.mapURL = [[SITURL alloc] initWithDirection:[nsFloor objectForKey:@"mapUrl"]];;
     floor.level = [[nsFloor objectForKey:@"level"] intValue];
     floor.identifier = [nsFloor objectForKey:@"floorIdentifier"];
     floor.buildingIdentifier = [nsFloor objectForKey:@"buildingIdentifier"];
+    floor.altitude = [nsFloor[@"altitude"] doubleValue];
     return floor;
 }
 
