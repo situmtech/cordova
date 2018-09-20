@@ -53,6 +53,7 @@
 		3A4011372153B0D500AC3BD5 /* InputCoordinateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4011362153B0D500AC3BD5 /* InputCoordinateTests.m */; };
 		3A4011392153B24400AC3BD5 /* InputLocationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4011382153B24400AC3BD5 /* InputLocationTests.m */; };
 		3A40113B2153C4CB00AC3BD5 /* InputPoiCategoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A40113A2153C4CB00AC3BD5 /* InputPoiCategoryTests.m */; };
+		3A40113D2153CBA800AC3BD5 /* InputIndicationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A40113C2153CBA800AC3BD5 /* InputIndicationTests.m */; };
 		3A4D721721525B970038ED55 /* InputPointTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D721621525B970038ED55 /* InputPointTests.m */; };
 		3A4D721B215276660038ED55 /* InputCartesianCoordinateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D721A215276660038ED55 /* InputCartesianCoordinateTests.m */; };
 		7ED95D021AB9028C008C4574 /* CDVDebug.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ED95CF21AB9028C008C4574 /* CDVDebug.h */; };
@@ -203,6 +204,7 @@
 		3A4011362153B0D500AC3BD5 /* InputCoordinateTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputCoordinateTests.m; sourceTree = "<group>"; };
 		3A4011382153B24400AC3BD5 /* InputLocationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputLocationTests.m; sourceTree = "<group>"; };
 		3A40113A2153C4CB00AC3BD5 /* InputPoiCategoryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputPoiCategoryTests.m; sourceTree = "<group>"; };
+		3A40113C2153CBA800AC3BD5 /* InputIndicationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputIndicationTests.m; sourceTree = "<group>"; };
 		3A4D721621525B970038ED55 /* InputPointTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputPointTests.m; sourceTree = "<group>"; };
 		3A4D721A215276660038ED55 /* InputCartesianCoordinateTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputCartesianCoordinateTests.m; sourceTree = "<group>"; };
 		68A32D7114102E1C006B237C /* libCordova.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCordova.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -472,6 +474,7 @@
 				3A4011382153B24400AC3BD5 /* InputLocationTests.m */,
 				95F6FF5D2153B5E700AE30B5 /* InputFloorTests.m */,
 				3A40113A2153C4CB00AC3BD5 /* InputPoiCategoryTests.m */,
+				3A40113C2153CBA800AC3BD5 /* InputIndicationTests.m */,
 			);
 			path = InputTests;
 			sourceTree = "<group>";
@@ -775,6 +778,7 @@
 				95B14A39214A488F0073A9E1 /* EventTests.m in Sources */,
 				95D33B49214B9680000E073E /* PoiTests.m in Sources */,
 				95B14A2F214A45B10073A9E1 /* BoundTests.m in Sources */,
+				3A40113D2153CBA800AC3BD5 /* InputIndicationTests.m in Sources */,
 				95B14A47214A51BA0073A9E1 /* RouteTests.m in Sources */,
 				0D5CFD61212C275E00C6E436 /* CDVUIWebViewDelegate.m in Sources */,
 				95B14A33214A46E20073A9E1 /* CartesianCoordinateTests.m in Sources */,

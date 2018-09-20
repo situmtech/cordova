@@ -279,6 +279,19 @@
     XCTAssertEqualObjects(poiCategoryA.code, poiCategoryB.code);
 }
 
+- (void) assertIndication: (SITIndication*) indicationA isEqualToIndication: (SITIndication*) indicationB {    
+    XCTAssertEqual(indicationA.orientation, indicationB.orientation);
+    XCTAssertEqual(indicationA.originStepIndex, indicationB.originStepIndex);
+    XCTAssertEqual(indicationA.destinationStepIndex, indicationB.destinationStepIndex);
+    XCTAssertEqualWithAccuracy(indicationA.horizontalDistance, indicationB.horizontalDistance, 0.0001);
+    XCTAssertEqualWithAccuracy(indicationA.verticalDistance, indicationB.verticalDistance, 0.0001);
+    XCTAssertEqual(indicationA.needLevelChange, indicationB.needLevelChange);
+    XCTAssertEqual([indicationA.nextLevel intValue], [indicationB.nextLevel intValue]);
+    XCTAssertEqualWithAccuracy(indicationA.orientationChange, indicationB.orientationChange, 0.0001);
+    XCTAssertEqual(indicationA.orientation, indicationB.orientation);
+    XCTAssertEqual(indicationA.action, indicationB.action);
+}
+
 - (void) assertFloor: (SITFloor *) floorA isEqualToFloor :(SITFloor *) floorB {
     XCTAssertEqualObjects(floorA.identifier, floorB.identifier);
     XCTAssertEqualObjects(@(floorA.altitude), @(floorB.altitude));
