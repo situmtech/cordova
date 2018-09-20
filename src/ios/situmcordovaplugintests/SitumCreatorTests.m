@@ -569,6 +569,7 @@
     poi.createdAt = createdAt;
     poi.updatedAt = updatedAt;
     poi.buildingIdentifier = @"101";
+    poi.customFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"test", @"test_field", @"101", @"building", nil];
     return poi;
 }
 
