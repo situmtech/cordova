@@ -37,5 +37,6 @@
 
 - (void) assertCartesianCoordinate: (SITCartesianCoordinate*) coordinateA isEqualToCartesianCoordinate: (SITCartesianCoordinate*) coordinateB;
 - (void) assertPoint: (SITPoint*) pointA isEqualToPoint: (SITPoint*) pointB;
+- (void) assertFloor: (SITFloor *) floorA isEqualToFloor :(SITFloor *) floorB;
 
 @end
