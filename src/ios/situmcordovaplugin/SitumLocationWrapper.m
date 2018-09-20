@@ -324,7 +324,11 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     category.code = [jo objectForKey:@"poiCategoryCode"];
     category.isPublic = [jo objectForKey:@"public"];
     category.selectedIconURL = [[SITURL alloc] initWithDirection:[jo objectForKey:@"icon_selected"]];
-    category.iconURL = [[SITURL alloc] initWithDirection:[jo objectForKey:@"icon_unselected"]];
+    if([jo objectForKey:@"icon_unselected"]) {
+        category.iconURL = [[SITURL alloc] initWithDirection:[jo objectForKey:@"icon_unselected"]];
+    } else {
+        category.iconURL = [[SITURL alloc] initWithDirection:[jo objectForKey:@"icon_deselected"]];
+    }
     return category;
 }
 
