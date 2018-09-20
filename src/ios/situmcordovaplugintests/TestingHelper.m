@@ -272,6 +272,13 @@
     [self assertAngle: locationA.cartesianBearing isEqualToAngle: locationB.cartesianBearing];
 }
 
+- (void) assertPoiCategory: (SITPOICategory*) poiCategoryA isEqualToPoiCategory: (SITPOICategory*) poiCategoryB {
+    XCTAssertEqualObjects(poiCategoryA.iconURL.direction, poiCategoryB.iconURL.direction);
+    XCTAssertEqualObjects(poiCategoryA.selectedIconURL.direction, poiCategoryB.selectedIconURL.direction);
+    XCTAssertEqualObjects(poiCategoryA.name.value , poiCategoryB.name.value);
+    XCTAssertEqualObjects(poiCategoryA.code, poiCategoryB.code);
+}
+
 - (void) assertFloor: (SITFloor *) floorA isEqualToFloor :(SITFloor *) floorB {
     XCTAssertEqualObjects(floorA.identifier, floorB.identifier);
     XCTAssertEqualObjects(@(floorA.altitude), @(floorB.altitude));

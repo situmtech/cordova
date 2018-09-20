@@ -39,6 +39,7 @@
 - (void) assertCartesianCoordinate: (SITCartesianCoordinate*) coordinateA isEqualToCartesianCoordinate: (SITCartesianCoordinate*) coordinateB;
 - (void) assertPoint: (SITPoint*) pointA isEqualToPoint: (SITPoint*) pointB;
 - (void) assertLocation: (SITLocation*) locationA isEqualToLocation: (SITLocation*) locationB;
+- (void) assertPoiCategory: (SITPOICategory*) poiCategoryA isEqualToPoiCategory: (SITPOICategory*) poiCategoryB;
 - (void) assertFloor: (SITFloor *) floorA isEqualToFloor :(SITFloor *) floorB;
 
 @end

@@ -52,6 +52,7 @@
 		0DF4AB2021143D5800D81A31 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF4AB1621143D5700D81A31 /* ViewController.m */; };
 		3A4011372153B0D500AC3BD5 /* InputCoordinateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4011362153B0D500AC3BD5 /* InputCoordinateTests.m */; };
 		3A4011392153B24400AC3BD5 /* InputLocationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4011382153B24400AC3BD5 /* InputLocationTests.m */; };
+		3A40113B2153C4CB00AC3BD5 /* InputPoiCategoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A40113A2153C4CB00AC3BD5 /* InputPoiCategoryTests.m */; };
 		3A4D721721525B970038ED55 /* InputPointTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D721621525B970038ED55 /* InputPointTests.m */; };
 		3A4D721B215276660038ED55 /* InputCartesianCoordinateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D721A215276660038ED55 /* InputCartesianCoordinateTests.m */; };
 		7ED95D021AB9028C008C4574 /* CDVDebug.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ED95CF21AB9028C008C4574 /* CDVDebug.h */; };
@@ -201,6 +202,7 @@
 		30325A0B136B343700982B63 /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = "<group>"; };
 		3A4011362153B0D500AC3BD5 /* InputCoordinateTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputCoordinateTests.m; sourceTree = "<group>"; };
 		3A4011382153B24400AC3BD5 /* InputLocationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputLocationTests.m; sourceTree = "<group>"; };
+		3A40113A2153C4CB00AC3BD5 /* InputPoiCategoryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputPoiCategoryTests.m; sourceTree = "<group>"; };
 		3A4D721621525B970038ED55 /* InputPointTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputPointTests.m; sourceTree = "<group>"; };
 		3A4D721A215276660038ED55 /* InputCartesianCoordinateTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputCartesianCoordinateTests.m; sourceTree = "<group>"; };
 		68A32D7114102E1C006B237C /* libCordova.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCordova.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -469,6 +471,7 @@
 				3A4011362153B0D500AC3BD5 /* InputCoordinateTests.m */,
 				3A4011382153B24400AC3BD5 /* InputLocationTests.m */,
 				95F6FF5D2153B5E700AE30B5 /* InputFloorTests.m */,
+				3A40113A2153C4CB00AC3BD5 /* InputPoiCategoryTests.m */,
 			);
 			path = InputTests;
 			sourceTree = "<group>";
@@ -777,6 +780,7 @@
 				95B14A33214A46E20073A9E1 /* CartesianCoordinateTests.m in Sources */,
 				3A4011372153B0D500AC3BD5 /* InputCoordinateTests.m in Sources */,
 				95B14A4B214A54CA0073A9E1 /* ConversionAreaTests.m in Sources */,
+				3A40113B2153C4CB00AC3BD5 /* InputPoiCategoryTests.m in Sources */,
 				95B14A2B214A402E0073A9E1 /* PointTests.m in Sources */,
 				3A4D721B215276660038ED55 /* InputCartesianCoordinateTests.m in Sources */,
 				0D884A202114634E0066C765 /* SitumCreatorTests.m in Sources */,
