@@ -33,7 +33,6 @@
     // Create the object to convert and test
     NSString *filename =  @"cartesianCoordinate1";
     NSDictionary *jsonCartesianCoordinate = [TestingHelper dataFromJSONFileNamed: filename inDirectory : _filePath];
-    // TODO: This conversion doesn't set isOutdoor
     SITCartesianCoordinate* convertedCoordinate = [[SitumLocationWrapper shared] cartesianCoordinateJsonObjectToCartesianCoordinate: jsonCartesianCoordinate];
     
     // Create the reference valid object to compare against
