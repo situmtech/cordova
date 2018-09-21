@@ -356,11 +356,9 @@ class SitumMapper {
 
   static PoiCategory poiCategoryFromJsonObject(JSONObject jo) throws JSONException {
     PoiCategory category = null;
-    Map<String, String> mapName = new HashMap<String, String>();
-    mapName.put("name", jo.getString(POI_CATEGORY_NAME));
     category = new PoiCategory.Builder()
         .code(jo.getString(POI_CATEGORY_CODE))
-        .name(new I18nString.Builder(jo.getString(POI_CATEGORY_NAME)).build())//
+        .name(new I18nString.Builder(jo.getString(POI_CATEGORY_NAME)).build())
         .isPublic(jo.getBoolean(IS_PUBLIC))
         .selectedIcon(new URL(jo.getString(POI_CATEGORY_ICON_SELECTED)))
         .unselectedIcon(new URL(jo.getString(POI_CATEGORY_ICON_UNSELECTED)))
