@@ -21,7 +21,7 @@ public class PoiCategoryCreator {
                 .isPublic(true)
                 .selectedIcon(new URL("TEST_URL"))
                 .unselectedIcon(new URL("TEST_URL"))
-                .name(new I18nString.Builder().anyLanguage("TEST_STRING").put("TEST_LANGUAGE","TEST_STRING").build())
+                .name(new I18nString.Builder("TEST_STRING").build())
                 .build();
     }
 

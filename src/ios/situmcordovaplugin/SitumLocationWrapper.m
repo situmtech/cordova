@@ -1,6 +1,5 @@
 #import "SitumLocationWrapper.h"
-
-NSString *DATEFORMAT = @"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZ";
+#import "Constants.h"
 
 NSString* emptyStrCheck(NSString *str) {
     if (!str || str == nil) {
@@ -166,7 +165,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:emptyStrCheck(building.identifier) forKey:@"buildingIdentifier"];
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:DATEFORMAT];
+    [dateFormatter setDateFormat:kDateFormat];
 
     [jo setObject:emptyStrCheck([dateFormatter stringFromDate:building.createdAt])
            forKey:@"createdAt"];
@@ -251,7 +250,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:emptyStrCheck(floor.identifier) forKey:@"identifier"];
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:DATEFORMAT];
+    [dateFormatter setDateFormat:kDateFormat];
 
     [jo setObject:emptyStrCheck([dateFormatter stringFromDate:floor.createdAt])
            forKey:@"createdAt"];
@@ -266,17 +265,18 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     SITFloor *floor  = [[SITFloor alloc] init];
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:DATEFORMAT];
+    [dateFormatter setDateFormat:kDateFormat];
 
-    floor.createdAt = [dateFormatter dateFromString:floor.createdAt];
+    floor.createdAt = [dateFormatter dateFromString:nsFloor[@"createdAt"]];
 
-    floor.updatedAt = [dateFormatter dateFromString:floor.updatedAt];
+    floor.updatedAt = [dateFormatter dateFromString:nsFloor[@"updatedAt"]];
 
     floor.scale = [[nsFloor objectForKey:@"scale"] doubleValue];
     floor.mapURL = [[SITURL alloc] initWithDirection:[nsFloor objectForKey:@"mapUrl"]];;
     floor.level = [[nsFloor objectForKey:@"level"] intValue];
     floor.identifier = [nsFloor objectForKey:@"floorIdentifier"];
     floor.buildingIdentifier = [nsFloor objectForKey:@"buildingIdentifier"];
+    floor.altitude = [nsFloor[@"altitude"] doubleValue];
     return floor;
 }
 
@@ -325,8 +325,19 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     category.code = [jo objectForKey:@"poiCategoryCode"];
     category.isPublic = [jo objectForKey:@"public"];
     category.selectedIconURL = [[SITURL alloc] initWithDirection:[jo objectForKey:@"icon_selected"]];
-    category.iconURL = [[SITURL alloc] initWithDirection:[jo objectForKey:@"icon_deselected"]];
+    if([jo objectForKey:@"icon_unselected"]) {
+        category.iconURL = [[SITURL alloc] initWithDirection:[jo objectForKey:@"icon_unselected"]];
+    } else {
+        category.iconURL = [[SITURL alloc] initWithDirection:[jo objectForKey:@"icon_deselected"]];
+    }
     return category;
+}
+
+- (NSDictionary *)bitmapToJsonObject:(UIImage *)icon {
+    NSString *base64 = [UIImagePNGRepresentation(icon) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    [dict setObject:base64 forKey:@"data"];
+    return dict;
 }
 
 // POI
@@ -343,8 +354,20 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:[NSNumber numberWithBool:poi.position.isIndoor] forKey:@"isIndoor"];
     [jo setObject:[NSNumber numberWithBool:poi.position.isOutdoor] forKey:@"isOutdoor"];
     [jo setObject: poi.category.code forKey:@"category"];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:kDateFormat];
+    
+    [jo setObject:emptyStrCheck([dateFormatter stringFromDate:poi.createdAt])
+           forKey:@"createdAt"];
+    
+    [jo setObject:emptyStrCheck([dateFormatter stringFromDate:poi.updatedAt])
+           forKey:@"updatedAt"];
+
     if (poi.customFields) {
         [jo setObject:poi.customFields forKey:@"customFields"];
+    } else {
+        [jo setObject:[NSDictionary new] forKey:@"customFields"];
     }
     [jo setObject:emptyStrCheck(poi.infoHTML) forKey:@"infoHtml"];
     return jo.copy;
@@ -385,11 +408,13 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     float bearing = [[[jo objectForKey:@"bearing"] valueForKey:@"degrees"] floatValue];
     float cartesianBearing = [[[jo objectForKey:@"cartesianBearing"] valueForKey:@"radians"] floatValue];
     
-    kSITQualityValues quality = kSITHigh;
+    kSITQualityValues quality = [(NSString*)[jo valueForKey: @"quality"] isEqualToString: @"HIGH"] ? kSITHigh : kSITLow;
+    kSITQualityValues bearingQuality = [(NSString*)[jo valueForKey: @"bearingQuality"] isEqualToString: @"HIGH"] ? kSITHigh : kSITLow;
 
     float accuracy = [(NSNumber*)[jo objectForKey:@"accuracy"] floatValue];
     
     SITLocation *location = [[SITLocation alloc] initWithTimestamp:timestamp position:position bearing:bearing cartesianBearing:cartesianBearing quality:quality accuracy:accuracy provider:[jo objectForKey:@"provider"]];
+    location.bearingQuality = bearingQuality;
     return location;
 }
 
@@ -439,7 +464,14 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
 }
 
 - (SITPoint *) pointJsonObjectToPoint:(NSDictionary *) jo {
-    SITPoint *point = [[SITPoint alloc] initWithCoordinate:[self coordinateJsonObjectToCoordinate:[jo objectForKey:@"coordinate"]] buildingIdentifier:[jo valueForKey:@"buildingIdentifier"] floorIdentifier:[jo valueForKey:@"floorIdentifier"] cartesianCoordinate:[self cartesianCoordinateJsonObjectToCartesianCoordinate:[jo objectForKey:@"cartesianCoordinate"]]];
+    SITPoint *point = nil;
+    BOOL isOutdoor = [(NSNumber*)jo[@"isOutdoor"] boolValue];
+    if(isOutdoor) {
+        point = [[SITPoint alloc] initWithCoordinate: [self coordinateJsonObjectToCoordinate:[jo objectForKey:@"coordinate"]]
+                                  buildingIdentifier:  [jo valueForKey:@"buildingIdentifier"]];
+    } else {
+        point = [[SITPoint alloc] initWithCoordinate:[self coordinateJsonObjectToCoordinate:[jo objectForKey:@"coordinate"]] buildingIdentifier:[jo valueForKey:@"buildingIdentifier"] floorIdentifier:[jo valueForKey:@"floorIdentifier"] cartesianCoordinate:[self cartesianCoordinateJsonObjectToCartesianCoordinate:[jo objectForKey:@"cartesianCoordinate"]]];
+    }
     return point;
 }
 

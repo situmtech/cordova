@@ -34,7 +34,6 @@
 		0D884A0921145E510066C765 /* SitumSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D884A0821145E510066C765 /* SitumSDK.framework */; };
 		0D884A1321145F820066C765 /* libCordova.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A32D7114102E1C006B237C /* libCordova.a */; };
 		0D884A202114634E0066C765 /* SitumCreatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D884A1B2114634D0066C765 /* SitumCreatorTests.m */; };
-		0D884A212114634E0066C765 /* SitumTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D884A1C2114634D0066C765 /* SitumTests.m */; };
 		0D884A222114634E0066C765 /* TestingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D884A1D2114634E0066C765 /* TestingHelper.m */; };
 		0D884A232114644C0066C765 /* SitumSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D884A0821145E510066C765 /* SitumSDK.framework */; };
 		0D884E7D2116FAA20066C765 /* resources in Resources */ = {isa = PBXBuildFile; fileRef = 0D884E7C2116FAA20066C765 /* resources */; };
@@ -51,6 +50,12 @@
 		0DF4AB1E21143D5800D81A31 /* SitumPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF4AB1421143D5700D81A31 /* SitumPlugin.m */; };
 		0DF4AB1F21143D5800D81A31 /* ViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DF4AB1521143D5700D81A31 /* ViewController.h */; };
 		0DF4AB2021143D5800D81A31 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF4AB1621143D5700D81A31 /* ViewController.m */; };
+		3A4011372153B0D500AC3BD5 /* InputCoordinateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4011362153B0D500AC3BD5 /* InputCoordinateTests.m */; };
+		3A4011392153B24400AC3BD5 /* InputLocationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4011382153B24400AC3BD5 /* InputLocationTests.m */; };
+		3A40113B2153C4CB00AC3BD5 /* InputPoiCategoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A40113A2153C4CB00AC3BD5 /* InputPoiCategoryTests.m */; };
+		3A40113D2153CBA800AC3BD5 /* InputIndicationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A40113C2153CBA800AC3BD5 /* InputIndicationTests.m */; };
+		3A4D721721525B970038ED55 /* InputPointTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D721621525B970038ED55 /* InputPointTests.m */; };
+		3A4D721B215276660038ED55 /* InputCartesianCoordinateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D721A215276660038ED55 /* InputCartesianCoordinateTests.m */; };
 		7ED95D021AB9028C008C4574 /* CDVDebug.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ED95CF21AB9028C008C4574 /* CDVDebug.h */; };
 		7ED95D031AB9028C008C4574 /* CDVJSON_private.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ED95CF31AB9028C008C4574 /* CDVJSON_private.h */; };
 		7ED95D041AB9028C008C4574 /* CDVJSON_private.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED95CF41AB9028C008C4574 /* CDVJSON_private.m */; };
@@ -91,6 +96,29 @@
 		7ED95D581AB9029B008C4574 /* NSDictionary+CordovaPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED95D321AB9029B008C4574 /* NSDictionary+CordovaPreferences.m */; };
 		7ED95D591AB9029B008C4574 /* NSMutableArray+QueueAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ED95D331AB9029B008C4574 /* NSMutableArray+QueueAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7ED95D5A1AB9029B008C4574 /* NSMutableArray+QueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED95D341AB9029B008C4574 /* NSMutableArray+QueueAdditions.m */; };
+		954995F0214F8BBB007F3C28 /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 954995EE214F8BBB007F3C28 /* Constants.h */; };
+		954995F1214F8BBB007F3C28 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 954995EF214F8BBB007F3C28 /* Constants.m */; };
+		954995F2214F8BBB007F3C28 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 954995EF214F8BBB007F3C28 /* Constants.m */; };
+		954995F8214FACD8007F3C28 /* PoiCategoryIconTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 954995F7214FACD8007F3C28 /* PoiCategoryIconTests.m */; };
+		95B14A2B214A402E0073A9E1 /* PointTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B14A2A214A402E0073A9E1 /* PointTests.m */; };
+		95B14A2D214A44800073A9E1 /* AngleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B14A2C214A44800073A9E1 /* AngleTests.m */; };
+		95B14A2F214A45B10073A9E1 /* BoundTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B14A2E214A45B10073A9E1 /* BoundTests.m */; };
+		95B14A33214A46E20073A9E1 /* CartesianCoordinateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B14A32214A46E20073A9E1 /* CartesianCoordinateTests.m */; };
+		95B14A35214A476B0073A9E1 /* CoordinateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B14A34214A476B0073A9E1 /* CoordinateTests.m */; };
+		95B14A37214A47D20073A9E1 /* DimensionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B14A36214A47D20073A9E1 /* DimensionTests.m */; };
+		95B14A39214A488F0073A9E1 /* EventTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B14A38214A488F0073A9E1 /* EventTests.m */; };
+		95B14A3B214A48F80073A9E1 /* FloorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B14A3A214A48F80073A9E1 /* FloorTests.m */; };
+		95B14A3D214A49B30073A9E1 /* indicationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B14A3C214A49B30073A9E1 /* indicationTests.m */; };
+		95B14A3F214A4AED0073A9E1 /* LocationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B14A3E214A4AED0073A9E1 /* LocationTests.m */; };
+		95B14A41214A4CF20073A9E1 /* LocationStatusTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B14A40214A4CF20073A9E1 /* LocationStatusTests.m */; };
+		95B14A43214A4E550073A9E1 /* NavigationProgressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B14A42214A4E550073A9E1 /* NavigationProgressTests.m */; };
+		95B14A45214A50E60073A9E1 /* PoiCategoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B14A44214A50E60073A9E1 /* PoiCategoryTests.m */; };
+		95B14A47214A51BA0073A9E1 /* RouteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B14A46214A51BA0073A9E1 /* RouteTests.m */; };
+		95B14A49214A535A0073A9E1 /* RouteStepTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B14A48214A535A0073A9E1 /* RouteStepTests.m */; };
+		95B14A4B214A54CA0073A9E1 /* ConversionAreaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B14A4A214A54CA0073A9E1 /* ConversionAreaTests.m */; };
+		95B14A4D214A56CE0073A9E1 /* BuildingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B14A4C214A56CE0073A9E1 /* BuildingTests.m */; };
+		95D33B49214B9680000E073E /* PoiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D33B48214B9680000E073E /* PoiTests.m */; };
+		95F6FF5E2153B5E700AE30B5 /* InputFloorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95F6FF5D2153B5E700AE30B5 /* InputFloorTests.m */; };
 		C0C01EB61E3911D50056E6CB /* Cordova.h in Headers */ = {isa = PBXBuildFile; fileRef = C0C01EB41E3911D50056E6CB /* Cordova.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C0C01EBA1E39120F0056E6CB /* libCordova.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A32D7114102E1C006B237C /* libCordova.a */; };
 		C0C01EBB1E39131A0056E6CB /* CDV.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ED95D0F1AB9029B008C4574 /* CDV.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -155,9 +183,7 @@
 		0D884A1221145F820066C765 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0D884A192114634D0066C765 /* SitumCreatorTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SitumCreatorTests.h; sourceTree = "<group>"; };
 		0D884A1B2114634D0066C765 /* SitumCreatorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SitumCreatorTests.m; sourceTree = "<group>"; };
-		0D884A1C2114634D0066C765 /* SitumTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SitumTests.m; sourceTree = "<group>"; };
 		0D884A1D2114634E0066C765 /* TestingHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestingHelper.m; sourceTree = "<group>"; };
-		0D884A1E2114634E0066C765 /* SitumTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SitumTests.h; sourceTree = "<group>"; };
 		0D884A1F2114634E0066C765 /* TestingHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestingHelper.h; sourceTree = "<group>"; };
 		0D884E7C2116FAA20066C765 /* resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = resources; sourceTree = "<group>"; };
 		0DF4AB0621143D5700D81A31 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -175,6 +201,12 @@
 		0DF4AB1521143D5700D81A31 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		0DF4AB1621143D5700D81A31 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		30325A0B136B343700982B63 /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = "<group>"; };
+		3A4011362153B0D500AC3BD5 /* InputCoordinateTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputCoordinateTests.m; sourceTree = "<group>"; };
+		3A4011382153B24400AC3BD5 /* InputLocationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputLocationTests.m; sourceTree = "<group>"; };
+		3A40113A2153C4CB00AC3BD5 /* InputPoiCategoryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputPoiCategoryTests.m; sourceTree = "<group>"; };
+		3A40113C2153CBA800AC3BD5 /* InputIndicationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputIndicationTests.m; sourceTree = "<group>"; };
+		3A4D721621525B970038ED55 /* InputPointTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputPointTests.m; sourceTree = "<group>"; };
+		3A4D721A215276660038ED55 /* InputCartesianCoordinateTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputCartesianCoordinateTests.m; sourceTree = "<group>"; };
 		68A32D7114102E1C006B237C /* libCordova.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCordova.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ED95CF21AB9028C008C4574 /* CDVDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDVDebug.h; sourceTree = "<group>"; };
 		7ED95CF31AB9028C008C4574 /* CDVJSON_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDVJSON_private.h; sourceTree = "<group>"; };
@@ -216,6 +248,28 @@
 		7ED95D321AB9029B008C4574 /* NSDictionary+CordovaPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+CordovaPreferences.m"; sourceTree = "<group>"; };
 		7ED95D331AB9029B008C4574 /* NSMutableArray+QueueAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+QueueAdditions.h"; sourceTree = "<group>"; };
 		7ED95D341AB9029B008C4574 /* NSMutableArray+QueueAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+QueueAdditions.m"; sourceTree = "<group>"; };
+		954995EE214F8BBB007F3C28 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		954995EF214F8BBB007F3C28 /* Constants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		954995F7214FACD8007F3C28 /* PoiCategoryIconTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoiCategoryIconTests.m; sourceTree = "<group>"; };
+		95B14A2A214A402E0073A9E1 /* PointTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PointTests.m; sourceTree = "<group>"; };
+		95B14A2C214A44800073A9E1 /* AngleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AngleTests.m; sourceTree = "<group>"; };
+		95B14A2E214A45B10073A9E1 /* BoundTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BoundTests.m; sourceTree = "<group>"; };
+		95B14A32214A46E20073A9E1 /* CartesianCoordinateTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CartesianCoordinateTests.m; sourceTree = "<group>"; };
+		95B14A34214A476B0073A9E1 /* CoordinateTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoordinateTests.m; sourceTree = "<group>"; };
+		95B14A36214A47D20073A9E1 /* DimensionTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DimensionTests.m; sourceTree = "<group>"; };
+		95B14A38214A488F0073A9E1 /* EventTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventTests.m; sourceTree = "<group>"; };
+		95B14A3A214A48F80073A9E1 /* FloorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FloorTests.m; sourceTree = "<group>"; };
+		95B14A3C214A49B30073A9E1 /* indicationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = indicationTests.m; sourceTree = "<group>"; };
+		95B14A3E214A4AED0073A9E1 /* LocationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationTests.m; sourceTree = "<group>"; };
+		95B14A40214A4CF20073A9E1 /* LocationStatusTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationStatusTests.m; sourceTree = "<group>"; };
+		95B14A42214A4E550073A9E1 /* NavigationProgressTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavigationProgressTests.m; sourceTree = "<group>"; };
+		95B14A44214A50E60073A9E1 /* PoiCategoryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoiCategoryTests.m; sourceTree = "<group>"; };
+		95B14A46214A51BA0073A9E1 /* RouteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RouteTests.m; sourceTree = "<group>"; };
+		95B14A48214A535A0073A9E1 /* RouteStepTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RouteStepTests.m; sourceTree = "<group>"; };
+		95B14A4A214A54CA0073A9E1 /* ConversionAreaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConversionAreaTests.m; sourceTree = "<group>"; };
+		95B14A4C214A56CE0073A9E1 /* BuildingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuildingTests.m; sourceTree = "<group>"; };
+		95D33B48214B9680000E073E /* PoiTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoiTests.m; sourceTree = "<group>"; };
+		95F6FF5D2153B5E700AE30B5 /* InputFloorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputFloorTests.m; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* SitumCordovaPlugin_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SitumCordovaPlugin_Prefix.pch; path = ../../SitumCordovaPlugin_Prefix.pch; sourceTree = "<group>"; };
 		C0C01EB21E3911D50056E6CB /* Cordova.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cordova.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0C01EB41E3911D50056E6CB /* Cordova.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cordova.h; sourceTree = "<group>"; };
@@ -358,14 +412,32 @@
 		0D884A0F21145F820066C765 /* situmcordovaplugintests */ = {
 			isa = PBXGroup;
 			children = (
+				3A4D721521525AB20038ED55 /* InputTests */,
 				0D884E7C2116FAA20066C765 /* resources */,
 				0D884A192114634D0066C765 /* SitumCreatorTests.h */,
 				0D884A1B2114634D0066C765 /* SitumCreatorTests.m */,
-				0D884A1E2114634E0066C765 /* SitumTests.h */,
-				0D884A1C2114634D0066C765 /* SitumTests.m */,
 				0D884A1F2114634E0066C765 /* TestingHelper.h */,
 				0D884A1D2114634E0066C765 /* TestingHelper.m */,
 				0D884A1221145F820066C765 /* Info.plist */,
+				95B14A2A214A402E0073A9E1 /* PointTests.m */,
+				95B14A2C214A44800073A9E1 /* AngleTests.m */,
+				95B14A2E214A45B10073A9E1 /* BoundTests.m */,
+				95B14A4C214A56CE0073A9E1 /* BuildingTests.m */,
+				95B14A32214A46E20073A9E1 /* CartesianCoordinateTests.m */,
+				95B14A34214A476B0073A9E1 /* CoordinateTests.m */,
+				95B14A36214A47D20073A9E1 /* DimensionTests.m */,
+				95B14A38214A488F0073A9E1 /* EventTests.m */,
+				95B14A3A214A48F80073A9E1 /* FloorTests.m */,
+				95B14A3C214A49B30073A9E1 /* indicationTests.m */,
+				95B14A3E214A4AED0073A9E1 /* LocationTests.m */,
+				95B14A40214A4CF20073A9E1 /* LocationStatusTests.m */,
+				95B14A42214A4E550073A9E1 /* NavigationProgressTests.m */,
+				95B14A44214A50E60073A9E1 /* PoiCategoryTests.m */,
+				95B14A46214A51BA0073A9E1 /* RouteTests.m */,
+				95B14A48214A535A0073A9E1 /* RouteStepTests.m */,
+				95B14A4A214A54CA0073A9E1 /* ConversionAreaTests.m */,
+				95D33B48214B9680000E073E /* PoiTests.m */,
+				954995F7214FACD8007F3C28 /* PoiCategoryIconTests.m */,
 			);
 			path = situmcordovaplugintests;
 			sourceTree = "<group>";
@@ -387,8 +459,24 @@
 				0DF4AB1421143D5700D81A31 /* SitumPlugin.m */,
 				0DF4AB1521143D5700D81A31 /* ViewController.h */,
 				0DF4AB1621143D5700D81A31 /* ViewController.m */,
+				954995EE214F8BBB007F3C28 /* Constants.h */,
+				954995EF214F8BBB007F3C28 /* Constants.m */,
 			);
 			path = situmcordovaplugin;
+			sourceTree = "<group>";
+		};
+		3A4D721521525AB20038ED55 /* InputTests */ = {
+			isa = PBXGroup;
+			children = (
+				3A4D721621525B970038ED55 /* InputPointTests.m */,
+				3A4D721A215276660038ED55 /* InputCartesianCoordinateTests.m */,
+				3A4011362153B0D500AC3BD5 /* InputCoordinateTests.m */,
+				3A4011382153B24400AC3BD5 /* InputLocationTests.m */,
+				95F6FF5D2153B5E700AE30B5 /* InputFloorTests.m */,
+				3A40113A2153C4CB00AC3BD5 /* InputPoiCategoryTests.m */,
+				3A40113C2153CBA800AC3BD5 /* InputIndicationTests.m */,
+			);
+			path = InputTests;
 			sourceTree = "<group>";
 		};
 		7ED95CF11AB9028C008C4574 /* Private */ = {
@@ -515,6 +603,7 @@
 				7ED95D571AB9029B008C4574 /* NSDictionary+CordovaPreferences.h in Headers */,
 				0D5CFD65212C275E00C6E436 /* CDVUIWebViewDelegate.h in Headers */,
 				7ED95D451AB9029B008C4574 /* CDVPlugin.h in Headers */,
+				954995F0214F8BBB007F3C28 /* Constants.h in Headers */,
 				7ED95D4C1AB9029B008C4574 /* CDVURLProtocol.h in Headers */,
 				7ED95D3A1AB9029B008C4574 /* CDVCommandDelegate.h in Headers */,
 				7ED95D391AB9029B008C4574 /* CDVAvailabilityDeprecated.h in Headers */,
@@ -670,13 +759,39 @@
 				0D5CFD52212C275E00C6E436 /* CDVGestureHandler.m in Sources */,
 				0D5CFD5D212C275E00C6E436 /* CDVLocalStorage.m in Sources */,
 				0D884A222114634E0066C765 /* TestingHelper.m in Sources */,
-				0D884A212114634E0066C765 /* SitumTests.m in Sources */,
+				95B14A3F214A4AED0073A9E1 /* LocationTests.m in Sources */,
+				95B14A43214A4E550073A9E1 /* NavigationProgressTests.m in Sources */,
 				0D5CFD67212C275E00C6E436 /* CDVUIWebViewEngine.m in Sources */,
+				95B14A3D214A49B30073A9E1 /* indicationTests.m in Sources */,
+				95B14A2D214A44800073A9E1 /* AngleTests.m in Sources */,
 				0D5CFD64212C275E00C6E436 /* CDVUIWebViewNavigationDelegate.m in Sources */,
+				95B14A37214A47D20073A9E1 /* DimensionTests.m in Sources */,
+				95B14A41214A4CF20073A9E1 /* LocationStatusTests.m in Sources */,
+				954995F8214FACD8007F3C28 /* PoiCategoryIconTests.m in Sources */,
+				954995F2214F8BBB007F3C28 /* Constants.m in Sources */,
+				95B14A35214A476B0073A9E1 /* CoordinateTests.m in Sources */,
+				95B14A49214A535A0073A9E1 /* RouteStepTests.m in Sources */,
+				3A4011392153B24400AC3BD5 /* InputLocationTests.m in Sources */,
+				95B14A4D214A56CE0073A9E1 /* BuildingTests.m in Sources */,
+				95F6FF5E2153B5E700AE30B5 /* InputFloorTests.m in Sources */,
 				0D5CFD58212C275E00C6E436 /* CDVHandleOpenURL.m in Sources */,
+				95B14A39214A488F0073A9E1 /* EventTests.m in Sources */,
+				95D33B49214B9680000E073E /* PoiTests.m in Sources */,
+				95B14A2F214A45B10073A9E1 /* BoundTests.m in Sources */,
+				3A40113D2153CBA800AC3BD5 /* InputIndicationTests.m in Sources */,
+				95B14A47214A51BA0073A9E1 /* RouteTests.m in Sources */,
 				0D5CFD61212C275E00C6E436 /* CDVUIWebViewDelegate.m in Sources */,
+				95B14A33214A46E20073A9E1 /* CartesianCoordinateTests.m in Sources */,
+				3A4011372153B0D500AC3BD5 /* InputCoordinateTests.m in Sources */,
+				95B14A4B214A54CA0073A9E1 /* ConversionAreaTests.m in Sources */,
+				3A40113B2153C4CB00AC3BD5 /* InputPoiCategoryTests.m in Sources */,
+				95B14A2B214A402E0073A9E1 /* PointTests.m in Sources */,
+				3A4D721B215276660038ED55 /* InputCartesianCoordinateTests.m in Sources */,
 				0D884A202114634E0066C765 /* SitumCreatorTests.m in Sources */,
+				3A4D721721525B970038ED55 /* InputPointTests.m in Sources */,
+				95B14A3B214A48F80073A9E1 /* FloorTests.m in Sources */,
 				0D5CFD54212C275E00C6E436 /* CDVIntentAndNavigationFilter.m in Sources */,
+				95B14A45214A50E60073A9E1 /* PoiCategoryTests.m in Sources */,
 				0D5CFD5B212C275E00C6E436 /* CDVLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -696,6 +811,7 @@
 				0DF4AB1921143D5800D81A31 /* main.m in Sources */,
 				0D5CFD57212C275E00C6E436 /* CDVHandleOpenURL.m in Sources */,
 				0D5CFD53212C275E00C6E436 /* CDVIntentAndNavigationFilter.m in Sources */,
+				954995F1214F8BBB007F3C28 /* Constants.m in Sources */,
 				7ED95D511AB9029B008C4574 /* CDVViewController.m in Sources */,
 				7ED95D581AB9029B008C4574 /* NSDictionary+CordovaPreferences.m in Sources */,
 				7ED95D371AB9029B008C4574 /* CDVAppDelegate.m in Sources */,
