@@ -33,13 +33,12 @@
     // Create the object to convert and test
     NSString *filename =  @"indication1";
     NSDictionary *jsonIndication = [TestingHelper dataFromJSONFileNamed: filename inDirectory : _pointFilePath];
-    // TODO: This conversion doesn't set isOutdoor
     SITIndication* convertedIndication = [[SitumLocationWrapper shared] indicationJsonObjectToIndication: jsonIndication];
     
     // Create the reference valid object to compare against
     SITIndication* referenceIndication = [SitumCreatorTests createIndication];
     
-    // Compare both points
+    // Compare both indications
     [_helper assertIndication: convertedIndication isEqualToIndication: referenceIndication];
 }
 

@@ -39,7 +39,7 @@
     // Create the reference valid object to compare against
     SITPOICategory* referenceCategory = [SitumCreatorTests createPoiCategory];
     
-    // Compare both points
+    // Compare both poiCategory
     [_helper assertPoiCategory: convertedCategory isEqualToPoiCategory: referenceCategory];
 }
 

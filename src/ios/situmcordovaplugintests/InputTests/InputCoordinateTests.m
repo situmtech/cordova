@@ -33,7 +33,6 @@
     // Create the object to convert and test
     NSString *filename =  @"coordinate1";
     NSDictionary *jsonCoordinate = [TestingHelper dataFromJSONFileNamed: filename inDirectory : _filePath];
-    // TODO: This conversion doesn't set isOutdoor
     CLLocationCoordinate2D convertedCoordinate = [[SitumLocationWrapper shared] coordinateJsonObjectToCoordinate: jsonCoordinate];
     
     // Create the reference valid object to compare against

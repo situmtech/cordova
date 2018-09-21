@@ -39,7 +39,7 @@
     // Create the reference valid object to compare against
     SITLocation* referenceLocation = [SitumCreatorTests createLocationWithBuildingFloorAndCartesianCoordinates];
     
-    // Compare both coordinates
+    // Compare both locations
     [_helper assertLocation: convertedLocation isEqualToLocation: referenceLocation];
 }
 
@@ -52,7 +52,7 @@
     // Create the reference valid object to compare against
     SITLocation* referenceLocation = [SitumCreatorTests createLocationWithCoordinate];
     
-    // Compare both coordinates
+    // Compare both locations
     [_helper assertLocation: convertedLocation isEqualToLocation: referenceLocation];
 }
 
@@ -65,7 +65,7 @@
     // Create the reference valid object to compare against
     SITLocation* referenceLocation = [SitumCreatorTests createLocationWithBuildingAndCoordinate];
     
-    // Compare both coordinates
+    // Compare both locations
     [_helper assertLocation: convertedLocation isEqualToLocation: referenceLocation];
 }
 
@@ -78,7 +78,7 @@
     // Create the reference valid object to compare against
     SITLocation* referenceLocation = [SitumCreatorTests locationWithCartesianBearing];
     
-    // Compare both coordinates
+    // Compare both locations
     [_helper assertLocation: convertedLocation isEqualToLocation: referenceLocation];
 }
 
@@ -91,7 +91,7 @@
     // Create the reference valid object to compare against
     SITLocation* referenceLocation = [SitumCreatorTests locationWithoutCartesianBearing];
     
-    // Compare both coordinates
+    // Compare both locations
     [_helper assertLocation: convertedLocation isEqualToLocation: referenceLocation];
 }
 
@@ -104,7 +104,7 @@
     // Create the reference valid object to compare against
     SITLocation* referenceLocation = [SitumCreatorTests locationWithBearing];
     
-    // Compare both coordinates
+    // Compare both locations
     [_helper assertLocation: convertedLocation isEqualToLocation: referenceLocation];
 }
 
@@ -117,7 +117,7 @@
     // Create the reference valid object to compare against
     SITLocation* referenceLocation = [SitumCreatorTests locationWithouthBearing];
     
-    // Compare both coordinates
+    // Compare both locations
     [_helper assertLocation: convertedLocation isEqualToLocation: referenceLocation];
 }
 
@@ -130,7 +130,7 @@
     // Create the reference valid object to compare against
     SITLocation* referenceLocation = [SitumCreatorTests indoorLocationWithIndoorBearingQualityLow];
     
-    // Compare both coordinates
+    // Compare both locations
     [_helper assertLocation: convertedLocation isEqualToLocation: referenceLocation];
 }
 
@@ -143,7 +143,7 @@
     // Create the reference valid object to compare against
     SITLocation* referenceLocation = [SitumCreatorTests indoorLocationWithIndoorBearingQualityHigh];
     
-    // Compare both coordinates
+    // Compare both locations
     [_helper assertLocation: convertedLocation isEqualToLocation: referenceLocation];
 }
 
@@ -156,7 +156,7 @@
     // Create the reference valid object to compare against
     SITLocation* referenceLocation = [SitumCreatorTests outdoorLocation];
     
-    // Compare both coordinates
+    // Compare both locations
     [_helper assertLocation: convertedLocation isEqualToLocation: referenceLocation];
 }
 
