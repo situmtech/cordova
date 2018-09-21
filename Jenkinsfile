@@ -45,6 +45,7 @@ node('vm1-docker') {
     stage('Checkout SCM') {
         checkout scm
     }
+    
     try {
         stage('JS test') {
             def kubectl = docker.image('node:10.6-slim')
@@ -56,11 +57,11 @@ node('vm1-docker') {
         }
 
         stage('Generate JSDoc') {
-        def kubectl = docker.image('node:10.6-slim')
-        kubectl.pull()
-        kubectl.inside() {
-            sh "npm run jsdoc"
-        }
+            def kubectl = docker.image('node:10.6-slim')
+            kubectl.pull()
+            kubectl.inside() {
+                sh "npm run jsdoc"
+            }
         }
 
         stage('Archive artifacts'){
@@ -73,7 +74,10 @@ node('vm1-docker') {
         }
     } finally {
         stage('Clean repo'){
-            sh "tests/scripts/self-destruct.sh"
+            def kubectl = docker.image('node:10.6-slim')
+            kubectl.inside("-u 0") {
+                sh "tests/scripts/self-destruct.sh"
+            }
         }
     }
 }
