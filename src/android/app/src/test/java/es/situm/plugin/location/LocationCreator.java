@@ -26,12 +26,14 @@ public class LocationCreator {
 
     public Location createLocationWithCoordinate () {
         Point point = new Point(new Coordinate(8.6, 10.5));
-        return new Location.Builder(14676784, "TEST_PROVIDER", point, 5).build();
+        return new Location.Builder(14676784, "TEST_PROVIDER", point, 5)
+                .bearing(Angle.fromRadians(0)).build();
     }
 
     public Location createLocationWithBuildingAndCoordinate() {
         Point point = new Point("101", new Coordinate(8.6, 10.5));
         return new es.situm.sdk.model.location.Location.Builder(14676784, "TEST_PROVIDER", point, 5)
+                .bearing(Angle.fromRadians(0))
                 .build();
     }
 

@@ -2,7 +2,7 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     id="situm-cordova-plugin-official"
-    version="1.8.2">
+    version="1.8.3">
     <name>Situm Cordova plugin Official</name>
     <description>This is the stable branch.</description>
     <license>MIT</license>
@@ -73,8 +73,10 @@
 
         <header-file src="src/ios/situmcordovaplugin/SitumPlugin.h" />
         <header-file src="src/ios/situmcordovaplugin/SitumLocationWrapper.h" />
+        <source-file src="src/ios/situmcordovaplugin/Constants.h" />
         <source-file src="src/ios/situmcordovaplugin/SitumPlugin.m" />
         <source-file src="src/ios/situmcordovaplugin/SitumLocationWrapper.m" />
+        <source-file src="src/ios/situmcordovaplugin/Constants.m" />
 
 		<!--<pods-config ios-min-version="9.0" use-frameworks="false">
 	    </pods-config>

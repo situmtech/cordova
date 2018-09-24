@@ -100,6 +100,30 @@ typedef NS_ENUM(int, SITLocationProvider){
 
 /**
  Constructor.
+ 
+ @param buildingId Unique identifier of the building in which you want to locate a user.
+ 
+ @return Initialized SITLocationRequest object.
+ */
+- (instancetype) initWithBuildingId: (NSString*) buildingId;
+
+/**
+Setter.
+ 
+ @param useDeadReckoning Boolean value indicating if deadReckoning should be used.
+ */
+- (void) setUseDeadReckoning: (BOOL) useDeadReckoning;
+
+
+/**
+ Setter.
+ 
+ @param updateInterval Boolean value indicating how often the position should be upload to realtime.
+ */
+- (void) setUpdateInterval: (NSInteger) updateInterval;
+
+/**
+ Constructor.
 
  @param priority one of SITLocationPriority
  @param provider one of SITLocationProvider

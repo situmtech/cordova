@@ -7,6 +7,7 @@
 //
 
 #import "SitumCreatorTests.h"
+#import "Constants.h"
 
 @implementation SitumCreatorTests
 
@@ -43,6 +44,29 @@
     return Bounds;
 }
 
+//building1.json
++ (SITBuilding *) createBuilding {
+    NSDictionary<NSString*, NSString*> *customFields = [[NSDictionary alloc] initWithObjectsAndKeys:
+        @"http://testUrl.com", @"notification_url",
+        @"1234", @"pin",
+        @"Trilateration", @"positioning-mode",
+        @"56C98FAD0C9, D5784F5A73CA", @"filter-beacon",
+        @"7f6cc424-aae2-47fd-b5e9-476ad15e4733, fa4b8d11-9c13-4ad9-9859-cecd41c58000, 1876b5fa-3e4b-4d09-9252-627032fe9312", @"beacons_uuids",
+        @"True", @"asset-localization",
+        nil] ;
+    CLLocationCoordinate2D center = CLLocationCoordinate2DMake(42.8723472943445, -8.56325268745422);
+    SITDimensions *dimensions = [[SITDimensions alloc] initWithWidth:71.0686153823893 height:42.6106416714803];
+    SITAngle *angle = [[SITAngle alloc] initWithRadians:-3.31881803875501];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:kDateFormat];
+    NSDate *createdAt = [dateFormatter dateFromString:@"Wed Jan 04 18:41:43 +0100 2017"];
+    NSDate *updatedAt = [dateFormatter dateFromString:@"Wed Sep 12 12:10:25 +0200 2018"];
+    
+    SITBuilding *building = [[SITBuilding alloc] initWithIdentifier:@"1051" createdAt:createdAt updatedAt:updatedAt customFields:customFields userIdentifier:@"-1" name:@"Ed. Emprendia - Situm" center:center info:@"<p>http://Prueba/actualizador/recibirAlarmas</p>" dimensions:dimensions rotation:angle pictureURL:nil pictureThumbURL:nil];
+    building.infoHTML = @"<p>http://Prueba/actualizador/recibirAlarmas</p>";
+    return building;
+}
+
 //cartesianCoordinate1.json
 + (SITCartesianCoordinate *) createCartesianCoordinate {
     SITCartesianCoordinate *cartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:5 y:7];
@@ -65,21 +89,34 @@
 + (SITEvent *) createEvent {
     SITEvent *event = [[SITEvent alloc] init];
     event.identifier = [NSNumber numberWithDouble:12];
+    event.customFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"en", @"lang", nil];
     event.info = @"<p>Test html</p>";
-    //building identifier
-    event.project_identifier = [NSNumber numberWithDouble:1];;
+    event.project_identifier = @(1);
+    SITCircularArea *conversion = [SITCircularArea new];
+    CLLocationCoordinate2D conversionCenterCoordinate = CLLocationCoordinate2DMake(50, 100);
+    SITCartesianCoordinate *conversionCenterCartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:5 y:10];
+    SITPoint *conversionCenterPoint = [[SITPoint alloc] initWithCoordinate:conversionCenterCoordinate buildingIdentifier:@"1" floorIdentifier:@"1000" cartesianCoordinate:conversionCenterCartesianCoordinate];
+    conversion.center = conversionCenterPoint;
+    conversion.radius = @(3);
+    event.conversion = conversion;
+    SITCircularArea *trigger = [SITCircularArea new];
+    CLLocationCoordinate2D triggerCenterCoordinate = CLLocationCoordinate2DMake(25, 50);
+    SITCartesianCoordinate *triggerCenterCartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:2 y:5];
+    SITPoint *triggerCenterPoint = [[SITPoint alloc] initWithCoordinate:triggerCenterCoordinate buildingIdentifier:@"1" floorIdentifier:@"1000" cartesianCoordinate:triggerCenterCartesianCoordinate];
+    trigger.center = triggerCenterPoint;
+    trigger.radius = @(6);
+    event.trigger = trigger;
+    event.name = @"Event";
     return event;
 }
 
 //floor1.json
 + (SITFloor *) createFloorWithAltitude {
     SITFloor *floor = [[SITFloor alloc] init];
-    /*NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:DATEFORMAT];
-    
-    floor.createdAt = [dateFormatter dateFromString:floor.createdAt];
-    
-    floor.updatedAt = [dateFormatter dateFromString:floor.updatedAt];*/
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:kDateFormat];
+    floor.createdAt = [dateFormatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    floor.updatedAt = [dateFormatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
     floor.altitude = 2.5;
     floor.scale = 10.2;
     floor.mapURL = [[SITURL alloc] initWithDirection:@"TEST_URL"];
@@ -93,10 +130,10 @@
 + (SITFloor *) createFloorWithoutAltitude {
     SITFloor *floor = [[SITFloor alloc] init];
     
-    /*NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:DATEFORMAT];
-    floor.createdAt = [dateFormatter dateFromString:floor.createdAt];
-    floor.updatedAt = [dateFormatter dateFromString:floor.updatedAt];*/
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:kDateFormat];
+    floor.createdAt = [dateFormatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    floor.updatedAt = [dateFormatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
     
     floor.altitude = 0;
     floor.scale = 10.2;
@@ -131,10 +168,11 @@
     SITPoint *position  = [[SITPoint alloc]  initWithCoordinate:coordinate buildingIdentifier:@"101" floorIdentifier:@"12" cartesianCoordinate: cartesianCoordinate];
     float bearing = 0; //degrees
     float cartesianBearing = 0; //radians
-    kSITQualityValues quality = kSITLow;
+    kSITQualityValues quality = kSITHigh;
     NSString *provider = @"TEST_PROVIDER";
     float accuracy = 5;
     SITLocation *location = [[SITLocation alloc] initWithTimestamp:timestamp position:position bearing: bearing cartesianBearing:cartesianBearing quality:quality accuracy:accuracy provider:provider];
+    location.bearingQuality = kSITLow;
     return location;
 }
 
@@ -147,10 +185,11 @@
     position.floorIdentifier = @"-1";
     float bearing = 0; //degrees
     float cartesianBearing = 0; //radians
-    kSITQualityValues quality = kSITLow;
+    kSITQualityValues quality = kSITHigh;
     NSString *provider = @"TEST_PROVIDER";
     float accuracy = 5;
     SITLocation *location = [[SITLocation alloc] initWithTimestamp:timestamp position:position bearing: bearing cartesianBearing:cartesianBearing quality:quality accuracy:accuracy provider:provider];
+    location.bearingQuality = kSITHigh;
     return location;
 }
 
@@ -161,10 +200,11 @@
     SITPoint *position  = [[SITPoint alloc]  initWithCoordinate:coordinate buildingIdentifier:@"101"];
     float bearing = 0; //degrees
     float cartesianBearing = 0; //radians
-    kSITQualityValues quality = kSITLow;
+    kSITQualityValues quality = kSITHigh;
     NSString *provider = @"TEST_PROVIDER";
     float accuracy = 5;
     SITLocation *location = [[SITLocation alloc] initWithTimestamp:timestamp position:position bearing: bearing cartesianBearing:cartesianBearing quality:quality accuracy:accuracy provider:provider];
+    location.bearingQuality = kSITHigh;
     return location;
 }
 
@@ -180,6 +220,7 @@
     NSString *provider = @"TEST_PROVIDER";
     float accuracy = 5;
     SITLocation *location = [[SITLocation alloc] initWithTimestamp:timestamp position:position bearing: bearing cartesianBearing:cartesianBearing quality:quality accuracy:accuracy provider:provider];
+    location.bearingQuality = kSITHigh;
     return location;
 }
 
@@ -192,10 +233,11 @@
     SITPoint *position  = [[SITPoint alloc]  initWithCoordinate:coordinate buildingIdentifier:@"101" floorIdentifier:@"12" cartesianCoordinate: cartesianCoordinate];
     float bearing = 0; //degrees
     float cartesianBearing = 0; //radians
-    kSITQualityValues quality = kSITLow;
+    kSITQualityValues quality = kSITHigh;
     NSString *provider = @"TEST_PROVIDER";
     float accuracy = 5;
     SITLocation *location = [[SITLocation alloc] initWithTimestamp:timestamp position:position bearing: bearing cartesianBearing:cartesianBearing quality:quality accuracy:accuracy provider:provider];
+    location.bearingQuality = kSITLow;
     return location;
 }
 
@@ -206,7 +248,7 @@
     SITPoint *position  = [[SITPoint alloc]  initWithCoordinate:coordinate buildingIdentifier:@"-1"];
     float bearing = 92; //degrees
     float cartesianBearing = 0; //radians
-    kSITQualityValues quality = kSITLow;
+    kSITQualityValues quality = kSITHigh;
     NSString *provider = @"TEST_PROVIDER";
     float accuracy = 5;
     SITLocation *location = [[SITLocation alloc] initWithTimestamp:timestamp position:position bearing: bearing cartesianBearing:cartesianBearing quality:quality accuracy:accuracy provider:provider];
@@ -221,10 +263,11 @@
     SITPoint *position  = [[SITPoint alloc]  initWithCoordinate:coordinate buildingIdentifier:@"101" floorIdentifier:@"12" cartesianCoordinate: cartesianCoordinate];
     float bearing = 0; //degrees
     float cartesianBearing = 0; //radians
-    kSITQualityValues quality = kSITLow;
+    kSITQualityValues quality = kSITHigh;
     NSString *provider = @"TEST_PROVIDER";
     float accuracy = 5;
     SITLocation *location = [[SITLocation alloc] initWithTimestamp:timestamp position:position bearing: bearing cartesianBearing:cartesianBearing quality:quality accuracy:accuracy provider:provider];
+    location.bearingQuality = kSITLow;
     return location;
 }
 
@@ -236,10 +279,11 @@
     SITPoint *position  = [[SITPoint alloc]  initWithCoordinate:coordinate buildingIdentifier:@"101" floorIdentifier:@"12" cartesianCoordinate: cartesianCoordinate];
     float bearing = 92; //degrees
     float cartesianBearing = 2; //radians
-    kSITQualityValues quality = kSITLow;
+    kSITQualityValues quality = kSITHigh;
     NSString *provider = @"TEST_PROVIDER";
     float accuracy = 5;
     SITLocation *location = [[SITLocation alloc] initWithTimestamp:timestamp position:position bearing: bearing cartesianBearing:cartesianBearing quality:quality accuracy:accuracy provider:provider];
+    location.bearingQuality = kSITLow;
     return location;
 }
 
@@ -262,8 +306,7 @@
 + (SITLocation *) outdoorLocation {
     NSTimeInterval timestamp = 14676784;
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(8.6, 10.5);
-    SITCartesianCoordinate *cartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:0 y:0];
-    SITPoint *position  = [[SITPoint alloc]  initWithCoordinate:coordinate buildingIdentifier:@"-1" floorIdentifier:@"-1" cartesianCoordinate: cartesianCoordinate];
+    SITPoint *position  = [[SITPoint alloc]  initWithCoordinate:coordinate buildingIdentifier:@"-1"];
     float bearing = 92; //degrees
     float cartesianBearing = 0; //radians
     kSITQualityValues quality = kSITHigh;
@@ -422,6 +465,152 @@
     return navigationProgress;
 }
 
+//poi1.json
++ (SITPOI *) createOutdoorPoiWithCategory {
+    SITPOICategory *category = [SITPOICategory new];
+    category.code = @"situm-no-category";
+    SITMultilanguageString *string = [[SITMultilanguageString alloc] initWithValue:@"Sin categoría" defaultLocale:[NSLocale localeWithLocaleIdentifier:@"es_ES"]];
+    category.name = string;
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(5, 2);
+    SITPoint *point = [[SITPoint alloc] initWithCoordinate:coordinate buildingIdentifier:@"101"];
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    [formatter setDateFormat:kDateFormat];
+    NSDate *createdAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    NSDate *updatedAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    
+    SITPOI *poi = [[SITPOI alloc] init];
+    [poi setValue:point
+           forKey:@"outdoorPosition"];
+    poi.category = category;
+    poi.infoHTML = @"TEST_INFO";
+    poi.name = @"TEST_NAME";
+    poi.identifier = @"-1";
+    poi.createdAt = createdAt;
+    poi.updatedAt = updatedAt;
+    poi.buildingIdentifier = @"101";
+    return poi;
+}
+
+//poi2.json
++ (SITPOI *) createPoiWithBuildingFloorAndCoordinateWithCategory {
+    SITCartesianCoordinate *cartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:2 y:9];
+    SITBuilding *building = [[SITBuilding alloc] init];
+    building.identifier = @"101";
+    SITPoint *point = [[SITPoint alloc] initWithBuilding:building floorIdentifier:@"12" cartesianCoordinate:cartesianCoordinate];
+    
+    SITPOICategory *category = [SITPOICategory new];
+    category.code = @"situm-no-category";
+    SITMultilanguageString *string = [[SITMultilanguageString alloc] initWithValue:@"Sin categoría" defaultLocale:[NSLocale localeWithLocaleIdentifier:@"es_ES"]];
+    category.name = string;
+    
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    [formatter setDateFormat:kDateFormat];
+    NSDate *createdAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    NSDate *updatedAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    
+    SITPOI *poi = [SITPOI new];
+    [poi setValue:point
+           forKey:@"indoorPosition"];
+    poi.category = category;
+    poi.infoHTML = @"TEST_INFO";
+    poi.name = @"TEST_NAME";
+    poi.identifier = @"-1";
+    poi.createdAt = createdAt;
+    poi.updatedAt = updatedAt;
+    poi.buildingIdentifier = @"101";
+    return poi;
+}
+
+//poi3.json
++ (SITPOI *) createPoiWithCoordinateAndBuildingId {
+    SITPOICategory *category = [SITPOICategory new];
+    category.code = @"situm-no-category";
+    SITMultilanguageString *string = [[SITMultilanguageString alloc] initWithValue:@"Sin categoría" defaultLocale:[NSLocale localeWithLocaleIdentifier:@"es_ES"]];
+    category.name = string;
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(5, 7);
+    SITPoint *point = [[SITPoint alloc] initWithCoordinate:coordinate buildingIdentifier:@"101"];
+    
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    [formatter setDateFormat:kDateFormat];
+    NSDate *createdAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    NSDate *updatedAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    
+    SITPOI *poi = [[SITPOI alloc] init];
+    [poi setValue:point
+           forKey:@"outdoorPosition"];
+    poi.category = category;
+    poi.infoHTML = @"TEST_INFO";
+    poi.name = @"TEST_NAME";
+    poi.identifier = @"-1";
+    poi.createdAt = createdAt;
+    poi.updatedAt = updatedAt;
+    poi.buildingIdentifier = @"101";
+    return poi;
+}
+
+//poi4.json
++ (SITPOI *) createPoiWithBuildingFloorCoordinateAndCartesian {
+    SITCartesianCoordinate *cartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:2 y:9];
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(37, 45);
+    SITBuilding *building = [[SITBuilding alloc] init];
+    building.identifier = @"101";
+    SITPoint *point = [[SITPoint alloc] initWithCoordinate:coordinate buildingIdentifier:@"101" floorIdentifier:@"12" cartesianCoordinate:cartesianCoordinate];
+    
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    [formatter setDateFormat:kDateFormat];
+    NSDate *createdAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    NSDate *updatedAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    
+    SITPOICategory *category = [SITPOICategory new];
+    category.code = @"situm-no-category";
+    SITMultilanguageString *string = [[SITMultilanguageString alloc] initWithValue:@"Sin categoría" defaultLocale:[NSLocale localeWithLocaleIdentifier:@"es_ES"]];
+    category.name = string;
+    
+    SITPOI *poi = [SITPOI new];
+    [poi setValue:point
+           forKey:@"indoorPosition"];
+    poi.category = category;
+    poi.infoHTML = @"TEST_INFO";
+    poi.name = @"TEST_NAME";
+    poi.identifier = @"-1";
+    poi.createdAt = createdAt;
+    poi.updatedAt = updatedAt;
+    poi.buildingIdentifier = @"101";
+    poi.customFields = [[NSDictionary alloc] initWithObjectsAndKeys:@"test", @"test_field", @"101", @"building", nil];
+    return poi;
+}
+
+//poi5.json
++ (SITPOI *) createPoiWithBuildingFloorAndCoordinates {
+    SITCartesianCoordinate *cartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:2 y:9];
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(37.4534534534,54.65464564534);
+    SITBuilding *building = [[SITBuilding alloc] init];
+    building.identifier = @"101";
+    SITPoint *point = [[SITPoint alloc] initWithCoordinate:coordinate buildingIdentifier:@"101" floorIdentifier:@"12" cartesianCoordinate:cartesianCoordinate];
+    
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    [formatter setDateFormat:kDateFormat];
+    NSDate *createdAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    NSDate *updatedAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    
+    SITPOICategory *category = [SITPOICategory new];
+    category.code = @"situm-no-category";
+    SITMultilanguageString *string = [[SITMultilanguageString alloc] initWithValue:@"Sin categoría" defaultLocale:[NSLocale localeWithLocaleIdentifier:@"es_ES"]];
+    category.name = string;
+    
+    SITPOI *poi = [SITPOI new];
+    [poi setValue:point
+           forKey:@"indoorPosition"];
+    poi.category = category;
+    poi.infoHTML = @"TEST_INFO";
+    poi.name = @"TEST_NAME";
+    poi.createdAt = createdAt;
+    poi.updatedAt = updatedAt;
+    poi.buildingIdentifier = @"101";
+    poi.identifier = @"-1";
+    return poi;
+}
+
 //poiCategory1.json
 + (SITPOICategory *) createPoiCategory {
     SITPOICategory *category = [[SITPOICategory alloc] init];
@@ -431,6 +620,14 @@
     category.selectedIconURL = [[SITURL alloc] initWithDirection:@"TEST_URL"];
     category.iconURL = [[SITURL alloc] initWithDirection:@"TEST_URL"];
     return category;
+}
+
++ (UIImage *) createPoiCategoryIcon {
+    NSString *filePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"poiCategoryIcon1"
+                                                                          ofType:@"png"
+                                                                     inDirectory:@"resources/poiCategoryIcon"];
+    UIImage *image = [UIImage imageWithContentsOfFile:filePath];
+    return image;
 }
 
 //point1.json
