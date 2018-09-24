@@ -73,8 +73,10 @@
 
         <header-file src="src/ios/situmcordovaplugin/SitumPlugin.h" />
         <header-file src="src/ios/situmcordovaplugin/SitumLocationWrapper.h" />
+        <source-file src="src/ios/situmcordovaplugin/Constants.h" />
         <source-file src="src/ios/situmcordovaplugin/SitumPlugin.m" />
         <source-file src="src/ios/situmcordovaplugin/SitumLocationWrapper.m" />
+        <source-file src="src/ios/situmcordovaplugin/Constants.m" />
 
 		<!--<pods-config ios-min-version="9.0" use-frameworks="false">
 	    </pods-config>
