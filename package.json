@@ -1,6 +1,6 @@
 {
   "name": "situm-cordova-plugin-official",
-  "version": "1.8.2",
+  "version": "1.8.3",
   "cordova": {
     "id": "situm-cordova-plugin-official",
     "platforms": [
@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/situmtech/situm-cordova-plugin#readme",
   "dependencies": {
-    "cordova-common": "^2.2.1",
+    "cordova-common": "^2.2.5",
     "describe": "^1.2.0",
     "q": "^1.5.1",
     "tui-jsdoc-template": "^1.2.2"
