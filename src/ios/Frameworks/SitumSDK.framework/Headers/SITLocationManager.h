@@ -22,6 +22,13 @@
  */
 @interface SITLocationManager : NSObject <SITLocationInterface>
 
+typedef NS_ENUM(NSInteger, SITRealtimeUpdateInterval) {
+    kSITUpdateIntervalRealtime = 1,
+    kSITUpdateIntervalFast = 5,
+    kSITUpdateIntervalNormal = 15,
+    kSITUpdateIntervalSlow = 25
+};
+
 - (void) updateFromDeadReckoningWithX: (float) x
                                     y: (float) y
                                   yaw: (float) yaw;
