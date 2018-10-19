@@ -359,6 +359,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     NSDictionary *buildingJO;
     
     NSNumber *useDeadReckoning = nil;
+    NSNumber *useGps = nil;
     NSString *buildingId;
     
 /*
@@ -373,6 +374,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
             NSDictionary *requestJO = (NSDictionary*)[params objectAtIndex:1];
             buildingId = [[requestJO objectForKey:@"buildingIdentifier"] stringValue];
             useDeadReckoning = [requestJO objectForKey: @"useDeadReckoning"];
+            useGps = [requestJO objectForKey: @"useGps"];
         }
     } else {
         buildingJO = (NSDictionary*)params;
@@ -392,6 +394,9 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
         locationRequest = [[SITLocationRequest alloc] initWithPriority:kSITHighAccuracy provider:kSITHybridProvider updateInterval:2 buildingID:buildingId operationQueue:[NSOperationQueue mainQueue] useDeadReckoning:[useDeadReckoning boolValue] options:nil];
     } else {
         locationRequest = [[SITLocationRequest alloc] initWithPriority:kSITHighAccuracy provider:kSITHybridProvider updateInterval:2 buildingID:buildingId operationQueue:[NSOperationQueue mainQueue] options:nil];
+    }
+    if(useGps != nil) {
+        [locationRequest setUseGps:[useGps boolValue]];
     }
      
     [[SITLocationManager sharedInstance] requestLocationUpdates:locationRequest];
