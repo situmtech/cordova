@@ -47,4 +47,29 @@
     [_helper assertLocationRequest: convertedLocationRequest isEqualToLocationRequest: referenceLocationRequest];
 }
 
+- (void) testLocationRequestWithoutGpsNorDeadReckoning {
+    // Create the object to convert and test
+    NSString *filename =  @"locationRequest2";
+    NSArray *jsonLocationRequest = [TestingHelper dataFromJSONFileNamed: filename inDirectory : _pointFilePath];
+    SITLocationRequest* convertedLocationRequest = [[SitumLocationWrapper shared] jsonObjectToLocationRequest: jsonLocationRequest];
+    
+    // Create the reference valid object to compare against
+    SITLocationRequest* referenceLocationRequest = [SitumCreatorTests createLocationRequestWithoutGpsNorDeadReckoning];
+    
+    // Compare both indications
+    [_helper assertLocationRequest: convertedLocationRequest isEqualToLocationRequest: referenceLocationRequest];
+}
+
+- (void) testLocationRequestWithGpsAndDeadReckoning {
+    // Create the object to convert and test
+    NSString *filename =  @"locationRequest3";
+    NSArray *jsonLocationRequest = [TestingHelper dataFromJSONFileNamed: filename inDirectory : _pointFilePath];
+    SITLocationRequest* convertedLocationRequest = [[SitumLocationWrapper shared] jsonObjectToLocationRequest: jsonLocationRequest];
+    
+    // Create the reference valid object to compare against
+    SITLocationRequest* referenceLocationRequest = [SitumCreatorTests createLocationRequestWithGpsAndDeadReckoning];
+    
+    // Compare both indications
+    [_helper assertLocationRequest: convertedLocationRequest isEqualToLocationRequest: referenceLocationRequest];
+}
 @end

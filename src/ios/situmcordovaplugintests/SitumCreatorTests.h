@@ -34,6 +34,8 @@
 
 //locationRequest
 + (SITLocationRequest *) createLegacyLocationRequest;
++ (SITLocationRequest *) createLocationRequestWithoutGpsNorDeadReckoning;
++ (SITLocationRequest *) createLocationRequestWithGpsAndDeadReckoning;
 
 //location
 + (SITLocation *) createLocationWithBuildingFloorAndCartesianCoordinates; //location1.json
