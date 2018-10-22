@@ -354,48 +354,8 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 
 
 - (void)startPositioning:(CDVInvokedUrlCommand *)command {
-    
-    NSDictionary *buildingJO;
-    
-    NSNumber *useDeadReckoning = nil;
-    NSNumber *useGps = nil;
-    NSString *buildingId;
-    
-/*
- * The following if-else is necessary in order to mantain compatibility
- * with the startPositioning[building] method. 
- * If params is an array, then it contains both a building and a locationRequest
- * If params is a dictionary, then it should only contain a building
- */
-    if ([command.arguments isKindOfClass:[NSArray class]]) {
-        buildingJO = (NSDictionary*)[command.arguments objectAtIndex:0];
-        if (command.arguments.count > 1) {
-            NSDictionary *requestJO = (NSDictionary*)[command.arguments objectAtIndex:1];
-            buildingId = [[requestJO objectForKey:@"buildingIdentifier"] stringValue];
-            useDeadReckoning = [requestJO objectForKey: @"useDeadReckoning"];
-            useGps = [requestJO objectForKey: @"useGps"];
-        }
-    } else {
-        buildingJO = (NSDictionary*)command.arguments[0];
-    }
-    
     locationCallbackId = command.callbackId;
-    selectedBuildingJO = buildingJO;
-    if (buildingId == nil) {
-        buildingId = [buildingJO valueForKey:@"identifier"];
-    }
-    
-    if (buildingId == nil) {
-        buildingId = [NSString stringWithFormat:@"%@", [buildingJO valueForKey:@"buildingIdentifier"]];
-    }
-    SITLocationRequest *locationRequest = [[SITLocationRequest alloc] initWithBuildingId:buildingId];
-    if (useDeadReckoning != nil) {
-        [locationRequest setUseDeadReckoning:[useDeadReckoning boolValue]];
-
-    }
-    if(useGps != nil) {
-        [locationRequest setUseGps:[useGps boolValue]];
-    }
+    SITLocationRequest *locationRequest = [SitumLocationWrapper.shared jsonObjectToLocationRequest:command.arguments];
      
     [[SITLocationManager sharedInstance] requestLocationUpdates:locationRequest];
     [[SITLocationManager sharedInstance] setDelegate:self];
