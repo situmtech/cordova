@@ -261,6 +261,10 @@
     XCTAssertTrue(pointA.isOutdoor == pointB.isOutdoor, @"SITPoint: isOutdoor bool  wasn't equal.");
 }
 
+- (void) assertLocationRequest: (SITLocationRequest *) requestA isEqualToLocationRequest: (SITLocationRequest *) requestB {
+    XCTAssertEqualObjects(requestA.buildingID, requestB.buildingID);
+}
+
 - (void) assertLocation: (SITLocation *) locationA isEqualToLocation:(SITLocation *)locationB {
     XCTAssertEqualWithAccuracy(locationA.accuracy, locationB.accuracy, 0.001);
     XCTAssertEqualObjects(locationA.provider, locationB.provider);

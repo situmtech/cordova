@@ -31,6 +31,10 @@
 + (SITFloor *) createFloorWithoutAltitude; //floor2.json
 //indication
 + (SITIndication *) createIndication;
+
+//locationRequest
++ (SITLocationRequest *) createLegacyLocationRequest;
+
 //location
 + (SITLocation *) createLocationWithBuildingFloorAndCartesianCoordinates; //location1.json
 + (SITLocation *) createLocationWithCoordinate; //location2.json

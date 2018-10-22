@@ -159,6 +159,12 @@
     return indication;
 }
 
+//locationRequest1.json
++ (SITLocationRequest *) createLegacyLocationRequest {
+    SITLocationRequest *locationRequest = [[SITLocationRequest alloc] initWithBuildingId:@"1051"];
+    return locationRequest;
+}
+
 //location1.json
 + (SITLocation *) createLocationWithBuildingFloorAndCartesianCoordinates {
     NSTimeInterval timestamp = 14676784;
