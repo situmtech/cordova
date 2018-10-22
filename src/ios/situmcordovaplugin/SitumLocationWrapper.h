@@ -39,7 +39,7 @@
 
 
 // Location
-
+- (SITLocationRequest *) jsonObjectToLocationRequest: (NSArray *) json;
 - (NSDictionary *) locationToJsonObject:(SITLocation *) location;
 - (NSString*) locationStateToString:(SITLocationState) state;
 - (NSDictionary *) locationStateToJsonObject:(SITLocationState) state;

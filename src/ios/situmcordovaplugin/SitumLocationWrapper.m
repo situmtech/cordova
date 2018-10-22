@@ -180,6 +180,48 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     return jo.copy;
 }
 
+- (SITLocationRequest *) jsonObjectToLocationRequest: (NSArray *) json {
+    NSDictionary *buildingJO;
+    NSNumber *useDeadReckoning = nil;
+    NSNumber *useGps = nil;
+    NSString *buildingId;
+    
+    
+    //The following if-else is necessary in order to mantain compatibility
+    //with the startPositioning[building] method.
+    //If params is an array, then it contains both a building and a locationRequest
+    //If params is a dictionary, then it should only contain a building
+    
+    if ([json isKindOfClass:[NSArray class]]) {
+        buildingJO = (NSDictionary*)[json objectAtIndex:0];
+        if (json.count > 1) {
+            NSDictionary *requestJO = (NSDictionary*)[json objectAtIndex:1];
+            buildingId = [[requestJO objectForKey:@"buildingIdentifier"] stringValue];
+            useDeadReckoning = [requestJO objectForKey: @"useDeadReckoning"];
+            useGps = [requestJO objectForKey: @"useGps"];
+        }
+    } else {
+        buildingJO = (NSDictionary*)json[0];
+    }
+    
+    if (buildingId == nil) {
+        buildingId = [buildingJO valueForKey:@"identifier"];
+    }
+    
+    if (buildingId == nil) {
+        buildingId = [NSString stringWithFormat:@"%@", [buildingJO valueForKey:@"buildingIdentifier"]];
+    }
+    SITLocationRequest *locationRequest = [[SITLocationRequest alloc] initWithBuildingId:buildingId];
+    if (useDeadReckoning != nil) {
+        [locationRequest setUseDeadReckoning:[useDeadReckoning boolValue]];
+        
+    }
+    if(useGps != nil) {
+        [locationRequest setUseGps:[useGps boolValue]];
+    }
+    return locationRequest;
+}
+
 - (NSString*) locationStateToString:(SITLocationState) state {
     NSString *type = @"";
     switch (state) {

@@ -159,6 +159,28 @@
     return indication;
 }
 
+//locationRequest1.json
++ (SITLocationRequest *) createLegacyLocationRequest {
+    SITLocationRequest *locationRequest = [[SITLocationRequest alloc] initWithBuildingId:@"1051"];
+    return locationRequest;
+}
+
+//locationRequest2.json
++ (SITLocationRequest *) createLocationRequestWithoutGpsNorDeadReckoning {
+    SITLocationRequest *locationRequest = [[SITLocationRequest alloc] initWithBuildingId:@"1051"];
+    [locationRequest setUseDeadReckoning:false];
+    [locationRequest setUseGps:false];
+    return locationRequest;
+}
+
+//locationRequest3.json
++ (SITLocationRequest *) createLocationRequestWithGpsAndDeadReckoning {
+    SITLocationRequest *locationRequest = [[SITLocationRequest alloc] initWithBuildingId:@"1051"];
+    [locationRequest setUseDeadReckoning:true];
+    [locationRequest setUseGps:true];
+    return locationRequest;
+}
+
 //location1.json
 + (SITLocation *) createLocationWithBuildingFloorAndCartesianCoordinates {
     NSTimeInterval timestamp = 14676784;

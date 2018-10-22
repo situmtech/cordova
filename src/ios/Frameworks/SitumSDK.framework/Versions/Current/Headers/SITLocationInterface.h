@@ -19,24 +19,29 @@
  */
 typedef NS_ENUM(int, SITLocationState) {
     /**
-     *  Localization is not running.
+     *  Location is not running.
      */
             kSITLocationStopped = 0,
 
     /*
-     System is still calculating.
+     *  System is still calculating.
      */
             kSITLocationCalculating,
 
     /*
-     System cannot determine where the user is in that building.
+     *  System cannot determine where the user is in that building.
      */
             kSITLocationUserNotInBuilding,
 
     /**
-     *  Localization is running.
+     *  Location is running.
      */
             kSITLocationStarted,
+    
+    /**
+     *  Compass needs to be calibrated
+     */
+            kSITLocationCompassNeedsCalibration,
 };
 
 

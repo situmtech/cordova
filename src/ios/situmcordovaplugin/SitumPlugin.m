@@ -354,45 +354,8 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 
 
 - (void)startPositioning:(CDVInvokedUrlCommand *)command {
-    NSArray *params = (NSArray*)[command.arguments objectAtIndex:0];
-    
-    NSDictionary *buildingJO;
-    
-    NSNumber *useDeadReckoning = nil;
-    NSString *buildingId;
-    
-/*
- * The following if-else is necessary in order to mantain compatibility
- * with the startPositioning[building] method. 
- * If params is an array, then it contains both a building and a locationRequest
- * If params is a dictionary, then it should only contain a building
- */
-    if ([params isKindOfClass:[NSArray class]]) {
-        buildingJO = (NSDictionary*)[params objectAtIndex:0];
-        if (params.count > 1) {
-            NSDictionary *requestJO = (NSDictionary*)[params objectAtIndex:1];
-            buildingId = [[requestJO objectForKey:@"buildingIdentifier"] stringValue];
-            useDeadReckoning = [requestJO objectForKey: @"useDeadReckoning"];
-        }
-    } else {
-        buildingJO = (NSDictionary*)params;
-    }
-    
     locationCallbackId = command.callbackId;
-    selectedBuildingJO = buildingJO;
-    if (buildingId == nil) {
-        buildingId = [buildingJO valueForKey:@"identifier"];
-    }
-    
-    if (buildingId == nil) {
-        buildingId = [NSString stringWithFormat:@"%@", [buildingJO valueForKey:@"buildingIdentifier"]];
-    }
-    SITLocationRequest *locationRequest;
-    if (useDeadReckoning != nil) {
-        locationRequest = [[SITLocationRequest alloc] initWithPriority:kSITHighAccuracy provider:kSITHybridProvider updateInterval:2 buildingID:buildingId operationQueue:[NSOperationQueue mainQueue] useDeadReckoning:[useDeadReckoning boolValue] options:nil];
-    } else {
-        locationRequest = [[SITLocationRequest alloc] initWithPriority:kSITHighAccuracy provider:kSITHybridProvider updateInterval:2 buildingID:buildingId operationQueue:[NSOperationQueue mainQueue] options:nil];
-    }
+    SITLocationRequest *locationRequest = [SitumLocationWrapper.shared jsonObjectToLocationRequest:command.arguments];
      
     [[SITLocationManager sharedInstance] requestLocationUpdates:locationRequest];
     [[SITLocationManager sharedInstance] setDelegate:self];
