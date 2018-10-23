@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 All non released changes should be in CHANGELOG_UNRELEASED.md file
 
 ---------
-## [1.8.6] - UNRELEASED
+## [1.8.6] - 2018-10-23
 
 ### Added
 * Add GPS option in order to use GPS in iOS
