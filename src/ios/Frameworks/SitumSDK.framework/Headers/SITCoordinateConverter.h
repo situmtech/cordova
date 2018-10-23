@@ -20,6 +20,8 @@
                             center:(CLLocationCoordinate2D)center
                           rotation:(SITAngle *)rotation;
 
+- (SITDimensions*) getDimensions;
+
 - (SITCartesianCoordinate *)toCartesianCoordinate:(CLLocationCoordinate2D)coordinate;
 
 - (CLLocationCoordinate2D)toLocationCoordinate:(SITCartesianCoordinate *)cartesianCoordinate;
@@ -31,5 +33,7 @@
 - (SITBounds)bounds;
 
 - (SITBounds)rotatedBounds;
+
+- (SITAngle*) convertBearingToCartesianAngle: (SITAngle*) bearing;
 
 @end

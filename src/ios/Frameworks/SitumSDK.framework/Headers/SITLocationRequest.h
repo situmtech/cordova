@@ -69,11 +69,19 @@ typedef NS_ENUM(int, SITLocationProvider){
  The time interval at which location will be delivered, default is 1 second (coming soon).
  */
 @property (nonatomic, readwrite) NSInteger updateInterval;
+
+
 /**
 * (EXPERIMENTAL) Set if you want to use dead reckoning to get fast position updates using only
 * the inertial sensors, between the server position updates.
  */
 @property (nonatomic, readwrite) BOOL useDeadReckoning;
+
+
+/**
+ * Set if you want to use GPS positioning to improve location.
+ */
+@property (nonatomic, readwrite) BOOL useGps;
 
 
 /**
@@ -114,6 +122,12 @@ Setter.
  */
 - (void) setUseDeadReckoning: (BOOL) useDeadReckoning;
 
+/**
+ Setter.
+ 
+ @param useGps Boolean value indicating if gps positioning should be used.
+ */
+- (void) setUseGps: (BOOL) useGps;
 
 /**
  Setter.

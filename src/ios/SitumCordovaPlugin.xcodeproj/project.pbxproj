@@ -100,6 +100,7 @@
 		954995F1214F8BBB007F3C28 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 954995EF214F8BBB007F3C28 /* Constants.m */; };
 		954995F2214F8BBB007F3C28 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 954995EF214F8BBB007F3C28 /* Constants.m */; };
 		954995F8214FACD8007F3C28 /* PoiCategoryIconTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 954995F7214FACD8007F3C28 /* PoiCategoryIconTests.m */; };
+		957695E1217DA8960082E679 /* LocationRequestTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 957695E0217DA8960082E679 /* LocationRequestTest.m */; };
 		95B14A2B214A402E0073A9E1 /* PointTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B14A2A214A402E0073A9E1 /* PointTests.m */; };
 		95B14A2D214A44800073A9E1 /* AngleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B14A2C214A44800073A9E1 /* AngleTests.m */; };
 		95B14A2F214A45B10073A9E1 /* BoundTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B14A2E214A45B10073A9E1 /* BoundTests.m */; };
@@ -251,6 +252,7 @@
 		954995EE214F8BBB007F3C28 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		954995EF214F8BBB007F3C28 /* Constants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		954995F7214FACD8007F3C28 /* PoiCategoryIconTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoiCategoryIconTests.m; sourceTree = "<group>"; };
+		957695E0217DA8960082E679 /* LocationRequestTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationRequestTest.m; sourceTree = "<group>"; };
 		95B14A2A214A402E0073A9E1 /* PointTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PointTests.m; sourceTree = "<group>"; };
 		95B14A2C214A44800073A9E1 /* AngleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AngleTests.m; sourceTree = "<group>"; };
 		95B14A2E214A45B10073A9E1 /* BoundTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BoundTests.m; sourceTree = "<group>"; };
@@ -475,6 +477,7 @@
 				95F6FF5D2153B5E700AE30B5 /* InputFloorTests.m */,
 				3A40113A2153C4CB00AC3BD5 /* InputPoiCategoryTests.m */,
 				3A40113C2153CBA800AC3BD5 /* InputIndicationTests.m */,
+				957695E0217DA8960082E679 /* LocationRequestTest.m */,
 			);
 			path = InputTests;
 			sourceTree = "<group>";
@@ -690,7 +693,7 @@
 				TargetAttributes = {
 					0D884A0D21145F820066C765 = {
 						CreatedOnToolsVersion = 9.2;
-						DevelopmentTeam = 2DRU8J553J;
+						DevelopmentTeam = ACLL2M4T26;
 						ProvisioningStyle = Automatic;
 					};
 					C0C01EB11E3911D50056E6CB = {
@@ -758,6 +761,7 @@
 			files = (
 				0D5CFD52212C275E00C6E436 /* CDVGestureHandler.m in Sources */,
 				0D5CFD5D212C275E00C6E436 /* CDVLocalStorage.m in Sources */,
+				957695E1217DA8960082E679 /* LocationRequestTest.m in Sources */,
 				0D884A222114634E0066C765 /* TestingHelper.m in Sources */,
 				95B14A3F214A4AED0073A9E1 /* LocationTests.m in Sources */,
 				95B14A43214A4E550073A9E1 /* NavigationProgressTests.m in Sources */,
@@ -903,7 +907,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 2DRU8J553J;
+				DEVELOPMENT_TEAM = ACLL2M4T26;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -957,7 +961,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 2DRU8J553J;
+				DEVELOPMENT_TEAM = ACLL2M4T26;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (

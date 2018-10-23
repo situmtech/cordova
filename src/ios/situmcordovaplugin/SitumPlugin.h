@@ -11,8 +11,6 @@
     NSMutableDictionary *poisStored;
     NSMutableDictionary *routesStored;
     
-    NSDictionary *selectedBuildingJO;
-    
     NSString *locationCallbackId, *routeCallbackId, *navigationProgressCallbackId;
 }
 
