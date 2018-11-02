@@ -17,13 +17,13 @@
 @interface SITServices : NSObject
 
 typedef enum {
-    NONE,
-    USERPASS,
-    APIKEY,
-    TOKEN
-} Auth;
+    kSITNONE,
+    kSITUSERPASS,
+    kSITAPIKEY,
+    kSITTOKEN
+} SITAuth;
 
-@property Auth auth;
+@property SITAuth auth;
 
 /*!
  *  Provides your API key to the Situm SDK for iOS.  This key is generated
@@ -102,7 +102,7 @@ typedef enum {
 
 + (SITToken *)token;
 
-+ (Auth)auth;
++ (SITAuth)auth;
 
 + (NSString *)authHeader;
 
@@ -114,7 +114,7 @@ typedef enum {
 
 + (BOOL)provideToken:(SITToken *)token;
 
-+ (void)provideAuth:(Auth)authMode;
++ (void)provideAuth:(SITAuth)authMode;
 
 + (BOOL)isConfigured;
 
