@@ -70,7 +70,7 @@ typedef enum {
  */
 + (void)setAllowsInvalidSSLCertificate:(BOOL)allowsInvalidSSLCertificate;
 
-/*!
+/*
  *  Returns the license information for Situm SDK for iOS.
  *
  *  @return String containing the licence informacion of this realease of the Situm SDK for iOS.
@@ -78,35 +78,96 @@ typedef enum {
  */
 + (NSString *)licenseInfo;
 
-/**
- Identifier of the smartphone 
+/*
+ * Identifier of the smartphone
+ *
+ * @return Internal unique string used to identify the user's device.
  */
 + (NSString *)deviceID;
 
+/*
+ * Checks whether the APIKEY is valid for use.
+ *
+ * @param APIKey String containing the api key to be validated.
+ *
+ * @return
+ */
 + (BOOL)isValidAPIKey:(NSString *)APIKey;
 
+/*
+ * API key used to access dashboard resources.
+ *
+ * @return String containing the api key used to authorize the requests to dashboard.
+ */
 + (NSString *)APIKey;
 
+/*
+ * Email identifying the user.
+ *
+ * @return String containing the email to identify the user.
+ */
 + (NSString *)email;
 
+/*
+ * Name of the user.
+ *
+ * @return String containing the name of the user.
+ */
 + (NSString *)user;
 
+/*
+ * Password used to access dashboard resources.
+ *
+ * @return String containing the password used to authorize the requests to dashboard.
+ */
 + (NSString *)password;
 
+/*
+ * Method used to set the user and password of the current session.
+ *
+ * @param user String with the name of the user.
+ * @param password String with the password associated with the user.
+ *
+ * @return Boolean indicating the result of the auth operation.
+ */
 + (BOOL)provideUser:(NSString *)user
            password:(NSString *)password;
 
 #pragma mark - Private Methods
 
+/*
+ * Function used to parse a token to the correct format.
+ *
+ * @param token String containing the token to be parsed.
+ *
+ * @return String containing the parsed token.
+ */
 + (NSString *)parse:(NSString *)token;
 
+/*
+ * Token used in the network requests.
+ *
+ * @return String containing the stored token.
+ */
 + (SITToken *)token;
 
+/*
+ * Type of authentication used.
+ *
+ * @return Value of SITAuth enum indicating the type of authentication used.
+ */
 + (SITAuth)auth;
 
 + (NSString *)authHeader;
 
 + (NSString *)tokenHeader;
+
+/*
+ * URL used to access the dashboard.
+ *
+ * @return String containing the url used to access the dashboard.
+ */
++ (NSString*) dashboardURL;
 
 + (void)clearData;
 
@@ -117,5 +178,14 @@ typedef enum {
 + (void)provideAuth:(SITAuth)authMode;
 
 + (BOOL)isConfigured;
+
+/*
+ * Sets the URL used to access the dashboard.
+ *
+ * @param dashboardURL String containing the url used to access the dashboard.
+ */
++ (void) setDashboardURL: (NSString*) dashboardURL;
+
+
 
 @end
