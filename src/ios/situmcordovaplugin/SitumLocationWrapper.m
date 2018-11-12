@@ -196,7 +196,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
         buildingJO = (NSDictionary*)[json objectAtIndex:0];
         if (json.count > 1) {
             NSDictionary *requestJO = (NSDictionary*)[json objectAtIndex:1];
-            buildingId = [[requestJO objectForKey:@"buildingIdentifier"] stringValue];
+            buildingId = [NSString stringWithFormat:@"%@", requestJO[@"buildingIdentifier"]];
             useDeadReckoning = [requestJO objectForKey: @"useDeadReckoning"];
             useGps = [requestJO objectForKey: @"useGps"];
         }
