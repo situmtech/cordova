@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 All non released changes should be in CHANGELOG_UNRELEASED.md file
 
 ---------
+## [1.8.9] - 2018-11-12
+
+### Fixed
+* Fixed error when starting positioning using LocationRequest
+
+### Changed
+* Use legacy build system
+
 ## [1.8.8] - 2018-11-06
 
 ### Changed
