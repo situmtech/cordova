@@ -32,7 +32,7 @@ typedef NS_ENUM(NSInteger, kSITQualityValues)
 
 
 /**
- The time at which this location was determined.
+ The time interval since 1970 at which this location was determined, expressed in milliseconds
  */
 @property (nonatomic) NSTimeInterval timestamp;
 
@@ -87,7 +87,7 @@ typedef NS_ENUM(NSInteger, kSITQualityValues)
 /**
  Private method. Contructor.
 
- @param timestamp when the location was determined.
+ @param timestamp since 1970 when the location was determined, in milliseconds
  @param position geographical coordinate information.
  @param bearing the direction in which the device is traveling in geographical coordinate system (degrees)
  @param cartesianBearing The direction in which the device is traveling in cartesian coordinate system (radians)
@@ -108,7 +108,7 @@ typedef NS_ENUM(NSInteger, kSITQualityValues)
 /**
  Private method. Contructor.
  
- @param timestamp when the location was determined.
+ @param timestamp since 1970 when the location was determined, in milliseconds
  @param position geographical coordinate information.
  @param bearing the direction in which the device is traveling in geographical coordinate system (degrees)
  @param cartesianBearing The direction in which the device is traveling in cartesian coordinate system (radians)

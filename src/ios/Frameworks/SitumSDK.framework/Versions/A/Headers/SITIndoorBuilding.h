@@ -31,8 +31,8 @@
  *  @discussion You should not create objects of this class. Instead you should retrieve them using the
  *  appropiate method of the SITCommunicationManager class.
  */
-
-@interface SITIndoorBuilding : NSObject DEPRECATED_MSG_ATTRIBUTE("Use SITBuilding instead.");
+__deprecated_msg("Use SITBuilding instead.")
+@interface SITIndoorBuilding : NSObject;
 
 // use this as a private property
 

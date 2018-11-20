@@ -13,6 +13,7 @@
 /**
  *  Protocol to provide additional information of what happens inside the SITIndoorLocationManager
  */
+__deprecated_msg("Use SITLocationManager instead.")
 @protocol SITIndoorLocationManagerDelegate <NSObject>
 
 @optional

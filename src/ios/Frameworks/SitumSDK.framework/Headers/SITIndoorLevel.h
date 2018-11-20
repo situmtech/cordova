@@ -16,7 +16,9 @@
  *  @discussion You should not create objects of this class. Instead you should retrieve them using the
  *  appropiate method of the SITCommunicationManager class.
  */
-@interface SITIndoorLevel : NSObject DEPRECATED_MSG_ATTRIBUTE("Use SITFloor object instead.");
+
+__deprecated_msg("Use SITFloor instead.")
+@interface SITIndoorLevel : NSObject;
 
 
 /**

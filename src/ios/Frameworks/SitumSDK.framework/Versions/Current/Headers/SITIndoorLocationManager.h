@@ -14,8 +14,8 @@
 /*!
  * This class provide you with methods to  of entry to the SitumSDK.
  */
-__attribute__ ((deprecated))
-@interface SITIndoorLocationManager : NSObject DEPRECATED_MSG_ATTRIBUTE("Use SITLocationManager instead");
+__deprecated_msg("Use SITLocationManager instead.")
+@interface SITIndoorLocationManager : NSObject;
 
 /**
  *  Indoor Location Manager State
