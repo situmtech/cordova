@@ -191,11 +191,11 @@
                          withCompletion:(SITBuildingFetchHandler)buildindFetchHandler;
 
 - (BOOL)fetchInfoOfIndoorBuilding: (SITIndoorBuilding *) indoorBuilding
-                   withCompletion: (SITBuildingInfoFetchHandler) completion;
+                   withCompletion: (SITBuildingInfoFetchHandler) completion DEPRECATED_MSG_ATTRIBUTE("Use fetchBuildingInfo instead.");
 
 - (BOOL)fetchInfoOfIndoorBuilding: (SITIndoorBuilding *) indoorBuilding
                       withOptions: (NSDictionary *) options
-                   withCompletion: (SITBuildingInfoFetchHandler) completion;
+                   withCompletion: (SITBuildingInfoFetchHandler) completion DEPRECATED_MSG_ATTRIBUTE("Use fetchBuildingInfo instead.");
 
 /*!
  *  Retrieve levels of a building.
@@ -300,7 +300,7 @@
  */
 - (NSArray *)filterPOIs:(NSArray *)POIs
              byCategory:(NSString *)category
-          byIndoorLevel:(SITIndoorLevel *)indoorLevel;
+          byIndoorLevel:(SITIndoorLevel *)indoorLevel DEPRECATED_MSG_ATTRIBUTE("Deprecated method.");
 
 /**
  *  Retrieve Outdoor POIs from a building
@@ -326,7 +326,7 @@
 
 - (BOOL)fetchOutdoorPOIsFromIndoorBuilding:(SITIndoorBuilding *)indoorBuilding
                                withOptions:(NSDictionary *)options
-                            withCompletion:(SITExteriorPOIFetchHandler)exteriorPOIFetchHandler;
+                            withCompletion:(SITExteriorPOIFetchHandler)exteriorPOIFetchHandler DEPRECATED_MSG_ATTRIBUTE("Use fetchPoisOfBuilding instead.");
 
 
 /*!
@@ -354,7 +354,7 @@
  */
 - (BOOL)fetchGraphFromIndoorBuilding:(SITIndoorBuilding *)indoorBuilding
                          withOptions:(NSDictionary *)options
-                      withCompletion:(SITGraphFetchHandler)graphFetchHandler;
+                      withCompletion:(SITGraphFetchHandler)graphFetchHandler DEPRECATED_MSG_ATTRIBUTE("Fetching the graph is no longer supported.");
 
 /**
  *  Retrieve the events of a SITIndoorBuilding
@@ -467,7 +467,7 @@
 
 - (BOOL)retrieveModelForBuilding:(nonnull SITIndoorBuilding *)building
                      withSuccess:(nonnull SITSuccessRetrievingModelCompletion)successCompletion
-                         failure:(nonnull SITFailureCompletion)failureCompletion;
+                         failure:(nonnull SITFailureCompletion)failureCompletion DEPRECATED_MSG_ATTRIBUTE("Fetching the model is no longer supported.");
 
 @end
 

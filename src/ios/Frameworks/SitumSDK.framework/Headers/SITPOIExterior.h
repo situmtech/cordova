@@ -13,7 +13,8 @@
 /**
  *  This class represents a Point Of Interest outside a SITIndoorBuilding
  */
-@interface SITPOIExterior : SITPOIBase DEPRECATED_MSG_ATTRIBUTE("Use SITPOI instead.");
+__deprecated_msg("Use SITPOI instead.")
+@interface SITPOIExterior : SITPOIBase;
 
 /**
  *  Latitude coordinate of the Exterior POI.
