@@ -28,7 +28,6 @@
 #import "SITPOI.h"
 #import "SITPOIExterior.h"
 
-#import "SITGraph.h"
 #import "SITEvent.h"
 
 #import "SITAngle.h"
@@ -93,6 +92,8 @@
 #import "SITBounds.h"
 
 #import "SITCoordinateUtil.h"
+
+#import "SITAccessibilityMode.h"
 
 #ifndef PublicSDK_h
 #import "SITBeaconManager.h"

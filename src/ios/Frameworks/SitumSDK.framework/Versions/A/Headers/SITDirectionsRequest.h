@@ -10,6 +10,7 @@
 
 #import "SITPoint.h"
 #import "SITLocation.h"
+#import "SITAccessibilityMode.h"
 
 
 /**
@@ -100,7 +101,9 @@
  
  @param isAccessible Boolean indicating if the route should be accessible for all users.
  */
-- (void) setAccessible: (BOOL) isAccessible;
+- (void) setAccessible: (BOOL) isAccessible DEPRECATED_MSG_ATTRIBUTE("Use - setAccessibility:(SITAccessibility) accessibility instead");
+
+- (void) setAccessibility:(SITAccessibilityMode) accessibility;
 
 /**
  Setter for the minimize floor changes option. This should be used to request a route with the minimun possible amount of floor changes.

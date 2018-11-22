@@ -13,8 +13,6 @@
 #import "SITPOI.h"
 #import "SITEvent.h"
 
-#import "SITGraph.h"
-
 @interface SITBuildingInfo : NSObject
 
 @property (nonatomic, strong) SITBuilding *building;
@@ -22,7 +20,5 @@
 @property (nonatomic, strong) NSArray<SITPOI *> *indoorPois;
 @property (nonatomic, strong) NSArray<SITPOI *> *outdoorPois;
 @property (nonatomic, strong) NSArray<SITEvent *> *events;
-
-@property (nonatomic, strong) SITGraph *graph;
 
 @end

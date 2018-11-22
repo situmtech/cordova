@@ -13,6 +13,10 @@
 
 #import "SITIndoorPoint.h"
 #import "SITIndoorRoute.h"
+#import "SITAccessibilityMode.h"
+#import "SITLink.h"
+#import "SITNode.h"
+#import "PESGraph.h"
 
 @class PESGraph;
 
@@ -26,7 +30,7 @@
 *
 *  @param sourcePoint      source SITIndoorPoint.
 *  @param destinationPoint destination SITIndoorPoint.
-*  @param isAccessible     determines if the route should be computed having into account accessible alternatives 
+*  @param accessibility     determines the accessibility options that should be taken into account. See SITAccessibility for more information
 *
 *  @return A SITIndoorRoute object containing the points and the distance between them to travel from the source point to the destination point. This method can
 *  return nil if either sourcePoint or destinationPoint does not belong to the building.
@@ -34,21 +38,34 @@
 */
 - (SITIndoorRoute *)shortestRouteFromIndoorPoint:(SITIndoorPoint *)sourcePoint
                                    toIndoorPoint:(SITIndoorPoint *)destinationPoint
-                                    isAccessible:(BOOL)isAccessible;
+                                    accessibility:(SITAccessibilityMode)accessibility;
 
-#pragma mark - private methods
+- (SITIndoorRoute*) shortestRouteFromIndoorPoint: (SITIndoorPoint*) sourcePoint
+                                   toIndoorPoint: (SITIndoorPoint*) destinationPoint
+                                   accessibility: (SITAccessibilityMode) accessibility
+                                     withOptions: (NSDictionary*) options;
+
+- (NSArray*) getNodesWithAccessibility: (SITAccessibilityMode) accessibility;
+
+- (NSArray*) getLinksWithAccessibility: (SITAccessibilityMode) accessibility;
+
+- (SITNode *)closestNodeToIndoorPoint:(SITIndoorPoint *)indoorPoint accessibility:(SITAccessibilityMode)accessibility;
+
+- (void) removeLink: (SITLink*) linkToRemove withGraph: (PESGraph*) graph;
+
+- (int) calculateFloorChangesWithFloor: (NSString*) floorIdentifier;
+
 - (NSArray *)links;
 
 - (NSArray *)nodes;
 
 - (void)prepareGraph;
 
-#pragma mark - Hide this methods before commit
 - (void)setNodes:(NSArray *)nodes;
 
 - (void)setLinks:(NSArray *)links;
 
-- (PESGraph *)internalGraphAccessible:(BOOL)accessible;
+- (PESGraph *)internalGraphWithAccessibility:(SITAccessibilityMode)accessibility;
 
 @end
 
