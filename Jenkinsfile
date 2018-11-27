@@ -2,18 +2,18 @@ node('ios') {
     stage('Checkout SCM') {
         checkout scm
     }
-    
+
     try {
         stage ('iOS test') {
             sh "tests/scripts/copy_ios_resources.sh"
-            sh "cd src/ios && xcodebuild test -project SitumCordovaPlugin.xcodeproj -scheme CordovaLib -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.4'"
+            sh "cd src/ios && pod repo update && pod install && xcodebuild test -workspace SitumCordovaPlugin.xcworkspace -scheme CordovaLib -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.4'"
         }
     } finally {
         stage('clean repo') {
             sh "tests/scripts/self-destruct.sh"
         }
     }
-    
+
 }
 
 node('androidci') {
