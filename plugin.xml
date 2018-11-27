@@ -50,14 +50,14 @@
         </config-file>
 
         <config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
-		    <string>Location is required to find out where you are</string>
-		</config-file>
-		<config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
-			<string>Location is required to find out where you are</string>
-		</config-file>
-		<config-file target="*-Info.plist" parent="NSLocationUsageDescription">
-			<string>Location is required to find out where you are</string>
-		</config-file>
+		        <string>Location is required to find out where you are</string>
+    		</config-file>
+    		<config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
+    			   <string>Location is required to find out where you are</string>
+    		</config-file>
+    		<config-file target="*-Info.plist" parent="NSLocationUsageDescription">
+    			   <string>Location is required to find out where you are</string>
+    		</config-file>
 
         <framework src="CFNetwork.framework" />
         <framework src="CoreData.framework" />
@@ -70,12 +70,12 @@
         <framework src="libz.dylib" />
         <framework src="libc++.dylib" />
 
-<!--        <framework src="src/ios/Frameworks/SitumSDK.framework" custom="true"/>-->
-        <framework src="SitumSDK" type="podspec" spec="~> 2.17.0" />
+        <framework src="SitumSDK" type="podspec" spec="2.17.0" />
+
 
         <header-file src="src/ios/situmcordovaplugin/SitumPlugin.h" />
         <header-file src="src/ios/situmcordovaplugin/SitumLocationWrapper.h" />
-        <source-file src="src/ios/situmcordovaplugin/Constants.h" />
+        <header-file src="src/ios/situmcordovaplugin/Constants.h" />
         <source-file src="src/ios/situmcordovaplugin/SitumPlugin.m" />
         <source-file src="src/ios/situmcordovaplugin/SitumLocationWrapper.m" />
         <source-file src="src/ios/situmcordovaplugin/Constants.m" />
