@@ -120,6 +120,7 @@
 		95B14A4D214A56CE0073A9E1 /* BuildingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B14A4C214A56CE0073A9E1 /* BuildingTests.m */; };
 		95D33B49214B9680000E073E /* PoiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D33B48214B9680000E073E /* PoiTests.m */; };
 		95F6FF5E2153B5E700AE30B5 /* InputFloorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95F6FF5D2153B5E700AE30B5 /* InputFloorTests.m */; };
+		B24430A92B01572485145B0D /* Pods_SitumCordovaPlugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF639F8C42C24AB0EC736F85 /* Pods_SitumCordovaPlugin.framework */; };
 		C0C01EB61E3911D50056E6CB /* Cordova.h in Headers */ = {isa = PBXBuildFile; fileRef = C0C01EB41E3911D50056E6CB /* Cordova.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C0C01EBA1E39120F0056E6CB /* libCordova.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A32D7114102E1C006B237C /* libCordova.a */; };
 		C0C01EBB1E39131A0056E6CB /* CDV.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ED95D0F1AB9029B008C4574 /* CDV.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -163,6 +164,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08D0E6D0409D72DCB4DC8EDC /* Pods-SitumCordovaPlugin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SitumCordovaPlugin.release.xcconfig"; path = "Pods/Target Support Files/Pods-SitumCordovaPlugin/Pods-SitumCordovaPlugin.release.xcconfig"; sourceTree = "<group>"; };
+		0C0C006A57E640C81044FC18 /* Pods-SitumCordovaPlugin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SitumCordovaPlugin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SitumCordovaPlugin/Pods-SitumCordovaPlugin.debug.xcconfig"; sourceTree = "<group>"; };
 		0D5CFD3B212C275E00C6E436 /* CDVGestureHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDVGestureHandler.h; sourceTree = "<group>"; };
 		0D5CFD3C212C275E00C6E436 /* CDVGestureHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVGestureHandler.m; sourceTree = "<group>"; };
 		0D5CFD3E212C275E00C6E436 /* CDVIntentAndNavigationFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVIntentAndNavigationFilter.m; sourceTree = "<group>"; };
@@ -273,6 +276,7 @@
 		95D33B48214B9680000E073E /* PoiTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoiTests.m; sourceTree = "<group>"; };
 		95F6FF5D2153B5E700AE30B5 /* InputFloorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputFloorTests.m; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* SitumCordovaPlugin_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SitumCordovaPlugin_Prefix.pch; path = ../../SitumCordovaPlugin_Prefix.pch; sourceTree = "<group>"; };
+		BF639F8C42C24AB0EC736F85 /* Pods_SitumCordovaPlugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SitumCordovaPlugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0C01EB21E3911D50056E6CB /* Cordova.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cordova.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0C01EB41E3911D50056E6CB /* Cordova.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cordova.h; sourceTree = "<group>"; };
 		C0C01EB51E3911D50056E6CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -301,6 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D884A0921145E510066C765 /* SitumSDK.framework in Frameworks */,
+				B24430A92B01572485145B0D /* Pods_SitumCordovaPlugin.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +333,7 @@
 				034768DFFF38A50411DB9C8B /* Products */,
 				0D5184E921145DEB00BFA9E3 /* Frameworks */,
 				30325A0B136B343700982B63 /* VERSION */,
+				DF13D93707E045B4473AC963 /* Pods */,
 			);
 			name = CordovaLib;
 			sourceTree = "<group>";
@@ -336,6 +342,7 @@
 			isa = PBXGroup;
 			children = (
 				0D884A0821145E510066C765 /* SitumSDK.framework */,
+				BF639F8C42C24AB0EC736F85 /* Pods_SitumCordovaPlugin.framework */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -549,6 +556,15 @@
 			path = Cordova;
 			sourceTree = "<group>";
 		};
+		DF13D93707E045B4473AC963 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0C0C006A57E640C81044FC18 /* Pods-SitumCordovaPlugin.debug.xcconfig */,
+				08D0E6D0409D72DCB4DC8EDC /* Pods-SitumCordovaPlugin.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -669,10 +685,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "SitumCordovaPlugin" */;
 			buildPhases = (
+				9751BCD37A14B280A7768C8D /* [CP] Check Pods Manifest.lock */,
 				D2AAC07A0554694100DB518D /* Headers */,
 				D2AAC07B0554694100DB518D /* Sources */,
 				D2AAC07C0554694100DB518D /* Frameworks */,
 				0D884E7E2116FD8E0066C765 /* Resources */,
+				61D03F53C3214BCC53CF0A64 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -753,6 +771,42 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		61D03F53C3214BCC53CF0A64 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SitumCordovaPlugin/Pods-SitumCordovaPlugin-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9751BCD37A14B280A7768C8D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SitumCordovaPlugin-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0D884A0A21145F820066C765 /* Sources */ = {
@@ -987,6 +1041,7 @@
 		};
 		1DEB921F08733DC00010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C0C006A57E640C81044FC18 /* Pods-SitumCordovaPlugin.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_MODULES = YES;
@@ -1005,7 +1060,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = SitumCordovaPlugin_Prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = "";
 				INSTALL_PATH = /usr/local/lib;
@@ -1018,6 +1073,7 @@
 		};
 		1DEB922008733DC00010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08D0E6D0409D72DCB4DC8EDC /* Pods-SitumCordovaPlugin.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_MODULES = YES;
@@ -1033,7 +1089,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = SitumCordovaPlugin_Prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = "";
 				INSTALL_PATH = /usr/local/lib;
@@ -1056,7 +1112,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1085,7 +1141,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
