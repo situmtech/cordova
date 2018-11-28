@@ -567,8 +567,7 @@ public class PluginHelper {
            locationBuilder.buildingIdentifier(sBuildingId);
         }
 
-        LocationRequest locationRequest = locationBuilder.build();
-        return locationRequest;
+        return locationBuilder.build();
     }
 
     public void startPositioning(final CordovaInterface cordova, CordovaWebView webView, JSONArray args,
@@ -585,11 +584,6 @@ public class PluginHelper {
                         try {
                             PluginHelper.this.computedLocation = location; // This is for testing purposes
                             Log.i(PluginHelper.TAG, "onLocationChanged() called with: location = [" + location + "]");
-                            CartesianCoordinate cartesianCoordinate = location.getCartesianCoordinate();
-                            String locationMessage = "building: " + location.getBuildingIdentifier() + "\nfloor: "
-                                    + location.getFloorIdentifier() + "\nx: " + cartesianCoordinate.getX() + "\ny: "
-                                    + cartesianCoordinate.getY() + "\nyaw: " + location.getCartesianBearing()
-                                    + "\naccuracy: " + location.getAccuracy();
                             JSONObject jsonObject = SitumMapper.locationToJsonObject(location);
                             PluginResult result = new PluginResult(Status.OK, jsonObject);
                             result.setKeepCallback(true);
@@ -862,16 +856,14 @@ public class PluginHelper {
                 JSONObject options = args.getJSONObject(3);
                 Log.i(TAG, "request directions options" + options);
                 if(options.has(SitumMapper.ACCESSIBLE_MODE)) {
-                    Integer mode = options.getInt(SitumMapper.ACCESSIBLE_MODE);
-                    if(mode.equals(DirectionsRequest.AccessibilityMode.ONLY_ACCESSIBLE)) {
+                    String mode = options.getString(SitumMapper.ACCESSIBLE_MODE);
+                    if(mode.equals(DirectionsRequest.AccessibilityMode.ONLY_ACCESSIBLE.name())) {
                         accessibilityMode = DirectionsRequest.AccessibilityMode.ONLY_ACCESSIBLE;
-                    } else if (mode.equals(DirectionsRequest.AccessibilityMode.ONLY_NOT_ACCESSIBLE_FLOOR_CHANGES)) {
+                    } else if (mode.equals(DirectionsRequest.AccessibilityMode.ONLY_NOT_ACCESSIBLE_FLOOR_CHANGES.name())) {
                         accessibilityMode = DirectionsRequest.AccessibilityMode.ONLY_NOT_ACCESSIBLE_FLOOR_CHANGES;
                     }
-                } else if (options.has(SitumMapper.ACCESSIBLE)) {
-                    if (options.getBoolean(SitumMapper.ACCESSIBLE)) {
-                        accessibilityMode = DirectionsRequest.AccessibilityMode.ONLY_ACCESSIBLE;
-                    }
+                } else if (options.has(SitumMapper.ACCESSIBLE) && options.getBoolean(SitumMapper.ACCESSIBLE)) {
+                    accessibilityMode = DirectionsRequest.AccessibilityMode.ONLY_ACCESSIBLE;
                 }
                 if (options.has(SitumMapper.STARTING_ANGLE)) {
                     startingAngle = options.getDouble(SitumMapper.STARTING_ANGLE);
