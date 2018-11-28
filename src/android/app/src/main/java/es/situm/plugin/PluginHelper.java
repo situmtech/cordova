@@ -549,16 +549,18 @@ public class PluginHelper {
             }
 
             if (request.has(SitumMapper.REALTIME_UPDATE_INTERVAL)) {
-                Integer realtimeUpdateInterval = request.getInt(SitumMapper.REALTIME_UPDATE_INTERVAL);
+                String realtimeUpdateInterval = request.getString(SitumMapper.REALTIME_UPDATE_INTERVAL);
                 if (realtimeUpdateInterval != null) {
-                    if (realtimeUpdateInterval.equals(RealtimeUpdateInterval.REALTIME)) {
+                    if (realtimeUpdateInterval.equals(RealtimeUpdateInterval.REALTIME.name())) {
                         locationBuilder.realtimeUpdateInterval(RealtimeUpdateInterval.REALTIME);
-                    } else if (realtimeUpdateInterval.equals(RealtimeUpdateInterval.FAST)) {
+                    } else if (realtimeUpdateInterval.equals(RealtimeUpdateInterval.FAST.name())) {
                         locationBuilder.realtimeUpdateInterval(RealtimeUpdateInterval.FAST);
-                    } else if (realtimeUpdateInterval.equals(RealtimeUpdateInterval.NORMAL)) {
+                    } else if (realtimeUpdateInterval.equals(RealtimeUpdateInterval.NORMAL.name())) {
                         locationBuilder.realtimeUpdateInterval(RealtimeUpdateInterval.NORMAL);
-                    } else if (realtimeUpdateInterval.equals(RealtimeUpdateInterval.SLOW)) {
+                    } else if (realtimeUpdateInterval.equals(RealtimeUpdateInterval.SLOW.name())) {
                         locationBuilder.realtimeUpdateInterval(RealtimeUpdateInterval.SLOW);
+                    } else if (realtimeUpdateInterval.equals(RealtimeUpdateInterval.BATTERY_SAVER.name())) {
+                        locationBuilder.realtimeUpdateInterval(RealtimeUpdateInterval.BATTERY_SAVER);
                     }
                     Log.i(TAG, "realtimeUpdateInterval: " + realtimeUpdateInterval);
                 }
