@@ -521,7 +521,8 @@ module.exports = DirectionsRequest
  * @description
  * A data object that contains the directions options.
  * @property {boolean} minimizeFloorChanges - Defines wheter or not the route should be calculated minimizing the floor changes even if the result is longer.
- * @property {boolean} accessibleRoute - Defines wheter or not the route has to be suitable for wheel chairs (true) or not (false).
+ * @property {boolean} accessible - Defines wheter or not the route has to be suitable for wheel chairs (true) or not (false). @deprecated use accessibleMode instead.
+ * @property {number} accessibleMode - Defines the accessibility mode used to calculate a route
  * @property {number} startingAngle - Current user's orientation in degrees.
  */
 

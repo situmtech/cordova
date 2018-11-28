@@ -855,15 +855,23 @@ public class PluginHelper {
             JSONObject jsonoTo = args.getJSONObject(2);
             Point from = SitumMapper.pointJsonObjectToPoint(jsonoFrom, jsonoBuilding);
             Point to = SitumMapper.pointJsonObjectToPoint(jsonoTo, jsonoBuilding);
-            Boolean accessibleRoute = false;
+            DirectionsRequest.AccessibilityMode accessibilityMode = DirectionsRequest.AccessibilityMode.CHOOSE_SHORTEST;
             Boolean minimizeFloorChanges = false;
             double startingAngle = 0.0;
             if (args.length() > 2) {
                 JSONObject options = args.getJSONObject(3);
                 Log.i(TAG, "request directions options" + options);
-
-                if (options.has(SitumMapper.ACCESSIBLE)) {
-                    accessibleRoute = options.getBoolean(SitumMapper.ACCESSIBLE);
+                if(options.has(SitumMapper.ACCESSIBLE_MODE)) {
+                    Integer mode = options.getInt(SitumMapper.ACCESSIBLE_MODE);
+                    if(mode.equals(DirectionsRequest.AccessibilityMode.ONLY_ACCESSIBLE)) {
+                        accessibilityMode = DirectionsRequest.AccessibilityMode.ONLY_ACCESSIBLE;
+                    } else if (mode.equals(DirectionsRequest.AccessibilityMode.ONLY_NOT_ACCESSIBLE_FLOOR_CHANGES)) {
+                        accessibilityMode = DirectionsRequest.AccessibilityMode.ONLY_NOT_ACCESSIBLE_FLOOR_CHANGES;
+                    }
+                } else if (options.has(SitumMapper.ACCESSIBLE)) {
+                    if (options.getBoolean(SitumMapper.ACCESSIBLE)) {
+                        accessibilityMode = DirectionsRequest.AccessibilityMode.ONLY_ACCESSIBLE;
+                    }
                 }
                 if (options.has(SitumMapper.STARTING_ANGLE)) {
                     startingAngle = options.getDouble(SitumMapper.STARTING_ANGLE);
@@ -872,7 +880,7 @@ public class PluginHelper {
                     minimizeFloorChanges = options.getBoolean(SitumMapper.MINIMIZE_FLOOR_CHANGES);
                 }
             }
-            DirectionsRequest directionRequest = new DirectionsRequest.Builder().from(from, Angle.fromDegrees(startingAngle)).to(to).isAccessible(accessibleRoute).minimizeFloorChanges(minimizeFloorChanges).build();
+            DirectionsRequest directionRequest = new DirectionsRequest.Builder().from(from, Angle.fromDegrees(startingAngle)).to(to).accessibilityMode(accessibilityMode).minimizeFloorChanges(minimizeFloorChanges).build();
             SitumSdk.directionsManager().requestDirections(directionRequest, new Handler<Route>() {
                 @Override
                 public void onSuccess(Route route) {

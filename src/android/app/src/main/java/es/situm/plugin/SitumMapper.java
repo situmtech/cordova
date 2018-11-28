@@ -197,6 +197,7 @@ class SitumMapper {
   public static final String CREATED_AT = "createdAt";
   public static final String UPDATED_AT = "updatedAt";
   public static final String NAME = "name";
+  public static final String ACCESSIBLE_MODE = "accessibleMode";
 
   public static final DateFormat dateFormat = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy", Locale.US);
 
