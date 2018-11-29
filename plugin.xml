@@ -43,7 +43,6 @@
             <clobbers target="cordova.plugins.Situm" />
         </js-module>
         <config-file target="config.xml" parent="/*">
-            <preference name="deployment-target" value="9.0.0" />
 	    <feature name="SitumPlugin">
                 <param name="ios-package" value="SitumPlugin" onload="true" />
             </feature>
@@ -70,7 +69,7 @@
         <framework src="libz.dylib" />
         <framework src="libc++.dylib" />
 
-        <framework src="SitumSDK" type="podspec" spec="2.17.0" />
+        <framework src="SitumSDK" type="podspec" spec="2.17.2" />
 
 
         <header-file src="src/ios/situmcordovaplugin/SitumPlugin.h" />
