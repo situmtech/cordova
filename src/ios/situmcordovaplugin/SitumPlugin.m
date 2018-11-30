@@ -376,7 +376,13 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
         routesStored = [[NSMutableDictionary alloc] init];
     }
     
-    SITDirectionsRequest* directionsRequest = [SitumLocationWrapper.shared jsonObjectToDirectionsRequest:command.arguments poisStored:poisStored];
+    SITDirectionsRequest* directionsRequest = [SitumLocationWrapper.shared jsonObjectToDirectionsRequest:command.arguments];
+    
+    if (directionsRequest == nil) {
+        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Unable to parse request"];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:routeCallbackId];
+        return;
+    }
     
     [[SITDirectionsManager sharedInstance] setDelegate:self];
     [[SITDirectionsManager sharedInstance] requestDirections:directionsRequest];

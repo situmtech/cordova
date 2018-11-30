@@ -532,30 +532,43 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     return cartesianCoordinate;
 }
 
-- (SITDirectionsRequest *) jsonObjectToDirectionsRequest: (NSArray *) json
-                                                poisStored: (NSDictionary<NSString*, SITPOI*> *) poisStored {
+- (SITDirectionsRequest *) jsonObjectToDirectionsRequest: (NSArray *) json {
     NSDictionary* fromLocation = (NSDictionary*)[json objectAtIndex:1];
     NSDictionary* toPOI = (NSDictionary*)[json objectAtIndex:2];
     NSDictionary* options = (NSDictionary*)[json objectAtIndex:3];
     
     SITLocation *location = [SitumLocationWrapper.shared locationJsonObjectToLocation:fromLocation];
-    SITPOI *poi = (SITPOI*)[poisStored objectForKey:@"name"];
-    SITPoint *endPoint;
-    if (poi) {
-        endPoint = poi.position;
-    } else {
-        endPoint = [SitumLocationWrapper.shared pointJsonObjectToPoint:[toPOI objectForKey:@"position"]];
-    }
+    SITPoint *endPoint = [SitumLocationWrapper.shared pointJsonObjectToPoint:[toPOI objectForKey:@"position"]];
     
     SITDirectionsRequest *directionsRequest = [[SITDirectionsRequest alloc] initWithLocation: location withDestination: endPoint];
     
-    BOOL accessible = false;
+    NSNumber *accessible;
     BOOL minimizeFloorChanges = false;
+    NSString *accessibilityModeValue = nil;
     if(options) {
-        accessible = [(NSNumber*)[options valueForKey: @"accessibleRoute"] boolValue];
+        accessible = (NSNumber*)[options valueForKey: @"accessible"];
+        if (accessible == nil) {
+            accessible = (NSNumber*)[options valueForKey: @"accessibleRoute"];
+        }
+        accessibilityModeValue = options[@"accessibilityMode"];
         minimizeFloorChanges = [(NSNumber*)[options valueForKey: @"minimizeFloorChanges"] boolValue];
     }
-    [directionsRequest setAccessible: accessible];
+    
+    if (accessibilityModeValue != nil) {
+        SITAccessibilityMode accessibilityMode;
+        if ([accessibilityModeValue isEqualToString:@"CHOOSE_SHORTEST"]) {
+            accessibilityMode = kSITChooseShortest;
+        } else if ([accessibilityModeValue isEqualToString:@"ONLY_NOT_ACCESSIBLE_FLOOR_CHANGES"]) {
+            accessibilityMode = kSITOnlyNotAccessibleFloorChanges;
+        } else {
+            accessibilityMode = kSITOnlyAccessible;
+        }
+        [directionsRequest setAccessibility:accessibilityMode];
+    } else if (accessible != nil) {
+        
+        [directionsRequest setAccessible: [accessible boolValue]];
+    }
+    
     [directionsRequest setMinimizeFloorChanges: minimizeFloorChanges];
     return directionsRequest;
 }

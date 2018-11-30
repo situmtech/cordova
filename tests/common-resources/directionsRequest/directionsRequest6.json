@@ -1,0 +1,153 @@
+[
+  {
+    "address": "",
+    "bounds": {
+        "northEast": {
+            "latitude": 42.87253907829066,
+            "longitude": -8.562817801731425
+        },
+        "northWest": {
+            "latitude": 42.87253907829066,
+            "longitude": -8.563687573151498
+        },
+        "southEast": {
+            "latitude": 42.87215551039662,
+            "longitude": -8.562817801731425
+        },
+        "southWest": {
+            "latitude": 42.87215551039662,
+            "longitude": -8.563687573151498
+        }
+    },
+    "boundsRotated": {
+        "northEast": {
+            "latitude": 42.87210212173802,
+            "longitude": -8.56363479235278
+        },
+        "northWest": {
+            "latitude": 42.8722149069941,
+            "longitude": -8.562778644442083
+        },
+        "southEast": {
+            "latitude": 42.87247968165883,
+            "longitude": -8.56372673044084
+        },
+        "southWest": {
+            "latitude": 42.87259246691492,
+            "longitude": -8.56287058257683
+        }
+    },
+    "center": {
+        "latitude": 42.8723472943445,
+        "longitude": -8.56325268745422
+    },
+    "dimensions": {
+        "width": 71.0686153823893,
+        "height": 42.6106416714803
+    },
+    "infoHtml": "<p>http://Prueba/actualizador/recibirAlarmas</p>",
+    "name": "Ed. Emprendia - Situm",
+    "pictureThumbUrl": "",
+    "pictureUrl": "",
+    "rotation": -3.31881803875501,
+    "userIdentifier": "-1",
+    "buildingIdentifier": "1051",
+    "customFields": {
+        "notification_url": "http://testUrl.com",
+        "pin": "1234",
+        "positioning-mode": "Trilateration",
+        "beacons_uuids": "7f6cc424-aae2-47fd-b5e9-476ad15e4733, fa4b8d11-9c13-4ad9-9859-cecd41c58000, 1876b5fa-3e4b-4d09-9252-627032fe9312",
+        "filter-beacon": "56C98FAD0C9, D5784F5A73CA",
+        "asset-localization": "True"
+    },
+    "createdAt": "Wed Jan 04 18:41:43 +0100 2017",
+    "updatedAt": "Wed Sep 12 12:10:25 +0200 2018"
+},
+  {
+      "hasCartesianBearing": false,
+      "coordinate": {
+        "latitude": 8.6,
+        "longitude": 10.5
+      },
+      "bearing": {
+        "radiansMinusPiPi": 0,
+        "radians": 0,
+        "degreesClockwise": 360,
+        "degrees": 0
+      },
+      "accuracy": 5,
+      "isIndoor": false,
+      "deviceId": "",
+      "buildingIdentifier": "101",
+      "quality": "HIGH",
+      "isOutdoor": true,
+      "floorIdentifier": "-1",
+      "provider": "TEST_PROVIDER",
+      "cartesianBearing": {
+        "radiansMinusPiPi": 0,
+        "radians": 0,
+        "degreesClockwise": 360,
+        "degrees": 0
+      },
+      "bearingQuality": "HIGH",
+      "hasBearing": true,
+      "cartesianCoordinate": {
+        "x": 0,
+        "y": 0
+      },
+      "position": {
+        "coordinate": {
+          "latitude": 8.6,
+          "longitude": 10.5
+        },
+        "floorIdentifier": "-1",
+        "cartesianCoordinate": {
+          "x": 0,
+          "y": 0
+        },
+        "isIndoor": false,
+        "buildingIdentifier": "101",
+        "isOutdoor": true
+      },
+      "timestamp": 14676784
+    },
+    {
+      "identifier": "-1",
+      "coordinate": {
+        "latitude": 37.4534534534,
+        "longitude": 54.65464564534
+      },
+      "poiName": "TEST_NAME",
+      "customFields": {},
+      "isIndoor": true,
+      "infoHtml": "TEST_INFO",
+      "buildingIdentifier": "101",
+      "isOutdoor": false,
+      "createdAt": "Thu Jan 01 01:00:00 +0100 1970",
+      "floorIdentifier": "12",
+      "cartesianCoordinate": {
+        "x": 2,
+        "y": 9
+      },
+      "position": {
+        "coordinate": {
+          "latitude": 37.4534534534,
+          "longitude": 54.65464564534
+        },
+        "floorIdentifier": "12",
+        "cartesianCoordinate": {
+          "x": 2,
+          "y": 9
+        },
+        "isIndoor": true,
+        "buildingIdentifier": "101",
+        "isOutdoor": false
+      },
+      "category": "situm-no-category",
+      "updatedAt": "Thu Jan 01 01:00:00 +0100 1970"
+    },
+  {
+      "minimizeFloorChanges": true,
+      "accessibilityMode": "CHOOSE_SHORTEST"
+  }
+]
