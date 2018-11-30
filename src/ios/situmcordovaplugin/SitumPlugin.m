@@ -372,34 +372,11 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     
     routeCallbackId = command.callbackId;
     
-    NSDictionary* fromLocation = (NSDictionary*)[command.arguments objectAtIndex:1];
-    NSDictionary* toPOI = (NSDictionary*)[command.arguments objectAtIndex:2];
-    NSDictionary* options = (NSDictionary*)[command.arguments objectAtIndex:3];
-    
     if (routesStored == nil) {
         routesStored = [[NSMutableDictionary alloc] init];
     }
     
-    
-    SITLocation *location = [SitumLocationWrapper.shared locationJsonObjectToLocation:fromLocation];
-    SITPOI *poi = (SITPOI*)[poisStored objectForKey:@"name"];
-    SITPoint *endPoint;
-    if (poi) {
-        endPoint = poi.position;
-    } else {
-        endPoint = [SitumLocationWrapper.shared pointJsonObjectToPoint:[toPOI objectForKey:@"position"]];
-    }
-    
-    SITDirectionsRequest *directionsRequest = [[SITDirectionsRequest alloc] initWithLocation: location withDestination: endPoint];
-    
-    BOOL accessible = false;
-    BOOL minimizeFloorChanges = false;
-    if(options) {
-        accessible = [(NSNumber*)[options valueForKey: @"accessibleRoute"] boolValue];
-        minimizeFloorChanges = [(NSNumber*)[options valueForKey: @"minimizeFloorChanges"] boolValue];
-    }
-    [directionsRequest setAccessible: accessible];
-    [directionsRequest setMinimizeFloorChanges: minimizeFloorChanges];
+    SITDirectionsRequest* directionsRequest = [SitumLocationWrapper.shared jsonObjectToDirectionsRequest:command.arguments poisStored:poisStored];
     
     [[SITDirectionsManager sharedInstance] setDelegate:self];
     [[SITDirectionsManager sharedInstance] requestDirections:directionsRequest];

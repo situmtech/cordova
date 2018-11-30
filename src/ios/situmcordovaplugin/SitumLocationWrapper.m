@@ -532,6 +532,35 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     return cartesianCoordinate;
 }
 
+- (SITDirectionsRequest *) jsonObjectToDirectionsRequest: (NSArray *) json
+                                                poisStored: (NSDictionary<NSString*, SITPOI*> *) poisStored {
+    NSDictionary* fromLocation = (NSDictionary*)[json objectAtIndex:1];
+    NSDictionary* toPOI = (NSDictionary*)[json objectAtIndex:2];
+    NSDictionary* options = (NSDictionary*)[json objectAtIndex:3];
+    
+    SITLocation *location = [SitumLocationWrapper.shared locationJsonObjectToLocation:fromLocation];
+    SITPOI *poi = (SITPOI*)[poisStored objectForKey:@"name"];
+    SITPoint *endPoint;
+    if (poi) {
+        endPoint = poi.position;
+    } else {
+        endPoint = [SitumLocationWrapper.shared pointJsonObjectToPoint:[toPOI objectForKey:@"position"]];
+    }
+    
+    SITDirectionsRequest *directionsRequest = [[SITDirectionsRequest alloc] initWithLocation: location withDestination: endPoint];
+    
+    BOOL accessible = false;
+    BOOL minimizeFloorChanges = false;
+    if(options) {
+        accessible = [(NSNumber*)[options valueForKey: @"accessibleRoute"] boolValue];
+        minimizeFloorChanges = [(NSNumber*)[options valueForKey: @"minimizeFloorChanges"] boolValue];
+    }
+    [directionsRequest setAccessible: accessible];
+    [directionsRequest setMinimizeFloorChanges: minimizeFloorChanges];
+    return directionsRequest;
+}
+
+
 // Dimensions
 
 - (NSDictionary *) dimensionsToJsonObject:(SITDimensions *) dimensions {

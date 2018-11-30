@@ -64,6 +64,10 @@
 
 - (SITCartesianCoordinate *) cartesianCoordinateJsonObjectToCartesianCoordinate:(NSDictionary *) jo;
 
+// Directions
+- (SITDirectionsRequest *) jsonObjectToDirectionsRequest: (NSArray *) json
+                                              poisStored: (NSDictionary<NSString*, SITPOI*> *) poisStored;
+
 // Dimensions
 
 - (NSDictionary *) dimensionsToJsonObject:(SITDimensions *) dimensions;
