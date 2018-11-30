@@ -106,6 +106,14 @@ $ cordova plugin add situm-cordova-plugin-official
 $ cordova plugin add https://github.com/situmtech/situm-cordova-plugin.git
 ```
 
+#### Additional note
+
+It's possible that the proccess of adding the plugin fails with a Cocoapods error saying there are specs to satisfy the pod but the deployment target is too low. To fix this, you just need to add the following line in your config.xml file:
+
+```xml
+<preference name="deployment-target" value="9.0.0" />
+```
+
 ## Using the Plugin
 
 ### Accessing plugin object
