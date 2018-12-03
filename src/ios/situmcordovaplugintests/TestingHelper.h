@@ -39,6 +39,7 @@
 - (void) assertCartesianCoordinate: (SITCartesianCoordinate*) coordinateA isEqualToCartesianCoordinate: (SITCartesianCoordinate*) coordinateB;
 - (void) assertPoint: (SITPoint*) pointA isEqualToPoint: (SITPoint*) pointB;
 - (void) assertLocationRequest: (SITLocationRequest *) requestA isEqualToLocationRequest: (SITLocationRequest *) requestB;
+- (void) assertDirectionsRequest: (SITDirectionsRequest *) requestA isEqualToDirectionsRequest: (SITDirectionsRequest *) requestB;
 - (void) assertLocation: (SITLocation*) locationA isEqualToLocation: (SITLocation*) locationB;
 - (void) assertPoiCategory: (SITPOICategory*) poiCategoryA isEqualToPoiCategory: (SITPOICategory*) poiCategoryB;
 - (void) assertIndication: (SITIndication*) indicationA isEqualToIndication: (SITIndication*) indicationB;
