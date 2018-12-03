@@ -185,6 +185,9 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     NSNumber *useDeadReckoning = nil;
     NSNumber *useGps = nil;
     NSString *buildingId;
+    NSString *realtimeUpdateInterval;
+    SITRealtimeUpdateInterval interval = 0;
+    
     
     
     //The following if-else is necessary in order to mantain compatibility
@@ -199,6 +202,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
             buildingId = [NSString stringWithFormat:@"%@", requestJO[@"buildingIdentifier"]];
             useDeadReckoning = [requestJO objectForKey: @"useDeadReckoning"];
             useGps = [requestJO objectForKey: @"useGps"];
+            realtimeUpdateInterval = requestJO[@"realtimeUpdateInterval"];
         }
     } else {
         buildingJO = (NSDictionary*)json[0];
@@ -211,6 +215,22 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     if (buildingId == nil) {
         buildingId = [NSString stringWithFormat:@"%@", [buildingJO valueForKey:@"buildingIdentifier"]];
     }
+    
+    if (realtimeUpdateInterval != nil) {
+        
+        if ([realtimeUpdateInterval isEqualToString:@"REALTIME"]) {
+            interval = kSITUpdateIntervalRealtime;
+        } else if ([realtimeUpdateInterval isEqualToString:@"FAST"]) {
+            interval = kSITUpdateIntervalFast;
+        } else if ([realtimeUpdateInterval isEqualToString:@"NORMAL"]) {
+            interval = kSITUpdateIntervalNormal;
+        } else if ([realtimeUpdateInterval isEqualToString:@"SLOW"]) {
+            interval = kSITUpdateIntervalSlow;
+        } else if ([realtimeUpdateInterval isEqualToString:@"BATTERY_SAVER"]) {
+            interval = 18000; //temporary
+        }
+    }
+    
     SITLocationRequest *locationRequest = [[SITLocationRequest alloc] initWithBuildingId:buildingId];
     if (useDeadReckoning != nil) {
         [locationRequest setUseDeadReckoning:[useDeadReckoning boolValue]];
@@ -218,6 +238,10 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     }
     if(useGps != nil) {
         [locationRequest setUseGps:[useGps boolValue]];
+    }
+    
+    if (interval != 0) {
+        [locationRequest setUpdateInterval:interval];
     }
     return locationRequest;
 }
