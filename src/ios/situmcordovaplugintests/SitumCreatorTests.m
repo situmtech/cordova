@@ -181,6 +181,15 @@
     return locationRequest;
 }
 
+//locationRequest4.json
++ (SITLocationRequest *) createLocationRequestWithBatterySaver {
+    SITLocationRequest *locationRequest = [[SITLocationRequest alloc] initWithBuildingId:@"1051"];
+    [locationRequest setUseDeadReckoning:true];
+    [locationRequest setUseGps:true];
+    [locationRequest setUpdateInterval: 1800];
+    return locationRequest;
+}
+
 //location1.json
 + (SITLocation *) createLocationWithBuildingFloorAndCartesianCoordinates {
     NSTimeInterval timestamp = 14676784;
