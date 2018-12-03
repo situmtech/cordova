@@ -2,6 +2,7 @@ package es.situm.plugin;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.support.annotation.Nullable;
 import android.util.Base64;
 
 import org.json.JSONArray;
@@ -19,6 +20,7 @@ import java.util.Map;
 
 import java.io.ByteArrayOutputStream;
 
+import es.situm.sdk.directions.DirectionsRequest;
 import es.situm.sdk.location.LocationStatus;
 import es.situm.sdk.location.util.CoordinateConverter;
 import es.situm.sdk.model.I18nString;
@@ -177,6 +179,7 @@ class SitumMapper {
   public static final String SMALLEST_DISPLACEMENT = "smallestDisplacement";
   public static final String REALTIME_UPDATE_INTERVAL = "realtimeUpdateInterval";
   public static final String ACCESSIBLE = "accessible";
+  public static final String ACCESSIBLE_ROUTE = "accessibleRoute";
   public static final String CACHE_AGE = "cacheAge";
 
   public static final String DISTANCE_TO_IGNORE_FIRST_INDICATION = "distanceToIgnoreFirstIndication";
@@ -197,7 +200,7 @@ class SitumMapper {
   public static final String CREATED_AT = "createdAt";
   public static final String UPDATED_AT = "updatedAt";
   public static final String NAME = "name";
-  public static final String ACCESSIBLE_MODE = "accessibleMode";
+  public static final String ACCESSIBILITY_MODE = "accessibilityMode";
 
   public static final DateFormat dateFormat = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy", Locale.US);
 
@@ -681,5 +684,36 @@ class SitumMapper {
     encodedImage = Base64.encodeToString(byteArrayOS.toByteArray(), Base64.DEFAULT);
     jo.put("data", encodedImage);
     return jo;
+  }
+
+  static DirectionsRequest jsonObjectToDirectionsRequest(JSONObject joBuilding, JSONObject joFrom,
+                                                         JSONObject joTo,@Nullable JSONObject joOptions) throws JSONException {
+    Point from = SitumMapper.pointJsonObjectToPoint(joFrom, joBuilding);
+    Point to = SitumMapper.pointJsonObjectToPoint(joTo, joBuilding);
+    DirectionsRequest.AccessibilityMode accessibilityMode = DirectionsRequest.AccessibilityMode.CHOOSE_SHORTEST;
+    Boolean minimizeFloorChanges = false;
+    double startingAngle = 0.0;
+
+    if ( joOptions != null) {
+      if (joOptions.has(SitumMapper.ACCESSIBILITY_MODE)) {
+        String mode = joOptions.getString(SitumMapper.ACCESSIBILITY_MODE);
+        if (mode.equals(DirectionsRequest.AccessibilityMode.ONLY_ACCESSIBLE.name())) {
+          accessibilityMode = DirectionsRequest.AccessibilityMode.ONLY_ACCESSIBLE;
+        } else if (mode.equals(DirectionsRequest.AccessibilityMode.ONLY_NOT_ACCESSIBLE_FLOOR_CHANGES.name())) {
+          accessibilityMode = DirectionsRequest.AccessibilityMode.ONLY_NOT_ACCESSIBLE_FLOOR_CHANGES;
+        }
+      } else if (joOptions.has(SitumMapper.ACCESSIBLE) && joOptions.getBoolean(SitumMapper.ACCESSIBLE)) {
+        accessibilityMode = DirectionsRequest.AccessibilityMode.ONLY_ACCESSIBLE;
+      } else if (joOptions.has(SitumMapper.ACCESSIBLE_ROUTE) && joOptions.getBoolean(SitumMapper.ACCESSIBLE_ROUTE)) {
+        accessibilityMode = DirectionsRequest.AccessibilityMode.ONLY_ACCESSIBLE;
+      }
+      if (joOptions.has(SitumMapper.STARTING_ANGLE)) {
+        startingAngle = joOptions.getDouble(SitumMapper.STARTING_ANGLE);
+      }
+      if (joOptions.has(SitumMapper.MINIMIZE_FLOOR_CHANGES)) {
+        minimizeFloorChanges = joOptions.getBoolean(SitumMapper.MINIMIZE_FLOOR_CHANGES);
+      }
+    }
+    return new DirectionsRequest.Builder().from(from, Angle.fromDegrees(startingAngle)).to(to).accessibilityMode(accessibilityMode).minimizeFloorChanges(minimizeFloorChanges).build();
   }
 }

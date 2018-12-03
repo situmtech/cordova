@@ -37,11 +37,8 @@ import es.situm.sdk.model.cartography.Building;
 import es.situm.sdk.model.cartography.Floor;
 import es.situm.sdk.model.cartography.Poi;
 import es.situm.sdk.model.cartography.PoiCategory;
-import es.situm.sdk.model.cartography.Point;
 import es.situm.sdk.model.directions.Route;
-import es.situm.sdk.model.location.Angle;
 import es.situm.sdk.model.location.BeaconFilter;
-import es.situm.sdk.model.location.CartesianCoordinate;
 import es.situm.sdk.model.location.Location;
 import es.situm.sdk.model.navigation.NavigationProgress;
 import es.situm.sdk.navigation.NavigationListener;
@@ -548,7 +545,8 @@ public class PluginHelper {
                 }    
             }
 
-            if (request.has(SitumMapper.REALTIME_UPDATE_INTERVAL)) {
+            if (request.has(SitumMapper.REALTIME_UPDATE_INTERVAL) &&
+                    request.get(SitumMapper.REALTIME_UPDATE_INTERVAL) instanceof String) {
                 String realtimeUpdateInterval = request.getString(SitumMapper.REALTIME_UPDATE_INTERVAL);
                 if (realtimeUpdateInterval != null) {
                     if (realtimeUpdateInterval.equals(RealtimeUpdateInterval.REALTIME.name())) {
@@ -849,38 +847,15 @@ public class PluginHelper {
             JSONObject jsonoBuilding = args.getJSONObject(0);
             JSONObject jsonoFrom = args.getJSONObject(1);
             JSONObject jsonoTo = args.getJSONObject(2);
-            Point from = SitumMapper.pointJsonObjectToPoint(jsonoFrom, jsonoBuilding);
-            Point to = SitumMapper.pointJsonObjectToPoint(jsonoTo, jsonoBuilding);
-            DirectionsRequest.AccessibilityMode accessibilityMode = DirectionsRequest.AccessibilityMode.CHOOSE_SHORTEST;
-            Boolean minimizeFloorChanges = false;
-            double startingAngle = 0.0;
+            JSONObject jsonoOptions = null;
             if (args.length() > 2) {
-                JSONObject options = args.getJSONObject(3);
-                Log.i(TAG, "request directions options" + options);
-                if(options.has(SitumMapper.ACCESSIBLE_MODE)) {
-                    String mode = options.getString(SitumMapper.ACCESSIBLE_MODE);
-                    if(mode.equals(DirectionsRequest.AccessibilityMode.ONLY_ACCESSIBLE.name())) {
-                        accessibilityMode = DirectionsRequest.AccessibilityMode.ONLY_ACCESSIBLE;
-                    } else if (mode.equals(DirectionsRequest.AccessibilityMode.ONLY_NOT_ACCESSIBLE_FLOOR_CHANGES.name())) {
-                        accessibilityMode = DirectionsRequest.AccessibilityMode.ONLY_NOT_ACCESSIBLE_FLOOR_CHANGES;
-                    }
-                } else if (options.has(SitumMapper.ACCESSIBLE) && options.getBoolean(SitumMapper.ACCESSIBLE)) {
-                    accessibilityMode = DirectionsRequest.AccessibilityMode.ONLY_ACCESSIBLE;
-                }
-                if (options.has(SitumMapper.STARTING_ANGLE)) {
-                    startingAngle = options.getDouble(SitumMapper.STARTING_ANGLE);
-                }
-                if (options.has(SitumMapper.MINIMIZE_FLOOR_CHANGES)) {
-                    minimizeFloorChanges = options.getBoolean(SitumMapper.MINIMIZE_FLOOR_CHANGES);
-                }
+                jsonoOptions = args.getJSONObject(3);
             }
-            DirectionsRequest directionRequest = new DirectionsRequest.Builder().from(from, Angle.fromDegrees(startingAngle)).to(to).accessibilityMode(accessibilityMode).minimizeFloorChanges(minimizeFloorChanges).build();
+            DirectionsRequest directionRequest =
+                    SitumMapper.jsonObjectToDirectionsRequest(jsonoBuilding, jsonoFrom, jsonoTo, jsonoOptions);
             SitumSdk.directionsManager().requestDirections(directionRequest, new Handler<Route>() {
                 @Override
                 public void onSuccess(Route route) {
-                    
-                    // TODO: Remove this line before going to public (Just for development purposes)
-                    PluginHelper.this.computedRoute = route;
                     try {
                         JSONObject jsonoRoute = SitumMapper.routeToJsonObject(route, cordova.getActivity());
                         Log.i(TAG, "onSuccess: Route calculated successfully" + route);
