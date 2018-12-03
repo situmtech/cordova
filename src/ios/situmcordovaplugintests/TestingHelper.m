@@ -262,9 +262,10 @@
 }
 
 - (void) assertLocationRequest: (SITLocationRequest *) requestA isEqualToLocationRequest: (SITLocationRequest *) requestB {
-    XCTAssertEqualObjects(requestA.buildingID, requestB.buildingID);
-    XCTAssertEqual(requestA.useDeadReckoning, requestB.useDeadReckoning);
-    XCTAssertEqual(requestA.useGps, requestB.useGps);
+    XCTAssertEqualObjects(requestA.buildingID, requestB.buildingID, @"LocationRequest: building identifier wasn't equal");
+    XCTAssertEqual(requestA.useDeadReckoning, requestB.useDeadReckoning, @"LocationRequest: useDeadReckoning value wasn't equal");
+    XCTAssertEqual(requestA.useGps, requestB.useGps, @"LocationRequest: useGps value wasn't equal");
+    XCTAssertEqual(requestA.updateInterval, requestB.updateInterval, @"LocationRequest: updateInterval wasn`t equal");
 }
 
 - (void) assertLocation: (SITLocation *) locationA isEqualToLocation:(SITLocation *)locationB {
