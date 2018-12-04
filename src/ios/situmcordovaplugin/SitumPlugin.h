@@ -8,7 +8,7 @@
     NSMutableDictionary *floorStored;
     NSMutableDictionary *eventStored;
     NSMutableDictionary *categoryStored;
-    NSMutableDictionary *poisStored;
+    NSMutableDictionary<NSString *, SITPOI*> *poisStored;
     NSMutableDictionary *routesStored;
     
     NSString *locationCallbackId, *routeCallbackId, *navigationProgressCallbackId;

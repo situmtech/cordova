@@ -268,6 +268,15 @@
     XCTAssertEqual(requestA.updateInterval, requestB.updateInterval, @"LocationRequest: updateInterval wasn`t equal");
 }
 
+- (void) assertDirectionsRequest: (SITDirectionsRequest *) requestA isEqualToDirectionsRequest: (SITDirectionsRequest *) requestB {
+    [self assertPoint:requestA.origin isEqualToPoint:requestB.origin];
+    [self assertPoint:requestA.destination isEqualToPoint:requestB.destination];
+    XCTAssertEqual(requestA.options.count, requestB.options.count);
+    XCTAssertEqual(requestA.options[@"initialBearing"], requestB.options[@"initialBearing"]);
+    XCTAssertEqual(requestA.options[@"minimizeFloorChanges"], requestB.options[@"minimizeFloorChanges"]);
+    XCTAssertEqual(requestA.options[@"accessible"], requestB.options[@"accessible"]);
+}
+
 - (void) assertLocation: (SITLocation *) locationA isEqualToLocation:(SITLocation *)locationB {
     XCTAssertEqualWithAccuracy(locationA.accuracy, locationB.accuracy, 0.001);
     XCTAssertEqualObjects(locationA.provider, locationB.provider);

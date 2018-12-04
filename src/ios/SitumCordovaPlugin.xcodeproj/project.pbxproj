@@ -97,6 +97,7 @@
 		7ED95D581AB9029B008C4574 /* NSDictionary+CordovaPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED95D321AB9029B008C4574 /* NSDictionary+CordovaPreferences.m */; };
 		7ED95D591AB9029B008C4574 /* NSMutableArray+QueueAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ED95D331AB9029B008C4574 /* NSMutableArray+QueueAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7ED95D5A1AB9029B008C4574 /* NSMutableArray+QueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED95D341AB9029B008C4574 /* NSMutableArray+QueueAdditions.m */; };
+		952D03B021B160DE000C6530 /* DirectionsRequestTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 952D03AF21B160DE000C6530 /* DirectionsRequestTest.m */; };
 		954995F0214F8BBB007F3C28 /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 954995EE214F8BBB007F3C28 /* Constants.h */; };
 		954995F1214F8BBB007F3C28 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 954995EF214F8BBB007F3C28 /* Constants.m */; };
 		954995F2214F8BBB007F3C28 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 954995EF214F8BBB007F3C28 /* Constants.m */; };
@@ -254,6 +255,7 @@
 		7ED95D331AB9029B008C4574 /* NSMutableArray+QueueAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+QueueAdditions.h"; sourceTree = "<group>"; };
 		7ED95D341AB9029B008C4574 /* NSMutableArray+QueueAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+QueueAdditions.m"; sourceTree = "<group>"; };
 		8F5368C04B299F04076437E6 /* Pods_situmcordovaplugintests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_situmcordovaplugintests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		952D03AF21B160DE000C6530 /* DirectionsRequestTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DirectionsRequestTest.m; sourceTree = "<group>"; };
 		954995EE214F8BBB007F3C28 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		954995EF214F8BBB007F3C28 /* Constants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		954995F7214FACD8007F3C28 /* PoiCategoryIconTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoiCategoryIconTests.m; sourceTree = "<group>"; };
@@ -489,6 +491,7 @@
 				3A40113A2153C4CB00AC3BD5 /* InputPoiCategoryTests.m */,
 				3A40113C2153CBA800AC3BD5 /* InputIndicationTests.m */,
 				957695E0217DA8960082E679 /* LocationRequestTest.m */,
+				952D03AF21B160DE000C6530 /* DirectionsRequestTest.m */,
 			);
 			path = InputTests;
 			sourceTree = "<group>";
@@ -832,6 +835,7 @@
 				954995F8214FACD8007F3C28 /* PoiCategoryIconTests.m in Sources */,
 				954995F2214F8BBB007F3C28 /* Constants.m in Sources */,
 				95B14A35214A476B0073A9E1 /* CoordinateTests.m in Sources */,
+				952D03B021B160DE000C6530 /* DirectionsRequestTest.m in Sources */,
 				95B14A49214A535A0073A9E1 /* RouteStepTests.m in Sources */,
 				3A4011392153B24400AC3BD5 /* InputLocationTests.m in Sources */,
 				95B14A4D214A56CE0073A9E1 /* BuildingTests.m in Sources */,
