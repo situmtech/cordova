@@ -63,4 +63,17 @@
     // Compare both indications
     [_helper assertLocationRequest: convertedLocationRequest isEqualToLocationRequest: referenceLocationRequest];
 }
+
+- (void) testLocationRequestBatterySaver {
+    // Create the object to convert and test
+    NSString *filename =  @"locationRequest4";
+    NSArray *jsonLocationRequest = [TestingHelper dataFromJSONFileNamed: filename inDirectory : _pointFilePath];
+    SITLocationRequest* convertedLocationRequest = [[SitumLocationWrapper shared] jsonObjectToLocationRequest: jsonLocationRequest];
+    
+    // Create the reference valid object to compare against
+    SITLocationRequest* referenceLocationRequest = [SitumCreatorTests createLocationRequestWithBatterySaver];
+    
+    // Compare both indications
+    [_helper assertLocationRequest: convertedLocationRequest isEqualToLocationRequest: referenceLocationRequest];
+}
 @end

@@ -181,6 +181,13 @@
     return locationRequest;
 }
 
+//locationRequest4.json
++ (SITLocationRequest *) createLocationRequestWithBatterySaver {
+    SITLocationRequest *locationRequest = [[SITLocationRequest alloc] initWithBuildingId:@"1051"];
+    [locationRequest setUpdateInterval: 1800];
+    return locationRequest;
+}
+
 //directionsRequest1.json
 + (SITDirectionsRequest *) createDirectionsRequestWithPOI {
     SITDirectionsRequest *directionsRequest = [[SITDirectionsRequest alloc] initWithLocation:[self createLocationWithBuildingAndCoordinate] withDestination:[self createPoiWithBuildingFloorAndCoordinates].position];
