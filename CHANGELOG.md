@@ -8,6 +8,15 @@ All non released changes should be in CHANGELOG_UNRELEASED.md file
 
 ---------
 
+## [1.8.9] - 2018-12-04
+
+### Changed
+* Integrate SitumSDK for iOS through Cocoapods
+* Update iOS SDK version to 2.17.2
+* Update Android SDK version to 2.30.1
+* Parse `realtimeUpdateInterval` as a String
+* Parse accessibilityMode 
+
 ## [1.8.9] - 2018-11-12
 
 ### Fixed
