@@ -181,6 +181,35 @@
     return locationRequest;
 }
 
+//locationRequest4.json
++ (SITLocationRequest *) createLocationRequestWithBatterySaver {
+    SITLocationRequest *locationRequest = [[SITLocationRequest alloc] initWithBuildingId:@"1051"];
+    [locationRequest setUpdateInterval: 1800];
+    return locationRequest;
+}
+
+//directionsRequest1.json
++ (SITDirectionsRequest *) createDirectionsRequestWithPOI {
+    SITDirectionsRequest *directionsRequest = [[SITDirectionsRequest alloc] initWithLocation:[self createLocationWithBuildingAndCoordinate] withDestination:[self createPoiWithBuildingFloorAndCoordinates].position];
+    [directionsRequest setMinimizeFloorChanges:true];
+    [directionsRequest setAccessibility:kSITChooseShortest];
+    return directionsRequest;
+}
+
++ (SITDirectionsRequest *) createDirectionsRequestWithLocation {
+    SITDirectionsRequest *directionsRequest = [[SITDirectionsRequest alloc] initWithLocation:[self createLocationWithBuildingAndCoordinate] withDestination:[self locationWithCartesianBearing].position];
+    [directionsRequest setMinimizeFloorChanges:true];
+    [directionsRequest setAccessibility:kSITChooseShortest];
+    return directionsRequest;
+}
+
++ (SITDirectionsRequest *) createDirectionsRequestWithAccessible {
+    SITDirectionsRequest *directionsRequest = [[SITDirectionsRequest alloc] initWithLocation:[self createLocationWithBuildingAndCoordinate] withDestination:[self locationWithCartesianBearing].position];
+    [directionsRequest setMinimizeFloorChanges:true];
+    [directionsRequest setAccessible:true];
+    return directionsRequest;
+}
+
 //location1.json
 + (SITLocation *) createLocationWithBuildingFloorAndCartesianCoordinates {
     NSTimeInterval timestamp = 14676784;

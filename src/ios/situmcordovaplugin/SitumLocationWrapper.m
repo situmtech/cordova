@@ -185,6 +185,9 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     NSNumber *useDeadReckoning = nil;
     NSNumber *useGps = nil;
     NSString *buildingId;
+    NSString *realtimeUpdateInterval;
+    SITRealtimeUpdateInterval interval = 0;
+    
     
     
     //The following if-else is necessary in order to mantain compatibility
@@ -199,6 +202,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
             buildingId = [NSString stringWithFormat:@"%@", requestJO[@"buildingIdentifier"]];
             useDeadReckoning = [requestJO objectForKey: @"useDeadReckoning"];
             useGps = [requestJO objectForKey: @"useGps"];
+            realtimeUpdateInterval = requestJO[@"realtimeUpdateInterval"];
         }
     } else {
         buildingJO = (NSDictionary*)json[0];
@@ -211,6 +215,22 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     if (buildingId == nil) {
         buildingId = [NSString stringWithFormat:@"%@", [buildingJO valueForKey:@"buildingIdentifier"]];
     }
+    
+    if (realtimeUpdateInterval != nil) {
+        
+        if ([realtimeUpdateInterval isEqualToString:@"REALTIME"]) {
+            interval = kSITUpdateIntervalRealtime;
+        } else if ([realtimeUpdateInterval isEqualToString:@"FAST"]) {
+            interval = kSITUpdateIntervalFast;
+        } else if ([realtimeUpdateInterval isEqualToString:@"NORMAL"]) {
+            interval = kSITUpdateIntervalNormal;
+        } else if ([realtimeUpdateInterval isEqualToString:@"SLOW"]) {
+            interval = kSITUpdateIntervalSlow;
+        } else if ([realtimeUpdateInterval isEqualToString:@"BATTERY_SAVER"]) {
+            interval = 1800; //temporary
+        }
+    }
+    
     SITLocationRequest *locationRequest = [[SITLocationRequest alloc] initWithBuildingId:buildingId];
     if (useDeadReckoning != nil) {
         [locationRequest setUseDeadReckoning:[useDeadReckoning boolValue]];
@@ -218,6 +238,10 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     }
     if(useGps != nil) {
         [locationRequest setUseGps:[useGps boolValue]];
+    }
+    
+    if (interval != 0) {
+        [locationRequest setUpdateInterval:interval];
     }
     return locationRequest;
 }
@@ -531,6 +555,48 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     SITCartesianCoordinate *cartesianCoordinate = [[SITCartesianCoordinate alloc] initWithX:[[jo valueForKey:@"x"] doubleValue] y:[[jo valueForKey:@"y"] doubleValue]];
     return cartesianCoordinate;
 }
+
+- (SITDirectionsRequest *) jsonObjectToDirectionsRequest: (NSArray *) json {
+    NSDictionary* fromLocation = (NSDictionary*)[json objectAtIndex:1];
+    NSDictionary* toPOI = (NSDictionary*)[json objectAtIndex:2];
+    NSDictionary* options = (NSDictionary*)[json objectAtIndex:3];
+    
+    SITLocation *location = [SitumLocationWrapper.shared locationJsonObjectToLocation:fromLocation];
+    SITPoint *endPoint = [SitumLocationWrapper.shared pointJsonObjectToPoint:[toPOI objectForKey:@"position"]];
+    
+    SITDirectionsRequest *directionsRequest = [[SITDirectionsRequest alloc] initWithLocation: location withDestination: endPoint];
+    
+    NSNumber *accessible;
+    BOOL minimizeFloorChanges = false;
+    NSString *accessibilityModeValue = nil;
+    if(options) {
+        accessible = (NSNumber*)[options valueForKey: @"accessible"];
+        if (accessible == nil) {
+            accessible = (NSNumber*)[options valueForKey: @"accessibleRoute"];
+        }
+        accessibilityModeValue = options[@"accessibilityMode"];
+        minimizeFloorChanges = [(NSNumber*)[options valueForKey: @"minimizeFloorChanges"] boolValue];
+    }
+    
+    if (accessibilityModeValue != nil) {
+        SITAccessibilityMode accessibilityMode;
+        if ([accessibilityModeValue isEqualToString:@"CHOOSE_SHORTEST"]) {
+            accessibilityMode = kSITChooseShortest;
+        } else if ([accessibilityModeValue isEqualToString:@"ONLY_NOT_ACCESSIBLE_FLOOR_CHANGES"]) {
+            accessibilityMode = kSITOnlyNotAccessibleFloorChanges;
+        } else {
+            accessibilityMode = kSITOnlyAccessible;
+        }
+        [directionsRequest setAccessibility:accessibilityMode];
+    } else if (accessible != nil) {
+        
+        [directionsRequest setAccessible: [accessible boolValue]];
+    }
+    
+    [directionsRequest setMinimizeFloorChanges: minimizeFloorChanges];
+    return directionsRequest;
+}
+
 
 // Dimensions
 

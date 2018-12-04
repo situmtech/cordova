@@ -37,11 +37,8 @@ import es.situm.sdk.model.cartography.Building;
 import es.situm.sdk.model.cartography.Floor;
 import es.situm.sdk.model.cartography.Poi;
 import es.situm.sdk.model.cartography.PoiCategory;
-import es.situm.sdk.model.cartography.Point;
 import es.situm.sdk.model.directions.Route;
-import es.situm.sdk.model.location.Angle;
 import es.situm.sdk.model.location.BeaconFilter;
-import es.situm.sdk.model.location.CartesianCoordinate;
 import es.situm.sdk.model.location.Location;
 import es.situm.sdk.model.navigation.NavigationProgress;
 import es.situm.sdk.navigation.NavigationListener;
@@ -548,17 +545,20 @@ public class PluginHelper {
                 }    
             }
 
-            if (request.has(SitumMapper.REALTIME_UPDATE_INTERVAL)) {
-                Integer realtimeUpdateInterval = request.getInt(SitumMapper.REALTIME_UPDATE_INTERVAL);
+            if (request.has(SitumMapper.REALTIME_UPDATE_INTERVAL) &&
+                    request.get(SitumMapper.REALTIME_UPDATE_INTERVAL) instanceof String) {
+                String realtimeUpdateInterval = request.getString(SitumMapper.REALTIME_UPDATE_INTERVAL);
                 if (realtimeUpdateInterval != null) {
-                    if (realtimeUpdateInterval.equals(RealtimeUpdateInterval.REALTIME)) {
+                    if (realtimeUpdateInterval.equals(RealtimeUpdateInterval.REALTIME.name())) {
                         locationBuilder.realtimeUpdateInterval(RealtimeUpdateInterval.REALTIME);
-                    } else if (realtimeUpdateInterval.equals(RealtimeUpdateInterval.FAST)) {
+                    } else if (realtimeUpdateInterval.equals(RealtimeUpdateInterval.FAST.name())) {
                         locationBuilder.realtimeUpdateInterval(RealtimeUpdateInterval.FAST);
-                    } else if (realtimeUpdateInterval.equals(RealtimeUpdateInterval.NORMAL)) {
+                    } else if (realtimeUpdateInterval.equals(RealtimeUpdateInterval.NORMAL.name())) {
                         locationBuilder.realtimeUpdateInterval(RealtimeUpdateInterval.NORMAL);
-                    } else if (realtimeUpdateInterval.equals(RealtimeUpdateInterval.SLOW)) {
+                    } else if (realtimeUpdateInterval.equals(RealtimeUpdateInterval.SLOW.name())) {
                         locationBuilder.realtimeUpdateInterval(RealtimeUpdateInterval.SLOW);
+                    } else if (realtimeUpdateInterval.equals(RealtimeUpdateInterval.BATTERY_SAVER.name())) {
+                        locationBuilder.realtimeUpdateInterval(RealtimeUpdateInterval.BATTERY_SAVER);
                     }
                     Log.i(TAG, "realtimeUpdateInterval: " + realtimeUpdateInterval);
                 }
@@ -567,8 +567,7 @@ public class PluginHelper {
            locationBuilder.buildingIdentifier(sBuildingId);
         }
 
-        LocationRequest locationRequest = locationBuilder.build();
-        return locationRequest;
+        return locationBuilder.build();
     }
 
     public void startPositioning(final CordovaInterface cordova, CordovaWebView webView, JSONArray args,
@@ -585,11 +584,6 @@ public class PluginHelper {
                         try {
                             PluginHelper.this.computedLocation = location; // This is for testing purposes
                             Log.i(PluginHelper.TAG, "onLocationChanged() called with: location = [" + location + "]");
-                            CartesianCoordinate cartesianCoordinate = location.getCartesianCoordinate();
-                            String locationMessage = "building: " + location.getBuildingIdentifier() + "\nfloor: "
-                                    + location.getFloorIdentifier() + "\nx: " + cartesianCoordinate.getX() + "\ny: "
-                                    + cartesianCoordinate.getY() + "\nyaw: " + location.getCartesianBearing()
-                                    + "\naccuracy: " + location.getAccuracy();
                             JSONObject jsonObject = SitumMapper.locationToJsonObject(location);
                             PluginResult result = new PluginResult(Status.OK, jsonObject);
                             result.setKeepCallback(true);
@@ -853,32 +847,15 @@ public class PluginHelper {
             JSONObject jsonoBuilding = args.getJSONObject(0);
             JSONObject jsonoFrom = args.getJSONObject(1);
             JSONObject jsonoTo = args.getJSONObject(2);
-            Point from = SitumMapper.pointJsonObjectToPoint(jsonoFrom, jsonoBuilding);
-            Point to = SitumMapper.pointJsonObjectToPoint(jsonoTo, jsonoBuilding);
-            Boolean accessibleRoute = false;
-            Boolean minimizeFloorChanges = false;
-            double startingAngle = 0.0;
+            JSONObject jsonoOptions = null;
             if (args.length() > 2) {
-                JSONObject options = args.getJSONObject(3);
-                Log.i(TAG, "request directions options" + options);
-
-                if (options.has(SitumMapper.ACCESSIBLE)) {
-                    accessibleRoute = options.getBoolean(SitumMapper.ACCESSIBLE);
-                }
-                if (options.has(SitumMapper.STARTING_ANGLE)) {
-                    startingAngle = options.getDouble(SitumMapper.STARTING_ANGLE);
-                }
-                if (options.has(SitumMapper.MINIMIZE_FLOOR_CHANGES)) {
-                    minimizeFloorChanges = options.getBoolean(SitumMapper.MINIMIZE_FLOOR_CHANGES);
-                }
+                jsonoOptions = args.getJSONObject(3);
             }
-            DirectionsRequest directionRequest = new DirectionsRequest.Builder().from(from, Angle.fromDegrees(startingAngle)).to(to).isAccessible(accessibleRoute).minimizeFloorChanges(minimizeFloorChanges).build();
+            DirectionsRequest directionRequest =
+                    SitumMapper.jsonObjectToDirectionsRequest(jsonoBuilding, jsonoFrom, jsonoTo, jsonoOptions);
             SitumSdk.directionsManager().requestDirections(directionRequest, new Handler<Route>() {
                 @Override
                 public void onSuccess(Route route) {
-                    
-                    // TODO: Remove this line before going to public (Just for development purposes)
-                    PluginHelper.this.computedRoute = route;
                     try {
                         JSONObject jsonoRoute = SitumMapper.routeToJsonObject(route, cordova.getActivity());
                         Log.i(TAG, "onSuccess: Route calculated successfully" + route);

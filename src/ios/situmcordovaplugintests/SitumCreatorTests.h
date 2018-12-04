@@ -36,7 +36,12 @@
 + (SITLocationRequest *) createLegacyLocationRequest;
 + (SITLocationRequest *) createLocationRequestWithoutGpsNorDeadReckoning;
 + (SITLocationRequest *) createLocationRequestWithGpsAndDeadReckoning;
++ (SITLocationRequest *) createLocationRequestWithBatterySaver; //locationRequest4.json
 
+//directionsRequest
++ (SITDirectionsRequest *) createDirectionsRequestWithPOI;
++ (SITDirectionsRequest *) createDirectionsRequestWithLocation;
++ (SITDirectionsRequest *) createDirectionsRequestWithAccessible;
 //location
 + (SITLocation *) createLocationWithBuildingFloorAndCartesianCoordinates; //location1.json
 + (SITLocation *) createLocationWithCoordinate; //location2.json

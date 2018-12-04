@@ -1,8 +1,6 @@
 package es.situm.plugin;
 
 
-import android.graphics.Bitmap;
-
 import com.google.common.truth.Truth;
 
 import org.json.JSONArray;
@@ -23,6 +21,7 @@ import es.situm.plugin.cartesianCoordinate.CartesianCoordinateCreator;
 import es.situm.plugin.circle.CircleCreator;
 import es.situm.plugin.coordinate.CoordinateCreator;
 import es.situm.plugin.dimensions.DimensionsCreator;
+import es.situm.plugin.directionsRequest.DirectionsRequestCreator;
 import es.situm.plugin.event.EventCreator;
 import es.situm.plugin.floor.FloorCreator;
 import es.situm.plugin.indication.IndicationCreator;
@@ -35,6 +34,7 @@ import es.situm.plugin.point.PointCreator;
 import es.situm.plugin.route.RouteCreator;
 import es.situm.plugin.routeStep.RouteStepCreator;
 import es.situm.plugin.situmConversionArea.SitumConversionAreaCreator;
+import es.situm.sdk.directions.DirectionsRequest;
 import es.situm.sdk.location.LocationStatus;
 import es.situm.sdk.model.cartography.Building;
 import es.situm.sdk.model.cartography.Circle;
@@ -181,6 +181,7 @@ public class SitumMapperTest {
     private CircleCreator circleCreator = new CircleCreator();
     private PoiCreator poiCreator = new PoiCreator();
     private BuildingCreator buildingCreator = new BuildingCreator();
+    private DirectionsRequestCreator directionsRequestCreator = new DirectionsRequestCreator();
 
     @Test
     public void angleTest1() {
@@ -319,6 +320,84 @@ public class SitumMapperTest {
             testDimensions(dimessionsJSONObject, dimensions1);
         } catch (JSONException e) {
             System.err.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void directionsRequestTest1() {
+        try {
+            JSONArray jo = directionsRequestCreator.getDirectionsRequest1();
+            DirectionsRequest directionsRequest = SitumMapper.jsonObjectToDirectionsRequest(
+                    buildingCreator.getBuilding1(), pointCreator.getPoint1(), pointCreator.getPoint2(), jo.getJSONObject(3));
+            DirectionsRequest directionsRequest1 = directionsRequestCreator.createDirectionsRequest1();
+            testDirectionsRequest(directionsRequest, directionsRequest1);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void directionsRequestTest2() {
+        try {
+            JSONArray jo = directionsRequestCreator.getDirectionsRequest2();
+            DirectionsRequest directionsRequest = SitumMapper.jsonObjectToDirectionsRequest(
+                    buildingCreator.getBuilding1(), pointCreator.getPoint1(), pointCreator.getPoint2(), jo.getJSONObject(3));
+            DirectionsRequest directionsRequest1 = directionsRequestCreator.createDirectionsRequest2();
+            testDirectionsRequest(directionsRequest, directionsRequest1);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void directionsRequestTest3() {
+        try {
+            JSONArray jo = directionsRequestCreator.getDirectionsRequest3();
+            DirectionsRequest directionsRequest = SitumMapper.jsonObjectToDirectionsRequest(
+                    buildingCreator.getBuilding1(), pointCreator.getPoint1(), pointCreator.getPoint2(), jo.getJSONObject(3));
+            DirectionsRequest directionsRequest1 = directionsRequestCreator.createDirectionsRequest3();
+            testDirectionsRequest(directionsRequest, directionsRequest1);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void directionsRequestTest4() {
+        try {
+            JSONArray jo = directionsRequestCreator.getDirectionsRequest4();
+            DirectionsRequest directionsRequest = SitumMapper.jsonObjectToDirectionsRequest(
+                    buildingCreator.getBuilding1(), pointCreator.getPoint1(), pointCreator.getPoint2(), jo.getJSONObject(3));
+            DirectionsRequest directionsRequest1 = directionsRequestCreator.createDirectionsRequest4();
+            testDirectionsRequest(directionsRequest, directionsRequest1);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void directionsRequestTest5() {
+        try {
+            JSONArray jo = directionsRequestCreator.getDirectionsRequest5();
+            DirectionsRequest directionsRequest = SitumMapper.jsonObjectToDirectionsRequest(
+                    buildingCreator.getBuilding1(), pointCreator.getPoint1(), pointCreator.getPoint2(), jo.getJSONObject(3));
+            DirectionsRequest directionsRequest1 = directionsRequestCreator.createDirectionsRequest5();
+            testDirectionsRequest(directionsRequest, directionsRequest1);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void directionsRequestTest6() {
+        try {
+            JSONArray jo = directionsRequestCreator.getDirectionsRequest6();
+            DirectionsRequest directionsRequest = SitumMapper.jsonObjectToDirectionsRequest(
+                    buildingCreator.getBuilding1(), pointCreator.getPoint1(), pointCreator.getPoint2(), jo.getJSONObject(3));
+            DirectionsRequest directionsRequest1 = directionsRequestCreator.createDirectionsRequest6();
+            testDirectionsRequest(directionsRequest, directionsRequest1);
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
@@ -1084,6 +1163,11 @@ public class SitumMapperTest {
         Assert.assertEquals(defaultDimensions.getDouble(WIDTH), dimensions.getDouble(WIDTH), 0);
         Assert.assertEquals(Double.class, dimensions.get(HEIGHT).getClass());
         Assert.assertEquals(defaultDimensions.getDouble(HEIGHT), dimensions.getDouble(HEIGHT), 0);
+    }
+
+    private void testDirectionsRequest(DirectionsRequest directionsRequest, DirectionsRequest defaultDirectionsRequest) {
+        Assert.assertEquals(defaultDirectionsRequest.getAccessibilityMode(), directionsRequest.getAccessibilityMode());
+        Assert.assertEquals(defaultDirectionsRequest.minimizeFloorChanges(), directionsRequest.minimizeFloorChanges());
     }
 
     private void testFloor(Floor floor, Floor defaultFloor) {

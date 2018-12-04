@@ -7,12 +7,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 All non released changes should be in CHANGELOG_UNRELEASED.md file
 
 ---------
-## [1.9.0] - 2018-12-03
-
-### Changed
-* Integrate SitumSDK for iOS through Cocoapods
-* Update iOS SDK version to 2.17.2
-
 
 ## [1.8.9] - 2018-11-12
 
