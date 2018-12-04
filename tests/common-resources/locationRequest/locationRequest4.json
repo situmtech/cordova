@@ -11,8 +11,6 @@
         "useWifi": true,
         "motionMode": "BY_FOOT",
         "useForegroundService": true,
-        "useDeadReckoning": true,
-        "useGps": true,
         "outdoorLocationOptions": 
         {
             "continuousMode": true,
@@ -29,6 +27,6 @@
             }
         ],
         "smallestDisplacement": 1.0,
-        "realtimeUpdateInterval": "REALTIME"
+        "realtimeUpdateInterval": "BATTERY_SAVER"
     }
  ]
