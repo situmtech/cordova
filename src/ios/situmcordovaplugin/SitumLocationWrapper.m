@@ -227,7 +227,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
         } else if ([realtimeUpdateInterval isEqualToString:@"SLOW"]) {
             interval = kSITUpdateIntervalSlow;
         } else if ([realtimeUpdateInterval isEqualToString:@"BATTERY_SAVER"]) {
-            interval = 1800; //temporary
+            interval = kSITUpdateIntervalBatterySaver;
         }
     }
     
