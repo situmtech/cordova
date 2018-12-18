@@ -184,7 +184,7 @@
 //locationRequest4.json
 + (SITLocationRequest *) createLocationRequestWithBatterySaver {
     SITLocationRequest *locationRequest = [[SITLocationRequest alloc] initWithBuildingId:@"1051"];
-    [locationRequest setUpdateInterval: 1800];
+    [locationRequest setUpdateInterval: kSITUpdateIntervalBatterySaver];
     return locationRequest;
 }
 
