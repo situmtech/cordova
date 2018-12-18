@@ -857,6 +857,7 @@ public class PluginHelper {
                 @Override
                 public void onSuccess(Route route) {
                     try {
+                        PluginHelper.this.computedRoute = route;
                         JSONObject jsonoRoute = SitumMapper.routeToJsonObject(route, cordova.getActivity());
                         Log.i(TAG, "onSuccess: Route calculated successfully" + route);
                         callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonoRoute));
