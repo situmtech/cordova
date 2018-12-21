@@ -1,3 +1,4 @@
 ### Changed
-* Update iOS SDK to version 2.18.0
-* Fix `computedRoute` not being stored
+
+* Update iOS SDK to version 2.18.3
+* Update Android SDK to version 2.30.4

@@ -235,7 +235,7 @@ class SitumMapper {
   }
 
   static Map<String,String> jsonObjectToMapString(JSONObject jo) throws JSONException {
-    Map<String,String> map = new HashMap<>();
+    Map<String,String> map = new HashMap<String, String>();
     int length = jo.length();
     for(int i = 0; i<length; i++){
       map.put(jo.names().get(i).toString(),jo.getString(jo.names().get(i).toString()));

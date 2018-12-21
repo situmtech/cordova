@@ -8,7 +8,13 @@ All non released changes should be in CHANGELOG_UNRELEASED.md file
 
 ---------
 
-## [1.8.9] - 2018-12-04
+## [1.9.1] - 2018-12-18
+
+### Changed
+* Update iOS SDK to version 2.18.0
+* Fix `computedRoute` not being stored
+
+## [1.9.0] - 2018-12-04
 
 ### Changed
 * Integrate SitumSDK for iOS through Cocoapods
