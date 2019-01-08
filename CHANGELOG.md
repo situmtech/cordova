@@ -7,12 +7,26 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 All non released changes should be in CHANGELOG_UNRELEASED.md file
 
 ---------
+## [1.9.3] - 2019-01-08
+
+### Changed
+
+* Update iOS SDK to version 2.18.4
+
+## [1.9.2] - 2018-12-21
+
+### Changed
+
+* Update iOS SDK to version 2.18.3
+* Update Android SDK to version 2.30.4
+
 
 ## [1.9.1] - 2018-12-18
 
 ### Changed
 * Update iOS SDK to version 2.18.0
 * Fix `computedRoute` not being stored
+
 
 ## [1.9.0] - 2018-12-04
 
@@ -22,6 +36,7 @@ All non released changes should be in CHANGELOG_UNRELEASED.md file
 * Update Android SDK version to 2.30.1
 * Parse `realtimeUpdateInterval` as a String
 * Parse accessibilityMode 
+
 
 ## [1.8.9] - 2018-11-12
 
