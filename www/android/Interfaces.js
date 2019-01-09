@@ -357,6 +357,42 @@ var Indication = {
 
 module.exports = Indication
 
+
+/**
+ * @name
+ * NavigationProgress
+ * @description
+ * Provides information of the progress of a user while following a route.
+ * @property {Point} closestPointInRoute - Closest point in the route from the user location provided . @deprecated Use closestLocationInRoute instead.
+ * @property {Location} closestLocationInRoute - Closest location in the route from the user location provided .
+ * @property {number} distanceToClosestPointInRoute - Distance between the real user location (provided to updateWithLocation(Location)) and the closest route location.
+ * @property {Indication} currentIndication - The current indication.
+ * @property {Indication} nextIndication - The next indication.
+ * @property {number} currentStepIndex - The index of the closest route step to the user, where closestLocationInRoute is.
+ * @property {number} distanceToGoal -  The distance in meters from closestLocationInRoute to route's goal point.
+ * @property {number} distanceToEndStep - The distance in meters to go from closestLocationInRoute to the end of the current step.
+ * @property {number} timeToEndStep - The estimated time to go from closestLocationInRoute to the end of the current route step,  considering a speed of 1 meter/second.
+ * @property {number} timeToGoal - The estimated time to go from closestLocationInRoute to the goal/end of route, considering a speed of 1 meter/second.
+ * @property {RouteStep} routeStep - The closest route step to the user, where closestLocationInRoute is.
+ */
+
+var NavigationProgress = {
+  closestPointInRoute,
+  closestLocationInRoute,
+  distanceToClosestPointInRoute,
+  currentIndication,
+  nextIndication,
+  currentStepIndex,
+  distanceToGoal,
+  distanceToEndStep,
+  timeToEndStep,
+  timeToGoal,
+  routeStep
+}
+
+module.exports = NavigationProgress
+
+
 /**
  * @name
  * SitumEvent
