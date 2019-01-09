@@ -185,7 +185,7 @@ var Situm = {
    * Set the navigation params, and the listener that receives the updated navigation progress.
    * @description Set the navigation params, and the listener that receives the updated navigation progress. Can only exist one navigation with one listener at a time. If this method was previously invoked, but removeUpdates() wasn't, removeUpdates() is called internally.
    * @param {NavigationRequest} navigationRequest Request non-null search parameters.
-   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} cb Cordova native callback to recive data. See {@link NavigationProgress}
    * @param {function} error Cordova native callback to recive errors.
    * @return {void}
    */
