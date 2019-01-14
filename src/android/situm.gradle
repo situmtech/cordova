@@ -1,7 +1,7 @@
 allprojects {
     repositories {
         jcenter()
-        maven { 
+        maven {
             url "https://repo.situm.es/artifactory/libs-release-local"
         }
         maven {
@@ -13,7 +13,7 @@ allprojects {
 dependencies {
     compile 'com.google.android.gms:play-services-maps:15.0.1'
     compile 'com.google.android.gms:play-services-location:15.0.1'
-    implementation('es.situm:situm-sdk:2.30.4@aar') {
+    implementation('es.situm:situm-sdk:2.31.0@aar') {
         transitive = true
     }
 }
