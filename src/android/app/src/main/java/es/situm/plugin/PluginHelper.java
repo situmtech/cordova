@@ -575,61 +575,58 @@ public class PluginHelper {
         try {
             JSONObject jsonoBuilding = args.getJSONObject(0);
             String sBuildingName = jsonoBuilding.getString(SitumMapper.BUILDING_NAME);
-            if (locationListener == null) {
-                LocationRequest locationRequest = buildLocationRequest(args);
+            LocationRequest locationRequest = buildLocationRequest(args);
 
-                Log.i(TAG, "startPositioning: starting positioning in " + sBuildingName);
-                locationListener = new LocationListener() {
-                    public void onLocationChanged(Location location) {
-                        try {
-                            PluginHelper.this.computedLocation = location; // This is for testing purposes
-                            Log.i(PluginHelper.TAG, "onLocationChanged() called with: location = [" + location + "]");
-                            JSONObject jsonObject = SitumMapper.locationToJsonObject(location);
-                            PluginResult result = new PluginResult(Status.OK, jsonObject);
-                            result.setKeepCallback(true);
-                            callbackContext.sendPluginResult(result);
-                        } catch (JSONException e) {
-                            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
-                        }
-                    }
-
-                    public void onStatusChanged(@NonNull LocationStatus status) {
-                        try {
-                            Log.i(PluginHelper.TAG, "onStatusChanged() called with: status = [" + status + "]");
-                            JSONObject jsonObject = SitumMapper.locationStatusToJsonObject(status);
-                            PluginResult result = new PluginResult(Status.OK, jsonObject);
-                            result.setKeepCallback(true);
-                            callbackContext.sendPluginResult(result);
-                        } catch (JSONException e) {
-                            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
-                        }
-                    }
-
-                    public void onError(@NonNull Error error) {
-                        Log.e(PluginHelper.TAG, "onError() called with: error = [" + error + "]");
-                        PluginResult result = new PluginResult(Status.ERROR, error.getMessage());
+            Log.i(TAG, "startPositioning: starting positioning in " + sBuildingName);
+            locationListener = new LocationListener() {
+                public void onLocationChanged(Location location) {
+                    try {
+                        PluginHelper.this.computedLocation = location; // This is for testing purposes
+                        Log.i(PluginHelper.TAG, "onLocationChanged() called with: location = [" + location + "]");
+                        JSONObject jsonObject = SitumMapper.locationToJsonObject(location);
+                        PluginResult result = new PluginResult(Status.OK, jsonObject);
                         result.setKeepCallback(true);
                         callbackContext.sendPluginResult(result);
-                        switch (error.getCode()) {
-                        case 8001:
-                            requestLocationPermission(cordova);
-                            return;
-                        case 8002:
-                            showLocationSettings(cordova);
-                            return;
-                        default:
-                            return;
-                        }
+                    } catch (JSONException e) {
+                        callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
                     }
-                };
-                try {
-                    SitumSdk.locationManager().requestLocationUpdates(locationRequest, locationListener);
-                } catch (Exception e) {
-                    Log.e(PluginHelper.TAG, "onError() called with: error = [" + e + "]");
                 }
-                return;
+
+                public void onStatusChanged(@NonNull LocationStatus status) {
+                    try {
+                        Log.i(PluginHelper.TAG, "onStatusChanged() called with: status = [" + status + "]");
+                        JSONObject jsonObject = SitumMapper.locationStatusToJsonObject(status);
+                        PluginResult result = new PluginResult(Status.OK, jsonObject);
+                        result.setKeepCallback(true);
+                        callbackContext.sendPluginResult(result);
+                    } catch (JSONException e) {
+                        callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
+                    }
+                }
+
+                public void onError(@NonNull Error error) {
+                    Log.e(PluginHelper.TAG, "onError() called with: error = [" + error + "]");
+                    locationListener = null;
+                    PluginResult result = new PluginResult(Status.ERROR, error.getMessage());
+                    result.setKeepCallback(true);
+                    callbackContext.sendPluginResult(result);
+                    switch (error.getCode()) {
+                    case 8001:
+                        requestLocationPermission(cordova);
+                        return;
+                    case 8002:
+                        showLocationSettings(cordova);
+                        return;
+                    default:
+                        return;
+                    }
+                }
+            };
+            try {
+                SitumSdk.locationManager().requestLocationUpdates(locationRequest, locationListener);
+            } catch (Exception e) {
+                Log.e(PluginHelper.TAG, "onError() called with: error = [" + e + "]");
             }
-            Log.i(TAG, "startPositioning: location listener is already started.");
         } catch (Exception e) {
             Log.e(TAG, "Unexpected error building response", e.getCause());
             callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
