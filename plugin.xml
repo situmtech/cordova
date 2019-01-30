@@ -2,7 +2,7 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     id="situm-cordova-plugin-official"
-    version="1.9.6">
+    version="1.10.1">
     <name>Situm Cordova plugin Official</name>
     <description>This is the stable branch.</description>
     <license>MIT</license>
@@ -69,7 +69,7 @@
         <framework src="libz.dylib" />
         <framework src="libc++.dylib" />
 
-        <framework src="SitumSDK" type="podspec" spec="2.19.0" />
+        <framework src="SitumSDK" type="podspec" spec="2.21.0" />
 
 
         <header-file src="src/ios/situmcordovaplugin/SitumPlugin.h" />
