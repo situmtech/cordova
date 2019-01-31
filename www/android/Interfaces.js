@@ -467,7 +467,7 @@ module.exports = SitumConversionArea
 
 /**
  * @name
- * LocationRequest
+ * LocationOptions
  * @description
  * A data object that contains parameters for the location service, LocationManager.
  * @property {number} buildingIdentifier - Identifier of the building on which the positioning will be started
@@ -485,7 +485,7 @@ module.exports = SitumConversionArea
  * @property {string} realtimeUpdateInterval - Default interval to send locations to the Realtime. Possible values are REALTIME, FAST, NORMAL, SLOW and BATTERY_SAVER
  */
 
-var LocationRequest = {
+var LocationOptions = {
   buildingIdentifier,
   interval,
   indoorProvider,
@@ -499,6 +499,23 @@ var LocationRequest = {
   beaconFilters,
   smallestDisplacement,
   realtimeUpdateInterval
+}
+
+module.exports = LocationOptions
+
+/**
+ * @name
+ * LocationRequest
+ * @description
+ * A data object that contains parameters for the location service, LocationManager.
+ * @type {array}
+ * @property {Building} building 0 - Building on which the positioning will be started
+ * @property {LocationOptions} locationOptions 1 - Location options.
+ */
+
+var LocationRequest = { 
+    building,
+    locationOptions
 }
 
 module.exports = LocationRequest
