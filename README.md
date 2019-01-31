@@ -32,6 +32,7 @@
       - [requestNavigationUpdates](#--requestnavigationupdates)
       - [updateNavigationWithLocation](#--updatenavigationwithlocation)
       - [removeNavigationUpdates](#--removenavigationupdates)
+  * [Use Cases](#use-cases)
   * [License](#license)
   * [More information](#more-information)
   * [Support information](#support-information)
