@@ -363,29 +363,39 @@ Here we will include some examples of tipical use cases resolved using this plug
 
 #### Navigation: Guide an user through a route
 
-This funcionality will allow you to draw a route between two [points](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Point) inside a Building. Also, Situm SDK provides a way to show the indications while you are going from one point to another. In this example we will show you how to get the [indications](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Indication). 
+This funcionality will allow you to draw a route between two [points](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Point) inside a Building. Also, Situm SDK provides a way to show the [indications](https://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Indication) while you are going from one point to another. In this example we will show you how to get the [indications](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Indication). 
 
-This is a three-steps-functionallity, first we have to request directions so the route is calculated, then request the navigation updates (with the configured [options](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#NavigationRequest)) and then provide the new position every time we move along the route. 
+This is a three-steps-functionallity, first we have to request [directions](https://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Indication) so the [route](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Route) is calculated, then request the navigation updates (with the configured [options](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#NavigationRequest)) and then provide the new position every time we move along the route. 
 
-- First is obtainingt the [route](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Route). It will be received on the onSuccess callback of the`requestDirections` method. At this point, you will be able to draw a Google Maps polyline to represent the route.
+- First is obtainingt the [route](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Route):
 
 ```javascript
-var directionsOptionsMap = new Object();
-directionsOptionsMap["minimizeFloorChanges"] = true;
+
+  var directionsOptionsMap = new Object();
+  directionsOptionsMap["minimizeFloorChanges"] = true;
+  
   requestDirections([building, from, to, directionsOptionsMap], (route) => {
+  
     // Route Situm object
     console.log(route["points"])
     console.log(route["indications"])
+    
   }, (error) => {
+  
     // If errors will come here
     console.log('An unexpected error has ocurred.')
+    
   });
+  
 ```
 
 
-- Having done the previous step, we request the navigation updates:
+It will be received on the onSuccess callback of the `requestDirections` method. At this point, you will be able to draw a Google Maps polyline to represent the [route](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Route).
+
+- Having done the previous step, we request the [NavigationProgress](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#NavigationProgress):
 
 ```javascript
+
   // This are some of the options for the navigation, check the docs for more
   var navigationOptions = new Object();
   navigationOptions["distanceToIgnoreFirstIndication"] = 0.3; // (Optional) meters;
@@ -399,34 +409,50 @@ directionsOptionsMap["minimizeFloorChanges"] = true;
   navigationOptions["roundIndicationsStep"] = 5; // (Optional) milliseconds
 
   requestNavigationUpdates([navigationOptions], (res: any) => {     
+  
     if (res["type"] == "progress") {
+    
     	// Navigation progress can be processed here
     	console.log(res["currentIndication"])
-    	console.log(["res.distanceToGoal"])
+    	console.log(res["distanceToGoal"])
+    	
     } else if (res["type"] == "destinationReached") {
+    
     	// Here you manage the event when the user reaches the goal of the route
+    	
     } else if (res["type"] == "userOutsideRoute") {
+    
     	// Here you manage the event when the user is outside of the route
+    	
     }
   }, (error: any) => {
+  
     // If errors will come here 
     console.log('An unexpected error has ocurred.')
+    
   });
 ```
 
-Please note that in our first callback we are checking the `type` value in the result. this indicates if the object received is a [NavigationProgress](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#NavigationProgress) or an status update. When type is different from "progress" it means that your user has either reached it's destination or gone outside of the route. **Both former cases will cause the navigation updates to stop**. To recover from this event or start a new route you should call `- requestNavigationUpdates` again.
+Please note that in our first callback we are checking the `type` value in the result. this indicates if the object received is a [NavigationProgress](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#NavigationProgress) or an status update. When type is different from "progress" it means that your user has either reached it's destination or gone outside of the [route](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Route). **Both former cases will cause the navigation updates to stop**. To recover from this event or start a new [route](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Route) you should call `- requestNavigationUpdates` again.
 
-- Then we use this method to update the position. Each time a new position is received through `- startPositioning` callback, it should be sent with this method to update the navigation progress:
+- Then we use this method to update the [position](https://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Location):
 
 ```javascript
+
   updateNavigationWithLocation([position], (result) => {
+  
     // You shouldn't need to use this.
     // Progress will be managed in the requestNavigationUpdates callback
+    
   }, (error) => {
+  
     // If errors will come here
     console.log('An unexpected error has ocurred.')
+    
   });
 ```
+
+Each time a new [position](https://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Location) is received through `- startPositioning` callback, it should be sent with this method to receive a new [NavigationProgress](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#NavigationProgress)
 
 ## License
 
