@@ -359,20 +359,26 @@ When you are no longer interested on Navigation Updates you should call this met
 
 ## Use Cases
 
-Here we will include some examples of tipical use cases resolved using this plugin. This section is incomplete right now, but we are making efforts to expand it as soon as possible.
+Here we will include some examples of tipical use cases resolved using this plugin. This section is incomplete right now, but we are making efforts to expand it.
 
 #### Navigation: Guide an user through a route
 
-This funcionality will allow you to draw a route between two [points](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Point) inside a Building. Also, Situm SDK provides a way to show the [indications](https://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Indication) while you are going from one point to another. In this example we will show you how to get the [indications](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Indication). 
+This funcionality will allow you to draw a [route](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Route) between two [points](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Point) inside a [building](https://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Building). You can obtain an static route with all the information you need, but also, Situm SDK provides a way to show the [indications](https://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Indication) while you are going from one point to another. In this example we will show you how to get the [indications](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Indication). 
 
-This is a three-steps-functionallity, first we have to request [directions](https://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Indication) so the [route](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Route) is calculated, then request the navigation updates (with the configured [options](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#NavigationRequest)) and then provide the new position every time we move along the route. 
+This is a three-steps-functionallity, first we have to request [indications](https://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Indication) so the [route](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Route) is calculated, then request the [navigation updates](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#NavigationProgress) (with the configured [options](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#NavigationRequest)) and then provide the new [position](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Location) every time we move along the route. Next you will find a code example step by step:
 
 - First is obtainingt the [route](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Route):
 
 ```javascript
 
   var directionsOptionsMap = new Object();
+  // This defines if you want to take a minimum number of floor changes
   directionsOptionsMap["minimizeFloorChanges"] = true;
+  // This chooses if the route needs to be suitable for wheelchairs
+  // Possible values: CHOOSE_SHORTEST, ONLY_NOT_ACCESSIBLE_FLOOR_CHANGES, ONLY_ACCESSIBLE
+  directionsOptionsMap["accessibilityMode"] = "CHOOSE_SHORTEST";
+  // This defines the initial orientation in degrees
+  directionsOptionsMap["startingAngle"] = 0.0;
   
   requestDirections([building, from, to, directionsOptionsMap], (route) => {
   
@@ -390,7 +396,7 @@ This is a three-steps-functionallity, first we have to request [directions](http
 ```
 
 
-It will be received on the onSuccess callback of the `requestDirections` method. At this point, you will be able to draw a Google Maps polyline to represent the [route](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Route).
+It will be received on the onSuccess callback of the `requestDirections` method. At this point, you will be able to draw the steps to represent the [route](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Route).
 
 - Having done the previous step, we request the [NavigationProgress](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#NavigationProgress):
 
@@ -441,7 +447,6 @@ Please note that in our first callback we are checking the `type` value in the r
 
   updateNavigationWithLocation([position], (result) => {
   
-    // You shouldn't need to use this.
     // Progress will be managed in the requestNavigationUpdates callback
     
   }, (error) => {
