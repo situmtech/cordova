@@ -359,7 +359,7 @@ When you are no longer interested on Navigation Updates you should call this met
 
 ## Use Cases
 
-Here we will include some examples of tipical use cases resolved using this plugin. This section is incomplete right now, but we are making efforts to expand it.
+Here we will include some examples of tipical use cases resolved using this plugin.
 
 #### Navigation: Guide an user through a route
 
