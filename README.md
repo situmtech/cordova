@@ -441,7 +441,7 @@ It will be received on the onSuccess callback of the `requestDirections` method.
 
 Please note that in our first callback we are checking the `type` value in the result. this indicates if the object received is a [NavigationProgress](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#NavigationProgress) or an status update. When type is different from "progress" it means that your user has either reached it's destination or gone outside of the [route](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Route). **In both former cases you must stop the positioning**. To recover from this event or start a new [route](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Route) you should call `- requestNavigationUpdates` again.
 
-- Then we use this method to update the [position](https://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Location):
+- Then we update the navigation. Each time a new [position](https://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Location) is received through `- startPositioning` callback, it should be sent with this method to receive a new [NavigationProgress](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#NavigationProgress):
 
 ```javascript
 
@@ -457,7 +457,7 @@ Please note that in our first callback we are checking the `type` value in the r
   });
 ```
 
-Each time a new [position](https://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Location) is received through `- startPositioning` callback, it should be sent with this method to receive a new [NavigationProgress](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#NavigationProgress)
+
 
 ## License
 
