@@ -845,7 +845,7 @@ public class PluginHelper {
             JSONObject jsonoFrom = args.getJSONObject(1);
             JSONObject jsonoTo = args.getJSONObject(2);
             JSONObject jsonoOptions = null;
-            if (args.length() > 2) {
+            if (args.length() >= 4) {
                 jsonoOptions = args.getJSONObject(3);
             }
             DirectionsRequest directionRequest =
