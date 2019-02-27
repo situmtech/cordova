@@ -77,9 +77,9 @@ In this tutorial, we will guide you step by step to set up your first Cordova ap
 
 ### Cordova requirements:
 
-* Android: https://cordova.apache.org/docs/en/latest/guide/platforms/android/#installing-the-requirements
-
-* iOS: https://cordova.apache.org/docs/en/latest/guide/platforms/android/#installing-the-requirements
+* [Android](https://cordova.apache.org/docs/en/latest/guide/platforms/android/#installing-the-requirements)
+* [iOS](https://cordova.apache.org/docs/en/latest/guide/platforms/android/#installing-the-requirements)
+* [Cocoapods](https://cocoapods.org/) (Only if you need your application to run in iOS devices)
 
 ---
 
@@ -106,6 +106,8 @@ $ cordova plugin add situm-cordova-plugin-official
 ```
 $ cordova plugin add https://github.com/situmtech/situm-cordova-plugin.git
 ```
+
+\* *Please note that we are using Cocoapods in order to manage iOS dependencies, which means you might need to run `pod repo update` when trying to compile your app after updating our plugin*
 
 ## Using the Plugin
 
