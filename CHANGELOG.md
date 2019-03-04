@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 All non released changes should be in CHANGELOG_UNRELEASED.md file
 
 ---------
+## [1.10.6] - 2019-02-27
+
+### Changed
+
+* Updated iOS sdk to 2.21.8
+* Updated Android sdk to 2.32.1
+
+### Fixed
+
+* Fix crash when calling requestDirections() in Android with 3 parameters
+
+
 ## [1.10.5] - 2019-02-20
 
 ### Changed
