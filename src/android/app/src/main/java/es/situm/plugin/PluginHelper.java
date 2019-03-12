@@ -736,6 +736,11 @@ public class PluginHelper {
                     builder.timeToIgnoreUnexpectedFloorChanges(timeToIgnoreUnexpectedFloorChanges);
                 }
 
+                if (navigationJSONOptions.has(SitumMapper.IGNORE_LOW_QUALITY_LOCATIONS)) {
+                    Boolean ignoreLowQualityLocations = navigationJSONOptions.getBoolean(SitumMapper.IGNORE_LOW_QUALITY_LOCATIONS);
+                    builder.ignoreLowQualityLocations(ignoreLowQualityLocations);
+                }
+
             } catch (Exception e) {
                 //TODO: handle exception
                 Log.d(TAG, "Situm >> Unable to retrieve navigation options. Applying default ones");
