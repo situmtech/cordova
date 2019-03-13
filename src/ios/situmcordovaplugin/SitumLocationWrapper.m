@@ -379,7 +379,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:[NSString stringWithFormat:@"%@", category.identifier] forKey:@"identifier"];
     [jo setObject:[NSNumber numberWithBool:category.isPublic] forKey:@"public"];
     [jo setObject:[NSString stringWithFormat:@"%@", category.code] forKey:@"poiCategoryCode"];
-    [jo setObject:[NSString stringWithFormat:@"%@", category.name] forKey:@"poiCategoryName"];
+    [jo setObject:[NSString stringWithFormat:@"%@", [category.name value]] forKey:@"poiCategoryName"];
     [jo setObject:category.iconURL.direction forKey:@"icon_deselected"];
     [jo setObject:category.selectedIconURL.direction forKey:@"icon_selected"];
     return jo.copy;
