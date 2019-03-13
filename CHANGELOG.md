@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 All non released changes should be in CHANGELOG_UNRELEASED.md file
 
 ---------
+## [1.11.1] - 2019-03-13
+
+### Changed
+
+* Updated iOS sdk to 2.23.0
+
+
 ## [1.10.8] - 2019-03-04
 
 ### Changed
@@ -128,7 +135,7 @@ All non released changes should be in CHANGELOG_UNRELEASED.md file
 * Update iOS SDK version to 2.17.2
 * Update Android SDK version to 2.30.1
 * Parse `realtimeUpdateInterval` as a String
-* Parse accessibilityMode 
+* Parse accessibilityMode
 
 
 ## [1.8.9] - 2018-11-12
