@@ -525,13 +525,15 @@ module.exports = LocationRequest
  * NavigationRequest
  * @description
  * A data object that contains parameters for the navigation service, NavigationManager.
- * @property {number} distanceToGoalThreshold - Distance threshold from when the goal is considered reached.
- * @property {number} outsideRouteThreshold - OutsideRouteThreshold.
- * @property {number} distanceToFloorChangeThreshold - Distance threshold from when a floor change is considered reached.
  * @property {number} distanceToChangeIndicationThreshold - Distance threshold from when the next indication is considered reached.
+ * @property {number} distanceToFloorChangeThreshold - Distance threshold from when a floor change is considered reached.
+ * @property {number} distanceToGoalThreshold - Distance threshold from when the goal is considered reached.
+ * @property {number} distanceToIgnoreFirstIndication - Maximum distance to ignore the first indication when navigating a route (Only available for Android).
+ * @property {number} ignoreLowQualityLocations - Set if low quality locations should be ignored. (Only available for Android).
  * @property {number} indicationsInterval - Time to wait between indications.
- * @property {number} timeToFirstIndication - Time to wait until the first indication is returned.
+ * @property {number} outsideRouteThreshold - Set the distance to consider the use is outside of the route. A type=userOutsideRoute will be sent trough the NavigationListener .
  * @property {number} roundIndicationsStep - Step that will be used to round indications distance.
+ * @property {number} timeToFirstIndication - Time to wait until the first indication is returned.
  * @property {number} timeToIgnoreUnexpectedFloorChanges - Time (in millis) to ignore the locations received during navigation, when the next indication is a floor change, if the locations are in a wrong floor (not in origin or destination floors).
  */
 
