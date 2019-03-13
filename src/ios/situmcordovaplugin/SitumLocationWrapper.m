@@ -216,7 +216,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
         buildingId = [NSString stringWithFormat:@"%@", [buildingJO valueForKey:@"buildingIdentifier"]];
     }
     
-    if (realtimeUpdateInterval != nil) {
+    if (realtimeUpdateInterval != nil && [realtimeUpdateInterval isKindOfClass: [NSString class]]) {
         
         if ([realtimeUpdateInterval isEqualToString:@"REALTIME"]) {
             interval = kSITUpdateIntervalRealtime;
