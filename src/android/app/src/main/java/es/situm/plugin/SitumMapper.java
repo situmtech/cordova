@@ -191,6 +191,7 @@ class SitumMapper {
   public static final String TIME_TO_FIRST_INDICATION = "timeToFirstIndication";
   public static final String ROUND_INDICATION_STEP = "roundIndicationsStep";
   public static final String TIME_TO_IGNORE_UNEXPECTED_FLOOR_CHANGES = "timeToIgnoreUnexpectedFloorChanges";
+  public static final String IGNORE_LOW_QUALITY_LOCATIONS = "ignoreLowQualityLocations";
 
   public static final String CURRENT_STEP_INDEX = "currentStepIndex";
   public static final String CLOSEST_LOCATION_IN_ROUTE = "closestLocationInRoute";    

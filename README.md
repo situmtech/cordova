@@ -77,9 +77,9 @@ In this tutorial, we will guide you step by step to set up your first Cordova ap
 
 ### Cordova requirements:
 
-* Android: https://cordova.apache.org/docs/en/latest/guide/platforms/android/#installing-the-requirements
-
-* iOS: https://cordova.apache.org/docs/en/latest/guide/platforms/android/#installing-the-requirements
+* [Android](https://cordova.apache.org/docs/en/latest/guide/platforms/android/#installing-the-requirements)
+* [iOS](https://cordova.apache.org/docs/en/latest/guide/platforms/android/#installing-the-requirements)
+* [Cocoapods](https://cocoapods.org/) (Only if you need your application to run in iOS devices)
 
 ---
 
@@ -106,6 +106,8 @@ $ cordova plugin add situm-cordova-plugin-official
 ```
 $ cordova plugin add https://github.com/situmtech/situm-cordova-plugin.git
 ```
+
+\* *Please note that we are using Cocoapods in order to manage iOS dependencies, which means you might need to run `pod repo update` when trying to compile your app after updating our plugin*
 
 ## Using the Plugin
 
@@ -147,7 +149,7 @@ Sets the maximum age of a cached response in seconds.
 
 #### - startPositioning
 
-Starts the positioning on the [locationRequest](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/LocationRequest.html), a [building](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html) should be sent as the first parameter and a locationOptions should be sent as the second one. Returns a set of locationStatus and [location](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Location.html) through the success callback.
+Starts the positioning on the [locationRequest](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#LocationRequest.html), a [building](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#Building.html) should be sent as the first parameter and a locationOptions should be sent as the second one. Returns a set of locationStatus and [location](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#Location.html) through the success callback.
 
 ```javascript
   startPositioning([building, locationOptions], position => {
@@ -171,7 +173,7 @@ Stop locationListener on current active listener.
 
 #### - fetchBuildings
 
-Download all the [buildings](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html) for the current user.
+Download all the [buildings](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#Building.html) for the current user.
 
 ```javascript
   fetchBuildings((buildings) => {
@@ -183,7 +185,7 @@ Download all the [buildings](http://developers.situm.es/sdk_documentation/cordov
 
 #### - fetchFloorsFromBuilding
 
-Download all the [floors](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Floor.html) of a [building](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html).
+Download all the [floors](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#Floor.html) of a [building](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#Building.html).
 
 ```javascript
   fetchFloorsFromBuilding(building, (floors) => {
@@ -195,7 +197,7 @@ Download all the [floors](http://developers.situm.es/sdk_documentation/cordova/j
 
 #### - fetchIndoorPOIsFromBuilding
 
-Download the indoor [POIs](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Poi.html) of a [building](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html).
+Download the indoor [POIs](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#Poi.html) of a [building](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#Building.html).
 
 ```javascript
   fetchIndoorPOIsFromBuilding(building, (pois) => {
@@ -207,7 +209,7 @@ Download the indoor [POIs](http://developers.situm.es/sdk_documentation/cordova/
 
 #### - fetchOutdoorPOIsFromBuilding
 
-Download the outdoor [POIs](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Poi.html) of a [building](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html).
+Download the outdoor [POIs](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#Poi.html) of a [building](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#Building.html).
 
 ```javascript
   fetchOutdoorPOIsFromBuilding(building, (pois) => {
@@ -219,7 +221,7 @@ Download the outdoor [POIs](http://developers.situm.es/sdk_documentation/cordova
 
 #### - fetchEventsFromBuilding
 
-Download the events of a [building](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Building.html).
+Download the events of a [building](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#Building.html).
 
 ```javascript
   fetchEventsFromBuilding(building, (events) => {
@@ -231,7 +233,7 @@ Download the events of a [building](http://developers.situm.es/sdk_documentation
 
 #### - fetchPoiCategories
 
-Get all [POI categories](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/PoiCategory.html), download and cache their icons asynchronously.
+Get all [POI categories](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#PoiCategory.html), download and cache their icons asynchronously.
 
 ```javascript
   fetchPoiCategories((poiCategories) => {
@@ -243,7 +245,7 @@ Get all [POI categories](http://developers.situm.es/sdk_documentation/cordova/js
 
 #### - fetchMapFromFloor
 
-Download the map image of a [floor](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Floor.html).
+Download the map image of a [floor](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#Floor.html).
 
 ```javascript
   fetchMapFromFloor (floor, (mapImage) => {
@@ -255,7 +257,7 @@ Download the map image of a [floor](http://developers.situm.es/sdk_documentation
 
 #### - fetchPoiCategoryIconNormal
 
-Get the normal category icon for a [POICategory](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/PoiCategory.html).
+Get the normal category icon for a [POICategory](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#PoiCategory.html).
 
 ```javascript
   fetchPoiCategoryIconNormal (poiCategory, (iconNormal) => {
@@ -267,7 +269,7 @@ Get the normal category icon for a [POICategory](http://developers.situm.es/sdk_
 
 #### - fetchPoiCategoryIconSelected
 
-Get the selected category icon for a [POICategory](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/PoiCategory.html).
+Get the selected category icon for a [POICategory](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#PoiCategory.html).
 
 ```javascript
   fetchPoiCategoryIconSelected (poiCategory, (iconSelected) => {
@@ -286,7 +288,7 @@ Invalidate all the resources in the cache.
 ```
 #### - requestDirections
 
-Calculates a route between two [points](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.3.10/symbols/Point.html).
+Calculates a route between two [points](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#Point.html).
 
 ```javascript
 var directionsOptionsMap = new Object();
@@ -363,11 +365,11 @@ Here we will include some examples of tipical use cases resolved using this plug
 
 #### Navigation: Guide an user through a route
 
-This funcionality will allow you to draw a [route](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Route) between two [points](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Point) inside a [building](https://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Building). You can obtain an static route with all the information you need, but also, Situm SDK provides a way to show the [indications](https://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Indication) while you are going from one point to another. In this example we will show you how to get the [indications](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Indication). 
+This funcionality will allow you to draw a [route](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#Route) between two [points](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#Point) inside a [building](https://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#Building). You can obtain an static route with all the information you need, but also, Situm SDK provides a way to show the [indications](https://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#Indication) while you are going from one point to another. In this example we will show you how to get the [indications](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#Indication). 
 
-This is a three-steps-functionallity, first we have to request [indications](https://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Indication) so the [route](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Route) is calculated, then request the [navigation updates](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#NavigationProgress) (with the configured [options](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#NavigationRequest)) and then provide the new [position](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Location) every time we move along the route. Next you will find a code example step by step:
+This is a three-steps-functionallity, first we have to request [indications](https://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#Indication) so the [route](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#Route) is calculated, then request the [navigation updates](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#NavigationProgress) (with the configured [options](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#NavigationRequest)) and then provide the new [position](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#Location) every time we move along the route. Next you will find a code example step by step:
 
-- First is obtainingt the [route](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Route):
+- First is obtainingt the [route](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#Route):
 
 ```javascript
 
@@ -396,9 +398,9 @@ This is a three-steps-functionallity, first we have to request [indications](htt
 ```
 
 
-It will be received on the onSuccess callback of the `requestDirections` method. At this point, you will be able to draw the steps to represent the [route](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Route).
+It will be received on the onSuccess callback of the `requestDirections` method. At this point, you will be able to draw the steps to represent the [route](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#Route).
 
-- Having done the previous step, we request the [NavigationProgress](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#NavigationProgress):
+- Having done the previous step, we request the [NavigationProgress](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#NavigationProgress):
 
 ```javascript
 
@@ -439,9 +441,9 @@ It will be received on the onSuccess callback of the `requestDirections` method.
   });
 ```
 
-Please note that in our first callback we are checking the `type` value in the result. this indicates if the object received is a [NavigationProgress](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#NavigationProgress) or an status update. When type is different from "progress" it means that your user has either reached it's destination or gone outside of the [route](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Route). **In both former cases you must stop the positioning**. To recover from this event or start a new [route](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Route) you should call `- requestNavigationUpdates` again.
+Please note that in our first callback we are checking the `type` value in the result. this indicates if the object received is a [NavigationProgress](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#NavigationProgress) or an status update. When type is different from "progress" it means that your user has either reached it's destination or gone outside of the [route](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#Route). **In both former cases you must stop the positioning**. To recover from this event or start a new [route](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#Route) you should call `- requestNavigationUpdates` again.
 
-- Then we update the navigation. Each time a new [position](https://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#Location) is received through `- startPositioning` callback, it should be sent with this method to receive a new [NavigationProgress](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.2/global.html#NavigationProgress):
+- Then we update the navigation. Each time a new [position](https://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#Location) is received through `- startPositioning` callback, it should be sent with this method to receive a new [NavigationProgress](http://developers.situm.es/sdk_documentation/cordova/jsdoc/1.10.5/global.html#NavigationProgress):
 
 ```javascript
 
@@ -465,7 +467,7 @@ Situm-Cordova-Plugin is licensed under [MIT License](https://opensource.org/lice
 
 ## More information
 
-More info is available at our [Developers Page](http://developers.situm.es/pages/cordova/).
+More info is available at our [Developers Page](http://developers.situm.es/pages/mobile/cordova/).
 
 ## Support information
 For any question or bug report, please send an email to [support@situm.es](mailto:support@situm.es)
