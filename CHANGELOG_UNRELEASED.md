@@ -1,3 +1,3 @@
 ### Changed
 
-* Updated Android SDK to 2.33.0
+* Updated iOS SDK to 2.24.0
