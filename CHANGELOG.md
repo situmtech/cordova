@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 All non released changes should be in CHANGELOG_UNRELEASED.md file
 
 ---------
+## [1.11.3] - 2019-03-14
+
+### Changed
+* Updated Android SDK to 2.34.1
+
+
 ## [1.11.2] - 2019-03-14
 
 ### Changed
