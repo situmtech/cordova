@@ -35,7 +35,7 @@ dependencies {
         exclude group: 'junit', module:'junit'
     }
     androidTestCompile 'com.android.support.test:runner:1.0.2'
-    compile ('es.situm:situm-sdk:2.33.0@aar') {
+    compile ('es.situm:situm-sdk:2.34.1@aar') {
         transitive = true
 
     }
