@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 All non released changes should be in CHANGELOG_UNRELEASED.md file
 
 ---------
-## [1.11.6] - 2019-03-20
+## [1.11.7] - 2019-03-20
 
 ### Changed
 
