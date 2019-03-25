@@ -682,11 +682,11 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
       [segmentsJsonArray addObject: [self routeSegmentToJsonObject: segment]];
     }
 
-    [jo setObject:[self pointToJsonObject:route.origin] forKey:@"from"];
-    [jo setObject:[self pointToJsonObject:route.destination] forKey:@"to"];
-    [jo setObject:stepsJsonArray.copy forKey:@"steps"];
+    [jo setObject: [self pointToJsonObject:route.origin] forKey:@"from"];
+    [jo setObject: [self pointToJsonObject:route.destination] forKey:@"to"];
+    [jo setObject: stepsJsonArray.copy forKey:@"steps"];
     [jo setObject: pointsJsonArray.copy forKey:@"points"];
-    [jo setObject:indicationsJsonArray.copy forKey:@"indications"];
+    [jo setObject: indicationsJsonArray.copy forKey:@"indications"];
     [jo setObject: segmentsJsonArray.copy forKey: @"segments"];
 
     if (route.routeSteps.count == 0) return jo; // No steps on the route
@@ -708,7 +708,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject: segment.floorIdentifier forKey: @"floorIdentifier"]
     NSMutableArray* pointsJO = [NSMutableArray new];
     for(SITPoint* point in segment.points) {
-        [pointsJo addObject: [self pointToJsonObject: point]];
+        [pointsJO addObject: [self pointToJsonObject: point]];
     }
     [jo setObject: pointsJO forKey: @"points"];
 
