@@ -680,6 +680,17 @@ class SitumMapper {
   static JSONObject navigationProgressToJsonObject(NavigationProgress navigationProgress, Context context)
       throws JSONException {
     JSONObject jo = new JSONObject();
+    JSONArray pointsJsonArray = new JSONArray();
+    for (Point point : navigationProgress.getPoints()) {
+      pointsJsonArray.put(pointToJsonObject(point));
+    }
+    JSONArray segmentsJsonArray = new JSONArray();
+    for(RouteSegment segment : navigationProgress.getSegments()) {
+      segmentsJsonArray.put(routeSegmentToJsonObject(segment));
+    }
+
+    jo.put(POINTS, pointsJsonArray);
+    jo.put(SEGMENTS, segmentsJsonArray);
     jo.put(CLOSEST_POINT_IN_ROUTE, pointToJsonObject(navigationProgress.getClosestPointInRoute()));
     jo.put(CURRENT_INDICATION, indicationToJsonObject(navigationProgress.getCurrentIndication(), context));
     jo.put(NEXT_INDICATION, indicationToJsonObject(navigationProgress.getNextIndication(), context));
@@ -691,6 +702,7 @@ class SitumMapper {
     jo.put(TIME_TO_GOAL, navigationProgress.getTimeToGoal());
     jo.put(CURRENT_STEP_INDEX, navigationProgress.getRouteStep().getId());
     jo.put(CLOSEST_LOCATION_IN_ROUTE, locationToJsonObject(navigationProgress.getClosestLocationInRoute()));
+
     return jo;
   }
 
