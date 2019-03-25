@@ -123,6 +123,7 @@ class SitumMapper {
   public static final String FROM = "from";
   public static final String TO = "TO";
   public static final String STEPS = "steps";
+  public static final String SEGMENTS = "segments";
 
   public static final String DISTANCE_TO_GOAL = "distanceToGoal";
   public static final String DISTANCE = "distance";
@@ -572,6 +573,10 @@ class SitumMapper {
     for (Point point : route.getPoints()) {
       pointsJsonArray.put(pointToJsonObject(point));
     }
+    JSONArray segmentsJsonArray = new JSONArray();
+    for(RouteSegment segment : route.getSegments()) {
+      segmentsJsonArray.put(routeSegmentToJsonObject(segment));
+    }
 
     jo.put(EDGES, edgesJsonArray);
     jo.put(FIRST_STEP, routeStepToJsonObject(route.getFirstStep()));
@@ -580,6 +585,7 @@ class SitumMapper {
     jo.put(LAST_STEP, routeStepToJsonObject(route.getLastStep()));
     jo.put(NODES, nodesJsonArray);
     jo.put(POINTS, pointsJsonArray);
+    jo.put(SEGMENTS, segmentsJsonArray);
     jo.put(INDICATIONS, indicationsJsonArray);
     jo.put(TO, pointToJsonObject(route.getTo()));
     jo.put(STEPS, stepsJsonArray);
@@ -616,6 +622,19 @@ class SitumMapper {
    * .to(pointJsonObjectToPoint(jo.getJSONObject(TO))).id(jo.getInt(ID)).isLast(jo
    * .getBoolean(IS_LAST)) .build(); return routeStep; }
    */
+
+   // RouteSegment
+   static JSONObject routeSegmentToJsonObject(RouteSegment segment) throws JSONException {
+     JSONObject jo = new JSONObject();
+     jo.put(FLOOR_IDENTIFIER, segment.getFloorIdentifier());
+     JSONArray pointsJsonArray = new JSONArray();
+     for (Point point : segment.getPoints()) {
+       pointsJsonArray.put(pointToJsonObject(point));
+     }
+     jo.put(POINTS, pointsJsonArray);
+
+     return jo;
+   }
 
   // Indication
 
