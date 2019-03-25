@@ -1,6 +1,7 @@
 ### Added
 
 * Added new param `segments` to object `Route`
+* Added new params `points` and `segments` to object `NavigationProgress`
 
 ### Changed
 
