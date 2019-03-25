@@ -780,6 +780,19 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
 
 - (NSDictionary *) navigationProgressToJsonObject:(SITNavigationProgress *) navigationProgress {
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
+
+    NSMutableArray *pointsJsonArray = [[NSMutableArray alloc] init];
+    for(SITPoint* point in navigationProgress.points) {
+      [pointsJsonArray addObject:[self pointToJsonObject: point]];
+    }
+
+    NSMutableArray* segmentsJsonArray = [NSMutableArray new];
+    for(SITRouteSegment* segment in navigationProgress.segments) {
+      [segmentsJsonArray addObject: [self routeSegmentToJsonObject: segment]];
+    }
+
+    [jo setObject: pointsJsonArray forKey: @"points"];
+    [jo setObject: segmentsJsonArray forKey: @"segments"];
     [jo setObject:[self pointToJsonObject:navigationProgress.closestPointToRoute] forKey:@"closestPointInRoute"];
     [jo setObject:[NSNumber numberWithFloat:navigationProgress.distanceToClosestPointInRoute] forKey:@"distanceToClosestPointInRoute"];
     [jo setObject:[self indicationToJsonObject:navigationProgress.currentIndication] forKey:@"currentIndication"];
