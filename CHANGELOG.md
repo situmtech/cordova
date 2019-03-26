@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 All non released changes should be in CHANGELOG_UNRELEASED.md file
 
 ---------
+## [1.12.0] - 2019-03-26
+
+### Added
+
+* Added new param `segments` to object `Route`
+* Added new params `points` and `segments` to object `NavigationProgress`
+
+### Changed
+
+* Updated iOS SDK to 2.26.1
+* Updated Android SDK to 2.35.0
+* The param `points` from `Route` (in iOS) is now obtained from the new homonym method from iOS SDK
+
+
 ## [1.11.8] - 2019-03-22
 
 ### Changed
