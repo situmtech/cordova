@@ -226,7 +226,9 @@
 - (void) assertRouteSegment: (NSDictionary *) jsonRouteStepFile : (NSDictionary *) routeStepJO {
     
     XCTAssertEqualObjects(jsonRouteStepFile[@"floorIdentifier"], routeStepJO[@"floorIdentifier"]);
-    [self assertPoint: [jsonRouteStepFile[@"points"] objectAtIndex: 0] : [routeStepJO[@"points"] objectAtIndex: 0]];
+    for(int i = 0; i < [jsonRouteStepFile[@"points"] count]; i++) {
+        [self assertPoint: [jsonRouteStepFile[@"points"] objectAtIndex: i] : [routeStepJO[@"points"] objectAtIndex: i]];
+    }
 }
 
 - (void) assertConversionArea:(NSDictionary *) jsonConversionAreaFile : (NSDictionary *) conversionAreaJO;
