@@ -46,10 +46,10 @@ node('vm1-docker') {
     stage('Checkout SCM') {
         checkout scm
     }
-    
+
     try {
         stage('JS test') {
-            def kubectl = docker.image('node:10.6-slim')
+            def kubectl = docker.image('node:11.12-slim')
             kubectl.pull()
             kubectl.inside("-u 0") {
                 sh "npm install"
@@ -58,7 +58,7 @@ node('vm1-docker') {
         }
 
         stage('Generate JSDoc') {
-            def kubectl = docker.image('node:10.6-slim')
+            def kubectl = docker.image('node:11.12-slim')
             kubectl.pull()
             kubectl.inside() {
                 sh "npm run jsdoc"
@@ -66,7 +66,7 @@ node('vm1-docker') {
         }
 
         stage('Archive artifacts'){
-            def kubectl = docker.image('node:10.6-slim')
+            def kubectl = docker.image('node:11.12-slim')
             kubectl.inside("-u 0") {
                 sh "apt-get update && apt-get --assume-yes install zip"
                 sh "zip -r JSDoc ./docs/JSDoc/*"
@@ -75,7 +75,7 @@ node('vm1-docker') {
         }
     } finally {
         stage('Clean repo'){
-            def kubectl = docker.image('node:10.6-slim')
+            def kubectl = docker.image('node:11.12-slim')
             kubectl.inside("-u 0") {
                 sh "tests/scripts/self-destruct.sh"
             }
