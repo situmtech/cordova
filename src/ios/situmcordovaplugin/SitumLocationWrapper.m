@@ -659,36 +659,60 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
 // Route
 
 - (NSDictionary *) routeToJsonObject:(SITRoute *) route {
+  
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
-    
-    NSMutableArray *pointsJsonArray = [[NSMutableArray alloc] init];
+
     NSMutableArray *stepsJsonArray = [[NSMutableArray alloc] init];
     for (SITRouteStep *routeStep in route.routeSteps) {
         [stepsJsonArray addObject:[self routeStepToJsonObject:routeStep]];
-        [pointsJsonArray addObject:[self pointToJsonObject:routeStep.to]];
     }
-    [pointsJsonArray addObject:[self pointToJsonObject:route.destination]];
-    
+
+    NSMutableArray *pointsJsonArray = [[NSMutableArray alloc] init];
+    for(SITPoint* point in route.points) {
+      [pointsJsonArray addObject:[self pointToJsonObject: point]];
+    }
+
     NSMutableArray *indicationsJsonArray = [[NSMutableArray alloc] init];
     for (SITIndication *indication in route.indications) {
         [indicationsJsonArray addObject:[self indicationToJsonObject:indication]];
     }
 
-    [jo setObject:[self pointToJsonObject:route.origin] forKey:@"from"];
-    [jo setObject:[self pointToJsonObject:route.destination] forKey:@"to"];
-    [jo setObject:stepsJsonArray.copy forKey:@"steps"];
-    [jo setObject:indicationsJsonArray forKey:@"indications"];
+    NSMutableArray* segmentsJsonArray = [NSMutableArray new];
+    for(SITRouteSegment* segment in route.segments) {
+      [segmentsJsonArray addObject: [self routeSegmentToJsonObject: segment]];
+    }
+
+    [jo setObject: [self pointToJsonObject:route.origin] forKey:@"from"];
+    [jo setObject: [self pointToJsonObject:route.destination] forKey:@"to"];
+    [jo setObject: stepsJsonArray.copy forKey:@"steps"];
+    [jo setObject: pointsJsonArray.copy forKey:@"points"];
+    [jo setObject: indicationsJsonArray.copy forKey:@"indications"];
+    [jo setObject: segmentsJsonArray.copy forKey: @"segments"];
 
     if (route.routeSteps.count == 0) return jo; // No steps on the route
 
-    
+
     [jo setObject:stepsJsonArray.copy forKey:@"edges"];
     [jo setObject:stepsJsonArray.firstObject forKey:@"firstStep"];
     [jo setObject:stepsJsonArray.lastObject forKey:@"lastStep"];
     [jo setObject:pointsJsonArray forKey:@"nodes"];
-    [jo setObject:pointsJsonArray forKey:@"points"];
+
     return jo.copy;
-    
+}
+
+// RouteSegment
+
+- (NSDictionary*) routeSegmentToJsonObject: (SITRouteSegment*) segment {
+
+    NSMutableDictionary* jo = [NSMutableDictionary new];
+    [jo setObject: segment.floorIdentifier forKey: @"floorIdentifier"];
+    NSMutableArray* pointsJO = [NSMutableArray new];
+    for(SITPoint* point in segment.points) {
+        [pointsJO addObject: [self pointToJsonObject: point]];
+    }
+    [jo setObject: pointsJO forKey: @"points"];
+
+    return [jo copy];
 }
 
 //RouteStep
@@ -756,6 +780,19 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
 
 - (NSDictionary *) navigationProgressToJsonObject:(SITNavigationProgress *) navigationProgress {
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
+
+    NSMutableArray *pointsJsonArray = [[NSMutableArray alloc] init];
+    for(SITPoint* point in navigationProgress.points) {
+      [pointsJsonArray addObject:[self pointToJsonObject: point]];
+    }
+
+    NSMutableArray* segmentsJsonArray = [NSMutableArray new];
+    for(SITRouteSegment* segment in navigationProgress.segments) {
+      [segmentsJsonArray addObject: [self routeSegmentToJsonObject: segment]];
+    }
+
+    [jo setObject: pointsJsonArray forKey: @"points"];
+    [jo setObject: segmentsJsonArray forKey: @"segments"];
     [jo setObject:[self pointToJsonObject:navigationProgress.closestPointToRoute] forKey:@"closestPointInRoute"];
     [jo setObject:[NSNumber numberWithFloat:navigationProgress.distanceToClosestPointInRoute] forKey:@"distanceToClosestPointInRoute"];
     [jo setObject:[self indicationToJsonObject:navigationProgress.currentIndication] forKey:@"currentIndication"];

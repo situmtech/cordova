@@ -458,5 +458,73 @@
       "buildingIdentifier": "101",
       "isOutdoor": true
     }
+  ],
+  "segments": [
+    {
+    "floorIdentifier" : "12",
+    "points" : [
+      {
+            "buildingIdentifier" : "-1",
+            "cartesianCoordinate" : {
+                "x" : 4,
+                "y" : 7
+            },
+            "coordinate" : {
+                "latitude" : 12.29979118583395,
+                "longitude" : 13.999850616887485
+            },
+            "floorIdentifier" : "12",
+            "isIndoor" : true,
+            "isOutdoor" : false
+        },
+        {
+            "buildingIdentifier" : "-1",
+            "cartesianCoordinate" : {
+                "x" : 6,
+                "y" : 6
+            },
+            "coordinate" : {
+              "latitude" : 12.299782146259663,
+              "longitude" : 13.999869002500485
+            },
+            "floorIdentifier" : "12",
+            "isIndoor" : true,
+            "isOutdoor" : false
+        },
+        {
+            "buildingIdentifier" : "-1",
+            "cartesianCoordinate" : {
+                "x" : 3,
+                "y" : 5
+            },
+            "coordinate" : {
+                "latitude" : 12.299773106685375,
+                "longitude" : 13.999841424080985
+            },
+            "floorIdentifier" : "12",
+            "isIndoor" : true,
+            "isOutdoor" : false
+        }
+      ]
+    },
+    {
+    "floorIdentifier" : "-1",
+    "points" : [
+        {
+            "buildingIdentifier" : "101",
+            "cartesianCoordinate" : {
+                "x" : 0,
+                "y" : 0
+            },
+            "coordinate" : {
+                "latitude" : 2,
+                "longitude" : 5
+            },
+            "floorIdentifier" : "-1",
+            "isIndoor" : false,
+            "isOutdoor" : true
+        }
+      ]
+    }
   ]
 }

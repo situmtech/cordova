@@ -1,14 +1,19 @@
 package es.situm.plugin.navigationProgress;
 
+import android.os.Parcel;
+
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.io.File;
 import java.io.FileReader;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import es.situm.sdk.model.cartography.Point;
 import es.situm.sdk.model.directions.Indication;
+import es.situm.sdk.model.directions.RouteSegment;
 import es.situm.sdk.model.directions.RouteStep;
 import es.situm.sdk.model.location.CartesianCoordinate;
 import es.situm.sdk.model.location.Coordinate;
@@ -55,7 +60,9 @@ public class NavigationProgressCreator {
                 .isLast(false)
                 .to(to)
                 .build();
-
+        final ArrayList<Point> points = new ArrayList<Point>();
+        points.add(from);
+        points.add(to);
         return new NavigationProgress.Builder()
                 .closestLocationInRoute(location)
                 .closestRoutePoint(point)
@@ -65,6 +72,7 @@ public class NavigationProgressCreator {
                 .indication(indication)
                 .nextIndication(nextIndication)
                 .routeStep(routeStep)
+                .points(points)
                 .speed(2.5)
                 .build();
     }
@@ -95,6 +103,9 @@ public class NavigationProgressCreator {
                 .build();
         Point from = new Point("101","12", Coordinate.EMPTY, new CartesianCoordinate(5,6));
         Point to = new Point("101","12", Coordinate.EMPTY, new CartesianCoordinate(3,5));
+        final ArrayList<Point> points = new ArrayList<Point>();
+        points.add(from);
+        points.add(to);
         RouteStep routeStep = new RouteStep.Builder()
                 .distance(23.4)
                 .distanceToEnd(27)
@@ -114,6 +125,7 @@ public class NavigationProgressCreator {
                 .indication(indication)
                 .nextIndication(nextIndication)
                 .routeStep(routeStep)
+                .points(points)
                 .speed(1.5)
                 .build();
     }

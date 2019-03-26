@@ -208,6 +208,7 @@ describe('Test requestDirections ->', () => {
     expect(typeof route.lastStep).to.be('object');
     expect(route.nodes instanceof Array).to.be(true);
     expect(route.points instanceof Array).to.be(true);
+    expect(route.segments instanceof Array).to.be(true);
     expect(typeof route.TO).to.be('object');
     expect(route.steps instanceof Array).to.be(true);
   });
@@ -239,6 +240,11 @@ describe('Test requestDirections ->', () => {
     expect(point = route.points[0]);
     expect(typeof point).to.be('object');
     testPoint(point);
+  });
+  it('Check segment route', () => {
+    expect(segment = route.segments[0]);
+    expect(typeof segment).to.be('object');
+    testSegment(segment);
   });
   it('Check TO route', () => {
     testPoint(route.TO);
@@ -395,6 +401,11 @@ const testIndication = indication => {
   expect(typeof indication.stepIdxOrigin).to.be('number');
   expect(typeof indication.neededLevelChange).to.be('boolean');
   expect(typeof indication.humanReadableMessage).to.be('string');
+}
+
+const testSegment = segment => {
+  expect(typeof segment.floorIdentifier).to.be('string');
+  expect(segment.points instanceof Array).to.be(true);
 }
 
 const testBearing = bearing => {

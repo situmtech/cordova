@@ -207,6 +207,8 @@
     [self assertPoint:jsonRouteFile[@"from"]:routeJO[@"from"]];
     //TODO review TO vs to
     [self assertPoint:jsonRouteFile[@"TO"]:routeJO[@"to"]];
+    [self assertRouteSegment: [jsonRouteFile[@"segments"] objectAtIndex: 0] : [routeJO[@"segments"] objectAtIndex: 0]];
+    [self assertRouteSegment: [jsonRouteFile[@"segments"] objectAtIndex: 1] : [routeJO[@"segments"] objectAtIndex: 1]];
 }
 
 - (void) assertRouteStep: (NSDictionary *) jsonRouteStepFile : (NSDictionary *) routeStepJO;
@@ -219,6 +221,14 @@
     XCTAssertEqualObjects(jsonRouteStepFile[@"id"], routeStepJO[@"id"]);
     [self assertPoint:jsonRouteStepFile[@"from"]:routeStepJO[@"from"]];
     [self assertPoint:jsonRouteStepFile[@"TO"]:routeStepJO[@"TO"]];
+}
+
+- (void) assertRouteSegment: (NSDictionary *) jsonRouteStepFile : (NSDictionary *) routeStepJO {
+    
+    XCTAssertEqualObjects(jsonRouteStepFile[@"floorIdentifier"], routeStepJO[@"floorIdentifier"]);
+    for(int i = 0; i < [jsonRouteStepFile[@"points"] count]; i++) {
+        [self assertPoint: [jsonRouteStepFile[@"points"] objectAtIndex: i] : [routeStepJO[@"points"] objectAtIndex: i]];
+    }
 }
 
 - (void) assertConversionArea:(NSDictionary *) jsonConversionAreaFile : (NSDictionary *) conversionAreaJO;

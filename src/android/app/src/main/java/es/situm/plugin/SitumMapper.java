@@ -33,6 +33,7 @@ import es.situm.sdk.model.cartography.PoiCategory;
 import es.situm.sdk.model.cartography.Point;
 import es.situm.sdk.model.directions.Indication;
 import es.situm.sdk.model.directions.Route;
+import es.situm.sdk.model.directions.RouteSegment;
 import es.situm.sdk.model.directions.RouteStep;
 import es.situm.sdk.model.location.Angle;
 import es.situm.sdk.model.location.Bounds;
@@ -123,6 +124,7 @@ class SitumMapper {
   public static final String FROM = "from";
   public static final String TO = "TO";
   public static final String STEPS = "steps";
+  public static final String SEGMENTS = "segments";
 
   public static final String DISTANCE_TO_GOAL = "distanceToGoal";
   public static final String DISTANCE = "distance";
@@ -572,6 +574,10 @@ class SitumMapper {
     for (Point point : route.getPoints()) {
       pointsJsonArray.put(pointToJsonObject(point));
     }
+    JSONArray segmentsJsonArray = new JSONArray();
+    for(RouteSegment segment : route.getSegments()) {
+      segmentsJsonArray.put(routeSegmentToJsonObject(segment));
+    }
 
     jo.put(EDGES, edgesJsonArray);
     jo.put(FIRST_STEP, routeStepToJsonObject(route.getFirstStep()));
@@ -580,6 +586,7 @@ class SitumMapper {
     jo.put(LAST_STEP, routeStepToJsonObject(route.getLastStep()));
     jo.put(NODES, nodesJsonArray);
     jo.put(POINTS, pointsJsonArray);
+    jo.put(SEGMENTS, segmentsJsonArray);
     jo.put(INDICATIONS, indicationsJsonArray);
     jo.put(TO, pointToJsonObject(route.getTo()));
     jo.put(STEPS, stepsJsonArray);
@@ -616,6 +623,19 @@ class SitumMapper {
    * .to(pointJsonObjectToPoint(jo.getJSONObject(TO))).id(jo.getInt(ID)).isLast(jo
    * .getBoolean(IS_LAST)) .build(); return routeStep; }
    */
+
+   // RouteSegment
+   static JSONObject routeSegmentToJsonObject(RouteSegment segment) throws JSONException {
+     JSONObject jo = new JSONObject();
+     jo.put(FLOOR_IDENTIFIER, segment.getFloorIdentifier());
+     JSONArray pointsJsonArray = new JSONArray();
+     for (Point point : segment.getPoints()) {
+       pointsJsonArray.put(pointToJsonObject(point));
+     }
+     jo.put(POINTS, pointsJsonArray);
+
+     return jo;
+   }
 
   // Indication
 
@@ -660,7 +680,22 @@ class SitumMapper {
 
   static JSONObject navigationProgressToJsonObject(NavigationProgress navigationProgress, Context context)
       throws JSONException {
+
     JSONObject jo = new JSONObject();
+    JSONArray pointsJsonArray = new JSONArray();
+    JSONArray segmentsJsonArray = new JSONArray();
+    if(navigationProgress.getPoints() != null) {
+      for (Point point : navigationProgress.getPoints()) {
+        pointsJsonArray.put(pointToJsonObject(point));
+      }
+    }
+    if(navigationProgress.getSegments() != null) {
+      for (RouteSegment segment : navigationProgress.getSegments()) {
+        segmentsJsonArray.put(routeSegmentToJsonObject(segment));
+      }
+    }
+    jo.put(POINTS, pointsJsonArray);
+    jo.put(SEGMENTS, segmentsJsonArray);
     jo.put(CLOSEST_POINT_IN_ROUTE, pointToJsonObject(navigationProgress.getClosestPointInRoute()));
     jo.put(CURRENT_INDICATION, indicationToJsonObject(navigationProgress.getCurrentIndication(), context));
     jo.put(NEXT_INDICATION, indicationToJsonObject(navigationProgress.getNextIndication(), context));
@@ -672,6 +707,7 @@ class SitumMapper {
     jo.put(TIME_TO_GOAL, navigationProgress.getTimeToGoal());
     jo.put(CURRENT_STEP_INDEX, navigationProgress.getRouteStep().getId());
     jo.put(CLOSEST_LOCATION_IN_ROUTE, locationToJsonObject(navigationProgress.getClosestLocationInRoute()));
+
     return jo;
   }
 
