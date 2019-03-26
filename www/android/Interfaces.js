@@ -287,6 +287,7 @@ module.exports = Angle
  * @property {Point[]} points - List of ordered points of the route
  * @property {Point} to - Last point and goal of the route.
  * @property {RouteStep[]} steps - Ordered list of steps to go to the goal point
+ * @property {RouteSegment[]} segments - List of segments formed by consecutive points and a floor identifier
  */
 
 var Route = {
@@ -298,7 +299,8 @@ var Route = {
   nodes,
   points,
   to,
-  steps
+  steps,
+  segments
 }
 
 module.exports = Route
@@ -328,6 +330,22 @@ var RouteStep = {
 }
 
 module.exports = RouteStep
+
+/**
+ * @name
+ * RouteSegment
+ * @description
+ * A fragment of a route, described by a floor identifier and a list of consecutive points from the same floor
+ * @property {string} floorIdentifier - Identifier of the floor containing the points in this segment
+ * @property {Point[]} points - Consecutive points in the same floor forming a path
+ */
+
+var RouteSegment = {
+  floorIdentifier,
+  points
+}
+
+module.exports = RouteSegment
 
 /**
  * @name
@@ -374,6 +392,8 @@ module.exports = Indication
  * @property {number} timeToEndStep - The estimated time to go from closestLocationInRoute to the end of the current route step,  considering a speed of 1 meter/second.
  * @property {number} timeToGoal - The estimated time to go from closestLocationInRoute to the goal/end of route, considering a speed of 1 meter/second.
  * @property {RouteStep} routeStep - The closest route step to the user, where closestLocationInRoute is.
+ * @property {Point[]} points - List of ordered points of the remaining route
+ * @property {RouteSegment[]} segments - List of segments formed by consecutive points and a floor identifier
  */
 
 var NavigationProgress = {
@@ -387,7 +407,9 @@ var NavigationProgress = {
   distanceToEndStep,
   timeToEndStep,
   timeToGoal,
-  routeStep
+  routeStep,
+  points,
+  segments
 }
 
 module.exports = NavigationProgress
