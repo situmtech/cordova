@@ -65,6 +65,7 @@ import static es.situm.plugin.SitumMapper.PICTURE_THUMB_URL;
 import static es.situm.plugin.SitumMapper.PICTURE_URL;
 import static es.situm.plugin.SitumMapper.POI_NAME;
 import static es.situm.plugin.SitumMapper.ROTATION;
+import static es.situm.plugin.SitumMapper.SEGMENTS;
 import static es.situm.plugin.SitumMapper.USER_IDENTIFIER;
 import static es.situm.plugin.SitumMapper.circleToJsonObject;
 import static es.situm.plugin.SitumMapper.conversionAreaToJsonObject;
@@ -1035,6 +1036,13 @@ public class SitumMapperTest {
         for(int i = 0; i < points.length(); i++) {
             testPoint(points.getJSONObject(i), defaultPoints.getJSONObject(i));
         }
+        Assert.assertEquals(JSONArray.class, route.get(SEGMENTS).getClass());
+        JSONArray segments = route.getJSONArray(SEGMENTS);
+        JSONArray defaultSegments = defaultRoute.getJSONArray(SEGMENTS);
+        Assert.assertEquals(segments.length(), defaultSegments.length());
+        for(int i = 0; i < segments.length(); i++) {
+            testSegment(segments.getJSONObject(i), defaultSegments.getJSONObject(i));
+        }
     }
 
     private void testAngle(Angle angle, Angle defaultAngle) {
@@ -1305,6 +1313,18 @@ public class SitumMapperTest {
         Assert.assertEquals(defaultPoint.getString(BUILDING_IDENTIFIER), point.getString(BUILDING_IDENTIFIER));
         Assert.assertEquals(Boolean.class, point.get(IS_OUTDOOR).getClass());
         Assert.assertEquals(defaultPoint.getBoolean(IS_OUTDOOR), point.getBoolean(IS_OUTDOOR));
+    }
+
+    private void testSegment(JSONObject segment, JSONObject defaultSegment) throws JSONException {
+        Assert.assertEquals(String.class, segment.get(FLOOR_IDENTIFIER).getClass());
+        Assert.assertEquals(segment.getString(FLOOR_IDENTIFIER), defaultSegment.getString(FLOOR_IDENTIFIER));
+        Assert.assertEquals(JSONArray.class, segment.get(POINTS).getClass());
+        JSONArray points = segment.getJSONArray(POINTS);
+        JSONArray defaultPoints = defaultSegment.getJSONArray(POINTS);
+        Assert.assertEquals(points.length(), defaultPoints.length());
+        for(int i = 0; i < points.length(); i++) {
+            testPoint(points.getJSONObject(i), defaultPoints.getJSONObject(i));
+        }
     }
 
     private void testLocationStatus(JSONObject locationStatus, JSONObject defaultLocationStatus) throws JSONException{
