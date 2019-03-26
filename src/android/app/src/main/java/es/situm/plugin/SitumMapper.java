@@ -33,6 +33,7 @@ import es.situm.sdk.model.cartography.PoiCategory;
 import es.situm.sdk.model.cartography.Point;
 import es.situm.sdk.model.directions.Indication;
 import es.situm.sdk.model.directions.Route;
+import es.situm.sdk.model.directions.RouteSegment;
 import es.situm.sdk.model.directions.RouteStep;
 import es.situm.sdk.model.location.Angle;
 import es.situm.sdk.model.location.Bounds;
