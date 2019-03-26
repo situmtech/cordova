@@ -488,8 +488,8 @@
                 "longitude" : 14
             },
             "floorIdentifier" : "12",
-            "isIndoor" : "1",
-            "isOutdoor" : "0"
+            "isIndoor" : true,
+            "isOutdoor" : false
         },
         {
             "buildingIdentifier" : "-1",
