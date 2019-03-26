@@ -705,7 +705,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
 - (NSDictionary*) routeSegmentToJsonObject: (SITRouteSegment*) segment {
 
     NSMutableDictionary* jo = [NSMutableDictionary new];
-    [jo setObject: segment.floorIdentifier forKey: @"floorIdentifier"]
+    [jo setObject: segment.floorIdentifier forKey: @"floorIdentifier"];
     NSMutableArray* pointsJO = [NSMutableArray new];
     for(SITPoint* point in segment.points) {
         [pointsJO addObject: [self pointToJsonObject: point]];
