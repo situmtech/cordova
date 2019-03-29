@@ -204,6 +204,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
             useDeadReckoning = [requestJO objectForKey: @"useDeadReckoning"];
             useGps = [requestJO objectForKey: @"useGps"];
             realtimeUpdateInterval = requestJO[@"realtimeUpdateInterval"];
+            interval = requestJO[@"interval"];
         }
     } else {
         buildingJO = (NSDictionary*)json[0];
@@ -241,7 +242,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
         [locationRequest setUseGps:[useGps boolValue]];
     }
     
-    if(interval != nil && interval >= 1000) {
+    if(interval != nil && [interval intValue] >= 1000) {
       [locationRequest setInterval:[interval intValue]];
     }
 
