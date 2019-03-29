@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 All non released changes should be in CHANGELOG_UNRELEASED.md file
 
 ---------
+## [1.12.2] - 2019-03-29
+
+### Added
+
+* iOS wrapper now correctly parses interval in locationRequest
+
+### Changed
+
+* Updated iOS SDK to 2.27.0
+
+
 ## [1.12.1] - 2019-03-28
 
 ### Changed
