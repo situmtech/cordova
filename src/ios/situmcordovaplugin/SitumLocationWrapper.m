@@ -186,7 +186,8 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     NSNumber *useGps = nil;
     NSString *buildingId;
     NSString *realtimeUpdateInterval;
-    SITRealtimeUpdateInterval interval = 0;
+    NSNumber *interval = 0;
+    SITRealtimeUpdateInterval realtimeInterval = 0;
     
     
     
@@ -219,15 +220,15 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     if (realtimeUpdateInterval != nil && [realtimeUpdateInterval isKindOfClass: [NSString class]]) {
         
         if ([realtimeUpdateInterval isEqualToString:@"REALTIME"]) {
-            interval = kSITUpdateIntervalRealtime;
+            realtimeInterval = kSITUpdateIntervalRealtime;
         } else if ([realtimeUpdateInterval isEqualToString:@"FAST"]) {
-            interval = kSITUpdateIntervalFast;
+            realtimeInterval = kSITUpdateIntervalFast;
         } else if ([realtimeUpdateInterval isEqualToString:@"NORMAL"]) {
-            interval = kSITUpdateIntervalNormal;
+            realtimeInterval = kSITUpdateIntervalNormal;
         } else if ([realtimeUpdateInterval isEqualToString:@"SLOW"]) {
-            interval = kSITUpdateIntervalSlow;
+            realtimeInterval = kSITUpdateIntervalSlow;
         } else if ([realtimeUpdateInterval isEqualToString:@"BATTERY_SAVER"]) {
-            interval = kSITUpdateIntervalBatterySaver;
+            realtimeInterval = kSITUpdateIntervalBatterySaver;
         }
     }
     
@@ -240,8 +241,12 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
         [locationRequest setUseGps:[useGps boolValue]];
     }
     
-    if (interval != 0) {
-        [locationRequest setUpdateInterval:interval];
+    if(interval != nil && interval >= 1000) {
+      [locationRequest setInterval:[interval intValue]];
+    }
+
+    if (realtimeInterval != 0) {
+        [locationRequest setUpdateInterval:realtimeInterval];
     }
     return locationRequest;
 }
