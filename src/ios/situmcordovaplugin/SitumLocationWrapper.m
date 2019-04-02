@@ -186,7 +186,8 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     NSNumber *useGps = nil;
     NSString *buildingId;
     NSString *realtimeUpdateInterval;
-    NSNumber *interval = 0;
+    NSNumber *interval;
+    NSNumber *smallestDisplacement;
     SITRealtimeUpdateInterval realtimeInterval = 0;
     
     
@@ -205,6 +206,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
             useGps = [requestJO objectForKey: @"useGps"];
             realtimeUpdateInterval = requestJO[@"realtimeUpdateInterval"];
             interval = requestJO[@"interval"];
+            smallestDisplacement = requestJO[@"smallestDisplacement"];
         }
     } else {
         buildingJO = (NSDictionary*)json[0];
@@ -242,8 +244,12 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
         [locationRequest setUseGps:[useGps boolValue]];
     }
     
-    if(interval != nil && [interval intValue] >= 1000) {
+    if(interval != nil) {
       [locationRequest setInterval:[interval intValue]];
+    }
+
+    if (smallestDisplacement != nil) {
+        [locationRequest setSmallestDisplacement:[smallestDisplacement floatValue]];
     }
 
     if (realtimeInterval != 0) {

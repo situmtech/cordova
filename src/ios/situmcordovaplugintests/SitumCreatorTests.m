@@ -170,6 +170,8 @@
     SITLocationRequest *locationRequest = [[SITLocationRequest alloc] initWithBuildingId:@"1051"];
     [locationRequest setUseDeadReckoning:false];
     [locationRequest setUseGps:false];
+    [locationRequest setSmallestDisplacement:1.0];
+    [locationRequest setInterval:1000];
     return locationRequest;
 }
 
@@ -178,6 +180,8 @@
     SITLocationRequest *locationRequest = [[SITLocationRequest alloc] initWithBuildingId:@"1051"];
     [locationRequest setUseDeadReckoning:true];
     [locationRequest setUseGps:true];
+    [locationRequest setSmallestDisplacement:1.0];
+    [locationRequest setInterval:1000];
     return locationRequest;
 }
 
@@ -185,6 +189,8 @@
 + (SITLocationRequest *) createLocationRequestWithBatterySaver {
     SITLocationRequest *locationRequest = [[SITLocationRequest alloc] initWithBuildingId:@"1051"];
     [locationRequest setUpdateInterval: kSITUpdateIntervalBatterySaver];
+    [locationRequest setSmallestDisplacement:1.0];
+    [locationRequest setInterval:1000];
     return locationRequest;
 }
 
