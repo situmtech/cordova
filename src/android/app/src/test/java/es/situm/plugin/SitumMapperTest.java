@@ -26,6 +26,7 @@ import es.situm.plugin.event.EventCreator;
 import es.situm.plugin.floor.FloorCreator;
 import es.situm.plugin.indication.IndicationCreator;
 import es.situm.plugin.location.LocationCreator;
+import es.situm.plugin.locationRequest.LocationRequestCreator;
 import es.situm.plugin.locationStatus.LocationStatusCreator;
 import es.situm.plugin.navigationProgress.NavigationProgressCreator;
 import es.situm.plugin.poi.PoiCreator;
@@ -35,6 +36,7 @@ import es.situm.plugin.route.RouteCreator;
 import es.situm.plugin.routeStep.RouteStepCreator;
 import es.situm.plugin.situmConversionArea.SitumConversionAreaCreator;
 import es.situm.sdk.directions.DirectionsRequest;
+import es.situm.sdk.location.LocationRequest;
 import es.situm.sdk.location.LocationStatus;
 import es.situm.sdk.model.cartography.Building;
 import es.situm.sdk.model.cartography.Circle;
@@ -183,6 +185,7 @@ public class SitumMapperTest {
     private PoiCreator poiCreator = new PoiCreator();
     private BuildingCreator buildingCreator = new BuildingCreator();
     private DirectionsRequestCreator directionsRequestCreator = new DirectionsRequestCreator();
+    private LocationRequestCreator locationRequestCreator = new LocationRequestCreator();
 
     @Test
     public void angleTest1() {
@@ -397,6 +400,30 @@ public class SitumMapperTest {
                     buildingCreator.getBuilding1(), pointCreator.getPoint1(), pointCreator.getPoint2(), jo.getJSONObject(3));
             DirectionsRequest directionsRequest1 = directionsRequestCreator.createDirectionsRequest6();
             testDirectionsRequest(directionsRequest, directionsRequest1);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void locationRequestTest1() {
+        try {
+            JSONArray jo = locationRequestCreator.getLocationRequest1();
+            LocationRequest locationRequest = SitumMapper.locationRequestJSONObjectToLocationRequest(jo);
+            LocationRequest locationRequest1 = locationRequestCreator.createLocationRequest1();
+            testLocationRequest(locationRequest, locationRequest1);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void locationRequestTest2() {
+        try {
+            JSONArray jo = locationRequestCreator.getLocationRequest2();
+            LocationRequest locationRequest = SitumMapper.locationRequestJSONObjectToLocationRequest(jo);
+            LocationRequest locationRequest2 = locationRequestCreator.createLocationRequest2();
+            testLocationRequest(locationRequest, locationRequest2);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1176,6 +1203,14 @@ public class SitumMapperTest {
     private void testDirectionsRequest(DirectionsRequest directionsRequest, DirectionsRequest defaultDirectionsRequest) {
         Assert.assertEquals(defaultDirectionsRequest.getAccessibilityMode(), directionsRequest.getAccessibilityMode());
         Assert.assertEquals(defaultDirectionsRequest.minimizeFloorChanges(), directionsRequest.minimizeFloorChanges());
+    }
+
+    private void testLocationRequest(LocationRequest locationRequest, LocationRequest defaultLocationRequest) {
+        Assert.assertEquals(locationRequest.getBuildingIdentifier(), defaultLocationRequest.getBuildingIdentifier());
+        Assert.assertEquals(locationRequest.getSmallestDisplacement(), defaultLocationRequest.getSmallestDisplacement(), 0.001);
+        Assert.assertEquals(locationRequest.getInterval(), defaultLocationRequest.getInterval());
+        Assert.assertEquals(locationRequest.autoEnableBleDuringPositioning(), defaultLocationRequest.autoEnableBleDuringPositioning());
+
     }
 
     private void testFloor(Floor floor, Floor defaultFloor) {

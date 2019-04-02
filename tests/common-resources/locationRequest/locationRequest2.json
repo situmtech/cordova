@@ -27,6 +27,7 @@
             }
         ],
         "smallestDisplacement": 1.0,
-        "realtimeUpdateInterval": "REALTIME"
+        "realtimeUpdateInterval": "REALTIME",
+        "autoEnableBleDuringPositioning": false
     }
  ]
