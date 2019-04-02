@@ -276,6 +276,8 @@
     XCTAssertEqual(requestA.useDeadReckoning, requestB.useDeadReckoning, @"LocationRequest: useDeadReckoning value wasn't equal");
     XCTAssertEqual(requestA.useGps, requestB.useGps, @"LocationRequest: useGps value wasn't equal");
     XCTAssertEqual(requestA.updateInterval, requestB.updateInterval, @"LocationRequest: updateInterval wasn`t equal");
+    XCTAssertEqual(requestA.interval, requestB.interval, @"LocationRequest: interval wasn't equal");
+    XCTAssertEqual(requestA.smallestDisplacement, requestB.smallestDisplacement, @"LocationRequest: smallestDisplacement wasn't equal");
 }
 
 - (void) assertDirectionsRequest: (SITDirectionsRequest *) requestA isEqualToDirectionsRequest: (SITDirectionsRequest *) requestB {
