@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 All non released changes should be in CHANGELOG_UNRELEASED.md file
 
 ---------
+## [1.13.0] - 2019-04-03
+
+### Added
+* Add support for `autoEnableBleDuringPositioning` in Android
+* Add support for `smallestDisplacement` on iOS devices
+
+### Changed
+* Update iOS SDK to 2.28.0
+
+
 ## [1.12.2] - 2019-03-29
 
 ### Added
