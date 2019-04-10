@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 All non released changes should be in CHANGELOG_UNRELEASED.md file
 
 ---------
+## [1.14.0] - 2019-04-10
+
+### Added
+
+* Added "useBarometer" to location request
+
+### Changed
+
+* Updated iOS sdk to 2.29.0
+* Updated Android sdk to 2.36.0
+
+
 ## [1.13.0] - 2019-04-03
 
 ### Added
