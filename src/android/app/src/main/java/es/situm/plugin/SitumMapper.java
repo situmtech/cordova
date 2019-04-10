@@ -177,6 +177,7 @@ class SitumMapper {
   public static final String USE_FOREGROUND_SERVICE = "useForegroundService";
   public static final String USE_DEAD_RECKONING = "useDeadReckoning";
   public static final String USE_GPS = "useGps";
+  public static final String USE_BAROMETER = "useBarometer";
   public static final String AUTO_ENABLE_BLE = "autoEnableBleDuringPositioning";
 
   public static final String OUTDOOR_LOCATION_OPTIONS = "outdoorLocationOptions";
@@ -795,6 +796,12 @@ class SitumMapper {
             Boolean useGps = request.getBoolean(SitumMapper.USE_GPS);
             locationBuilder.useGps(useGps);
             Log.i(TAG, "useGps: " + useGps);
+        }
+
+        if (request.has(SitumMapper.USE_BAROMETER)) {
+            Boolean useBarometer = request.getBoolean(SitumMapper.USE_BAROMETER);
+            locationBuilder.useBarometer(useBarometer);
+            Log.i(TAG, "useBarometer: " + useBarometer);
         }
 
         if (request.has(SitumMapper.AUTO_ENABLE_BLE)) {

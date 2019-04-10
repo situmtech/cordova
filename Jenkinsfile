@@ -7,7 +7,7 @@ node('ios') {
         stage ('iOS test') {
             sh "tests/scripts/copy_ios_resources.sh"
             sh "scripts/update_iosSDK_version.sh ."
-            sh "cd src/ios && pod repo update && pod install && xcodebuild test -workspace SitumCordovaPlugin.xcworkspace -scheme CordovaLib -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.4'"
+            sh "cd src/ios && pod repo update && pod install && xcodebuild test -workspace SitumCordovaPlugin.xcworkspace -scheme CordovaLib -destination 'platform=iOS Simulator,name=iPhone 7,OS=11.2'"
         }
     } finally {
         stage('clean repo') {
