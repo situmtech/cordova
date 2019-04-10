@@ -1,4 +1,4 @@
-/** @name 
+/** @name
  * Building
  * @description
  * A Building object definition
@@ -258,7 +258,7 @@ module.exports = Location
  * Angle
  * @description
  * Representation of an angle.
- * @property {number} degrees - Angle in degrees, increasing in counter-clockwise 
+ * @property {number} degrees - Angle in degrees, increasing in counter-clockwise
  * @property {number} degreesClockwise - Angle in radians, increasing in clockwise
  * @property {number} radians - Angle in radians, increasing in counter-clockwise
  * @property {number} radiansMinusPiPi - Angle in radians in range (-pi,pi)
@@ -357,7 +357,7 @@ module.exports = RouteSegment
  * @property {string} indicationType - The Indication.Action of the instruction as String
  * @property {number} orientation - The angle a user should change his direction in order to go from the origin to the destination.
  * @property {string} orientationType - The Indication.Orientation of the instruction as String
- * @property {number} stepIdxDestination - The index of the indication's step of destination. 
+ * @property {number} stepIdxDestination - The index of the indication's step of destination.
  * @property {number} stepIdxOrigin - The index of the indication's step of origin
  * @property {boolean} neededLevelChange - If the user should change the level in order to arrive to destination
  */
@@ -498,6 +498,7 @@ module.exports = SitumConversionArea
  * @property {boolean} useBle - Defines whether or not to use BLE for positioning
  * @property {boolean} useWifi - Defines whether or not to use Wi-Fi for positioning
  * @property {boolean} useGps - Defines whether or not to use the GPS for indoor positioning
+ * @property {boolean} useBarometer - Defines whether or not to use barometer for indoor positioning
  * @property {string} motionMode - Default motion mode. Possible values are BY_CAR, BY_FOOT and RADIOMAX
  * @property {boolean} useForegroundService - Defines whether or not to activate the {@link http://developers.situm.es/pages/android/using_situm_sdk_background.html foreground service}
  * @property {boolean} useDeadReckoning - Defines whether ot not to use dead reckoning to get fast position updates using only the inertial sensors, between the server position updates.
@@ -515,6 +516,7 @@ var LocationOptions = {
   useBle,
   useWifi,
   useGps,
+  useBarometer,
   motionMode,
   useForegroundService,
   useDeadReckoning,
@@ -536,7 +538,7 @@ module.exports = LocationOptions
  * @property {LocationOptions} locationOptions 1 - Location options.
  */
 
-var LocationRequest = { 
+var LocationRequest = {
     building,
     locationOptions
 }
@@ -619,7 +621,7 @@ module.exports = DirectionsOptions
  * @description
  * Outdoor location options are only used in indoor-outdoor mode (Only available for Android)
  * @property {boolean} continuousMode - Environment detection continuous mode (true) or burst mode (false).
- * @property {boolean} userDefinedThreshold 
+ * @property {boolean} userDefinedThreshold
  * @property {number} burstInterval - Interval to scan for GPS and detect the environment (in seconds).
  * @property {number} averageSnrThreshold
  */
