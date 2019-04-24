@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 All non released changes should be in CHANGELOG_UNRELEASED.md file
 
 ---------
+## [1.14.2] - 2019-04-24
+
+### Changed
+* Updated iOS SDK to 2.30.1
+
+
 ## [1.14.1] - 2019-04-16
 
 ### Changed
