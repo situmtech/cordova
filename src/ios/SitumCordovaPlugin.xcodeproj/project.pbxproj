@@ -38,7 +38,6 @@
 		0D884E7D2116FAA20066C765 /* resources in Resources */ = {isa = PBXBuildFile; fileRef = 0D884E7C2116FAA20066C765 /* resources */; };
 		0D884E832117012F0066C765 /* resources in Resources */ = {isa = PBXBuildFile; fileRef = 0D884E7C2116FAA20066C765 /* resources */; };
 		0D884E87211708900066C765 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0D884A1221145F820066C765 /* Info.plist */; };
-		0D884E88211708900066C765 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0D884A1221145F820066C765 /* Info.plist */; };
 		0DF4AB1721143D5800D81A31 /* AppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DF4AB0621143D5700D81A31 /* AppDelegate.h */; };
 		0DF4AB1821143D5800D81A31 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF4AB0721143D5700D81A31 /* AppDelegate.m */; };
 		0DF4AB1921143D5800D81A31 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF4AB0E21143D5700D81A31 /* main.m */; };
