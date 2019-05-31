@@ -500,7 +500,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 }
 
 - (void)locationManager:(nonnull id<SITLocationInterface>)locationManager
-       didFailWithError:(nonnull NSError *)error {
+       didFailWithError: (NSError * _Nullable)error {
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.description];
     pluginResult.keepCallback = [NSNumber numberWithBool:true];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:locationCallbackId];
