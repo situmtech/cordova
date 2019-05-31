@@ -23,21 +23,28 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-web:3.0.2'
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'org.json:json:20140107'
+    compile 'com.android.support:appcompat-v7:27.1.1'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestCompile 'com.android.support.test.espresso:espresso-web:3.0.2'
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.json:json:20140107'
     testCompile "com.google.truth:truth:0.42"
-    androidTestImplementation 'com.android.support:support-annotations:27.1.1'
-    implementation ('com.googlecode.json-simple:json-simple:1.1.1'){
+    androidTestCompile 'com.android.support:support-annotations:27.1.1'
+    compile ('com.googlecode.json-simple:json-simple:1.1.1'){
         exclude group: 'junit', module:'junit'
     }
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    implementation ('es.situm:situm-sdk:2.37.6@aar') {
+    androidTestCompile 'com.android.support.test:runner:1.0.2'
+    compile ('es.situm:situm-sdk:2.37.6@aar') {
         transitive = true
 
     }
-    implementation 'org.apache.cordova:framework:7.1.0'
+    compile 'org.apache.cordova:framework:7.1.0'
+
+    compile ('com.squareup.okhttp3:okhttp:3.10.0') {
+        force = true
+    }
+    compile ('com.squareup.okhttp3:logging-interceptor:3.10.0') {
+        force = true
+    }
 }
