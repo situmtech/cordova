@@ -43,6 +43,7 @@ module.exports = Building
  * @property {number} altitude - Altitude of the floor above ground level, in meters.
  * @property {string} buildingIdentifier - The identifier of building which this floor belongs.
  * @property {number} level - The number of the floor.
+ * @property {string} name - The name of the floor
  * @property {string} mapUrl - The floor map image url
  * @property {number} scale - The scale of the floor image, in px/meters
  * @property {string} floorIdentifier - The unique identifier of the resource
