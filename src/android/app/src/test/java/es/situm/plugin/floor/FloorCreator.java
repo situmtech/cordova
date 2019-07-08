@@ -18,6 +18,7 @@ public class FloorCreator {
                 .altitude(2.5)
                 .buildingIdentifier("101")
                 .level(1)
+                .name("testName")
                 .mapUrl(new es.situm.sdk.model.URL("TEST_URL"))
                 .scale(10.2)
                 .build();
@@ -27,6 +28,7 @@ public class FloorCreator {
         return new Floor.Builder()
                 .buildingIdentifier("101")
                 .level(1)
+                .name("testName")
                 .mapUrl(new es.situm.sdk.model.URL("TEST_URL"))
                 .scale(10.2)
                 .build();
