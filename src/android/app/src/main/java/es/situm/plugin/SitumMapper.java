@@ -292,9 +292,15 @@ class SitumMapper {
 
   static Floor floorJsonObjectToFloor(JSONObject jo) throws JSONException {
     Floor floor = null;
-    floor = new Floor.Builder().buildingIdentifier(jo.getString(BUILDING_IDENTIFIER)).altitude(jo.getDouble(ALTITUDE))
-            .customFields(jsonObjectToMapString(jo.getJSONObject(CUSTOM_FIELDS))).name(jo.getString(NAME))
-        .level(jo.getInt(LEVEL)).mapUrl(new URL(jo.getString(MAP_URL))).scale(jo.getDouble(SCALE)).build();
+    floor = new Floor.Builder()
+            .buildingIdentifier(jo.getString(BUILDING_IDENTIFIER))
+            .altitude(jo.getDouble(ALTITUDE))
+            .customFields(jsonObjectToMapString(jo.getJSONObject(CUSTOM_FIELDS)))
+            .name(jo.getString(NAME))
+            .level(jo.getInt(LEVEL))
+            .mapUrl(new URL(jo.getString(MAP_URL)))
+            .scale(jo.getDouble(SCALE)).build();
+    
     return floor;
   }
 
