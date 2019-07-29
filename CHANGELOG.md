@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 All non released changes should be in CHANGELOG_UNRELEASED.md file
 
 ---------
+## [1.15.2] - 2019-07-29
+
+### Fixed
+* New release to remove .git directory from plugin (added due to a npm bug)
+
+
 ## [1.15.1] - 2019-07-22
 
 #### Changed
