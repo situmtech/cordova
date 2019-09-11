@@ -1,7 +1,7 @@
 package es.situm.plugin.event;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
