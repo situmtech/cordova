@@ -97,9 +97,9 @@
 		7ED95D591AB9029B008C4574 /* NSMutableArray+QueueAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ED95D331AB9029B008C4574 /* NSMutableArray+QueueAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7ED95D5A1AB9029B008C4574 /* NSMutableArray+QueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED95D341AB9029B008C4574 /* NSMutableArray+QueueAdditions.m */; };
 		952D03B021B160DE000C6530 /* DirectionsRequestTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 952D03AF21B160DE000C6530 /* DirectionsRequestTest.m */; };
-		954995F0214F8BBB007F3C28 /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 954995EE214F8BBB007F3C28 /* Constants.h */; };
-		954995F1214F8BBB007F3C28 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 954995EF214F8BBB007F3C28 /* Constants.m */; };
-		954995F2214F8BBB007F3C28 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 954995EF214F8BBB007F3C28 /* Constants.m */; };
+		954995F0214F8BBB007F3C28 /* SITConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 954995EE214F8BBB007F3C28 /* SITConstants.h */; };
+		954995F1214F8BBB007F3C28 /* SITConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 954995EF214F8BBB007F3C28 /* SITConstants.m */; };
+		954995F2214F8BBB007F3C28 /* SITConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 954995EF214F8BBB007F3C28 /* SITConstants.m */; };
 		954995F8214FACD8007F3C28 /* PoiCategoryIconTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 954995F7214FACD8007F3C28 /* PoiCategoryIconTests.m */; };
 		957695E1217DA8960082E679 /* LocationRequestTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 957695E0217DA8960082E679 /* LocationRequestTest.m */; };
 		95B14A2B214A402E0073A9E1 /* PointTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B14A2A214A402E0073A9E1 /* PointTests.m */; };
@@ -255,8 +255,8 @@
 		7ED95D341AB9029B008C4574 /* NSMutableArray+QueueAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+QueueAdditions.m"; sourceTree = "<group>"; };
 		8F5368C04B299F04076437E6 /* Pods_situmcordovaplugintests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_situmcordovaplugintests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		952D03AF21B160DE000C6530 /* DirectionsRequestTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DirectionsRequestTest.m; sourceTree = "<group>"; };
-		954995EE214F8BBB007F3C28 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		954995EF214F8BBB007F3C28 /* Constants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		954995EE214F8BBB007F3C28 /* SITConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SITConstants.h; sourceTree = "<group>"; };
+		954995EF214F8BBB007F3C28 /* SITConstants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SITConstants.m; sourceTree = "<group>"; };
 		954995F7214FACD8007F3C28 /* PoiCategoryIconTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoiCategoryIconTests.m; sourceTree = "<group>"; };
 		957695E0217DA8960082E679 /* LocationRequestTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationRequestTest.m; sourceTree = "<group>"; };
 		95B14A2A214A402E0073A9E1 /* PointTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PointTests.m; sourceTree = "<group>"; };
@@ -325,7 +325,7 @@
 			name = Products;
 			sourceTree = CORDOVALIB;
 		};
-		0867D691FE84028FC02AAC07 = {
+		0867D691FE84028FC02AAC07 /* CordovaLib */ = {
 			isa = PBXGroup;
 			children = (
 				0DF4AB0521143D5700D81A31 /* situmcordovaplugin */,
@@ -473,8 +473,8 @@
 				0DF4AB1421143D5700D81A31 /* SitumPlugin.m */,
 				0DF4AB1521143D5700D81A31 /* ViewController.h */,
 				0DF4AB1621143D5700D81A31 /* ViewController.m */,
-				954995EE214F8BBB007F3C28 /* Constants.h */,
-				954995EF214F8BBB007F3C28 /* Constants.m */,
+				954995EE214F8BBB007F3C28 /* SITConstants.h */,
+				954995EF214F8BBB007F3C28 /* SITConstants.m */,
 			);
 			path = situmcordovaplugin;
 			sourceTree = "<group>";
@@ -628,7 +628,7 @@
 				7ED95D571AB9029B008C4574 /* NSDictionary+CordovaPreferences.h in Headers */,
 				0D5CFD65212C275E00C6E436 /* CDVUIWebViewDelegate.h in Headers */,
 				7ED95D451AB9029B008C4574 /* CDVPlugin.h in Headers */,
-				954995F0214F8BBB007F3C28 /* Constants.h in Headers */,
+				954995F0214F8BBB007F3C28 /* SITConstants.h in Headers */,
 				7ED95D4C1AB9029B008C4574 /* CDVURLProtocol.h in Headers */,
 				7ED95D3A1AB9029B008C4574 /* CDVCommandDelegate.h in Headers */,
 				7ED95D391AB9029B008C4574 /* CDVAvailabilityDeprecated.h in Headers */,
@@ -738,7 +738,7 @@
 				en,
 				Base,
 			);
-			mainGroup = 0867D691FE84028FC02AAC07;
+			mainGroup = 0867D691FE84028FC02AAC07 /* CordovaLib */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -756,7 +756,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D884E7D2116FAA20066C765 /* resources in Resources */,
-				0D884E88211708900066C765 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -832,7 +831,7 @@
 				95B14A37214A47D20073A9E1 /* DimensionTests.m in Sources */,
 				95B14A41214A4CF20073A9E1 /* LocationStatusTests.m in Sources */,
 				954995F8214FACD8007F3C28 /* PoiCategoryIconTests.m in Sources */,
-				954995F2214F8BBB007F3C28 /* Constants.m in Sources */,
+				954995F2214F8BBB007F3C28 /* SITConstants.m in Sources */,
 				95B14A35214A476B0073A9E1 /* CoordinateTests.m in Sources */,
 				952D03B021B160DE000C6530 /* DirectionsRequestTest.m in Sources */,
 				95B14A49214A535A0073A9E1 /* RouteStepTests.m in Sources */,
@@ -876,7 +875,7 @@
 				0DF4AB1921143D5800D81A31 /* main.m in Sources */,
 				0D5CFD57212C275E00C6E436 /* CDVHandleOpenURL.m in Sources */,
 				0D5CFD53212C275E00C6E436 /* CDVIntentAndNavigationFilter.m in Sources */,
-				954995F1214F8BBB007F3C28 /* Constants.m in Sources */,
+				954995F1214F8BBB007F3C28 /* SITConstants.m in Sources */,
 				7ED95D511AB9029B008C4574 /* CDVViewController.m in Sources */,
 				7ED95D581AB9029B008C4574 /* NSDictionary+CordovaPreferences.m in Sources */,
 				7ED95D371AB9029B008C4574 /* CDVAppDelegate.m in Sources */,
