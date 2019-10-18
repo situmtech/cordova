@@ -1,5 +1,5 @@
 //
-//  Constants.h
+//  SITCPConstants.h
 //  SitumCordovaPlugin
 //
 //  Created by Cristina Sánchez Barreiro on 17/09/2018.

@@ -1,5 +1,5 @@
 //
-//  Constants.m
+//  SITConstants.m
 //  SitumCordovaPlugin
 //
 //  Created by Cristina Sánchez Barreiro on 17/09/2018.
