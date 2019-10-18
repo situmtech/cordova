@@ -1,5 +1,5 @@
 #import "SitumLocationWrapper.h"
-#import "Constants.h"
+#import "SITCPConstants.h"
 
 NSString* emptyStrCheck(NSString *str) {
     if (!str || str == nil) {

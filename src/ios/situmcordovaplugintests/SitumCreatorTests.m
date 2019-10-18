@@ -7,7 +7,7 @@
 //
 
 #import "SitumCreatorTests.h"
-#import "Constants.h"
+#import "SITCPConstants.h"
 
 @implementation SitumCreatorTests
 

@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Constants : NSObject
+@interface SITCPConstants : NSObject
 
 FOUNDATION_EXPORT NSString *const kDateFormat;
 

@@ -5,9 +5,9 @@
 //  Created by Cristina Sánchez Barreiro on 17/09/2018.
 //
 
-#import "Constants.h"
+#import "SITCPConstants.h"
 
-@implementation Constants
+@implementation SITCPConstants
 
 NSString *const kDateFormat = @"E MMM dd HH:mm:ss Z yyyy";
 
