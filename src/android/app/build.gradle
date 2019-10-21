@@ -35,7 +35,7 @@ dependencies {
         exclude group: 'junit', module:'junit'
     }
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    implementation ('es.situm:situm-sdk:2.40.0@aar') {
+    implementation ('es.situm:situm-sdk:2.40.0-support@aar') {
         transitive = true
 
     }
