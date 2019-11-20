@@ -54,6 +54,10 @@ public class SitumPlugin extends CordovaPlugin {
       es.situm.sdk.SitumSdk.configuration().setCacheMaxAge(cacheAge, TimeUnit.SECONDS);
     } else if (action.equalsIgnoreCase("fetchBuildings")) {
       getPluginInstance().fetchBuildings(cordova, webView, args, callbackContext);
+    } else if (action.equalsIgnoreCase("fetchBuildingInfo")) {
+      getPluginInstance().fetchBuildingInfo(cordova, webView, args, callbackContext);
+    } else if (action.equalsIgnoreCase("fetchGeofencesFromBuilding")) {
+      getPluginInstance().fetchGeofencesFromBuilding(cordova, webView, args, callbackContext);
     } else if (action.equalsIgnoreCase("startPositioning")) {
       getPluginInstance().startPositioning(cordova, webView, args, callbackContext);
     } else if (action.equalsIgnoreCase("stopPositioning")) {
@@ -84,6 +88,10 @@ public class SitumPlugin extends CordovaPlugin {
       getPluginInstance().updateNavigationWithLocation(cordova, webView, args, callbackContext);
     } else  if(action.equalsIgnoreCase("removeNavigationUpdates")) {
       getPluginInstance().removeNavigationUpdates(cordova, webView, args, callbackContext);
+    } else  if(action.equalsIgnoreCase("requestRealTimeUpdates")) {
+      getPluginInstance().requestRealTimeUpdates(cordova, webView, args, callbackContext);
+    } else  if(action.equalsIgnoreCase("removeRealTimeUpdates")) {
+      getPluginInstance().removeRealTimeUpdates(cordova, webView, args, callbackContext);
     } else {
       getPluginInstance().returnDefaultResponse(callbackContext);
     }

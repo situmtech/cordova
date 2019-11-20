@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -34,6 +35,8 @@ import es.situm.sdk.model.cartography.Floor;
 import es.situm.sdk.model.cartography.Poi;
 import es.situm.sdk.model.cartography.PoiCategory;
 import es.situm.sdk.model.cartography.Point;
+import es.situm.sdk.model.cartography.Geofence;
+import es.situm.sdk.model.cartography.BuildingInfo;
 import es.situm.sdk.model.directions.Indication;
 import es.situm.sdk.model.directions.Route;
 import es.situm.sdk.model.directions.RouteSegment;
@@ -50,6 +53,9 @@ import es.situm.sdk.model.navigation.NavigationProgress;
 import es.situm.sdk.v1.Point2f;
 import es.situm.sdk.v1.SitumConversionArea;
 import es.situm.sdk.v1.SitumEvent;
+
+import es.situm.sdk.realtime.RealTimeRequest;
+import es.situm.sdk.model.realtime.RealTimeData;
 
 //import java.util.Vector;
 
@@ -82,6 +88,7 @@ class SitumMapper {
   public static final String FLOOR_IDENTIFIER = "floorIdentifier";
 
   public static final String LEVEL = "level";
+  public static final String FLOOR = "floor";
   public static final String MAP_URL = "mapUrl";
   public static final String SCALE = "scale";
 
@@ -215,6 +222,15 @@ class SitumMapper {
   public static final String UPDATED_AT = "updatedAt";
   public static final String NAME = "name";
   public static final String ACCESSIBILITY_MODE = "accessibilityMode";
+  public static final String POLYGON_POINTS = "polygonPoints";
+  public static final String CODE = "code";
+  public static final String BUILDING = "building";
+  public static final String FLOORS = "floors";
+  public static final String EVENTS = "events";
+  public static final String INDOOR_POIS = "indoorPOIs";
+  public static final String OUTDOOR_POIS = "outdoorPOIs";  
+  public static final String LOCATIONS = "locations";
+  public static final String POLL_TIME = "pollTime";
 
   public static final DateFormat dateFormat = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy", Locale.US);
 
@@ -273,6 +289,97 @@ class SitumMapper {
     return building;
   }
 
+static JSONArray arrayFromFloors(Collection<Floor> floors) throws JSONException {
+	JSONArray jsonaFloors = new JSONArray();
+
+    for (Floor floor : floors) {
+        JSONObject jsonoFloor = SitumMapper.floorToJsonObject(floor);
+        jsonaFloors.put(jsonoFloor);
+    }
+	return jsonaFloors;
+  }
+
+static JSONArray arrayFromPois(Collection<Poi> pois) throws JSONException {
+	JSONArray jsonaPois = new JSONArray();
+
+    for (Poi poi : pois) {
+		JSONObject jsonoPoi = SitumMapper.poiToJsonObject(poi);
+        jsonaPois.put(jsonoPoi);
+    }
+	return jsonaPois;
+}
+
+static JSONObject realtimeDataToJson(RealTimeData realtimeData) throws JSONException {
+	JSONObject jsonObject = new JSONObject();
+
+	JSONArray jarrayLocations = new JSONArray();
+
+	for (Location location : realtimeData.getLocations()) {
+		JSONObject jsonLocation = SitumMapper.locationToJsonObject(location);
+		jarrayLocations.put(jsonLocation);
+	}
+
+	jsonObject.put(LOCATIONS, jarrayLocations);
+
+	return jsonObject;
+}
+
+static JSONArray arrayFromEvents(Collection<SitumEvent> situmEvents) throws JSONException {
+	JSONArray array = new JSONArray();
+    for (SitumEvent situmEvent : situmEvents) {
+    	JSONObject jsonoSitumEvent = situmEventToJsonObject(situmEvent);
+        array.put(jsonoSitumEvent);
+	}
+	return array;
+}
+
+  // Building Info
+static JSONObject buildingInfoToJsonObject(BuildingInfo buildingInfo) throws JSONException {
+    JSONObject jo = new JSONObject();
+
+	// Parse Building   
+    jo.put(BUILDING, buildingToJsonObject(buildingInfo.getBuilding()));
+	// Parse Floors
+    jo.put(FLOORS, arrayFromFloors(buildingInfo.getFloors()));
+	// Parse Indoor Pois
+	jo.put(INDOOR_POIS, arrayFromPois(buildingInfo.getIndoorPOIs()));
+	// Parse Outdoor Pois
+	jo.put(OUTDOOR_POIS, arrayFromPois(buildingInfo.getOutdoorPOIs()));
+	// Events
+	jo.put(EVENTS, arrayFromEvents(buildingInfo.getEvents()));
+	// fetch geofences
+	
+    return jo;
+  }
+
+  // Geofence
+  static JSONObject geofenceToJsonObject(Geofence geofence) throws JSONException {
+    JSONObject jo = new JSONObject();
+    jo.put(NAME, geofence.getName());
+    jo.put(CODE, geofence.getCode());
+    jo.put(INFO_HTML, geofence.getInfoHtml());
+    jo.put(BUILDING_IDENTIFIER, geofence.getBuildingIdentifier());
+    jo.put(FLOOR_IDENTIFIER, geofence.getFloorIdentifier());
+
+    // polygonPoints
+    jo.put(POLYGON_POINTS, jsonPointsFromPoints(geofence.getPolygonPoints()));
+
+    jo.put(IDENTIFIER, geofence.getIdentifier());
+    jo.put(CUSTOM_FIELDS, mapStringToJsonObject(geofence.getCustomFields()));
+    jo.put(CREATED_AT, dateFormat.format(geofence.getCreatedAt()));
+    jo.put(UPDATED_AT, dateFormat.format(geofence.getUpdatedAt()));
+
+    return jo;
+  }
+
+  static JSONArray jsonPointsFromPoints(List<Point> points) throws JSONException {
+    JSONArray pointsJsonArray = new JSONArray();
+     for (Point point : points) {
+       pointsJsonArray.put(pointToJsonObject(point));
+     }
+     return pointsJsonArray;
+  }
+
   // Floor
 
   static JSONObject floorToJsonObject(Floor floor) throws JSONException {
@@ -280,6 +387,8 @@ class SitumMapper {
     jo.put(ALTITUDE, floor.getAltitude());
     jo.put(BUILDING_IDENTIFIER, floor.getBuildingIdentifier());
     jo.put(LEVEL, floor.getLevel());
+    // Include floor here
+    jo.put(FLOOR, floor.getFloor());
     jo.put(NAME, floor.getName());
     jo.put(MAP_URL, floor.getMapUrl().getValue());
     jo.put(SCALE, floor.getScale());
@@ -298,6 +407,8 @@ class SitumMapper {
             .customFields(jsonObjectToMapString(jo.getJSONObject(CUSTOM_FIELDS)))
             .name(jo.getString(NAME))
             .level(jo.getInt(LEVEL))
+            .floor(jo.getInt(FLOOR))
+            .name(jo.getString(NAME))
             .mapUrl(new URL(jo.getString(MAP_URL)))
             .scale(jo.getDouble(SCALE)).build();
     
@@ -741,6 +852,23 @@ class SitumMapper {
     encodedImage = Base64.encodeToString(byteArrayOS.toByteArray(), Base64.DEFAULT);
     jo.put("data", encodedImage);
     return jo;
+  }
+
+  static RealTimeRequest jsonObjectRealtimeRequest(JSONObject object) throws JSONException {
+	RealTimeRequest.Builder builder = new RealTimeRequest.Builder();
+
+	if (object.has(BUILDING)) {
+		builder.building(buildingJsonObjectToBuilding(object.getJSONObject(BUILDING)));
+	}
+
+	if (object.has(POLL_TIME)) {
+		Integer poll_interval = object.getInt(SitumMapper.POLL_TIME);
+
+		if (poll_interval != null) {
+			builder.pollTimeMs(poll_interval);
+		}
+	}
+	return builder.build();
   }
 
   static LocationRequest locationRequestJSONObjectToLocationRequest(JSONArray args) throws JSONException {

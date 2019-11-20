@@ -164,6 +164,31 @@ module.exports = Poi
 
 /**
  * @name
+ * Geofence
+ * @description
+ * Point of Interest, associated to a building, regardless of whether it's place inside or outside the building.
+ * @property {string} identifier - The unique identifier of the resource
+ * @property {string} buildingIdentifier - Identifier of building to which the POI belongs.
+ * @property {string} floorIdentifier - If this POI is outside the building (isOutdoor == true), this field has no meaning.
+ * @property {string} name - A name for the geofence, appropriate for display to the user.
+ * @property {string} infoHtml - Additional information about POI, in HTML
+ * @property {Point[]} polygonPoints - List of points of that define the area of the geofence
+ * @property {object} customFields - Map of custom fields, indexed by their name.
+ */
+
+var Geofence = {
+  identifier,
+  buildingIdentifier,
+  floorIdentifier,
+  infoHtml,
+  polygonPoints,
+  customFields
+}
+
+module.exports = Geofence
+
+/**
+ * @name
  * PoiCategory
  * @description
  * Category of Point of Interest.
@@ -174,6 +199,7 @@ module.exports = Poi
  * @property {boolean} public - Whether the category is public or not
  */
 
+ 
 var PoiCategory = {
   poiCategoryCode,
   poiCategoryName,

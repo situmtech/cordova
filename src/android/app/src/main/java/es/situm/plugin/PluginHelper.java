@@ -17,6 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.HashMap;
 
 import es.situm.sdk.SitumSdk;
@@ -30,12 +31,19 @@ import es.situm.sdk.model.cartography.Building;
 import es.situm.sdk.model.cartography.Floor;
 import es.situm.sdk.model.cartography.Poi;
 import es.situm.sdk.model.cartography.PoiCategory;
+import es.situm.sdk.model.cartography.Geofence;
+import es.situm.sdk.model.cartography.BuildingInfo;
 import es.situm.sdk.model.directions.Route;
 import es.situm.sdk.model.location.Location;
 import es.situm.sdk.model.navigation.NavigationProgress;
 import es.situm.sdk.navigation.NavigationListener;
 import es.situm.sdk.navigation.NavigationManager;
 import es.situm.sdk.navigation.NavigationRequest;
+import es.situm.sdk.realtime.RealTimeManager;
+import es.situm.sdk.realtime.RealTimeRequest;
+import es.situm.sdk.realtime.RealTimeListener;
+import es.situm.sdk.model.realtime.RealTimeData;
+
 import es.situm.sdk.utils.Handler;
 import es.situm.sdk.v1.SitumEvent;
 
@@ -51,6 +59,8 @@ public class PluginHelper {
     private volatile CommunicationManager cmInstance;
 
     private volatile NavigationManager nmInstance;
+    private RealTimeListener realtimeListener;
+    private volatile RealTimeManager rmInstance;
 
     private Route computedRoute;
     private Location computedLocation;
@@ -67,6 +77,16 @@ public class PluginHelper {
 
     public void setCommunicationManager(CommunicationManager communicationManager) {
         cmInstance = communicationManager;
+    }
+
+    private RealTimeManager getRealtimeManagerInstance() {
+        if (rmInstance == null) {
+            synchronized (RealTimeManager.class) {   //Check for the second time.
+                //if there is no instance available... create new one
+                if (rmInstance == null) rmInstance = SitumSdk.realtimeManager();
+            }
+        }
+        return rmInstance;
     }
 
     private NavigationManager getNavigationManagerInstance() {
@@ -117,6 +137,83 @@ public class PluginHelper {
         }
     }
 
+    // building, floors, events, indoorPois, outdoorPois, ¿geofences? ¿Paths?
+    public void fetchBuildingInfo(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+            final CallbackContext callbackContext) 
+    {
+        try {
+            JSONObject jsonoBuilding = args.getJSONObject(0);
+            Building building = SitumMapper.buildingJsonObjectToBuilding(jsonoBuilding);
+
+            getCommunicationManagerInstance().fetchBuildingInfo(building, new Handler<BuildingInfo>() {
+                @Override
+                public void onSuccess(BuildingInfo object) {
+                    try {
+                        Log.d(PluginHelper.TAG, "onSuccess: building info fetched successfully.");
+                        
+                        
+                        JSONObject jsonObject = SitumMapper.buildingInfoToJsonObject(object); // Include geofences to parse ? This needs to be on sdk
+
+                        callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonObject));
+                    } catch (JSONException e) {
+                        callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
+                    }
+                }
+
+                @Override
+                public void onFailure(Error error) {
+                    Log.e(PluginHelper.TAG, "onFailure:" + error);
+                    callbackContext.sendPluginResult(new PluginResult(Status.ERROR, error.getMessage()));
+                }
+            });
+
+        } catch (Exception e) {
+            Log.e(TAG, "Unexpected error in building info response", e.getCause());
+            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
+        }
+    }
+
+    public void fetchGeofencesFromBuilding(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+            final CallbackContext callbackContext) 
+    {
+        try {
+            JSONObject jsonoBuilding = args.getJSONObject(0);
+            Building building = SitumMapper.buildingJsonObjectToBuilding(jsonoBuilding);
+
+            getCommunicationManagerInstance().fetchGeofencesFromBuilding(building, new Handler<List<Geofence>>() {
+                @Override
+                public void onSuccess(List<Geofence> geofences) {
+                    try {
+                        Log.d(PluginHelper.TAG, "onSuccess: Geofences fetched successfully.");
+                        JSONArray jsonaGeofences = new JSONArray();
+
+                        for (Geofence geofence : geofences) {
+                            Log.i(PluginHelper.TAG, "onSuccess: " + geofence.getIdentifier());
+                            JSONObject jsonoGeofence = SitumMapper.geofenceToJsonObject(geofence);
+                            jsonaGeofences.put(jsonoGeofence);
+                        }
+                        if (geofences.isEmpty()) {
+                            Log.e(PluginHelper.TAG, "onSuccess: you have no geofences defined for this building");
+                        }
+                        callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonaGeofences));
+                    } catch (JSONException e) {
+                        callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
+                    }
+                }
+
+                @Override
+                public void onFailure(Error error) {
+                    Log.e(PluginHelper.TAG, "onFailure:" + error);
+                    callbackContext.sendPluginResult(new PluginResult(Status.ERROR, error.getMessage()));
+                }
+            });
+
+        } catch (Exception e) {
+            Log.e(TAG, "Unexpected error in building info response", e.getCause());
+            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
+        }
+    }
+
     public void fetchFloorsFromBuilding(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
             final CallbackContext callbackContext) {
         try {
@@ -127,6 +224,8 @@ public class PluginHelper {
                 public void onSuccess(Collection<Floor> floors) {
                     try {
                         Log.d(PluginHelper.TAG, "onSuccess: Floors fetched successfully.");
+                        
+                        // TODO 19/11/19:     jo.put(FLOORS, arrayFromFloors(buildingInfo.getFloors()));
                         JSONArray jsonaFloors = new JSONArray();
 
                         for (Floor floor : floors) {
@@ -633,6 +732,77 @@ public class PluginHelper {
             result.setKeepCallback(true);
             callbackContext.sendPluginResult(result);
 
+    }
+
+    public void requestRealTimeUpdates(final CordovaInterface cordova,
+     CordovaWebView webView, 
+     JSONArray args, 
+     final CallbackContext callbackContext) { 
+        try {
+            // Convert request to native
+            Log.d("RRT", "Plugin Helper arriving initial");
+            JSONObject jsonRequest = args.getJSONObject(0);
+
+            // Building building = SitumMapper.buildingJsonObjectToBuilding(jsonoBuilding);
+            Log.d("RRT", "Plugin Helper converted building");
+
+
+            RealTimeRequest request = SitumMapper.jsonObjectRealtimeRequest(jsonRequest);
+            // Call
+            // RealTimeRequest.Builder builder = new RealTimeRequest.Builder().building(building); // Poll time interval
+
+            Log.d("RRT", "built rtrequest");
+
+            realtimeListener = new RealTimeListener() {
+                
+                @Override
+                public void onUserLocations(RealTimeData realTimeData) {
+                    Log.d(TAG, "Success retrieving realtime data" + realTimeData);
+
+                    try {
+                        // Parse information
+                        JSONObject jsonResult = SitumMapper.realtimeDataToJson(realTimeData);
+
+                        // Send it back to (removing user information)
+                        PluginResult result = new PluginResult(Status.OK,jsonResult);
+                        result.setKeepCallback(true);
+                        callbackContext.sendPluginResult(result);        
+                    } catch (Exception e) {
+                        Log.d(TAG, "Error  exception realtime data" + e);
+                    }
+                    
+                    
+                }
+
+                @Override
+                public void onError(Error error) {
+                    Log.e(TAG, "Error request realtime data" + error);
+                    PluginResult result = new PluginResult(Status.ERROR, error.getMessage());
+                    result.setKeepCallback(true);
+                    callbackContext.sendPluginResult(result);
+                }
+
+            };
+            try {
+                getRealtimeManagerInstance().requestRealTimeUpdates(request, realtimeListener);
+            } catch (Exception e) {
+                Log.e(PluginHelper.TAG, "onError() called with: error = [" + e + "]");
+            }
+        } catch (Exception e) {
+            Log.d("RRT", "exception: " + e);
+
+            e.printStackTrace();
+            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
+        }
+     }
+
+     public void removeRealTimeUpdates(CordovaInterface cordova,
+    CordovaWebView webView, 
+    JSONArray args, 
+    final CallbackContext callbackContext) {
+        // 
+        Log.i(TAG, "Remove realtime updates");
+        getRealtimeManagerInstance().removeRealTimeUpdates(); // TODO: Incorporate sending a result to the exterior
     }
 
     // Initialize Navigation Component 
