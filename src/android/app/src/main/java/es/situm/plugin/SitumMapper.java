@@ -393,6 +393,7 @@ static JSONObject buildingInfoToJsonObject(BuildingInfo buildingInfo) throws JSO
     jo.put(MAP_URL, floor.getMapUrl().getValue());
     jo.put(SCALE, floor.getScale());
     jo.put(FLOOR_IDENTIFIER, floor.getIdentifier());
+    jo.put(IDENTIFIER, floor.getIdentifier());
     jo.put(CUSTOM_FIELDS, mapStringToJsonObject(floor.getCustomFields()));
     jo.put(CREATED_AT, dateFormat.format(floor.getCreatedAt()));
     jo.put(UPDATED_AT, dateFormat.format(floor.getUpdatedAt()));

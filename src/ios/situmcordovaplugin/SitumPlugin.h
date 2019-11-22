@@ -2,7 +2,7 @@
 #import <SitumSDK/SitumSDK.h>
 
 
-@interface SitumPlugin : CDVPlugin<SITDirectionsDelegate, SITLocationDelegate, SITNavigationDelegate> {
+@interface SitumPlugin : CDVPlugin<SITDirectionsDelegate, SITLocationDelegate, SITNavigationDelegate, SITRealTimeDelegate> {
     
     NSMutableDictionary *buildingsStored;
     NSMutableDictionary *floorStored;
@@ -11,7 +11,7 @@
     NSMutableDictionary<NSString *, SITPOI*> *poisStored;
     NSMutableDictionary *routesStored;
     
-    NSString *locationCallbackId, *routeCallbackId, *navigationProgressCallbackId;
+    NSString *locationCallbackId, *routeCallbackId, *navigationProgressCallbackId, *realtimeCallbackId;
 }
 
 // The hooks for our plugin commands
@@ -20,6 +20,8 @@
 - (void)startPositioning:(CDVInvokedUrlCommand *)command;
 - (void)stopPositioning:(CDVInvokedUrlCommand *)command;
 - (void)fetchBuildings:(CDVInvokedUrlCommand *)command;
+- (void)fetchBuildingInfo:(CDVInvokedUrlCommand *)command;
+- (void)fetchGeofencesFromBuilding:(CDVInvokedUrlCommand *)command;
 - (void)fetchFloorsFromBuilding:(CDVInvokedUrlCommand *)command;
 - (void)fetchIndoorPOIsFromBuilding:(CDVInvokedUrlCommand *)command;
 - (void)fetchOutdoorPOIsFromBuilding:(CDVInvokedUrlCommand *)command;
@@ -30,6 +32,7 @@
 - (void)fetchPoiCategoryIconSelected:(CDVInvokedUrlCommand *)command;
 - (void)invalidateCache:(CDVInvokedUrlCommand *)command;
 - (void)requestDirections:(CDVInvokedUrlCommand *)command;
-
-
+// Realtime
+- (void)requestRealTimeUpdates:(CDVInvokedUrlCommand *)command;
+- (void)removeRealTimeUpdates:(CDVInvokedUrlCommand *)command;
 @end
