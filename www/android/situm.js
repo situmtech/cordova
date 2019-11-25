@@ -161,6 +161,28 @@ var Situm = {
     exec(cb, error, PLUGIN_NAME, 'fetchPoiCategoryIconSelected', [category]);
   },
   /**
+  * Download all the information of a building.
+   * @description Download the information of a building (floors, pois, basic information, ...)
+   * @param {Building} building The building identifier. Not null.
+   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {BuildingInfo} buildingInfo structure
+   */
+  fetchBuildingInfo: function (building, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'fetchBuildingInfo', [building]);
+  },
+  /**
+   * Download all the information of a building.
+   * @description Download the indoor POIs of a building
+   * @param {Int} buildingIdentifier The building identifier. Not null.
+   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {Building[]} pois Array of POIs
+   */
+  fetchGeofencesFromBuilding: function (building, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'fetchGeofencesFromBuilding', [building]);
+  },
+  /**
    * Invalidate all the resources in the cache.
    * @description Invalidate all the resources in the cache
    * @param {function} cb Cordova native callback to recive data.
@@ -212,6 +234,26 @@ var Situm = {
    */
   removeNavigationUpdates: function (cb, error) {
     exec(cb, error, PLUGIN_NAME, 'removeNavigationUpdates', []);
+  },
+  // Realtime
+
+  /**
+   * Set the realtime params and listener that receives realtime location updates
+   * @param {RealTimeRequest} request Request - non-null search parameters.
+   * @param {fuction} cb Cordova native callback to recive data. 
+   * @param {function} error Cordova native callback to recive errors. 
+   */
+  requestRealTimeUpdates: function (request, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'requestRealTimeUpdates', [request]);
+  },
+
+  /**
+   * Stops receiving updates in realtime about user location.
+   * @param {function} cb Cordova native callback to recive data. 
+   * @param {function} error Cordova native callback to recive errors. 
+   */
+  removeRealTimeUpdates: function(cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'removeRealTimeUpdates', []);
   }
 };
 module.exports = Situm;

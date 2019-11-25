@@ -8,6 +8,7 @@
 //Building
 
 - (NSDictionary *) buildingToJsonObject:(SITBuilding *) building;
+- (NSDictionary *) buildingInfoToJsonObject:(SITBuildingInfo *)buildingInfo;
 
 //Building (should be deprecated)
 
@@ -37,6 +38,8 @@
 
 - (NSDictionary *) poiToJsonObject:(SITPOI *) poi;
 
+// Geofence
+- (NSDictionary *) geofenceToJsonObject:(SITGeofence *)geofence;
 
 // Location
 - (SITLocationRequest *) jsonObjectToLocationRequest: (NSArray *) json;
@@ -98,5 +101,9 @@
 // NavigationProgress
 
 - (NSDictionary *) navigationProgressToJsonObject:(SITNavigationProgress *) navigationProgress;
+
+// Realtime
+- (NSDictionary *)jsonFromRealtimeData:(SITRealTimeData *)realtimeData;
+- (SITRealTimeRequest *)realtimeRequestFromJson:(NSDictionary *)jo;
 
 @end

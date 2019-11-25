@@ -45,6 +45,12 @@ var Situm = {
   fetchPoiCategoryIconSelected: function (category, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'fetchPoiCategoryIconSelected', [category]);
   },
+  fetchBuildingInfo: function(building, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'fetchBuildingInfo', [building]);
+  },
+  fetchGeofencesFromBuilding: function (building, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'fetchGeofencesFromBuilding', [building]);
+  },
   invalidateCache: function (cb, error) {
     exec(cb, error, PLUGIN_NAME, 'invalidateCache');
   },
@@ -65,6 +71,12 @@ var Situm = {
   },
   removeNavigationUpdates: function (args, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'removeNavigationUpdates', args);
+  },
+  requestRealTimeUpdates: function (request, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'requestRealTimeUpdates', [request]);
+  },
+  removeRealTimeUpdates: function(cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'removeRealTimeUpdates', []);
   }
 };
 module.exports = Situm;

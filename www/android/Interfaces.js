@@ -35,6 +35,27 @@ var Building = {
 
 module.exports = Building
 
+/** @name
+ * BuildingInfo
+ * @description
+ * Detailed information of a building in a single object.
+ * @property {Building} building - Basic information.
+ * @property {Array<Floor>} floors - complete set of levels.
+ * @property {Array<Poi>} indoorPois - list of indoor pois (the ones which its coordinate is inside the building).
+ * @property {Array<Poi>} outdoorPois - list of indoor pois (the ones which its coordinate is outside the building).
+ * @property {Array<Event>} events - list of events associated with a building.
+ */
+
+var BuildingInfo = {
+  building,
+  floors,
+  indoorPois,
+  outdoorPois,
+  events
+}
+
+module.exports = BuildingInfo
+
 /**
  * @name
  * Floor
@@ -164,6 +185,31 @@ module.exports = Poi
 
 /**
  * @name
+ * Geofence
+ * @description
+ * Point of Interest, associated to a building, regardless of whether it's place inside or outside the building.
+ * @property {string} identifier - The unique identifier of the resource
+ * @property {string} buildingIdentifier - Identifier of building to which the POI belongs.
+ * @property {string} floorIdentifier - If this POI is outside the building (isOutdoor == true), this field has no meaning.
+ * @property {string} name - A name for the geofence, appropriate for display to the user.
+ * @property {string} infoHtml - Additional information about POI, in HTML
+ * @property {Point[]} polygonPoints - List of points of that define the area of the geofence
+ * @property {object} customFields - Map of custom fields, indexed by their name.
+ */
+
+var Geofence = {
+  identifier,
+  buildingIdentifier,
+  floorIdentifier,
+  infoHtml,
+  polygonPoints,
+  customFields
+}
+
+module.exports = Geofence
+
+/**
+ * @name
  * PoiCategory
  * @description
  * Category of Point of Interest.
@@ -174,6 +220,7 @@ module.exports = Poi
  * @property {boolean} public - Whether the category is public or not
  */
 
+ 
 var PoiCategory = {
   poiCategoryCode,
   poiCategoryName,
@@ -649,3 +696,33 @@ var BeaconFilter = {
 }
 
 module.exports = BeaconFilter
+
+/**
+ * @name
+ * RealTimeRequest
+ * @description
+ * A data object that contains the parameters to process realtime data of the users.
+ * @property {Building} building object
+ * @property {int} pollTime - Interval in milliseconds (minimum is 3000ms).
+ */
+
+var RealTimeRequest = {
+  building,
+  pollTime,
+}
+
+module.exports = RealTimeRequest
+
+/**
+ * @name
+ * RealTimeData
+ * @description
+ * A data object that contains information of the location of users in realtime.
+ * @property {Array<Location>} locations object
+ */
+
+var RealTimeData = {
+  locations,
+}
+
+module.exports = RealTimeData
