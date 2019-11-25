@@ -1,0 +1,48 @@
+{
+  "hasCartesianBearing": false,
+  "coordinate": {
+    "latitude": 8.6,
+    "longitude": 10.5
+  },
+  "bearing": {
+    "radiansMinusPiPi": 0,
+    "radians": 0,
+    "degreesClockwise": 360,
+    "degrees": 0
+  },
+  "accuracy": 5,
+  "isIndoor": false,
+  "deviceId": "",
+  "buildingIdentifier": "-1",
+  "quality": "HIGH",
+  "isOutdoor": true,
+  "floorIdentifier": "-1",
+  "provider": "TEST_PROVIDER",
+  "cartesianBearing": {
+    "radiansMinusPiPi": 0,
+    "radians": 0,
+    "degreesClockwise": 360,
+    "degrees": 0
+  },
+  "bearingQuality": "HIGH",
+  "hasBearing": true,
+  "cartesianCoordinate": {
+    "x": 0,
+    "y": 0
+  },
+  "position": {
+    "coordinate": {
+      "latitude": 8.6,
+      "longitude": 10.5
+    },
+    "floorIdentifier": "-1",
+    "cartesianCoordinate": {
+      "x": 0,
+      "y": 0
+    },
+    "isIndoor": false,
+    "buildingIdentifier": "-1",
+    "isOutdoor": true
+  },
+  "timestamp": 14676784
+}
