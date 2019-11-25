@@ -35,6 +35,27 @@ var Building = {
 
 module.exports = Building
 
+/** @name
+ * BuildingInfo
+ * @description
+ * Detailed information of a building in a single object.
+ * @property {Building} building - Basic information.
+ * @property {Array<Floor>} floors - complete set of levels.
+ * @property {Array<Poi>} indoorPois - list of indoor pois (the ones which its coordinate is inside the building).
+ * @property {Array<Poi>} outdoorPois - list of indoor pois (the ones which its coordinate is outside the building).
+ * @property {Array<Event>} events - list of events associated with a building.
+ */
+
+var BuildingInfo = {
+  building,
+  floors,
+  indoorPois,
+  outdoorPois,
+  events
+}
+
+module.exports = BuildingInfo
+
 /**
  * @name
  * Floor
@@ -675,3 +696,33 @@ var BeaconFilter = {
 }
 
 module.exports = BeaconFilter
+
+/**
+ * @name
+ * RealTimeRequest
+ * @description
+ * A data object that contains the parameters to process realtime data of the users.
+ * @property {Building} building object
+ * @property {int} pollTime - Interval in milliseconds (minimum is 3000ms).
+ */
+
+var RealTimeRequest = {
+  building,
+  pollTime,
+}
+
+module.exports = RealTimeRequest
+
+/**
+ * @name
+ * RealTimeData
+ * @description
+ * A data object that contains information of the location of users in realtime.
+ * @property {Array<Location>} locations object
+ */
+
+var RealTimeData = {
+  locations,
+}
+
+module.exports = RealTimeData
