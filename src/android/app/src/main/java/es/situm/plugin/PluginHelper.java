@@ -740,18 +740,10 @@ public class PluginHelper {
      final CallbackContext callbackContext) { 
         try {
             // Convert request to native
-            Log.d("RRT", "Plugin Helper arriving initial");
             JSONObject jsonRequest = args.getJSONObject(0);
-
-            // Building building = SitumMapper.buildingJsonObjectToBuilding(jsonoBuilding);
-            Log.d("RRT", "Plugin Helper converted building");
-
 
             RealTimeRequest request = SitumMapper.jsonObjectRealtimeRequest(jsonRequest);
             // Call
-            // RealTimeRequest.Builder builder = new RealTimeRequest.Builder().building(building); // Poll time interval
-
-            Log.d("RRT", "built rtrequest");
 
             realtimeListener = new RealTimeListener() {
                 
@@ -789,7 +781,7 @@ public class PluginHelper {
                 Log.e(PluginHelper.TAG, "onError() called with: error = [" + e + "]");
             }
         } catch (Exception e) {
-            Log.d("RRT", "exception: " + e);
+            Log.d(TAG, "exception: " + e);
 
             e.printStackTrace();
             callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));

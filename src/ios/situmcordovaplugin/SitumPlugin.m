@@ -149,11 +149,6 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     if (IS_LOG_ENABLED) {
         NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ with parameters: %@", DEFAULT_SITUM_LOG, operation, buildingJO]);
     }
-
-    /*
-    if (floorStored == nil) {
-        floorStored = [[NSMutableDictionary alloc] init];
-    }*/
     
     NSString *buildingId = [buildingJO valueForKey:@"identifier"];
     SITBuilding *building = [[SITBuilding alloc]init];
@@ -189,21 +184,8 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
             if (IS_LOG_ENABLED) {
                 NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ json array has : %@", DEFAULT_SITUM_LOG, operation, ja]);
             }
-            /*
-            [floorStored setObject:obj forKey:[NSString stringWithFormat:@"%@", obj.identifier]];
-            if (IS_LOG_ENABLED) {
-                NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ added: %@ to dictionary results", DEFAULT_SITUM_LOG, operation, obj]);
-            }*/
         }
         CDVPluginResult* pluginResult = nil;
-        /*
-        if (array.count == 0) {
-            if (IS_LOG_ENABLED) {
-                NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ no geofences on building: %@", DEFAULT_SITUM_LOG, operation, buildingJO]);
-            }
-            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"The selected building does not have geofences. Correct that on http://dashboard.situm.es"];
-        // } else {
-            */
         // Not having geofences is not an error
         if (IS_LOG_ENABLED) {
             NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ retrieved geofences: %@ on building: %@", DEFAULT_SITUM_LOG, operation, array, buildingJO]);
