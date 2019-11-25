@@ -325,6 +325,7 @@
     XCTAssertEqualObjects(floorA.identifier, floorB.identifier);
     XCTAssertEqualObjects(@(floorA.altitude), @(floorB.altitude));
     XCTAssertEqualObjects(@(floorA.level), @(floorB.level));
+    XCTAssertEqualObjects(@(floorA.floor), @(floorB.floor));
     XCTAssertEqualObjects(@(floorA.scale), @(floorB.scale));
     [self assertUrl:floorA.mapURL isEqualToUrl:floorB.mapURL];
     XCTAssertEqualObjects(floorA.buildingIdentifier, floorB.buildingIdentifier);

@@ -38,6 +38,7 @@
     NSString *fileName = @"poiCategoryIcon1";
     //read from json object in resources
     NSDictionary *jsonImage = [TestingHelper dataFromJSONFileNamed: fileName inDirectory : _filePath];
+    NSLog(@"file")
     [_helper assertImage: jsonImage: imageJO];
 }
 
