@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 All non released changes should be in CHANGELOG_UNRELEASED.md file
 
 ---------
+## [1.16.0] - 2019-11-28
+
+### Added
+* floor property to Floor object (deprecate level)
+* included functions to retrieve geofences from a building
+* retrieve information of a building in a single function 
+* retrieve realtime locations
+
+### Updated
+* update Situm SDK Android to version 2.43.0
+
 ## [1.15.2] - 2019-07-29
 
 ### Fixed

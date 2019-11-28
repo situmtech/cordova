@@ -180,6 +180,61 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     return jo.copy;
 }
 
+- (NSArray *)floorsToJsonArray:(NSArray *)floors
+{
+    NSMutableArray *ja = [[NSMutableArray alloc] init];
+    for (SITFloor *obj in floors) {
+        NSDictionary *floorJson = [self floorToJsonObject:obj];
+       
+        [ja addObject:floorJson];
+    }
+    return ja;
+}
+
+- (NSArray *)poisToJsonArray:(NSArray *)array
+{
+    NSMutableArray *ja = [[NSMutableArray alloc] init];
+    for (SITPOI *obj in array) {
+        NSDictionary *json = [self poiToJsonObject:obj];
+       
+        [ja addObject:json];
+    }
+    return ja;
+}
+
+- (NSArray *)eventsToJsonArray:(NSArray *)array
+{
+    NSMutableArray *ja = [[NSMutableArray alloc] init];
+    for (SITEvent *obj in array) {
+        NSDictionary *json = [self eventToJsonObject:obj];
+       
+        [ja addObject:json];
+    }
+    return ja;
+}
+
+
+// Building Info
+- (NSDictionary *) buildingInfoToJsonObject:(SITBuildingInfo *)buildingInfo
+{
+    NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
+
+    // Building
+    [jo setObject:[self buildingToJsonObject:buildingInfo.building] forKey:@"building"];
+    // Floors
+    [jo setObject:[self floorsToJsonArray:buildingInfo.floors] forKey:@"floors"];
+    // Indoor Pois
+    [jo setObject:[self poisToJsonArray:buildingInfo.indoorPois] forKey:@"indoorPois"];
+    // Outdoor Pois
+    [jo setObject:[self poisToJsonArray:buildingInfo.outdoorPois] forKey:@"outdoorPois"];
+    // Events
+    [jo setObject:[self eventsToJsonArray:buildingInfo.events] forKey:@"events"];
+    // Geofences?
+    
+    return jo;
+}
+
+
 - (SITLocationRequest *) jsonObjectToLocationRequest: (NSArray *) json {
     NSDictionary *buildingJO;
     NSNumber *useDeadReckoning = nil;
@@ -320,6 +375,42 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     return jo.copy;
 }
 
+
+// Geofence
+- (NSDictionary *)geofenceToJsonObject:(SITGeofence *)geofence {
+    NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
+
+    // Complete implementation
+    [jo setObject:emptyStrCheck(geofence.identifier) forKey:@"identifier"];
+    [jo setObject:emptyStrCheck(geofence.buildingIdentifier) forKey:@"buildingIdentifier"];
+    [jo setObject:emptyStrCheck(geofence.floorIdentifier) forKey:@"floorIdentifier"];
+    
+    [jo setObject:emptyStrCheck(geofence.name) forKey:@"name"];
+
+    // Polygon Points
+    [jo setObject:[self pointsToJsonArray:geofence.polygonPoints] forKey:@"polygonPoints"];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:kDateFormat];
+    
+    [jo setObject:emptyStrCheck([dateFormatter stringFromDate:geofence.createdAt])
+           forKey:@"createdAt"];
+    
+    [jo setObject:emptyStrCheck([dateFormatter stringFromDate:geofence.updatedAt])
+           forKey:@"updatedAt"];
+
+    if (geofence.customFields) {
+        [jo setObject:geofence.customFields forKey:@"customFields"];
+    } else {
+        [jo setObject:[NSDictionary new] forKey:@"customFields"];
+    }
+    [jo setObject:emptyStrCheck(geofence.infoHtml) forKey:@"infoHtml"];
+
+
+
+    return jo;
+}
+
 //Floor
 
 - (NSDictionary *) floorToJsonObject:(SITFloor *) floor {
@@ -328,6 +419,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     [jo setObject:[NSNumber numberWithDouble:floor.altitude] forKey:@"altitude"];
     [jo setObject:emptyStrCheck([NSString stringWithFormat:@"%@", floor.buildingIdentifier]) forKey:@"buildingIdentifier"];
     [jo setObject:[NSNumber numberWithInteger: floor.level] forKey:@"level"];
+    [jo setObject:[NSNumber numberWithInteger: floor.floor] forKey:@"floor"];
     [jo setObject:floor.mapURL.direction forKey:@"mapUrl"];
     [jo setObject:[NSNumber numberWithDouble:floor.scale] forKey:@"scale"];
     [jo setObject:[NSString stringWithFormat:@"%@", floor.identifier] forKey:@"floorIdentifier"];
@@ -358,6 +450,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     floor.scale = [[nsFloor objectForKey:@"scale"] doubleValue];
     floor.mapURL = [[SITURL alloc] initWithDirection:[nsFloor objectForKey:@"mapUrl"]];;
     floor.level = [[nsFloor objectForKey:@"level"] intValue];
+    floor.floor = [[nsFloor objectForKey:@"floor"] intValue];
     floor.identifier = [nsFloor objectForKey:@"floorIdentifier"];
     floor.name = [nsFloor objectForKey:@"name"];
     floor.buildingIdentifier = [nsFloor objectForKey:@"buildingIdentifier"];
@@ -535,6 +628,13 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
 
 
 // Point
+- (NSArray *) pointsToJsonArray:(NSArray<SITPoint *> *)points {
+    NSMutableArray *pointsJO = [[NSMutableArray alloc]init];
+    for(SITPoint* point in points) {
+        [pointsJO addObject: [self pointToJsonObject: point]];
+    }
+    return pointsJO;
+}
 
 - (NSDictionary *) pointToJsonObject:(SITPoint *) point {
     NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
@@ -827,5 +927,34 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
 }
 
 // check nil string
+
+// Realtime
+- (SITRealTimeRequest *)realtimeRequestFromJson:(NSDictionary *)jo
+{
+    SITRealTimeRequest *request = [[SITRealTimeRequest alloc] init];
+
+    NSDictionary *buildingJO = [jo valueForKey:@"building"];
+    
+    
+    request.buildingIdentifier = [buildingJO valueForKey:@"identifier"];
+    request.updateInterval = [[jo valueForKey:@"pollTime"] integerValue];
+
+    return request;
+}
+
+- (NSDictionary *)jsonFromRealtimeData:(SITRealTimeData *)realtimeData
+{
+    NSMutableDictionary *jo  = [[NSMutableDictionary alloc] init];
+
+    NSMutableArray *locations = [[NSMutableArray alloc]init];
+
+    for (SITLocation *location in realtimeData.locations) {
+        [locations addObject:[self locationToJsonObject:location]];
+    }
+
+    [jo setObject:locations forKey:@"locations"];
+
+    return jo;
+} 
 
 @end

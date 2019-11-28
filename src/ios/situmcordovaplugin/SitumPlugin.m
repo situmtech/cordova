@@ -56,6 +56,43 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     }
 }
 
+- (void)fetchBuildingInfo:(CDVInvokedUrlCommand *)command
+{
+    // TODO:
+    // Retrieve the buildingIdentifier
+    NSDictionary* buildingJO = (NSDictionary*)[command.arguments objectAtIndex:0];
+    
+    NSString *operation = @"Fetching building info request";
+    if (IS_LOG_ENABLED) {
+        NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ with parameters: %@", DEFAULT_SITUM_LOG, operation, buildingJO]);
+    }
+    
+    NSString *buildingId = [buildingJO valueForKey:@"identifier"];
+    
+    [[SITCommunicationManager sharedManager] fetchBuildingInfo:buildingId withOptions:nil success:^(NSDictionary * _Nullable mapping) {
+        if (IS_LOG_ENABLED) {
+            NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ Fetching buildings returned values", DEFAULT_SITUM_LOG, operation]);
+        }
+        
+        // Parse and convert to json
+        NSDictionary *buildingInfoJson = [SitumLocationWrapper.shared buildingInfoToJsonObject:mapping[@"results"]];
+        
+        // Send result outsidecon e
+        if (IS_LOG_ENABLED) {
+            NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ retrieved building info: %@ of building: %@", DEFAULT_SITUM_LOG, operation, buildingInfoJson, buildingJO]);
+        }
+        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:buildingInfoJson.copy];
+        // }
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        
+    } failure:^(NSError * _Nullable error) {
+        if (IS_LOG_ENABLED) {
+            NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ error : %@ retrieving building info on building: %@", DEFAULT_SITUM_LOG, operation, error, buildingId]);
+        }
+        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.description] callbackId:command.callbackId];
+    }];
+}
+
 - (void)fetchBuildings:(CDVInvokedUrlCommand*)command
 {
     if (buildingsStored == nil) {
@@ -102,6 +139,61 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
                                                                     }
                                                                    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.description] callbackId:command.callbackId];
                                                                }];
+}
+
+- (void)fetchGeofencesFromBuilding:(CDVInvokedUrlCommand*)command 
+{
+    NSDictionary* buildingJO = (NSDictionary*)[command.arguments objectAtIndex:0];
+    
+    NSString *operation = @"Fetching geofences request";
+    if (IS_LOG_ENABLED) {
+        NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ with parameters: %@", DEFAULT_SITUM_LOG, operation, buildingJO]);
+    }
+    
+    NSString *buildingId = [buildingJO valueForKey:@"identifier"];
+    SITBuilding *building = [[SITBuilding alloc]init];
+    building.identifier = buildingId;
+    
+    [[SITCommunicationManager sharedManager] fetchGeofencesFromBuilding:building
+                                                            withOptions:nil
+                                                         withCompletion:^(id  _Nullable array, NSError * _Nullable error) {
+        if (error) {
+            if (IS_LOG_ENABLED) {
+                NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ error : %@ retrieving geofences on building: %@", DEFAULT_SITUM_LOG, operation, error, buildingJO]);
+            }
+            [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.description] callbackId:command.callbackId];
+            
+            return;
+        }
+        
+        // A success has been returned
+        if (IS_LOG_ENABLED) {
+            NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ responded", DEFAULT_SITUM_LOG, operation]);
+        }
+
+        NSMutableArray *ja = [[NSMutableArray alloc] init];
+        if (IS_LOG_ENABLED) {
+            NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ results: %@", DEFAULT_SITUM_LOG, operation, array]);
+        }
+        for (SITGeofence *obj in array) {
+            NSDictionary *jsonObject = [SitumLocationWrapper.shared geofenceToJsonObject:obj];
+            if (IS_LOG_ENABLED) {
+                NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ parsed floor: %@", DEFAULT_SITUM_LOG, operation, jsonObject]);
+            }
+            [ja addObject:jsonObject];
+            if (IS_LOG_ENABLED) {
+                NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ json array has : %@", DEFAULT_SITUM_LOG, operation, ja]);
+            }
+        }
+        CDVPluginResult* pluginResult = nil;
+        // Not having geofences is not an error
+        if (IS_LOG_ENABLED) {
+            NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ retrieved geofences: %@ on building: %@", DEFAULT_SITUM_LOG, operation, array, buildingJO]);
+        }
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:ja.copy];
+        // }
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }];
 }
 
 
@@ -485,6 +577,37 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     [self.commandDelegate sendPluginResult:pluginResult callbackId:locationCallbackId];
 }
 
+// Realtime 
+- (void)requestRealTimeUpdates:(CDVInvokedUrlCommand *)command {
+    realtimeCallbackId = command.callbackId;
+    SITRealTimeRequest *request = [SitumLocationWrapper.shared realtimeRequestFromJson:(NSDictionary*)[command.arguments objectAtIndex:0]];
+
+    [[SITRealTimeManager sharedManager] requestRealTimeUpdates:request];
+    [SITRealTimeManager sharedManager].delegate = self;
+}
+
+- (void)removeRealTimeUpdates:(CDVInvokedUrlCommand *)command {
+    [[SITRealTimeManager sharedManager] removeRealTimeUpdates];
+}
+
+// SITRealtimeDelegate methods
+- (void)realTimeManager:(id <SITRealTimeInterface> _Nonnull)realTimeManager
+ didUpdateUserLocations:(SITRealTimeData *  _Nonnull)realTimeData 
+{
+    // SITRealTimeData to json
+    NSDictionary *realtimeInfo = [SitumLocationWrapper.shared jsonFromRealtimeData:realTimeData];
+    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:realtimeInfo.copy];
+    pluginResult.keepCallback = [NSNumber numberWithBool:true];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:realtimeCallbackId];
+}
+
+- (void)realTimeManager:(id <SITRealTimeInterface>  _Nonnull)realTimeManager
+       didFailWithError:(NSError *  _Nonnull)error
+{
+    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.description];
+    pluginResult.keepCallback = [NSNumber numberWithBool:true];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:realtimeCallbackId];
+}
 
 // SITLocationDelegate methods
 
@@ -585,7 +708,6 @@ destinationReachedOnRoute:(SITRoute *)route {
     pluginResult.keepCallback = [NSNumber numberWithBool:true];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:navigationProgressCallbackId];
 }
-
 
 
 @end

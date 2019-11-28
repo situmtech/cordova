@@ -122,6 +122,7 @@
     floor.name = @"testName";
     floor.mapURL = [[SITURL alloc] initWithDirection:@"TEST_URL"];
     floor.level = 1;
+    floor.floor = 1;
     floor.identifier = @"-1";
     floor.buildingIdentifier = @"101";
     return floor;
@@ -140,6 +141,7 @@
     floor.scale = 10.2;
     floor.mapURL = [[SITURL alloc] initWithDirection:@"TEST_URL"];
     floor.level = 1;
+    floor.floor = 1;
     floor.identifier = @"-1";
     floor.buildingIdentifier = @"101";
     return floor;
