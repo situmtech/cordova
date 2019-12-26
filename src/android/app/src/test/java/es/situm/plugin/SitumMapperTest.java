@@ -250,7 +250,7 @@ public class SitumMapperTest {
             Building building = SitumMapper.buildingJsonObjectToBuilding(jo);
             Building building1 = buildingCreator.createBuilding1();
             testBuilding(building, building1);
-        } catch (JSONException e) {
+        } catch (Exception e) {
             System.err.println(e.getMessage());
         }
     }
@@ -335,7 +335,7 @@ public class SitumMapperTest {
                     buildingCreator.getBuilding1(), pointCreator.getPoint1(), pointCreator.getPoint2(), jo.getJSONObject(3));
             DirectionsRequest directionsRequest1 = directionsRequestCreator.createDirectionsRequest1();
             testDirectionsRequest(directionsRequest, directionsRequest1);
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -348,7 +348,7 @@ public class SitumMapperTest {
                     buildingCreator.getBuilding1(), pointCreator.getPoint1(), pointCreator.getPoint2(), jo.getJSONObject(3));
             DirectionsRequest directionsRequest1 = directionsRequestCreator.createDirectionsRequest2();
             testDirectionsRequest(directionsRequest, directionsRequest1);
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -361,7 +361,7 @@ public class SitumMapperTest {
                     buildingCreator.getBuilding1(), pointCreator.getPoint1(), pointCreator.getPoint2(), jo.getJSONObject(3));
             DirectionsRequest directionsRequest1 = directionsRequestCreator.createDirectionsRequest3();
             testDirectionsRequest(directionsRequest, directionsRequest1);
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -374,7 +374,7 @@ public class SitumMapperTest {
                     buildingCreator.getBuilding1(), pointCreator.getPoint1(), pointCreator.getPoint2(), jo.getJSONObject(3));
             DirectionsRequest directionsRequest1 = directionsRequestCreator.createDirectionsRequest4();
             testDirectionsRequest(directionsRequest, directionsRequest1);
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -387,7 +387,7 @@ public class SitumMapperTest {
                     buildingCreator.getBuilding1(), pointCreator.getPoint1(), pointCreator.getPoint2(), jo.getJSONObject(3));
             DirectionsRequest directionsRequest1 = directionsRequestCreator.createDirectionsRequest5();
             testDirectionsRequest(directionsRequest, directionsRequest1);
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -400,7 +400,7 @@ public class SitumMapperTest {
                     buildingCreator.getBuilding1(), pointCreator.getPoint1(), pointCreator.getPoint2(), jo.getJSONObject(3));
             DirectionsRequest directionsRequest1 = directionsRequestCreator.createDirectionsRequest6();
             testDirectionsRequest(directionsRequest, directionsRequest1);
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -906,7 +906,7 @@ public class SitumMapperTest {
             Point point = SitumMapper.pointJsonObjectToPoint(jo, buildingCreator.getBuilding1());
             Point point1 = pointCreator.createPointWithBuildingWithAngleFromDegrees();
             testPoint(point, point1);
-        } catch (JSONException e) {
+        } catch (Exception e) {
             System.err.println(e.getMessage());
         }
     }
@@ -918,7 +918,7 @@ public class SitumMapperTest {
             Point point = SitumMapper.pointJsonObjectToPoint(jo, buildingCreator.getBuilding1());
             Point point1 = pointCreator.createPointWithBuildingWithAngleFromRadians();
             testPoint(point, point1);
-        } catch (JSONException e) {
+        } catch (Exception e) {
             System.err.println(e.getMessage());
         }
     }
