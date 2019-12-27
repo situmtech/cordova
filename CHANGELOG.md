@@ -7,12 +7,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 All non released changes should be in CHANGELOG_UNRELEASED.md file
 
 ---------
+## [1.16.1] - 2019-12-27
+
+### Fixed
+* Fix a bug that caused a crash when the phone had selected certain timezones
+
+
 ## [1.16.0] - 2019-11-28
 
 ### Added
 * floor property to Floor object (deprecate level)
 * included functions to retrieve geofences from a building
-* retrieve information of a building in a single function 
+* retrieve information of a building in a single function
 * retrieve realtime locations
 
 ### Updated
