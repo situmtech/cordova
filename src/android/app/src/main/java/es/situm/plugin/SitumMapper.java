@@ -12,9 +12,9 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Collection;
@@ -53,15 +53,11 @@ import es.situm.sdk.model.navigation.NavigationProgress;
 import es.situm.sdk.v1.Point2f;
 import es.situm.sdk.v1.SitumConversionArea;
 import es.situm.sdk.v1.SitumEvent;
-
 import es.situm.sdk.realtime.RealTimeRequest;
 import es.situm.sdk.model.realtime.RealTimeData;
 
-//import java.util.Vector;
 
 class SitumMapper {
-
-  // public static final String TAG = "LocationWrapper";
 
   public static final float MIN_SNR = 10;
   public static final float MAX_SNR = 40;
@@ -214,7 +210,7 @@ class SitumMapper {
   public static final String IGNORE_LOW_QUALITY_LOCATIONS = "ignoreLowQualityLocations";
 
   public static final String CURRENT_STEP_INDEX = "currentStepIndex";
-  public static final String CLOSEST_LOCATION_IN_ROUTE = "closestLocationInRoute";    
+  public static final String CLOSEST_LOCATION_IN_ROUTE = "closestLocationInRoute";
 
   public static final String STARTING_ANGLE = "startingAngle";
   public static final String MINIMIZE_FLOOR_CHANGES = "minimizeFloorChanges";
@@ -228,7 +224,7 @@ class SitumMapper {
   public static final String FLOORS = "floors";
   public static final String EVENTS = "events";
   public static final String INDOOR_POIS = "indoorPOIs";
-  public static final String OUTDOOR_POIS = "outdoorPOIs";  
+  public static final String OUTDOOR_POIS = "outdoorPOIs";
   public static final String LOCATIONS = "locations";
   public static final String POLL_TIME = "pollTime";
 
@@ -275,15 +271,17 @@ class SitumMapper {
     return map;
   }
 
-  static Building buildingJsonObjectToBuilding(JSONObject jo) throws JSONException {
+  static Building buildingJsonObjectToBuilding(JSONObject jo) throws JSONException, ParseException {
     Building building = null;
     Coordinate center = new Coordinate(jo.getJSONObject(CENTER).getDouble(LATITUDE),
         jo.getJSONObject(CENTER).getDouble(LONGITUDE));
     Dimensions dimesnsions = new Dimensions(jo.getJSONObject(DIMENSIONS).getDouble(WIDTH),
         jo.getJSONObject(DIMENSIONS).getDouble(HEIGHT));
     building = new Building.Builder().identifier(jo.getString(BUILDING_IDENTIFIER)).address(jo.getString(ADDRESS))
-            .rotation(Angle.fromRadians(jo.getDouble(ROTATION))).updatedAt(new Date(jo.getString(UPDATED_AT)))
-            .createdAt(new Date(jo.getString(CREATED_AT))).customFields(jsonObjectToMapString(jo.getJSONObject(CUSTOM_FIELDS)))
+            .rotation(Angle.fromRadians(jo.getDouble(ROTATION)))
+            .updatedAt(dateFormat.parse(jo.getString(UPDATED_AT)))
+            .createdAt(dateFormat.parse(jo.getString(CREATED_AT)))
+            .customFields(jsonObjectToMapString(jo.getJSONObject(CUSTOM_FIELDS)))
         .name(jo.getString(BUILDING_NAME)).userIdentifier(jo.getString(USER_IDENTIFIER)).center(center)
         .dimensions(dimesnsions).infoHtml(jo.getString(INFO_HTML)).build();
     return building;
@@ -337,10 +335,10 @@ static JSONArray arrayFromEvents(Collection<SitumEvent> situmEvents) throws JSON
 static JSONObject buildingInfoToJsonObject(BuildingInfo buildingInfo) throws JSONException {
     JSONObject jo = new JSONObject();
 
-	// Parse Building   
-    jo.put(BUILDING, buildingToJsonObject(buildingInfo.getBuilding()));
+	// Parse Building
+  jo.put(BUILDING, buildingToJsonObject(buildingInfo.getBuilding()));
 	// Parse Floors
-    jo.put(FLOORS, arrayFromFloors(buildingInfo.getFloors()));
+  jo.put(FLOORS, arrayFromFloors(buildingInfo.getFloors()));
 	// Parse Indoor Pois
 	jo.put(INDOOR_POIS, arrayFromPois(buildingInfo.getIndoorPOIs()));
 	// Parse Outdoor Pois
@@ -348,7 +346,7 @@ static JSONObject buildingInfoToJsonObject(BuildingInfo buildingInfo) throws JSO
 	// Events
 	jo.put(EVENTS, arrayFromEvents(buildingInfo.getEvents()));
 	// fetch geofences
-	
+
     return jo;
   }
 
@@ -412,7 +410,7 @@ static JSONObject buildingInfoToJsonObject(BuildingInfo buildingInfo) throws JSO
             .name(jo.getString(NAME))
             .mapUrl(new URL(jo.getString(MAP_URL)))
             .scale(jo.getDouble(SCALE)).build();
-    
+
     return floor;
   }
 
@@ -610,7 +608,7 @@ static JSONObject buildingInfoToJsonObject(BuildingInfo buildingInfo) throws JSO
     return jo;
   }
 
-  static Point pointJsonObjectToPoint(JSONObject jo, JSONObject joBuilding) throws JSONException {
+  static Point pointJsonObjectToPoint(JSONObject jo, JSONObject joBuilding) throws JSONException, ParseException {
     Building building = null;
     Point point = null;
 
@@ -855,7 +853,7 @@ static JSONObject buildingInfoToJsonObject(BuildingInfo buildingInfo) throws JSO
     return jo;
   }
 
-  static RealTimeRequest jsonObjectRealtimeRequest(JSONObject object) throws JSONException {
+  static RealTimeRequest jsonObjectRealtimeRequest(JSONObject object) throws JSONException, ParseException {
 	RealTimeRequest.Builder builder = new RealTimeRequest.Builder();
 
 	if (object.has(BUILDING)) {
@@ -945,7 +943,7 @@ static JSONObject buildingInfoToJsonObject(BuildingInfo buildingInfo) throws JSO
             locationBuilder.autoEnableBleDuringPositioning(autoEnableBleDuringPositioning);
             Log.i(TAG, "autoEnableBleDuringPositioning: " + autoEnableBleDuringPositioning);
         }
-        
+
         if (request.has(SitumMapper.MOTION_MODE)) {
             String motionMode = request.getString(SitumMapper.MOTION_MODE);
             if (motionMode != null) {
@@ -1000,7 +998,7 @@ static JSONObject buildingInfoToJsonObject(BuildingInfo buildingInfo) throws JSO
             if (smallestDisplacement != null && smallestDisplacement > 0) {
                 locationBuilder.smallestDisplacement(smallestDisplacement);
                 Log.i(TAG, "smallestDisplacement: " + smallestDisplacement);
-            }    
+            }
         }
 
         if (request.has(SitumMapper.REALTIME_UPDATE_INTERVAL) &&
@@ -1061,7 +1059,7 @@ static JSONObject buildingInfoToJsonObject(BuildingInfo buildingInfo) throws JSO
   }
 
   static DirectionsRequest jsonObjectToDirectionsRequest(JSONObject joBuilding, JSONObject joFrom,
-                                                         JSONObject joTo,@Nullable JSONObject joOptions) throws JSONException {
+                                                         JSONObject joTo,@Nullable JSONObject joOptions) throws JSONException, ParseException {
     Point from = SitumMapper.pointJsonObjectToPoint(joFrom, joBuilding);
     Point to = SitumMapper.pointJsonObjectToPoint(joTo, joBuilding);
     DirectionsRequest.AccessibilityMode accessibilityMode = DirectionsRequest.AccessibilityMode.CHOOSE_SHORTEST;
