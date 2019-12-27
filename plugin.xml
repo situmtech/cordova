@@ -2,7 +2,7 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     id="situm-cordova-plugin-official"
-    version="1.16.0">
+    version="1.16.1">
     <name>Situm Cordova plugin Official</name>
     <description>This is the stable branch.</description>
     <license>MIT</license>
@@ -78,10 +78,6 @@
         <source-file src="src/ios/situmcordovaplugin/SitumPlugin.m" />
         <source-file src="src/ios/situmcordovaplugin/SitumLocationWrapper.m" />
         <source-file src="src/ios/situmcordovaplugin/Constants.m" />
-
-		<!--<pods-config ios-min-version="9.0" use-frameworks="false">
-	    </pods-config>
-       <pod name="RestKit" version="~> 0.27.2" />
-       <pod name="CocoaAsyncSocket"/>-->
+        
     </platform>
 </plugin>
