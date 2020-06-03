@@ -69,7 +69,15 @@
         <framework src="libz.dylib" />
         <framework src="libc++.dylib" />
 
-        <framework src="SitumSDKBeta" type="podspec" spec="0.0.7" />
+        <podspec>
+          <config>
+            <source url="https://github.com/CocoaPods/Specs.git"/>
+          </config>
+          <pods use-frameworks="true">
+            <pod name="SitumSDKBeta" spec="0.0.9" />
+          </pods>
+        </podspec>
+
 
 
         <header-file src="src/ios/situmcordovaplugin/SitumPlugin.h" />
