@@ -17,15 +17,28 @@ resources:
     type: bitbucket
     endpoint: Bitbucket - sistemas
     name: situm/sys-kubernetes-templates.git
+    ref: SIS-144
 
-pool:
-  vmImage: 'macOS-latest'
+jobs:
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- job: Ios_job
+  pool:
+    vmImage: 'macOS-10.14'
+    
+  steps:
+   - template: azure-templates/upload-sharepoint.yml@sys_kubernetes_templates
+     parameters:
+       prepare_sharepoint: False
+       properties_file: 'scripts/framework.properties'
+       prepare_ndk: false
+    
+   - script: |
+      if [ "$(branch)" == "master-release" ] || [ "$(branch)" == "master" ] || [ $(echo $(branch) | grep -cE "^release-*") -eq 1 ];then
+        buildType="Release"
+      else
+        buildType="Debug"
+      fi
+       echo "##vso[task.setvariable variable=buildType]$(echo $buildType)"
+     displayName: Set buildType
+    
+  
