@@ -40,5 +40,16 @@ jobs:
       fi
        echo "##vso[task.setvariable variable=buildType]$(echo $buildType)"
      displayName: Set buildType
+
+   - script: |
+      tests/scripts/copy_ios_resources.sh
+      scripts/update_iosSDK_version.sh .
+      cd src/ios && pod repo update && pod install && xcodebuild test -workspace SitumCordovaPlugin.xcworkspace -scheme CordovaLib -destination 'platform=iOS Simulator,name=iPhone 7,OS=11.2'
+     displayName: iOS test
+
+   - script: |
+      tests/scripts/self-destruct.sh
+     displayName: clean repo
+      
     
   
