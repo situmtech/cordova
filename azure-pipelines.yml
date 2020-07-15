@@ -70,17 +70,17 @@ jobs:
   container: node_slim
 
   steps:
-    - script: |
-        npm install
-        npm test
-      displayName: JS Test
-
-    - script: |
-        npm run jsdoc
-      displayName: Generate JSDoc
+  #  - script: |
+  #      npm install
+  #      npm test
+  #    displayName: JS Test
+#
+  #  - script: |
+  #      npm run jsdoc
+  #    displayName: Generate JSDoc
     
     - script: |
-        cat /etc/issue
+        whoami
         apt-get --assume-yes install zip
         zip -r JSDoc ./docs/JSDoc/*
       displayName: Archive artifacts
