@@ -15,6 +15,7 @@ resources:
   containers:
   - container: node_slim
     image: node:11.12-slim
+    options: --user=root
 
 pool:
     vmImage: 'ubuntu-latest'
