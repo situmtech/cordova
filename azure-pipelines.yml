@@ -15,7 +15,7 @@ resources:
   containers:
   - container: node_slim
     image: node:11.12-slim
-    options: "-u root"
+    options: '-u root'
 
 jobs:
 
@@ -82,7 +82,7 @@ jobs:
       displayName: Generate JSDoc
     
     - script: |
-        apt-get update && apt-get --assume-yes install zip
+        apt-get --assume-yes install zip
         zip -r JSDoc ./docs/JSDoc/*
       displayName: Archive artifacts
 
