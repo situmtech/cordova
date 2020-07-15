@@ -15,7 +15,6 @@ resources:
   containers:
   - container: node_slim
     image: node:11.12-slim
-    options: --user root
 
 pool:
     vmImage: 'ubuntu-latest'
@@ -68,22 +67,19 @@ jobs:
 #
 - job: docker_job    
  
-  container: node_slim
-
   steps:
-  #  - script: |
-  #      npm install
-  #      npm test
-  #    displayName: JS Test
-#
-  #  - script: |
-  #      npm run jsdoc
-  #    displayName: Generate JSDoc
+    - script: |
+        npm install
+        npm test
+      displayName: JS Test
+      target: node_slim
+
+    - script: |
+        npm run jsdoc
+      displayName: Generate JSDoc
+      target: node_slim
     
     - script: |
-        su - root
-        whoami
-        apt-get --assume-yes install zip
         zip -r JSDoc ./docs/JSDoc/*
       displayName: Archive artifacts
 
