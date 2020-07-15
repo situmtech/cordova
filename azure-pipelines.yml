@@ -46,7 +46,7 @@ jobs:
      displayName: iOS test
 
 
-- job: Ios_job
+- job: Android_job
   pool:
     vmImage: 'ubuntu-latest'
     
