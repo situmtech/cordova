@@ -12,12 +12,10 @@ variables:
 - group: Passwords
 
 resources:
-  repositories:
-  - repository: sys_kubernetes_templates
-    type: bitbucket
-    endpoint: Bitbucket - sistemas
-    name: situm/sys-kubernetes-templates.git
-    ref: SIS-144
+  containers:
+  - container: node_slim
+    image: node:11.12-slim
+    options: "-u 0"
 
 jobs:
 
@@ -67,5 +65,34 @@ jobs:
     displayName: Publish test
     condition: always()
 
+- job: docker_job    
+  pool:
+    vmImage: 'ubuntu-latest'
+  
+  container: node_slim
+
+  steps:
+    - script: |
+        npm install
+        npm test
+      displayName: JS Test
+
+    - script: |
+        npm run jsdoc
+      displayName: Generate JSDoc
     
+    - script: |
+        apt-get update && apt-get --assume-yes install zip
+        zip -r JSDoc ./docs/JSDoc/*
+      displayName: Archive artifacts
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathToPublish: 'JSDoc'
+        artifactName: 'JSDoc.zip' 
+      displayName: Archive
+
+
+  
+
   
