@@ -26,21 +26,6 @@ jobs:
     vmImage: 'macOS-10.14'
     
   steps:
-   - template: azure-templates/upload-sharepoint.yml@sys_kubernetes_templates
-     parameters:
-       prepare_sharepoint: False
-       properties_file: 'scripts/framework.properties'
-       prepare_ndk: false
-    
-   - script: |
-      if [ "$(branch)" == "master-release" ] || [ "$(branch)" == "master" ] || [ $(echo $(branch) | grep -cE "^release-*") -eq 1 ];then
-        buildType="Release"
-      else
-        buildType="Debug"
-      fi
-       echo "##vso[task.setvariable variable=buildType]$(echo $buildType)"
-     displayName: Set buildType
-    
    - script: |
         sudo xcode-select -switch /Applications/Xcode_11.3.1.app
         mkdir -p /Users/runner/.cocoapods/repos/ 
@@ -52,17 +37,35 @@ jobs:
      displayName: Add repo 
 
    - script: |
-      sudo xcode-select -switch /Applications/Xcode_11.3.1.app
-      tests/scripts/copy_ios_resources.sh
-      scripts/update_iosSDK_version.sh .
-      #cd src/ios && pod repo update && pod install && xcodebuild test -workspace SitumCordovaPlugin.xcworkspace -scheme CordovaLib -destination 'platform=iOS Simulator,name=iPhone 7,OS=11.2'
-      cd src/ios && pod repo update && pod install && xcodebuild test -workspace SitumCordovaPlugin.xcworkspace -scheme CordovaLib -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.2'
+      echo "foo"
+      #sudo xcode-select -switch /Applications/Xcode_11.3.1.app
+      #tests/scripts/copy_ios_resources.sh
+      #scripts/update_iosSDK_version.sh .
+      ##cd src/ios && pod repo update && pod install && xcodebuild test -workspace SitumCordovaPlugin.xcworkspace -scheme CordovaLib -destination 'platform=iOS Simulator,name=iPhone 7,OS=11.2'
+      #cd src/ios && pod repo update && pod install && xcodebuild test -workspace SitumCordovaPlugin.xcworkspace -scheme CordovaLib -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.2'
      displayName: iOS test
 
-   - script: |
-      sudo xcode-select -switch /Applications/Xcode_11.3.1.app
-      tests/scripts/self-destruct.sh
-     displayName: clean repo
-      
+
+- job: Ios_job
+  pool:
+    vmImage: 'ubuntu-latest'
+    
+  steps:      
+  - script: |
+      cd src/android
+      ./gradlew clean
+    displayName: Clean Android
+
+  - script: |
+      tests/scripts/copy_android_resources.sh
+      cd src/android && ./gradlew test --continue
+    displayName: Android test
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: 'src/android/app/build/test-results/*/*.xml'
+    displayName: Publish test
+    condition: always()
+
     
   
