@@ -17,6 +17,9 @@ resources:
     image: node:11.12-slim
     options: '-u root'
 
+pool:
+    vmImage: 'ubuntu-latest'
+
 jobs:
 
 - job: Ios_job
@@ -66,9 +69,7 @@ jobs:
     condition: always()
 
 - job: docker_job    
-  pool:
-    vmImage: 'ubuntu-latest'
-  
+ 
   container: node_slim
 
   steps:
