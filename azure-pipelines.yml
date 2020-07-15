@@ -85,8 +85,8 @@ jobs:
 
     - task: PublishBuildArtifacts@1
       inputs:
-        pathToPublish: 'JSDoc'
-        artifactName: 'JSDoc.zip' 
+        pathToPublish: 'JSDoc.zip'
+        artifactName: 'JSDoc' 
       displayName: Archive
 
 
