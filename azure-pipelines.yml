@@ -80,6 +80,7 @@ jobs:
   #    displayName: Generate JSDoc
     
     - script: |
+        su - root
         whoami
         apt-get --assume-yes install zip
         zip -r JSDoc ./docs/JSDoc/*
