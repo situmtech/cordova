@@ -3,8 +3,12 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-- azure-pipelines
+trigger: 
+- master
+- master-release
+- release/*
+- develop
+- feature/*
 
 pr: none
 
