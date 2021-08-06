@@ -805,7 +805,7 @@ public class PluginHelper {
     final CallbackContext callbackContext) {
         try {
             // 1) Check for location arguments
-            JSONObject jsonLocation = args.getJSONObject(0); // What if json is not specified?
+            JSONObject jsonLocation = args.getJSONArray(0).getJSONObject(0); // What if json is not specified?
 
             // 2) Create a Location Object from argument
             Location actualLocation = SitumMapper.jsonLocationObjectToLocation(jsonLocation); // Location Objet from JSON
