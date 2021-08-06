@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 All non released changes should be in CHANGELOG_UNRELEASED.md file
 
 ---------
+## [1.16.3] - 2021-08-06
+
+### Fixed
+* Error parsing locations in the navigation
+
 ## [1.16.2] - 2021-02-04
 ### Updated
 * update Situm SDK Android to version 2.67.1
