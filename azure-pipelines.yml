@@ -1,0 +1,98 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger: 
+- master
+- master-release
+- release/*
+- develop
+- feature/*
+
+pr: none
+
+variables:
+- group: Passwords
+
+resources:
+  containers:
+  - container: node_slim
+    image: node:11.12-slim
+
+pool:
+    vmImage: 'ubuntu-latest'
+
+jobs:
+
+- job: Ios_job
+  pool:
+    vmImage: 'macOS-10.14'
+    
+  steps:
+   - script: |
+        sudo xcode-select -switch /Applications/Xcode_11.3.1.app
+        mkdir -p /Users/runner/.cocoapods/repos/ 
+        wget https://github.com/CocoaPods/Specs/archive/master.zip 
+        echo "##########  UNZIPPING FILES  ##########"
+        unzip -qq master.zip
+        echo -n "##########  MOVING TO NEW FOLDER  ##########"
+        mv Specs-master/Specs  /Users/runner/.cocoapods/repos/
+     displayName: Add repo 
+
+   - script: |
+      sudo xcode-select -switch /Applications/Xcode_11.3.1.app
+      tests/scripts/copy_ios_resources.sh
+      scripts/update_iosSDK_version.sh .
+      #cd src/ios && pod repo update && pod install && xcodebuild test -workspace SitumCordovaPlugin.xcworkspace -scheme CordovaLib -destination 'platform=iOS Simulator,name=iPhone 7,OS=11.2'
+      cd src/ios && pod repo update && pod install && xcodebuild test -workspace SitumCordovaPlugin.xcworkspace -scheme CordovaLib -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.2'
+     displayName: iOS test
+
+
+- job: Android_job
+    
+  steps:      
+  - script: |
+      cd src/android
+      ./gradlew clean
+    displayName: Clean Android
+
+  - script: |
+      tests/scripts/copy_android_resources.sh
+      cd src/android && ./gradlew test --continue
+    displayName: Android test
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: 'src/android/app/build/test-results/*/*.xml'
+    displayName: Publish test
+    condition: always()
+
+- job: docker_job    
+
+  steps:
+  - script: |
+        npm install
+        npm test
+    displayName: JS Test
+    target: node_slim
+ 
+  - script: |
+         npm run jsdoc
+    displayName: Generate JSDoc
+    target: node_slim
+     
+  - script: |
+         zip -r JSDoc ./docs/JSDoc/*
+    displayName: Archive artifacts
+ 
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathToPublish: 'JSDoc.zip'
+      artifactName: 'JSDoc' 
+    displayName: Archive
+ 
+ 
+   
+ 
+   
