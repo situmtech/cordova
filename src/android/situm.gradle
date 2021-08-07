@@ -2,7 +2,7 @@ allprojects {
     repositories {
         jcenter()
         maven {
-            url "https://repo.situm.es/artifactory/libs-release-local"
+            url "https://repo.situm.com/artifactory/libs-release-local"
         }
         maven {
             url "https://maven.google.com"
