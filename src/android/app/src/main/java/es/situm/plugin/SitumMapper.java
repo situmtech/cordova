@@ -2,7 +2,6 @@ package es.situm.plugin;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.annotation.Nullable;
 import android.util.Base64;
 import android.util.Log;
 
@@ -184,9 +183,8 @@ class SitumMapper {
   public static final String AUTO_ENABLE_BLE = "autoEnableBleDuringPositioning";
 
   public static final String OUTDOOR_LOCATION_OPTIONS = "outdoorLocationOptions";
-  public static final String CONTINUOUS_MODE = "continuousMode";
   public static final String USER_DEFINED_THRESHOLD = "userDefinedThreshold";
-  public static final String BURST_INTERVAL = "burstInterval";
+  public static final String COMPUTE_INTERVAL = "computeInterval";
   public static final String AVERAGE_SNR_THRESHOLD = "averageSnrThreshold";
 
   public static final String BEACON_FILTERS = "beaconFilters";
@@ -1029,23 +1027,17 @@ static JSONObject buildingInfoToJsonObject(BuildingInfo buildingInfo) throws JSO
   static OutdoorLocationOptions buildOutdoorLocationOptions(JSONObject outdoorLocationOptions) throws JSONException{
     OutdoorLocationOptions.Builder optionsBuilder = new OutdoorLocationOptions.Builder();
 
-    if (outdoorLocationOptions.has(SitumMapper.CONTINUOUS_MODE)) {
-      Boolean continuousMode = outdoorLocationOptions.getBoolean(SitumMapper.CONTINUOUS_MODE);
-      optionsBuilder.continuousMode(continuousMode);
-      Log.i(TAG, "continuousMode: " + continuousMode);
-    }
-
     if (outdoorLocationOptions.has(SitumMapper.USER_DEFINED_THRESHOLD)) {
       Boolean userDefinedThreshold = outdoorLocationOptions.getBoolean(SitumMapper.USER_DEFINED_THRESHOLD);
       optionsBuilder.userDefinedThreshold(userDefinedThreshold);
       Log.i(TAG, "userDefinedThreshold: " + userDefinedThreshold);
     }
 
-    if (outdoorLocationOptions.has(SitumMapper.BURST_INTERVAL)) {
-      Integer burstInterval = outdoorLocationOptions.getInt(SitumMapper.BURST_INTERVAL);
-      if (burstInterval != null && burstInterval >= 1) {
-        optionsBuilder.burstInterval(burstInterval);
-        Log.i(TAG, "burstInterval: " + burstInterval);
+    if (outdoorLocationOptions.has(SitumMapper.COMPUTE_INTERVAL)) {
+      Integer computeInterval = outdoorLocationOptions.getInt(SitumMapper.COMPUTE_INTERVAL);
+      if (computeInterval != null && computeInterval >= 1) {
+        optionsBuilder.computeInterval(computeInterval);
+        Log.i(TAG, "computeInterval: " + computeInterval);
       }
     }
 
@@ -1059,7 +1051,7 @@ static JSONObject buildingInfoToJsonObject(BuildingInfo buildingInfo) throws JSO
   }
 
   static DirectionsRequest jsonObjectToDirectionsRequest(JSONObject joBuilding, JSONObject joFrom,
-                                                         JSONObject joTo,@Nullable JSONObject joOptions) throws JSONException, ParseException {
+                                                         JSONObject joTo, JSONObject joOptions) throws JSONException, ParseException {
     Point from = SitumMapper.pointJsonObjectToPoint(joFrom, joBuilding);
     Point to = SitumMapper.pointJsonObjectToPoint(joTo, joBuilding);
     DirectionsRequest.AccessibilityMode accessibilityMode = DirectionsRequest.AccessibilityMode.CHOOSE_SHORTEST;

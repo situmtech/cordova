@@ -2,8 +2,6 @@ package es.situm.plugin;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -516,7 +514,7 @@ public class PluginHelper {
                     }
                 }
 
-                public void onStatusChanged(@NonNull LocationStatus status) {
+                public void onStatusChanged(LocationStatus status) {
                     try {
                         Log.i(PluginHelper.TAG, "onStatusChanged() called with: status = [" + status + "]");
                         JSONObject jsonObject = SitumMapper.locationStatusToJsonObject(status);
@@ -528,22 +526,12 @@ public class PluginHelper {
                     }
                 }
 
-                public void onError(@NonNull Error error) {
+                public void onError(Error error) {
                     Log.e(PluginHelper.TAG, "onError() called with: error = [" + error + "]");
                     locationListener = null;
                     PluginResult result = new PluginResult(Status.ERROR, error.getMessage());
                     result.setKeepCallback(true);
                     callbackContext.sendPluginResult(result);
-                    switch (error.getCode()) {
-                    case 8001:
-                        requestLocationPermission(cordova);
-                        return;
-                    case 8002:
-                        showLocationSettings(cordova);
-                        return;
-                    default:
-                        return;
-                    }
                 }
             };
             try {
@@ -571,16 +559,6 @@ public class PluginHelper {
             Log.i(TAG, "stopPositioning: location listener is not started.");
             callbackContext.sendPluginResult(new PluginResult(Status.OK, "Allready disabled"));
         }
-    }
-
-    private void showLocationSettings(CordovaInterface cordova) {
-        Toast.makeText(cordova.getActivity(), "You must enable location", Toast.LENGTH_LONG).show();
-        cordova.getActivity().startActivityForResult(new Intent("android.settings.LOCATION_SOURCE_SETTINGS"), 0);
-    }
-
-    private void requestLocationPermission(CordovaInterface cordova) {
-        ActivityCompat.requestPermissions(cordova.getActivity(),
-                new String[] { "android.permission.ACCESS_COARSE_LOCATION" }, 0);
     }
 
     public void returnDefaultResponse(CallbackContext callbackContext) {
