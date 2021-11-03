@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
+
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaWebView;
@@ -532,6 +534,16 @@ public class PluginHelper {
                     PluginResult result = new PluginResult(Status.ERROR, error.getMessage());
                     result.setKeepCallback(true);
                     callbackContext.sendPluginResult(result);
+                    switch (error.getCode()) {
+                        case 8001:
+                            requestLocationPermission(cordova);
+                            return;
+                        case 8002:
+                            showLocationSettings(cordova);
+                            return;
+                        default:
+                            return;
+                    }
                 }
             };
             try {
@@ -559,6 +571,16 @@ public class PluginHelper {
             Log.i(TAG, "stopPositioning: location listener is not started.");
             callbackContext.sendPluginResult(new PluginResult(Status.OK, "Allready disabled"));
         }
+    }
+
+    private void showLocationSettings(CordovaInterface cordova) {
+        Toast.makeText(cordova.getActivity(), "You must enable location", Toast.LENGTH_LONG).show();
+        cordova.getActivity().startActivityForResult(new Intent("android.settings.LOCATION_SOURCE_SETTINGS"), 0);
+    }
+
+    private void requestLocationPermission(CordovaInterface cordova) {
+        ActivityCompat.requestPermissions(cordova.getActivity(),
+                new String[] { "android.permission.ACCESS_FINE_LOCATION" }, 0);
     }
 
     public void returnDefaultResponse(CallbackContext callbackContext) {
