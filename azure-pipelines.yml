@@ -59,7 +59,7 @@ jobs:
 
   - script: |
       tests/scripts/copy_android_resources.sh
-      cd src/android && ./gradlew test --continue
+      cd src/android && ./gradlew test --continue --info
     displayName: Android test
   - task: PublishTestResults@2
     inputs:
