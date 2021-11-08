@@ -72,6 +72,8 @@ import static es.situm.plugin.SitumMapper.USER_IDENTIFIER;
 import static es.situm.plugin.SitumMapper.circleToJsonObject;
 import static es.situm.plugin.SitumMapper.conversionAreaToJsonObject;
 
+import android.util.Log;
+
 @RunWith(JUnit4.class)
 public class SitumMapperTest {
 
@@ -1385,6 +1387,10 @@ public class SitumMapperTest {
         Assert.assertEquals(Boolean.class, poi.get(IS_OUTDOOR).getClass());
         Assert.assertEquals(defaultPoi.getBoolean(IS_OUTDOOR),poi.getBoolean(IS_OUTDOOR));
         Assert.assertEquals(String.class, poi.get(CREATED_AT).getClass());
+        System.err.println("System.err: " + defaultPoi.getString(CREATED_AT) + " vs " + poi.getString(CREATED_AT));
+        System.err.println("System.out: " + defaultPoi.getString(CREATED_AT) + " vs " + poi.getString(CREATED_AT));
+        Log.e("CHECK", "Log.e: " + defaultPoi.getString(CREATED_AT) + " vs " + poi.getString(CREATED_AT));
+        Log.d("CHECK", "Log.d: " + defaultPoi.getString(CREATED_AT) + " vs " + poi.getString(CREATED_AT));
         Assert.assertEquals(defaultPoi.getString(CREATED_AT), poi.getString(CREATED_AT));
         Assert.assertEquals(String.class, poi.get(FLOOR_IDENTIFIER).getClass());
         Assert.assertEquals(defaultPoi.getString(FLOOR_IDENTIFIER),poi.getString(FLOOR_IDENTIFIER));
