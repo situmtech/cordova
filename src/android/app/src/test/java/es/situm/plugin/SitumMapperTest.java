@@ -1207,7 +1207,7 @@ public class SitumMapperTest {
 
     private void testLocationRequest(LocationRequest locationRequest, LocationRequest defaultLocationRequest) {
         Assert.assertEquals(locationRequest.getBuildingIdentifier(), defaultLocationRequest.getBuildingIdentifier());
-        Assert.assertEquals(locationRequest.getSmallestDisplacement(), defaultLocationRequest.getSmallestDisplacement(), 0.001);
+        Assert.assertEquals(locationRequest.getSmallestDisplacement(), defaultLocationRequest.getSmallestDisplacement());
         Assert.assertEquals(locationRequest.getInterval(), defaultLocationRequest.getInterval());
         Assert.assertEquals(locationRequest.autoEnableBleDuringPositioning(), defaultLocationRequest.autoEnableBleDuringPositioning());
 
