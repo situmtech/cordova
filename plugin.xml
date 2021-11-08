@@ -69,7 +69,7 @@
         <framework src="libz.dylib" />
         <framework src="libc++.dylib" />
 
-        <framework src="SitumSDK" type="podspec" spec="2.37.0" />
+        <framework src="SitumSDK" type="podspec" spec="2.51.4" />
 
 
         <header-file src="src/ios/situmcordovaplugin/SitumPlugin.h" />
