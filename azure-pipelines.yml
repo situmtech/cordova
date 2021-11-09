@@ -30,15 +30,15 @@ jobs:
     vmImage: 'macOS-10.14'
     
   steps:
-   - script: |
-        sudo xcode-select -switch /Applications/Xcode_11.3.1.app
-        mkdir -p /Users/runner/.cocoapods/repos/ 
-        wget https://github.com/CocoaPods/Specs/archive/master.zip 
-        echo "##########  UNZIPPING FILES  ##########"
-        unzip -qq master.zip
-        echo -n "##########  MOVING TO NEW FOLDER  ##########"
-        mv Specs-master/Specs  /Users/runner/.cocoapods/repos/
-     displayName: Add repo 
+#   - script: |
+#        sudo xcode-select -switch /Applications/Xcode_11.3.1.app
+#        mkdir -p /Users/runner/.cocoapods/repos/ 
+#        wget https://github.com/CocoaPods/Specs/archive/master.zip 
+#        echo "##########  UNZIPPING FILES  ##########"
+#        unzip -qq master.zip
+#        echo -n "##########  MOVING TO NEW FOLDER  ##########"
+#        mv Specs-master/Specs  /Users/runner/.cocoapods/repos/
+#     displayName: Add repo 
 
    - script: |
       sudo xcode-select -switch /Applications/Xcode_11.3.1.app
