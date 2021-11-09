@@ -7,6 +7,7 @@
 ## Table of contents
 
   * [Description](#description)
+  * [Capacitor compatibily](#capacitor)
   * [Setup your account](#setup-your-account)
   * [Installing pre-requisites](#installing-pre-requisites)
   * [Installing the plugin](#installing-the-plugin)
@@ -50,6 +51,14 @@ Situm Cordova Plugin is a set of utilities that allow any developer to build Cor
 * Compute a route from a point A (e.g. where the smartphone is) to a point B (e.g. any point of interest within the building).
 
 * Trigger notifications when the user enters a certain area.
+
+---
+
+## Capacitor compatibility
+
+This plugin is compatible with Capacitor 3.0 
+
+Issue: In iOS, there is a known issue with capacitor-cli 3.2.5 and static cordova plugins https://github.com/ionic-team/capacitor/issues/5142. To solve it use a different version of capacitor cli. 
 
 ---
 
