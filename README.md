@@ -109,6 +109,13 @@ $ cordova plugin add https://github.com/situmtech/situm-cordova-plugin.git
 
 \* *Please note that we are using Cocoapods in order to manage iOS dependencies, which means you might need to run `pod repo update` when trying to compile your app after updating our plugin*
 
+### 4) For Capacitor users:
+
+```
+npm install situm-cordova-plugin-official
+npx cap sync
+```
+
 ## Using the Plugin
 
 ### Accessing plugin object
@@ -468,6 +475,8 @@ Situm-Cordova-Plugin is licensed under [MIT License](https://opensource.org/lice
 ## More information
 
 More info is available at our [Developers Page](http://developers.situm.es/pages/mobile/cordova/).
+
+Keep up to date about important changes in the README.md file of this project, or visit [the official documentation](https://situm.com/docs/cordova-sdk-changelog/) to see more details.
 
 ## Support information
 For any question or bug report, please send an email to [support@situm.es](mailto:support@situm.es)
