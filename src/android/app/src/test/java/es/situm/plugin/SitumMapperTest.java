@@ -77,7 +77,7 @@ import android.util.Log;
 @RunWith(JUnit4.class)
 public class SitumMapperTest {
 
-    private DateFormat dateFormat = DateFormat.getInstance();
+    private DateFormat dateFormat = DateUtils.dateFormat;
 
     // Properties names
     private static final String RADIANS_MINUS_PI_PI = "radiansMinusPiPi";

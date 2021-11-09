@@ -226,7 +226,7 @@ class SitumMapper {
   public static final String LOCATIONS = "locations";
   public static final String POLL_TIME = "pollTime";
 
-  public static final DateFormat dateFormat = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy", Locale.US);
+  public static final DateFormat dateFormat = DateUtils.dateFormat;
 
   private static final String TAG = "PluginHelper";
 

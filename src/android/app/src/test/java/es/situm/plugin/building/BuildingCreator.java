@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Locale;
 
 
+import es.situm.plugin.DateUtils;
 import es.situm.sdk.model.URL;
 import es.situm.sdk.model.cartography.Building;
 import es.situm.sdk.model.location.Angle;
@@ -23,7 +24,7 @@ public class BuildingCreator {
 
     private final ClassLoader classLoader = getClass().getClassLoader();
     private final JSONParser parser = new JSONParser();
-    private final DateFormat dateFormat = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy", Locale.US);
+    private final DateFormat dateFormat = DateUtils.dateFormat;
 
     public Building createBuilding1() {
         Coordinate coordinate = new Coordinate(42.8723472943445, -8.56325268745422);
