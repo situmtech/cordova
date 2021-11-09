@@ -32,8 +32,8 @@ public class BuildingCreator {
         Date createdAt = null;
         Date updatedAt = null;
         try {
-            createdAt = dateFormat.parse("Wed Jan 04 18:41:43 +0100 2017");
-            updatedAt = dateFormat.parse("Wed Sep 12 12:10:25 +0200 2018");
+            createdAt = dateFormat.parse("Wed Jan 04 18:41:43 +0000 2017");
+            updatedAt = dateFormat.parse("Wed Sep 12 12:10:25 +0000 2018");
         } catch (ParseException e) {
             e.printStackTrace();
         }
