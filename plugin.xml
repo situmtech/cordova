@@ -33,6 +33,7 @@
       <source-file src="src/android/app/src/main/java/es/situm/plugin/SitumPlugin.java" target-dir="src/es/situm/plugin" />
       <source-file src="src/android/app/src/main/java/es/situm/plugin/PluginHelper.java" target-dir="src/es/situm/plugin" />
       <source-file src="src/android/app/src/main/java/es/situm/plugin/SitumMapper.java" target-dir="src/es/situm/plugin" />
+      <source-file src="src/android/app/src/main/java/es/situm/plugin/DateUtils.java" target-dir="src/es/situm/plugin" />
 
     </platform>
 
@@ -69,7 +70,7 @@
         <framework src="libz.dylib" />
         <framework src="libc++.dylib" />
 
-        <framework src="SitumSDK" type="podspec" spec="2.37.0" />
+        <framework src="SitumSDK" type="podspec" spec="2.51.4" />
 
 
         <header-file src="src/ios/situmcordovaplugin/SitumPlugin.h" />

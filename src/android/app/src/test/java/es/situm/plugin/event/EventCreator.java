@@ -1,8 +1,5 @@
 package es.situm.plugin.event;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -66,7 +63,6 @@ public class EventCreator {
                 return "<p>Test html</p>";
             }
 
-            @Nullable
             @Override
             public Circle getConversion() {
                 Point point = new Point("1", "1000", new Coordinate(50, 100), new CartesianCoordinate(5, 10));
@@ -90,7 +86,6 @@ public class EventCreator {
                 );
             }
 
-            @NonNull
             @Override
             public Map<String, String> getCustomFields() {
                 HashMap<String, String> customFields = new HashMap<>();

@@ -668,16 +668,14 @@ module.exports = DirectionsOptions
  * OutdoorLocationOptions
  * @description
  * Outdoor location options are only used in indoor-outdoor mode (Only available for Android)
- * @property {boolean} continuousMode - Environment detection continuous mode (true) or burst mode (false).
  * @property {boolean} userDefinedThreshold
- * @property {number} burstInterval - Interval to scan for GPS and detect the environment (in seconds).
+ * @property {number} computeInterval - Interval (in milliseconds) between consecutive GPS readings performed by Situm SDK, and therefore between consecutive generated Outdoor Locations.
  * @property {number} averageSnrThreshold
  */
 
 var OutdoorLocationOptions = {
-  continuousMode,
   userDefinedThreshold,
-  burstInterval,
+  computeInterval,
   averageSnrThreshold
 }
 
