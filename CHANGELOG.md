@@ -9,8 +9,6 @@ All non released changes should be in CHANGELOG_UNRELEASED.md file
 ---------
 ## [1.17.0] - 2021-12-15
 
-## Unreleased
-
 ### Changed
 * Updated Android SDK to 2.70.4.
 * Updated iOS SDK to 2.51.4.
