@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 All non released changes should be in CHANGELOG_UNRELEASED.md file
 
 ---------
+## [1.17.0] - 2021-12-15
+
+## Unreleased
+
+### Changed
+* Updated Android SDK to 2.70.4.
+* Updated iOS SDK to 2.51.4.
+* Migrated to AndroidX for the Android platform. Android Support Library is no longer supported and this means a compatibility break with respect to previous versions.
+
+
 ## [1.16.3] - 2021-08-06
 
 ### Fixed
