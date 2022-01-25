@@ -146,6 +146,13 @@ Situm SDK for Android now compiles and targets sdkVersion 31 (Android 12). To wo
       <activity android:exported="true"/>
     </edit-config>
   ```
+  * Make sure your `config.xml` root element `widget` declares the Android namespace:
+  ```xml
+    <widget id="..." version="..."
+      ...
+      xmlns:android="http://schemas.android.com/apk/res/android">
+  ```
+  * If you find problems, also make sure the Gradle JDK points to version 11 in your project configuration (recommended Android Studio embedded JDK).
 
 ## Using the Plugin
 
