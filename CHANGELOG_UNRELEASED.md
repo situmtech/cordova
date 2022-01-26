@@ -5,7 +5,7 @@
 * Updated min cordova-android platform version to 10.0.0.
 * Situm SDK now compiles and targets sdkVersion 31 (Android 12). To work properly on Android 12 devices and above, the host app must:
     * Target android api 31 or above. In your project `config.xml` file, add `<preference name="android-targetSdkVersion" value="31" />` to the Android platform configuration.
-    * Request the runtime permissions `BLUETOOTH_SCAN` and `BLUETOOTH_CONNECT`, in addition to the `ACCESS_FINE_LOCATION` that was already necessary.
+    * Request the runtime permissions `BLUETOOTH_SCAN` and `BLUETOOTH_CONNECT`, in addition to the `ACCESS_COARSE_LOCATION` that was already necessary (and `ACCESS_FINE_LOCATION` if you are using [Global Mode](https://situm.com/docs/how-does-situm-work/#5-toc-title)).
     * Add `android:exported="true"` to all the intent-filtered components of your `AndroidManifest.xml` file. You can add the following configuration to your `config.xml` to automate this process:
     ```xml
       <edit-config
@@ -15,7 +15,7 @@
         <activity android:exported="true"/>
       </edit-config>
     ```
-    * Make sure your `config.xml` root element `widget` declares the Android namespace:
+    * Make sure the `widget` root element of your `config.xml` file declares the Android namespace:
     ```xml
         <widget id="..." version="..."
         ...
