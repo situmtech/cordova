@@ -11,7 +11,7 @@
     <issue>https://github.com/situmtech/situm-cordova-plugin/issues</issue>
 
     <engines>
-        <engine name="cordova-android" version=">=6.0.0" />
+        <engine name="cordova-android" version=">=10.0.0" />
     </engines>
 
     <!-- android -->
@@ -28,12 +28,12 @@
             <param name="android-package" value="es.situm.plugin.SitumPlugin" />
             <param name="onload" value="true" />
             </feature>
-      </config-file>
+       </config-file>
 
-      <source-file src="src/android/app/src/main/java/es/situm/plugin/SitumPlugin.java" target-dir="src/es/situm/plugin" />
-      <source-file src="src/android/app/src/main/java/es/situm/plugin/PluginHelper.java" target-dir="src/es/situm/plugin" />
-      <source-file src="src/android/app/src/main/java/es/situm/plugin/SitumMapper.java" target-dir="src/es/situm/plugin" />
-      <source-file src="src/android/app/src/main/java/es/situm/plugin/DateUtils.java" target-dir="src/es/situm/plugin" />
+        <source-file src="src/android/app/src/main/java/es/situm/plugin/SitumPlugin.java" target-dir="src/es/situm/plugin" />
+        <source-file src="src/android/app/src/main/java/es/situm/plugin/PluginHelper.java" target-dir="src/es/situm/plugin" />
+        <source-file src="src/android/app/src/main/java/es/situm/plugin/SitumMapper.java" target-dir="src/es/situm/plugin" />
+        <source-file src="src/android/app/src/main/java/es/situm/plugin/DateUtils.java" target-dir="src/es/situm/plugin" />
 
     </platform>
 
