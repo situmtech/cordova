@@ -30,16 +30,14 @@
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
-//TODO: Try to verify if methods to convert categoryIcons are working properly
-//- (void) testPoiCategoryIcon {
-//    UIImage *image = [SitumCreatorTests createPoiCategoryIcon];
-//
-//    NSDictionary *imageJO = [SitumLocationWrapper.shared bitmapToJsonObject:image];
-//    NSString *fileName = @"poiCategoryIcon1";
-//    //read from json object in resources
-//    NSDictionary *jsonImage = [TestingHelper dataFromJSONFileNamed: fileName inDirectory : _filePath];
-//
-//    [_helper assertImage: jsonImage: imageJO];
-//}
+- (void) testPoiCategoryIcon {
+    UIImage *image = [SitumCreatorTests createPoiCategoryIcon];
+
+    NSDictionary *imageJO = [SitumLocationWrapper.shared bitmapToJsonObject:image];
+    NSString *fileName = @"poiCategoryIcon1";
+    //read from json object in resources
+    NSDictionary *jsonImage = [TestingHelper dataFromJSONFileNamed: fileName inDirectory : _filePath];
+    [_helper assertImage: jsonImage: imageJO];
+}
 
 @end
