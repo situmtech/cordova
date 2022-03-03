@@ -12,6 +12,12 @@ All non released changes should be in CHANGELOG_UNRELEASED.md file
 ### Changed
 * Updated iOS SDK to 2.52.0.
 
+## [1.17.3] - 2022-02-24
+
+**Improved**
+
+- We have changed the structure of the main README file so that it is easier to read and includes all the info needed to get this plugin working in a project.
+
 ## [1.17.2] - 2022-01-31
 
 ### Changed
