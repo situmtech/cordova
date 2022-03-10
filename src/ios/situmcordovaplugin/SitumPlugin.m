@@ -27,7 +27,8 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     NSString* email = [command.arguments objectAtIndex:0];
     NSString* apiKey = [command.arguments objectAtIndex:1];
     [SITServices provideAPIKey:apiKey forEmail:email];
-
+    [SITServices setUseRemoteConfig:YES];
+    
     if (IS_LOG_ENABLED) {
         NSArray *allPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [allPaths objectAtIndex:0];
@@ -43,6 +44,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     NSString* email = [command.arguments objectAtIndex:0];
     NSString* password = [command.arguments objectAtIndex:1];
     [SITServices provideUser:email password:password];
+    [SITServices setUseRemoteConfig:YES];
 }
 
 - (void)setCacheMaxAge:(CDVInvokedUrlCommand *)command {

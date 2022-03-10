@@ -44,10 +44,12 @@ public class SitumPlugin extends CordovaPlugin {
       String email = args.getString(0);
       String apiKey = args.getString(1);
       es.situm.sdk.SitumSdk.configuration().setApiKey(email, apiKey);
+      es.situm.sdk.SitumSdk.configuration().setUseRemoteConfig(true);
     } else if (action.equalsIgnoreCase("setUserPass")) {
       String email = args.getString(0);
       String password = args.getString(1);
       es.situm.sdk.SitumSdk.configuration().setUserPass(email, password);
+      es.situm.sdk.SitumSdk.configuration().setUseRemoteConfig(true);
     } else if (action.equalsIgnoreCase("setCacheMaxAge")) {    
       Integer cacheAge = args.getInt(0);
       Log.d(TAG,"Setting cache max age to " + cacheAge + " seconds");
