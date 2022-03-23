@@ -40,6 +40,11 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 
 }
 
+- (void)setUseRemoteConfig:(CDVInvokedUrlCommand *)command {
+    BOOL useRemoteConfig = [[command objectAtIndex: 0] boolValue];
+    [SITServices setUseRemoteConfig:useRemoteConfig];
+}
+
 - (void)setUserPass:(CDVInvokedUrlCommand *)command {
     NSString* email = [command.arguments objectAtIndex:0];
     NSString* password = [command.arguments objectAtIndex:1];

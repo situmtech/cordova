@@ -6,6 +6,9 @@ var Situm = {
   setApiKey: function (email, apiKey, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'setApiKey', [email, apiKey]);
   },
+  setUseRemoteConfig: function (useRemoteConfig, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'setUseRemoteConfig', [useRemoteConfig]);
+  },
   setUserPass: function (email, password, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'setUserPass', [email, password]);
   },
