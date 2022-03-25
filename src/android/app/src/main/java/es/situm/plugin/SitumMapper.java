@@ -870,6 +870,12 @@ static JSONObject buildingInfoToJsonObject(BuildingInfo buildingInfo) throws JSO
 
   static LocationRequest locationRequestJSONObjectToLocationRequest(JSONArray args) throws JSONException {
     LocationRequest.Builder locationBuilder = new LocationRequest.Builder();
+    
+    // Remote configuration, no params
+    if (args.length == 0) {
+      return locationBuilder.build();
+    }
+    
     JSONObject jsonoBuilding = args.getJSONObject(0);
     String sBuildingId;
     if (jsonoBuilding.get(SitumMapper.BUILDING_IDENTIFIER) instanceof String) {
