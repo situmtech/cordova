@@ -872,7 +872,7 @@ static JSONObject buildingInfoToJsonObject(BuildingInfo buildingInfo) throws JSO
     LocationRequest.Builder locationBuilder = new LocationRequest.Builder();
     
     // Remote configuration, no params
-    if (args.length == 0) {
+    if (args.length() == 0) {
       return locationBuilder.build();
     }
     
