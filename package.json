@@ -11,7 +11,7 @@
   "description": "Situm Cordova-based Plugin for hybrid apps.",
   "repository": {
     "type": "git",
-    "url": "../../situm-cordova-plugin"
+    "url": "git+https://github.com/situmtech/situm-cordova-plugin.git"
   },
   "keywords": [
     "situm",
