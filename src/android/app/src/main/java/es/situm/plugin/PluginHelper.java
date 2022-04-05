@@ -497,11 +497,9 @@ public class PluginHelper {
     public void startPositioning(final CordovaInterface cordova, CordovaWebView webView, JSONArray args,
             final CallbackContext callbackContext) {
         try {
-            JSONObject jsonoBuilding = args.getJSONObject(0);
-            String sBuildingName = jsonoBuilding.getString(SitumMapper.BUILDING_NAME);
             LocationRequest locationRequest = SitumMapper.locationRequestJSONObjectToLocationRequest(args);
 
-            Log.i(TAG, "startPositioning: starting positioning in " + sBuildingName);
+            Log.i(TAG, "startPositioning: starting positioning in " + locationRequest);
             locationListener = new LocationListener() {
                 public void onLocationChanged(Location location) {
                     try {

@@ -40,7 +40,11 @@ public class SitumPlugin extends CordovaPlugin {
 
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
     Log.d(TAG, "execute: " + action);
-    if (action.equalsIgnoreCase("setApiKey")) {
+    if (action.equalsIgnoreCase("setUseRemoteConfig")) {
+      Boolean useRemoteConfig = args.getBoolean(0);
+      es.situm.sdk.SitumSdk.configuration().setUseRemoteConfig(useRemoteConfig);
+      Log.d(TAG, "Setting remote config available: " + useRemoteConfig);
+    } else if (action.equalsIgnoreCase("setApiKey")) {
       String email = args.getString(0);
       String apiKey = args.getString(1);
       es.situm.sdk.SitumSdk.configuration().setApiKey(email, apiKey);
