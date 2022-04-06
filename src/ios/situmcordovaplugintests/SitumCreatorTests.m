@@ -59,8 +59,8 @@
     SITAngle *angle = [[SITAngle alloc] initWithRadians:-3.31881803875501];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:kDateFormat];
-    NSDate *createdAt = [dateFormatter dateFromString:@"Wed Jan 04 18:41:43 +0100 2017"];
-    NSDate *updatedAt = [dateFormatter dateFromString:@"Wed Sep 12 12:10:25 +0200 2018"];
+    NSDate *createdAt = [dateFormatter dateFromString:@"Wed Jan 04 18:41:43 +0000 2017"];
+    NSDate *updatedAt = [dateFormatter dateFromString:@"Wed Sep 12 12:10:25 +0000 2018"];
     
     SITBuilding *building = [[SITBuilding alloc] initWithIdentifier:@"1051" createdAt:createdAt updatedAt:updatedAt customFields:customFields userIdentifier:@"-1" name:@"Ed. Emprendia - Situm" center:center info:@"<p>http://Prueba/actualizador/recibirAlarmas</p>" dimensions:dimensions rotation:angle pictureURL:nil pictureThumbURL:nil];
     building.infoHTML = @"<p>http://Prueba/actualizador/recibirAlarmas</p>";
@@ -115,8 +115,8 @@
     SITFloor *floor = [[SITFloor alloc] init];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:kDateFormat];
-    floor.createdAt = [dateFormatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
-    floor.updatedAt = [dateFormatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    floor.createdAt = [dateFormatter dateFromString:@"Thu Jan 01 00:00:00 +0000 1970"];
+    floor.updatedAt = [dateFormatter dateFromString:@"Thu Jan 01 00:00:00 +0000 1970"];
     floor.altitude = 2.5;
     floor.scale = 10.2;
     floor.name = @"testName";
@@ -134,8 +134,8 @@
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:kDateFormat];
-    floor.createdAt = [dateFormatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
-    floor.updatedAt = [dateFormatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    floor.createdAt = [dateFormatter dateFromString:@"Thu Jan 01 00:00:00 +0000 1970"];
+    floor.updatedAt = [dateFormatter dateFromString:@"Thu Jan 01 00:00:00 +0000 1970"];
     floor.name = @"testName";
     floor.altitude = 0;
     floor.scale = 10.2;
@@ -535,8 +535,8 @@
     SITPoint *point = [[SITPoint alloc] initWithCoordinate:coordinate buildingIdentifier:@"101"];
     NSDateFormatter *formatter = [NSDateFormatter new];
     [formatter setDateFormat:kDateFormat];
-    NSDate *createdAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
-    NSDate *updatedAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    NSDate *createdAt = [formatter dateFromString:@"Thu Jan 01 00:00:00 +0000 1970"];
+    NSDate *updatedAt = [formatter dateFromString:@"Thu Jan 01 00:00:00 +0000 1970"];
     
     SITPOI *poi = [[SITPOI alloc] init];
     [poi setValue:point
@@ -565,8 +565,8 @@
     
     NSDateFormatter *formatter = [NSDateFormatter new];
     [formatter setDateFormat:kDateFormat];
-    NSDate *createdAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
-    NSDate *updatedAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    NSDate *createdAt = [formatter dateFromString:@"Thu Jan 01 00:00:00 +0000 1970"];
+    NSDate *updatedAt = [formatter dateFromString:@"Thu Jan 01 00:00:00 +0000 1970"];
     
     SITPOI *poi = [SITPOI new];
     [poi setValue:point
@@ -592,8 +592,8 @@
     
     NSDateFormatter *formatter = [NSDateFormatter new];
     [formatter setDateFormat:kDateFormat];
-    NSDate *createdAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
-    NSDate *updatedAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    NSDate *createdAt = [formatter dateFromString:@"Thu Jan 01 00:00:00 +0000 1970"];
+    NSDate *updatedAt = [formatter dateFromString:@"Thu Jan 01 00:00:00 +0000 1970"];
     
     SITPOI *poi = [[SITPOI alloc] init];
     [poi setValue:point
@@ -618,8 +618,8 @@
     
     NSDateFormatter *formatter = [NSDateFormatter new];
     [formatter setDateFormat:kDateFormat];
-    NSDate *createdAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
-    NSDate *updatedAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    NSDate *createdAt = [formatter dateFromString:@"Thu Jan 01 00:00:00 +0000 1970"];
+    NSDate *updatedAt = [formatter dateFromString:@"Thu Jan 01 00:00:00 +0000 1970"];
     
     SITPOICategory *category = [SITPOICategory new];
     category.code = @"situm-no-category";
@@ -650,8 +650,8 @@
     
     NSDateFormatter *formatter = [NSDateFormatter new];
     [formatter setDateFormat:kDateFormat];
-    NSDate *createdAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
-    NSDate *updatedAt = [formatter dateFromString:@"Thu Jan 01 01:00:00 +0100 1970"];
+    NSDate *createdAt = [formatter dateFromString:@"Thu Jan 01 00:00:00 +0000 1970"];
+    NSDate *updatedAt = [formatter dateFromString:@"Thu Jan 01 00:00:00 +0000 1970"];
     
     SITPOICategory *category = [SITPOICategory new];
     category.code = @"situm-no-category";

@@ -72,10 +72,12 @@ import static es.situm.plugin.SitumMapper.USER_IDENTIFIER;
 import static es.situm.plugin.SitumMapper.circleToJsonObject;
 import static es.situm.plugin.SitumMapper.conversionAreaToJsonObject;
 
+import android.util.Log;
+
 @RunWith(JUnit4.class)
 public class SitumMapperTest {
 
-    private DateFormat dateFormat = DateFormat.getInstance();
+    private DateFormat dateFormat = DateUtils.dateFormat;
 
     // Properties names
     private static final String RADIANS_MINUS_PI_PI = "radiansMinusPiPi";
@@ -1207,7 +1209,7 @@ public class SitumMapperTest {
 
     private void testLocationRequest(LocationRequest locationRequest, LocationRequest defaultLocationRequest) {
         Assert.assertEquals(locationRequest.getBuildingIdentifier(), defaultLocationRequest.getBuildingIdentifier());
-        Assert.assertEquals(locationRequest.getSmallestDisplacement(), defaultLocationRequest.getSmallestDisplacement(), 0.001);
+        Assert.assertEquals(locationRequest.getSmallestDisplacement(), defaultLocationRequest.getSmallestDisplacement());
         Assert.assertEquals(locationRequest.getInterval(), defaultLocationRequest.getInterval());
         Assert.assertEquals(locationRequest.autoEnableBleDuringPositioning(), defaultLocationRequest.autoEnableBleDuringPositioning());
 

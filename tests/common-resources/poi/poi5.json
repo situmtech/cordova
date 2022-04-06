@@ -10,7 +10,7 @@
   "infoHtml": "TEST_INFO",
   "buildingIdentifier": "101",
   "isOutdoor": false,
-  "createdAt": "Thu Jan 01 01:00:00 +0100 1970",
+  "createdAt": "Thu Jan 01 00:00:00 +0000 1970",
   "floorIdentifier": "12",
   "cartesianCoordinate": {
     "x": 2,
@@ -31,5 +31,5 @@
     "isOutdoor": false
   },
   "category": "situm-no-category",
-  "updatedAt": "Thu Jan 01 01:00:00 +0100 1970"
+  "updatedAt": "Thu Jan 01 00:00:00 +0000 1970"
 }

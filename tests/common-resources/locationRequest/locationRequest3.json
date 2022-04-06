@@ -15,9 +15,8 @@
         "useGps": true,
         "outdoorLocationOptions": 
         {
-            "continuousMode": true,
             "userDefinedThreshold": false,
-            "burstInterval": 1,
+            "computeInterval": 1,
             "averageSnrThreshold": 25.0
         },
         "beaconFilters": [

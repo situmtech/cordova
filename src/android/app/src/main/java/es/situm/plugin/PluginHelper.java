@@ -2,10 +2,10 @@ package es.situm.plugin;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.core.app.ActivityCompat;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
@@ -497,11 +497,9 @@ public class PluginHelper {
     public void startPositioning(final CordovaInterface cordova, CordovaWebView webView, JSONArray args,
             final CallbackContext callbackContext) {
         try {
-            JSONObject jsonoBuilding = args.getJSONObject(0);
-            String sBuildingName = jsonoBuilding.getString(SitumMapper.BUILDING_NAME);
             LocationRequest locationRequest = SitumMapper.locationRequestJSONObjectToLocationRequest(args);
 
-            Log.i(TAG, "startPositioning: starting positioning in " + sBuildingName);
+            Log.i(TAG, "startPositioning: starting positioning in " + locationRequest);
             locationListener = new LocationListener() {
                 public void onLocationChanged(Location location) {
                     try {
@@ -516,7 +514,7 @@ public class PluginHelper {
                     }
                 }
 
-                public void onStatusChanged(@NonNull LocationStatus status) {
+                public void onStatusChanged(LocationStatus status) {
                     try {
                         Log.i(PluginHelper.TAG, "onStatusChanged() called with: status = [" + status + "]");
                         JSONObject jsonObject = SitumMapper.locationStatusToJsonObject(status);
@@ -528,21 +526,21 @@ public class PluginHelper {
                     }
                 }
 
-                public void onError(@NonNull Error error) {
+                public void onError(Error error) {
                     Log.e(PluginHelper.TAG, "onError() called with: error = [" + error + "]");
                     locationListener = null;
                     PluginResult result = new PluginResult(Status.ERROR, error.getMessage());
                     result.setKeepCallback(true);
                     callbackContext.sendPluginResult(result);
                     switch (error.getCode()) {
-                    case 8001:
-                        requestLocationPermission(cordova);
-                        return;
-                    case 8002:
-                        showLocationSettings(cordova);
-                        return;
-                    default:
-                        return;
+                        case 8001:
+                            requestLocationPermission(cordova);
+                            return;
+                        case 8002:
+                            showLocationSettings(cordova);
+                            return;
+                        default:
+                            return;
                     }
                 }
             };
@@ -580,7 +578,7 @@ public class PluginHelper {
 
     private void requestLocationPermission(CordovaInterface cordova) {
         ActivityCompat.requestPermissions(cordova.getActivity(),
-                new String[] { "android.permission.ACCESS_COARSE_LOCATION" }, 0);
+                new String[] { "android.permission.ACCESS_FINE_LOCATION" }, 0);
     }
 
     public void returnDefaultResponse(CallbackContext callbackContext) {
@@ -805,7 +803,7 @@ public class PluginHelper {
     final CallbackContext callbackContext) {
         try {
             // 1) Check for location arguments
-            JSONObject jsonLocation = args.getJSONObject(0); // What if json is not specified?
+            JSONObject jsonLocation = args.getJSONArray(0).getJSONObject(0); // What if json is not specified?
 
             // 2) Create a Location Object from argument
             Location actualLocation = SitumMapper.jsonLocationObjectToLocation(jsonLocation); // Location Objet from JSON
