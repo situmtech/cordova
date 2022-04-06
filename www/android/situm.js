@@ -20,6 +20,9 @@ var Situm = {
   setApiKey: function (email, apiKey, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'setApiKey', [email, apiKey]);
   },
+  setUseRemoteConfig: function (useRemoteConfig, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'setUseRemoteConfig', [useRemoteConfig]);
+  },
   /**
    * Provides user's email and password.
    * @description Provides user's email and password. This credentials will be used to obtain a valid user token to authenticate the server request, when necessary. Token obtaining is not necessary done when this method is executed. Old credentials will be removed.

@@ -246,7 +246,18 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     NSNumber *useBarometer = nil;
     SITRealtimeUpdateInterval realtimeInterval = 0;
     
-    
+    // Check use of remote configuration
+    if ([json isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *params = (NSDictionary *)json;
+        
+        if ([params allKeys].count == 0) {
+            return nil;
+        }
+    } else if ([json isKindOfClass:[NSArray class]]) {
+        if (json.count == 0) {
+            return nil;
+        }
+    }
     
     //The following if-else is necessary in order to mantain compatibility
     //with the startPositioning[building] method.
