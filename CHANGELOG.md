@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 All non released changes should be in CHANGELOG_UNRELEASED.md file
 
 ---------
+## [1.18.1] - 2022-06-23
+
+## Changed
+* Updated Android SDK to version 2.76.1.
+* Updated iOS SDK to version 2.52.3
+
 ## [1.18.0] - 2022-04-06
 
 # Added
