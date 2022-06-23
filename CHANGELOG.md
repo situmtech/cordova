@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 All non released changes should be in CHANGELOG_UNRELEASED.md file
 
 ---------
+## [1.18.1] - 2022-06-23
+
+## Changed
+* Updated Android SDK to version 2.76.1.
+* Updated iOS SDK to version 2.52.3
+
+## [1.18.0] - 2022-04-06
+
+# Added
+* New functionality: Remote configuration. Now you can load the configuration from the Dashboard and the SDK will automatically use it if you enable it. You can learn more about this and how to use it here.
+
+# Update
+- Android SDK to version 2.73.0 and iOS SDK version 2.52.1.
+
 ## [1.17.4] - 2022-03-03
 
 ### Changed
