@@ -67,6 +67,16 @@ var Situm = {
     exec(cb, error, PLUGIN_NAME, 'stopPositioning', []);
   },
   /**
+   * Set the geofence listener to receive updates when you enter or exit one of them.
+   * @description Set the geofence listener to receive updates when you enter or exit one of them.
+   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {void}
+   */
+  setGeofenceListener: function (cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'setGeofenceListener', []);
+  },
+  /**
    * Download all the buildings for the current user.
    * @description Download all the buildings for the current user
    * @param {function} cb Cordova native callback to recive data.

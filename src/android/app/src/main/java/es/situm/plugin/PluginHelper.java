@@ -24,6 +24,7 @@ import es.situm.sdk.SitumSdk;
 import es.situm.sdk.communication.CommunicationManager;
 import es.situm.sdk.directions.DirectionsRequest;
 import es.situm.sdk.error.Error;
+import es.situm.sdk.location.GeofenceListener;
 import es.situm.sdk.location.LocationListener;
 import es.situm.sdk.location.LocationRequest;
 import es.situm.sdk.location.LocationStatus;
@@ -569,6 +570,49 @@ public class PluginHelper {
             Log.i(TAG, "stopPositioning: location listener is not started.");
             callbackContext.sendPluginResult(new PluginResult(Status.OK, "Allready disabled"));
         }
+    }
+
+    public void setGeofenceListener(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+                                CallbackContext callbackContext) {
+        SitumSdk.locationManager().setGeofenceListener(new GeofenceListener() {
+            @Override
+            public void onEnteredGeofences(List<Geofence> geofences) {
+                JSONArray jsonaGeofences = new JSONArray();
+                try {
+                    JSONObject joEventType = new JSONObject();
+                    joEventType.put("eventType", "onEnteredGeofences");
+                    jsonaGeofences.put(joEventType);
+                    parseGeofencesToJsonArray(jsonaGeofences, geofences);
+                } catch (JSONException e) {
+                    callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
+                    return;
+                }
+                callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonaGeofences));
+            }
+
+            @Override
+            public void onExitedGeofences(List<Geofence> geofences) {
+                JSONArray jsonaGeofences = new JSONArray();
+                try {
+                    JSONObject joEventType = new JSONObject();
+                    joEventType.put("eventType", "onExitedGeofences");
+                    jsonaGeofences.put(joEventType);
+                    parseGeofencesToJsonArray(jsonaGeofences, geofences);
+                } catch (JSONException e) {
+                    callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
+                    return;
+                }
+                callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonaGeofences));
+            }
+        });
+    }
+
+    private JSONArray parseGeofencesToJsonArray(JSONArray jsonaGeofences, List<Geofence> geofences) throws JSONException {
+        for (Geofence geofence : geofences) {
+            JSONObject jsonoGeofence = SitumMapper.geofenceToJsonObject(geofence);
+            jsonaGeofences.put(jsonoGeofence);
+        }
+        return jsonaGeofences;
     }
 
     private void showLocationSettings(CordovaInterface cordova) {
