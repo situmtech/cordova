@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 All non released changes should be in CHANGELOG_UNRELEASED.md file
 
 ---------
+## [1.18.2] - 2023-01-04
+
+## Changed
+* Updated iOS SDK to version [2.55.0](https://situm.com/docs/ios-sdk-changelog).
+* Updated Android SDK to version [2.83.3](https://situm.com/docs/android-sdk-changelog).
+
 ## [1.18.1] - 2022-06-23
 
 ## Changed
