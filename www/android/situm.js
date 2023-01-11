@@ -67,14 +67,27 @@ var Situm = {
     exec(cb, error, PLUGIN_NAME, 'stopPositioning', []);
   },
   /**
-   * Set the geofence listener to receive updates when you enter or exit one of them.
+   * Get notified about entering geofences. Take into account:
+   * * This method must be called **before** the positioning is started.
+   * * Positioning geofences (with `trainer_metadata` custom field) won't be notified.
+   * * This callback only work with indoor locations. Any outdoor location will produce a call to onExitGeofences with the last positioned geofences as argument.
    * @description Set the geofence listener to receive updates when you enter or exit one of them.
-   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} cb Cordova native callback to recive data. The data is an array of geofences.
    * @param {function} error Cordova native callback to recive errors.
-   * @return {void}
+   * @return {Geofence[]}
    */
-  setGeofenceListener: function (cb, error) {
-    exec(cb, error, PLUGIN_NAME, 'setGeofenceListener', []);
+  onEnterGeofences: function (cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'onEnterGeofences', []);
+  },
+  /**
+   * Get notified about exiting geofences. Take into account the considerations described at onEnterGeofences
+   * @description Set the geofence listener to receive updates when you enter or exit one of them.
+   * @param {function} cb Cordova native callback to recive data. The data is an array of geofences.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {Geofence[]}
+   */
+  onExitGeofences: function (cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'onExitGeofences', []);
   },
   /**
    * Download all the buildings for the current user.

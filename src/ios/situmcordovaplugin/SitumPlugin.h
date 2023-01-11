@@ -19,6 +19,8 @@
 - (void)setUserPass:(CDVInvokedUrlCommand *)command;
 - (void)startPositioning:(CDVInvokedUrlCommand *)command;
 - (void)stopPositioning:(CDVInvokedUrlCommand *)command;
+- (void)onEnterGeofences:(CDVInvokedUrlCommand *)command;
+- (void)onExitGeofences:(CDVInvokedUrlCommand *)command;
 - (void)fetchBuildings:(CDVInvokedUrlCommand *)command;
 - (void)fetchBuildingInfo:(CDVInvokedUrlCommand *)command;
 - (void)fetchGeofencesFromBuilding:(CDVInvokedUrlCommand *)command;
