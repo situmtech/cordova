@@ -591,39 +591,32 @@ public class PluginHelper {
         GeofenceListener geofenceListener = new GeofenceListener() {
             public void onEnteredGeofences(List<Geofence> enteredGeofences) {
                 if (callbackEnterGeofences != null) {
-                    JSONArray jsonaGeofences;
-                    try {
-                        jsonaGeofences = SitumMapper.parseGeofencesToJsonArray(enteredGeofences);
-                    } catch (JSONException e) {
-                        PluginResult pluginResult = new PluginResult(Status.ERROR, e.getMessage());
-                        pluginResult.setKeepCallback(true);
-                        callbackEnterGeofences.sendPluginResult(pluginResult);
-                        return;
-                    }
-                    PluginResult pluginResult = new PluginResult(Status.OK, jsonaGeofences);
-                    pluginResult.setKeepCallback(true);
-                    callbackEnterGeofences.sendPluginResult(pluginResult);
+                    notifyGeofences(callbackEnterGeofences, enteredGeofences);
                 }
             }
 
             public void onExitedGeofences(List<Geofence> exitedGeofences) {
                 if (callbackExitGeofences != null) {
-                    JSONArray jsonaGeofences;
-                    try {
-                        jsonaGeofences = SitumMapper.parseGeofencesToJsonArray(exitedGeofences);
-                    } catch (JSONException e) {
-                        PluginResult pluginResult = new PluginResult(Status.ERROR, e.getMessage());
-                        pluginResult.setKeepCallback(true);
-                        callbackExitGeofences.sendPluginResult(pluginResult);
-                        return;
-                    }
-                    PluginResult pluginResult = new PluginResult(Status.OK, jsonaGeofences);
-                    pluginResult.setKeepCallback(true);
-                    callbackExitGeofences.sendPluginResult(pluginResult);
+                    notifyGeofences(callbackExitGeofences, exitedGeofences);
                 }
             }
         };
         SitumSdk.locationManager().setGeofenceListener(geofenceListener);
+    }
+
+    private void notifyGeofences(CallbackContext callbackContext, List<Geofence> geofences) {
+        JSONArray jsonaGeofences;
+        try {
+            jsonaGeofences = SitumMapper.parseGeofencesToJsonArray(geofences);
+        } catch (JSONException e) {
+            PluginResult pluginResult = new PluginResult(Status.ERROR, e.getMessage());
+            pluginResult.setKeepCallback(true);
+            callbackContext.sendPluginResult(pluginResult);
+            return;
+        }
+        PluginResult pluginResult = new PluginResult(Status.OK, jsonaGeofences);
+        pluginResult.setKeepCallback(true);
+        callbackContext.sendPluginResult(pluginResult);
     }
 
     private void showLocationSettings(CordovaInterface cordova) {
