@@ -131,9 +131,9 @@ Download all the buildings for the current user.
 
 ```js
 cordova.plugins.Situm.fetchBuildings((res: any) => {
-      // Return an array of [buildings](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Building)
+      // Return an array of {@link https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Building|buildings}
     }, (err: any) => {
-      //Returns an error
+      // returns error string
     });
 ```
 
@@ -145,7 +145,7 @@ Download the information (floors, pois, ...) of a building.
 cordova.plugins.Situm.fetchBuildingInfo(building,(res: any) => {
       // Return a all the information [from a building](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#BuildingInfo)
     }, (err: any) => {
-      //Returns an error
+      // returns error string
     });
 ```
 
@@ -157,7 +157,7 @@ Download all the floors of a building.
 cordova.plugins.Situm.fetchFloorsFromBuilding(building,(res: any) => {
       // Return an array of [floors](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Floor)
     }, (err: any) => {
-      //Returns an error
+      // returns error string
     });
 ```
 
@@ -169,7 +169,7 @@ Download the indoor POIs of a building.
 cordova.plugins.Situm.fetchIndoorPOIsFromBuilding(building,(res: any) => {
       // Return an array of [POI](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#POI)
     }, (err: any) => {
-      //Returns an error
+      // returns error string
     });
 ```
 
@@ -181,7 +181,7 @@ Download the outdoor POIs of a building.
 cordova.plugins.Situm.fetchOutdoorPOIsFromBuilding(building,(res: any) => {
       // Return an array of [POI](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#POI)
     }, (err: any) => {
-      //Returns an error
+      // returns error string
     });
 ```
 
@@ -193,7 +193,7 @@ Download the events of a building.
 cordova.plugins.Situm.fetchEventsFromBuilding(building,(res: any) => {
       // Return an array of [SitumEvent](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#SitumEvent)
     }, (err: any) => {
-      //Returns an error
+      // returns error string
     });
 ```
 #### - fetchPoiCategories
@@ -204,7 +204,7 @@ Get all POI categories, download and cache their icons asynchronously.
 cordova.plugins.Situm.fetchPoiCategories((res: any) => {
       // Return an array of [PoiCategory](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#PoiCategory)
     }, (err: any) => {
-      //Returns an error
+      // returns error string
     });
 ```
 
@@ -216,7 +216,7 @@ Download the map image of a floor.
 cordova.plugins.Situm.fetchMapFromFloor(floor, (res: any) => {
       // Return an image as an string encoded in Base64
     }, (err: any) => {
-      //Returns an error
+      // returns error string
     });
 ```
 
@@ -228,7 +228,7 @@ Get the normal category icon for a POICategory.
 cordova.plugins.Situm.fetchPoiCategoryIconNormal(category, (res: any) => {
       // Return an image as an string encoded in Base64
     }, (err: any) => {
-      //Returns an error
+      // returns error string
     });
   ```
 
@@ -240,7 +240,7 @@ Get the selected category icon for a POICategory.
 cordova.plugins.Situm.fetchPoiCategoryIconSelected(category, (res: any) => {
       // Return an image as an string encoded in Base64
     }, (err: any) => {
-      //Returns an error
+      // returns error string
     });
   ```
 
@@ -252,7 +252,7 @@ Get all geofences from the building.
 cordova.plugins.Situm.fetchGeofencesFromBuilding(building, (res: any) => {
       // Return an array of [Geofence](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Geofence)
     }, (err: any) => {
-      //Returns an error
+      // returns error string
     });
 ```
 
