@@ -370,7 +370,7 @@ Get notified about entering geofences. Take into account:
 - This method must be called **before** the positioning is started.
 - Positioning geofences (with `trainer_metadata` custom field) won't be notified.
 - This callback only work with indoor locations. Any outdoor location will produce a call to [onExitedGeofences](#--onExitedGeofences) with the last positioned geofences as argument.
-- This callback will return arrays of [geofences](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Geofence)
+- This callback will return an array of [geofences](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Geofence)
 
 ```js
 cordova.plugins.Situm.onEnterGeofences((geofences: any) => {
@@ -385,7 +385,7 @@ cordova.plugins.Situm.onEnterGeofences((geofences: any) => {
 > This method is available only in Android by now.
 
 Get notified about exiting geofences. Take into account the considerations described at [onEnterGeofences](#--onEnterGeofences).
-- This callback will return arrays of [geofences](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Geofence)
+- This callback will return an array of [geofences](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Geofence)
 
 ```js
 cordova.plugins.Situm.onExitGeofences((geofences: any) => {
