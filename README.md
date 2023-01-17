@@ -100,7 +100,9 @@ cordova.plugins.Situm.setCacheMaxAge(1*60*60) // 1 hour
 
 #### - startPositioning
 
-Starts the positioning system.
+Starts the positioning system. In the success callback it can return:
+* [Location](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Location)
+* [LocationStatus](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#LocationStatus)
 ```js
   locationOptions = {
       buildingIdentifier = "BUILDING_ID"
@@ -127,11 +129,11 @@ cordova.plugins.Situm.stopPositioning()
 
 #### - fetchBuildings
 
-Download all the buildings for the current user.
+Download all the buildings for the current user.Returns an array of [buildings](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Building)
 
 ```js
 cordova.plugins.Situm.fetchBuildings((res: any) => {
-      // Return an array of {@link https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Building|buildings}
+      // Return an array of buildings
     }, (err: any) => {
       // returns error string
     });
@@ -139,11 +141,11 @@ cordova.plugins.Situm.fetchBuildings((res: any) => {
 
 ### - fetchBuildingInfo
 
-Download the information (floors, pois, ...) of a building.
+Download the information (floors, pois, ...) [of a building](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#BuildingInfo)
 
 ```js
 cordova.plugins.Situm.fetchBuildingInfo(building,(res: any) => {
-      // Return a all the information [from a building](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#BuildingInfo)
+      // Return the buildingInfo
     }, (err: any) => {
       // returns error string
     });
@@ -151,11 +153,11 @@ cordova.plugins.Situm.fetchBuildingInfo(building,(res: any) => {
 
 #### - fetchFloorsFromBuilding
 
-Download all the floors of a building.
+Download all the [floors](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Floor) of a building.
 
 ```js
 cordova.plugins.Situm.fetchFloorsFromBuilding(building,(res: any) => {
-      // Return an array of [floors](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Floor)
+      // Return an array of floors
     }, (err: any) => {
       // returns error string
     });
@@ -163,11 +165,11 @@ cordova.plugins.Situm.fetchFloorsFromBuilding(building,(res: any) => {
 
 #### - fetchIndoorPOIsFromBuilding
 
-Download the indoor POIs of a building.
+Download the indoor [POIs](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#POI) of a building.
 
 ```js
 cordova.plugins.Situm.fetchIndoorPOIsFromBuilding(building,(res: any) => {
-      // Return an array of [POI](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#POI)
+      // Return an array of indoor POIs
     }, (err: any) => {
       // returns error string
     });
@@ -175,11 +177,11 @@ cordova.plugins.Situm.fetchIndoorPOIsFromBuilding(building,(res: any) => {
 
 #### - fetchOutdoorPOIsFromBuilding
 
-Download the outdoor POIs of a building.
+Download the outdoor [POIs](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#POI) of a building.
 
 ```js
 cordova.plugins.Situm.fetchOutdoorPOIsFromBuilding(building,(res: any) => {
-      // Return an array of [POI](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#POI)
+      // Return an array of outdoor POIs
     }, (err: any) => {
       // returns error string
     });
@@ -187,22 +189,22 @@ cordova.plugins.Situm.fetchOutdoorPOIsFromBuilding(building,(res: any) => {
 
 #### - fetchEventsFromBuilding
 
-Download the events of a building.
+Download the [events](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#SitumEvent) of a building.
 
 ```js
 cordova.plugins.Situm.fetchEventsFromBuilding(building,(res: any) => {
-      // Return an array of [SitumEvent](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#SitumEvent)
+      // Return an array of events
     }, (err: any) => {
       // returns error string
     });
 ```
 #### - fetchPoiCategories
 
-Get all POI categories, download and cache their icons asynchronously.
+Get all [POI Categories](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#PoiCategory), download and cache their icons asynchronously.
 
 ```js
 cordova.plugins.Situm.fetchPoiCategories((res: any) => {
-      // Return an array of [PoiCategory](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#PoiCategory)
+      // Return an array of POI categories
     }, (err: any) => {
       // returns error string
     });
@@ -246,11 +248,11 @@ cordova.plugins.Situm.fetchPoiCategoryIconSelected(category, (res: any) => {
 
   #### - fetchGeofencesFromBuilding
 
-Get all geofences from the building.
+Get all [geofences](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Geofence) from the building.
 
 ```js
 cordova.plugins.Situm.fetchGeofencesFromBuilding(building, (res: any) => {
-      // Return an array of [Geofence](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Geofence)
+      // Return an array of geofences
     }, (err: any) => {
       // returns error string
     });
@@ -267,19 +269,21 @@ cordova.plugins.Situm.invalidateCache();
 
 #### - requestDirections
 
-Calculates a route between two points. This route is the one that will be used when you call requestNavigationUpdates. If this method is called multiple times the last Route will be used
+Calculates a route between two points. This route is the one that will be used when you call requestNavigationUpdates. If this method is called multiple times the last Route will be used.
+You can change the options to generate the Route with [DirectionOptions](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#DirectionsOptions)
+Returns a [Route](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Route)
 ```js
 directionRequest = [
   building, // Building in which you're positioning
   from, // Point where you want to start the route. You can pass a Point or a Location
   to, // Point where you want to finish the route
-  {} // Options to generate the route see [DirectionOptions](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#DirectionsOptions)
+  {} // Options to generate the route
   ]
 
 
 cordova.plugins.Situm.requestDirections(
   directionsRequest, (route: any) => {
-      //Return a [Route](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Route)
+      //Return a Route
     }, (err: any) => {
       // returns error string
     });
@@ -288,6 +292,7 @@ cordova.plugins.Situm.requestDirections(
 #### - requestNavigationUpdates
 
 Necessary step to request progress. Alone this method does not provide progress object. You must feed navigation API with location, as indicated on updateNavigationWithLocation section.
+When you start feeding locations you can receive [NavigationProgress](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#NavigationProgress) or other of the results described below
 
 ```js
 // Navigation request with example values
@@ -301,11 +306,10 @@ cordova.plugins.Situm.requestNavigationUpdates(
       /**
        * This callback can return four different things:
        * 1. A message notifying about the success starting the navigation
-       * 2. A json with the [NavigationProgress](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#NavigationProgress). The Json will also have a field "type" with the value "progress" so you can know when this happens.
+       * 2. A json with the NavigationProgress. The Json will also have a field "type" with the value "progress" so you can know when this happens.
        * 3. A json with the field "type" and the value "destinationReached". This happens when the navigation finish because you reached the end.
        * 4. A json with the field "type" and the value "userOutsideRoute". This happens when the user deviate from the route. You can notify them so they return to the correct path.
        */
-      //returns the [NavigationProgress](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#NavigationProgress)
     },
     (error: any) => {
       //returns error string
@@ -330,7 +334,7 @@ cordova.plugins.Situm.removeNavigationUpdates();
 
 #### - requestRealTimeUpdates
 
-Emits the real time location of devices 
+Emits the [real time](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#RealTimeData) location of devices 
 
 ```js
 const request = {
@@ -340,7 +344,7 @@ const request = {
 cordova.plugins.Situm.SitumPlugin.requestRealTimeUpdates(
   request,
     (locations: any) => {
-      // returns [RealtimeTimeData](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#RealTimeData)
+      // returns the locations of the other devices in real time
     },
     (error: any) => {
       // returns error string
@@ -366,10 +370,11 @@ Get notified about entering geofences. Take into account:
 - This method must be called **before** the positioning is started.
 - Positioning geofences (with `trainer_metadata` custom field) won't be notified.
 - This callback only work with indoor locations. Any outdoor location will produce a call to [onExitedGeofences](#--onExitedGeofences) with the last positioned geofences as argument.
+- This callback will return arrays of [geofences](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Geofence)
 
 ```js
 cordova.plugins.Situm.onEnterGeofences((geofences: any) => {
-  // Returns an array of [geofences](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Geofence)
+  // Returns an array of geofences
   // e.g. [{"polygonPoints": [], "customFields": {}, "updatedAt": "Thu Jan 01 01:00:00 +0100 1970", "buildingIdentifier": "1234", "floorIdentifier": "123456", "code": "", "createdAt": "Thu Jan 01 01:00:00 +0100 1970", "infoHtml": "", "name": "My Geofence", "identifier": "12345678-aaaa-bbbb-cccc-12345678abcd"}]
 });
 ```
@@ -380,10 +385,11 @@ cordova.plugins.Situm.onEnterGeofences((geofences: any) => {
 > This method is available only in Android by now.
 
 Get notified about exiting geofences. Take into account the considerations described at [onEnterGeofences](#--onEnterGeofences).
+- This callback will return arrays of [geofences](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Geofence)
 
 ```js
 cordova.plugins.Situm.onExitGeofences((geofences: any) => {
-  // Returns an array of [geofences](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Geofence)
+  // Returns an array of geofences
   // e.g. [{"polygonPoints": [], "customFields": {}, "updatedAt": "Thu Jan 01 01:00:00 +0100 1970", "buildingIdentifier": "1234", "floorIdentifier": "123456", "code": "", "createdAt": "Thu Jan 01 01:00:00 +0100 1970", "infoHtml": "", "name": "My Geofence", "identifier": "12345678-aaaa-bbbb-cccc-12345678abcd"}]
 });
 ```
