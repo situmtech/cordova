@@ -65,6 +65,329 @@ Situm-Cordova-Plugin is licensed under [MIT License](https://opensource.org/lice
 - **Examples**. In [this repo](https://github.com/situmtech/situm-cordova-getting-started) you can find a sample app implementing this plugin. Take a look at how the examples are implemented, so you can figure out how to adapt it to your project.
 - **Cordova Wayfinding plugin**. If you are looking for a wayfinding solution using Cordova, check out [this repo](https://github.com/situmtech/situm-cordova-plugin-wayfinding).
 
+### Methods 
+
+NOTE: This plugin is currently under development. There may be method not implemented yet. Also there may be some API changes as development progresses.
+
+#### - setApiKey
+
+Log in into your Situm Account. This key is generated in Situm Dashboard. Return true if apiKey was set successfully, otherwise false
+
+```js
+cordova.plugins.Situm.setApiKey("SITUM_EMAIL", "SITUM_API_KEY");
+```
+
+#### - setUserPass
+
+Provides user's email and password. Return true if apiKey was set successfully, otherwise false
+```js
+cordova.plugins.Situm.setUserPass("SITUM_EMAIL", "SITUM_USER_PASS");
+```
+
+#### - setRemoteConfig
+
+Set the remote configuration state which allows to use the configuration (location request) stored on the web to find the location of the user.
+```js
+cordova.plugins.Situm.setUseRemoteConfig(true);
+```
+
+#### - setCacheMaxAge
+
+Sets the maximum age of a cached response in seconds.
+```js
+cordova.plugins.Situm.setCacheMaxAge(1*60*60) // 1 hour
+```
+
+#### - startPositioning
+
+Starts the positioning system.
+```js
+  locationOptions = {
+      buildingIdentifier = "BUILDING_ID"
+  };
+
+cordova.plugins.Situm.startPositioning(locationOptions, (res: any) => {
+      if (res && res.statusName) {
+        // Returns location status
+      }
+      if (res && res.position) {
+        // Return location object
+      }
+    }, (err: any) => {
+      //Return error as an string.If this happens the positioning is stopped
+    });
+```
+
+#### - stopPositioning
+
+Stop the positioning system on current active listener.
+```js
+cordova.plugins.Situm.stopPositioning()
+```
+
+#### - fetchBuildings
+
+Download all the buildings for the current user.
+
+```js
+cordova.plugins.Situm.fetchBuildings((res: any) => {
+      // Return an array of [buildings](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Building)
+    }, (err: any) => {
+      //Returns an error
+    });
+```
+
+### - fetchBuildingInfo
+
+Download the information (floors, pois, ...) of a building.
+
+```js
+cordova.plugins.Situm.fetchBuildingInfo(building,(res: any) => {
+      // Return a all the information [from a building](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#BuildingInfo)
+    }, (err: any) => {
+      //Returns an error
+    });
+```
+
+#### - fetchFloorsFromBuilding
+
+Download all the floors of a building.
+
+```js
+cordova.plugins.Situm.fetchFloorsFromBuilding(building,(res: any) => {
+      // Return an array of [floors](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Floor)
+    }, (err: any) => {
+      //Returns an error
+    });
+```
+
+#### - fetchIndoorPOIsFromBuilding
+
+Download the indoor POIs of a building.
+
+```js
+cordova.plugins.Situm.fetchIndoorPOIsFromBuilding(building,(res: any) => {
+      // Return an array of [POI](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#POI)
+    }, (err: any) => {
+      //Returns an error
+    });
+```
+
+#### - fetchOutdoorPOIsFromBuilding
+
+Download the outdoor POIs of a building.
+
+```js
+cordova.plugins.Situm.fetchOutdoorPOIsFromBuilding(building,(res: any) => {
+      // Return an array of [POI](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#POI)
+    }, (err: any) => {
+      //Returns an error
+    });
+```
+
+#### - fetchEventsFromBuilding
+
+Download the events of a building.
+
+```js
+cordova.plugins.Situm.fetchEventsFromBuilding(building,(res: any) => {
+      // Return an array of [SitumEvent](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#SitumEvent)
+    }, (err: any) => {
+      //Returns an error
+    });
+```
+#### - fetchPoiCategories
+
+Get all POI categories, download and cache their icons asynchronously.
+
+```js
+cordova.plugins.Situm.fetchPoiCategories((res: any) => {
+      // Return an array of [PoiCategory](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#PoiCategory)
+    }, (err: any) => {
+      //Returns an error
+    });
+```
+
+#### - fetchMapFromFloor
+
+Download the map image of a floor.
+
+```js
+cordova.plugins.Situm.fetchMapFromFloor(floor, (res: any) => {
+      // Return an image as an string encoded in Base64
+    }, (err: any) => {
+      //Returns an error
+    });
+```
+
+#### - fetchPoiCategoryIconNormal
+
+Get the normal category icon for a POICategory.
+
+```js
+cordova.plugins.Situm.fetchPoiCategoryIconNormal(category, (res: any) => {
+      // Return an image as an string encoded in Base64
+    }, (err: any) => {
+      //Returns an error
+    });
+  ```
+
+#### - fetchPoiCategoryIconSelected
+
+Get the selected category icon for a POICategory.
+
+```js
+cordova.plugins.Situm.fetchPoiCategoryIconSelected(category, (res: any) => {
+      // Return an image as an string encoded in Base64
+    }, (err: any) => {
+      //Returns an error
+    });
+  ```
+
+  #### - fetchGeofencesFromBuilding
+
+Get all geofences from the building.
+
+```js
+cordova.plugins.Situm.fetchGeofencesFromBuilding(building, (res: any) => {
+      // Return an array of [Geofence](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Geofence)
+    }, (err: any) => {
+      //Returns an error
+    });
+```
+
+
+#### - invalidateCache
+
+Invalidate all the resources in the cache.
+
+```js
+cordova.plugins.Situm.invalidateCache();
+```
+
+#### - requestDirections
+
+Calculates a route between two points. This route is the one that will be used when you call requestNavigationUpdates. If this method is called multiple times the last Route will be used
+```js
+directionRequest = [
+  building, // Building in which you're positioning
+  from, // Point where you want to start the route. You can pass a Point or a Location
+  to, // Point where you want to finish the route
+  {} // Options to generate the route see [DirectionOptions](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#DirectionsOptions)
+  ]
+
+
+cordova.plugins.Situm.requestDirections(
+  directionsRequest, (route: any) => {
+      //Return a [Route](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Route)
+    }, (err: any) => {
+      // returns error string
+    });
+```
+
+#### - requestNavigationUpdates
+
+Necessary step to request progress. Alone this method does not provide progress object. You must feed navigation API with location, as indicated on updateNavigationWithLocation section.
+
+```js
+// Navigation request with example values
+navigationRequest = [
+  distanceToGoalThreshold = 10,
+  distanceToFloorChangeThreshold = 5
+]
+cordova.plugins.Situm.requestNavigationUpdates(
+  navigationRequest,
+    (navigation: any) => {
+      /**
+       * This callback can return four different things:
+       * 1. A message notifying about the success starting the navigation
+       * 2. A json with the [NavigationProgress](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#NavigationProgress). The Json will also have a field "type" with the value "progress" so you can know when this happens.
+       * 3. A json with the field "type" and the value "destinationReached". This happens when the navigation finish because you reached the end.
+       * 4. A json with the field "type" and the value "userOutsideRoute". This happens when the user deviate from the route. You can notify them so they return to the correct path.
+       */
+      //returns the [NavigationProgress](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#NavigationProgress)
+    },
+    (error: any) => {
+      //returns error string
+    });
+```
+
+#### - updateNavigationWithLocation
+    
+Usually, position variable should be one of the locations provided by the system on the [startPositioning](#--startpositioning) function.
+
+```js
+cordova.plugins.Situm.updateNavigationWithLocation(currentLocation)
+```
+
+#### - removeNavigationUpdates
+
+When you are no longer interested on Navigation Updates you should call this method to remove internal allocated resources.
+
+```js
+cordova.plugins.Situm.removeNavigationUpdates();
+```
+
+#### - requestRealTimeUpdates
+
+Emits the real time location of devices 
+
+```js
+const request = {
+      building: building, //Building in which you want to be notified
+      pollTime: 3000, // time in milliseconds
+    }
+cordova.plugins.Situm.SitumPlugin.requestRealTimeUpdates(
+  request,
+    (locations: any) => {
+      // returns [RealtimeTimeData](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#RealTimeData)
+    },
+    (error: any) => {
+      // returns error string
+    }
+    );
+```
+
+#### - removeRealTimeUpdates
+
+When you are no longer interested on realtime location Updates you should call this method to remove internal allocated resources.
+
+```js
+cordova.plugins.Situm.removeRealTimeUpdates();
+```
+
+#### - onEnterGeofences
+
+> **Warning**
+> This method is available only in Android by now.
+
+Get notified about entering geofences. Take into account:
+
+- This method must be called **before** the positioning is started.
+- Positioning geofences (with `trainer_metadata` custom field) won't be notified.
+- This callback only work with indoor locations. Any outdoor location will produce a call to [onExitedGeofences](#--onExitedGeofences) with the last positioned geofences as argument.
+
+```js
+cordova.plugins.Situm.onEnterGeofences((geofences: any) => {
+  // Returns an array of [geofences](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Geofence)
+  // e.g. [{"polygonPoints": [], "customFields": {}, "updatedAt": "Thu Jan 01 01:00:00 +0100 1970", "buildingIdentifier": "1234", "floorIdentifier": "123456", "code": "", "createdAt": "Thu Jan 01 01:00:00 +0100 1970", "infoHtml": "", "name": "My Geofence", "identifier": "12345678-aaaa-bbbb-cccc-12345678abcd"}]
+});
+```
+
+#### - onExitGeofences
+
+> **Warning**
+> This method is available only in Android by now.
+
+Get notified about exiting geofences. Take into account the considerations described at [onEnterGeofences](#--onEnterGeofences).
+
+```js
+cordova.plugins.Situm.onExitGeofences((geofences: any) => {
+  // Returns an array of [geofences](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Geofence)
+  // e.g. [{"polygonPoints": [], "customFields": {}, "updatedAt": "Thu Jan 01 01:00:00 +0100 1970", "buildingIdentifier": "1234", "floorIdentifier": "123456", "code": "", "createdAt": "Thu Jan 01 01:00:00 +0100 1970", "infoHtml": "", "name": "My Geofence", "identifier": "12345678-aaaa-bbbb-cccc-12345678abcd"}]
+});
+```
+
 ---
 
 ## Development
