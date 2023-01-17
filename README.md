@@ -33,7 +33,7 @@ Situm Cordova Plugin is a set of utilities that allow any developer to build Cor
 ## Getting started
 
 - Set up your Situm account following [these steps](https://situm.com/docs/01-introduction/#3-toc-title).
-- [Configure](https://situm.com/docs/04-a-basic-cordova-app/) this plugin in your project.
+- [Configure](https://situm.com/docs/a-basic-cordova-app/) this plugin in your project.
 - [API Reference](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/situm) will help you use a particular class or method.
 
 ---
@@ -60,7 +60,7 @@ Situm-Cordova-Plugin is licensed under [MIT License](https://opensource.org/lice
 
 ## Documentation
 
-- **General documentation**. You can find in our [documentation site](https://situm.com/docs/04-a-basic-cordova-app/) all the information you need to configure this plugin in your project and get it up and running in no time.
+- **General documentation**. You can find in our [documentation site](https://situm.com/docs/a-basic-cordova-app/) all the information you need to configure this plugin in your project and get it up and running in no time.
 - **API reference**. Check out the [plugin reference](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/situm) and learn how to use a particular class or method.
 - **Examples**. In [this repo](https://github.com/situmtech/situm-cordova-getting-started) you can find a sample app implementing this plugin. Take a look at how the examples are implemented, so you can figure out how to adapt it to your project.
 - **Cordova Wayfinding plugin**. If you are looking for a wayfinding solution using Cordova, check out [this repo](https://github.com/situmtech/situm-cordova-plugin-wayfinding).
