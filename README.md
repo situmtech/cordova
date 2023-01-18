@@ -365,11 +365,11 @@ cordova.plugins.Situm.removeRealTimeUpdates();
 > **Warning**
 > This method is available only in Android by now.
 
-Get notified about entering geofences. Take into account:
+Get notified about users entering geofences. Take into account:
 
 - This method must be called **before** the positioning is started.
-- Positioning geofences (with `trainer_metadata` custom field) won't be notified.
-- This callback only work with indoor locations. Any outdoor location will produce a call to [onExitedGeofences](#--onExitedGeofences) with the last positioned geofences as argument.
+- Positioning geofences (with `trainer_metadata` custom field [configured in the dashboard](https://situm.com/docs/special-custom-fields/#activating-the-uncalibrated-indoor-geolocation-mode)) won't be notified.
+- This callback works only with indoor locations. Any outdoor location will produce a call to [onExitedGeofences](#--onExitedGeofences) with the last positioned geofences as argument.
 - This callback will return an array of [geofences](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Geofence)
 
 ```js

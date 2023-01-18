@@ -67,10 +67,10 @@ var Situm = {
     exec(cb, error, PLUGIN_NAME, 'stopPositioning', []);
   },
   /**
-   * Get notified about entering geofences. Take into account:
-   * * This method must be called **before** the positioning is started.
-   * * Positioning geofences (with `trainer_metadata` custom field) won't be notified.
-   * * This callback only work with indoor locations. Any outdoor location will produce a call to onExitGeofences with the last positioned geofences as argument.
+   * Get notified about users entering geofences. Take into account:
+   * * This method must be called before the positioning is started.
+   * * Positioning geofences (with `trainer_metadata` custom field configured in the dashboard (https://situm.com/docs/special-custom-fields/#activating-the-uncalibrated-indoor-geolocation-mode)) won't be notified.
+   * * This callback works only with indoor locations. Any outdoor location will produce a call to onExitGeofences with the last positioned geofences as argument.
    * @description Set the geofence listener to receive updates when you enter or exit one of them.
    * @param {function} cb Cordova native callback to recive data. The data is an array of geofences.
    * @param {function} error Cordova native callback to recive errors.
