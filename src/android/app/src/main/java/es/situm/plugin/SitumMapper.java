@@ -368,6 +368,15 @@ static JSONObject buildingInfoToJsonObject(BuildingInfo buildingInfo) throws JSO
     return jo;
   }
 
+   static JSONArray parseGeofencesToJsonArray(List<Geofence> geofences) throws JSONException {
+    JSONArray jsonaGeofences = new JSONArray();
+    for (Geofence geofence : geofences) {
+      JSONObject jsonoGeofence = geofenceToJsonObject(geofence);
+      jsonaGeofences.put(jsonoGeofence);
+    }
+    return jsonaGeofences;
+  }
+
   static JSONArray jsonPointsFromPoints(List<Point> points) throws JSONException {
     JSONArray pointsJsonArray = new JSONArray();
      for (Point point : points) {

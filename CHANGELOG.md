@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 All non released changes should be in CHANGELOG_UNRELEASED.md file
 
 ---------
+## [1.19.0] - 2023-01-23
+
+### Added
+
+New methods onEnterGeofences and onExitGeofences. This methods notify when an user enters or exits a geofence.  Right now it is only available for the Android version. If you want to know more, please check the JSDoc or the README in the repository.
+
 ## [1.18.2] - 2023-01-04
 
 ## Changed
