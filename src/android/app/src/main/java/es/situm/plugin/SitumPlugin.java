@@ -64,6 +64,10 @@ public class SitumPlugin extends CordovaPlugin {
       getPluginInstance().fetchGeofencesFromBuilding(cordova, webView, args, callbackContext);
     } else if (action.equalsIgnoreCase("startPositioning")) {
       getPluginInstance().startPositioning(cordova, webView, args, callbackContext);
+    } else if (action.equalsIgnoreCase("onEnterGeofences")) {
+      getPluginInstance().onEnterGeofences(cordova, webView, args, callbackContext);
+    } else if (action.equalsIgnoreCase("onExitGeofences")) {
+      getPluginInstance().onExitGeofences(cordova, webView, args, callbackContext);
     } else if (action.equalsIgnoreCase("stopPositioning")) {
       getPluginInstance().stopPositioning(cordova, webView, args, callbackContext);
     } else if (action.equalsIgnoreCase("fetchPoiCategories")) {

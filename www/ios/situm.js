@@ -21,6 +21,12 @@ var Situm = {
   stopPositioning: function (cb, error) {
     exec(cb, error, PLUGIN_NAME, 'stopPositioning', []);
   },
+  onEnterGeofences: function (cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'onEnterGeofences', []);
+  },
+  onExitGeofences: function (cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'onExitGeofences', []);
+  },
   fetchBuildings: function (cb, error) {
     exec(cb, error, PLUGIN_NAME, 'fetchBuildings', []);
   },

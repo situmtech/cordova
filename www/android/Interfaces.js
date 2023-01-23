@@ -303,6 +303,22 @@ module.exports = Location
 
 /**
  * @name
+ * LocationStatus
+ * @description
+ * Status of the positioning
+ * @property {string} statusName - Status in which the positioning is
+ * @property {number} statusOrdinal - Number of the status
+ */
+
+var LocationStatus = {
+  statusName,
+  statusOrdinal
+}
+
+module.exports = LocationStatus
+
+/**
+ * @name
  * Angle
  * @description
  * Representation of an angle.

@@ -24,6 +24,7 @@ import es.situm.sdk.SitumSdk;
 import es.situm.sdk.communication.CommunicationManager;
 import es.situm.sdk.directions.DirectionsRequest;
 import es.situm.sdk.error.Error;
+import es.situm.sdk.location.GeofenceListener;
 import es.situm.sdk.location.LocationListener;
 import es.situm.sdk.location.LocationRequest;
 import es.situm.sdk.location.LocationStatus;
@@ -64,6 +65,9 @@ public class PluginHelper {
 
     private Route computedRoute;
     private Location computedLocation;
+
+    private CallbackContext callbackEnterGeofences;
+    private CallbackContext callbackExitGeofences;
 
     private CommunicationManager getCommunicationManagerInstance() {
         if (cmInstance == null) { //Check for the first time
@@ -569,6 +573,50 @@ public class PluginHelper {
             Log.i(TAG, "stopPositioning: location listener is not started.");
             callbackContext.sendPluginResult(new PluginResult(Status.OK, "Allready disabled"));
         }
+    }
+
+    public void onEnterGeofences(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+                                CallbackContext callbackContext) {
+        this.callbackEnterGeofences = callbackContext;
+        createAndSetGeofenceListener();
+    }
+
+    public void onExitGeofences(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+                                 CallbackContext callbackContext) {
+        this.callbackExitGeofences = callbackContext;
+        createAndSetGeofenceListener();
+    }
+
+    private void createAndSetGeofenceListener() {
+        GeofenceListener geofenceListener = new GeofenceListener() {
+            public void onEnteredGeofences(List<Geofence> enteredGeofences) {
+                if (callbackEnterGeofences != null) {
+                    notifyGeofences(callbackEnterGeofences, enteredGeofences);
+                }
+            }
+
+            public void onExitedGeofences(List<Geofence> exitedGeofences) {
+                if (callbackExitGeofences != null) {
+                    notifyGeofences(callbackExitGeofences, exitedGeofences);
+                }
+            }
+        };
+        SitumSdk.locationManager().setGeofenceListener(geofenceListener);
+    }
+
+    private void notifyGeofences(CallbackContext callbackContext, List<Geofence> geofences) {
+        JSONArray jsonaGeofences;
+        try {
+            jsonaGeofences = SitumMapper.parseGeofencesToJsonArray(geofences);
+        } catch (JSONException e) {
+            PluginResult pluginResult = new PluginResult(Status.ERROR, e.getMessage());
+            pluginResult.setKeepCallback(true);
+            callbackContext.sendPluginResult(pluginResult);
+            return;
+        }
+        PluginResult pluginResult = new PluginResult(Status.OK, jsonaGeofences);
+        pluginResult.setKeepCallback(true);
+        callbackContext.sendPluginResult(pluginResult);
     }
 
     private void showLocationSettings(CordovaInterface cordova) {

@@ -465,6 +465,14 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     [[SITLocationManager sharedInstance] removeUpdates];
 }
 
+- (void)onEnterGeofences:(CDVInvokedUrlCommand *)command {
+    
+}
+
+- (void)onExitGeofences:(CDVInvokedUrlCommand *)command {
+
+}
+
 
 - (void)requestDirections:(CDVInvokedUrlCommand*)command
 {
