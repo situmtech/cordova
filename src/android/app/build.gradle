@@ -44,7 +44,7 @@ dependencies {
     implementation ('com.googlecode.json-simple:json-simple:1.1.1'){
         exclude group: 'junit', module:'junit'
     }
-    implementation ('es.situm:situm-sdk:2.83.3@aar') {
+    implementation ('es.situm:situm-sdk:2.85.0@aar') {
         transitive = true
     }
     implementation 'org.apache.cordova:framework:7.1.0'
