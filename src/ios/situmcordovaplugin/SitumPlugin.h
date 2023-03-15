@@ -18,6 +18,7 @@
 - (void)setApiKey:(CDVInvokedUrlCommand *)command;
 - (void)setUserPass:(CDVInvokedUrlCommand *)command;
 - (void)startPositioning:(CDVInvokedUrlCommand *)command;
+- (void)setUseRemoteConfig:(CDVInvokedUrlCommand *)command;
 - (void)stopPositioning:(CDVInvokedUrlCommand *)command;
 - (void)onEnterGeofences:(CDVInvokedUrlCommand *)command;
 - (void)onExitGeofences:(CDVInvokedUrlCommand *)command;
