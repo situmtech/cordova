@@ -17,8 +17,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 
 import es.situm.sdk.SitumSdk;
 import es.situm.sdk.communication.CommunicationManager;
@@ -29,22 +29,21 @@ import es.situm.sdk.location.LocationListener;
 import es.situm.sdk.location.LocationRequest;
 import es.situm.sdk.location.LocationStatus;
 import es.situm.sdk.model.cartography.Building;
+import es.situm.sdk.model.cartography.BuildingInfo;
 import es.situm.sdk.model.cartography.Floor;
+import es.situm.sdk.model.cartography.Geofence;
 import es.situm.sdk.model.cartography.Poi;
 import es.situm.sdk.model.cartography.PoiCategory;
-import es.situm.sdk.model.cartography.Geofence;
-import es.situm.sdk.model.cartography.BuildingInfo;
 import es.situm.sdk.model.directions.Route;
 import es.situm.sdk.model.location.Location;
 import es.situm.sdk.model.navigation.NavigationProgress;
+import es.situm.sdk.model.realtime.RealTimeData;
 import es.situm.sdk.navigation.NavigationListener;
 import es.situm.sdk.navigation.NavigationManager;
 import es.situm.sdk.navigation.NavigationRequest;
+import es.situm.sdk.realtime.RealTimeListener;
 import es.situm.sdk.realtime.RealTimeManager;
 import es.situm.sdk.realtime.RealTimeRequest;
-import es.situm.sdk.realtime.RealTimeListener;
-import es.situm.sdk.model.realtime.RealTimeData;
-
 import es.situm.sdk.utils.Handler;
 import es.situm.sdk.v1.SitumEvent;
 
@@ -143,7 +142,7 @@ public class PluginHelper {
 
     // building, floors, events, indoorPois, outdoorPois, ¿geofences? ¿Paths?
     public void fetchBuildingInfo(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
-            final CallbackContext callbackContext) 
+            final CallbackContext callbackContext)
     {
         try {
             JSONObject jsonoBuilding = args.getJSONObject(0);
@@ -154,8 +153,8 @@ public class PluginHelper {
                 public void onSuccess(BuildingInfo object) {
                     try {
                         Log.d(PluginHelper.TAG, "onSuccess: building info fetched successfully.");
-                        
-                        
+
+
                         JSONObject jsonObject = SitumMapper.buildingInfoToJsonObject(object); // Include geofences to parse ? This needs to be on sdk
 
                         callbackContext.sendPluginResult(new PluginResult(Status.OK, jsonObject));
@@ -178,7 +177,7 @@ public class PluginHelper {
     }
 
     public void fetchGeofencesFromBuilding(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
-            final CallbackContext callbackContext) 
+            final CallbackContext callbackContext)
     {
         try {
             JSONObject jsonoBuilding = args.getJSONObject(0);
@@ -228,7 +227,7 @@ public class PluginHelper {
                 public void onSuccess(Collection<Floor> floors) {
                     try {
                         Log.d(PluginHelper.TAG, "onSuccess: Floors fetched successfully.");
-                        
+
                         // TODO 19/11/19:     jo.put(FLOORS, arrayFromFloors(buildingInfo.getFloors()));
                         JSONArray jsonaFloors = new JSONArray();
 
@@ -274,7 +273,7 @@ public class PluginHelper {
                                 for (Poi poi : pois) {
                                     Log.i(PluginHelper.TAG,
                                             "onSuccess: " + poi.getIdentifier() + " - " + poi.getName() + "-" + poi.getCustomFields());
-                                    
+
                                     Log.d(PluginHelper.TAG, "Some log that should appear");
                                     JSONObject jsonoPoi = SitumMapper.poiToJsonObject(poi);
                                     jsonaPois.put(jsonoPoi);
@@ -504,6 +503,9 @@ public class PluginHelper {
             LocationRequest locationRequest = SitumMapper.locationRequestJSONObjectToLocationRequest(args);
 
             Log.i(TAG, "startPositioning: starting positioning in " + locationRequest);
+            if (locationListener != null) {
+                SitumSdk.locationManager().removeLocationListener(locationListener);
+            }
             locationListener = new LocationListener() {
                 public void onLocationChanged(Location location) {
                     try {
@@ -549,7 +551,8 @@ public class PluginHelper {
                 }
             };
             try {
-                SitumSdk.locationManager().requestLocationUpdates(locationRequest, locationListener);
+                SitumSdk.locationManager().addLocationListener(locationListener);
+                SitumSdk.locationManager().requestLocationUpdates(locationRequest);
             } catch (Exception e) {
                 Log.e(PluginHelper.TAG, "onError() called with: error = [" + e + "]");
             }
@@ -559,20 +562,21 @@ public class PluginHelper {
         }
     }
 
-    public void stopPositioning(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+    public void stopPositioning(
+            CordovaInterface cordova,
+            CordovaWebView webView,
+            JSONArray args,
             CallbackContext callbackContext) {
-        if (locationListener != null) {
-            try {
-                SitumSdk.locationManager().removeUpdates(locationListener);
-                locationListener = null;
-                callbackContext.sendPluginResult(new PluginResult(Status.OK, "Success"));
-            } catch (Exception e) {
-                callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
-            }
-        } else {
-            Log.i(TAG, "stopPositioning: location listener is not started.");
-            callbackContext.sendPluginResult(new PluginResult(Status.OK, "Allready disabled"));
+        try {
+            SitumSdk.locationManager().removeUpdates();
+        } catch (Exception e) {
+            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
         }
+        if (locationListener != null) {
+            SitumSdk.locationManager().removeLocationListener(locationListener);
+            locationListener = null;
+        }
+        callbackContext.sendPluginResult(new PluginResult(Status.OK, "Success"));
     }
 
     public void onEnterGeofences(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
@@ -641,8 +645,8 @@ public class PluginHelper {
     }
 
     public void requestNavigationUpdates(final CordovaInterface cordova,
-     CordovaWebView webView, 
-     JSONArray args, 
+     CordovaWebView webView,
+     JSONArray args,
      final CallbackContext callbackContext) {
             // 1) Parse and check arguments
 
@@ -731,8 +735,8 @@ public class PluginHelper {
                         }
                         PluginResult result = new PluginResult(Status.OK, jsonProgress ); // TODO: Change this to return an object with valid information
                         result.setKeepCallback(true);
-                        callbackContext.sendPluginResult(result);        
-    
+                        callbackContext.sendPluginResult(result);
+
                     } catch (Exception e) {
                         //TODO: handle exception
                         Log.d(TAG, "On Error parsing progress: " + progress);
@@ -753,7 +757,7 @@ public class PluginHelper {
                     }
                     PluginResult result = new PluginResult(Status.OK,jsonResult);
                     result.setKeepCallback(true);
-                    callbackContext.sendPluginResult(result);        
+                    callbackContext.sendPluginResult(result);
                 };
 
                 public void onUserOutsideRoute() {
@@ -767,10 +771,10 @@ public class PluginHelper {
                     }
                     PluginResult result = new PluginResult(Status.OK,jsonResult);
                     result.setKeepCallback(true);
-                    callbackContext.sendPluginResult(result);        
+                    callbackContext.sendPluginResult(result);
                 }
             };
-            
+
             // 3)  Connect interfaces and connect callback back to js
             getNavigationManagerInstance().requestNavigationUpdates(navigationRequest, navigationListener); // Be carefull with exceptions
 
@@ -781,9 +785,9 @@ public class PluginHelper {
     }
 
     public void requestRealTimeUpdates(final CordovaInterface cordova,
-     CordovaWebView webView, 
-     JSONArray args, 
-     final CallbackContext callbackContext) { 
+     CordovaWebView webView,
+     JSONArray args,
+     final CallbackContext callbackContext) {
         try {
             // Convert request to native
             JSONObject jsonRequest = args.getJSONObject(0);
@@ -792,7 +796,7 @@ public class PluginHelper {
             // Call
 
             realtimeListener = new RealTimeListener() {
-                
+
                 @Override
                 public void onUserLocations(RealTimeData realTimeData) {
                     Log.d(TAG, "Success retrieving realtime data" + realTimeData);
@@ -804,12 +808,12 @@ public class PluginHelper {
                         // Send it back to (removing user information)
                         PluginResult result = new PluginResult(Status.OK,jsonResult);
                         result.setKeepCallback(true);
-                        callbackContext.sendPluginResult(result);        
+                        callbackContext.sendPluginResult(result);
                     } catch (Exception e) {
                         Log.d(TAG, "Error  exception realtime data" + e);
                     }
-                    
-                    
+
+
                 }
 
                 @Override
@@ -835,8 +839,8 @@ public class PluginHelper {
      }
 
      public void removeRealTimeUpdates(CordovaInterface cordova,
-    CordovaWebView webView, 
-    JSONArray args, 
+    CordovaWebView webView,
+    JSONArray args,
     final CallbackContext callbackContext) {
         // 
         Log.i(TAG, "Remove realtime updates");
@@ -846,8 +850,8 @@ public class PluginHelper {
     // Initialize Navigation Component 
 
     public void updateNavigationWithLocation(CordovaInterface cordova,
-    CordovaWebView webView, 
-    JSONArray args, 
+    CordovaWebView webView,
+    JSONArray args,
     final CallbackContext callbackContext) {
         try {
             // 1) Check for location arguments
@@ -859,7 +863,7 @@ public class PluginHelper {
             Log.i(TAG, "UpdateNavigation with Location: " + actualLocation);
 
             // 3) Connect interfaces
-            getNavigationManagerInstance().updateWithLocation(actualLocation); 
+            getNavigationManagerInstance().updateWithLocation(actualLocation);
             callbackContext.sendPluginResult(new PluginResult(Status.OK, "Navigation updated"));
         } catch (Exception e) {
             e.printStackTrace();
@@ -868,8 +872,8 @@ public class PluginHelper {
     }
 
     public void removeNavigationUpdates(CordovaInterface cordova,
-    CordovaWebView webView, 
-    JSONArray args, 
+    CordovaWebView webView,
+    JSONArray args,
     final CallbackContext callbackContext) {
         // 
         Log.i(TAG, "Remove navigation updates");

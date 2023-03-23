@@ -1,5 +1,6 @@
 #import "SitumPlugin.h"
 #import "SitumLocationWrapper.h"
+#import "SITUtils.h"
 
 
 #import <Cordova/CDVAvailability.h>
@@ -449,28 +450,28 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     }];
 }
 
-
 - (void)startPositioning:(CDVInvokedUrlCommand *)command {
     locationCallbackId = command.callbackId;
     SITLocationRequest *locationRequest = [SitumLocationWrapper.shared jsonObjectToLocationRequest:command.arguments];
-     
+    [[SITLocationManager sharedInstance] addDelegate:self];
     [[SITLocationManager sharedInstance] requestLocationUpdates:locationRequest];
-    [[SITLocationManager sharedInstance] setDelegate:self];
 }
 
 - (void)stopPositioning:(CDVInvokedUrlCommand *)command {
     locationCallbackId = command.callbackId;
     [[SITLocationManager sharedInstance] removeUpdates];
+    [[SITLocationManager sharedInstance] removeDelegate:self];
 }
 
 - (void)onEnterGeofences:(CDVInvokedUrlCommand *)command {
-    
+    enterGeofencesCallbackId = command.callbackId;
+    [[SITLocationManager sharedInstance] setGeofenceDelegate:self];
 }
 
 - (void)onExitGeofences:(CDVInvokedUrlCommand *)command {
-
+    exitGeofencesCallbackId = command.callbackId;
+    [[SITLocationManager sharedInstance] setGeofenceDelegate:self];
 }
-
 
 - (void)requestDirections:(CDVInvokedUrlCommand*)command
 {
@@ -722,5 +723,25 @@ destinationReachedOnRoute:(SITRoute *)route {
     [self.commandDelegate sendPluginResult:pluginResult callbackId:navigationProgressCallbackId];
 }
 
+// SITGeofencesDelegate
+
+- (void)didEnteredGeofences:(NSArray<SITGeofence *> *)geofences {
+    if (enterGeofencesCallbackId) {
+        [self sendGeofences:geofences withCallbackId:enterGeofencesCallbackId];
+    }
+}
+
+- (void)didExitedGeofences:(NSArray<SITGeofence *> *)geofences {
+    if (exitGeofencesCallbackId) {
+        [self sendGeofences:geofences withCallbackId:exitGeofencesCallbackId];
+    }
+}
+
+- (void)sendGeofences:(NSArray<SITGeofence *> *)geofences
+       withCallbackId:(NSString *)callbackId {
+    NSArray *geofencesList = [SITUtils toArrayDict: geofences];
+    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:geofencesList.copy];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+}
 
 @end
