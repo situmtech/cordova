@@ -741,6 +741,7 @@ destinationReachedOnRoute:(SITRoute *)route {
        withCallbackId:(NSString *)callbackId {
     NSArray *geofencesList = [SITUtils toArrayDict: geofences];
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:geofencesList.copy];
+    pluginResult.keepCallback = [NSNumber numberWithBool:true];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
 
