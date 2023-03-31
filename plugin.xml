@@ -70,7 +70,7 @@
         <framework src="libz.dylib" />
         <framework src="libc++.dylib" />
 
-        <framework src="SitumSDK" type="podspec" spec="2.58.0" />
+        <framework src="SitumSDK" type="podspec" spec="2.59.0" />
 
 
         <header-file src="src/ios/situmcordovaplugin/SitumPlugin.h" />
@@ -79,6 +79,8 @@
         <source-file src="src/ios/situmcordovaplugin/SitumPlugin.m" />
         <source-file src="src/ios/situmcordovaplugin/SitumLocationWrapper.m" />
         <source-file src="src/ios/situmcordovaplugin/Constants.m" />
+        <source-file src="src/ios/situmcordovaplugin/SITUtils.m" />
+        <source-file src="src/ios/situmcordovaplugin/SITUtils.h" />
         
     </platform>
 </plugin>

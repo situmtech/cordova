@@ -2,7 +2,7 @@
 #import <SitumSDK/SitumSDK.h>
 
 
-@interface SitumPlugin : CDVPlugin<SITDirectionsDelegate, SITLocationDelegate, SITNavigationDelegate, SITRealTimeDelegate> {
+@interface SitumPlugin : CDVPlugin<SITDirectionsDelegate, SITLocationDelegate, SITNavigationDelegate, SITRealTimeDelegate, SITGeofencesDelegate> {
     
     NSMutableDictionary *buildingsStored;
     NSMutableDictionary *floorStored;
@@ -11,7 +11,7 @@
     NSMutableDictionary<NSString *, SITPOI*> *poisStored;
     NSMutableDictionary *routesStored;
     
-    NSString *locationCallbackId, *routeCallbackId, *navigationProgressCallbackId, *realtimeCallbackId;
+    NSString *locationCallbackId, *routeCallbackId, *navigationProgressCallbackId, *realtimeCallbackId, *enterGeofencesCallbackId, *exitGeofencesCallbackId;
 }
 
 // The hooks for our plugin commands
