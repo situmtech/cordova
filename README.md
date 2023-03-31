@@ -456,9 +456,18 @@ Situm SDK for Android now compiles and targets sdkVersion 31 (Android 12). To wo
 
 This plugin is compatible with Capacitor 3.0.
 
-**Issue**: In iOS, there is a known issue with capacitor-cli 3.2.5 and static cordova plugins https://github.com/ionic-team/capacitor/issues/5142. To solve it use a different version of capacitor cli. 
+**Issue**: In iOS, there is a known issue with capacitor-cli 3.2.5 and static cordova plugins https://github.com/ionic-team/capacitor/issues/5142. To solve it use a different version of capacitor cli.
 
-
+If the problem persists, add this plugin to the `staticPlugins` section of your `capacitor.config.json` file:
+```json
+{
+	"cordova": {
+		"staticPlugins": [
+			"situm-cordova-plugin-official"
+		]
+	}
+}
+```
 
 
 ## More information
