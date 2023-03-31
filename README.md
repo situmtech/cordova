@@ -362,9 +362,6 @@ cordova.plugins.Situm.removeRealTimeUpdates();
 
 #### - onEnterGeofences
 
-> **Warning**
-> This method is available only in Android by now.
-
 Get notified about users entering geofences. Take into account:
 
 - This method must be called **before** the positioning is started.
@@ -380,9 +377,6 @@ cordova.plugins.Situm.onEnterGeofences((geofences: any) => {
 ```
 
 #### - onExitGeofences
-
-> **Warning**
-> This method is available only in Android by now.
 
 Get notified about exiting geofences. Take into account the considerations described at [onEnterGeofences](#--onEnterGeofences).
 - This callback will return an array of [geofences](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Geofence)
