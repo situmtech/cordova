@@ -3,82 +3,181 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger: 
-- master
-- master-release
-- release/*
-- develop
-- feature/*
+trigger: none
 
 pr: none
 
 variables:
 - group: Passwords
+- group: SoftwareVersions
+
+parameters:
+   - name: version
+     displayName: Plugin version (Only required for Release)
+     default: "0.0.0"
 
 resources:
-  containers:
-  - container: node_slim
-    image: node:11.12-slim
-
-pool:
-    vmImage: 'ubuntu-latest'
+  repositories:
+  - repository: sys_kubernetes_templates
+    type: bitbucket
+    endpoint: Bitbucket - sistemas
+    name: situm/sys-kubernetes-templates.git
+    ref: "feature/SIS-631"
+  - repository: web_developers
+    type: bitbucket
+    endpoint: Bitbucket - sistemas
+    name: situm/web-developers.git
+    ref: master
 
 jobs:
+- ${{ if or(contains(variables['Build.SourceBranch'], '1feature/'), contains(variables['Build.SourceBranch'],'develop')) }}:
+  - job: Test_iOS
+    pool:
+      vmImage: $(macOSVersion)
+      
+    steps:
+    - template: azure/common-steps.yaml
 
-- job: Ios_job
-  pool:
-    vmImage: 'macOS-10.15'
-    
-  steps:
+    - bash: |
+        echo -e "\n[+] Set xcode version to $(xcodeVersion)"
+        sudo xcode-select -switch $(xcodeVersion)
 
-   - script: |
-      sudo xcode-select -switch /Applications/Xcode_11.3.1.app
-      tests/scripts/copy_ios_resources.sh
-      scripts/update_iosSDK_version.sh .
-      #cd src/ios && pod repo update && pod install && xcodebuild test -workspace SitumCordovaPlugin.xcworkspace -scheme CordovaLib -destination 'platform=iOS Simulator,name=iPhone 7,OS=11.2'
-      cd src/ios && pod repo update && pod install && xcodebuild test -workspace SitumCordovaPlugin.xcworkspace -scheme CordovaLib -destination 'platform=iOS Simulator,name=iPhone 8,OS=13.3'
-     displayName: iOS test
+        echo -e "\n[+] Copy JSON test files \n"
+        tests/scripts/copy_ios_resources.sh
+
+        echo -e "\n[+] Pod install \n"
+        cd src/ios 
+        pod install
+        
+        echo -e "\n[+] Execute xcode tests \n"
+
+        xcodebuild test -workspace SitumCordovaPlugin.xcworkspace -scheme CordovaLib -destination $(iosSimulator)
+
+        if [ $? -ne 0 ];then
+          echo -e "\n [!] Error with tests....... \n"
+          exit 1
+        fi
+
+      displayName: Execute Tests
+  
+  
+  - job: Test_Android
+    pool:
+      vmImage: $(ubuntuVersion)
+
+    steps:      
+      - template: azure/common-steps.yaml
+      - bash: |
+          echo -e "\n[+] Copy JSON test files \n"
+          tests/scripts/copy_android_resources.sh
+          
+          echo -e "\n[+] Execute gradle tests \n"
+          cd src/android 
+          ./gradlew test --continue --info
+
+          if [ $? -ne 0 ];then
+            echo -e "\n [!] Error with tests....... \n"
+            exit 1
+          fi
+
+        displayName: Execute Test
+
+      - task: PublishTestResults@2
+        inputs:
+          testResultsFormat: 'JUnit'
+          testResultsFiles: 'src/android/app/build/test-results/*/*.xml'
+        displayName: Publish test
+        condition: always()
+  
+- ${{ if contains(variables['Build.SourceBranch'], 'feature/SIS-631') }}:
+  - job: Generate_Release
+    pool:
+      vmImage: $(ubuntuVersion)
+    steps:
+      - template: azure/common-steps.yaml
+
+      - task: NodeTool@0
+        inputs:
+          versionSource: 'spec' 
+          versionSpec: $(nodeVersion)
+
+      - bash: |
+          if [[ "${{ parameters.version }}" == "0.0.0" ]];then
+            echo -e "\n[!] IMPORTANT: You don't set the plugin version when you run the release branch and I'm not fortune teller\n"
+            exit 1
+          fi
+
+          echo -e "\n[+] Installing NPM version $(npmVersion)\n"
+          npm install -g $(npmVersion)
+
+          currentBranch=$(echo $(Build.SourceBranch) | cut -d "/" -f 3,4)
+          echo "##vso[task.setvariable variable=currentBranch]$(echo $currentBranch)"
+          
+          echo -e "\n[+] Variables:"
+          echo -e "\t[+] Plugin version: ${{ parameters.version }}"
+          echo -e "\t[+] NPM CLI version: $( npm --version)"
+          echo -e "\t[+] Current branch: $currentBranch"
+
+          echo -e "\n[+] Setting git remote credentials\n"
+          cd situm-cordova-plugin
+          git remote set-url origin https://situmops:$(github_token)@github.com/$(Build.Repository.Name).git
+          cat .git/config
+
+        displayName: Initial Vars & Configs
+
+      - bash: |
+
+          cd situm-cordova-plugin
+          echo -e "\n[+] Setting NPM version to ${{ parameters.version }}"
+          npm version ${{ parameters.version }} --no-git-tag-version
+
+          echo -e "\n[+] Change plugin version in plugin.xml"
+          sed -i "s/version=\".*\">/version=\"${{ parameters.version }}\">/g" plugin.xml
+
+          echo -e "\n[+] Setting git to push NPM version\n"
+          git config --global user.email "sistemas@situm.es"
+          git config --global user.name "Situmops"
+
+          echo -e "\n[+] Fetch branches \n"
+          git fetch
+
+          echo -e "\n[+] Changing to $(currentBranch)"
+          git checkout $(currentBranch)
+
+          echo -e "\n[+] Add,Commit and Push to $(currentBranch)"
+          git commit -am "Setting the NPM version to ${{ parameters.version }}"
+          git push --set-upstream origin $(currentBranch)
+          git push
+        displayName: Make changes
 
 
-- job: Android_job
-    
-  steps:      
-  - script: |
-      cd src/android
-      ./gradlew clean
-    displayName: Clean Android
+      - template: azure-templates/publish_release.yml@sys_kubernetes_templates
+        parameters:
+          bitbucket:
+            bitbucket_user: situmops
+          system: "N/A"
+          server: "github"
+          mergeBranches:
+            - "SIS-631-master"
+            - "SIS-631-develop"
 
-  - script: |
-      tests/scripts/copy_android_resources.sh
-      cd src/android && ./gradlew test --continue --info
-    displayName: Android test
-  - task: PublishTestResults@2
-    inputs:
-      testResultsFormat: 'JUnit'
-      testResultsFiles: 'src/android/app/build/test-results/*/*.xml'
-    displayName: Publish test
-    condition: always()
 
-- job: docker_job    
-
-  steps:
-  - script: |
-        npm install
-        npm test
-    displayName: JS Test
-    target: node_slim
- 
-  - script: |
-         npm run jsdoc
-    displayName: Generate JSDoc
-    target: node_slim
-     
-  - script: |
-         zip -r JSDoc ./docs/JSDoc/*
-    displayName: Archive artifacts
- 
-  - task: PublishBuildArtifacts@1
-    inputs:
-      pathToPublish: 'JSDoc.zip'
-      artifactName: 'JSDoc' 
-    displayName: Archive
+          #      - bash: |
+          #          cd situm-cordova-plugin
+          #
+          #
+          #          echo -e "\n[+] Install npm dependencies \n"
+          #          npm install
+          #
+          #          echo -e "\n[+] Execute npm tests \n"
+          #          npm test
+          #        displayName: JS Test
+          #      
+          #      - bash: |
+          #          cd situm-cordova-plugin
+          #
+          #          echo -e "\n[+] Generate Documentation\n"
+          #          npm run jsdoc
+          #
+          #        displayName: Generate JSDoc
+          #         
