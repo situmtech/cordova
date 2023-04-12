@@ -151,17 +151,17 @@ jobs:
         displayName: Make changes
 
 
-          #      - template: azure-templates/publish_release.yml@sys_kubernetes_templates
-          #        parameters:
-          #          bitbucket:
-          #            bitbucket_user: situmops
-          #          system: "N/A"
-          #          server: "github"
-          #          mergeBranches:
-          #            - "SIS-631-master"
-          #            - "SIS-631-develop"
-          #
-          #
+      - template: azure-templates/publish_release.yml@sys_kubernetes_templates
+        parameters:
+          bitbucket:
+            bitbucket_user: situmops
+          system: "N/A"
+          server: "github"
+          mergeBranches:
+            - "SIS-631-master"
+            - "SIS-631-develop"
+
+
           #      - bash: |
           #          cd situm-cordova-plugin
           #
