@@ -37,18 +37,16 @@ jobs:
         
         echo -e "\n[+] Execute xcode tests \n"
 
-        xcodebuild test -workspace SitumCordovaPlugin.xcworkspace -scheme CordovaLib -destination $(iosSimulator) | tee -a reports.xcresults
+        xcodebuild test -workspace SitumCordovaPlugin.xcworkspace -scheme CordovaLib -destination $(iosSimulator) | xcpretty --report junit
 
 
 
-        echo -e "\n[+] Convert tests to JUNIT \n"
-        cat reports.xcresults | xcpretty --report junit 
       displayName: Execute Tests
   
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'JUnit'
-        testResultsFiles: 'src/ios/reports.xml'
+        testResultsFiles: 'src/ios/build/reports/junit.xml'
       displayName: Publish test
   
   - job: Test_Android
