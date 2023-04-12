@@ -18,7 +18,7 @@ parameters:
     
 
 jobs:
-- ${{ if or(contains(variables['Build.SourceBranch'], 'feature/'), contains(variables['Build.SourceBranch'],'develop')) }}:
+- ${{ if or(contains(variables['Build.SourceBranch'], '1feature/'), contains(variables['Build.SourceBranch'],'develop')) }}:
   - job: Test_iOS
     pool:
       vmImage: $(macOSVersion)
@@ -73,24 +73,31 @@ jobs:
       condition: always()
   
 - ${{ if contains(variables['Build.SourceBranch'], 'feature/SIS-631') }}:
-  - job: docker_job    
-  
-    steps:
-    - script: |
-          npm install
-          npm test
-      displayName: JS Test
-   
-    - script: |
-           npm run jsdoc
-      displayName: Generate JSDoc
+  - job:
+      pool:
+        vmImage: $(ubuntuVersion)
+      steps:
+
+        - task: NodeTool@0
+          inputs:
+            versionSource: 'spec' # 'spec' | 'fromFile'. Required. Source of version. Default: spec.
+            versionSpec: $(nodeVersion)
+
+        - bash: |
+
+            echo -e "\n[+] Installing NPM version $(npmVersion)\n"
+            npm install -g $(npmVersion)
+
+            echo -e "\n[+] Install npm dependencies \n"
+            npm install
+
+            echo -e "\n[+] Execute npm tests \n"
+            npm test
+          displayName: JS Test
        
-    - script: |
-           zip -r JSDoc ./docs/JSDoc/*
-      displayName: Archive artifacts
-   
-    - task: PublishBuildArtifacts@1
-      inputs:
-        pathToPublish: 'JSDoc.zip'
-        artifactName: 'JSDoc' 
-      displayName: Archive
+        - bash: |
+            echo -e "\n[+] Generate Documentation\n"
+            npm run jsdoc
+
+          displayName: Generate JSDoc
+           
