@@ -131,6 +131,8 @@ jobs:
           echo -e "\n[+] Setting NPM version to ${{ parameters.version }}"
           npm version ${{ parameters.version }} --no-git-tag-version
 
+          echo -e "\n[+] Change plugin version in plugin.xml"
+
           echo -e "\n[+] Setting git to push NPM version\n"
           git config --global user.email "sistemas@situm.es"
           git config --global user.name "Situmops"
