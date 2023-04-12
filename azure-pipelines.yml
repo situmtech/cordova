@@ -37,8 +37,10 @@ jobs:
 
         xcodebuild test -workspace SitumCordovaPlugin.xcworkspace -scheme CordovaLib -destination $(iosSimulator) | tee -a reports.xcresults
 
+
+
         echo -e "\n[+] Convert tests to JUNIT \n"
-        cat reports.xcresults | xcpretty --report junit > reports.xml
+        cat reports.xcresults | xcpretty --report junit 
       displayName: Execute Tests
   
     - task: PublishTestResults@2
@@ -48,6 +50,9 @@ jobs:
       displayName: Publish test
   
   - job: Test_Android
+    pool:
+      vmImage: $(ubuntuVersion)
+
     steps:      
     - bash: |
         echo -e "\n[+] Copy JSON test files \n"
@@ -65,7 +70,7 @@ jobs:
       displayName: Publish test
       condition: always()
   
-- ${{ if or(contains(variables['Build.SourceBranch'], 'release/'), contains(variables['Build.SourceBranch'],'master')) }}:
+- ${{ if contains(variables['Build.SourceBranch'], 'feature/SIS-631') }}:
   - job: docker_job    
   
     steps:
