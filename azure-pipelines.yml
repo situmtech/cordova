@@ -71,7 +71,7 @@ jobs:
       condition: always()
   
 - ${{ if contains(variables['Build.SourceBranch'], 'feature/SIS-631') }}:
-  - job:
+  - job: Generate_Release
       pool:
         vmImage: $(ubuntuVersion)
       steps:
