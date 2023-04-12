@@ -97,7 +97,7 @@ jobs:
       - bash: |
           if [[ "${{ parameters.version }}" == "0.0.0" ]];then
             
-            echo "\n[!] IMPORTANT: You don't set the plugin version when you run the release branch and I'm not fortune teller\n"
+            echo -e "\n[!] IMPORTANT: You don't set the plugin version when you run the release branch and I'm not fortune teller\n"
 
             exit 1
           fi
