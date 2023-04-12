@@ -15,7 +15,18 @@ parameters:
    - name: version
      displayName: Plugin version (Only required for Release)
      default: "0.0.0"
-    
+
+resources:
+  repositories:
+  - repository: sys_kubernetes_templates
+    type: bitbucket
+    endpoint: Bitbucket - sistemas
+    name: situm/sys-kubernetes-templates.git
+  - repository: web_developers
+    type: bitbucket
+    endpoint: Bitbucket - sistemas
+    name: situm/web-developers.git
+    ref: master
 
 jobs:
 - ${{ if or(contains(variables['Build.SourceBranch'], 'feature/'), contains(variables['Build.SourceBranch'],'develop')) }}:
@@ -27,6 +38,7 @@ jobs:
     - template: azure/common-steps.yaml
 
     - bash: |
+        cd situm-cordova-plugin
         echo -e "\n[+] Set xcode version to $(xcodeVersion)"
         sudo xcode-select -switch $(xcodeVersion)
 
@@ -39,17 +51,10 @@ jobs:
         
         echo -e "\n[+] Execute xcode tests \n"
 
-        xcodebuild test -workspace SitumCordovaPlugin.xcworkspace -scheme CordovaLib -destination $(iosSimulator) | xcpretty --report junit
-
-
+        xcodebuild test -workspace SitumCordovaPlugin.xcworkspace -scheme CordovaLib -destination $(iosSimulator)
 
       displayName: Execute Tests
   
-    - task: PublishTestResults@2
-      inputs:
-        testResultsFormat: 'JUnit'
-        testResultsFiles: 'src/ios/build/reports/junit.xml'
-      displayName: Publish test
   
   - job: Test_Android
     pool:
@@ -58,6 +63,7 @@ jobs:
     steps:      
       - template: azure/common-steps.yaml
       - bash: |
+          cd situm-cordova-plugin
           echo -e "\n[+] Copy JSON test files \n"
           tests/scripts/copy_android_resources.sh
           
@@ -85,6 +91,7 @@ jobs:
           versionSpec: $(nodeVersion)
 
       - bash: |
+          cd situm-cordova-plugin
 
           echo -e "\n[+] Installing NPM version $(npmVersion)\n"
           npm install -g $(npmVersion)
@@ -97,6 +104,8 @@ jobs:
         displayName: JS Test
       
       - bash: |
+          cd situm-cordova-plugin
+
           echo -e "\n[+] Generate Documentation\n"
           npm run jsdoc
 
