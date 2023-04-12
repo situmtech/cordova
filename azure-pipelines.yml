@@ -17,7 +17,7 @@ parameters:
 
 jobs:
 - ${{ if or(contains(variables['Build.SourceBranch'], 'feature/'), contains(variables['Build.SourceBranch'],'develop')) }}:
-  - job: Test iOS
+  - job: Test_iOS
     pool:
       vmImage: $(macOSVersion)
       
@@ -47,7 +47,7 @@ jobs:
         testResultsFiles: 'src/ios/reports.xml'
       displayName: Publish test
   
-  - job: Test Android
+  - job: Test_Android
     steps:      
     - bash: |
         echo -e "\n[+] Copy JSON test files \n"
