@@ -15,12 +15,8 @@ parameters:
    - name: version
      displayName: Plugin version
 
-
-pool:
-    vmImage: 'ubuntu-latest'
-
 jobs:
-- ${{ if contains(variables['Build.SourceBranch'], 'release/') }}:
+- ${{ if or(contains(variables['Build.SourceBranch'], 'feature/'), contains(variables['Build.SourceBranch'],'develop')) }}:
   - job: Ios_job
     pool:
       vmImage: 'macOS-10.15'
