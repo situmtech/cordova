@@ -3,7 +3,9 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger: none
+trigger:
+  - feature/*
+  - develop
 
 pr: none
 
@@ -22,7 +24,7 @@ resources:
     type: bitbucket
     endpoint: Bitbucket - sistemas
     name: situm/sys-kubernetes-templates.git
-    ref: "feature/SIS-631"
+    ref: master
   - repository: web_developers
     type: bitbucket
     endpoint: Bitbucket - sistemas
@@ -30,7 +32,7 @@ resources:
     ref: master
 
 jobs:
-- ${{ if or(contains(variables['Build.SourceBranch'], '1feature/'), contains(variables['Build.SourceBranch'],'develop')) }}:
+- ${{ if or(contains(variables['Build.SourceBranch'], 'feature/'), contains(variables['Build.SourceBranch'],'develop')) }}:
   - job: Test_iOS
     pool:
       vmImage: $(macOSVersion)
@@ -89,7 +91,7 @@ jobs:
         displayName: Publish test
         condition: always()
   
-- ${{ if contains(variables['Build.SourceBranch'], 'feature/SIS-631') }}:
+- ${{ if contains(variables['Build.SourceBranch'], 'release/') }}:
   - job: Generate_Release
     pool:
       vmImage: $(ubuntuVersion)
@@ -160,9 +162,25 @@ jobs:
           server: "github"
           repoFolder: "situm-cordova-plugin"
           mergeBranches:
-            - "SIS-631-master"
-            - "SIS-631-develop"
+            - "master"
+            - "develop"
 
+      - bash: |
+          echo -e "\n[+] Fetch all branches\n"
+          git fetch
+     
+          echo -e "\n[+] Checkout and Pull to master branch\n"
+          git checkout master
+          git pull origin master
+     
+          echo -e "\n[+] Configure NPM login"
+          echo "//registry.npmjs.org/:_authToken=$(NPM_TOKEN)" > ~/.npmrc
+     
+          echo -e "\n[+] Publish NPM packages"
+          npm publish --access=public
+     
+        displayName: NPM publish
+ 
       - bash: |
           cd situm-cordova-plugin
       
