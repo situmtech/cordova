@@ -29,7 +29,7 @@ resources:
     ref: master
 
 jobs:
-- ${{ if or(contains(variables['Build.SourceBranch'], 'feature/'), contains(variables['Build.SourceBranch'],'develop')) }}:
+- ${{ if or(contains(variables['Build.SourceBranch'], '1feature/'), contains(variables['Build.SourceBranch'],'develop')) }}:
   - job: Test_iOS
     pool:
       vmImage: $(macOSVersion)
@@ -52,6 +52,11 @@ jobs:
 
         xcodebuild test -workspace SitumCordovaPlugin.xcworkspace -scheme CordovaLib -destination $(iosSimulator)
 
+        if [ $? -ne 0 ];then
+          echo -e "\n [!] Error with tests....... \n"
+          exit 1
+        fi
+
       displayName: Execute Tests
   
   
@@ -68,6 +73,12 @@ jobs:
           echo -e "\n[+] Execute gradle tests \n"
           cd src/android 
           ./gradlew test --continue --info
+
+          if [ $? -ne 0 ];then
+            echo -e "\n [!] Error with tests....... \n"
+            exit 1
+          fi
+
         displayName: Execute Test
 
       - task: PublishTestResults@2
@@ -83,9 +94,20 @@ jobs:
       vmImage: $(ubuntuVersion)
     steps:
       - template: azure/common-steps.yaml
+      - bash: |
+          if [[ "${{ parameters.version }}" == "0.0.0" ]];then
+            
+            echo "\n[!] IMPORTANT: You don't set the plugin version when you run the release branch and I'm not fortune teller\n"
+
+            exit 1
+          fi
+
+          echo -e "\n[+] Checking"
+
+        displayName: Check variables
       - task: NodeTool@0
         inputs:
-          versionSource: 'spec' # 'spec' | 'fromFile'. Required. Source of version. Default: spec.
+          versionSource: 'spec' 
           versionSpec: $(nodeVersion)
 
       - bash: |
