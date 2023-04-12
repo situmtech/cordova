@@ -13,15 +13,11 @@ variables:
 
 parameters:
    - name: version
-     displayName: Plugin version
-
+     displayName: Plugin version (Only required for Release)
+     default: "0.0.0"
+    
 
 jobs:
-- checkout: self
-  fetchDepth: 1
-  fetchTags: false
-  displayName: Checkout self
-
 - ${{ if or(contains(variables['Build.SourceBranch'], 'feature/'), contains(variables['Build.SourceBranch'],'develop')) }}:
   - job: Test_iOS
     pool:
