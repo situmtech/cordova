@@ -107,6 +107,9 @@ jobs:
             exit 1
           fi
 
+          echo -e "\n[+] Installing NPM version $(npmVersion)\n"
+          npm install -g $(npmVersion)
+
           currentBranch=$(echo $(Build.SourceBranch) | cut -d "/" -f 3,4)
           echo "##vso[task.setvariable variable=currentBranch]$(echo $currentBranch)"
           
@@ -125,8 +128,8 @@ jobs:
       - bash: |
 
           cd situm-cordova-plugin
-          echo -e "\n[+] Setting NPM version to $(version)"
-          npm version $(version) --no-git-tag-version
+          echo -e "\n[+] Setting NPM version to ${{ parameters.version }}"
+          npm version ${{ parameters.version }} --no-git-tag-version
 
           echo -e "\n[+] Setting git to push NPM version\n"
           git config --global user.email "sistemas@situm.es"
@@ -139,41 +142,39 @@ jobs:
           git checkout $(currentBranch)
 
           echo -e "\n[+] Add,Commit and Push to $(currentBranch)"
-          git commit -am "Setting the NPM version to $(version)"
+          git commit -am "Setting the NPM version to ${{ parameters.version }}"
           git push --set-upstream origin $(currentBranch)
           git push
         displayName: Make changes
 
 
-      - template: azure-templates/publish_release.yml@sys_kubernetes_templates
-        parameters:
-          bitbucket:
-            bitbucket_user: situmops
-          system: "N/A"
-          server: "github"
-          mergeBranches:
-            - "master"
-            - "develop"
-
-
-      - bash: |
-          cd situm-cordova-plugin
-
-          echo -e "\n[+] Installing NPM version $(npmVersion)\n"
-          npm install -g $(npmVersion)
-
-          echo -e "\n[+] Install npm dependencies \n"
-          npm install
-
-          echo -e "\n[+] Execute npm tests \n"
-          npm test
-        displayName: JS Test
-      
-      - bash: |
-          cd situm-cordova-plugin
-
-          echo -e "\n[+] Generate Documentation\n"
-          npm run jsdoc
-
-        displayName: Generate JSDoc
-         
+          #      - template: azure-templates/publish_release.yml@sys_kubernetes_templates
+          #        parameters:
+          #          bitbucket:
+          #            bitbucket_user: situmops
+          #          system: "N/A"
+          #          server: "github"
+          #          mergeBranches:
+          #            - "SIS-631-master"
+          #            - "SIS-631-develop"
+          #
+          #
+          #      - bash: |
+          #          cd situm-cordova-plugin
+          #
+          #
+          #          echo -e "\n[+] Install npm dependencies \n"
+          #          npm install
+          #
+          #          echo -e "\n[+] Execute npm tests \n"
+          #          npm test
+          #        displayName: JS Test
+          #      
+          #      - bash: |
+          #          cd situm-cordova-plugin
+          #
+          #          echo -e "\n[+] Generate Documentation\n"
+          #          npm run jsdoc
+          #
+          #        displayName: Generate JSDoc
+          #         
