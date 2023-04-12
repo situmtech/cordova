@@ -17,33 +17,47 @@ parameters:
 
 jobs:
 - ${{ if or(contains(variables['Build.SourceBranch'], 'feature/'), contains(variables['Build.SourceBranch'],'develop')) }}:
-  - job: Ios_job
+  - job: Test iOS
     pool:
-      vmImage: 'macOS-10.15'
+      vmImage: $(macOSVersion)
       
     steps:
-  
-     - script: |
-        sudo xcode-select -switch /Applications/Xcode_11.3.1.app
+    - bash: |
+        echo -e "\n[+] Set xcode version to $(xcodeVersion)"
+        sudo xcode-select -switch $(xcodeVersion)
+
+        echo -e "\n[+] Copy JSON test files \n"
         tests/scripts/copy_ios_resources.sh
-        scripts/update_iosSDK_version.sh .
-        #cd src/ios && pod repo update && pod install && xcodebuild test -workspace SitumCordovaPlugin.xcworkspace -scheme CordovaLib -destination 'platform=iOS Simulator,name=iPhone 7,OS=11.2'
-        cd src/ios && pod repo update && pod install && xcodebuild test -workspace SitumCordovaPlugin.xcworkspace -scheme CordovaLib -destination 'platform=iOS Simulator,name=iPhone 8,OS=13.3'
-       displayName: iOS test
+
+        echo -e "\n[+] Pod install \n"
+        cd src/ios 
+        pod install
+        
+        echo -e "\n[+] Execute xcode tests \n"
+
+        xcodebuild test -workspace SitumCordovaPlugin.xcworkspace -scheme CordovaLib -destination $(iosSimulator) | tee -a reports.xcresults
+
+        echo -e "\n[+] Convert tests to JUNIT \n"
+        cat reports.xcresults | xcpretty --report junit > reports.xml
+      displayName: Execute Tests
   
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: 'src/ios/reports.xml'
+      displayName: Publish test
   
-  - job: Android_job
-      
+  - job: Test Android
     steps:      
-    - script: |
-        cd src/android
-        ./gradlew clean
-      displayName: Clean Android
-  
-    - script: |
+    - bash: |
+        echo -e "\n[+] Copy JSON test files \n"
         tests/scripts/copy_android_resources.sh
-        cd src/android && ./gradlew test --continue --info
-      displayName: Android test
+        
+        echo -e "\n[+] Execute gradle tests \n"
+        cd src/android 
+        ./gradlew test --continue --info
+      displayName: Execute Test
+
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'JUnit'
@@ -51,6 +65,7 @@ jobs:
       displayName: Publish test
       condition: always()
   
+- ${{ if or(contains(variables['Build.SourceBranch'], 'release/'), contains(variables['Build.SourceBranch'],'master')) }}:
   - job: docker_job    
   
     steps:
