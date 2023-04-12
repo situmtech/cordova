@@ -18,12 +18,14 @@ parameters:
     
 
 jobs:
-- ${{ if or(contains(variables['Build.SourceBranch'], '1feature/'), contains(variables['Build.SourceBranch'],'develop')) }}:
+- ${{ if or(contains(variables['Build.SourceBranch'], 'feature/'), contains(variables['Build.SourceBranch'],'develop')) }}:
   - job: Test_iOS
     pool:
       vmImage: $(macOSVersion)
       
     steps:
+    - template: azure/common-steps.yaml
+
     - bash: |
         echo -e "\n[+] Set xcode version to $(xcodeVersion)"
         sudo xcode-select -switch $(xcodeVersion)
@@ -54,48 +56,49 @@ jobs:
       vmImage: $(ubuntuVersion)
 
     steps:      
-    - bash: |
-        echo -e "\n[+] Copy JSON test files \n"
-        tests/scripts/copy_android_resources.sh
-        
-        echo -e "\n[+] Execute gradle tests \n"
-        cd src/android 
-        ./gradlew test --continue --info
-      displayName: Execute Test
+      - template: azure/common-steps.yaml
+      - bash: |
+          echo -e "\n[+] Copy JSON test files \n"
+          tests/scripts/copy_android_resources.sh
+          
+          echo -e "\n[+] Execute gradle tests \n"
+          cd src/android 
+          ./gradlew test --continue --info
+        displayName: Execute Test
 
-    - task: PublishTestResults@2
-      inputs:
-        testResultsFormat: 'JUnit'
-        testResultsFiles: 'src/android/app/build/test-results/*/*.xml'
-      displayName: Publish test
-      condition: always()
+      - task: PublishTestResults@2
+        inputs:
+          testResultsFormat: 'JUnit'
+          testResultsFiles: 'src/android/app/build/test-results/*/*.xml'
+        displayName: Publish test
+        condition: always()
   
 - ${{ if contains(variables['Build.SourceBranch'], 'feature/SIS-631') }}:
   - job: Generate_Release
     pool:
       vmImage: $(ubuntuVersion)
     steps:
+      - template: azure/common-steps.yaml
+      - task: NodeTool@0
+        inputs:
+          versionSource: 'spec' # 'spec' | 'fromFile'. Required. Source of version. Default: spec.
+          versionSpec: $(nodeVersion)
 
-     - task: NodeTool@0
-       inputs:
-         versionSource: 'spec' # 'spec' | 'fromFile'. Required. Source of version. Default: spec.
-         versionSpec: $(nodeVersion)
+      - bash: |
 
-     - bash: |
+          echo -e "\n[+] Installing NPM version $(npmVersion)\n"
+          npm install -g $(npmVersion)
 
-         echo -e "\n[+] Installing NPM version $(npmVersion)\n"
-         npm install -g $(npmVersion)
+          echo -e "\n[+] Install npm dependencies \n"
+          npm install
 
-         echo -e "\n[+] Install npm dependencies \n"
-         npm install
+          echo -e "\n[+] Execute npm tests \n"
+          npm test
+        displayName: JS Test
+      
+      - bash: |
+          echo -e "\n[+] Generate Documentation\n"
+          npm run jsdoc
 
-         echo -e "\n[+] Execute npm tests \n"
-         npm test
-       displayName: JS Test
-    
-     - bash: |
-         echo -e "\n[+] Generate Documentation\n"
-         npm run jsdoc
-
-       displayName: Generate JSDoc
-        
+        displayName: Generate JSDoc
+         
