@@ -72,30 +72,30 @@ jobs:
   
 - ${{ if contains(variables['Build.SourceBranch'], 'feature/SIS-631') }}:
   - job: Generate_Release
-      pool:
-        vmImage: $(ubuntuVersion)
-      steps:
+    pool:
+      vmImage: $(ubuntuVersion)
+    steps:
 
-        - task: NodeTool@0
-          inputs:
-            versionSource: 'spec' # 'spec' | 'fromFile'. Required. Source of version. Default: spec.
-            versionSpec: $(nodeVersion)
+     - task: NodeTool@0
+       inputs:
+         versionSource: 'spec' # 'spec' | 'fromFile'. Required. Source of version. Default: spec.
+         versionSpec: $(nodeVersion)
 
-        - bash: |
+     - bash: |
 
-            echo -e "\n[+] Installing NPM version $(npmVersion)\n"
-            npm install -g $(npmVersion)
+         echo -e "\n[+] Installing NPM version $(npmVersion)\n"
+         npm install -g $(npmVersion)
 
-            echo -e "\n[+] Install npm dependencies \n"
-            npm install
+         echo -e "\n[+] Install npm dependencies \n"
+         npm install
 
-            echo -e "\n[+] Execute npm tests \n"
-            npm test
-          displayName: JS Test
-       
-        - bash: |
-            echo -e "\n[+] Generate Documentation\n"
-            npm run jsdoc
+         echo -e "\n[+] Execute npm tests \n"
+         npm test
+       displayName: JS Test
+    
+     - bash: |
+         echo -e "\n[+] Generate Documentation\n"
+         npm run jsdoc
 
-          displayName: Generate JSDoc
-           
+       displayName: Generate JSDoc
+        
