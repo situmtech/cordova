@@ -132,6 +132,7 @@ jobs:
           npm version ${{ parameters.version }} --no-git-tag-version
 
           echo -e "\n[+] Change plugin version in plugin.xml"
+          sed -i "s/version=\".*\">/version=\"${{ parameters.version }}\">/g" plugin.xml
 
           echo -e "\n[+] Setting git to push NPM version\n"
           git config --global user.email "sistemas@situm.es"
