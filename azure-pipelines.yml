@@ -90,6 +90,22 @@ jobs:
           testResultsFiles: 'src/android/app/build/test-results/*/*.xml'
         displayName: Publish test
         condition: always()
+
+  - job: Test_JS
+    pool:
+      vmImage: $(ubuntuVersion)
+
+    steps:
+      - bash: |
+          cd situm-cordova-plugin
+      
+          echo -e "\n[+] Install npm dependencies \n"
+          npm install
+      
+          echo -e "\n[+] Execute npm tests \n"
+          npm test
+        displayName: JS Test
+
   
 - ${{ if contains(variables['Build.SourceBranch'], 'release/') }}:
   - job: Generate_Release
@@ -181,15 +197,6 @@ jobs:
      
         displayName: NPM publish
  
-      - bash: |
-          cd situm-cordova-plugin
-      
-          echo -e "\n[+] Install npm dependencies \n"
-          npm install
-      
-          echo -e "\n[+] Execute npm tests \n"
-          npm test
-        displayName: JS Test
       
       - bash: |
           cd situm-cordova-plugin
