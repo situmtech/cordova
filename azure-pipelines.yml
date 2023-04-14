@@ -32,7 +32,7 @@ resources:
     ref: master
 
 jobs:
-- ${{ if or(contains(variables['Build.SourceBranch'], 'feature/'), contains(variables['Build.SourceBranch'],'develop')) }}:
+- ${{ if or(contains(variables['Build.SourceBranch'], 'feature/'), contains(variables['Build.SourceBranch'],'develop'), ne(variables['Build.Reason'],'Manual')) }}:
   - job: Test_iOS
     pool:
       vmImage: $(macOSVersion)
