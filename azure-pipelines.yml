@@ -30,6 +30,11 @@ resources:
     endpoint: Bitbucket - sistemas
     name: situm/web-developers.git
     ref: master
+  - repository: cordova_sdk_validation
+    type: bitbucket
+    endpoint: Bitbucket - sistemas
+    name: situm/cordova-sdk-validation.git
+    ref: master
 
 jobs:
 - ${{ if or(contains(variables['Build.SourceBranch'], 'feature/'), contains(variables['Build.SourceBranch'],'develop'), ne(variables['Build.Reason'],'Manual')) }}:
@@ -215,5 +220,27 @@ jobs:
             bitbucket_user: $(bitbucket_user)
             bitbucket_pass: $(bitbucket_pass)
           release: "situm-cordova-plugin"
+
+      - checkout: cordova_sdk_validation 
+        fetchTags: false
+        fetchDepth: 1
+        displayName: Checkout Cordova app example
+  
+      - bash: |
+          cd cordova-sdk-validation
+          echo -e "\n[+] Setting git remote credentials\n"
+          git remote set-url origin https://$(bitbucket_user):$(bitbucket_pass)@bitbucket.org/situm/situm-cordova-plugin.git
+          
+          cat .git/config
+
+          echo -e "\n[+] Checkout to master branch\n"
+          git checkout master
+
+          echo -e "\n[+] Commit empty change to run examples repo\n"
+          git commit -m "Publish Cordova SDK plugin release $(version)" --allow-empty
+          echo -e "\n[+] Push empty change \n"
+          git push origin master
+          
+        displayName: Execute example app 
 
 
