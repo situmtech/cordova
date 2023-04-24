@@ -187,6 +187,7 @@ jobs:
             - "develop"
 
       - bash: |
+          cd situm-cordova-plugin
           echo -e "\n[+] Fetch all branches\n"
           git fetch
      
