@@ -206,6 +206,9 @@ jobs:
       
       - bash: |
           cd situm-cordova-plugin
+
+          echo -e "\n[+] Install dependencies"
+          npm install
       
           echo -e "\n[+] Generate Documentation\n"
           npm run jsdoc
