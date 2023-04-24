@@ -1,0 +1,5 @@
+steps:
+  - checkout: self
+    fetchTags: false
+    fetchDepth: 1
+    displayName: Checkout repo
