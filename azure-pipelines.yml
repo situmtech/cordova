@@ -233,7 +233,7 @@ jobs:
       - bash: |
           cd cordova-sdk-validation
           echo -e "\n[+] Setting git remote credentials\n"
-          git remote set-url origin https://$(bitbucket_user):$(bitbucket_pass)@bitbucket.org/situm/situm-cordova-plugin.git
+          git remote set-url origin https://$(bitbucket_user):$(bitbucket_pass)@bitbucket.org/situm/cordova-sdk-validation.git
           
           cat .git/config
 
