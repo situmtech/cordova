@@ -44,7 +44,11 @@ dependencies {
     implementation ('com.googlecode.json-simple:json-simple:1.1.1'){
         exclude group: 'junit', module:'junit'
     }
+<<<<<<< Updated upstream
     implementation ('es.situm:situm-sdk:2.86.1@aar') {
+=======
+    implementation ('es.situm:situm-sdk:2.86.2@aar') {
+>>>>>>> Stashed changes
         transitive = true
     }
     implementation 'org.apache.cordova:framework:7.1.0'
