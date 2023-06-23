@@ -269,7 +269,7 @@ jobs:
         parameters:
           versions: $(versions)
           releaseTable: CORDOVA_SDK_TABLE
-          confluence_release_page: $(cordovaSDKReleasePage)
+          confluence_release_page: $(CORDOVA_SDK_TABLE)
           confluence_release_page_title: "SDK Automatic Release Table - Cordova Plugin"
           bitbucket:
             bitbucket_user: $(bitbucket_user)
