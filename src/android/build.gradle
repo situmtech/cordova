@@ -24,7 +24,7 @@ allprojects {
             url "https://maven.google.com"
         }
         maven {
-            url "https://repo.spring.io/plugins-release"
+            url "https://mvnrepository.com/repos/spring-libs-milestone"
           }
     }
 }
