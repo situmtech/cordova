@@ -282,7 +282,7 @@ jobs:
             versions="$versions *$androidsdk* |"
             changelog_android=$androidsdk
           else
-            changelog_sdk="0.0.0"
+            changelog_android="0.0.0"
             versions="$versions $androidsdk|"
           fi
     
@@ -290,7 +290,7 @@ jobs:
             versions="$versions *$iossdk*|"
             changelog_ios=$iossdk
           else
-            changelog_sdk="0.0.0"
+            changelog_ios="0.0.0"
             versions="$versions $iossdk|"
           fi
     
