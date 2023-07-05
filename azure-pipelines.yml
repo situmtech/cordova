@@ -117,10 +117,10 @@ jobs:
     steps:
       - template: azure/common-steps.yaml
 
-      - task: NodeTool@0
-        inputs:
-          versionSource: 'spec' 
-          versionSpec: $(nodeVersion)
+      # - task: NodeTool@0
+      #   inputs:
+      #     versionSource: 'spec' 
+      #     versionSpec: $(nodeVersion)
 
       - bash: |
           if [[ "${{ parameters.version }}" == "0.0.0" ]];then
