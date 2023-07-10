@@ -13,7 +13,7 @@ variables:
 - group: ChangelogIds
 
 parameters:
-   - name: version
+   - name: CordovaVersion
      displayName: Plugin version (Only required for Release)
      default: "0.0.0"
 
@@ -123,21 +123,35 @@ jobs:
           versionSource: 'spec' 
           versionSpec: $(nodeVersion)
 
+      - ${{ if eq(variables['Build.Reason'],'manual') }}:
+        - bash: |
+            if [[ "${{ parameters.CordovaVersion }}" == "0.0.0" ]];then
+              echo -e "\n[!] IMPORTANT: You don't set the plugin version when you run the release branch and I'm not fortune teller\n"
+              exit 1
+            else
+              echo "##vso[task.setvariable variable=version]$(echo ${{ parameters.CordovaVersion }})"
+              echo -e "\n[+] I'm a shy step so I don't tell you anything\n"
+            fi
+    
+          displayName: Set Cordova Version Manual
+    
+      - ${{ if ne(variables['Build.Reason'],'manual') }}:
+        - bash: |
+            CordovaVersion=$(echo $(Build.SourceBranch) | cut -d "/" -f 4)
+            echo "##vso[task.setvariable variable=version]$(echo $CordovaVersion)"
+            echo -e "\n[+] I'm a shy step that only executes where this pipeline run automatic\n"
+          displayName: Set Cordova Version Automatic
+
       - bash: |
-          if [[ "${{ parameters.version }}" == "0.0.0" ]];then
-            echo -e "\n[!] IMPORTANT: You don't set the plugin version when you run the release branch and I'm not fortune teller\n"
-            exit 1
-          fi
 
           echo -e "\n[+] Installing NPM version $(npmVersion)\n"
           npm install -g $(npmVersion)
 
           currentBranch=$(echo $(Build.SourceBranch) | cut -d "/" -f 3,4)
           echo "##vso[task.setvariable variable=currentBranch]$(echo $currentBranch)"
-          echo "##vso[task.setvariable variable=version]$(echo ${{ parameters.version }})"
           
           echo -e "\n[+] Variables:"
-          echo -e "\t[+] Plugin version: ${{ parameters.version }}"
+          echo -e "\t[+] Plugin version: $(version)"
           echo -e "\t[+] NPM CLI version: $(npm --version)"
           echo -e "\t[+] Current branch: $currentBranch"
 
