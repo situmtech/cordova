@@ -13,7 +13,11 @@ allprojects {
 dependencies {
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
-    implementation('es.situm:situm-sdk:2.88.0@aar') {
+<<<<<<< Updated upstream
+    implementation('es.situm:situm-sdk:3.0.0@aar') {
+=======
+    implementation('es.situm:situm-sdk:3.0.1@aar') {
+>>>>>>> Stashed changes
         transitive = true
     }
 }
