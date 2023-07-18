@@ -1,7 +1,8 @@
 
 trigger:
-  - feature/*
   - develop
+  - release/*
+  - feature/*
 
 pr: none
 
@@ -9,9 +10,10 @@ variables:
 - group: Passwords
 - group: SoftwareVersions
 - group: ConfluencePages
+- group: ChangelogIds
 
 parameters:
-   - name: version
+   - name: CordovaVersion
      displayName: Plugin version (Only required for Release)
      default: "0.0.0"
 
@@ -121,57 +123,73 @@ jobs:
           versionSource: 'spec' 
           versionSpec: $(nodeVersion)
 
+      - ${{ if eq(variables['Build.Reason'],'manual') }}:
+        - bash: |
+            if [[ "${{ parameters.CordovaVersion }}" == "0.0.0" ]];then
+              echo -e "\n[!] IMPORTANT: You don't set the plugin version when you run the release branch and I'm not fortune teller\n"
+              exit 1
+            else
+              echo "##vso[task.setvariable variable=version]$(echo ${{ parameters.CordovaVersion }})"
+              echo -e "\n[+] I'm a shy step so I don't tell you anything\n"
+            fi
+    
+          displayName: Set Cordova Version Manual
+    
+      - ${{ if ne(variables['Build.Reason'],'manual') }}:
+        - bash: |
+            CordovaVersion=$(echo $(Build.SourceBranch) | cut -d "/" -f 4)
+            echo "##vso[task.setvariable variable=version]$(echo $CordovaVersion)"
+            echo -e "\n[+] I'm a shy step that only executes where this pipeline run automatic\n"
+          displayName: Set Cordova Version Automatic
+
       - bash: |
-          if [[ "${{ parameters.version }}" == "0.0.0" ]];then
-            echo -e "\n[!] IMPORTANT: You don't set the plugin version when you run the release branch and I'm not fortune teller\n"
-            exit 1
-          fi
 
           echo -e "\n[+] Installing NPM version $(npmVersion)\n"
           npm install -g $(npmVersion)
 
           currentBranch=$(echo $(Build.SourceBranch) | cut -d "/" -f 3,4)
           echo "##vso[task.setvariable variable=currentBranch]$(echo $currentBranch)"
-          echo "##vso[task.setvariable variable=version]$(echo ${{ parameters.version }})"
           
           echo -e "\n[+] Variables:"
-          echo -e "\t[+] Plugin version: ${{ parameters.version }}"
+          echo -e "\t[+] Plugin version: $(version)"
           echo -e "\t[+] NPM CLI version: $(npm --version)"
           echo -e "\t[+] Current branch: $currentBranch"
 
           echo -e "\n[+] Setting git remote credentials\n"
-          cd situm-cordova-plugin
+          if [ -d "situm-cordova-plugin" ];then
+            cd situm-cordova-plugin
+          fi
           git remote set-url origin https://situmops:$(github_token)@github.com/$(Build.Repository.Name).git
           cat .git/config
 
         displayName: Initial Vars & Configs
 
       - bash: |
-
+      
           cd situm-cordova-plugin
           echo -e "\n[+] Setting NPM version to $(version)"
           npm version $(version) --no-git-tag-version
-
+      
           echo -e "\n[+] Change plugin version in plugin.xml"
           sed -i "s/version=\".*\">/version=\"$(version)\">/g" plugin.xml
-
+      
           echo -e "\n[+] Setting git to push NPM version\n"
           git config --global user.email "sistemas@situm.es"
           git config --global user.name "Situmops"
-
+      
           echo -e "\n[+] Fetch branches \n"
           git fetch
-
+      
           echo -e "\n[+] Changing to $(currentBranch)"
           git checkout $(currentBranch)
-
+      
           echo -e "\n[+] Add,Commit and Push to $(currentBranch)"
           git commit -am "Setting the NPM version to $(version)"
           git push --set-upstream origin $(currentBranch)
           git push
         displayName: Make changes
-
-
+      
+      
       - template: azure-templates/publish_release.yml@sys_kubernetes_templates
         parameters:
           bitbucket:
@@ -182,7 +200,7 @@ jobs:
           mergeBranches:
             - "master"
             - "develop"
-
+      
       - bash: |
           cd situm-cordova-plugin
           echo -e "\n[+] Fetch all branches\n"
@@ -199,11 +217,11 @@ jobs:
           npm publish --access=public
       
         displayName: NPM publish
-
+      
       
       - bash: |
           cd situm-cordova-plugin
-
+      
           echo -e "\n[+] Install dependencies"
           npm install
       
@@ -221,50 +239,92 @@ jobs:
             bitbucket_user: $(bitbucket_user)
             bitbucket_pass: $(bitbucket_pass)
           release: "situm-cordova-plugin"
-
+      
       - checkout: cordova_sdk_validation 
         fetchTags: false
         fetchDepth: 1
         displayName: Checkout Cordova app example
-  
+      
       - bash: |
           cd cordova-sdk-validation
           echo -e "\n[+] Setting git remote credentials\n"
           git remote set-url origin https://$(bitbucket_user):$(bitbucket_pass)@bitbucket.org/situm/cordova-sdk-validation.git
           
           cat .git/config
-
+      
           echo -e "\n[+] Fetch branches"
           git fetch origin master
           echo -e "\n[+] Checkout to master branch\n"
           git checkout master
-
+      
           echo -e "\n[+] Commit empty change to run examples repo\n"
           git commit -m "Publish Cordova SDK plugin release $(version)" --allow-empty
           echo -e "\n[+] Push empty change \n"
           git push origin master
           
         displayName: Execute example app 
-      
+            
       - bash: |
           if [ -d "situm-cordova-plugin" ]; then
             cd situm-cordova-plugin
           fi
-  
+      
+          echo -e "\n[+] Pull master changes and change to master branch \n"
+          git fetch
+          git checkout master
+          git pull origin master
+      
           iossdk=$(grep -oE '\s<framework src="SitumSDK" type="podspec" spec="[0-9]+\.[0-9]+\.[0-9]+" />' plugin.xml | awk -F'"' '{print $6}')
           androidsdk=$(grep -oE 'es.situm:situm-sdk:[0-9]+\.[0-9]+\.[0-9]+@aar' src/android/situm.gradle | awk -F'[:@]' '{print $3}')
+      
+      
+          echo -e "\n[+] Checkout to previous commit\n"
+          git checkout HEAD~1
+      
+          iossdk_old=$(grep -oE '\s<framework src="SitumSDK" type="podspec" spec="[0-9]+\.[0-9]+\.[0-9]+" />' plugin.xml | awk -F'"' '{print $6}')
+          androidsdk_old=$(grep -oE 'es.situm:situm-sdk:[0-9]+\.[0-9]+\.[0-9]+@aar' src/android/situm.gradle | awk -F'[:@]' '{print $3}')
 
+          echo -e "\n[+] Return repository to master branch\n"
+          git checkout master
+      
           echo -e "\n[+] Versions:"
-          echo -e "\t[+] RN SDK: $(version)"
+          echo -e "\t[+] Cordova SDK: $(version)"
           echo -e "\t[+] ANDROID SDK: $androidsdk"
           echo -e "\t[+] IOS SDK: $iossdk"
+          echo -e "\t[+] ANDROID SDK (OLD VERSION): $androidsdk_old"
+          echo -e "\t[+] IOS SDK (OLD IOS): $iossdk_old"
+          
+          versions="| *VERSIÓN* | *FECHA* | *ANDROID SDK* | *IOS SDK* |\n|$(version)|$(date +"%d/%m/%Y")|"
       
-          versions="| *VERSIÓN* | *FECHA* | *ANDROID SDK* | *IOS SDK* |\n|$(version)|$(date +"%d/%m/%Y")|$androidsdk|$iossdk|"
+          if [ "$androidsdk" != "$androidsdk_old" ];then
+            versions="$versions *$androidsdk* |"
+            android_changelog_version=$androidsdk
+          else
+            android_changelog_version="0.0.0"
+            versions="$versions $androidsdk|"
+          fi
+      
+          if [ "$iossdk" != "$iossdk_old" ];then
+            versions="$versions *$iossdk*|"
+            ios_changelog_version=$iossdk
+          else
+            ios_changelog_version="0.0.0"
+            versions="$versions $iossdk|"
+          fi
       
           echo "##vso[task.setvariable variable=versions]$(echo $versions)"
+          echo "##vso[task.setvariable variable=android_changelog_version]$(echo $android_changelog_version)"
+          echo "##vso[task.setvariable variable=ios_changelog_version]$(echo $ios_changelog_version)"
       
         displayName: Get Versions
-      
+       
+      - ${{ if ne(variables['Build.Reason'],'manual') }}:
+        - template: azure-templates/publish-changelog.yaml@sys_kubernetes_templates
+          parameters:
+            changelogId: $(Cordova_Changelog_id)
+            android_changelog_version: $(android_changelog_version)
+            ios_changelog_version: $(ios_changelog_version)
+     
       - template: azure-templates/release-table.yaml@sys_kubernetes_templates
         parameters:
           versions: $(versions)
@@ -274,4 +334,4 @@ jobs:
           bitbucket:
             bitbucket_user: $(bitbucket_user)
             bitbucket_pass: $(bitbucket_pass)
-   
+        
