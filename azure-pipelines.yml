@@ -184,7 +184,7 @@ jobs:
           git checkout $(currentBranch)
       
           echo -e "\n[+] Add,Commit and Push to $(currentBranch)"
-          git commit -am "Setting the NPM version to $(version)"
+          git commit -am "[skip ci] Setting the Cordova version to $(version)"
           git push --set-upstream origin $(currentBranch)
           git push
         displayName: Make changes
