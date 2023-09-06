@@ -1,6 +1,6 @@
 {
   "name": "situm-cordova-plugin-official",
-  "version": "1.20.16",
+  "version": "1.20.17",
   "cordova": {
     "id": "situm-cordova-plugin-official",
     "platforms": [
