@@ -1,5 +1,9 @@
 target 'SitumCordovaPlugin' do
   use_frameworks!
   platform :ios, '9.0'
+<<<<<<< Updated upstream
   pod 'SitumSDK', '3.0.3'
+=======
+  pod 'SitumSDK', '3.1.0'
+>>>>>>> Stashed changes
 end
