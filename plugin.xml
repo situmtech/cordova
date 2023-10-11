@@ -71,9 +71,13 @@
         <framework src="libc++.dylib" />
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         <framework src="SitumSDK" type="podspec" spec="3.0.3" />
 =======
         <framework src="SitumSDK" type="podspec" spec="3.1.0" />
+>>>>>>> Stashed changes
+=======
+        <framework src="SitumSDK" type="podspec" spec="3.2.0" />
 >>>>>>> Stashed changes
 
 
