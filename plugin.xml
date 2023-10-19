@@ -72,12 +72,12 @@
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
-        <framework src="SitumSDK" type="podspec" spec="3.2.1" />
+        <framework src="SitumSDK" type="podspec" spec="3.2.2" />
 =======
-        <framework src="SitumSDK" type="podspec" spec="3.2.1" />
+        <framework src="SitumSDK" type="podspec" spec="3.2.2" />
 >>>>>>> Stashed changes
 =======
-        <framework src="SitumSDK" type="podspec" spec="3.2.1" />
+        <framework src="SitumSDK" type="podspec" spec="3.2.2" />
 >>>>>>> Stashed changes
 
 
