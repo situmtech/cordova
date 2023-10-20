@@ -318,13 +318,12 @@ jobs:
       
         displayName: Get Versions
        
-      - ${{ if ne(variables['Build.Reason'],'manual') }}:
-        - template: azure-templates/publish-changelog.yaml@sys_kubernetes_templates
-          parameters:
-            changelogId: $(Cordova_Changelog_id)
-            android_changelog_version: $(android_changelog_version)
-            ios_changelog_version: $(ios_changelog_version)
-     
+      - template: azure-templates/publish-changelog.yaml@sys_kubernetes_templates
+        parameters:
+          changelogId: $(Cordova_Changelog_id)
+          android_changelog_version: $(android_changelog_version)
+          ios_changelog_version: $(ios_changelog_version)
+          
       - template: azure-templates/release-table.yaml@sys_kubernetes_templates
         parameters:
           versions: $(versions)
