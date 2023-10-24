@@ -70,7 +70,13 @@
         <framework src="libz.dylib" />
         <framework src="libc++.dylib" />
 
-        <framework src="SitumSDK" type="podspec" spec="3.2.2" />
+        <podspec>
+            <config>
+            </config>
+            <pods use-frameworks="true">
+                <podspec name="SitumSdk" spec="~> 3.2.2"/>
+            </pods>
+        </podspec>
 
 
         <header-file src="src/ios/situmcordovaplugin/SitumPlugin.h" />
