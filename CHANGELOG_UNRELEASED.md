@@ -2,4 +2,4 @@
 
 ### Fix
 
-* Fixed some issues that broke the compilation of our plugin.
+* Fixed some problem with plugin.xml format on cordova-ios-7.0.1.
