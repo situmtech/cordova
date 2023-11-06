@@ -74,7 +74,7 @@
             <config>
             </config>
             <pods use-frameworks="true">
-                <podspec name="SitumSdk" spec="~> 3.2.3"/>
+                <pod name="SitumSDK" spec="~> 3.2.3"/>
             </pods>
         </podspec>
 
