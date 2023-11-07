@@ -14,18 +14,11 @@
         <engine name="cordova-android" version=">=10.0.0" />
     </engines>
 
-    <dependency id="cordova-plugin-inappbrowser" version="5.0.0" />
-
     <!-- android -->
     <platform name="android">
         <js-module src="www/android/situm.js" name="situm">
             <runs/>
             <clobbers target="cordova.plugins.Situm" />
-        </js-module>
-
-        <js-module src="www/android/map-viewer.js" name="map-viewer">
-            <runs/>
-            <clobbers target="cordova.plugins.MapView" />
         </js-module>
 
         <framework src="src/android/situm.gradle" custom="true" type="gradleReference" />
