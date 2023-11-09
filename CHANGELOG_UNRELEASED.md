@@ -1,5 +1,5 @@
 ## Unreleased
 
-### Fix
+### Added
 
-* Fixed some issues that broke the compilation of our plugin.
+* Added new MapViewer component to visualize our cartography through a web view.
