@@ -14,12 +14,10 @@
         <engine name="cordova-android" version=">=10.0.0" />
     </engines>
 
-    <js-module src="www/map-viewer.js" name="map-viewer">
+    <js-module src="www/map-view.js" name="map-view">
         <runs/>
         <clobbers target="cordova.plugins.MapView" />
     </js-module>
-
-    <dependency id="cordova-plugin-inappbrowser" version="5.0.0" />
 
     <!-- android -->
     <platform name="android">
