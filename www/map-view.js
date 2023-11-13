@@ -1,48 +1,34 @@
-// import MapViewController from './map-view-controller.js';
+const MapViewController = require("situm-cordova-plugin-official.map-view-controller");
 
 class MapView extends HTMLElement {
   constructor() {
     super();
-    console.log("base-domain: ", this.getAttribute("base-domain"));
-    console.log("situm-api-key: ", this.getAttribute("situm-api-key"));
-    console.log("building-id: ", this.getAttribute("building-id"));
-    console.log(
-      "whole_msg: ",
-      `${this.getAttribute("base-domain")}/?apikey=${this.getAttribute(
-        "situm-api-key"
-      )}&buildingid=${this.getAttribute("building-id")}`
-    );
+  }
 
+  connectedCallback() {
     this.innerHTML = `\
         <iframe\
             id="map-view-iframe"\
-            src="${this.getAttribute("base-domain")}/?apikey=${this.getAttribute("situm-api-key")}&buildingid=${this.getAttribute("building-id")}"\
+            src="${this.getAttribute(
+              "base-domain"
+            )}/?apikey=${this.getAttribute(
+      "situm-api-key"
+    )}&buildingid=${this.getAttribute("building-id")}"\
             width="100%"\
             height="600px"\
         />\
         `;
+    this.controller = new MapViewController();
+    this._messageReceivedCallback = this._messageReceivedCallback.bind(this);
+
+    window.addEventListener("message", this._messageReceivedCallback);
   }
 
-  connectedCallback() {
-    // MapViewController.handleMapViewMessages();
-    window.addEventListener("message", function (m) {
-      console.log("message data: ", m.data);
-      const msg = JSON.parse(m.data);
-      console.log("msg.type: ", msg.type);
-      // MapViewController.handleMapViewMessagesWithM(m);
-      if (msg.type && msg.type == "app.map_is_ready") {
-        this.document
-          .getElementById("map-view-iframe")
-          .contentWindow.postMessage(
-            {
-              type: "cartography.select_poi",
-              payload: { identifier: 122321 },
-            },
-            "https://map-viewer.situm.com"
-          );
-        console.log("Sending poi selection");
-      }
-    });
+  _messageReceivedCallback(m) {
+    const msg = JSON.parse(m.data);
+    if (msg && msg.type) {
+      this.controller.handleMapViewMessages(msg);
+    }
   }
 }
 

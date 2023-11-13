@@ -19,6 +19,11 @@
         <clobbers target="cordova.plugins.MapView" />
     </js-module>
 
+    <js-module src="www/map-view-controller.js" name="map-view-controller">
+        <runs/>
+        <clobbers target="cordova.plugins.MapViewController" />
+    </js-module>
+
     <!-- android -->
     <platform name="android">
         <js-module src="www/android/situm.js" name="situm">

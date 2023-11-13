@@ -1,13 +1,20 @@
 var exec = require('cordova/exec');
 
 var PLUGIN_NAME = 'Situm';
+let _internalEventDelegate = undefined;
 
 /** 
  * @namespace Situm
  */
 
 var Situm = {
-
+  /**
+   * An internal method.
+   * @param {internalEventDelegate} callback.
+   */
+  internalSetEventDelegate: function (callback) {
+    _internalEventDelegate = callback;
+  },
   /**
    * Provides your API key to the Situm SDK.
    * @description Provides your API key to the Situm SDK. This key is generated for your application in the Dashboard. Old credentials will be removed.
@@ -54,9 +61,13 @@ var Situm = {
    * @return {Location} position Current position of device.
    */
   startPositioning: function (request, cb, error) {
-    exec(cb, error, PLUGIN_NAME, 'startPositioning', request);
+    let internalCallback = (res) => {
+      _internalEventDelegate('startPositioning', res);
+      cb(res);
+    };
+    exec(internalCallback, error, PLUGIN_NAME, 'startPositioning', request);;
   },
-  /**
+    /**
    * Stop locationListener on current active listener.
    * @description Stop locationListener on current active listener.
    * @param {function} cb Cordova native callback to recive data.
@@ -105,7 +116,7 @@ var Situm = {
    * @param {Building} building The building. Not null.
    * @param {function} cb Cordova native callback to recive data.
    * @param {function} error Cordova native callback to recive errors.
-   * @return {Floor[]} floors Array of floors. 
+   * @return {Floor[]} floors Array of floors.
    */
   fetchFloorsFromBuilding: function (building, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'fetchFloorsFromBuilding', [building]);
@@ -187,7 +198,7 @@ var Situm = {
     exec(cb, error, PLUGIN_NAME, 'fetchPoiCategoryIconSelected', [category]);
   },
   /**
-  * Download all the information of a building.
+   * Download all the information of a building.
    * @description Download the information of a building (floors, pois, basic information, ...)
    * @param {Building} building The building identifier. Not null.
    * @param {function} cb Cordova native callback to recive data.
@@ -266,8 +277,8 @@ var Situm = {
   /**
    * Set the realtime params and listener that receives realtime location updates
    * @param {RealTimeRequest} request Request - non-null search parameters.
-   * @param {fuction} cb Cordova native callback to recive data. 
-   * @param {function} error Cordova native callback to recive errors. 
+   * @param {fuction} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
    */
   requestRealTimeUpdates: function (request, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'requestRealTimeUpdates', [request]);
@@ -275,8 +286,8 @@ var Situm = {
 
   /**
    * Stops receiving updates in realtime about user location.
-   * @param {function} cb Cordova native callback to recive data. 
-   * @param {function} error Cordova native callback to recive errors. 
+   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
    */
   removeRealTimeUpdates: function(cb, error) {
     exec(cb, error, PLUGIN_NAME, 'removeRealTimeUpdates', []);
