@@ -11,6 +11,11 @@ class MapViewController {
       .contentWindow.postMessage(message, "https://map-viewer.situm.com");
   }
 
+  /**
+   * Listen to native SDK events and notify them to map-viewer.
+   * @param {string} eventName 
+   * @param {any} payload 
+   */
   _handleSdkNativeEvents(eventName, payload) {
     switch (eventName) {
       case "startPositioning":
@@ -22,6 +27,10 @@ class MapViewController {
     }
   }
 
+  /**
+   * Listen to the events that map-viewer externalizes
+   * @param {any} m
+   */
   handleMapViewMessages(m) {
     switch (m.type) {
       case "app.map_is_ready":
@@ -36,6 +45,12 @@ class MapViewController {
     }
   }
 
+  // ACTIONS
+
+  /**
+   * Select a poi of a building.
+   * @param {number} identifier
+   * */
   selectPoi(identifier) {
     this._sendMessageToViewer({
       type: "cartography.select_poi",
