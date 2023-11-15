@@ -34,7 +34,7 @@ class MapViewController {
   handleMapViewMessages(m) {
     switch (m.type) {
       case "app.map_is_ready":
-        this.selectPoi(122321);
+        this._onLoadCallback(this);
         break;
       case "cartography.poi_selected":
         console.log(`poi (${m.payload.identifier}) was selected`);
@@ -56,6 +56,10 @@ class MapViewController {
       type: "cartography.select_poi",
       payload: { identifier: identifier },
     });
+  }
+
+  onLoad(cb) {
+    this._onLoadCallback = cb;
   }
 }
 
