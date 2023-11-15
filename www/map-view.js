@@ -6,14 +6,14 @@ class MapView extends HTMLElement {
   }
 
   connectedCallback() {
-    let baseDomain = this.getAttribute("base-domain");
+    let viewerDomain = this.getAttribute("viewer-domain");
     let situmApiKey = this.getAttribute("situm-api-key");
-    let buildingId = this.getAttribute("building-id");
+    let buildingIdentifier = this.getAttribute("building-identifier");
 
     this.innerHTML = `\
         <iframe\
             id="map-view-iframe"\
-            src="${baseDomain}/?apikey=${situmApiKey}&buildingid=${buildingId}&mode=embed"\
+            src="${viewerDomain}/?apikey=${situmApiKey}&buildingid=${buildingIdentifier}&mode=embed"\
             width="100%"\
             height="600px"\
         />\
