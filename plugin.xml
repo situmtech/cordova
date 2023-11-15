@@ -49,7 +49,7 @@
 
     <!-- ios -->
     <platform name="ios">
-        <js-module src="www/ios/situm.js" name="SitumPlugin">
+        <js-module src="www/ios/situm.js" name="situm">
             <runs/>
             <clobbers target="cordova.plugins.Situm" />
         </js-module>

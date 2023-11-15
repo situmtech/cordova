@@ -24,7 +24,7 @@ var Situm = {
       _internalEventDelegate('startPositioning', res);
       cb(res);
     };
-    exec(internalCallback, error, PLUGIN_NAME, 'startPositioning', request);;
+    exec(internalCallback, error, PLUGIN_NAME, 'startPositioning', request);
   },
   stopPositioning: function (cb, error) {
     exec(cb, error, PLUGIN_NAME, 'stopPositioning', []);
