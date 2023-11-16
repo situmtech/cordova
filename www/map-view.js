@@ -1,7 +1,6 @@
 const MapViewController = require('./map-view-controller');
 
 class MapView extends HTMLElement {
-
   constructor() {
     super();
   }
@@ -21,13 +20,40 @@ class MapView extends HTMLElement {
   }
 
   _getViewerURL() {
-    let base = this.getAttribute("viewer-domain");
-    let query = `apikey=${this.getAttribute("situm-api-key")}&buildingid=${this.getAttribute("building-identifier")}&mode=embed`;
+    let viewerDomain = this._formatValidDomain(
+      this.getAttribute("viewer-domain")
+    );
+    let situmApiKey = this.getAttribute("situm-api-key") ?? "";
+    let buildingIdentifier = this.getAttribute("building-identifier") ?? "";
+
+    let situmApiKeyQP = situmApiKey.length > 0 ? `apikey=${situmApiKey}` : "";
+    let buildingIdentifierQP =
+      buildingIdentifier > 0 ? `&buildingid=${buildingIdentifier}` : "";
+    let query = `${situmApiKeyQP}${buildingIdentifierQP}&mode=embed`;
+
     let remoteIdentifier = this.getAttribute("remote-identifier");
     if (remoteIdentifier) {
-      return `${base}/id/${remoteIdentifier}?${query}`;
+      return `${viewerDomain}/id/${remoteIdentifier}?${query}`;
     }
-    return `${base}?${query}`;
+    return `${viewerDomain}/?${query}`;
+  }
+
+  _formatValidDomain(domain) {
+    let result = domain;
+
+    if (result == null) {
+      return 'https://map-viewer.situm.com';
+    }
+
+    if (!result.startsWith('https://') && !result.startsWith('http://')) {
+      result = `https://${result}`;
+    }
+
+    if (result.endsWith('/')) {
+      result = result.substring(0, result.length - 1);
+    }
+
+    return result;
   }
 
   _messageReceivedCallback(m) {
@@ -42,7 +68,6 @@ class MapView extends HTMLElement {
     // este puente (estático). Quizais sexa millorable.
     MapViewController._setOnLoadCallback(callback);
   }
-  
 }
 
 customElements.define("map-view", MapView);
