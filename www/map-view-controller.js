@@ -22,10 +22,12 @@ class MapViewControllerImpl {
       type: type,
       payload: payload,
     };
-    // TODO: hardcoded URL!!!
-    document
-      .getElementById("map-view-iframe")
-      .contentWindow.postMessage(message, "https://map-viewer.situm.com");
+    // TODO: hardcoded URL!!!, insert a variable 
+    // to be able to send postMessages() on map-viewer-des and -pre
+    this._mapView.firstElementChild.contentWindow.postMessage(
+      message,
+      "https://map-viewer.situm.com"
+    );
   }
 
   /**
@@ -37,10 +39,10 @@ class MapViewControllerImpl {
     switch (eventName) {
       case "onLocationUpdate":
         if (!payload.statusName) {
-          console.log("location.update", payload);
+          console.debug("location.update", payload);
           this._sendMessageToViewer("location.update", payload);
         } else {
-          console.log("location.update_status", { status: payload.statusName });
+          console.debug("location.update_status", { status: payload.statusName });
           this._sendMessageToViewer(
             "location.update_status",
             {status: payload.statusName}
@@ -57,20 +59,19 @@ class MapViewControllerImpl {
   _handleMapViewMessages(m) {
     switch (m.type) {
       case "app.map_is_ready":
-        console.log("Map is ready!")
         if (this._onLoadCallback && typeof this._onLoadCallback === 'function') {
           this._onLoadCallback(this);
-          console.log(`MapView is: ${this._mapView._uuid}`);
+          console.debug('Map is ready!');
         }
         break;
       case "cartography.poi_selected":
-        console.log(`poi (${m.payload.identifier}) was selected`);
+        console.debug(`poi (${m.payload.identifier}) was selected`);
         break;
       case "directions.requested":
         this._onDirectionsRequested(m.payload);
         break;
       default:
-        console.log("Got unmanaged message: ", m);
+        console.debug("Got unmanaged message: ", m);
         break;
     }
   }
