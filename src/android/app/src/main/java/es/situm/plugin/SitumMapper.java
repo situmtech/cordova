@@ -690,112 +690,10 @@ static JSONObject buildingInfoToJsonObject(BuildingInfo buildingInfo) throws JSO
   }
 
   static JSONObject routeToJsonObject(Route route, Context context) throws JSONException {
-    JSONObject jo = new JSONObject();
-    JSONArray edgesJsonArray = new JSONArray();
-    for (RouteStep routeStep : route.getEdges()) {
-      edgesJsonArray.put(routeStepToJsonObject(routeStep));
-    }
-    JSONArray stepsJsonArray = new JSONArray();
-    for (RouteStep routeStep : route.getSteps()) {
-      stepsJsonArray.put(routeStepToJsonObject(routeStep));
-    }
-    JSONArray indicationsJsonArray = new JSONArray();
-    for (Indication indication : route.getIndications()) {
-      indicationsJsonArray.put(indicationToJsonObject(indication, context));
-    }
-    JSONArray nodesJsonArray = new JSONArray();
-    for (Point point : route.getNodes()) {
-      nodesJsonArray.put(pointToJsonObject(point));
-    }
-    JSONArray pointsJsonArray = new JSONArray();
-    for (Point point : route.getPoints()) {
-      pointsJsonArray.put(pointToJsonObject(point));
-    }
-    JSONArray segmentsJsonArray = new JSONArray();
-    for(RouteSegment segment : route.getSegments()) {
-      segmentsJsonArray.put(routeSegmentToJsonObject(segment));
-    }
-
-    jo.put(EDGES, edgesJsonArray);
-    jo.put(FIRST_STEP, routeStepToJsonObject(route.getFirstStep()));
-    jo.put(FROM, pointToJsonObject(route.getFrom()));
-    jo.put(INDICATIONS, indicationsJsonArray);
-    jo.put(LAST_STEP, routeStepToJsonObject(route.getLastStep()));
-    jo.put(NODES, nodesJsonArray);
-    jo.put(POINTS, pointsJsonArray);
-    jo.put(SEGMENTS, segmentsJsonArray);
-    jo.put(INDICATIONS, indicationsJsonArray);
-    jo.put(TO, pointToJsonObject(route.getTo()));
-    jo.put(STEPS, stepsJsonArray);
-    return jo;
+    return new JSONObject(route.toMap());
   }
-
-  /*
-   * static Route jsonRouteToRoute(JSONObject jo) throws JSONException { // Create
-   * a static route
-   *
-   * }
-   */
-
-  // RouteStep
-
-  static JSONObject routeStepToJsonObject(RouteStep routeStep) throws JSONException {
-    JSONObject jo = new JSONObject();
-    jo.put(DISTANCE, routeStep.getDistance());
-    jo.put(DISTANCE_TO_GOAL, routeStep.getDistanceToGoal());
-    jo.put(FROM, pointToJsonObject(routeStep.getFrom()));
-    jo.put(ID, routeStep.getId());
-    jo.put(TO, pointToJsonObject(routeStep.getTo()));
-    jo.put(IS_FIRST, routeStep.isFirst());
-    jo.put(IS_LAST, routeStep.isLast());
-    return jo;
-  }
-
-  /*
-   * static RouteStep routeStepJsonObjectToRouteStep(JSONObject jo) throws
-   * JSONException { RouteStep routeStep = null; routeStep = new
-   * RouteStep.Builder().distance(jo.getDouble(DISTANCE))
-   * .distanceToEnd(jo.getDouble(DISTANCE_TO_GOAL)).from(pointJsonObjectToPoint(jo
-   * .getJSONObject(FROM)))
-   * .to(pointJsonObjectToPoint(jo.getJSONObject(TO))).id(jo.getInt(ID)).isLast(jo
-   * .getBoolean(IS_LAST)) .build(); return routeStep; }
-   */
-
-   // RouteSegment
-   static JSONObject routeSegmentToJsonObject(RouteSegment segment) throws JSONException {
-     JSONObject jo = new JSONObject();
-     jo.put(FLOOR_IDENTIFIER, segment.getFloorIdentifier());
-     JSONArray pointsJsonArray = new JSONArray();
-     for (Point point : segment.getPoints()) {
-       pointsJsonArray.put(pointToJsonObject(point));
-     }
-     jo.put(POINTS, pointsJsonArray);
-
-     return jo;
-   }
 
   // Indication
-
-  static JSONObject indicationToJsonObject(Indication indication) throws JSONException {
-    return indicationToJsonObject(indication, null);
-  }
-
-  static JSONObject indicationToJsonObject(Indication indication, Context context) throws JSONException {
-    JSONObject jo = new JSONObject();
-    jo.put(DISTANCE, indication.getDistance());
-    jo.put(DISTANCE_TO_NEXT_LEVEL, indication.getDistanceToNextLevel());
-    jo.put(INDICATION_TYPE, indication.getIndicationType().toString());
-    jo.put(ORIENTATION, indication.getOrientation());
-    jo.put(ORIENTATION_TYPE, indication.getOrientationType());
-    jo.put(STEP_IDX_DESTINATION, indication.getStepIdxDestination());
-    jo.put(STEP_IDX_ORIGIN, indication.getStepIdxOrigin());
-    jo.put(NEEDED_LEVEL_CHANGE, indication.isNeededLevelChange());
-    if (context != null) {
-      jo.put(HUMAN_READABLE_MESSAGE, indication.toText(context));
-    }
-    jo.put(NEXT_LEVEL, indication.getNextLevel());
-    return jo;
-  }
 
   static Indication indicationJsonObjectToIndication(JSONObject jo) throws JSONException {
     Indication indication = null;
@@ -817,35 +715,7 @@ static JSONObject buildingInfoToJsonObject(BuildingInfo buildingInfo) throws JSO
 
   static JSONObject navigationProgressToJsonObject(NavigationProgress navigationProgress, Context context)
       throws JSONException {
-
-    JSONObject jo = new JSONObject();
-    JSONArray pointsJsonArray = new JSONArray();
-    JSONArray segmentsJsonArray = new JSONArray();
-    if(navigationProgress.getPoints() != null) {
-      for (Point point : navigationProgress.getPoints()) {
-        pointsJsonArray.put(pointToJsonObject(point));
-      }
-    }
-    if(navigationProgress.getSegments() != null) {
-      for (RouteSegment segment : navigationProgress.getSegments()) {
-        segmentsJsonArray.put(routeSegmentToJsonObject(segment));
-      }
-    }
-    jo.put(POINTS, pointsJsonArray);
-    jo.put(SEGMENTS, segmentsJsonArray);
-    jo.put(CLOSEST_POINT_IN_ROUTE, pointToJsonObject(navigationProgress.getClosestPointInRoute()));
-    jo.put(CURRENT_INDICATION, indicationToJsonObject(navigationProgress.getCurrentIndication(), context));
-    jo.put(NEXT_INDICATION, indicationToJsonObject(navigationProgress.getNextIndication(), context));
-    jo.put(DISTANCE_TO_CLOSEST_POINT_IN_ROUTE, navigationProgress.getDistanceToClosestPointInRoute());
-    jo.put(DISTANCE_TO_END_STEP, navigationProgress.getDistanceToEndStep());
-    jo.put(DISTANCE_TO_GOAL, navigationProgress.getDistanceToGoal());
-    jo.put(ROUTE_STEP, routeStepToJsonObject(navigationProgress.getRouteStep()));
-    jo.put(TIME_TO_END_STEP, navigationProgress.getTimeToEndStep());
-    jo.put(TIME_TO_GOAL, navigationProgress.getTimeToGoal());
-    jo.put(CURRENT_STEP_INDEX, navigationProgress.getRouteStep().getId());
-    jo.put(CLOSEST_LOCATION_IN_ROUTE, locationToJsonObject(navigationProgress.getClosestLocationInRoute()));
-
-    return jo;
+    return new JSONObject(navigationProgress.toMap());
   }
 
   // Utils
@@ -879,12 +749,12 @@ static JSONObject buildingInfoToJsonObject(BuildingInfo buildingInfo) throws JSO
 
   static LocationRequest locationRequestJSONObjectToLocationRequest(JSONArray args) throws JSONException {
     LocationRequest.Builder locationBuilder = new LocationRequest.Builder();
-    
+
     // Remote configuration, no params
     if (args.length() == 0) {
       return locationBuilder.build();
     }
-    
+
     JSONObject jsonoBuilding = args.getJSONObject(0);
     String sBuildingId;
     if (jsonoBuilding.get(SitumMapper.BUILDING_IDENTIFIER) instanceof String) {
