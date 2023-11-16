@@ -6,13 +6,11 @@ class MapViewControllerImpl {
   _mapView = undefined;
 
   constructor() {
-    console.log("MapViewControllerImpl#constructor")
     Situm.internalSetEventDelegate(this._handleSdkNativeEvents.bind(this));
   }
 
   _prepare(mapView) {
     this._mapView = mapView;
-    console.log(`Controller prepared, mapView is ${mapView}`);
   }
 
   _setOnLoadCallback(callback) {
