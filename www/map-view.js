@@ -1,16 +1,12 @@
 const MapViewController = require('./map-view-controller');
 
 class MapView extends HTMLElement {
-  _uuid = undefined
 
   constructor() {
     super();
-    this._uuid = this._generateUUID();
-    console.log("MapView#constructor");
   }
 
   connectedCallback() {
-    console.log("MapView#connectedCallback");
     MapViewController._prepare(this);
     this.innerHTML = `
       <iframe
@@ -45,14 +41,6 @@ class MapView extends HTMLElement {
     // Por ahora o seteo da callback de on-load dende o integrador faise usando
     // este puente (estático). Quizais sexa millorable.
     MapViewController._setOnLoadCallback(callback);
-  }
-
-  _generateUUID() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      const r = Math.random() * 16 | 0;
-      const v = c === 'x' ? r : (r & 0x3 | 0x8);
-      return v.toString(16);
-    });
   }
   
 }
