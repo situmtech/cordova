@@ -98,7 +98,7 @@ class MapViewControllerImpl {
   _doCalculateRoute(buildingId, directionsRequest, mapViewerData) {
     let building = this._buildings.find(b => b.buildingIdentifier == buildingId);
     Situm.requestDirections(
-      [building, directionsRequest.from, directionsRequest.to, {}],
+      [building, directionsRequest.from, directionsRequest.to, directionsRequest],
       (route) => {
         this._sendMessageToViewer("directions.update", { ...route, ...mapViewerData });
       },

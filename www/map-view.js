@@ -18,6 +18,7 @@ class MapView extends HTMLElement {
         src="${this._getViewerURL()}"
         width="100%"
         height="100%"
+        style="border: none; box-shadow: none;"
       />
     `;
     window.addEventListener("message", this._messageReceivedCallback);
