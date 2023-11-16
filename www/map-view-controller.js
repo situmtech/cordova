@@ -37,8 +37,17 @@ class MapViewControllerImpl {
    */
   _handleSdkNativeEvents(eventName, payload) {
     switch (eventName) {
-      case "startPositioning":
-        this._sendMessageToViewer("location.update", payload);
+      case "onLocationUpdate":
+        if (!payload.statusName) {
+          console.log("location.update", payload);
+          this._sendMessageToViewer("location.update", payload);
+        } else {
+          console.log("location.update_status", { status: payload.statusName });
+          this._sendMessageToViewer(
+            "location.update_status",
+            {status: payload.statusName}
+          );
+        }
         break;
     }
   }
@@ -118,9 +127,6 @@ class MapViewControllerImpl {
     this._sendMessageToViewer("cartography.select_poi", { identifier: identifier });
   }
 
-  onLoad(cb) {
-    this._onLoadCallback = cb;
-  }
 }
 
 let MapViewController = new MapViewControllerImpl();

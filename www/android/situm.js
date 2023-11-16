@@ -62,7 +62,7 @@ var Situm = {
    */
   startPositioning: function (request, cb, error) {
     let internalCallback = (res) => {
-      _internalEventDelegate('startPositioning', res);
+      _internalEventDelegate('onLocationUpdate', res);
       cb(res);
     };
     exec(internalCallback, error, PLUGIN_NAME, 'startPositioning', request);;
