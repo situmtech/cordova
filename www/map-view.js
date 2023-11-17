@@ -28,7 +28,7 @@ class MapView extends HTMLElement {
 
     let situmApiKeyQP = situmApiKey.length > 0 ? `apikey=${situmApiKey}` : "";
     let buildingIdentifierQP =
-      buildingIdentifier > 0 ? `&buildingid=${buildingIdentifier}` : "";
+      buildingIdentifier.length > 0 ? `&buildingid=${buildingIdentifier}` : "";
     let query = `${situmApiKeyQP}${buildingIdentifierQP}&mode=embed`;
 
     let remoteIdentifier = this.getAttribute("remote-identifier");
