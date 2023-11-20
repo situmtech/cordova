@@ -58,7 +58,7 @@ class MapViewControllerImpl {
           // Do nothing.
         },
         () => {
-          console.error("Error ata updateNavigationWithLocation")
+          console.error("Error at updateNavigationWithLocation")
         }
       );
     }
