@@ -23,10 +23,12 @@ class MapViewControllerImpl {
       type: type,
       payload: payload,
     };
-    this._mapView.firstElementChild.contentWindow.postMessage(
-      message,
-      this._mapView._getViewerDomain()
-    );
+    if (this._mapView.firstElementChild){
+      this._mapView.firstElementChild.contentWindow.postMessage(
+        message,
+        this._mapView._getViewerDomain()
+      )
+    };
   }
 
   // ==================================================
