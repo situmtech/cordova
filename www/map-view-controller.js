@@ -36,9 +36,9 @@ class MapViewControllerImpl {
   _handleSdkNativeEvents(eventName, payload) {
     switch (eventName) {
       case "onLocationUpdate":
-        if (!payload.statusName) {
+        if (payload.type && payload.type == "locationChanged") {
           this._handleOnLocationUpdate(payload);
-        } else {
+        } else if (payload.statusName) {
           this._handleOnLocationStatus(payload);
         }
         break;
