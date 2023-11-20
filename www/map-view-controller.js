@@ -87,7 +87,7 @@ class MapViewControllerImpl {
       case "navigation.requested":
         this._onNavigationRequested(m.payload);
         break;
-      case "navigation.cancel":
+      case "navigation.stopped":
         this._onNavigationCancel();
         break;
       default:
