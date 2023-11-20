@@ -86,8 +86,8 @@ var Situm = {
 
     exec(cb, error, PLUGIN_NAME, 'updateNavigationWithLocation', args);
   },
-  removeNavigationUpdates: function (args, cb, error) {
-    exec(cb, error, PLUGIN_NAME, 'removeNavigationUpdates', args);
+  removeNavigationUpdates: function (cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'removeNavigationUpdates', []);
   },
   requestRealTimeUpdates: function (request, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'requestRealTimeUpdates', [request]);
