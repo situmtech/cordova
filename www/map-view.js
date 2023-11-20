@@ -62,8 +62,8 @@ class MapView extends HTMLElement {
   }
 
   static onLoad(callback) {
-    // Por ahora o seteo da callback de on-load dende o integrador faise usando
-    // este puente (estático). Quizais sexa millorable.
+    // For now, setting the on-load callback from the integrator is done using this (static) bridge.
+    // Probably this could be improved.
     MapViewController._setOnLoadCallback(callback);
   }
 }

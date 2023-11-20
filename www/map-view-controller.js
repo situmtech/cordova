@@ -36,7 +36,9 @@ class MapViewControllerImpl {
   _handleSdkNativeEvents(eventName, payload) {
     switch (eventName) {
       case "onLocationUpdate":
-        if (payload.type && payload.type == "locationChanged") {
+        // iOS is sending String messages here, check some fields 
+        // to avoid assuming that we receive an object of type Location.
+        if (payload.buildingIdentifier && payload.position) {
           this._handleOnLocationUpdate(payload);
         } else if (payload.statusName) {
           this._handleOnLocationStatus(payload);
