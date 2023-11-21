@@ -172,6 +172,7 @@ class MapViewControllerImpl {
             (progress) => {
               // Navigation is working, handle different progress types:
               if (progress.type == "progress") {
+                progress.type = 'PROGRESS'; // The map-viewer waits for an upper case "type".
                 this._sendMessageToViewer("navigation.update", progress);
               } else if (progress.type == "destinationReached") {
                 this._sendMessageToViewer("navigation.update", {type: "DESTINATION_REACHED"});
