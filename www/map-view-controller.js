@@ -23,7 +23,7 @@ class MapViewControllerImpl {
       type: type,
       payload: payload,
     };
-    if (this._mapView.firstElementChild){
+    if (this._mapView && this._mapView.firstElementChild){
       this._mapView.firstElementChild.contentWindow.postMessage(
         message,
         this._mapView._getViewerDomain()
