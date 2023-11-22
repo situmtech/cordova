@@ -181,6 +181,10 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
         if (IS_LOG_ENABLED) {
             NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ results: %@", DEFAULT_SITUM_LOG, operation, array]);
         }
+        // TODO: for some reason, the array of Geofences is being received into a "results" dict.
+        if ([array objectForKey:@"results"]) {
+            array = [array objectForKey:@"results"];
+        }
         for (SITGeofence *obj in array) {
             NSDictionary *jsonObject = [SitumLocationWrapper.shared geofenceToJsonObject:obj];
             if (IS_LOG_ENABLED) {

@@ -2,7 +2,7 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     id="situm-cordova-plugin-official"
-    version="1.20.34">
+    version="3.0.0">
     <name>Situm Cordova plugin Official</name>
     <description>This is the stable branch.</description>
     <license>MIT</license>
@@ -13,6 +13,16 @@
     <engines>
         <engine name="cordova-android" version=">=10.0.0" />
     </engines>
+
+    <js-module src="www/map-view.js" name="map-view">
+        <runs/>
+        <clobbers target="cordova.plugins.MapView" />
+    </js-module>
+
+    <js-module src="www/map-view-controller.js" name="map-view-controller">
+        <runs/>
+        <clobbers target="cordova.plugins.MapViewController" />
+    </js-module>
 
     <!-- android -->
     <platform name="android">
@@ -39,7 +49,7 @@
 
     <!-- ios -->
     <platform name="ios">
-        <js-module src="www/ios/situm.js" name="SitumPlugin">
+        <js-module src="www/ios/situm.js" name="situm">
             <runs/>
             <clobbers target="cordova.plugins.Situm" />
         </js-module>
