@@ -14,6 +14,16 @@
         <engine name="cordova-android" version=">=10.0.0" />
     </engines>
 
+    <js-module src="www/map-view.js" name="map-view">
+        <runs/>
+        <clobbers target="cordova.plugins.MapView" />
+    </js-module>
+
+    <js-module src="www/map-view-controller.js" name="map-view-controller">
+        <runs/>
+        <clobbers target="cordova.plugins.MapViewController" />
+    </js-module>
+
     <!-- android -->
     <platform name="android">
         <js-module src="www/android/situm.js" name="situm">
@@ -39,7 +49,7 @@
 
     <!-- ios -->
     <platform name="ios">
-        <js-module src="www/ios/situm.js" name="SitumPlugin">
+        <js-module src="www/ios/situm.js" name="situm">
             <runs/>
             <clobbers target="cordova.plugins.Situm" />
         </js-module>

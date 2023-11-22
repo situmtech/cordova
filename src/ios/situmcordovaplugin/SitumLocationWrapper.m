@@ -592,7 +592,13 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
 
 - (SITLocation *) locationJsonObjectToLocation:(NSDictionary *) jo {
     NSTimeInterval timestamp = [(NSNumber*)[jo valueForKey:@"timestamp"] doubleValue];
-    SITPoint *position = [self pointJsonObjectToPoint:[jo objectForKey:@"position"]];
+    SITPoint *position;
+    // TODO: the map-viewer is not wrapping the position info into a position object.
+    if ([jo objectForKey:@"position"] != nil) {
+         position = [self pointJsonObjectToPoint:[jo objectForKey:@"position"]];
+    } else {
+        position = [self pointJsonObjectToPoint:jo];
+    }
     
     float bearing = [[[jo objectForKey:@"bearing"] valueForKey:@"degrees"] floatValue];
     float cartesianBearing = [[[jo objectForKey:@"cartesianBearing"] valueForKey:@"radians"] floatValue];
@@ -692,7 +698,13 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     NSDictionary* options = (NSDictionary*)[json objectAtIndex:3];
     
     SITLocation *location = [SitumLocationWrapper.shared locationJsonObjectToLocation:fromLocation];
-    SITPoint *endPoint = [SitumLocationWrapper.shared pointJsonObjectToPoint:[toPOI objectForKey:@"position"]];
+    SITPoint *endPoint;
+    // TODO: the map-viewer is not wrapping the position info into a position object.
+    if ([toPOI objectForKey:@"position"] != nil) {
+        endPoint = [SitumLocationWrapper.shared pointJsonObjectToPoint:[toPOI objectForKey:@"position"]];
+    } else {
+        endPoint = [SitumLocationWrapper.shared pointJsonObjectToPoint:toPOI];
+    }
     
     SITDirectionsRequest *directionsRequest = [[SITDirectionsRequest alloc] initWithLocation: location withDestination: endPoint];
     

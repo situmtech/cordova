@@ -1,8 +1,12 @@
 var exec = require('cordova/exec');
 
 var PLUGIN_NAME = 'SitumPlugin';
+let _internalEventDelegate = undefined;
 
 var Situm = {
+  internalSetEventDelegate: function (callback) {
+    _internalEventDelegate = callback;
+  },
   setApiKey: function (email, apiKey, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'setApiKey', [email, apiKey]);
   },
@@ -15,8 +19,12 @@ var Situm = {
   setCacheMaxAge: function (cacheAge, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'setCacheMaxAge', [cacheAge]);
   },
-  startPositioning: function (arrBuilding, cb, error) {
-    exec(cb, error, PLUGIN_NAME, 'startPositioning', arrBuilding);
+  startPositioning: function (request, cb, error) {
+    let internalCallback = (res) => {
+      _internalEventDelegate('onLocationUpdate', res);
+      cb(res);
+    };
+    exec(internalCallback, error, PLUGIN_NAME, 'startPositioning', request);
   },
   stopPositioning: function (cb, error) {
     exec(cb, error, PLUGIN_NAME, 'stopPositioning', []);
@@ -78,8 +86,8 @@ var Situm = {
 
     exec(cb, error, PLUGIN_NAME, 'updateNavigationWithLocation', args);
   },
-  removeNavigationUpdates: function (args, cb, error) {
-    exec(cb, error, PLUGIN_NAME, 'removeNavigationUpdates', args);
+  removeNavigationUpdates: function (cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'removeNavigationUpdates', []);
   },
   requestRealTimeUpdates: function (request, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'requestRealTimeUpdates', [request]);
