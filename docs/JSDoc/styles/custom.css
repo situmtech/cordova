@@ -1,0 +1,23 @@
+footer {
+    background-color: rgb(0,161,223);
+}
+
+footer > img {
+    display: none !important;
+}
+
+.main section article table td.name, .main section article table td.type, .main section article table td.attributes, .main section article table td.default {
+    max-width: 300px;
+}
+
+.lnb h3 {
+    color: rgb(0,161,223);
+}
+
+.main section article h3.subsection-title {
+    color: rgb(0,161,223);
+}
+
+#resizer {
+    background-color: rgb(0,161,223);
+}

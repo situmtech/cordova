@@ -1,5 +1,8 @@
-const Situm = require("situm-cordova-plugin-official.situm");
+const Situm = require("@situm/cordova.situm");
 
+/**
+ * @namespace MapViewControllerImpl
+ */
 class MapViewControllerImpl {
   _onLoadCallback = undefined;
   _buildings = undefined;
@@ -98,11 +101,7 @@ class MapViewControllerImpl {
     }
   }
 
-  /**
-   * Fetch the given building and return it or undefined if not found.
-   * @param {any} buildingId 
-   * @param {function} callback 
-   */
+  // Fetch the given building and return it or undefined if not found.
   _ensureBuilding(buildingId, callback) {
     if (this._buildings) {
       let building = this._buildings.find(b => b.buildingIdentifier == buildingId);
@@ -211,8 +210,8 @@ class MapViewControllerImpl {
   // ==================================================
 
   /**
-   * Select a poi of a building.
-   * @param {number} identifier
+   * Select a {@link POI} of a building.
+   * @param {number} identifier The unique identifier of the resource.
    * */
   selectPoi(identifier) {
     this._sendMessageToViewer("cartography.select_poi", { identifier: identifier });
