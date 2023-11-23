@@ -1,5 +1,7 @@
 const MapViewController = require('./map-view-controller');
-
+/**
+ * @namespace MapView
+ */
 class MapView extends HTMLElement {
   _viewerDomain;
 
@@ -65,6 +67,10 @@ class MapView extends HTMLElement {
     }
   }
 
+  /**
+   * MapView was loaded and you can now start using the MapViewController methods.
+   * @param {Function} callback A callback that gives back a MapViewController.
+   */
   static onLoad(callback) {
     // For now, setting the on-load callback from the integrator is done using this (static) bridge.
     // Probably this could be improved.
