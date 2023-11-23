@@ -1,17 +1,24 @@
 {
   "name": "@situm/cordova",
   "version": "3.0.0",
+  "description": "Set of utilities that allow any developer to build Cordova location based apps using Situm's indoor positioning system.",
+  "private": false,
+  "repository": "https://github.com/situmtech/cordova",
+  "author": "Situm Technologies <mobile@situm.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/situmtech/cordova/issues"
+  },
+  "homepage": "https://github.com/situmtech/cordova#readme",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "cordova": {
     "id": "@situm/cordova",
     "platforms": [
       "android",
       "ios"
     ]
-  },
-  "description": "Situm Cordova-based Plugin for hybrid apps.",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/situmtech/situm-cordova-plugin.git"
   },
   "keywords": [
     "situm",
@@ -26,12 +33,6 @@
       "version": ">=6.0.0"
     }
   ],
-  "author": "Situm Techonologies",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/situmtech/situm-cordova-plugin/issues"
-  },
-  "homepage": "https://github.com/situmtech/situm-cordova-plugin#readme",
   "dependencies": {
     "cordova-common": "^2.2.5",
     "describe": "^1.2.0",
