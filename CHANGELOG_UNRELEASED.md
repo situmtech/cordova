@@ -1,4 +1,4 @@
-# Version 3.0.0 – November 22, 2023
+# Unreleased
 
 **Added**
 - Added new actions and events for MapViewController:
