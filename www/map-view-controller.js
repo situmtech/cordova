@@ -269,9 +269,14 @@ class MapViewControllerImpl {
 
   /**
    * Navigate to a POI of a building.
-   * @param {number} identifier The identifier of the poi.
-   * @param {'CHOOSE_SHORTEST' | 'ONLY_ACCESSIBLE' | 'ONLY_NOT_ACCESSIBLE_FLOOR_CHANGES'} accessibilityMode Choose the route type to calculate:
+   * 
+   * The types of {@link accessibilityMode} you can use are:
    * - 'CHOOSE_SHORTEST' : Calculates the shortest route to the destination {@link POI}.
+   * - 'ONLY_ACCESSIBLE' : Calculates the shortest route to the destination {@link POI} but avoiding stairs and prioritizing accessible floor changes such as lifts.
+   * - 'ONLY_NOT_ACCESSIBLE_FLOOR_CHANGES' : Calculates the shortest route to the destination {@link POI} but avoiding lifts and prioritizing non-accessible floor changes such as stairs.
+   *
+   * @param {number} identifier The identifier of the poi.
+   * @param {'CHOOSE_SHORTEST' | 'ONLY_ACCESSIBLE' | 'ONLY_NOT_ACCESSIBLE_FLOOR_CHANGES'} accessibilityMode Choose the route type to calculate.
    * */
   navigateToPoi(identifier, accessibilityMode) {
     this._sendMessageToViewer("navigation.start", {
