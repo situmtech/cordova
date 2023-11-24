@@ -1,11 +1,5 @@
 const Situm = require("situm-cordova-plugin-official.situm");
 
-export let AccessibilityMode = {
-  SHORTEST: "CHOOSE_SHORTEST",
-  ACCESSIBLE: "ONLY_ACCESSIBLE",
-  HEALTHY: "ONLY_NOT_ACCESIBLE_FLOOR_CHANGES",
-};
-
 /**
  * @namespace MapViewControllerImpl
  */
@@ -280,7 +274,8 @@ class MapViewControllerImpl {
   /**
    * Navigate to a POI of a building.
    * @param {number} identifier The identifier of the poi.
-   * @param {AccessibilityMode} accessibilityMode Choose the route type to calculate.
+   * @param {'CHOOSE_SHORTEST' | 'ONLY_ACCESSIBLE' | 'ONLY_NOT_ACCESSIBLE_FLOOR_CHANGES'} accessibilityMode Choose the route type to calculate:
+   * - 'CHOOSE_SHORTEST' : Calculates the shortest route to the destination {@link POI}.
    * */
   navigateToPoi(identifier, accessibilityMode) {
     this._sendMessageToViewer("navigation.start", {
@@ -311,4 +306,4 @@ class MapViewControllerImpl {
 }
 
 let MapViewController = new MapViewControllerImpl();
-module.exports = {MapViewController, AccessibilityMode};
+module.exports = MapViewController;
