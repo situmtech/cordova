@@ -92,10 +92,20 @@ class MapViewControllerImpl {
         break;
       case "cartography.poi_selected":
         console.debug(`poi (${m.payload.identifier}) was selected`);
-        this._onPoiSelectedCallback(m.payload);
+        this._onPoiSelectedCallback({
+          poi: {
+            identifier: m.payload.identifier,
+            buildingIdentifier: m.payload.buildingIdentifier,
+          },
+        });
         break;
       case "cartography.poi_deselected":
-        this._onPoiDeselectedCallback(m.payload);
+        this._onPoiDeselectedCallback({
+          poi: {
+            identifier: m.payload.identifier,
+            buildingIdentifier: m.payload.buildingIdentifier,
+          },
+        });
         break;
       case "directions.requested":
         this._onDirectionsRequested(m.payload);
@@ -269,14 +279,16 @@ class MapViewControllerImpl {
 
   /**
    * Navigate to a POI of a building.
-   * 
+   *
    * The types of {@link accessibilityMode} you can use are:
    * - 'CHOOSE_SHORTEST' : Calculates the shortest route to the destination {@link POI}.
    * - 'ONLY_ACCESSIBLE' : Calculates the shortest route to the destination {@link POI} but avoiding stairs and prioritizing accessible floor changes such as lifts.
    * - 'ONLY_NOT_ACCESSIBLE_FLOOR_CHANGES' : Calculates the shortest route to the destination {@link POI} but avoiding lifts and prioritizing non-accessible floor changes such as stairs.
    *
+   * accessibilityMode defaults to CHOOSE_SHORTEST.
+   *
    * @param {number} identifier The identifier of the poi.
-   * @param {'CHOOSE_SHORTEST' | 'ONLY_ACCESSIBLE' | 'ONLY_NOT_ACCESSIBLE_FLOOR_CHANGES'} accessibilityMode Choose the route type to calculate.
+   * @param {'CHOOSE_SHORTEST' | 'ONLY_ACCESSIBLE' | 'ONLY_NOT_ACCESSIBLE_FLOOR_CHANGES' | undefined} accessibilityMode Choose the route type to calculate.
    * */
   navigateToPoi(identifier, accessibilityMode) {
     this._sendMessageToViewer("navigation.start", {
@@ -291,17 +303,17 @@ class MapViewControllerImpl {
 
   /**
    * A POI was selected in your building.
-   * @param {Function} callback
+   * @param {Function} cb A callback that returns a {@link PoiSelectedResult} by its parameters.
    * */
-  onPoiSelected(callback) {
+  onPoiSelected(cb) {
     this._onPoiSelectedCallback = callback;
   }
 
   /**
    * A POI was deselected in your building.
-   * @param {Function} callback
+   * @param {Function} cb A callback that returns a {@link PoiDeselectedResult} by its parameters.
    * */
-  onPoiDeselected(callback) {
+  onPoiDeselected(cb) {
     this._onPoiDeselectedCallback = callback;
   }
 }

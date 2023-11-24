@@ -740,3 +740,39 @@ var RealTimeData = {
 }
 
 module.exports = RealTimeData
+
+/**
+ * @name
+ * PoiSelectedResult
+ * @description
+ * An object that contains the identifier of the POI the user has selected and the building indentifier of the POI.
+ * @property {number} identifier The unique identifier of the POI selected.
+ * @property {number} buildingIdentifier The unique identifier of the building where the POI is located at.
+ */
+
+var PoiSelectedResult = {
+  poi: {
+    identifier,
+    buildingIdentifier,
+  },
+};
+
+module.exports = PoiSelectedResult;
+
+/**
+ * @name
+ * PoiDeselectedResult
+ * @description
+ * An object that contains the identifier of the POI the user has deselected and the building indentifier of the POI.
+ * @property {number} identifier The unique identifier of the POI deselected.
+ * @property {number} buildingIdentifier The unique identifier of the building where the POI is located at.
+ */
+
+var PoiDeselectedResult = {
+  poi: {
+    identifier,
+    buildingIdentifier,
+  }
+};
+
+module.exports = PoiDeselectedResult;
