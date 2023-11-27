@@ -92,20 +92,22 @@ class MapViewControllerImpl {
         break;
       case "cartography.poi_selected":
         console.debug(`poi (${m.payload.identifier}) was selected`);
-        this._onPoiSelectedCallback({
+        const poiSelectedResult = {
           poi: {
             identifier: m.payload.identifier,
             buildingIdentifier: m.payload.buildingIdentifier,
           },
-        });
+        };
+        this._onPoiSelectedCallback(poiSelectedResult);
         break;
       case "cartography.poi_deselected":
-        this._onPoiDeselectedCallback({
+        const poiDeselectedResult = {
           poi: {
             identifier: m.payload.identifier,
             buildingIdentifier: m.payload.buildingIdentifier,
           },
-        });
+        };
+        this._onPoiDeselectedCallback(poiDeselectedResult);
         break;
       case "directions.requested":
         this._onDirectionsRequested(m.payload);
@@ -306,7 +308,7 @@ class MapViewControllerImpl {
    * @param {Function} cb A callback that returns a {@link PoiSelectedResult} by its parameters.
    * */
   onPoiSelected(cb) {
-    this._onPoiSelectedCallback = callback;
+    this._onPoiSelectedCallback = cb;
   }
 
   /**
@@ -314,7 +316,7 @@ class MapViewControllerImpl {
    * @param {Function} cb A callback that returns a {@link PoiDeselectedResult} by its parameters.
    * */
   onPoiDeselected(cb) {
-    this._onPoiDeselectedCallback = callback;
+    this._onPoiDeselectedCallback = cb;
   }
 }
 
