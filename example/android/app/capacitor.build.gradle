@@ -17,9 +17,10 @@ dependencies {
     implementation project(':capacitor-keyboard')
     implementation project(':capacitor-preferences')
     implementation project(':capacitor-status-bar')
-
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
+    implementation "androidx.appcompat:appcompat:1.3.1"
 }
-apply from: "../../node_modules/situm-cordova-plugin-official/src/android/situm.gradle"
+apply from: "../../../src/android/situm.gradle"
 
 if (hasProperty('postBuildExtras')) {
   postBuildExtras()
