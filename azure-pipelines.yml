@@ -101,7 +101,7 @@ jobs:
 
     steps:
       - bash: |
-          cd situm-cordova-plugin
+          cd cordova
       
           echo -e "\n[+] Install npm dependencies \n"
           npm install
@@ -156,8 +156,8 @@ jobs:
           echo -e "\t[+] Current branch: $currentBranch"
 
           echo -e "\n[+] Setting git remote credentials\n"
-          if [ -d "situm-cordova-plugin" ];then
-            cd situm-cordova-plugin
+          if [ -d "cordova" ];then
+            cd cordova
           fi
           git remote set-url origin https://situmops:$(github_token)@github.com/$(Build.Repository.Name).git
           cat .git/config
@@ -166,7 +166,7 @@ jobs:
 
       - bash: |
       
-          cd situm-cordova-plugin
+          cd cordova
           echo -e "\n[+] Setting NPM version to $(version)"
           npm version $(version) --no-git-tag-version
       
@@ -196,13 +196,13 @@ jobs:
             bitbucket_user: situmops
           system: "N/A"
           server: "github"
-          repoFolder: "situm-cordova-plugin"
+          repoFolder: "cordova"
           mergeBranches:
             - "master"
             - "develop"
       
       - bash: |
-          cd situm-cordova-plugin
+          cd cordova
           echo -e "\n[+] Fetch all branches\n"
           git fetch
       
@@ -220,7 +220,7 @@ jobs:
       
       
       - bash: |
-          cd situm-cordova-plugin
+          cd cordova
       
           echo -e "\n[+] Install dependencies"
           npm install
@@ -233,12 +233,12 @@ jobs:
       - template: azure-templates/commit-doc.yaml@sys_kubernetes_templates
         parameters:
           version: $(version)
-          docPath: situm-cordova-plugin/docs/JSDoc
+          docPath: cordova/docs/JSDoc
           system: cordova
           bitbucket:
             bitbucket_user: $(bitbucket_user)
             bitbucket_pass: $(bitbucket_pass)
-          release: "situm-cordova-plugin"
+          release: "cordova"
       
       - checkout: cordova_sdk_validation 
         fetchTags: false
@@ -265,8 +265,8 @@ jobs:
         displayName: Execute example app 
             
       - bash: |
-          if [ -d "situm-cordova-plugin" ]; then
-            cd situm-cordova-plugin
+          if [ -d "cordova" ]; then
+            cd cordova
           fi
       
           echo -e "\n[+] Pull master changes and change to master branch \n"
@@ -274,14 +274,14 @@ jobs:
           git checkout master
           git pull origin master
       
-          iossdk=$(grep -oE '\s<framework src="SitumSDK" type="podspec" spec="[0-9]+\.[0-9]+\.[0-9]+" />' plugin.xml | awk -F'"' '{print $6}')
+          iossdk=$(grep -oP 'spec="\~> \K[0-9]+\.[0-9]+\.[0-9]+' plugin.xml)
           androidsdk=$(grep -oE 'es.situm:situm-sdk:[0-9]+\.[0-9]+\.[0-9]+@aar' src/android/situm.gradle | awk -F'[:@]' '{print $3}')
       
       
           echo -e "\n[+] Checkout to previous commit\n"
           git checkout HEAD~1
       
-          iossdk_old=$(grep -oE '\s<framework src="SitumSDK" type="podspec" spec="[0-9]+\.[0-9]+\.[0-9]+" />' plugin.xml | awk -F'"' '{print $6}')
+          iossdk_old=$(grep -oP 'spec="\~> \K[0-9]+\.[0-9]+\.[0-9]+' plugin.xml)
           androidsdk_old=$(grep -oE 'es.situm:situm-sdk:[0-9]+\.[0-9]+\.[0-9]+@aar' src/android/situm.gradle | awk -F'[:@]' '{print $3}')
 
           echo -e "\n[+] Return repository to master branch\n"
