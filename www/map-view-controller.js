@@ -280,7 +280,7 @@ class MapViewControllerImpl {
   }
 
   /**
-   * Navigate to a POI of a building.
+   * Navigate to a {@link POI} of a building.
    *
    * The types of {@link accessibilityMode} you can use are:
    * - 'CHOOSE_SHORTEST' : Calculates the shortest route to the destination {@link POI}.
@@ -304,7 +304,7 @@ class MapViewControllerImpl {
   // ==================================================
 
   /**
-   * A POI was selected in your building.
+   * A {@link POI} was selected in your building.
    * @param {Function} cb A callback that returns a {@link PoiSelectedResult} by its parameters.
    * */
   onPoiSelected(cb) {
@@ -312,7 +312,7 @@ class MapViewControllerImpl {
   }
 
   /**
-   * A POI was deselected in your building.
+   * A {@link POI} was deselected in your building.
    * @param {Function} cb A callback that returns a {@link PoiDeselectedResult} by its parameters.
    * */
   onPoiDeselected(cb) {
