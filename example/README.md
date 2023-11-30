@@ -4,7 +4,7 @@
 
 <div align="center" style="text-align:center">
 
-A sample Capacitor application to start learning the power of [@situm/cordova](../README.md).
+A sample Capacitor application to start learning the power of [**@situm/cordova**](https://www.npmjs.com/package/@situm/cordova).
 
 </div>
 
@@ -18,7 +18,7 @@ A sample Capacitor application to start learning the power of [@situm/cordova](.
 
 ## What's in here
 
-This folder contains the necessary source code for an example application using the **@situm/cordova** plugin.
+This folder contains the necessary source code for an example application using the [**Situm Cordova Plugin**](../README.md) plugin.
 
 <div align="center" style="display: flex;">
     <img src="./docs/assets/sdk_preview.png" alt="sdk_preview">
@@ -81,7 +81,7 @@ export const BUILDING_IDENTIFIER = "YOUR_BUILDING_IDENTIFIER";
 
 ### Step 3: Run the app <a name="runapplication"></a>
 
-From the `example` folder, execute the following command which works on both Android and iOS devices:
+From the `example/` folder, execute the following command which works on both Android and iOS devices:
 
 ```bash
 # For Android devices
@@ -97,7 +97,7 @@ You can also run the app from your IDE:
 
 ## Documentation
 
-More information on how to use the official @situm/cordova plugin and the set of APIs, the functions, parameters and results each function accepts and provides can be found in our [SDK API Reference](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/situm) and [Wayfinding API Reference](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/mapview).
+More information on how to use the official [**@situm/cordova**](https://www.npmjs.com/package/@situm/cordova) plugin and the set of APIs, the functions, parameters and results each function accepts and provides can be found in our [SDK API Reference](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/situm) and [Wayfinding API Reference](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/mapview).
 
 ### Examples
 
