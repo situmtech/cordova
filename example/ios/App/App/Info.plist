@@ -23,11 +23,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>en</string>
+	<string>Location is required to find out where you are</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>en</string>
+	<string>Location is required to find out where you are</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>en</string>
+	<string>Location is required to find out where you are</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
