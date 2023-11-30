@@ -1,4 +1,58 @@
-/** @name
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Source: android/Interfaces.js | Situm</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
+
+    
+        
+            <link type="text/css" rel="stylesheet" href="styles/custom.css">
+        
+    
+</head>
+<body>
+<nav class="lnb" id="lnb">
+    <div class="logo" style="width: 90px; height: 90px">
+        
+            <a href="https://github.com/situmtech/situm-cordova-plugin" rel="noopener noreferrer" target="_blank">
+                <img src="https://situm.com/wp-content/uploads/2023/04/situm_logo_blanco_300_sq.png" width="100%" height="100%">
+            </a>
+        
+    </div>
+    <div class="title">
+        <h1><a href="index.html" class="link">Situm</a></h1>
+        
+    </div>
+    <div class="search-container" id="search-container">
+        <input type="text" placeholder="Search">
+        <ul></ul>
+    </div>
+    
+    <div class="lnb-api hidden"><h3>Namespaces</h3><ul><li><a href="MapView.html">MapView</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="MapView_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="MapView.html#.onLoad">onLoad</a></li></ul></div></li><li><a href="MapViewControllerImpl.html">MapViewControllerImpl</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="MapViewControllerImpl_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="MapViewControllerImpl.html#navigateToPoi">navigateToPoi</a></li><li><a href="MapViewControllerImpl.html#onPoiDeselected">onPoiDeselected</a></li><li><a href="MapViewControllerImpl.html#onPoiSelected">onPoiSelected</a></li><li><a href="MapViewControllerImpl.html#selectPoi">selectPoi</a></li></ul></div></li><li><a href="Situm.html">Situm</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Situm_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="Situm.html#.fetchBuildingInfo">fetchBuildingInfo</a></li><li><a href="Situm.html#.fetchBuildings">fetchBuildings</a></li><li><a href="Situm.html#.fetchEventsFromBuilding">fetchEventsFromBuilding</a></li><li><a href="Situm.html#.fetchFloorsFromBuilding">fetchFloorsFromBuilding</a></li><li><a href="Situm.html#.fetchGeofencesFromBuilding">fetchGeofencesFromBuilding</a></li><li><a href="Situm.html#.fetchIndoorPOIsFromBuilding">fetchIndoorPOIsFromBuilding</a></li><li><a href="Situm.html#.fetchMapFromFloor">fetchMapFromFloor</a></li><li><a href="Situm.html#.fetchOutdoorPOIsFromBuilding">fetchOutdoorPOIsFromBuilding</a></li><li><a href="Situm.html#.fetchPoiCategories">fetchPoiCategories</a></li><li><a href="Situm.html#.fetchPoiCategoryIconNormal">fetchPoiCategoryIconNormal</a></li><li><a href="Situm.html#.fetchPoiCategoryIconSelected">fetchPoiCategoryIconSelected</a></li><li><a href="Situm.html#.internalSetEventDelegate">internalSetEventDelegate</a></li><li><a href="Situm.html#.invalidateCache">invalidateCache</a></li><li><a href="Situm.html#.onEnterGeofences">onEnterGeofences</a></li><li><a href="Situm.html#.onExitGeofences">onExitGeofences</a></li><li><a href="Situm.html#.removeNavigationUpdates">removeNavigationUpdates</a></li><li><a href="Situm.html#.removeRealTimeUpdates">removeRealTimeUpdates</a></li><li><a href="Situm.html#.requestDirections">requestDirections</a></li><li><a href="Situm.html#.requestNavigationUpdates">requestNavigationUpdates</a></li><li><a href="Situm.html#.requestRealTimeUpdates">requestRealTimeUpdates</a></li><li><a href="Situm.html#.setApiKey">setApiKey</a></li><li><a href="Situm.html#.setCacheMaxAge">setCacheMaxAge</a></li><li><a href="Situm.html#.setUserPass">setUserPass</a></li><li><a href="Situm.html#.startPositioning">startPositioning</a></li><li><a href="Situm.html#.stopPositioning">stopPositioning</a></li><li><a href="Situm.html#.updateNavigationWithLocation">updateNavigationWithLocation</a></li></ul></div></li></ul></div><div class="lnb-api hidden"><h3>Global</h3><ul><li><a href="global.html#Angle">Angle</a></li><li><a href="global.html#BeaconFilter">BeaconFilter</a></li><li><a href="global.html#Bounds">Bounds</a></li><li><a href="global.html#Building">Building</a></li><li><a href="global.html#BuildingInfo">BuildingInfo</a></li><li><a href="global.html#CartesianCoordinate">CartesianCoordinate</a></li><li><a href="global.html#Circle">Circle</a></li><li><a href="global.html#Coordinate">Coordinate</a></li><li><a href="global.html#Dimensions">Dimensions</a></li><li><a href="global.html#DirectionsOptions">DirectionsOptions</a></li><li><a href="global.html#DirectionsRequest">DirectionsRequest</a></li><li><a href="global.html#Floor">Floor</a></li><li><a href="global.html#Geofence">Geofence</a></li><li><a href="global.html#Indication">Indication</a></li><li><a href="global.html#Location">Location</a></li><li><a href="global.html#LocationOptions">LocationOptions</a></li><li><a href="global.html#LocationRequest">LocationRequest</a></li><li><a href="global.html#LocationStatus">LocationStatus</a></li><li><a href="global.html#NavigationProgress">NavigationProgress</a></li><li><a href="global.html#NavigationRequest">NavigationRequest</a></li><li><a href="global.html#OutdoorLocationOptions">OutdoorLocationOptions</a></li><li><a href="global.html#POI">POI</a></li><li><a href="global.html#PoiCategory">PoiCategory</a></li><li><a href="global.html#PoiDeselectedResult">PoiDeselectedResult</a></li><li><a href="global.html#Point">Point</a></li><li><a href="global.html#PoiSelectedResult">PoiSelectedResult</a></li><li><a href="global.html#RealTimeData">RealTimeData</a></li><li><a href="global.html#RealTimeRequest">RealTimeRequest</a></li><li><a href="global.html#Route">Route</a></li><li><a href="global.html#RouteSegment">RouteSegment</a></li><li><a href="global.html#RouteStep">RouteStep</a></li><li><a href="global.html#SitumConversionArea">SitumConversionArea</a></li><li><a href="global.html#SitumEvent">SitumEvent</a></li></ul></div>
+</nav>
+<div id="resizer"></div>
+
+<div class="main" id="main">
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** @name
  * Building
  * @description
  * A Building object definition
@@ -40,10 +94,10 @@ module.exports = Building
  * @description
  * Detailed information of a building in a single object.
  * @property {Building} building - Basic information.
- * @property {Array<Floor>} floors - complete set of levels.
- * @property {Array<Poi>} indoorPois - list of indoor pois (the ones which its coordinate is inside the building).
- * @property {Array<Poi>} outdoorPois - list of indoor pois (the ones which its coordinate is outside the building).
- * @property {Array<Event>} events - list of events associated with a building.
+ * @property {Array&lt;Floor>} floors - complete set of levels.
+ * @property {Array&lt;Poi>} indoorPois - list of indoor pois (the ones which its coordinate is inside the building).
+ * @property {Array&lt;Poi>} outdoorPois - list of indoor pois (the ones which its coordinate is outside the building).
+ * @property {Array&lt;Event>} events - list of events associated with a building.
  */
 
 var BuildingInfo = {
@@ -732,7 +786,7 @@ module.exports = RealTimeRequest
  * RealTimeData
  * @description
  * A data object that contains information of the location of users in realtime.
- * @property {Array<Location>} locations object
+ * @property {Array&lt;Location>} locations object
  */
 
 var RealTimeData = {
@@ -745,9 +799,9 @@ module.exports = RealTimeData
  * @name
  * PoiSelectedResult
  * @description
- * An object that contains the identifier of the {@link POI} the user has selected and the building indentifier where it is located.
- * @property {number} identifier The unique identifier of the {@link POI} selected.
- * @property {number} buildingIdentifier The unique identifier of the building where the {@link POI} is located at.
+ * An object that contains the identifier of the POI the user has selected and the building indentifier of the POI.
+ * @property {number} identifier The unique identifier of the POI selected.
+ * @property {number} buildingIdentifier The unique identifier of the building where the POI is located at.
  */
 
 var PoiSelectedResult = {
@@ -763,9 +817,9 @@ module.exports = PoiSelectedResult;
  * @name
  * PoiDeselectedResult
  * @description
- * An object that contains the identifier of the {@link POI} the user has deselected and the building indentifier where it is located.
- * @property {number} identifier The unique identifier of the {@link POI} deselected.
- * @property {number} buildingIdentifier The unique identifier of the building where the {@link POI} is located at.
+ * An object that contains the identifier of the POI the user has deselected and the building indentifier of the POI.
+ * @property {number} identifier The unique identifier of the POI deselected.
+ * @property {number} buildingIdentifier The unique identifier of the building where the POI is located at.
  */
 
 var PoiDeselectedResult = {
@@ -775,4 +829,33 @@ var PoiDeselectedResult = {
   }
 };
 
-module.exports = PoiDeselectedResult;
+module.exports = PoiDeselectedResult;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<footer>
+    <img class="logo" src="https://situm.com/wp-content/uploads/2023/04/situm_logo_blanco_300_sq.png" style="width: 90px; height: 90px">
+    <div class="footer-text">COPYRIGHT © SITUM TECHNOLOGIES 2014 - 2018</div>
+</footer>
+<script>prettyPrint();</script>
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/tui-doc.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+    <script>
+        var id = '_sub'.replace(/"/g, '_');
+        var selectedApi = document.getElementById(id); // do not use jquery selector
+        var $selectedApi = $(selectedApi);
+
+        $selectedApi.removeClass('hidden');
+        $selectedApi.parent().find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+        showLnbApi();
+    </script>
+
+</body>
+</html>

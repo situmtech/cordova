@@ -2,8 +2,8 @@
 
 # Situm Cordova Plugin
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![npm](https://img.shields.io/npm/v/situm-cordova-plugin-official.svg)](https://www.npmjs.com/package/situm-cordova-plugin-official)
-[![npm](https://img.shields.io/npm/dm/situm-cordova-plugin-official.svg)](https://www.npmjs.com/package/situm-cordova-plugin-official)
+[![npm](https://img.shields.io/npm/v/@situm/cordova.svg)](https://www.npmjs.com/package/@situm/cordova)
+[![npm](https://img.shields.io/npm/dm/@situm/cordova.svg)](https://www.npmjs.com/package/@situm/cordova)
 </div>
 <div style="float:right; margin-left: 1rem;">
 
@@ -457,7 +457,7 @@ If the problem persists, add this plugin to the `staticPlugins` section of your 
 {
 	"cordova": {
 		"staticPlugins": [
-			"situm-cordova-plugin-official"
+			"@situm/cordova"
 		]
 	}
 }

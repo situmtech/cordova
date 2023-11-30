@@ -1,5 +1,7 @@
-## Unreleased
+# Unreleased
 
-### Added
-
-* Added new MapViewer component to visualize our cartography through a web view.
+**Added**
+- Added new actions and events for MapViewController:
+    - navigateToPoi
+    - onPoiSelected
+    - onPoiDeselected

@@ -1,17 +1,24 @@
 {
-  "name": "situm-cordova-plugin-official",
-  "version": "1.20.31",
+  "name": "@situm/cordova",
+  "version": "3.1.0",
+  "description": "Set of utilities that allow any developer to build Cordova location based apps using Situm's indoor positioning system.",
+  "private": false,
+  "repository": "https://github.com/situmtech/cordova",
+  "author": "Situm Technologies <mobile@situm.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/situmtech/cordova/issues"
+  },
+  "homepage": "https://github.com/situmtech/cordova#readme",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "cordova": {
-    "id": "situm-cordova-plugin-official",
+    "id": "@situm/cordova",
     "platforms": [
       "android",
       "ios"
     ]
-  },
-  "description": "Situm Cordova-based Plugin for hybrid apps.",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/situmtech/situm-cordova-plugin.git"
   },
   "keywords": [
     "situm",
@@ -26,12 +33,6 @@
       "version": ">=6.0.0"
     }
   ],
-  "author": "Situm Techonologies",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/situmtech/situm-cordova-plugin/issues"
-  },
-  "homepage": "https://github.com/situmtech/situm-cordova-plugin#readme",
   "dependencies": {
     "cordova-common": "^2.2.5",
     "describe": "^1.2.0",
@@ -41,7 +42,7 @@
   "scripts": {
     "test": "cd tests/js && mocha",
     "eslint": "node node_modules/eslint/bin/eslint www && node node_modules/eslint/bin/eslint src && node node_modules/eslint/bin/eslint tests",
-    "jsdoc": "rm -rf docs/JSDoc && ./node_modules/.bin/jsdoc www/android/situm.js www/android/Interfaces.js -c ./docs/conf.json -d docs/JSDoc"
+    "jsdoc": "rm -rf docs/JSDoc && ./node_modules/.bin/jsdoc www/android/situm.js www/android/Interfaces.js www/map-view.js www/map-view-controller.js -c ./docs/conf.json -d docs/JSDoc"
   },
   "devDependencies": {
     "eslint": "^5.3.0",
