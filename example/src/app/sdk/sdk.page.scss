@@ -1,0 +1,23 @@
+ion-toolbar {
+    align-items: center;
+}
+
+ion-thumbnail {
+    --size: 30px;
+}
+
+ion-button {
+    color: white;
+    text-transform: none;
+}
+
+ion-item.custom {
+    --padding-start: 10px;
+    --padding-end: 0px;
+    --margin-end: 0px;
+}
+
+ion-textarea.custom {
+    --placeholder-color: black;
+    --placeholder-opacity: 1;
+}

@@ -1,130 +1,133 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Situm Capacitor Example
-    </ion-title>
+    <ion-item class="custom" slot="start">
+      <ion-thumbnail slot="start">
+        <img
+          src="https://situm.com/wp-content/uploads/2023/02/cropped-Favicon-Situm-Indoor-Positioning.png"
+        />
+      </ion-thumbnail>
+    </ion-item>
+    <ion-title> Situm Capacitor Example </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="locate" color="primary"></ion-icon>
+        Positioning
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-row>
+        <ion-button
+          class="example-button"
+          (click)="startPositioning()"
+          [disabled]="positioning"
+        >
+          startPositioning()
+        </ion-button>
+        <ion-button
+          class="example-button"
+          (click)="stopPositioning()"
+          [disabled]="!positioning"
+        >
+          stopPositioning()
+        </ion-button>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
 
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Buildings</ion-card-title>
+      <ion-card-title>
+        <ion-icon name="cloud-download" color="primary"></ion-icon>
+        Fetch Resources
+      </ion-card-title>
     </ion-card-header>
-    <ion-card-content>
 
+    <ion-card-content>
       <ion-button
-          expand="block"
-          (click)="loadBuildings()"
-          [disabled]="positioning || buildings">
-          Click me to load buildings
+        class="example-button"
+        expand="block"
+        size="small"
+        (click)="fetchBuildingInfo()"
+      >
+        fetchBuildingInfo()
       </ion-button>
-
-      <ion-list *ngIf="buildings">
-        <ion-card *ngFor="let b of buildings">
-          <ion-item
-            (click)="startPositioning(b)"
-            [disabled]="positioning">
-            <ion-label >{{b.name}} - {{b.buildingIdentifier}}</ion-label>
-            <ion-button>
-              <ion-icon name="locate" slot="icon-only"></ion-icon>
-            </ion-button>
-          </ion-item>
-          <ion-item>
-            <ion-button tab="fetch-building-info" (click)="fetchBuildingInfo(b)">
-              <ion-label>Info</ion-label>
-            </ion-button>
-            <ion-button tab="fetch-indoor-pois" (click)="fetchPois(b)">
-              <ion-label>POIs</ion-label>
-            </ion-button>
-            <ion-button tab="fetch-geofences" (click)="fetchGeofences(b)">
-              <ion-label>Fences</ion-label>
-            </ion-button>
-          </ion-item>
-        </ion-card>
-        <ion-item>
-          <ion-button
-            expand="block"
-            (click)="startPositioning(null)"
-            [disabled]="positioning">
-              GLOBAL MODE
-          </ion-button>
-        </ion-item>
-      </ion-list>
-
+      <ion-button
+        class="example-button"
+        expand="block"
+        size="small"
+        (click)="fetchPois()"
+      >
+        fetchPois()
+      </ion-button>
+      <ion-button
+        class="example-button"
+        expand="block"
+        size="small"
+        (click)="fetchPoiCategories()"
+      >
+        fetchPoiCategories()
+      </ion-button>
+      <ion-button
+        class="example-button"
+        expand="block"
+        size="small"
+        (click)="fetchGeofences()"
+      >
+        fetchGeofences()
+      </ion-button>
     </ion-card-content>
   </ion-card>
-
-
-
-  <ion-card
-    *ngIf="floors && floors.length > 0">
-
-    <ion-card-header>
-      <ion-card-title>Floors</ion-card-title>
-    </ion-card-header>
-
-    <ion-card-content>
-      <ion-item
-        *ngFor="let f of floors">
-        <ion-label>{{ f.name }}</ion-label>
-        <img width="100" src="{{ f.mapUrl }}" />
-      </ion-item>
-    </ion-card-content>
-
-  </ion-card>
-
-
-
-  <ion-card
-    *ngIf="navigation">
-
-    <ion-card-header>
-      <ion-card-title>Navigation</ion-card-title>
-    </ion-card-header>
-
-    <ion-card-content>
-      <ion-item>
-        <ion-label style="max-height: 200px; overflow-y: scroll;" text-wrap>{{ navigation }}</ion-label>
-      </ion-item>
-      <ion-item
-        *ngFor="let indication of indications">
-        <ion-label>{{ indication.humanReadableMessage }}</ion-label>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
-
-
 
   <ion-card>
-
     <ion-card-header>
-      <ion-card-title>Status</ion-card-title>
+      <ion-card-title>
+        <ion-icon name="map" color="primary"></ion-icon>
+        Cartography
+      </ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
-
-      <ion-item>
-        <ion-icon name="pin" slot="start"></ion-icon>
-        <ion-label>{{ currentStatus }}</ion-label>
-        <ion-button
-          *ngIf="positioning"
-          (click)="stopPositioning()">
-          <ion-icon name="stop" slot="icon-only"></ion-icon>
+      <!-- <ion-button id="open-picker"> Pick a POI </ion-button> -->
+      <ion-card>
+        <ion-item id="open-picker" *ngIf="!currentPoi"> Pick a POI </ion-item>
+        <ion-item id="open-picker" *ngIf="currentPoi">
+          {{ currentPoi.identifier }} - {{ currentPoi.poiName }}
+        </ion-item>
+      </ion-card>
+      <ion-picker
+        trigger="open-picker"
+        [columns]="pickerColumns"
+        [buttons]="pickerButtons"
+      ></ion-picker>
+      <ion-row class="ion-justify-content-center">
+        <ion-button class="example-button" (click)="selectPoi()">
+          selectPoi()
         </ion-button>
-        <ion-button
-          *ngIf="positioning"
-          (click)="requestNav()">
-          <ion-icon name="navigate" slot="icon-only"></ion-icon>
+        <ion-button class="example-button" (click)="navigateToPoi()">
+          navigateToPoi()
         </ion-button>
-      </ion-item>
-
-      <ion-item>
-        {{ currentPositioningInfo }}
-      </ion-item>
-
+      </ion-row>
     </ion-card-content>
   </ion-card>
 
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>{{ currentStatus }}</ion-label>
+      </ion-item>
+
+      <ion-textarea
+        class="custom"
+        [readonly]="true"
+        placeholder="{{ currentPositioningInfo }}"
+        style="height: 60vh"
+      ></ion-textarea>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
