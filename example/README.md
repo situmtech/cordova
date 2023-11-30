@@ -1,0 +1,122 @@
+<p align="center"> <img width="233" src="https://situm.com/wp-content/themes/situm/img/logo-situm.svg" style="margin-bottom:1rem" />
+<h1 align="center">Situm Capacitor Example</h1>
+</p>
+
+<div align="center" style="text-align:center">
+
+A sample Capacitor application to start learning the power of [@situm/cordova](../README.md).
+
+</div>
+
+<div align="center" style="text-align:center">
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![npm](https://img.shields.io/npm/v/@situm/cordova.svg)](https://www.npmjs.com/package/@situm/cordova)
+[![npm](https://img.shields.io/npm/dm/@situm/cordova.svg)](https://www.npmjs.com/package/@situm/cordova)
+
+</div>
+
+## What's in here
+
+This folder contains the necessary source code for an example application using the **@situm/cordova** plugin.
+
+<div align="center" style="display: flex;">
+    <img src="./docs/assets/sdk_preview.png" alt="sdk_preview">
+    <img src="./docs/assets/wyf_preview.png" alt="wyf_preview">
+</div>
+
+## How to run the app
+
+### Step 1: Install the dependencies
+
+The first step is to download this repo:
+
+```bash
+git clone https://github.com/situmtech/cordova.git
+```
+
+And then install the plugin dependencies alongside the `example` app as follows:
+
+```bash
+cd cordova/example
+npm install
+```
+
+> [!NOTE]
+> You might want to try out this configuration if you are facing some issues to build our sample app:
+>
+> - node 19.8.1
+> - ionic 7.1.5 (@ionic/cli npm package)
+> - gradle 8.4
+> - java 17.0.6
+
+#### iOS only
+
+Run `pod install` or `pod update` from the `example/ios` folder to bring the dependencies to your project.
+
+Also check out the project [code signing](https://developer.apple.com/support/code-signing/) before you run the example.
+
+### Step 2: Set up your Situm credentials
+
+This example provides you with a template on `example/src/constants.ts.example`:
+
+> [!WARNING]
+> Rename `constants.ts.example` to `constants.ts`.
+
+Now populate it with your credentials:
+
+```typescript
+export const API_USER = "YOUR_SITUM_API_USER";
+export const API_KEY = "YOUR_SITUM_API_KEY";
+export const BUILDING_IDENTIFIER = "YOUR_BUILDING_IDENTIFIER";
+```
+
+### Step 3: Run the app <a name="runapplication"></a>
+
+From the `example` folder, execute the following command which works on both Android and iOS devices:
+
+```bash
+# For Android devices
+ionic cap run android
+# For iOS devices
+ionic cap run ios
+```
+
+You can also run the app from your IDE:
+
+- On Android: open `example/android/` with Android Studio.
+- On iOS: open `example/ios/App/App.xcworkspace` with XCode.
+
+## Documentation
+
+More information on how to use the official @situm/cordova plugin and the set of APIs, the functions, parameters and results each function accepts and provides can be found in our [SDK API Reference](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/situm) and [Wayfinding API Reference](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/mapview).
+
+### Examples
+
+In case you want to learn how to use our plugin, you may want to take a look at our code samples of the basics functionalities:
+
+1. [**Basic SDK and Wayfinding functionality**](./src/app/sdk/sdk.page.ts): showcases how to initialize the Situm SDK (refer to the [cordova sdk quickstart guide](https://situm.com/docs/a-basic-cordova-app/) for more information) and how to use some basic features like positioning and obtaining the information of a given building.
+
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning.
+
+Please refer to [CHANGELOG.md](../CHANGELOG.md) for a list of notables changes for each version of the library.
+
+You can also see the [tags on this repository](https://github.com/situmtech/cordova/tags).
+
+## Submitting Contributions
+
+You will need to sign a Contributor License Agreement (CLA) before making a submission. [Learn more here.](https://situm.com/contributions/)
+
+## License
+
+This project is licensed under the MIT - see the [LICENSE](../LICENSE) file for details.
+
+## More information
+
+More info is available at our [Developers Page](https://situm.com/docs/01-introduction/).
+
+## Support information
+
+For any question or bug report, please send an email to [support@situm.es](mailto:support@situm.es)
