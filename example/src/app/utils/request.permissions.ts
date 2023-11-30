@@ -16,7 +16,10 @@ export function requestPermissions(successCb: Function, errorCb: Function) {
         errorCb(JSON.stringify(error));
       },
       [
+        // Android
+        // We ask this permission to obtain the GPS data of the user and paint it on our map.
         cordova.plugins.diagnostic.permission.ACCESS_FINE_LOCATION,
+        // We ask this last 2 permissions to improve the accuracy of our SDK when locating the user.
         cordova.plugins.diagnostic.permission.BLUETOOTH_CONNECT,
         cordova.plugins.diagnostic.permission.BLUETOOTH_SCAN,
       ]
@@ -33,6 +36,8 @@ export function requestPermissions(successCb: Function, errorCb: Function) {
       }
     );
 
+    // iOS
+    // We just need to ask for the location permission.
     cordova.plugins.diagnostic.requestLocationAuthorization(
       function (status: string) {
         switch (status) {

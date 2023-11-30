@@ -56,7 +56,7 @@ declare let cordova: any;
 })
 export class SDKPage {
   buildings: Array<any> | undefined;
-  selectedBuilding: any | undefined;
+  currentBuilding: any | undefined;
   pois: any | undefined;
   currentPoi: any | undefined;
 
@@ -69,6 +69,12 @@ export class SDKPage {
     // Make sure you are authenticated before calling any other method of our SDK.
     cordova.plugins.Situm.setApiKey(Constants.API_USER, Constants.API_KEY);
 
+    // Use the remote configuration of your situm account.
+    // With this flag activated, you can modify your location request without any code changes.
+    // See all the parameters you can modify in https://dashboard.situm.com/settings.
+    cordova.plugins.Situm.setUseRemoteConfig(true);
+
+    // Internal app methods to initially retrieve the data of your building.
     this._retrieveSpecifiedBuilding(Constants.BUILDING_IDENTIFIER);
   }
 
@@ -109,14 +115,14 @@ export class SDKPage {
           this._setStatus(res.statusName);
         }
         if (res && res.position) {
-          this._setPositioning(true);
           this._setStatus('POSITIONING');
           this._setInfo(res);
         }
+        this._setPositioning(true);
       },
       (err: any) => {
         this._setPositioning(false);
-        this._setStatus('ERROR');
+        this._setStatus('ERROR WHILE POSITIONING');
         this._setInfo(err);
       }
     );
@@ -142,7 +148,7 @@ export class SDKPage {
 
   public fetchBuildingInfo() {
     cordova.plugins.Situm.fetchBuildingInfo(
-      this.selectedBuilding,
+      this.currentBuilding,
       (res: any) => {
         this._setStatus('LOADED BUILDING INFO');
         this._setInfo(res);
@@ -158,7 +164,7 @@ export class SDKPage {
 
   public fetchPois() {
     cordova.plugins.Situm.fetchIndoorPOIsFromBuilding(
-      this.selectedBuilding,
+      this.currentBuilding,
       (res: any) => {
         this.pois = res;
         this._setStatus('LOADED BUILDING INDOOR POIS');
@@ -190,7 +196,7 @@ export class SDKPage {
 
   public fetchGeofences() {
     cordova.plugins.Situm.fetchGeofencesFromBuilding(
-      this.selectedBuilding,
+      this.currentBuilding,
       (geofences: any) => {
         this._setStatus('LOADED BUILDING GEOFENCES');
         this._setInfo(geofences);
@@ -202,6 +208,11 @@ export class SDKPage {
     );
 
     this._setStatus('FETCHING BUILDING GEOFENCES ...');
+  }
+
+  public invalidateCache() {
+    cordova.plugins.Situm.invalidateCache();
+    this._setInfo('The cache was invalidated.');
   }
 
   // ==============================================================================================
@@ -222,6 +233,7 @@ export class SDKPage {
       this._setInfo('Select a POI before calling navigateToPoi() ');
       return;
     }
+    // See https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/mapviewcontrollerimpl#navigateToPoi
     cordova.plugins.MapViewController.navigateToPoi(
       this.currentPoi.identifier,
       'CHOOSE_SHORTEST' // 'ONLY_ACCESSIBLE' | 'ONLY_NOT_ACCESSIBLE_FLOOR_CHANGES' | undefined
@@ -243,7 +255,7 @@ export class SDKPage {
   }
 
   private _setInfo(jsonRes: string) {
-    console.log(JSON.stringify(jsonRes, null, 2));
+    // console.log(JSON.stringify(jsonRes, null, 2));
     this.ngZone.run(() => {
       this.currentPositioningInfo =
         jsonRes == '' || jsonRes == undefined
@@ -261,12 +273,12 @@ export class SDKPage {
   private _retrieveSpecifiedBuilding(buildingIdentifier: string) {
     // We are initially fetching the building specified in Constants.BUILDING_IDENTIFIER
     this._loadBuildings((buildings: any) => {
-      this.selectedBuilding = buildings.find(
+      this.currentBuilding = buildings.find(
         (b: any) => b.buildingIdentifier == buildingIdentifier
       );
       // And its POIs
-      this._loadPoisFrom(this.selectedBuilding, (pois: any) => {
-        // Finally, we also populate the POI picker
+      this._loadPoisFrom(this.currentBuilding, (pois: any) => {
+        // Finally, we also populate the POI picker with the building's pois
         this._populatePOIPicker(pois);
       });
     });
@@ -338,7 +350,7 @@ export class SDKPage {
     {
       text: 'Confirm',
       handler: (value: any) => {
-        console.log('You selected: ', value);
+        console.log('EXAMPLE> poi-picker> currentPoi: ', value.pois.value);
         this.ngZone.run(() => {
           this.currentPoi = value.pois.value;
         });
