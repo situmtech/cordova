@@ -22,18 +22,10 @@
 
     <ion-card-content>
       <ion-row>
-        <ion-button
-          class="example-button"
-          (click)="startPositioning()"
-          [disabled]="positioning"
-        >
+        <ion-button (click)="startPositioning()" [disabled]="positioning">
           startPositioning()
         </ion-button>
-        <ion-button
-          class="example-button"
-          (click)="stopPositioning()"
-          [disabled]="!positioning"
-        >
+        <ion-button (click)="stopPositioning()" [disabled]="!positioning">
           stopPositioning()
         </ion-button>
       </ion-row>
@@ -49,37 +41,20 @@
     </ion-card-header>
 
     <ion-card-content>
-      <ion-button
-        class="example-button"
-        expand="block"
-        size="small"
-        (click)="fetchBuildingInfo()"
-      >
+      <ion-button expand="block" size="small" (click)="fetchBuildingInfo()">
         fetchBuildingInfo()
       </ion-button>
-      <ion-button
-        class="example-button"
-        expand="block"
-        size="small"
-        (click)="fetchPois()"
-      >
+      <ion-button expand="block" size="small" (click)="fetchPois()">
         fetchPois()
       </ion-button>
-      <ion-button
-        class="example-button"
-        expand="block"
-        size="small"
-        (click)="fetchPoiCategories()"
-      >
+      <ion-button expand="block" size="small" (click)="fetchPoiCategories()">
         fetchPoiCategories()
       </ion-button>
-      <ion-button
-        class="example-button"
-        expand="block"
-        size="small"
-        (click)="fetchGeofences()"
-      >
+      <ion-button expand="block" size="small" (click)="fetchGeofences()">
         fetchGeofences()
+      </ion-button>
+      <ion-button expand="block" size="small" (click)="invalidateCache()">
+        invalidateCache()
       </ion-button>
     </ion-card-content>
   </ion-card>
@@ -93,7 +68,6 @@
     </ion-card-header>
 
     <ion-card-content>
-      <!-- <ion-button id="open-picker"> Pick a POI </ion-button> -->
       <ion-card>
         <ion-item id="open-picker" *ngIf="!currentPoi"> Pick a POI </ion-item>
         <ion-item id="open-picker" *ngIf="currentPoi">
@@ -106,12 +80,8 @@
         [buttons]="pickerButtons"
       ></ion-picker>
       <ion-row class="ion-justify-content-center">
-        <ion-button class="example-button" (click)="selectPoi()">
-          selectPoi()
-        </ion-button>
-        <ion-button class="example-button" (click)="navigateToPoi()">
-          navigateToPoi()
-        </ion-button>
+        <ion-button (click)="selectPoi()"> selectPoi() </ion-button>
+        <ion-button (click)="navigateToPoi()"> navigateToPoi() </ion-button>
       </ion-row>
     </ion-card-content>
   </ion-card>
