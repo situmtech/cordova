@@ -42,14 +42,6 @@ cd cordova/example
 npm install
 ```
 
-> [!NOTE]
-> You might want to try out this configuration if you are facing some issues to build our sample app:
->
-> - node 19.8.1
-> - ionic 7.1.5 (@ionic/cli npm package)
-> - gradle 8.4
-> - java 17.0.6
-
 #### iOS only
 
 Run `pod install` or `pod update` from the `example/ios` folder to bring the dependencies to your project.
@@ -58,10 +50,7 @@ Also check out the project [code signing](https://developer.apple.com/support/co
 
 ### Step 2: Set up your Situm credentials
 
-1. This example provides you with a template on [`src/constants.ts.example`](src/constants.ts.example) to set all your credentials used on the sdk tab just in one file:
-
-> [!WARNING]
-> Rename `constants.ts.example` to `constants.ts`.
+1. This example provides you with a template on [`src/constants.ts.example`](src/constants.ts.example) to set all your credentials used on the sdk tab just in one file. So rename this file to `constants.ts` and set up your credentials before running the app:
 
 ```typescript
 export const API_USER = "YOUR_SITUM_API_USER";
@@ -81,7 +70,7 @@ export const BUILDING_IDENTIFIER = "YOUR_BUILDING_IDENTIFIER";
 
 ### Step 3: Run the app <a name="runapplication"></a>
 
-From the `example/` folder, execute the following command which works on both Android and iOS devices:
+From the `example/` folder, execute the following command to run the app on your device:
 
 ```bash
 # For Android devices
@@ -94,6 +83,14 @@ You can also run the app from your IDE:
 
 - On Android: open `example/android/` with Android Studio.
 - On iOS: open `example/ios/App/App.xcworkspace` with XCode.
+
+> [!NOTE]
+> You might want to try out this configuration if you are facing some issues to build our sample app:
+>
+> - node 19.8.1
+> - ionic 7.1.5 (@ionic/cli npm package)
+> - gradle 8.4
+> - java 17.0.6
 
 ## Documentation
 
