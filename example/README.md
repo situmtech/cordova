@@ -1,5 +1,5 @@
 <p align="center"> <img width="233" src="https://situm.com/wp-content/themes/situm/img/logo-situm.svg" style="margin-bottom:1rem" />
-<h1 align="center">Situm Capacitor Example</h1>
+<h1 align="center">Situm Capacitor & Cordova Example</h1>
 </p>
 
 <div align="center" style="text-align:center">
@@ -18,7 +18,7 @@ A sample Capacitor application to start learning the power of [**@situm/cordova*
 
 ## What's in here
 
-This folder contains the necessary source code for an example application using the [**Situm Cordova Plugin**](../README.md) plugin.
+This folder contains the source code of a Capacitor + Ionic example application using the [**Situm Cordova Plugin**](../README.md). You can also **integrate this plugin on a Cordova project**! Learn how to do it in this [section](#using-situmcordova-on-a-cordova-app).
 
 <div align="center" style="display: flex;">
     <img src="./docs/assets/sdk_preview.png" alt="sdk_preview">
@@ -73,10 +73,11 @@ ionic cap run android
 ionic cap run ios
 ```
 
-> [!TIP]
+> [!NOTE]
 > iOS only
 >
 > You might need to update the pods of this app by executing inside `example/ios`:
+>
 > $ pod install --repo-update
 >
 > Also check out the project [code signing](https://developer.apple.com/support/code-signing/) before you run the example.
@@ -86,13 +87,45 @@ You can also run the app from your IDE:
 - On Android: open `example/android/` with Android Studio.
 - On iOS: open `example/ios/App/App.xcworkspace` with XCode.
 
-> [!NOTE]
+> [!TIP]
 > You might want to try out this configuration if you are facing some issues to build our sample app:
 >
 > - node 19.8.1
 > - ionic 7.1.5 (@ionic/cli npm package)
 > - gradle 8.4
 > - java 17.0.6
+
+## Using @situm/cordova on a Cordova app
+
+To integrate our plugin in a Cordova project, follow this 3 steps:
+
+1. Configure your Content-Security-Policy \<meta\> tag in your `www/index.html` to be able to display our MapView on Android:
+
+```html
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: https://ssl.gstatic.com https://map-viewer.situm.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;" />
+```
+
+2. Configure your `config.xml` file to be able to display our MapView on iOS by adding the following \<allow-navigation\> tag:
+
+```html
+<widget>
+  ...
+  <allow-navigation href="https://map-viewer.situm.com/*" />
+</widget>
+```
+
+3. All ready to use our plugin in a Cordova app!
+
+```bash
+cordova plugin add @situm/cordova
+# For Android
+cordova run android
+# For iOS
+cordova run iOS
+```
+
+> [!TIP]
+> You might want to learn [how to create a basic Cordova app using our @situm/cordova plugin](https://situm.com/docs/a-basic-cordova-app/).
 
 ## Documentation
 
