@@ -17,6 +17,7 @@ import {
   IonRow,
   IonPicker,
   IonThumbnail,
+  NavController,
 } from '@ionic/angular/standalone';
 import { NgFor, NgIf } from '@angular/common';
 import { locate, cloudDownload, map } from 'ionicons/icons';
@@ -60,12 +61,12 @@ export class SDKPage {
   pois: any | undefined;
   currentPoi: any | undefined;
 
-  constructor(private ngZone: NgZone) {
+  constructor(private ngZone: NgZone, private navCtrl: NavController) {
     addIcons({ locate, cloudDownload, map });
   }
 
   ionViewDidEnter() {
-    // Authenticate yourself in our SDK to be able to start positioning, retrieve data, ...
+    // First of all, authenticate yourself in our SDK to be able to start positioning, retrieve data, ...
     // Make sure you are authenticated before calling any other method of our SDK.
     cordova.plugins.Situm.setApiKey(Constants.API_USER, Constants.API_KEY);
 
@@ -74,7 +75,34 @@ export class SDKPage {
     // See all the parameters you can modify in https://dashboard.situm.com/settings.
     cordova.plugins.Situm.setUseRemoteConfig(true);
 
-    // Internal app methods to initially retrieve the data of your building.
+    // Wait until receive the MapViewController of our map and
+    // be able to send actions and receive events that occur inside it.
+    cordova.plugins.MapView.onLoad((controller: any) => {
+      // Once the MapView was loaded you can start managing our map by:
+
+      // 1. Sending actions like selecting or navigating to a poi in a building:
+      // controller.selectPoi('YOUR_POI_IDENTIFIER');
+      // controller.navigateToPoi('YOUR_POI_IDENTIFIER');
+
+      // 2. Listen to events that take place inside our map like a poi being selected or deselected:
+      controller.onPoiSelected((poiSelectedResult: any) => {
+        console.log('EXAMPLE> onPoiSelected -> ', poiSelectedResult);
+      });
+
+      controller.onPoiDeselected((poiDeselectedResult: any) => {
+        console.log('EXAMPLE> onPoiDeselected -> ', poiDeselectedResult);
+      });
+
+      // Sample application internal code
+      if (
+        this._doAfterMapViewIsLoaded != null &&
+        typeof this._doAfterMapViewIsLoaded === 'function'
+      ) {
+        console.log('Calling _doAfterMapViewIsLoaded');
+        this._doAfterMapViewIsLoaded();
+      }
+    });
+
     this._retrieveSpecifiedBuilding(Constants.BUILDING_IDENTIFIER);
   }
 
@@ -203,6 +231,7 @@ export class SDKPage {
       },
       (err: any) => {
         this._setStatus('ERROR FETCHING GEOFENCES');
+        console.error(err);
         this._setInfo(err);
       }
     );
@@ -224,8 +253,11 @@ export class SDKPage {
       this._setInfo('Select a POI before calling selectPoi() ');
       return;
     }
+    this._doAfterMapViewIsLoaded = () => {
+      cordova.plugins.MapViewController.selectPoi(this.currentPoi.identifier);
+    };
 
-    cordova.plugins.MapViewController.selectPoi(this.currentPoi.identifier);
+    this._transitionToWYFTab();
   }
 
   public navigateToPoi() {
@@ -233,11 +265,15 @@ export class SDKPage {
       this._setInfo('Select a POI before calling navigateToPoi() ');
       return;
     }
-    // See https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/mapviewcontrollerimpl#navigateToPoi
-    cordova.plugins.MapViewController.navigateToPoi(
-      this.currentPoi.identifier,
-      'CHOOSE_SHORTEST' // 'ONLY_ACCESSIBLE' | 'ONLY_NOT_ACCESSIBLE_FLOOR_CHANGES' | undefined
-    );
+    this._doAfterMapViewIsLoaded = () => {
+      // See https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/mapviewcontrollerimpl#navigateToPoi
+      cordova.plugins.MapViewController.navigateToPoi(
+        this.currentPoi.identifier,
+        'CHOOSE_SHORTEST' // 'ONLY_ACCESSIBLE' | 'ONLY_NOT_ACCESSIBLE_FLOOR_CHANGES' | undefined
+      );
+    };
+
+    this._transitionToWYFTab();
   }
 
   // ==============================================================================================
@@ -371,5 +407,13 @@ export class SDKPage {
       const textB = b.text.toLowerCase();
       return textA.localeCompare(textB);
     });
+  }
+
+  // deeplinking extra code
+
+  _doAfterMapViewIsLoaded = () => {};
+
+  private _transitionToWYFTab() {
+    this.navCtrl.navigateRoot('/tabs/wyf');
   }
 }
