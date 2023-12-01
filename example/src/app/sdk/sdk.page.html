@@ -2,9 +2,7 @@
   <ion-toolbar>
     <ion-item class="custom" slot="start">
       <ion-thumbnail slot="start">
-        <img
-          src="https://situm.com/wp-content/uploads/2023/02/cropped-Favicon-Situm-Indoor-Positioning.png"
-        />
+        <img src="../../assets/icon/situm-logo-whitebg.svg" />
       </ion-thumbnail>
     </ion-item>
     <ion-title> Situm Capacitor Example </ion-title>
@@ -22,10 +20,18 @@
 
     <ion-card-content>
       <ion-row>
-        <ion-button (click)="startPositioning()" [disabled]="positioning">
+        <ion-button
+          size="small"
+          (click)="startPositioning()"
+          [disabled]="positioning"
+        >
           startPositioning()
         </ion-button>
-        <ion-button (click)="stopPositioning()" [disabled]="!positioning">
+        <ion-button
+          size="small"
+          (click)="stopPositioning()"
+          [disabled]="!positioning"
+        >
           stopPositioning()
         </ion-button>
       </ion-row>
@@ -41,19 +47,17 @@
     </ion-card-header>
 
     <ion-card-content>
-      <ion-button expand="block" size="small" (click)="fetchBuildingInfo()">
+      <ion-button size="small" (click)="fetchBuildingInfo()">
         fetchBuildingInfo()
       </ion-button>
-      <ion-button expand="block" size="small" (click)="fetchPois()">
-        fetchPois()
-      </ion-button>
-      <ion-button expand="block" size="small" (click)="fetchPoiCategories()">
+      <ion-button size="small" (click)="fetchPois()"> fetchPois() </ion-button>
+      <ion-button size="small" (click)="fetchPoiCategories()">
         fetchPoiCategories()
       </ion-button>
-      <ion-button expand="block" size="small" (click)="fetchGeofences()">
+      <ion-button size="small" (click)="fetchGeofences()">
         fetchGeofences()
       </ion-button>
-      <ion-button expand="block" size="small" (click)="invalidateCache()">
+      <ion-button size="small" (click)="invalidateCache()">
         invalidateCache()
       </ion-button>
     </ion-card-content>
@@ -80,8 +84,12 @@
         [buttons]="pickerButtons"
       ></ion-picker>
       <ion-row class="ion-justify-content-center">
-        <ion-button (click)="selectPoi()"> selectPoi() </ion-button>
-        <ion-button (click)="navigateToPoi()"> navigateToPoi() </ion-button>
+        <ion-button size="small" (click)="selectPoi()">
+          selectPoi()
+        </ion-button>
+        <ion-button size="small" (click)="navigateToPoi()">
+          navigateToPoi()
+        </ion-button>
       </ion-row>
     </ion-card-content>
   </ion-card>
