@@ -42,12 +42,6 @@ cd cordova/example
 npm install
 ```
 
-#### iOS only
-
-Run `pod install` or `pod update` from the `example/ios` folder to bring the dependencies to your project.
-
-Also check out the project [code signing](https://developer.apple.com/support/code-signing/) before you run the example.
-
 ### Step 2: Set up your Situm credentials
 
 1. This example provides you with a template on [`src/constants.ts.example`](src/constants.ts.example) to set all your credentials used on the sdk tab just in one file. So rename this file to `constants.ts` and set up your credentials before running the app:
@@ -78,6 +72,14 @@ ionic cap run android
 # For iOS devices
 ionic cap run ios
 ```
+
+> [!TIP]
+> iOS only
+>
+> You might need to update the pods of this app by executing inside `example/ios`:
+> $ pod install --repo-update
+>
+> Also check out the project [code signing](https://developer.apple.com/support/code-signing/) before you run the example.
 
 You can also run the app from your IDE:
 
