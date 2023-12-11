@@ -95,11 +95,11 @@ export class SDKPage {
 
       // Sample application internal code
       if (
-        this._doAfterMapViewIsLoaded != null &&
+        this._doAfterMapViewIsLoaded != undefined &&
         typeof this._doAfterMapViewIsLoaded === 'function'
       ) {
-        console.log('Calling _doAfterMapViewIsLoaded');
         this._doAfterMapViewIsLoaded();
+        this._doAfterMapViewIsLoaded = undefined;
       }
     });
 
@@ -253,9 +253,10 @@ export class SDKPage {
       this._setInfo('Select a POI before calling selectPoi() ');
       return;
     }
-    this._doAfterMapViewIsLoaded = () => {
+
+    this._checkMapViewerIsLoaded(() => {
       cordova.plugins.MapViewController.selectPoi(this.currentPoi.identifier);
-    };
+    });
 
     this._transitionToWYFTab();
   }
@@ -265,13 +266,14 @@ export class SDKPage {
       this._setInfo('Select a POI before calling navigateToPoi() ');
       return;
     }
-    this._doAfterMapViewIsLoaded = () => {
+
+    this._checkMapViewerIsLoaded(() => {
       // See https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/mapviewcontrollerimpl#navigateToPoi
       cordova.plugins.MapViewController.navigateToPoi(
         this.currentPoi.identifier,
         'CHOOSE_SHORTEST' // 'ONLY_ACCESSIBLE' | 'ONLY_NOT_ACCESSIBLE_FLOOR_CHANGES' | undefined
       );
-    };
+    });
 
     this._transitionToWYFTab();
   }
@@ -411,7 +413,17 @@ export class SDKPage {
 
   // deeplinking extra code
 
-  _doAfterMapViewIsLoaded = () => {};
+  _doAfterMapViewIsLoaded: Function | undefined = () => {};
+
+  private _checkMapViewerIsLoaded(cb: Function) {
+    if (this._doAfterMapViewIsLoaded != undefined) {
+      this._doAfterMapViewIsLoaded = () => {
+        cb();
+      };
+    } else {
+      cb();
+    }
+  }
 
   private _transitionToWYFTab() {
     this.navCtrl.navigateRoot('/tabs/wyf');
