@@ -294,7 +294,7 @@ class MapViewControllerImpl {
    * */
   navigateToPoi(identifier, accessibilityMode) {
     this._sendMessageToViewer("navigation.start", {
-      navigationTo: identifier,
+      navigationTo: Number.parseInt(identifier),
       type: accessibilityMode,
     });
   }

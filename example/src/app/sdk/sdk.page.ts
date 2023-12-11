@@ -26,6 +26,7 @@ import { addIcons } from 'ionicons';
 import { requestPermissions } from '../utils/request.permissions';
 import * as Constants from '../../constants';
 
+// Declare a cordova variable to avoid typescript errors
 declare let cordova: any;
 
 @Component({
@@ -271,7 +272,7 @@ export class SDKPage {
       // See https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/mapviewcontrollerimpl#navigateToPoi
       cordova.plugins.MapViewController.navigateToPoi(
         this.currentPoi.identifier,
-        'CHOOSE_SHORTEST' // 'ONLY_ACCESSIBLE' | 'ONLY_NOT_ACCESSIBLE_FLOOR_CHANGES' | undefined
+        'CHOOSE_SHORTEST' // 'CHOOSE_SHORTEST' | 'ONLY_ACCESSIBLE' | 'ONLY_NOT_ACCESSIBLE_FLOOR_CHANGES' | undefined
       );
     });
 

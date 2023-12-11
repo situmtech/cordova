@@ -6,9 +6,6 @@ import {
   IonContent,
 } from '@ionic/angular/standalone';
 
-// Declare a cordova variable to avoid typescript errors
-declare let cordova: any;
-
 @Component({
   selector: 'app-wyf',
   templateUrl: 'wyf.page.html',
