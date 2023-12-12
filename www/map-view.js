@@ -1,5 +1,7 @@
-const MapViewController = require('./map-view-controller');
-
+const MapViewController = require("./map-view-controller");
+/**
+ * @namespace MapView
+ */
 class MapView extends HTMLElement {
   _viewerDomain;
 
@@ -26,11 +28,14 @@ class MapView extends HTMLElement {
   }
 
   _getViewerURL() {
-    let viewerDomain = this._formatValidDomain(this.getAttribute("viewer-domain"));
+    let viewerDomain = this._formatValidDomain(
+      this.getAttribute("viewer-domain")
+    );
     let situmApiKey = this.getAttribute("situm-api-key") ?? "";
     let buildingIdentifier = this.getAttribute("building-identifier") ?? "";
     let situmApiKeyQP = situmApiKey.length > 0 ? `apikey=${situmApiKey}` : "";
-    let buildingIdentifierQP = buildingIdentifier.length > 0 ? `&buildingid=${buildingIdentifier}` : "";
+    let buildingIdentifierQP =
+      buildingIdentifier.length > 0 ? `&buildingid=${buildingIdentifier}` : "";
     let query = `${situmApiKeyQP}${buildingIdentifierQP}&mode=embed`;
     let remoteIdentifier = this.getAttribute("remote-identifier");
     if (remoteIdentifier) {
@@ -42,12 +47,12 @@ class MapView extends HTMLElement {
   _formatValidDomain(domain) {
     let result = domain;
     if (result == null) {
-      return 'https://map-viewer.situm.com';
+      return "https://map-viewer.situm.com";
     }
-    if (!result.startsWith('https://') && !result.startsWith('http://')) {
+    if (!result.startsWith("https://") && !result.startsWith("http://")) {
       result = `https://${result}`;
     }
-    if (result.endsWith('/')) {
+    if (result.endsWith("/")) {
       result = result.substring(0, result.length - 1);
     }
     this._viewerDomain = result;
@@ -61,17 +66,22 @@ class MapView extends HTMLElement {
         MapViewController._handleMapViewMessages(msg);
       }
     } catch (error) {
-      console.warn(`Got unparseable message: ${m}`);
+      console.warn("Got unparseable message:", m);
     }
   }
 
-  static onLoad(callback) {
+  /**
+   * MapView was loaded.
+   * The {@link MapViewControllerImpl} will be sent by the callback.
+   * @param {Function} cb The callback that gives back the controller of this visual component.
+   */
+  static onLoad(cb) {
     // For now, setting the on-load callback from the integrator is done using this (static) bridge.
     // Probably this could be improved.
-    MapViewController._setOnLoadCallback(callback);
+    MapViewController._setOnLoadCallback(cb);
   }
 }
 
 customElements.define("map-view", MapView);
 
-module.exports = MapView
+module.exports = MapView;

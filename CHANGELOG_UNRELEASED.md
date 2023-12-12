@@ -1,5 +1,5 @@
-## Unreleased
+# Unreleased
 
-### Added
+**Added**
 
-* Added new MapViewer component to visualize our cartography through a web view.
+- Added an example Capacitor + Ionic as an example on how to integrate our plugin. Take a look at ./example

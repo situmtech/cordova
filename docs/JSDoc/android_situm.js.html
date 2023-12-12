@@ -1,0 +1,380 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Source: android/situm.js | Situm</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
+
+    
+        
+            <link type="text/css" rel="stylesheet" href="styles/custom.css">
+        
+    
+</head>
+<body>
+<nav class="lnb" id="lnb">
+    <div class="logo" style="width: 90px; height: 90px">
+        
+            <a href="https://github.com/situmtech/situm-cordova-plugin" rel="noopener noreferrer" target="_blank">
+                <img src="https://situm.com/wp-content/uploads/2023/04/situm_logo_blanco_300_sq.png" width="100%" height="100%">
+            </a>
+        
+    </div>
+    <div class="title">
+        <h1><a href="index.html" class="link">Situm</a></h1>
+        
+    </div>
+    <div class="search-container" id="search-container">
+        <input type="text" placeholder="Search">
+        <ul></ul>
+    </div>
+    
+    <div class="lnb-api hidden"><h3>Namespaces</h3><ul><li><a href="MapView.html">MapView</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="MapView_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="MapView.html#.onLoad">onLoad</a></li></ul></div></li><li><a href="MapViewControllerImpl.html">MapViewControllerImpl</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="MapViewControllerImpl_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="MapViewControllerImpl.html#navigateToPoi">navigateToPoi</a></li><li><a href="MapViewControllerImpl.html#onPoiDeselected">onPoiDeselected</a></li><li><a href="MapViewControllerImpl.html#onPoiSelected">onPoiSelected</a></li><li><a href="MapViewControllerImpl.html#selectPoi">selectPoi</a></li></ul></div></li><li><a href="Situm.html">Situm</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Situm_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="Situm.html#.fetchBuildingInfo">fetchBuildingInfo</a></li><li><a href="Situm.html#.fetchBuildings">fetchBuildings</a></li><li><a href="Situm.html#.fetchEventsFromBuilding">fetchEventsFromBuilding</a></li><li><a href="Situm.html#.fetchFloorsFromBuilding">fetchFloorsFromBuilding</a></li><li><a href="Situm.html#.fetchGeofencesFromBuilding">fetchGeofencesFromBuilding</a></li><li><a href="Situm.html#.fetchIndoorPOIsFromBuilding">fetchIndoorPOIsFromBuilding</a></li><li><a href="Situm.html#.fetchMapFromFloor">fetchMapFromFloor</a></li><li><a href="Situm.html#.fetchOutdoorPOIsFromBuilding">fetchOutdoorPOIsFromBuilding</a></li><li><a href="Situm.html#.fetchPoiCategories">fetchPoiCategories</a></li><li><a href="Situm.html#.fetchPoiCategoryIconNormal">fetchPoiCategoryIconNormal</a></li><li><a href="Situm.html#.fetchPoiCategoryIconSelected">fetchPoiCategoryIconSelected</a></li><li><a href="Situm.html#.internalSetEventDelegate">internalSetEventDelegate</a></li><li><a href="Situm.html#.invalidateCache">invalidateCache</a></li><li><a href="Situm.html#.onEnterGeofences">onEnterGeofences</a></li><li><a href="Situm.html#.onExitGeofences">onExitGeofences</a></li><li><a href="Situm.html#.removeNavigationUpdates">removeNavigationUpdates</a></li><li><a href="Situm.html#.removeRealTimeUpdates">removeRealTimeUpdates</a></li><li><a href="Situm.html#.requestDirections">requestDirections</a></li><li><a href="Situm.html#.requestNavigationUpdates">requestNavigationUpdates</a></li><li><a href="Situm.html#.requestRealTimeUpdates">requestRealTimeUpdates</a></li><li><a href="Situm.html#.setApiKey">setApiKey</a></li><li><a href="Situm.html#.setCacheMaxAge">setCacheMaxAge</a></li><li><a href="Situm.html#.setUserPass">setUserPass</a></li><li><a href="Situm.html#.startPositioning">startPositioning</a></li><li><a href="Situm.html#.stopPositioning">stopPositioning</a></li><li><a href="Situm.html#.updateNavigationWithLocation">updateNavigationWithLocation</a></li></ul></div></li></ul></div><div class="lnb-api hidden"><h3>Global</h3><ul><li><a href="global.html#Angle">Angle</a></li><li><a href="global.html#BeaconFilter">BeaconFilter</a></li><li><a href="global.html#Bounds">Bounds</a></li><li><a href="global.html#Building">Building</a></li><li><a href="global.html#BuildingInfo">BuildingInfo</a></li><li><a href="global.html#CartesianCoordinate">CartesianCoordinate</a></li><li><a href="global.html#Circle">Circle</a></li><li><a href="global.html#Coordinate">Coordinate</a></li><li><a href="global.html#Dimensions">Dimensions</a></li><li><a href="global.html#DirectionsOptions">DirectionsOptions</a></li><li><a href="global.html#DirectionsRequest">DirectionsRequest</a></li><li><a href="global.html#Floor">Floor</a></li><li><a href="global.html#Geofence">Geofence</a></li><li><a href="global.html#Indication">Indication</a></li><li><a href="global.html#Location">Location</a></li><li><a href="global.html#LocationOptions">LocationOptions</a></li><li><a href="global.html#LocationRequest">LocationRequest</a></li><li><a href="global.html#LocationStatus">LocationStatus</a></li><li><a href="global.html#NavigationProgress">NavigationProgress</a></li><li><a href="global.html#NavigationRequest">NavigationRequest</a></li><li><a href="global.html#OutdoorLocationOptions">OutdoorLocationOptions</a></li><li><a href="global.html#POI">POI</a></li><li><a href="global.html#PoiCategory">PoiCategory</a></li><li><a href="global.html#PoiDeselectedResult">PoiDeselectedResult</a></li><li><a href="global.html#Point">Point</a></li><li><a href="global.html#PoiSelectedResult">PoiSelectedResult</a></li><li><a href="global.html#RealTimeData">RealTimeData</a></li><li><a href="global.html#RealTimeRequest">RealTimeRequest</a></li><li><a href="global.html#Route">Route</a></li><li><a href="global.html#RouteSegment">RouteSegment</a></li><li><a href="global.html#RouteStep">RouteStep</a></li><li><a href="global.html#SitumConversionArea">SitumConversionArea</a></li><li><a href="global.html#SitumEvent">SitumEvent</a></li></ul></div>
+</nav>
+<div id="resizer"></div>
+
+<div class="main" id="main">
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>var exec = require('cordova/exec');
+
+var PLUGIN_NAME = 'Situm';
+let _internalEventDelegate = undefined;
+
+/** 
+ * @namespace Situm
+ */
+
+var Situm = {
+  /**
+   * An internal method.
+   * @param {internalEventDelegate} callback.
+   */
+  internalSetEventDelegate: function (callback) {
+    _internalEventDelegate = callback;
+  },
+  /**
+   * Provides your API key to the Situm SDK.
+   * @description Provides your API key to the Situm SDK. This key is generated for your application in the Dashboard. Old credentials will be removed.
+   * @param {string} email Email that identifies the account. Can't be empty.
+   * @param {string} apiKey Key obtained at situm.es. Can't be empty.
+   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {boolean} success True if operation finished successfully, otherwise false
+   */
+  setApiKey: function (email, apiKey, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'setApiKey', [email, apiKey]);
+  },
+  setUseRemoteConfig: function (useRemoteConfig, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'setUseRemoteConfig', [useRemoteConfig]);
+  },
+  /**
+   * Provides user's email and password.
+   * @description Provides user's email and password. This credentials will be used to obtain a valid user token to authenticate the server request, when necessary. Token obtaining is not necessary done when this method is executed. Old credentials will be removed.
+   * @param {string} email User's email. Can't be empty.
+   * @param {string} password User's password. Can't be empty.
+   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {boolean} success True if operation finished successfully, otherwise false
+   */
+  setUserPass: function (email, password, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'setUserPass', [email, password]);
+  },
+  /**
+   * Sets the maximum age of a cached response.
+   * @description Sets the maximum age of a cached response. If the cache response's age exceeds maxAge, it will not be used and a network request will be made.
+   * @param {number} cacheAge A non-negative integer
+   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {void}
+   */
+  setCacheMaxAge: function (cacheAge, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'setCacheMaxAge', [cacheAge]);
+  },
+  /**
+   * Set callback and starts listen onLocationChanged event.
+   * @param {LocationRequest} request Location Request.
+   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {Location} position Current position of device.
+   */
+  startPositioning: function (request, cb, error) {
+    let internalCallback = (res) => {
+      _internalEventDelegate('onLocationUpdate', res);
+      cb(res);
+    };
+    exec(internalCallback, error, PLUGIN_NAME, 'startPositioning', request);;
+  },
+    /**
+   * Stop locationListener on current active listener.
+   * @description Stop locationListener on current active listener.
+   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {void}
+   */
+  stopPositioning: function (cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'stopPositioning', []);
+  },
+  /**
+   * Get notified about users entering geofences. Take into account:
+   * * This method must be called before the positioning is started.
+   * * Positioning geofences (with `trainer_metadata` custom field configured in the dashboard (https://situm.com/docs/special-custom-fields/#activating-the-uncalibrated-indoor-geolocation-mode)) won't be notified.
+   * * This callback works only with indoor locations. Any outdoor location will produce a call to onExitGeofences with the last positioned geofences as argument.
+   * @description Set the geofence listener to receive updates when you enter or exit one of them.
+   * @param {function} cb Cordova native callback to recive data. The data is an array of geofences.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {Geofence[]}
+   */
+  onEnterGeofences: function (cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'onEnterGeofences', []);
+  },
+  /**
+   * Get notified about exiting geofences. Take into account the considerations described at onEnterGeofences
+   * @description Set the geofence listener to receive updates when you enter or exit one of them.
+   * @param {function} cb Cordova native callback to recive data. The data is an array of geofences.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {Geofence[]}
+   */
+  onExitGeofences: function (cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'onExitGeofences', []);
+  },
+  /**
+   * Download all the buildings for the current user.
+   * @description Download all the buildings for the current user
+   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {Building[]} buildings Array of buildings.
+   */
+  fetchBuildings: function (cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'fetchBuildings', []);
+  },
+  /**
+   * Download all the floors of a building.
+   * @description Download all the floors of a building
+   * @param {Building} building The building. Not null.
+   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {Floor[]} floors Array of floors.
+   */
+  fetchFloorsFromBuilding: function (building, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'fetchFloorsFromBuilding', [building]);
+  },
+  /**
+   * Download the indoor POIs of a building.
+   * @description Download the indoor POIs of a building
+   * @param {Building} building The building. Not null.
+   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {Poi[]} pois Array of POIs
+   */
+  fetchIndoorPOIsFromBuilding: function (building, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'fetchIndoorPOIsFromBuilding', [building]);
+  },
+  /**
+   * Download the outdoor POIs of a building.
+   * @description Download the outdoor POIs of a building
+   * @param {Building} building The building. Not null.
+   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {Poi[]} pois Array of POIs
+   */
+  fetchOutdoorPOIsFromBuilding: function (building, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'fetchOutdoorPOIsFromBuilding', [building]);
+  },
+  /**
+   * Download the events of a building.
+   * @description Download the events of a building
+   * @param {Building} building The building. Not null.
+   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {event[]} events The events of a building
+   */
+  fetchEventsFromBuilding: function (building, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'fetchEventsFromBuilding', [building]);
+  },
+  /**
+   * Get all POI categories, download and cache their icons asynchronously.
+   * @description Get all POI categories, download and cache their icons asynchronously. To get some of those icons from local storage @see {@link fetchPoiCategoryIconNormal(PoiCategory)} or {@link fetchPoiCategoryIconSelected(PoiCategory)}
+   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {PoiCategory[]} poiCategories The poiCategories array
+   */
+  fetchPoiCategories: function (cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'fetchPoiCategories');
+  },
+  /**
+   * Download the map image of a floor
+   * @description Download the map image of a floor
+   * @param {Floor} floor The floor. Not null.
+   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {bitmap} map The map image
+   */
+  fetchMapFromFloor: function (floor, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'fetchMapFromFloor', [floor]);
+  },
+  /**
+   * Get the normal category icon for a category.
+   * @description Get the normal category icon for a category
+   * @param {PoiCategory} category The category. Not null.
+   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {bitmap} icon The category icon
+   */
+  fetchPoiCategoryIconNormal: function (category, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'fetchPoiCategoryIconNormal', [category]);
+  },
+  /**
+   * Get the selected category icon for a category.
+   * @description Get the selected category icon for a category
+   * @param {PoiCategory} category The category. Not null.
+   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {bitmap} icon The category icon
+   */
+  fetchPoiCategoryIconSelected: function (category, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'fetchPoiCategoryIconSelected', [category]);
+  },
+  /**
+   * Download all the information of a building.
+   * @description Download the information of a building (floors, pois, basic information, ...)
+   * @param {Building} building The building identifier. Not null.
+   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {BuildingInfo} buildingInfo structure
+   */
+  fetchBuildingInfo: function (building, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'fetchBuildingInfo', [building]);
+  },
+  /**
+   * Download all the information of a building.
+   * @description Download the indoor POIs of a building
+   * @param {Int} buildingIdentifier The building identifier. Not null.
+   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {Building[]} pois Array of POIs
+   */
+  fetchGeofencesFromBuilding: function (building, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'fetchGeofencesFromBuilding', [building]);
+  },
+  /**
+   * Invalidate all the resources in the cache.
+   * @description Invalidate all the resources in the cache
+   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {void}
+   */
+  invalidateCache: function (cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'invalidateCache');
+  },
+  /**
+   * Calculates a route between two points.
+   * @description Calculates a route between two points.
+   * @param {DirectionsRequest} directionsRequest Request - non-null search parameters.
+   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {Route} route The route between provided points
+   */
+  requestDirections: function (directionsRequest, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'requestDirections', directionsRequest);
+  },
+  /**
+   * Set the navigation params, and the listener that receives the updated navigation progress.
+   * @description Set the navigation params, and the listener that receives the updated navigation progress. Can only exist one navigation with one listener at a time. If this method was previously invoked, but removeUpdates() wasn't, removeUpdates() is called internally.
+   * @param {NavigationRequest} navigationRequest Request non-null search parameters.
+   * @param {function} cb Cordova native callback to recive data. See {@link NavigationProgress}
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {void}
+   */
+  requestNavigationUpdates: function (navigationRequest, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'requestNavigationUpdates', navigationRequest);
+  },
+  /**
+   * Informs NavigationManager object the change of the user's location.
+   * @description Informs NavigationManager object the change of the user's location.
+   * @param {Location} location New Location of the user. If null, nothing is done.
+   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {boolean} success True if there is a listener to which notify progress update. False if there isn't, so this method do nothing.
+   */
+  updateNavigationWithLocation: function (location, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'updateNavigationWithLocation', [location]);
+  },
+  /**
+   * Removes all location updates.
+   * @description Removes all location updates. This removes the internal state of the manager, including the listener provided in requestNavigationUpdates(NavigationRequest, NavigationListener), so it won't receive more progress updates.
+   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {boolean} success True if a listener was removed. False if there was no listener.
+   */
+  removeNavigationUpdates: function (cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'removeNavigationUpdates', []);
+  },
+  // Realtime
+
+  /**
+   * Set the realtime params and listener that receives realtime location updates
+   * @param {RealTimeRequest} request Request - non-null search parameters.
+   * @param {fuction} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
+   */
+  requestRealTimeUpdates: function (request, cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'requestRealTimeUpdates', [request]);
+  },
+
+  /**
+   * Stops receiving updates in realtime about user location.
+   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
+   */
+  removeRealTimeUpdates: function(cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'removeRealTimeUpdates', []);
+  }
+};
+module.exports = Situm;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<footer>
+    <img class="logo" src="https://situm.com/wp-content/uploads/2023/04/situm_logo_blanco_300_sq.png" style="width: 90px; height: 90px">
+    <div class="footer-text">COPYRIGHT © SITUM TECHNOLOGIES 2014 - 2018</div>
+</footer>
+<script>prettyPrint();</script>
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/tui-doc.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+    <script>
+        var id = '_sub'.replace(/"/g, '_');
+        var selectedApi = document.getElementById(id); // do not use jquery selector
+        var $selectedApi = $(selectedApi);
+
+        $selectedApi.removeClass('hidden');
+        $selectedApi.parent().find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+        showLnbApi();
+    </script>
+
+</body>
+</html>

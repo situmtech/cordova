@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar mode="md">
+    <ion-thumbnail slot="start">
+      <img src="../../assets/icon/situm-logo-whitebg.svg" />
+    </ion-thumbnail>
+    <ion-title slot="start"> Situm Capacitor Example </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Add this component to your body -->
+  <!-- Retreive your situm api-key here https://dashboard.situm.com/accounts/profile -->
+  <!-- Follow this guide (https://situm.com/docs/sdk-cartography/#building-identifier)
+    to find out the identifier of the building you want to display -->
+  <map-view
+    viewer-domain="https://map-viewer.situm.com"
+    situm-api-key="YOUR_SITUM_API_KEY"
+    building-identifier="YOUR_BUILDING_IDENTIFIER"
+    #mapView
+  />
+  <!-- WARNING: We will be overwritting this attributes with the values in constants.ts -->
+</ion-content>
