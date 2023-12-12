@@ -45,7 +45,7 @@ npm install
 > [!TIP]
 > You might want to try out this configuration if you are facing some issues to build our sample app:
 >
-> - node 19.8.1
+> - node >= 18.13.X
 > - @ionic/cli 7.1.5
 > - gradle 8.4
 > - java 17.0.6

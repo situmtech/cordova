@@ -9,6 +9,7 @@ import {
   IonToolbar,
   IonTitle,
   IonContent,
+  IonThumbnail,
 } from '@ionic/angular/standalone';
 
 import * as Constants from 'src/constants';
@@ -20,7 +21,7 @@ import * as Constants from 'src/constants';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   styleUrls: ['wyf.page.scss'],
   standalone: true,
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent],
+  imports: [IonHeader, IonToolbar, IonTitle, IonThumbnail, IonContent],
 })
 export class WYFPage {
   @ViewChild('mapView') mapView: ElementRef | undefined;
