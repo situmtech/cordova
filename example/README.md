@@ -44,23 +44,17 @@ npm install
 
 ### Step 2: Set up your Situm credentials
 
-1. This example provides you with a template on [`src/constants.ts.example`](src/constants.ts.example) to set all your credentials used on the sdk tab just in one file. So rename this file to `constants.ts` and set up your credentials before running the app:
+This example provides you with a template on [`src/constants.ts.example`](src/constants.ts.example) to set all your credentials used on the sdk tab just in one file. So rename this file to `constants.ts` and set up your credentials before running the app:
 
 ```typescript
 export const API_USER = "YOUR_SITUM_API_USER";
 export const API_KEY = "YOUR_SITUM_API_KEY";
 export const BUILDING_IDENTIFIER = "YOUR_BUILDING_IDENTIFIER";
+export const VIEWER_DOMAIN = "https://map-viewer.situm.com";
 ```
 
-2. Also set the credentials in the [`src/app/wyf/wyf.page.html`](./src/app/wyf/wyf.page.html) for the wyf tab :
-
-```html
-<map-view 
-  viewer-domain="https://map-viewer.situm.com"
-  situm-api-key="YOUR_SITUM_API_KEY"
-  building-identifier="YOUR_BUILDING_IDENTIFIER"
-/>
-```
+> [!NOTE]
+> The credentials will also be set in the [`src/app/wyf/wyf.page.html`](./src/app/wyf/wyf.page.html) automatically in this example app. Make sure you set your credentials inside this file in your integration.
 
 ### Step 3: Run the app <a name="runapplication"></a>
 
