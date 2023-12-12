@@ -29,18 +29,26 @@ This folder contains the source code of a Capacitor + Ionic example application 
 
 ### Step 1: Install the dependencies
 
-The first step is to download this repo:
+1. The first step is to download this repo:
 
 ```bash
 git clone https://github.com/situmtech/cordova.git
 ```
 
-And then install the plugin dependencies alongside the `example` app as follows:
+2. Then install the plugin dependencies alongside the `example` app as follows:
 
 ```bash
 cd cordova/example
 npm install
 ```
+
+> [!TIP]
+> You might want to try out this configuration if you are facing some issues to build our sample app:
+>
+> - node 19.8.1
+> - @ionic/cli 7.1.5
+> - gradle 8.4
+> - java 17.0.6
 
 ### Step 2: Set up your Situm credentials
 
@@ -80,14 +88,6 @@ You can also run the app from your IDE:
 
 - On Android: open `example/android/` with Android Studio.
 - On iOS: open `example/ios/App/App.xcworkspace` with XCode.
-
-> [!TIP]
-> You might want to try out this configuration if you are facing some issues to build our sample app:
->
-> - node 19.8.1
-> - ionic 7.1.5 (@ionic/cli npm package)
-> - gradle 8.4
-> - java 17.0.6
 
 ## Using @situm/cordova on a Cordova app
 
