@@ -50,6 +50,13 @@ npm install
 > - gradle 8.4
 > - java 17.0.6
 
+> [!NOTE]
+> Make sure you are using `@ionic/cli` and not the deprecated `ionic` npm package. Otherwise you won't be able to build the app and you will receive the following error:
+
+```diff
+- [ERROR] Invalid project type: angular-standalone (project config: ./ionic.config.json).
+```
+
 ### Step 2: Set up your Situm credentials
 
 This example provides you with a template on [`src/constants.ts.example`](src/constants.ts.example) to set all your credentials used on the sdk tab just in one file. So rename this file to `constants.ts` and set up your credentials before running the app:
