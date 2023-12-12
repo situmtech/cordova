@@ -1,0 +1,109 @@
+<ion-header [translucent]="true">
+  <ion-toolbar mode="md">
+    <ion-thumbnail slot="start">
+      <img src="../../assets/icon/situm-logo-whitebg.svg" />
+    </ion-thumbnail>
+    <ion-title slot="start"> Situm Capacitor Example </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title mode="md">
+        <ion-icon name="locate" color="primary" />
+        Positioning
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-row>
+        <ion-button
+          size="small"
+          (click)="startPositioning()"
+          [disabled]="positioning"
+        >
+          startPositioning()
+        </ion-button>
+        <ion-button
+          size="small"
+          (click)="stopPositioning()"
+          [disabled]="!positioning"
+        >
+          stopPositioning()
+        </ion-button>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title mode="md">
+        <ion-icon name="cloud-download" color="primary" />
+        Fetch Resources
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-button size="small" (click)="fetchBuildingInfo()">
+        fetchBuildingInfo()
+      </ion-button>
+      <ion-button size="small" (click)="fetchPois()"> fetchPois() </ion-button>
+      <ion-button size="small" (click)="fetchPoiCategories()">
+        fetchPoiCategories()
+      </ion-button>
+      <ion-button size="small" (click)="fetchGeofences()">
+        fetchGeofences()
+      </ion-button>
+      <ion-button size="small" (click)="invalidateCache()">
+        invalidateCache()
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title mode="md">
+        <ion-icon name="map" color="primary" />
+        Cartography
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-card>
+        <ion-item id="open-picker" *ngIf="!currentPoi"> Pick a POI </ion-item>
+        <ion-item id="open-picker" *ngIf="currentPoi">
+          {{ currentPoi.identifier }} - {{ currentPoi.poiName }}
+        </ion-item>
+      </ion-card>
+      <ion-picker
+        trigger="open-picker"
+        [columns]="pickerColumns"
+        [buttons]="pickerButtons"
+      />
+      <ion-row class="ion-justify-content-center">
+        <ion-button size="small" (click)="selectPoi()">
+          selectPoi()
+        </ion-button>
+        <ion-button size="small" (click)="navigateToPoi()">
+          navigateToPoi()
+        </ion-button>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>{{ currentStatus }}</ion-label>
+      </ion-item>
+
+      <ion-textarea
+        class="custom"
+        [readonly]="true"
+        placeholder="{{ currentPositioningInfo }}"
+        style="height: 60vh"
+      />
+    </ion-card-content>
+  </ion-card>
+</ion-content>

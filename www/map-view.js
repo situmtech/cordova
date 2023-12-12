@@ -1,4 +1,4 @@
-const MapViewController = require('./map-view-controller');
+const MapViewController = require("./map-view-controller");
 /**
  * @namespace MapView
  */
@@ -66,7 +66,7 @@ class MapView extends HTMLElement {
         MapViewController._handleMapViewMessages(msg);
       }
     } catch (error) {
-      console.warn('Got unparseable message:', m);
+      console.warn("Got unparseable message:", m);
     }
   }
 
@@ -84,4 +84,4 @@ class MapView extends HTMLElement {
 
 customElements.define("map-view", MapView);
 
-module.exports = MapView
+module.exports = MapView;
