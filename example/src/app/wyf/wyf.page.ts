@@ -25,8 +25,9 @@ import * as Constants from 'src/constants';
 export class WYFPage {
   @ViewChild('mapView') mapView: ElementRef | undefined;
 
+  // Internal code
+  // Set the credentials inside the HTMLElement with the values in constants.ts
   ngAfterViewInit() {
-    // Set the credentials in the HTMLElement
     this.mapView?.nativeElement.setAttribute(
       'viewer-domain',
       Constants.VIEWER_DOMAIN

@@ -56,10 +56,10 @@ export const BUILDING_IDENTIFIER = "YOUR_BUILDING_IDENTIFIER";
 
 ```html
 <map-view 
-    viewer-domain="https://map-viewer.situm.com"
-    situm-api-key="YOUR_SITUM_API_KEY"
-    building-identifier="YOUR_BUILDING_IDENTIFIER">
-</map-view>
+  viewer-domain="https://map-viewer.situm.com"
+  situm-api-key="YOUR_SITUM_API_KEY"
+  building-identifier="YOUR_BUILDING_IDENTIFIER"
+/>
 ```
 
 ### Step 3: Run the app <a name="runapplication"></a>

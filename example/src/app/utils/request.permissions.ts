@@ -1,12 +1,13 @@
+import { Platform } from '@ionic/angular/standalone';
+
 declare let cordova: any;
 
-export function requestPermissions(successCb: Function, errorCb: Function) {
-  var isAndroid =
-    navigator.userAgent.match(/Android/i) &&
-    navigator.userAgent.match(/Android/i)!.length > 0;
-  var isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-  if (isAndroid) {
+export function requestPermissions(
+  successCb: Function,
+  errorCb: Function,
+  platform: Platform
+) {
+  if (platform.is('android')) {
     cordova.plugins.diagnostic.requestRuntimePermissions(
       function (permissions: Map<string, string>) {
         console.log('EXAMPLE> permissions statuses: ', permissions);
@@ -24,11 +25,12 @@ export function requestPermissions(successCb: Function, errorCb: Function) {
         cordova.plugins.diagnostic.permission.BLUETOOTH_SCAN,
       ]
     );
-  } else if (isIOS) {
+  } else if (platform.is('ios')) {
     cordova.plugins.diagnostic.getLocationAuthorizationStatus(
       (status: string) => {
         if (status == 'authorized') {
           successCb();
+          return;
         }
       },
       () => {

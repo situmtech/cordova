@@ -18,6 +18,7 @@ import {
   IonPicker,
   IonThumbnail,
   NavController,
+  Platform,
 } from '@ionic/angular/standalone';
 import { NgFor, NgIf } from '@angular/common';
 import { locate, cloudDownload, map } from 'ionicons/icons';
@@ -62,7 +63,11 @@ export class SDKPage {
   pois: any | undefined;
   currentPoi: any | undefined;
 
-  constructor(private ngZone: NgZone, private navCtrl: NavController) {
+  constructor(
+    private ngZone: NgZone,
+    private navCtrl: NavController,
+    public platform: Platform
+  ) {
     addIcons({ locate, cloudDownload, map });
   }
 
@@ -94,14 +99,7 @@ export class SDKPage {
         console.log('EXAMPLE> onPoiDeselected -> ', poiDeselectedResult);
       });
 
-      // Sample application internal code
-      if (
-        this._doAfterMapViewIsLoaded != undefined &&
-        typeof this._doAfterMapViewIsLoaded === 'function'
-      ) {
-        this._doAfterMapViewIsLoaded();
-        this._doAfterMapViewIsLoaded = undefined;
-      }
+      this._executePendingAction();
     });
 
     this._retrieveSpecifiedBuilding(Constants.BUILDING_IDENTIFIER);
@@ -126,7 +124,8 @@ export class SDKPage {
         this._setInfo(
           'Something did happen while asking for permission: ' + errorMessage
         );
-      }
+      },
+      this.platform
     );
   }
 
@@ -176,6 +175,8 @@ export class SDKPage {
   // ==============================================================================================
 
   public fetchBuildingInfo() {
+    this._setStatus('FETCHING BUILDING INFO ...');
+
     cordova.plugins.Situm.fetchBuildingInfo(
       this.currentBuilding,
       (res: any) => {
@@ -187,11 +188,11 @@ export class SDKPage {
         this._setInfo(err);
       }
     );
-
-    this._setStatus('FETCHING BUILDING INFO ...');
   }
 
   public fetchPois() {
+    this._setStatus('FETCHING BUILDING INDOOR POIS ...');
+
     cordova.plugins.Situm.fetchIndoorPOIsFromBuilding(
       this.currentBuilding,
       (res: any) => {
@@ -204,11 +205,11 @@ export class SDKPage {
         this._setInfo(err);
       }
     );
-
-    this._setStatus('FETCHING BUILDING INDOOR POIS ...');
   }
 
   public fetchPoiCategories() {
+    this._setStatus('FETCHING POI CATEGORIES ...');
+
     cordova.plugins.Situm.fetchPoiCategories(
       (poiCategories: any) => {
         this._setStatus('LOADED POI CATEGORIES');
@@ -219,11 +220,11 @@ export class SDKPage {
         this._setInfo(err);
       }
     );
-
-    this._setStatus('FETCHING POI CATEGORIES ...');
   }
 
   public fetchGeofences() {
+    this._setStatus('FETCHING BUILDING GEOFENCES ...');
+
     cordova.plugins.Situm.fetchGeofencesFromBuilding(
       this.currentBuilding,
       (geofences: any) => {
@@ -236,8 +237,6 @@ export class SDKPage {
         this._setInfo(err);
       }
     );
-
-    this._setStatus('FETCHING BUILDING GEOFENCES ...');
   }
 
   public invalidateCache() {
@@ -325,6 +324,7 @@ export class SDKPage {
 
   private _loadBuildings(successCb: Function) {
     if (this.buildings) return;
+    console.log('EXAMPLE> fetching all buildings ...');
     // Fetch all buildings:
     cordova.plugins.Situm.fetchBuildings(
       (res: any) => {
@@ -340,10 +340,12 @@ export class SDKPage {
         );
       }
     );
-    console.log('EXAMPLE> fetching all buildings ...');
   }
 
   private _loadPoisFrom(b: any, successCb: Function) {
+    console.log(
+      `EXAMPLE> fetching indoor pois from ${b.buildingIdentifier} - ${b.name} ...`
+    );
     // Fetch indoor pois from the building of Constants.BUILDING_IDENTIFIER:
     cordova.plugins.Situm.fetchIndoorPOIsFromBuilding(
       b,
@@ -358,10 +360,6 @@ export class SDKPage {
           `EXAMPLE> error while fetching indoor pois, error:\n ${err}`
         );
       }
-    );
-
-    console.log(
-      `EXAMPLE> fetching indoor pois from ${b.buildingIdentifier} - ${b.name} ...`
     );
   }
 
@@ -423,6 +421,16 @@ export class SDKPage {
       };
     } else {
       cb();
+    }
+  }
+
+  private _executePendingAction() {
+    if (
+      this._doAfterMapViewIsLoaded != undefined &&
+      typeof this._doAfterMapViewIsLoaded === 'function'
+    ) {
+      this._doAfterMapViewIsLoaded();
+      this._doAfterMapViewIsLoaded = undefined;
     }
   }
 
