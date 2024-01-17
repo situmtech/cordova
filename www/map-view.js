@@ -38,7 +38,7 @@ class MapView extends HTMLElement {
     let situmApiKeyQP = situmApiKey.length > 0 ? `apikey=${situmApiKey}` : "";
     let buildingIdentifierQP =
       buildingIdentifier.length > 0 ? `&buildingid=${buildingIdentifier}` : "";
-    let languageQP = language > 0 ? `&lng=${language}` : "";
+    let languageQP = language.length > 0 ? `&lng=${language}` : "";
 
     let query = `${situmApiKeyQP}${buildingIdentifierQP}${languageQP}&mode=embed`;
 
