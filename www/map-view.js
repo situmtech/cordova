@@ -33,13 +33,14 @@ class MapView extends HTMLElement {
     );
     let situmApiKey = this.getAttribute("situm-api-key") ?? "";
     let buildingIdentifier = this.getAttribute("building-identifier") ?? "";
+    let language = this.getAttribute("language") ?? "";
 
     let situmApiKeyQP = situmApiKey.length > 0 ? `apikey=${situmApiKey}` : "";
     let buildingIdentifierQP =
       buildingIdentifier.length > 0 ? `&buildingid=${buildingIdentifier}` : "";
+    let languageQP = language > 0 ? `&lng=${language}` : "";
 
-    let languageQP = this.getAttribute("language");
-    let query = `${situmApiKeyQP}${buildingIdentifierQP}&lng=${languageQP}&mode=embed`;
+    let query = `${situmApiKeyQP}${buildingIdentifierQP}${languageQP}&mode=embed`;
 
     let remoteIdentifier = this.getAttribute("remote-identifier");
     if (remoteIdentifier) {
