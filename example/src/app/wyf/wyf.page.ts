@@ -43,5 +43,10 @@ export class WYFPage {
       'building-identifier',
       Constants.BUILDING_IDENTIFIER
     );
+
+    this.mapView?.nativeElement.setAttribute(
+      'remote-identifier',
+      Constants.REMOTE_IDENTIFIER
+    );
   }
 }
