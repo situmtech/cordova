@@ -270,7 +270,8 @@ class MapViewControllerImpl {
   // ==================================================
 
   /**
-   * Select a {@link POI} of a building.
+   * Allows you to select a {@link POI} programmatically in your venue. This will cause the {@link MapView} to center the view on that POI and show its information.
+   * 
    * @param {number} identifier The unique identifier of the resource.
    * */
   selectPoi(identifier) {
@@ -280,7 +281,7 @@ class MapViewControllerImpl {
   }
 
   /**
-   * Navigate to a {@link POI} of a building.
+   * Allows you to navigate to a {@link POI} programmatically in your venue. This will cause the {@link MapView} to start navigation mode displaying the route between the user's location and the POI specified by parameters.
    *
    * The types of {@link accessibilityMode} you can use are:
    * - 'CHOOSE_SHORTEST' : Calculates the shortest route to the destination {@link POI}.
@@ -299,12 +300,23 @@ class MapViewControllerImpl {
     });
   }
 
+  /**
+   * Allows you to change the initial language that <map-view> uses to display its UI. 
+   * Checkout the [Situm docs](https://situm.com/docs/query-params/) to see the list of
+   * supported languages.
+   * 
+   * @param {string} language an ISO 639-1 code.
+   */
+  setLanguage(language){
+    this._sendMessageToViewer("ui.set_language", language);
+  }
+
   // ==================================================
   // EVENTS
   // ==================================================
 
   /**
-   * A {@link POI} was selected in your building.
+   * Informs you, through the function you pass as callback ({@link cb}), that a {@link POI} was selected in your building.
    * @param {Function} cb A callback that returns a {@link PoiSelectedResult} by its parameters.
    * */
   onPoiSelected(cb) {
@@ -312,7 +324,7 @@ class MapViewControllerImpl {
   }
 
   /**
-   * A {@link POI} was deselected in your building.
+   * Informs you, through the function you pass as callback ({@link cb}), that a {@link POI} was deselected in your building.
    * @param {Function} cb A callback that returns a {@link PoiDeselectedResult} by its parameters.
    * */
   onPoiDeselected(cb) {
