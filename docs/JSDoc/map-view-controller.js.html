@@ -81,7 +81,7 @@
  * &lt;/div>
  * 
  * &lt;script>
-    document.getElementById("copyButton").addEventListener("click", function() {
+    document.getElementById("copySnippetButton").addEventListener("click", function() {
       var textToCopy = document.getElementById("textToCopy");
 
       var range = document.createRange();
@@ -404,8 +404,7 @@ class MapViewControllerImpl {
 
   /**
    * Allows you to change the initial language that &amp;lt;map-view> uses to display its UI.
-   * Checkout the &lt;a href="https://situm.com/docs/13-internationalization/">Situm docs&lt;/a> to see the list of
-   * supported languages.
+   * Checkout the &lt;a href="https://situm.com/docs/13-internationalization/">Situm docs&lt;/a> to see the list of supported languages.
    *
    * @param {string} language an ISO 639-1 code.
    * @memberof MapViewController

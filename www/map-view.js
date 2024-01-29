@@ -17,7 +17,7 @@ const MapViewController = require('./map-view-controller')
  * </div>
  * 
  * <script>
-    document.getElementById("copyButton").addEventListener("click", function() {
+    document.getElementById("copySnippetButton").addEventListener("click", function() {
       var textToCopy = document.getElementById("textToCopy");
 
       var range = document.createRange();

@@ -27,7 +27,7 @@ const Situm = require('@situm/cordova.situm')
  * </div>
  * 
  * <script>
-    document.getElementById("copyButton").addEventListener("click", function() {
+    document.getElementById("copySnippetButton").addEventListener("click", function() {
       var textToCopy = document.getElementById("textToCopy");
 
       var range = document.createRange();
