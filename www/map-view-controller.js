@@ -349,9 +349,8 @@ class MapViewControllerImpl {
   }
 
   /**
-   * Allows you to change the initial language that <map-view> uses to display its UI.
-   * Checkout the [Situm docs](https://situm.com/docs/query-params/) to see the list of
-   * supported languages.
+   * Allows you to change the initial language that &lt;map-view> uses to display its UI.
+   * Checkout the <a href="https://situm.com/docs/13-internationalization/">Situm docs</a> to see the list of supported languages.
    *
    * @param {string} language an ISO 639-1 code.
    * @memberof MapViewController
