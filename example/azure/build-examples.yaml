@@ -47,6 +47,9 @@ steps:
 
           echo -e "\n[+] Pod install with --repo-update option \n"
           pod install --repo-update
+
+          echo -e "\n[+] Build ios app\n"
+          npx ionic cap build ios
         displayName: Install iOS example dependencies
 
       - bash: |
@@ -76,17 +79,20 @@ steps:
         displayName: Build iOS example
 
     - ${{ if contains(parameters.system, 'ubuntu') }}:
+      - task: JavaToolInstaller@0
+        inputs:
+          versionSpec: '17'
+          jdkArchitectureOption: 'x64'
+          jdkSourceOption: 'PreInstalled'
+        displayName: Install Java 17 for Gradle
 
       - bash: |
           echo -e "\n[+] Build Android example \n"
 
           cd example
 
-          mkdir -p android/app/src/main/assets
-
-          npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
-
-          cd android
+          echo -e "\n[+] Build android app \n"
+          npx ionic cap build android
 
           ./gradlew assembleDebug
 
