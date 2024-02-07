@@ -8,7 +8,6 @@ parameters:
   - name: BUILDNUMBER
     type: string
     default: "202430015"
-  - name: MAP
 
 steps:
     - ${{ if contains(parameters.system, 'macOS') }}:
