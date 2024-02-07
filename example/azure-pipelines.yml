@@ -25,7 +25,7 @@ parameters:
     default: "https://map-viewer.situm.com"
   - name: REMOTE_IDENTIFIER
     type: string
-    default: ""
+    default: " "
 
 variables:
   - group: Passwords
