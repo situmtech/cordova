@@ -89,10 +89,12 @@ steps:
       - bash: |
           echo -e "\n[+] Build Android example \n"
 
-          cd example
+          cd example/android
 
           echo -e "\n[+] Build android app \n"
-          npx ionic cap build android
+          npx ng build app
+
+          cd android
 
           ./gradlew assembleDebug
 
