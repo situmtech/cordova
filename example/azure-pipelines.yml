@@ -81,7 +81,6 @@ jobs:
 
     - template: azure/build-examples.yaml
       parameters:
-        MAPVIEWERDOMAIN: $(MAPVIEWERDOMAIN)
         system: $(ubuntuVersion)
         BUILDINGID: $(BUILDINGID)
         XAPIEMAIL: $(XAPIEMAIL)
@@ -135,7 +134,6 @@ jobs:
 
     - template: azure/build-examples.yaml
       parameters:
-        MAPVIEWERDOMAIN: $(MAPVIEWERDOMAIN)
         system: $(macOSVersion)
         XAPIEMAIL: $(XAPIEMAIL)
         BUILDINGID: $(BUILDINGID)

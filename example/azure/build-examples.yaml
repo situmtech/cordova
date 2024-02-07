@@ -8,6 +8,7 @@ parameters:
   - name: BUILDNUMBER
     type: string
     default: "202430015"
+  - name: MAP
 
 steps:
     - ${{ if contains(parameters.system, 'macOS') }}:
@@ -94,9 +95,9 @@ steps:
 
       - bash: |
           if [[ "$(Build.Reason)" == "Manual" ]];then
-            folder="$(RNSDKExample_folder)/Manual"
+            folder="$(CordovaExample_folder)/Manual"
           else
-            folder="$(RNSDKExample_folder)"
+            folder="$(CordovaExample_folder)"
           fi
           branchName=$(echo $(Build.SourceBranch)| cut -d "/" -f 3,4 | sed 's/\//_/g')
           branchFolder="$branchName"
