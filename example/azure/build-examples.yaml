@@ -46,9 +46,6 @@ steps:
           npx ionic cap sync ios
 
           cd ios
-          rm -rf Podfile.lock
-          echo -e "\n[+] Pod deintegrate \n"
-          pod deintegrate
 
           echo -e "\n[+] Pod install with --repo-update option \n"
           pod install --repo-update
