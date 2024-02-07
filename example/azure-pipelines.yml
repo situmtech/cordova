@@ -64,7 +64,6 @@ jobs:
            echo "##vso[task.setvariable variable=XAPIKEY]$(echo ${{parameters.XAPIKEY}})"
            echo "##vso[task.setvariable variable=XAPIEMAIL]$(echo ${{ parameters.XAPIEMAIL}})"
            echo "##vso[task.setvariable variable=BUILDINGID]$(echo ${{ parameters.BUILDINGID}})"
-           echo "##vso[task.setvariable variable=FLOORID]$(echo ${{ parameters.FLOORID}})"
            echo "##vso[task.setvariable variable=MAPVIEWERDOMAIN]$(echo ${{ parameters.MAPVIEWERDOMAIN }})"
            echo "##vso[task.setvariable variable=REMOTE_IDENTIFIER]$(echo ${{ parameters.REMOTE_IDENTIFIER }})"
 
