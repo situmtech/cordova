@@ -43,7 +43,7 @@ steps:
           cd example
 
           echo -e "\n[+] Build ios app\n"
-          npx ionic cap build ios
+          npx ionic cap sync ios
 
           cd ios
           rm -rf Podfile.lock
