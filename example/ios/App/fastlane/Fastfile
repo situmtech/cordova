@@ -23,7 +23,7 @@ platform :ios do
     #=================================================
     latest_testflight_build_number(
       api_key_path:"./fastlane/api_key.json",
-      app_identifier:"com.situm.cordovaexample",
+      app_identifier:"com.situm.capacitorexample",
     )
 
     #====================================================
@@ -51,7 +51,7 @@ platform :ios do
       xcargs: "CODE_SIGN_STYLE=Manual PROVISIONING_PROFILE_SPECIFIER=\"Situm Cordova SDK Example\"",
       export_options: {
           provisioningProfiles: {
-              "com.situm.cordovaexample" => "DistributorOnline"
+              "com.situm.capacitorexample" => "DistributorOnline"
             },
         }
     )
