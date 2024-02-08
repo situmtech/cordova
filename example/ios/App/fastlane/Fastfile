@@ -48,7 +48,7 @@ platform :ios do
       configuration: "Release",
       scheme: "App",
       export_method: "app-store",
-      xcargs: "CODE_SIGN_STYLE=Manual PROVISIONING_PROFILE_SPECIFIER=\"Situm Cordova SDK Example\" DEVELOPMENT_TEAM=\""+ENV['appleDevTeamId']+"\" PRODUCT_BUNDLER_IDENTIFIER=\"com.situm.capacitorexample\"",
+      xcargs: "CODE_SIGN_STYLE=Manual PROVISIONING_PROFILE_SPECIFIER=\"Situm Cordova SDK Example\" DEVELOPMENT_TEAM=\""+ENV['appleDevTeamId']+"\" PRODUCT_BUNDLE_IDENTIFIER=\"com.situm.capacitorexample\"",
       export_options: {
           provisioningProfiles: {
               "com.situm.capacitorexample" => "DistributorOnline"
