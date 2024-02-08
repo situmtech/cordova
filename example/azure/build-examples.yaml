@@ -58,7 +58,7 @@ steps:
 
           sudo xcode-select -switch $(xcodeVersion)
 
-          cd example/ios/fastlane
+          cd example/ios/App/fastlane
 
           echo -e "\n[+] Setting Apple connection options"
 
