@@ -45,7 +45,7 @@ steps:
           echo -e "\n[+] Build ios app\n"
           npx ionic cap sync ios
 
-          cd ios
+          cd ios/App
 
           echo -e "\n[+] Pod install with --repo-update option \n"
           pod install --repo-update
