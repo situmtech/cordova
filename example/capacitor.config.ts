@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.situm.capacitor_example',
+  appId: 'com.situm.capacitorexample',
   appName: 'Situm Capacitor Example',
   webDir: 'www',
   server: {
