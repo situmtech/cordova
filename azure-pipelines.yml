@@ -240,30 +240,6 @@ jobs:
             bitbucket_pass: $(bitbucket_pass)
           release: "cordova"
       
-      - checkout: cordova_sdk_validation 
-        fetchTags: false
-        fetchDepth: 1
-        displayName: Checkout Cordova app example
-      
-      - bash: |
-          cd cordova-sdk-validation
-          echo -e "\n[+] Setting git remote credentials\n"
-          git remote set-url origin https://$(bitbucket_user):$(bitbucket_pass)@bitbucket.org/situm/cordova-sdk-validation.git
-          
-          cat .git/config
-      
-          echo -e "\n[+] Fetch branches"
-          git fetch origin master
-          echo -e "\n[+] Checkout to master branch\n"
-          git checkout master
-      
-          echo -e "\n[+] Commit empty change to run examples repo\n"
-          git commit -m "Publish Cordova SDK plugin release $(version)" --allow-empty
-          echo -e "\n[+] Push empty change \n"
-          git push origin master
-          
-        displayName: Execute example app 
-            
       - bash: |
           if [ -d "cordova" ]; then
             cd cordova
