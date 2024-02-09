@@ -9,7 +9,7 @@ parameters:
     type: string
   - name: MAPVIEWERDOMAIN
     type: string
-  - name: REMOTE_IDENTIFIER
+  - name: REMOTEIDENTIFIER
     type: string
   - name: BUILDNUMBER
     type: string
