@@ -61,6 +61,6 @@ steps:
       echo "export const API_KEY = '${{ parameters.XAPIKEY }}';" >> example/src/constants.ts
       echo "export const BUILDING_IDENTIFIER = '${{ parameters.BUILDINGID }}';" >> example/src/constants.ts
       echo "export const VIEWER_DOMAIN = '${{ parameters.MAPVIEWERDOMAIN }}';" >> example/src/constants.ts
-      echo "export const REMOTE_IDENTIFIER = '${{ parameters.REMOTE_IDENTIFIER }}';" >> example/src/constants.ts
+      echo "export const REMOTEIDENTIFIER = '${{ parameters.REMOTEIDENTIFIER }}';" >> example/src/constants.ts
 
     displayName: Configure credentials
