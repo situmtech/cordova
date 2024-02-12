@@ -97,7 +97,7 @@ class MapView extends HTMLElement {
     let query = `${situmApiKeyQP}${buildingIdentifierQP}${languageQP}&mode=embed`
 
     let remoteIdentifier = this.getAttribute('remote-identifier')
-    if (remoteIdentifier) {
+    if (remoteIdentifier && remoteIdentifier.length > 0) {
       return `${viewerDomain}/id/${remoteIdentifier}?${query}`
     }
     return `${viewerDomain}/?${query}`

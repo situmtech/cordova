@@ -1,0 +1,147 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  - master
+
+pr: none
+
+parameters:
+  - name: XAPIEMAIL
+    type: string
+    displayName: X-API-EMAIL
+    default: user@email.com
+  - name: XAPIKEY
+    type: string
+    displayName: X-API-KEY
+    default: user-api-key
+  - name: BUILDINGID
+    type: string
+    default: "1"
+  - name: MAPVIEWERDOMAIN
+    type: string
+    default: "https://map-viewer.situm.com"
+  - name: REMOTEIDENTIFIER
+    type: string
+    default: "demo"
+
+variables:
+  - group: Passwords
+  - group: SoftwareVersions
+  - group: SharepointPaths
+
+resources:
+  repositories:
+  - repository: sys_kubernetes_templates
+    type: bitbucket
+    endpoint: Bitbucket - sistemas
+    name: situm/sys-kubernetes-templates.git
+
+jobs:
+  #===============================================================
+  # Job for Android app
+  #===============================================================
+  - job:
+    displayName: Build Android App
+    pool:
+      vmImage: $(ubuntuVersion)
+    steps:
+    - ${{ if ne(variables['Build.Reason'],'manual') }}:
+      - bash: |
+           echo "##vso[task.setvariable variable=XAPIKEY]$(echo $(XAPIKEY_EXAMPLES))"
+           echo "##vso[task.setvariable variable=XAPIEMAIL]$(echo $(XAPIEMAIL_EXAMPLES))"
+           echo "##vso[task.setvariable variable=BUILDINGID]$(echo $(BUILDING_ID_EXAMPLES))"
+           echo "##vso[task.setvariable variable=MAPVIEWERDOMAIN]$(echo $(DEFAULT_MAPVIEWURL))"
+           echo "##vso[task.setvariable variable=REMOTEIDENTIFIER]$(echo $(DEFAULT_REMOTEIDENTIFIER))"
+           echo "##vso[task.setvariable variable=BUILDNUMBER]$(echo $(Build.BuildNumber) | awk -F"." '{if ($2 < 10) print $1"0"$2; else print $1$2}')"
+
+           echo -e "\n[!] I'm a shy step so I don't show any information. You'll see my work in the Configure Credentials step"
+        displayName: Configure Automatic run Vars
+
+    - ${{ if eq(variables['Build.Reason'],'manual') }}:
+      - bash: |
+           echo "##vso[task.setvariable variable=XAPIKEY]$(echo ${{parameters.XAPIKEY}})"
+           echo "##vso[task.setvariable variable=XAPIEMAIL]$(echo ${{ parameters.XAPIEMAIL}})"
+           echo "##vso[task.setvariable variable=BUILDINGID]$(echo ${{ parameters.BUILDINGID}})"
+           echo "##vso[task.setvariable variable=MAPVIEWERDOMAIN]$(echo ${{ parameters.MAPVIEWERDOMAIN }})"
+           echo "##vso[task.setvariable variable=REMOTEIDENTIFIER]$(echo ${{ parameters.REMOTEIDENTIFIER }})"
+           echo "##vso[task.setvariable variable=BUILDNUMBER]$(echo $(Build.BuildNumber) | awk -F"." '{if ($2 < 10) print $1"0"$2; else print $1$2}')"
+
+           echo -e "\n[!] I'm a shy step so I don't show any information. You'll see my work in the Configure Credentials step"
+        displayName: Configure Manual run Vars
+
+    - template: azure/common-steps.yaml
+      parameters:
+        XAPIKEY: $(XAPIKEY)
+        XAPIEMAIL: $(XAPIEMAIL)
+        BUILDINGID: $(BUILDINGID)
+        MAPVIEWERDOMAIN: $(MAPVIEWERDOMAIN)
+        REMOTEIDENTIFIER: $(REMOTEIDENTIFIER)
+        system: $(ubuntuVersion)
+        BUILDNUMBER: $(BUILDNUMBER)
+
+    - template: azure/build-examples.yaml
+      parameters:
+        system: $(ubuntuVersion)
+        BUILDINGID: $(BUILDINGID)
+        XAPIEMAIL: $(XAPIEMAIL)
+        MAPVIEWERDOMAIN: $(MAPVIEWERDOMAIN)
+        BUILDNUMBER: $(BUILDNUMBER)
+
+  #===============================================================
+  # Job for iOS app
+  #===============================================================
+  - job:
+    displayName: Build iOS App
+    pool:
+      vmImage: $(macOSVersion)
+    steps:
+    - ${{ if ne(variables['Build.Reason'],'manual') }}:
+      - bash: |
+           echo "##vso[task.setvariable variable=XAPIKEY]$(echo $(XAPIKEY_EXAMPLES))"
+           echo "##vso[task.setvariable variable=XAPIEMAIL]$(echo $(XAPIEMAIL_EXAMPLES))"
+           echo "##vso[task.setvariable variable=BUILDINGID]$(echo $(BUILDING_ID_EXAMPLES))"
+           echo "##vso[task.setvariable variable=MAPVIEWERDOMAIN]$(DEFAULT_MAPVIEWURL)"
+           echo "##vso[task.setvariable variable=REMOTEIDENTIFIER]$(echo $(DEFAULT_REMOTEIDENTIFIER))"
+           echo "##vso[task.setvariable variable=BUILDNUMBER]$(echo $(Build.BuildNumber) | awk -F"." '{if ($2 < 10) print $1"0"$2; else print $1$2}')"
+
+           echo -e "\n[!] I'm a shy step so I don't show any information. You'll see my work in the Configure Credentials step"
+        displayName: Configure Automatic run Vars
+
+    - ${{ if eq(variables['Build.Reason'],'manual') }}:
+      - bash: |
+           echo "##vso[task.setvariable variable=XAPIKEY]$(echo ${{parameters.XAPIKEY}})"
+           echo "##vso[task.setvariable variable=XAPIEMAIL]$(echo ${{ parameters.XAPIEMAIL}})"
+           echo "##vso[task.setvariable variable=BUILDINGID]$(echo ${{ parameters.BUILDINGID}})"
+           echo "##vso[task.setvariable variable=MAPVIEWERDOMAIN]$(echo ${{ parameters.MAPVIEWERDOMAIN }})"
+           echo "##vso[task.setvariable variable=REMOTEIDENTIFIER]$(echo ${{ parameters.REMOTEIDENTIFIER }})"
+           echo "##vso[task.setvariable variable=BUILDNUMBER]$(echo $(Build.BuildNumber) | awk -F"." '{if ($2 < 10) print $1"0"$2; else print $1$2}')"
+
+           echo -e "\n[!] I'm a shy step so I don't show any information. You'll see my work in the Configure Credentials step"
+        displayName: Configure Manual run Vars
+
+    - bash: |
+         echo -e "\n[+] Install gnu-sed\n"
+         brew install gnu-sed
+      displayName: Install gnu-sed
+
+    - template: azure/common-steps.yaml
+      parameters:
+        XAPIKEY: $(XAPIKEY)
+        XAPIEMAIL: $(XAPIEMAIL)
+        BUILDINGID: $(BUILDINGID)
+        system: $(macOSVersion)
+        BUILDNUMBER: $(BUILDNUMBER)
+        MAPVIEWERDOMAIN: $(MAPVIEWERDOMAIN)
+        REMOTEIDENTIFIER: $(REMOTEIDENTIFIER)
+
+    - template: azure/build-examples.yaml
+      parameters:
+        MAPVIEWERDOMAIN: $(MAPVIEWERDOMAIN)
+        system: $(macOSVersion)
+        XAPIEMAIL: $(XAPIEMAIL)
+        BUILDINGID: $(BUILDINGID)
+        BUILDNUMBER: $(BUILDNUMBER)
+

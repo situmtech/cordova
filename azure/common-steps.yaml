@@ -1,5 +1,5 @@
 steps:
   - checkout: self
     fetchTags: false
-    fetchDepth: 1
+    fetchDepth: 3
     displayName: Checkout repo
