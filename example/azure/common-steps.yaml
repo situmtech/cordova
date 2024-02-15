@@ -1,0 +1,66 @@
+parameters:
+  - name: system
+    type: string
+  - name: XAPIEMAIL
+    type: string
+  - name: XAPIKEY
+    type: string
+  - name: BUILDINGID
+    type: string
+  - name: MAPVIEWERDOMAIN
+    type: string
+  - name: REMOTEIDENTIFIER
+    type: string
+  - name: BUILDNUMBER
+    type: string
+    default: "Value only set in iOS"
+steps:
+  - checkout: self
+    fetchDepth: 1
+    fetchTags: false
+    displayName: Clone repository
+
+  - task: NodeTool@0
+    inputs:
+      versionSource: "spec" # 'spec' | 'fromFile'. Required. Source of version. Default: spec.
+      versionSpec: $(nodeVersion)
+
+  - bash: |
+
+      echo -e "\n[+] Installing NPM version $(npmVersion)\n"
+      npm install -g $(npmVersion)
+
+      echo -e "\n[+] Install $(ioniccli)\n"
+      npm install $(ioniccli)
+
+      echo -e "\n[+] Install plugin dependencies\n"
+      npm install
+
+      echo -e "\n[+] Install example dependencies\n"
+      cd example
+      rm -rf ios/Podfile.lock
+      npm install
+
+
+    displayName: Install plugin dependencies
+
+  - bash: |
+
+      export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+      pluginVersion=$(grep -E '"version": "[0-9]+\.[0-9]+\.[0-9]+"' package.json | awk -F"\"" '{print $4}')
+      echo "##vso[task.setvariable variable=pluginVersion]$(echo $pluginVersion)"
+
+      echo -e "\n[+] Variables to set:"
+      echo -e "\t[+] X-API-EMAIL: ${{ parameters.XAPIEMAIL }}"
+      echo -e "\t[+] BUILDINGID: ${{ parameters.BUILDINGID }}"
+      echo -e "\t[+] MAPVIEWERDOMAIN: ${{ parameters.MAPVIEWERDOMAIN }}"
+      echo -e "\t[+] BUILDNUMBER: ${{ parameters.BUILDNUMBER }}"
+      echo -e "\t[+] Plugin Version used: $pluginVersion"
+
+      echo "export const API_USER = '${{ parameters.XAPIEMAIL }}';" > example/src/constants.ts
+      echo "export const API_KEY = '${{ parameters.XAPIKEY }}';" >> example/src/constants.ts
+      echo "export const BUILDING_IDENTIFIER = '${{ parameters.BUILDINGID }}';" >> example/src/constants.ts
+      echo "export const VIEWER_DOMAIN = '${{ parameters.MAPVIEWERDOMAIN }}';" >> example/src/constants.ts
+      echo "export const REMOTE_IDENTIFIER = '${{ parameters.REMOTEIDENTIFIER }}';" >> example/src/constants.ts
+
+    displayName: Configure credentials
