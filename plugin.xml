@@ -24,6 +24,11 @@
         <clobbers target="cordova.plugins.MapViewController" />
     </js-module>
 
+    <js-module src="www/common-utils.js" name="common-utils">
+        <runs/>
+        <clobbers target="cordova.plugins.SitumCommon" />
+    </js-module>
+
     <!-- android -->
     <platform name="android">
         <js-module src="www/android/situm.js" name="situm">

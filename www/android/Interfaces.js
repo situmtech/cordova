@@ -553,7 +553,7 @@ module.exports = SitumConversionArea
 
 /**
  * @name
- * LocationOptions
+ * LocationRequest
  * @description
  * A data object that contains parameters for the location service, LocationManager.
  * @property {number} buildingIdentifier - Identifier of the building on which the positioning will be started
@@ -567,13 +567,12 @@ module.exports = SitumConversionArea
  * @property {boolean} useForegroundService - Defines whether or not to activate the {@link http://developers.situm.es/pages/android/using_situm_sdk_background.html foreground service}
  * @property {boolean} useDeadReckoning - Defines whether ot not to use dead reckoning to get fast position updates using only the inertial sensors, between the server position updates.
  * @property {OutdoorLocationOptions} outdoorLocationOptions - Outdoor location options. Only used in an indoor/outdoor request
- * @property {BeaconFilter[]} beaconFilters - Beacon filters to be handled during scan time, otherwise only Situm beacons will be scanned. Can be invoked multiple times to add as much beacon filters as you want @deprecated The SitumSDK now does it automatically
+ * @property {BeaconFilter[]} beaconFilters - Beacon filters to be handled during scan time, otherwise only Situm beacons will be scanned. Can be invoked multiple times to add as much beacon filters as you want.
  * @property {number} smallestDisplacement - Default smallest displacement to nofiy location updates
  * @property {string} realtimeUpdateInterval - Default interval to send locations to the Realtime. Possible values are REALTIME, FAST, NORMAL, SLOW and BATTERY_SAVER
  * @property {boolean} autoEnableBleDuringPositioning - Set if the BLE should be re-enabled during positioning if the ble is used. Android only
  */
-
-var LocationOptions = {
+var LocationRequest = {
   buildingIdentifier,
   interval,
   indoorProvider,
@@ -587,27 +586,22 @@ var LocationOptions = {
   outdoorLocationOptions,
   beaconFilters,
   smallestDisplacement,
-  realtimeUpdateInterval
-}
+  realtimeUpdateInterval,
+  autoEnableBleDuringPositioning,
+};
 
-module.exports = LocationOptions
+module.exports = LocationRequest;
 
 /**
  * @name
- * LocationRequest
+ * LocationOptions
  * @description
  * A data object that contains parameters for the location service, LocationManager.
- * @type {array}
- * @property {Building} building 0 - Building on which the positioning will be started
- * @property {LocationOptions} locationOptions 1 - Location options.
+ * @deprecated
  */
+var LocationOptions = LocationRequest;
 
-var LocationRequest = {
-    building,
-    locationOptions
-}
-
-module.exports = LocationRequest
+module.exports = LocationOptions
 
 /**
  * @name

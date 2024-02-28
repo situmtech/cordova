@@ -1,4 +1,5 @@
 var exec = require('cordova/exec');
+const common = require('@situm/cordova.common-utils');
 
 var PLUGIN_NAME = 'SitumPlugin';
 let _internalEventDelegate = undefined;
@@ -24,7 +25,8 @@ var Situm = {
       _internalEventDelegate('onLocationUpdate', res);
       cb(res);
     };
-    exec(internalCallback, error, PLUGIN_NAME, 'startPositioning', request);
+    let compatRequest = common.standarizeRequest(request);
+    exec(internalCallback, error, PLUGIN_NAME, 'startPositioning', compatRequest);
   },
   stopPositioning: function (cb, error) {
     exec(cb, error, PLUGIN_NAME, 'stopPositioning', []);

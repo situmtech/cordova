@@ -755,159 +755,138 @@ static JSONObject buildingInfoToJsonObject(BuildingInfo buildingInfo) throws JSO
       return locationBuilder.build();
     }
 
-    JSONObject jsonoBuilding = args.getJSONObject(0);
-    String sBuildingId;
-    if (jsonoBuilding.get(SitumMapper.BUILDING_IDENTIFIER) instanceof String) {
-      sBuildingId = jsonoBuilding.getString(SitumMapper.BUILDING_IDENTIFIER);
-    } else {
-      sBuildingId = String.format(Locale.getDefault(), "%d", jsonoBuilding.getInt(SitumMapper.BUILDING_IDENTIFIER));
+    JSONObject request = args.getJSONObject(0);
+    if (request.has(SitumMapper.BUILDING_IDENTIFIER)) {
+      locationBuilder.buildingIdentifier(String.valueOf(request.get(SitumMapper.BUILDING_IDENTIFIER)));
     }
 
-    if (args.length() > 1) {
-        JSONObject request = args.getJSONObject(1);
-        if (request.has(SitumMapper.BUILDING_IDENTIFIER)) {
-          String buildingIdentifier;
-          if (request.get(SitumMapper.BUILDING_IDENTIFIER) instanceof String) {
-            buildingIdentifier = request.getString(SitumMapper.BUILDING_IDENTIFIER);
-          } else {
-            buildingIdentifier = String.format(Locale.getDefault(), "%d", jsonoBuilding.getInt(SitumMapper.BUILDING_IDENTIFIER));
+    if (request.has(SitumMapper.INTERVAL)) {
+      Integer interval = request.getInt(SitumMapper.INTERVAL);
+      if (interval != null) {
+        locationBuilder.interval(interval);
+        Log.i(TAG, "interval: " + interval);
+      }
+    }
+
+    if (request.has(SitumMapper.INDOOR_PROVIDER)) {
+      String indoorProvider = request.getString(SitumMapper.INDOOR_PROVIDER);
+      if (indoorProvider != null && !indoorProvider.isEmpty()) {
+        if (indoorProvider.equals(LocationRequest.IndoorProvider.SUPPORT.name())) {
+          locationBuilder.indoorProvider(LocationRequest.IndoorProvider.SUPPORT);
+        } else {
+          locationBuilder.indoorProvider(LocationRequest.IndoorProvider.INPHONE);
+        }
+        Log.i(TAG, "indoorProvider: " + indoorProvider);
+      }
+    }
+
+    if (request.has(SitumMapper.USE_BLE)) {
+      Boolean useBle = request.getBoolean(SitumMapper.USE_BLE);
+      locationBuilder.useBle(useBle);
+      Log.i(TAG, "useBle: " + useBle);
+    }
+
+    if (request.has(SitumMapper.USE_WIFI)) {
+      Boolean useWifi = request.getBoolean(SitumMapper.USE_WIFI);
+      locationBuilder.useWifi(useWifi);
+      Log.i(TAG, "useWifi: " + useWifi);
+    }
+
+    if (request.has(SitumMapper.USE_GPS)) {
+      Boolean useGps = request.getBoolean(SitumMapper.USE_GPS);
+      locationBuilder.useGps(useGps);
+      Log.i(TAG, "useGps: " + useGps);
+    }
+
+    if (request.has(SitumMapper.USE_BAROMETER)) {
+      Boolean useBarometer = request.getBoolean(SitumMapper.USE_BAROMETER);
+      locationBuilder.useBarometer(useBarometer);
+      Log.i(TAG, "useBarometer: " + useBarometer);
+    }
+
+    if (request.has(SitumMapper.AUTO_ENABLE_BLE)) {
+      Boolean autoEnableBleDuringPositioning = request.getBoolean(SitumMapper.AUTO_ENABLE_BLE);
+      locationBuilder.autoEnableBleDuringPositioning(autoEnableBleDuringPositioning);
+      Log.i(TAG, "autoEnableBleDuringPositioning: " + autoEnableBleDuringPositioning);
+    }
+
+    if (request.has(SitumMapper.MOTION_MODE)) {
+      String motionMode = request.getString(SitumMapper.MOTION_MODE);
+      if (motionMode != null) {
+        if (motionMode.equals(LocationRequest.MotionMode.BY_FOOT.name())) {
+          locationBuilder.motionMode(LocationRequest.MotionMode.BY_FOOT);
+        } else if (motionMode.equals(LocationRequest.MotionMode.BY_CAR.name())) {
+          locationBuilder.motionMode(LocationRequest.MotionMode.BY_CAR);
+        }
+        Log.i(TAG, "motionMode: " + motionMode);
+      }
+    }
+
+    if (request.has(SitumMapper.USE_FOREGROUND_SERVICE)) {
+      Boolean useForegroundService = request.getBoolean(SitumMapper.USE_FOREGROUND_SERVICE);
+      locationBuilder.useForegroundService(useForegroundService);
+      Log.i(TAG, "useForegroundService: " + useForegroundService);
+    }
+
+    if (request.has(SitumMapper.USE_DEAD_RECKONING)) {
+      Boolean useDeadReckoning = request.getBoolean(SitumMapper.USE_DEAD_RECKONING);
+      locationBuilder.useDeadReckoning(useDeadReckoning);
+      Log.i(TAG, "useDeadReckoning: " + useDeadReckoning);
+    }
+
+    if (request.has(SitumMapper.OUTDOOR_LOCATION_OPTIONS)) {
+      JSONObject outdoorLocationOptions = request.getJSONObject(SitumMapper.OUTDOOR_LOCATION_OPTIONS);
+      if (outdoorLocationOptions != null) {
+        locationBuilder.outdoorLocationOptions(buildOutdoorLocationOptions(outdoorLocationOptions));
+      }
+    }
+
+    if (request.has(SitumMapper.BEACON_FILTERS)) {
+      JSONArray beaconFilters = request.getJSONArray(SitumMapper.BEACON_FILTERS);
+      List<BeaconFilter> filtersList = new ArrayList<BeaconFilter>();
+      for (int i = 0; i < beaconFilters.length(); i++) {
+        JSONObject beaconFilter = beaconFilters.getJSONObject(i);
+        if (beaconFilter.has(SitumMapper.UUID)) {
+          String uuid = beaconFilter.getString(SitumMapper.UUID);
+          if (uuid != null && !uuid.isEmpty()) {
+            BeaconFilter.Builder builder = new BeaconFilter.Builder().uuid(uuid);
+            filtersList.add(builder.build());
+            Log.i(TAG, "beaconFilter: " + uuid);
           }
-
-            locationBuilder.buildingIdentifier(buildingIdentifier);
-            Log.i(TAG, "buildingIdentifier: " + buildingIdentifier);
         }
+      }
+      locationBuilder.addBeaconFilters(filtersList);
+    }
 
-        if (request.has(SitumMapper.INTERVAL)) {
-            Integer interval = request.getInt(SitumMapper.INTERVAL);
-            if (interval != null) {
-                locationBuilder.interval(interval);
-                Log.i(TAG, "interval: " + interval);
-            }
+    if (request.has(SitumMapper.SMALLEST_DISPLACEMENT)) {
+      Float smallestDisplacement = new Float(request.getDouble(SitumMapper.SMALLEST_DISPLACEMENT));
+      if (smallestDisplacement != null && smallestDisplacement > 0) {
+        locationBuilder.smallestDisplacement(smallestDisplacement);
+        Log.i(TAG, "smallestDisplacement: " + smallestDisplacement);
+      }
+    }
+
+    if (request.has(SitumMapper.REALTIME_UPDATE_INTERVAL) &&
+      request.get(SitumMapper.REALTIME_UPDATE_INTERVAL) instanceof String) {
+      String realtimeUpdateInterval = request.getString(SitumMapper.REALTIME_UPDATE_INTERVAL);
+      if (realtimeUpdateInterval != null) {
+        if (realtimeUpdateInterval.equals(LocationRequest.RealtimeUpdateInterval.REALTIME.name())) {
+          locationBuilder.realtimeUpdateInterval(LocationRequest.RealtimeUpdateInterval.REALTIME);
+        } else if (realtimeUpdateInterval.equals(LocationRequest.RealtimeUpdateInterval.FAST.name())) {
+          locationBuilder.realtimeUpdateInterval(LocationRequest.RealtimeUpdateInterval.FAST);
+        } else if (realtimeUpdateInterval.equals(LocationRequest.RealtimeUpdateInterval.NORMAL.name())) {
+          locationBuilder.realtimeUpdateInterval(LocationRequest.RealtimeUpdateInterval.NORMAL);
+        } else if (realtimeUpdateInterval.equals(LocationRequest.RealtimeUpdateInterval.SLOW.name())) {
+          locationBuilder.realtimeUpdateInterval(LocationRequest.RealtimeUpdateInterval.SLOW);
+        } else if (realtimeUpdateInterval.equals(LocationRequest.RealtimeUpdateInterval.BATTERY_SAVER.name())) {
+          locationBuilder.realtimeUpdateInterval(LocationRequest.RealtimeUpdateInterval.BATTERY_SAVER);
         }
-
-        if (request.has(SitumMapper.INDOOR_PROVIDER)) {
-            String indoorProvider = request.getString(SitumMapper.INDOOR_PROVIDER);
-            if (indoorProvider != null && !indoorProvider.isEmpty()) {
-                if (indoorProvider.equals(LocationRequest.IndoorProvider.SUPPORT.name())) {
-                    locationBuilder.indoorProvider(LocationRequest.IndoorProvider.SUPPORT);
-                } else {
-                    locationBuilder.indoorProvider(LocationRequest.IndoorProvider.INPHONE);
-                }
-                Log.i(TAG, "indoorProvider: " + indoorProvider);
-            }
-        }
-
-        if (request.has(SitumMapper.USE_BLE)) {
-            Boolean useBle = request.getBoolean(SitumMapper.USE_BLE);
-            locationBuilder.useBle(useBle);
-            Log.i(TAG, "useBle: " + useBle);
-        }
-
-        if (request.has(SitumMapper.USE_WIFI)) {
-            Boolean useWifi = request.getBoolean(SitumMapper.USE_WIFI);
-            locationBuilder.useWifi(useWifi);
-            Log.i(TAG, "useWifi: " + useWifi);
-        }
-
-        if (request.has(SitumMapper.USE_GPS)) {
-            Boolean useGps = request.getBoolean(SitumMapper.USE_GPS);
-            locationBuilder.useGps(useGps);
-            Log.i(TAG, "useGps: " + useGps);
-        }
-
-        if (request.has(SitumMapper.USE_BAROMETER)) {
-            Boolean useBarometer = request.getBoolean(SitumMapper.USE_BAROMETER);
-            locationBuilder.useBarometer(useBarometer);
-            Log.i(TAG, "useBarometer: " + useBarometer);
-        }
-
-        if (request.has(SitumMapper.AUTO_ENABLE_BLE)) {
-            Boolean autoEnableBleDuringPositioning = request.getBoolean(SitumMapper.AUTO_ENABLE_BLE);
-            locationBuilder.autoEnableBleDuringPositioning(autoEnableBleDuringPositioning);
-            Log.i(TAG, "autoEnableBleDuringPositioning: " + autoEnableBleDuringPositioning);
-        }
-
-        if (request.has(SitumMapper.MOTION_MODE)) {
-            String motionMode = request.getString(SitumMapper.MOTION_MODE);
-            if (motionMode != null) {
-                if (motionMode.equals(LocationRequest.MotionMode.BY_FOOT.name())) {
-                    locationBuilder.motionMode(LocationRequest.MotionMode.BY_FOOT);
-                } else if (motionMode.equals(LocationRequest.MotionMode.BY_CAR.name())) {
-                    locationBuilder.motionMode(LocationRequest.MotionMode.BY_CAR);
-                }
-                Log.i(TAG, "motionMode: " + motionMode);
-            }
-        }
-
-        if (request.has(SitumMapper.USE_FOREGROUND_SERVICE)) {
-            Boolean useForegroundService = request.getBoolean(SitumMapper.USE_FOREGROUND_SERVICE);
-            locationBuilder.useForegroundService(useForegroundService);
-            Log.i(TAG, "useForegroundService: " + useForegroundService);
-        }
-
-        if (request.has(SitumMapper.USE_DEAD_RECKONING)) {
-            Boolean useDeadReckoning = request.getBoolean(SitumMapper.USE_DEAD_RECKONING);
-            locationBuilder.useDeadReckoning(useDeadReckoning);
-            Log.i(TAG, "useDeadReckoning: " + useDeadReckoning);
-        }
-
-        if (request.has(SitumMapper.OUTDOOR_LOCATION_OPTIONS)) {
-            JSONObject outdoorLocationOptions = request.getJSONObject(SitumMapper.OUTDOOR_LOCATION_OPTIONS);
-            if (outdoorLocationOptions != null) {
-                locationBuilder.outdoorLocationOptions(buildOutdoorLocationOptions(outdoorLocationOptions));
-            }
-        }
-
-        if (request.has(SitumMapper.BEACON_FILTERS)) {
-            JSONArray beaconFilters = request.getJSONArray(SitumMapper.BEACON_FILTERS);
-            List<BeaconFilter> filtersList = new ArrayList<BeaconFilter>();
-            for (int i = 0; i < beaconFilters.length(); i++) {
-                JSONObject beaconFilter = beaconFilters.getJSONObject(i);
-                if (beaconFilter.has(SitumMapper.UUID)) {
-                    String uuid = beaconFilter.getString(SitumMapper.UUID);
-                    if (uuid != null && !uuid.isEmpty()) {
-                        BeaconFilter.Builder builder = new BeaconFilter.Builder().uuid(uuid);
-                        filtersList.add(builder.build());
-                        Log.i(TAG, "beaconFilter: " + uuid);
-                    }
-                }
-            }
-
-            locationBuilder.addBeaconFilters(filtersList);
-        }
-
-        if (request.has(SitumMapper.SMALLEST_DISPLACEMENT)) {
-            Float smallestDisplacement = new Float(request.getDouble(SitumMapper.SMALLEST_DISPLACEMENT));
-            if (smallestDisplacement != null && smallestDisplacement > 0) {
-                locationBuilder.smallestDisplacement(smallestDisplacement);
-                Log.i(TAG, "smallestDisplacement: " + smallestDisplacement);
-            }
-        }
-
-        if (request.has(SitumMapper.REALTIME_UPDATE_INTERVAL) &&
-                request.get(SitumMapper.REALTIME_UPDATE_INTERVAL) instanceof String) {
-            String realtimeUpdateInterval = request.getString(SitumMapper.REALTIME_UPDATE_INTERVAL);
-            if (realtimeUpdateInterval != null) {
-                if (realtimeUpdateInterval.equals(LocationRequest.RealtimeUpdateInterval.REALTIME.name())) {
-                    locationBuilder.realtimeUpdateInterval(LocationRequest.RealtimeUpdateInterval.REALTIME);
-                } else if (realtimeUpdateInterval.equals(LocationRequest.RealtimeUpdateInterval.FAST.name())) {
-                    locationBuilder.realtimeUpdateInterval(LocationRequest.RealtimeUpdateInterval.FAST);
-                } else if (realtimeUpdateInterval.equals(LocationRequest.RealtimeUpdateInterval.NORMAL.name())) {
-                    locationBuilder.realtimeUpdateInterval(LocationRequest.RealtimeUpdateInterval.NORMAL);
-                } else if (realtimeUpdateInterval.equals(LocationRequest.RealtimeUpdateInterval.SLOW.name())) {
-                    locationBuilder.realtimeUpdateInterval(LocationRequest.RealtimeUpdateInterval.SLOW);
-                } else if (realtimeUpdateInterval.equals(LocationRequest.RealtimeUpdateInterval.BATTERY_SAVER.name())) {
-                    locationBuilder.realtimeUpdateInterval(LocationRequest.RealtimeUpdateInterval.BATTERY_SAVER);
-                }
-                Log.i(TAG, "realtimeUpdateInterval: " + realtimeUpdateInterval);
-            }
-        }
-    } else {
-       locationBuilder.buildingIdentifier(sBuildingId);
+        Log.i(TAG, "realtimeUpdateInterval: " + realtimeUpdateInterval);
+      }
     }
 
     return locationBuilder.build();
-}
+  }
 
   static OutdoorLocationOptions buildOutdoorLocationOptions(JSONObject outdoorLocationOptions) throws JSONException{
     OutdoorLocationOptions.Builder optionsBuilder = new OutdoorLocationOptions.Builder();

@@ -1,12 +1,37 @@
 var exec = require('cordova/exec');
+const common = require('@situm/cordova.common-utils');
 
 var PLUGIN_NAME = 'Situm';
 let _internalEventDelegate = undefined;
 
+let _clientLocationUpdateCallback;
+let _clientLocationStatusCallback;
+let _clientLocationErrorCallback;
+
+let _internalPositioningCallback = function(res) {
+  if (!res) {
+    return;
+  }
+  if (_internalEventDelegate) {
+    _internalEventDelegate('onLocationUpdate', res);
+  }
+  if (res.position && _clientLocationUpdateCallback) {
+    _clientLocationUpdateCallback(res);
+  }
+  if (res.statusName && _clientLocationStatusCallback) {
+    _clientLocationStatusCallback(res.statusName);
+  }
+};
+
+let _internalErrorCallback = function(error) {
+  if (_clientLocationErrorCallback) {
+    _clientLocationErrorCallback(error);
+  }
+}
+
 /** 
  * @namespace Situm
  */
-
 var Situm = {
   /**
    * An internal method.
@@ -53,35 +78,114 @@ var Situm = {
   setCacheMaxAge: function (cacheAge, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'setCacheMaxAge', [cacheAge]);
   },
+
   /**
    * Set callback and starts listen onLocationChanged event.
    * @param {LocationRequest} request Location Request.
    * @param {function} cb Cordova native callback to recive data.
    * @param {function} error Cordova native callback to recive errors.
    * @return {Location} position Current position of device.
+   * @deprecated Use {@link requestLocationUpdates} instead. Use {@link onLocationUpdate}, {@link onLocationStatus}, and {@link onLocationError} to receive location updates, status changes and errors.
+   * @see {@link requestLocationUpdates}
+   * @see {@link onLocationUpdate}
+   * @see {@link onLocationStatus}
+   * @see {@link onLocationError}
    */
   startPositioning: function (request, cb, error) {
     let internalCallback = (res) => {
       _internalEventDelegate('onLocationUpdate', res);
       cb(res);
     };
-    exec(internalCallback, error, PLUGIN_NAME, 'startPositioning', request);;
+    let compatRequest = common.standarizeRequest(request);
+    exec(internalCallback, error, PLUGIN_NAME, 'startPositioning', compatRequest);
   },
-    /**
+
+  /**
+   * Starts positioning. Use {@link onLocationUpdate}, {@link onLocationStatus}, and {@link onLocationError} to receive location updates, status changes and errors.
+   * @param {LocationRequest} request LocationRequest containing the positioning options.
+   * @see {@link onLocationUpdate}
+   * @see {@link onLocationStatus}
+   * @see {@link onLocationError}
+   */
+  requestLocationUpdates: function(request) {
+    let compatRequest = common.standarizeRequest(request);
+    exec(_internalPositioningCallback, _internalErrorCallback, PLUGIN_NAME, 'startPositioning', compatRequest);
+  },
+
+  // TODO: move to TypeScript:
+
+  /**
+   * @typedef {function} OnLocationUpdateCallback
+   * @param {Location} location - Location.
+   */
+
+  // TODO: move to TypeScript:
+
+  /**
+   * @typedef {function} OnLocationStatusCallback
+   * @param {string} status - Status.
+   */
+
+  // TODO: move to TypeScript, create Error class:
+
+  /**
+   * @typedef {function} OnLocationErrorCallback
+   * @param {any} error - Location error.
+   */
+
+  /**
+   * Get notified about location updates.
+   * @param {OnLocationUpdateCallback} callback Callback.
+   * @see {@link requestLocationUpdates}
+   */
+  onLocationUpdate: function(callback) {
+    if (!callback || typeof callback === 'function') {
+      _clientLocationUpdateCallback = callback;
+    }
+  },
+
+  /**
+   * Get notified about positioning status changes.
+   * @param {OnLocationStatusCallback} callback Callback.
+   * @see {@link requestLocationUpdates}
+   */
+  onLocationStatus: function(callback) {
+    if (!callback || typeof callback === 'function') {
+      _clientLocationStatusCallback = callback;
+    }
+  },
+
+  /**
+   * Get notified about positioning errors.
+   * @param {OnLocationErrorCallback} callback Callback.
+   * @see {@link requestLocationUpdates}
+   */
+  onLocationError: function(callback) {
+    if (!callback || typeof callback === 'function') {
+      _clientLocationErrorCallback = callback;
+    }
+  },
+
+  /**
    * Stop locationListener on current active listener.
    * @description Stop locationListener on current active listener.
    * @param {function} cb Cordova native callback to recive data.
    * @param {function} error Cordova native callback to recive errors.
    * @return {void}
+   * @deprecated
    */
   stopPositioning: function (cb, error) {
     exec(cb, error, PLUGIN_NAME, 'stopPositioning', []);
   },
+
+  removeUpdates: function() {
+    exec(() => {}, () => {}, PLUGIN_NAME, 'stopPositioning', []);
+  },
+
   /**
    * Get notified about users entering geofences. Take into account:
-   * * This method must be called before the positioning is started.
-   * * Positioning geofences (with `trainer_metadata` custom field configured in the dashboard (https://situm.com/docs/special-custom-fields/#activating-the-uncalibrated-indoor-geolocation-mode)) won't be notified.
-   * * This callback works only with indoor locations. Any outdoor location will produce a call to onExitGeofences with the last positioned geofences as argument.
+   * Positioning geofences (with `trainer_metadata` custom field configured in the dashboard (https://situm.com/docs/special-custom-fields/#activating-the-uncalibrated-indoor-geolocation-mode)) won't be notified.
+   * This callback works only with indoor locations. Any outdoor location will produce a call to onExitGeofences with the last positioned geofences as argument.
    * @description Set the geofence listener to receive updates when you enter or exit one of them.
    * @param {function} cb Cordova native callback to recive data. The data is an array of geofences.
    * @param {function} error Cordova native callback to recive errors.
@@ -91,7 +195,7 @@ var Situm = {
     exec(cb, error, PLUGIN_NAME, 'onEnterGeofences', []);
   },
   /**
-   * Get notified about exiting geofences. Take into account the considerations described at onEnterGeofences
+   * Get notified about exiting geofences. Take into account the considerations described at onEnterGeofences.
    * @description Set the geofence listener to receive updates when you enter or exit one of them.
    * @param {function} cb Cordova native callback to recive data. The data is an array of geofences.
    * @param {function} error Cordova native callback to recive errors.
