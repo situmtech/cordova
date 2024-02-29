@@ -7,7 +7,10 @@ module.exports = {
    */
   standarizeRequest: function(input) {
     let response;
-    if (Array.isArray(input) && input.length > 0) {
+    if (!input) {
+      // If it is null or undefined, pass an empty location request.
+      response = {};
+    } else if (Array.isArray(input) && input.length > 0) {
       // If it is an array:
       if (input.every(item => typeof item === 'object')){
         // It may contain objects (legacy API: Building + LocationOptions).
