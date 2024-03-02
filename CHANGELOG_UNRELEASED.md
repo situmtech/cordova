@@ -3,6 +3,7 @@
 ## Added
 
 - Introduced new methods: requestLocationUpdates(LocationRequest), onLocationUpdate(function), onLocationStatus(function), onLocationError(function), and removeUpdates(). This addition aims to standardize the API across native SDKs and other hybrid platforms (React Native, Flutter). These methods serve as replacements for startPositioning (with parameterized callbacks) and stopPositioning.
+  removeUpdates() now returns a Promise so it can be called with async/await syntax.
 
 ## Deprecated
 
