@@ -597,7 +597,7 @@ module.exports = LocationRequest;
  * LocationOptions
  * @description
  * A data object that contains parameters for the location service, LocationManager.
- * @deprecated
+ * @deprecated Use {@link LocationRequest} instead.
  */
 var LocationOptions = LocationRequest;
 

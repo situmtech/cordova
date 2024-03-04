@@ -146,12 +146,16 @@ var Situm = {
    * @see {@link onLocationError}
    */
   startPositioning: function (request, cb, error) {
-    let internalCallback = (res) => {
-      _internalEventDelegate('onLocationUpdate', res);
+    let legacyCallback = (res) => {
+      _internalPositioningCallback(res);
       cb(res);
     };
+    let legacyErrorCallback = (err) => {
+      _internalErrorCallback(err);
+      error(err);
+    };
     let compatRequest = common.standarizeRequest(request);
-    exec(internalCallback, error, PLUGIN_NAME, 'startPositioning', compatRequest);
+    exec(legacyCallback, legacyErrorCallback, PLUGIN_NAME, 'startPositioning', compatRequest);
   },
 
   /**
@@ -234,9 +238,12 @@ var Situm = {
 
   /**
    * Stops positioning.
+   * @returns {Promise} Get notified when the native SDK actually stops positioning.
    */
   removeUpdates: function() {
-    exec(() => {}, () => {}, PLUGIN_NAME, 'stopPositioning', []);
+    return new Promise((res, rej) => {
+      exec(() => { res(true) }, (err) => { rej(err) }, PLUGIN_NAME, 'stopPositioning', []);
+    });
   },
 
   /**
