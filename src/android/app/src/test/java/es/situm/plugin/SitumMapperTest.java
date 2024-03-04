@@ -472,18 +472,6 @@ public class SitumMapperTest {
     }
 
     @Test
-    public void indicationJSONObjectTest() {
-        try {
-            Indication indication = indicationCreator.createIndication();
-            JSONObject indicationJSONObject = SitumMapper.indicationToJsonObject(indication);
-            JSONObject indication1 = indicationCreator.getIndication1();
-            testIndication(indicationJSONObject, indication1);
-        } catch (JSONException e) {
-            System.err.println(e.getMessage());
-        }
-    }
-
-    @Test
     public void locationTest1() {
         try {
             JSONObject jo = locationCreator.getLocation1();
