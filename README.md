@@ -2,9 +2,7 @@
 <h1 align="center">Situm Cordova Plugin</h1>
 </p>
 
-<div align="center" style="text-align:center">
 Situm Cordova Plugin is a set of utilities that allow any developer to build Cordova location based apps using Situm's indoor positioning system. Among many other capabilities, apps developed with Situm Cordova Plugin will be able to:
-</div>
 
 - Obtain information related to buildings where Situm's positioning system is already configured: floorplans, points of interest, geotriggered events, etc.
 - Retrieve the location of the smartphone inside these buildings (position, orientation, and floor where the smartphone is).
@@ -70,7 +68,7 @@ Situm Cordova Plugin is licensed under [MIT License](https://opensource.org/lice
 ### Methods
 
 > [!NOTE]
-> This plugin is currently under development. There may be method not implemented yet. Also there may be some API changes as development progresses.
+> This plugin is currently under development. There may be methods not implemented yet. Also there may be some API changes as development progresses.
 
 ### Situm class
 
