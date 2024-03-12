@@ -1,6 +1,6 @@
 {
   "name": "@situm/cordova",
-  "version": "3.3.12",
+  "version": "3.3.13",
   "description": "Set of utilities that allow any developer to build Cordova location based apps using Situm's indoor positioning system.",
   "private": false,
   "repository": "https://github.com/situmtech/cordova",
