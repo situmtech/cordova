@@ -19,6 +19,7 @@ import {
   IonThumbnail,
   NavController,
   Platform,
+  IonToggle,
 } from '@ionic/angular/standalone';
 import { NgFor, NgIf } from '@angular/common';
 import { locate, cloudDownload, map } from 'ionicons/icons';
@@ -50,6 +51,7 @@ declare let cordova: any;
     IonItem,
     IonList,
     IonRow,
+    IonToggle,
     IonIcon,
     IonTextarea,
     IonPicker,
@@ -62,6 +64,7 @@ export class SDKPage {
   currentBuilding: any | undefined;
   pois: any | undefined;
   currentPoi: any | undefined;
+  useNewAPIValue = false;
 
   constructor(
     private ngZone: NgZone,
@@ -137,6 +140,17 @@ export class SDKPage {
       // by specifying an empty identifier:
       //
       // buildingIdentifier: ''
+
+      // TODO: probar
+      // - ARRAY con building + loc request.
+      // - ARRAY con buildingId (string) + loc request.
+      // - ARRAY sólo con loc request.
+      // - Obxecto loc request.
+      // - Sólo buildingIdentifier (string a machete).
+      // - Probar algunha das opcións, useBle, useDeadReckoning.
+
+      // TODO: FIXEAR ambas partes nativas, tendo en conta que ahora sólo vai recibir 1 estilo de loc request.
+
       [{ buildingIdentifier: Constants.BUILDING_IDENTIFIER }],
       (res: any) => {
         if (res && res.statusName) {
@@ -156,18 +170,132 @@ export class SDKPage {
     );
   }
 
-  async stopPositioning() {
-    cordova.plugins.Situm.stopPositioning(
-      () => {
+  async useNewAPI(event: any) {
+    debugger;
+    this.useNewAPIValue = event.detail.checked;
+    this._setInfo('START WITH NEW API? ' + this.useNewAPIValue);
+  }
+
+  async startPositioningValidation(test: String) {
+    console.log("startPositioningValidation('" + test + "')");
+    let request;
+    switch (test) {
+      case 'buildingAndLocRequestArray':
+        request = [
+          { buildingIdentifier: Constants.BUILDING_IDENTIFIER },
+          {
+            useDeadReckoning: false,
+            interval: 1000,
+          },
+        ];
+        break;
+      case 'idAndLocRequestArray':
+        request = [
+          Constants.BUILDING_IDENTIFIER,
+          {
+            useDeadReckoning: false,
+            interval: 1000,
+          },
+        ];
+        break;
+      case 'onlyLocRequestArray':
+        request = [
+          {
+            buildingIdentifier: Constants.BUILDING_IDENTIFIER,
+            useDeadReckoning: false,
+          },
+        ];
+        break;
+      case 'onlyBuildingIdString':
+        request = Constants.BUILDING_IDENTIFIER;
+        break;
+      case 'onlyLocRequestObject':
+        request = {
+          buildingIdentifier: Constants.BUILDING_IDENTIFIER,
+        };
+        break;
+      case 'withUseBleFalse':
+        request = {
+          buildingIdentifier: Constants.BUILDING_IDENTIFIER,
+          useBle: false,
+          interval: 1000,
+        };
+        break;
+      case 'withInterval5s':
+        request = {
+          buildingIdentifier: Constants.BUILDING_IDENTIFIER,
+          interval: 5000,
+          useDeadReckoning: false,
+        };
+        break;
+      case 'null':
+        request = null;
+        break;
+      case 'empty':
+        request = {};
+        break;
+    }
+
+    if (this.useNewAPIValue) {
+      this._setInfo('START WITH NEW API');
+
+      cordova.plugins.Situm.onLocationUpdate((loc: any) => {
+        this._setStatus('POSITIONING');
+        this._setInfo(loc);
+        this._setPositioning(true);
+      });
+      cordova.plugins.Situm.onLocationStatus((status: string) => {
+        this._setStatus(status);
+        this._setPositioning(true);
+      });
+      cordova.plugins.Situm.onLocationError((error: any) => {
         this._setPositioning(false);
-        this._setStatus('STOPPED');
-        this._setInfo('');
-      },
-      (err: any) => {
-        this._setStatus('ERROR');
-        this._setInfo(err);
-      }
-    );
+        this._setStatus('ERROR WHILE POSITIONING');
+        this._setInfo(error);
+      });
+      cordova.plugins.Situm.requestLocationUpdates(request);
+    } else {
+      this._setInfo('START WITH OLD API');
+
+      cordova.plugins.Situm.startPositioning(
+        request,
+        (res: any) => {
+          if (res && res.statusName) {
+            this._setStatus(res.statusName);
+          }
+          if (res && res.position) {
+            this._setStatus('POSITIONING');
+            this._setInfo(res);
+          }
+          this._setPositioning(true);
+        },
+        (err: any) => {
+          this._setPositioning(false);
+          this._setStatus('ERROR WHILE POSITIONING');
+          this._setInfo(err);
+        }
+      );
+    }
+  }
+
+  async stopPositioning() {
+    let errorCallback = (err: any) => {
+      this._setStatus('ERROR');
+      this._setInfo(err);
+    };
+    let callback = () => {
+      this._setPositioning(false);
+      this._setStatus('STOPPED');
+      this._setInfo('');
+    };
+    if (this.useNewAPIValue) {
+      console.log('STOP USING NEW API');
+      await cordova.plugins.Situm.removeUpdates();
+      callback();
+    } else {
+      console.log('STOP USING OLD API');
+      cordova.plugins.Situm.stopPositioning(callback, errorCallback);
+    }
   }
 
   // ==============================================================================================
@@ -292,8 +420,7 @@ export class SDKPage {
     });
   }
 
-  private _setInfo(jsonRes: string) {
-    // console.log(JSON.stringify(jsonRes, null, 2));
+  private _setInfo(jsonRes: any) {
     this.ngZone.run(() => {
       this.currentPositioningInfo =
         jsonRes == '' || jsonRes == undefined

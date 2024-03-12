@@ -17,6 +17,44 @@
     </ion-card-header>
 
     <ion-card-content>
+
+      <ion-toggle [enableOnOffLabels]="true" (ionChange)="useNewAPI($event)">Use new API</ion-toggle><br /><br />
+
+      <ion-button
+        size="small"
+        (click)="startPositioningValidation('buildingAndLocRequestArray')"
+        [disabled]="positioning">array: building, locRequest(i=1s)</ion-button>
+      <ion-button
+        size="small"
+        (click)="startPositioningValidation('idAndLocRequestArray')"
+        [disabled]="positioning">array: id, locRequest(i=1s)</ion-button>
+      <ion-button
+        size="small"
+        (click)="startPositioningValidation('onlyLocRequestArray')"
+        [disabled]="positioning">array: locRequest(i=1s)</ion-button>
+        <br />
+        <br />
+      <ion-button
+        size="small"
+        (click)="startPositioningValidation('onlyLocRequestObject')"
+        [disabled]="positioning">locRequest</ion-button>
+      <ion-button
+        size="small"
+        (click)="startPositioningValidation('withUseBleFalse')"
+        [disabled]="positioning">useBle: false</ion-button>
+      <ion-button
+        size="small"
+        (click)="startPositioningValidation('withInterval5s')"
+        [disabled]="positioning">interval: 5000</ion-button>
+      <ion-button
+        size="small"
+        (click)="startPositioningValidation('null')"
+        [disabled]="positioning">null</ion-button>
+      <ion-button
+        size="small"
+        (click)="startPositioningValidation('empty')"
+        [disabled]="positioning">empty object</ion-button>
+
       <ion-row>
         <ion-button
           size="small"
@@ -33,6 +71,21 @@
           stopPositioning()
         </ion-button>
       </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>{{ currentStatus }}</ion-label>
+      </ion-item>
+
+      <ion-textarea
+        class="custom"
+        [readonly]="true"
+        placeholder="{{ currentPositioningInfo }}"
+        style="height: 60vh"
+      />
     </ion-card-content>
   </ion-card>
 
@@ -89,21 +142,6 @@
           navigateToPoi()
         </ion-button>
       </ion-row>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-content>
-      <ion-item>
-        <ion-label>{{ currentStatus }}</ion-label>
-      </ion-item>
-
-      <ion-textarea
-        class="custom"
-        [readonly]="true"
-        placeholder="{{ currentPositioningInfo }}"
-        style="height: 60vh"
-      />
     </ion-card-content>
   </ion-card>
 </ion-content>
