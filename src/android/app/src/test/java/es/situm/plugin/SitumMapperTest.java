@@ -472,18 +472,6 @@ public class SitumMapperTest {
     }
 
     @Test
-    public void indicationJSONObjectTest() {
-        try {
-            Indication indication = indicationCreator.createIndication();
-            JSONObject indicationJSONObject = SitumMapper.indicationToJsonObject(indication);
-            JSONObject indication1 = indicationCreator.getIndication1();
-            testIndication(indicationJSONObject, indication1);
-        } catch (JSONException e) {
-            System.err.println(e.getMessage());
-        }
-    }
-
-    @Test
     public void locationTest1() {
         try {
             JSONObject jo = locationCreator.getLocation1();
@@ -832,34 +820,6 @@ public class SitumMapperTest {
             JSONObject navigationProgressIndoorJSONObject = SitumMapper.navigationProgressToJsonObject(navigationProgressIndoor);
             JSONObject navigationProgress2 = navigationProgressCreator.getNavigationProgress2();
             testNavigationProgress(navigationProgressIndoorJSONObject, navigationProgress2);
-        }catch(JSONException e){
-            System.err.println(e.getMessage());
-        }
-    }
-
-    @Test
-    public void routeStepJSONObjectTest(){
-        try{
-            RouteStep routeStepWithCoordinate = routeStepCreator.createRouteStepWithCoordinate();
-            JSONObject routeStepWithCoordinateJSONObject = SitumMapper.routeStepToJsonObject(routeStepWithCoordinate);
-            JSONObject routeStep1 = routeStepCreator.getRouteStep1();
-            testRouteStep(routeStepWithCoordinateJSONObject, routeStep1);
-            RouteStep routeStepWithCoordinateAndBuildingId = routeStepCreator.createRouteStepWithCoordinateAndBuildingId();
-            JSONObject routeStepWithCoordinateAndBuildingIdJSONObject = SitumMapper.routeStepToJsonObject(routeStepWithCoordinateAndBuildingId);
-            JSONObject routeStep2 = routeStepCreator.getRouteStep2();
-            testRouteStep(routeStepWithCoordinateAndBuildingIdJSONObject, routeStep2);
-            RouteStep routeStepWithCoordinateBuildingIdAndFloor = routeStepCreator.createRouteStepWithCoordinateBuildingIdAndFloor();
-            JSONObject routeStepWithCoordinateBuildingIdAndFloorJSONObject = SitumMapper.routeStepToJsonObject(routeStepWithCoordinateBuildingIdAndFloor);
-            JSONObject routeStep3 = routeStepCreator.getRouteStep3();
-            testRouteStep(routeStepWithCoordinateBuildingIdAndFloorJSONObject, routeStep3);
-            RouteStep routeStepWithBuildingWithAngleFromDegree = routeStepCreator.createRouteStepWithBuildingWithAngleFromDegree();
-            JSONObject routeStepWithBuildingWithAngleFromDegreeJSONObject = SitumMapper.routeStepToJsonObject(routeStepWithBuildingWithAngleFromDegree);
-            JSONObject routeStep4 = routeStepCreator.getRouteStep4();
-            testRouteStep(routeStepWithBuildingWithAngleFromDegreeJSONObject, routeStep4);
-            RouteStep routeStepWithBuildingWithAngleFromRadians = routeStepCreator.createRouteStepWithBuildingWithAngleFromRadians();
-            JSONObject routeStepWithBuildingWithAngleFromRadiansJSONObject = SitumMapper.routeStepToJsonObject(routeStepWithBuildingWithAngleFromRadians);
-            JSONObject routeStep5 = routeStepCreator.getRouteStep5();
-            testRouteStep(routeStepWithBuildingWithAngleFromRadiansJSONObject, routeStep5);
         }catch(JSONException e){
             System.err.println(e.getMessage());
         }

@@ -462,9 +462,10 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 }
 
 - (void)stopPositioning:(CDVInvokedUrlCommand *)command {
-    locationCallbackId = command.callbackId;
     [[SITLocationManager sharedInstance] removeUpdates];
     [[SITLocationManager sharedInstance] removeDelegate:self];
+    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 - (void)onEnterGeofences:(CDVInvokedUrlCommand *)command {
@@ -581,7 +582,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Navigation updated"];
     pluginResult.keepCallback = [NSNumber numberWithBool:true];
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:locationCallbackId];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 - (void) removeNavigationUpdates:(CDVInvokedUrlCommand *)command {
@@ -592,7 +593,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     NSMutableDictionary *obj = [[NSMutableDictionary alloc] init];
     [[SITCommunicationManager sharedManager] clearCache];
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:obj.copy];
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:locationCallbackId];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 // Realtime 

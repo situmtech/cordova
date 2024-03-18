@@ -42,7 +42,7 @@
   "scripts": {
     "test": "cd tests/js && mocha",
     "eslint": "node node_modules/eslint/bin/eslint www && node node_modules/eslint/bin/eslint src && node node_modules/eslint/bin/eslint tests",
-    "jsdoc": "rm -rf docs/JSDoc && ./node_modules/.bin/jsdoc www/android/situm.js www/android/Interfaces.js www/map-view.js www/map-view-controller.js -c ./docs/conf.json -d docs/JSDoc"
+    "jsdoc": "rm -rf docs/JSDoc && ./node_modules/.bin/jsdoc www/situm.js www/Interfaces.js www/map-view.js www/map-view-controller.js -c ./docs/conf.json -d docs/JSDoc"
   },
   "devDependencies": {
     "eslint": "^5.3.0",
