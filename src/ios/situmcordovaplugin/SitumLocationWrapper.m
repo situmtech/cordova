@@ -234,9 +234,7 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     return jo;
 }
 
-
 - (SITLocationRequest *) jsonObjectToLocationRequest: (NSArray *) json {
-    NSDictionary *buildingJO;
     NSNumber *useDeadReckoning = nil;
     NSNumber *useGps = nil;
     NSString *buildingId;
@@ -245,11 +243,10 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     NSNumber *smallestDisplacement = nil;
     NSNumber *useBarometer = nil;
     SITRealtimeUpdateInterval realtimeInterval = 0;
-    
+
     // Check use of remote configuration
     if ([json isKindOfClass:[NSDictionary class]]) {
         NSDictionary *params = (NSDictionary *)json;
-        
         if ([params allKeys].count == 0) {
             return nil;
         }
@@ -258,38 +255,17 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
             return nil;
         }
     }
-    
-    //The following if-else is necessary in order to mantain compatibility
-    //with the startPositioning[building] method.
-    //If params is an array, then it contains both a building and a locationRequest
-    //If params is a dictionary, then it should only contain a building
-    
-    if ([json isKindOfClass:[NSArray class]]) {
-        buildingJO = (NSDictionary*)[json objectAtIndex:0];
-        if (json.count > 1) {
-            NSDictionary *requestJO = (NSDictionary*)[json objectAtIndex:1];
-            buildingId = [NSString stringWithFormat:@"%@", requestJO[@"buildingIdentifier"]];
-            useDeadReckoning = [requestJO objectForKey: @"useDeadReckoning"];
-            useGps = [requestJO objectForKey: @"useGps"];
-            realtimeUpdateInterval = requestJO[@"realtimeUpdateInterval"];
-            interval = requestJO[@"interval"];
-            smallestDisplacement = requestJO[@"smallestDisplacement"];
-            useBarometer = [requestJO objectForKey: @"useBarometer"];
-        }
-    } else {
-        buildingJO = (NSDictionary*)json[0];
-    }
-    
-    if (buildingId == nil) {
-        buildingId = [buildingJO valueForKey:@"identifier"];
-    }
-    
-    if (buildingId == nil) {
-        buildingId = [NSString stringWithFormat:@"%@", [buildingJO valueForKey:@"buildingIdentifier"]];
-    }
-    
+
+    NSDictionary *requestJO = (NSDictionary*)[json objectAtIndex:0];
+    buildingId = [NSString stringWithFormat:@"%@", requestJO[@"buildingIdentifier"]];
+    useDeadReckoning = [requestJO objectForKey: @"useDeadReckoning"];
+    useGps = [requestJO objectForKey: @"useGps"];
+    realtimeUpdateInterval = requestJO[@"realtimeUpdateInterval"];
+    interval = requestJO[@"interval"];
+    smallestDisplacement = requestJO[@"smallestDisplacement"];
+    useBarometer = [requestJO objectForKey: @"useBarometer"];
+
     if (realtimeUpdateInterval != nil && [realtimeUpdateInterval isKindOfClass: [NSString class]]) {
-        
         if ([realtimeUpdateInterval isEqualToString:@"REALTIME"]) {
             realtimeInterval = kSITUpdateIntervalRealtime;
         } else if ([realtimeUpdateInterval isEqualToString:@"FAST"]) {
@@ -302,18 +278,19 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
             realtimeInterval = kSITUpdateIntervalBatterySaver;
         }
     }
-    
+
     SITLocationRequest *locationRequest = [[SITLocationRequest alloc] initWithBuildingId:buildingId];
+
     if (useDeadReckoning != nil) {
         [locationRequest setUseDeadReckoning:[useDeadReckoning boolValue]];
-        
     }
+
     if(useGps != nil) {
         [locationRequest setUseGps:[useGps boolValue]];
     }
-    
+
     if(interval != nil) {
-      [locationRequest setInterval:[interval intValue]];
+        [locationRequest setInterval:[interval intValue]];
     }
 
     if (smallestDisplacement != nil) {
@@ -321,11 +298,11 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     }
 
     if(useBarometer != nil) {
-      [locationRequest setUseBarometer: [useBarometer boolValue]];
+        [locationRequest setUseBarometer: [useBarometer boolValue]];
     }
 
     if (realtimeInterval != 0) {
-        [locationRequest setUpdateInterval:realtimeInterval];
+        [locationRequest setRealtimeUpdateInterval:realtimeInterval];
     }
     return locationRequest;
 }

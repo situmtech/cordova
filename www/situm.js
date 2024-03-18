@@ -1,66 +1,37 @@
+var exec = require('cordova/exec');
+const common = require('@situm/cordova.common-utils');
 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Source: android/situm.js | Situm</title>
-
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
-
-    
-        
-            <link type="text/css" rel="stylesheet" href="styles/custom.css">
-        
-    
-</head>
-<body>
-<nav class="lnb" id="lnb">
-    <div class="logo" style="width: 90px; height: 90px">
-        
-            <a href="https://github.com/situmtech/situm-cordova-plugin" rel="noopener noreferrer" target="_blank">
-                <img src="https://situm.com/wp-content/uploads/2023/04/situm_logo_blanco_300_sq.png" width="100%" height="100%">
-            </a>
-        
-    </div>
-    <div class="title">
-        <h1><a href="index.html" class="link">Situm</a></h1>
-        
-    </div>
-    <div class="search-container" id="search-container">
-        <input type="text" placeholder="Search">
-        <ul></ul>
-    </div>
-    
-    <div class="lnb-api hidden"><h3>Namespaces</h3><ul><li><a href="MapView.html">MapView</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="MapView_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="MapView.html#.onLoad">onLoad</a></li></ul></div></li><li><a href="MapViewController.html">MapViewController</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="MapViewController_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="MapViewController.html#.navigateToPoi">navigateToPoi</a></li><li><a href="MapViewController.html#.onPoiDeselected">onPoiDeselected</a></li><li><a href="MapViewController.html#.onPoiSelected">onPoiSelected</a></li><li><a href="MapViewController.html#.selectPoi">selectPoi</a></li><li><a href="MapViewController.html#.setLanguage">setLanguage</a></li></ul></div></li><li><a href="Situm.html">Situm</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Situm_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="Situm.html#.fetchBuildingInfo">fetchBuildingInfo</a></li><li><a href="Situm.html#.fetchBuildings">fetchBuildings</a></li><li><a href="Situm.html#.fetchEventsFromBuilding">fetchEventsFromBuilding</a></li><li><a href="Situm.html#.fetchFloorsFromBuilding">fetchFloorsFromBuilding</a></li><li><a href="Situm.html#.fetchGeofencesFromBuilding">fetchGeofencesFromBuilding</a></li><li><a href="Situm.html#.fetchIndoorPOIsFromBuilding">fetchIndoorPOIsFromBuilding</a></li><li><a href="Situm.html#.fetchMapFromFloor">fetchMapFromFloor</a></li><li><a href="Situm.html#.fetchOutdoorPOIsFromBuilding">fetchOutdoorPOIsFromBuilding</a></li><li><a href="Situm.html#.fetchPoiCategories">fetchPoiCategories</a></li><li><a href="Situm.html#.fetchPoiCategoryIconNormal">fetchPoiCategoryIconNormal</a></li><li><a href="Situm.html#.fetchPoiCategoryIconSelected">fetchPoiCategoryIconSelected</a></li><li><a href="Situm.html#.internalSetEventDelegate">internalSetEventDelegate</a></li><li><a href="Situm.html#.invalidateCache">invalidateCache</a></li><li><a href="Situm.html#.onEnterGeofences">onEnterGeofences</a></li><li><a href="Situm.html#.onExitGeofences">onExitGeofences</a></li><li><a href="Situm.html#.removeNavigationUpdates">removeNavigationUpdates</a></li><li><a href="Situm.html#.removeRealTimeUpdates">removeRealTimeUpdates</a></li><li><a href="Situm.html#.requestDirections">requestDirections</a></li><li><a href="Situm.html#.requestNavigationUpdates">requestNavigationUpdates</a></li><li><a href="Situm.html#.requestRealTimeUpdates">requestRealTimeUpdates</a></li><li><a href="Situm.html#.setApiKey">setApiKey</a></li><li><a href="Situm.html#.setCacheMaxAge">setCacheMaxAge</a></li><li><a href="Situm.html#.setUserPass">setUserPass</a></li><li><a href="Situm.html#.startPositioning">startPositioning</a></li><li><a href="Situm.html#.stopPositioning">stopPositioning</a></li><li><a href="Situm.html#.updateNavigationWithLocation">updateNavigationWithLocation</a></li></ul></div></li></ul></div><div class="lnb-api hidden"><h3>Global</h3><ul><li><a href="global.html#Angle">Angle</a></li><li><a href="global.html#BeaconFilter">BeaconFilter</a></li><li><a href="global.html#Bounds">Bounds</a></li><li><a href="global.html#Building">Building</a></li><li><a href="global.html#BuildingInfo">BuildingInfo</a></li><li><a href="global.html#CartesianCoordinate">CartesianCoordinate</a></li><li><a href="global.html#Circle">Circle</a></li><li><a href="global.html#Coordinate">Coordinate</a></li><li><a href="global.html#Dimensions">Dimensions</a></li><li><a href="global.html#DirectionsOptions">DirectionsOptions</a></li><li><a href="global.html#DirectionsRequest">DirectionsRequest</a></li><li><a href="global.html#Floor">Floor</a></li><li><a href="global.html#Geofence">Geofence</a></li><li><a href="global.html#Indication">Indication</a></li><li><a href="global.html#Location">Location</a></li><li><a href="global.html#LocationOptions">LocationOptions</a></li><li><a href="global.html#LocationRequest">LocationRequest</a></li><li><a href="global.html#LocationStatus">LocationStatus</a></li><li><a href="global.html#NavigationProgress">NavigationProgress</a></li><li><a href="global.html#NavigationRequest">NavigationRequest</a></li><li><a href="global.html#OutdoorLocationOptions">OutdoorLocationOptions</a></li><li><a href="global.html#POI">POI</a></li><li><a href="global.html#PoiCategory">PoiCategory</a></li><li><a href="global.html#PoiDeselectedResult">PoiDeselectedResult</a></li><li><a href="global.html#Point">Point</a></li><li><a href="global.html#PoiSelectedResult">PoiSelectedResult</a></li><li><a href="global.html#RealTimeData">RealTimeData</a></li><li><a href="global.html#RealTimeRequest">RealTimeRequest</a></li><li><a href="global.html#Route">Route</a></li><li><a href="global.html#RouteSegment">RouteSegment</a></li><li><a href="global.html#RouteStep">RouteStep</a></li><li><a href="global.html#SitumConversionArea">SitumConversionArea</a></li><li><a href="global.html#SitumEvent">SitumEvent</a></li></ul></div>
-</nav>
-<div id="resizer"></div>
-
-<div class="main" id="main">
-    
-
-
-
-    
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>var exec = require('cordova/exec');
-
-var PLUGIN_NAME = 'Situm';
+var PLUGIN_NAME = 'SitumPlugin';
 let _internalEventDelegate = undefined;
+
+let _clientLocationUpdateCallback;
+let _clientLocationStatusCallback;
+let _clientLocationErrorCallback;
+
+let _internalPositioningCallback = function(res) {
+  if (!res) {
+    return;
+  }
+  if (_internalEventDelegate) {
+    _internalEventDelegate('onLocationUpdate', res);
+  }
+  if (res.position && _clientLocationUpdateCallback) {
+    _clientLocationUpdateCallback(res);
+  }
+  if (res.statusName && _clientLocationStatusCallback) {
+    _clientLocationStatusCallback(res.statusName);
+  }
+};
+
+let _internalErrorCallback = function(error) {
+  if (_clientLocationErrorCallback) {
+    _clientLocationErrorCallback(error);
+  }
+}
 
 /** 
  * @namespace Situm
  */
-
 var Situm = {
   /**
    * An internal method.
@@ -107,35 +78,124 @@ var Situm = {
   setCacheMaxAge: function (cacheAge, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'setCacheMaxAge', [cacheAge]);
   },
+
   /**
    * Set callback and starts listen onLocationChanged event.
    * @param {LocationRequest} request Location Request.
    * @param {function} cb Cordova native callback to recive data.
    * @param {function} error Cordova native callback to recive errors.
-   * @return {Location} position Current position of device.
+   * @return {Location} Current position of device.
+   * @deprecated Use {@link requestLocationUpdates} instead. Use {@link onLocationUpdate}, {@link onLocationStatus}, and {@link onLocationError} to receive location updates, status changes and errors.
+   * @see {@link requestLocationUpdates}
+   * @see {@link onLocationUpdate}
+   * @see {@link onLocationStatus}
+   * @see {@link onLocationError}
    */
   startPositioning: function (request, cb, error) {
-    let internalCallback = (res) => {
-      _internalEventDelegate('onLocationUpdate', res);
+    let legacyCallback = (res) => {
+      _internalPositioningCallback(res);
       cb(res);
     };
-    exec(internalCallback, error, PLUGIN_NAME, 'startPositioning', request);;
+    let legacyErrorCallback = (err) => {
+      _internalErrorCallback(err);
+      error(err);
+    };
+    let compatRequest = common.standarizeRequest(request);
+    exec(legacyCallback, legacyErrorCallback, PLUGIN_NAME, 'startPositioning', compatRequest);
   },
-    /**
+
+  /**
+   * Starts positioning. Use {@link onLocationUpdate}, {@link onLocationStatus}, and {@link onLocationError} to receive location updates, status changes and errors.
+   * @param {LocationRequest} request LocationRequest containing the positioning options.
+   * @see {@link onLocationUpdate}
+   * @see {@link onLocationStatus}
+   * @see {@link onLocationError}
+   */
+  requestLocationUpdates: function(request) {
+    let compatRequest = common.standarizeRequest(request);
+    exec(_internalPositioningCallback, _internalErrorCallback, PLUGIN_NAME, 'startPositioning', compatRequest);
+  },
+
+  // TODO: move to TypeScript:
+
+  /**
+   * @typedef {function} OnLocationUpdateCallback
+   * @param {Location} location - Location.
+   */
+
+  // TODO: move to TypeScript:
+
+  /**
+   * @typedef {function} OnLocationStatusCallback
+   * @param {string} status - Status.
+   */
+
+  // TODO: move to TypeScript, create Error class:
+
+  /**
+   * @typedef {function} OnLocationErrorCallback
+   * @param {any} error - Location error.
+   */
+
+  /**
+   * Get notified about location updates.
+   * @param {OnLocationUpdateCallback} callback Callback.
+   * @see {@link requestLocationUpdates}
+   */
+  onLocationUpdate: function(callback) {
+    if (!callback || typeof callback === 'function') {
+      _clientLocationUpdateCallback = callback;
+    }
+  },
+
+  /**
+   * Get notified about positioning status changes.
+   * @param {OnLocationStatusCallback} callback Callback.
+   * @see {@link requestLocationUpdates}
+   */
+  onLocationStatus: function(callback) {
+    if (!callback || typeof callback === 'function') {
+      _clientLocationStatusCallback = callback;
+    }
+  },
+
+  /**
+   * Get notified about positioning errors.
+   * @param {OnLocationErrorCallback} callback Callback.
+   * @see {@link requestLocationUpdates}
+   */
+  onLocationError: function(callback) {
+    if (!callback || typeof callback === 'function') {
+      _clientLocationErrorCallback = callback;
+    }
+  },
+
+  /**
    * Stop locationListener on current active listener.
    * @description Stop locationListener on current active listener.
    * @param {function} cb Cordova native callback to recive data.
    * @param {function} error Cordova native callback to recive errors.
    * @return {void}
+   * @deprecated Use {@link removeUpdates} instead.
    */
   stopPositioning: function (cb, error) {
     exec(cb, error, PLUGIN_NAME, 'stopPositioning', []);
   },
+
+  /**
+   * Stops positioning.
+   * @returns {Promise} Get notified when the native SDK actually stops positioning.
+   */
+  removeUpdates: function() {
+    return new Promise((res, rej) => {
+      exec(() => { res(true) }, (err) => { rej(err) }, PLUGIN_NAME, 'stopPositioning', []);
+    });
+  },
+
   /**
    * Get notified about users entering geofences. Take into account:
-   * * This method must be called before the positioning is started.
-   * * Positioning geofences (with `trainer_metadata` custom field configured in the dashboard (https://situm.com/docs/special-custom-fields/#activating-the-uncalibrated-indoor-geolocation-mode)) won't be notified.
-   * * This callback works only with indoor locations. Any outdoor location will produce a call to onExitGeofences with the last positioned geofences as argument.
+   * Positioning geofences (with `trainer_metadata` custom field configured in the dashboard (https://situm.com/docs/special-custom-fields/#activating-the-uncalibrated-indoor-geolocation-mode)) won't be notified.
+   * This callback works only with indoor locations. Any outdoor location will produce a call to onExitGeofences with the last positioned geofences as argument.
    * @description Set the geofence listener to receive updates when you enter or exit one of them.
    * @param {function} cb Cordova native callback to recive data. The data is an array of geofences.
    * @param {function} error Cordova native callback to recive errors.
@@ -145,7 +205,7 @@ var Situm = {
     exec(cb, error, PLUGIN_NAME, 'onEnterGeofences', []);
   },
   /**
-   * Get notified about exiting geofences. Take into account the considerations described at onEnterGeofences
+   * Get notified about exiting geofences. Take into account the considerations described at onEnterGeofences.
    * @description Set the geofence listener to receive updates when you enter or exit one of them.
    * @param {function} cb Cordova native callback to recive data. The data is an array of geofences.
    * @param {function} error Cordova native callback to recive errors.
@@ -314,6 +374,11 @@ var Situm = {
    * @return {boolean} success True if there is a listener to which notify progress update. False if there isn't, so this method do nothing.
    */
   updateNavigationWithLocation: function (location, cb, error) {
+    if (!args) {
+      args = []
+    } else if (!Array.isArray(args)) {
+      args = [args]
+    }
     exec(cb, error, PLUGIN_NAME, 'updateNavigationWithLocation', [location]);
   },
   /**
@@ -348,33 +413,3 @@ var Situm = {
   }
 };
 module.exports = Situm;
-</code></pre>
-        </article>
-    </section>
-
-
-
-
-</div>
-
-<footer>
-    <img class="logo" src="https://situm.com/wp-content/uploads/2023/04/situm_logo_blanco_300_sq.png" style="width: 90px; height: 90px">
-    <div class="footer-text">COPYRIGHT © SITUM TECHNOLOGIES 2014 - 2018</div>
-</footer>
-<script>prettyPrint();</script>
-<script src="scripts/jquery.min.js"></script>
-<script src="scripts/tui-doc.js"></script>
-<script src="scripts/linenumber.js"></script>
-
-    <script>
-        var id = '_sub'.replace(/"/g, '_');
-        var selectedApi = document.getElementById(id); // do not use jquery selector
-        var $selectedApi = $(selectedApi);
-
-        $selectedApi.removeClass('hidden');
-        $selectedApi.parent().find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
-        showLnbApi();
-    </script>
-
-</body>
-</html>

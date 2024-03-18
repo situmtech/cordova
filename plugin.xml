@@ -2,7 +2,7 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     id="@situm/cordova"
-    version="3.3.14">
+    version="3.4.0">
     <name>Situm Cordova plugin Official</name>
     <description>This is the stable branch.</description>
     <license>MIT</license>
@@ -24,9 +24,14 @@
         <clobbers target="cordova.plugins.MapViewController" />
     </js-module>
 
+    <js-module src="www/common-utils.js" name="common-utils">
+        <runs/>
+        <clobbers target="cordova.plugins.SitumCommon" />
+    </js-module>
+
     <!-- android -->
     <platform name="android">
-        <js-module src="www/android/situm.js" name="situm">
+        <js-module src="www/situm.js" name="situm">
             <runs/>
             <clobbers target="cordova.plugins.Situm" />
         </js-module>
@@ -34,9 +39,9 @@
         <framework src="src/android/situm.gradle" custom="true" type="gradleReference" />
 
         <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="Situm">
-            <param name="android-package" value="es.situm.plugin.SitumPlugin" />
-            <param name="onload" value="true" />
+            <feature name="SitumPlugin">
+                <param name="android-package" value="es.situm.plugin.SitumPlugin" />
+                <param name="onload" value="true" />
             </feature>
        </config-file>
 
@@ -49,12 +54,12 @@
 
     <!-- ios -->
     <platform name="ios">
-        <js-module src="www/ios/situm.js" name="situm">
+        <js-module src="www/situm.js" name="situm">
             <runs/>
             <clobbers target="cordova.plugins.Situm" />
         </js-module>
         <config-file target="config.xml" parent="/*">
-	    <feature name="SitumPlugin">
+	        <feature name="SitumPlugin">
                 <param name="ios-package" value="SitumPlugin" onload="true" />
             </feature>
         </config-file>
