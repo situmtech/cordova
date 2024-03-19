@@ -106,7 +106,7 @@ cordova.plugins.Situm.setCacheMaxAge(1 * 60 * 60); // 1 hour
 
 #### - startPositioning
 
-> [!WARN]
+> [!WARNING]
 > This method is deprecated, instead use [requestLocationUpdates](#--requestLocationUpdates).
 
 Starts the positioning system. In the success callback it can return:
