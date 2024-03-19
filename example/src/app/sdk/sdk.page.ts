@@ -109,7 +109,7 @@ export class SDKPage {
   // =                                    POSITIONING                                             =
   // ==============================================================================================
 
-  async startPositioning() {
+  async requestLocationUpdates() {
     if (this.positioning) {
       return;
     }
