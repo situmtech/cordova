@@ -77,7 +77,7 @@ Situm Cordova Plugin is licensed under [MIT License](https://opensource.org/lice
 Log in into your Situm Account. This key is generated in Situm Dashboard. Return true if apiKey was set successfully, otherwise false
 
 ```js
-cordova.plugins.Situm.setApiKey('SITUM_EMAIL', 'SITUM_API_KEY')
+cordova.plugins.Situm.setApiKey("SITUM_EMAIL", "SITUM_API_KEY");
 ```
 
 #### - setUserPass
@@ -85,7 +85,7 @@ cordova.plugins.Situm.setApiKey('SITUM_EMAIL', 'SITUM_API_KEY')
 Provides user's email and password. Return true if apiKey was set successfully, otherwise false
 
 ```js
-cordova.plugins.Situm.setUserPass('SITUM_EMAIL', 'SITUM_USER_PASS')
+cordova.plugins.Situm.setUserPass("SITUM_EMAIL", "SITUM_USER_PASS");
 ```
 
 #### - setRemoteConfig
@@ -93,7 +93,7 @@ cordova.plugins.Situm.setUserPass('SITUM_EMAIL', 'SITUM_USER_PASS')
 Set the remote configuration state which allows to use the configuration (location request) stored on the web to find the location of the user.
 
 ```js
-cordova.plugins.Situm.setUseRemoteConfig(true)
+cordova.plugins.Situm.setUseRemoteConfig(true);
 ```
 
 #### - setCacheMaxAge
@@ -101,7 +101,7 @@ cordova.plugins.Situm.setUseRemoteConfig(true)
 Sets the maximum age of a cached response in seconds.
 
 ```js
-cordova.plugins.Situm.setCacheMaxAge(1 * 60 * 60) // 1 hour
+cordova.plugins.Situm.setCacheMaxAge(1 * 60 * 60); // 1 hour
 ```
 
 #### - startPositioning
@@ -111,8 +111,8 @@ cordova.plugins.Situm.setCacheMaxAge(1 * 60 * 60) // 1 hour
 
 Starts the positioning system. In the success callback it can return:
 
-- [Location](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Location)
-- [LocationStatus](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#LocationStatus)
+- [Location](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Location).
+- [LocationStatus](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#LocationStatus).
 
 ```js
   locationOptions = {
@@ -153,7 +153,7 @@ Use this callback to stay aware about the user's [Location](https://developers.s
 ```js
 cordova.plugins.Situm.onLocationUpdate((location: any) => {
   console.log('The user has moved to: ' + location.position)
-})
+});
 ```
 
 #### - onLocationStatus
@@ -163,18 +163,18 @@ Use this callback to stay aware about the [LocationStatus](https://developers.si
 ```js
 cordova.plugins.Situm.onLocationStatus((status: string) => {
   console.log('New positioning status: ' + status)
-})
+});
 ```
 
 #### - onLocationError
 
 Use this callback to stay aware about the errors the user might face when the positioning system starts.
-See [onLocationError()](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/situm#.onLocationError)
+See [onLocationError()](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/situm#.onLocationError).
 
 ```js
 cordova.plugins.Situm.onLocationError((err: any) => {
   console.log('Error received when positioning: ' + err)
-})
+});
 ```
 
 #### - stopPositioning
@@ -182,7 +182,7 @@ cordova.plugins.Situm.onLocationError((err: any) => {
 Stop the positioning system on current active listener.
 
 ```js
-cordova.plugins.Situm.stopPositioning()
+cordova.plugins.Situm.stopPositioning();
 ```
 
 #### - fetchBuildings
@@ -197,7 +197,7 @@ cordova.plugins.Situm.fetchBuildings(
   (err: any) => {
     // returns error string
   }
-)
+);
 ```
 
 #### - fetchBuildingInfo
@@ -213,7 +213,7 @@ cordova.plugins.Situm.fetchBuildingInfo(
   (err: any) => {
     // returns error string
   }
-)
+);
 ```
 
 #### - fetchFloorsFromBuilding
@@ -229,7 +229,7 @@ cordova.plugins.Situm.fetchFloorsFromBuilding(
   (err: any) => {
     // returns error string
   }
-)
+);
 ```
 
 #### - fetchIndoorPOIsFromBuilding
@@ -245,7 +245,7 @@ cordova.plugins.Situm.fetchIndoorPOIsFromBuilding(
   (err: any) => {
     // returns error string
   }
-)
+);
 ```
 
 #### - fetchOutdoorPOIsFromBuilding
@@ -261,7 +261,7 @@ cordova.plugins.Situm.fetchOutdoorPOIsFromBuilding(
   (err: any) => {
     // returns error string
   }
-)
+);
 ```
 
 #### - fetchEventsFromBuilding
@@ -277,7 +277,7 @@ cordova.plugins.Situm.fetchEventsFromBuilding(
   (err: any) => {
     // returns error string
   }
-)
+);
 ```
 
 #### - fetchPoiCategories
@@ -292,7 +292,7 @@ cordova.plugins.Situm.fetchPoiCategories(
   (err: any) => {
     // returns error string
   }
-)
+);
 ```
 
 #### - fetchMapFromFloor
@@ -308,7 +308,7 @@ cordova.plugins.Situm.fetchMapFromFloor(
   (err: any) => {
     // returns error string
   }
-)
+);
 ```
 
 #### - fetchPoiCategoryIconNormal
@@ -324,7 +324,7 @@ cordova.plugins.Situm.fetchPoiCategoryIconNormal(
   (err: any) => {
     // returns error string
   }
-)
+);
 ```
 
 #### - fetchPoiCategoryIconSelected
@@ -340,7 +340,7 @@ cordova.plugins.Situm.fetchPoiCategoryIconSelected(
   (err: any) => {
     // returns error string
   }
-)
+);
 ```
 
 #### - fetchGeofencesFromBuilding
@@ -356,7 +356,7 @@ cordova.plugins.Situm.fetchGeofencesFromBuilding(
   (err: any) => {
     // returns error string
   }
-)
+);
 ```
 
 #### - invalidateCache
@@ -364,7 +364,7 @@ cordova.plugins.Situm.fetchGeofencesFromBuilding(
 Invalidate all the resources in the cache.
 
 ```js
-cordova.plugins.Situm.invalidateCache()
+cordova.plugins.Situm.invalidateCache();
 ```
 
 #### - requestDirections
@@ -379,7 +379,7 @@ directionRequest = [
   from, // Point where you want to start the route. You can pass a Point or a Location
   to, // Point where you want to finish the route
   {}, // Options to generate the route
-]
+];
 
 cordova.plugins.Situm.requestDirections(
   directionsRequest,
@@ -389,7 +389,7 @@ cordova.plugins.Situm.requestDirections(
   (err: any) => {
     // returns error string
   }
-)
+);
 ```
 
 #### - requestNavigationUpdates
@@ -402,7 +402,7 @@ When you start feeding locations you can receive [NavigationProgress](https://de
 navigationRequest = [
   (distanceToGoalThreshold = 10),
   (distanceToFloorChangeThreshold = 5),
-]
+];
 cordova.plugins.Situm.requestNavigationUpdates(
   navigationRequest,
   (navigation: any) => {
@@ -417,7 +417,7 @@ cordova.plugins.Situm.requestNavigationUpdates(
   (error: any) => {
     //returns error string
   }
-)
+);
 ```
 
 #### - updateNavigationWithLocation
@@ -425,7 +425,7 @@ cordova.plugins.Situm.requestNavigationUpdates(
 Usually, position variable should be one of the locations provided by the system on the [startPositioning](#--startpositioning) function.
 
 ```js
-cordova.plugins.Situm.updateNavigationWithLocation(currentLocation)
+cordova.plugins.Situm.updateNavigationWithLocation(currentLocation);
 ```
 
 #### - removeNavigationUpdates
@@ -433,7 +433,7 @@ cordova.plugins.Situm.updateNavigationWithLocation(currentLocation)
 When you are no longer interested on Navigation Updates you should call this method to remove internal allocated resources.
 
 ```js
-cordova.plugins.Situm.removeNavigationUpdates()
+cordova.plugins.Situm.removeNavigationUpdates();
 ```
 
 #### - requestRealTimeUpdates
@@ -444,7 +444,7 @@ Emits the [real time](https://developers.situm.com/sdk_documentation/cordova/jsd
 const request = {
   building: building, //Building in which you want to be notified
   pollTime: 3000, // time in milliseconds
-}
+};
 cordova.plugins.Situm.SitumPlugin.requestRealTimeUpdates(
   request,
   (locations: any) => {
@@ -453,7 +453,7 @@ cordova.plugins.Situm.SitumPlugin.requestRealTimeUpdates(
   (error: any) => {
     // returns error string
   }
-)
+);
 ```
 
 #### - removeRealTimeUpdates
@@ -461,7 +461,7 @@ cordova.plugins.Situm.SitumPlugin.requestRealTimeUpdates(
 When you are no longer interested on realtime location Updates you should call this method to remove internal allocated resources.
 
 ```js
-cordova.plugins.Situm.removeRealTimeUpdates()
+cordova.plugins.Situm.removeRealTimeUpdates();
 ```
 
 #### - onEnterGeofences
@@ -477,7 +477,7 @@ Get notified about users entering geofences. Take into account:
 cordova.plugins.Situm.onEnterGeofences((geofences: any) => {
   // Returns an array of geofences
   // e.g. [{"polygonPoints": [], "customFields": {}, "updatedAt": "Thu Jan 01 01:00:00 +0100 1970", "buildingIdentifier": "1234", "floorIdentifier": "123456", "code": "", "createdAt": "Thu Jan 01 01:00:00 +0100 1970", "infoHtml": "", "name": "My Geofence", "identifier": "12345678-aaaa-bbbb-cccc-12345678abcd"}]
-})
+});
 ```
 
 #### - onExitGeofences
@@ -490,7 +490,7 @@ Get notified about exiting geofences. Take into account the considerations descr
 cordova.plugins.Situm.onExitGeofences((geofences: any) => {
   // Returns an array of geofences
   // e.g. [{"polygonPoints": [], "customFields": {}, "updatedAt": "Thu Jan 01 01:00:00 +0100 1970", "buildingIdentifier": "1234", "floorIdentifier": "123456", "code": "", "createdAt": "Thu Jan 01 01:00:00 +0100 1970", "infoHtml": "", "name": "My Geofence", "identifier": "12345678-aaaa-bbbb-cccc-12345678abcd"}]
-})
+});
 ```
 
 ### MapView class
@@ -511,13 +511,13 @@ cordova.plugins.MapView.onLoad((controller: any) => {
 
   // 2. Listen to events that take place inside our map like a poi being selected or deselected:
   controller.onPoiSelected((poiSelectedResult: any) => {
-    console.log('EXAMPLE> onPoiSelected -> ', poiSelectedResult)
-  })
+    console.log("EXAMPLE> onPoiSelected -> ", poiSelectedResult);
+  });
 
   controller.onPoiDeselected((poiDeselectedResult: any) => {
-    console.log('EXAMPLE> onPoiDeselected -> ', poiDeselectedResult)
-  })
-})
+    console.log("EXAMPLE> onPoiDeselected -> ", poiDeselectedResult);
+  });
+});
 ```
 
 ### MapViewController class
@@ -531,8 +531,8 @@ Select a POI in the map.
 ```js
 cordova.plugins.MapView.onLoad((controller: any) => {
   // Once the MapView was loaded you can select a POI in our map by calling:
-  controller.selectPoi('YOUR_POI_IDENTIFIER')
-})
+  controller.selectPoi("YOUR_POI_IDENTIFIER");
+});
 ```
 
 #### - navigateToPoi
@@ -546,10 +546,10 @@ cordova.plugins.MapView.onLoad((controller: any) => {
   // Once the MapView was loaded you can navigate to a POI in our map.
   // Make sure to call this method once the user is positioning indoors in your building,
   // otherwise this method will have no effect.
-  controller.navigateToPoi('YOUR_POI_IDENTIFIER')
+  controller.navigateToPoi("YOUR_POI_IDENTIFIER");
 
   // controller.navigateToPoi("YOUR_POI_IDENTIFIER", "CHOOSE_SHORTEST");
-})
+});
 ```
 
 #### - onPoiSelected
@@ -563,9 +563,9 @@ Listen to the selection event of a POI.
 cordova.plugins.MapView.onLoad((controller: any) => {
   // Once the MapView was loaded you can listen to a POI being selected.
   controller.onPoiSelected((poiSelectedResult: any) => {
-    console.log('EXAMPLE> onPoiSelected -> ', poiSelectedResult)
-  })
-})
+    console.log("EXAMPLE> onPoiSelected -> ", poiSelectedResult);
+  });
+});
 ```
 
 #### - onPoiSelected
@@ -578,9 +578,9 @@ Listen to listen to a POI being deselected.
 cordova.plugins.MapView.onLoad((controller: any) => {
   // Once the MapView was loaded you can listen to a POI being deselected.
   controller.onPoiDeselected((poiDeselectedResult: any) => {
-    console.log('EXAMPLE> onPoiDeselected -> ', poiDeselectedResult)
-  })
-})
+    console.log("EXAMPLE> onPoiDeselected -> ", poiDeselectedResult);
+  });
+});
 ```
 
 ---
