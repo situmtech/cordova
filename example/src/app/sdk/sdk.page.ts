@@ -131,29 +131,31 @@ export class SDKPage {
 
   private doStartPositioning() {
     // Start positioning in the building specified in the /src/constants.ts you created before:
-    cordova.plugins.Situm.startPositioning(
+    cordova.plugins.Situm.requestLocationUpdates(
       // In case you have multiple buildings that the user could visit,
       // you might want to start positioning in all your buildings using global mode
       // by specifying an empty identifier:
       //
       // buildingIdentifier: ''
-      [{ buildingIdentifier: Constants.BUILDING_IDENTIFIER }],
-      (res: any) => {
-        if (res && res.statusName) {
-          this._setStatus(res.statusName);
-        }
-        if (res && res.position) {
-          this._setStatus('POSITIONING');
-          this._setInfo(res);
-        }
-        this._setPositioning(true);
-      },
-      (err: any) => {
-        this._setPositioning(false);
-        this._setStatus('ERROR WHILE POSITIONING');
-        this._setInfo(err);
-      }
+      { buildingIdentifier: Constants.BUILDING_IDENTIFIER }
     );
+    cordova.plugins.Situm.onLocationUpdate((location: any) => {
+      if (location && location.position) {
+        this._setStatus('POSITIONING');
+        this._setInfo(location);
+      }
+    });
+    cordova.plugins.Situm.onLocationStatus((status: string) => {
+      this._setStatus(status);
+      if (status == 'STARTING') {
+        this._setPositioning(true);
+      }
+    });
+    cordova.plugins.Situm.onLocationError((err: any) => {
+      this._setPositioning(false);
+      this._setStatus('ERROR WHILE POSITIONING');
+      this._setInfo(err);
+    });
   }
 
   async stopPositioning() {
