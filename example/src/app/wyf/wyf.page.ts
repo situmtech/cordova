@@ -29,10 +29,10 @@ export class WYFPage {
   // Internal code
   // Set the credentials inside the HTMLElement with the values in constants.ts
   ngAfterViewInit() {
-    this.mapView?.nativeElement.setAttribute(
-      'viewer-domain',
-      Constants.VIEWER_DOMAIN
-    );
+    // this.mapView?.nativeElement.setAttribute(
+    //   'viewer-domain',
+    //   Constants.VIEWER_DOMAIN
+    // );
 
     this.mapView?.nativeElement.setAttribute(
       'situm-api-key',
