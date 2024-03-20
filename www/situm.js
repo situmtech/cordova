@@ -8,7 +8,7 @@ let _clientLocationUpdateCallback;
 let _clientLocationStatusCallback;
 let _clientLocationErrorCallback;
 
-let _internalPositioningCallback = function(res) {
+let _internalPositioningCallback = function (res) {
   if (!res) {
     return;
   }
@@ -23,13 +23,13 @@ let _internalPositioningCallback = function(res) {
   }
 };
 
-let _internalErrorCallback = function(error) {
+let _internalErrorCallback = function (error) {
   if (_clientLocationErrorCallback) {
     _clientLocationErrorCallback(error);
   }
-}
+};
 
-/** 
+/**
  * @namespace Situm
  */
 var Situm = {
@@ -101,7 +101,13 @@ var Situm = {
       error(err);
     };
     let compatRequest = common.standarizeRequest(request);
-    exec(legacyCallback, legacyErrorCallback, PLUGIN_NAME, 'startPositioning', compatRequest);
+    exec(
+      legacyCallback,
+      legacyErrorCallback,
+      PLUGIN_NAME,
+      'startPositioning',
+      compatRequest
+    );
   },
 
   /**
@@ -111,9 +117,15 @@ var Situm = {
    * @see {@link onLocationStatus}
    * @see {@link onLocationError}
    */
-  requestLocationUpdates: function(request) {
+  requestLocationUpdates: function (request) {
     let compatRequest = common.standarizeRequest(request);
-    exec(_internalPositioningCallback, _internalErrorCallback, PLUGIN_NAME, 'startPositioning', compatRequest);
+    exec(
+      _internalPositioningCallback,
+      _internalErrorCallback,
+      PLUGIN_NAME,
+      'startPositioning',
+      compatRequest
+    );
   },
 
   // TODO: move to TypeScript:
@@ -142,7 +154,7 @@ var Situm = {
    * @param {OnLocationUpdateCallback} callback Callback.
    * @see {@link requestLocationUpdates}
    */
-  onLocationUpdate: function(callback) {
+  onLocationUpdate: function (callback) {
     if (!callback || typeof callback === 'function') {
       _clientLocationUpdateCallback = callback;
     }
@@ -153,7 +165,7 @@ var Situm = {
    * @param {OnLocationStatusCallback} callback Callback.
    * @see {@link requestLocationUpdates}
    */
-  onLocationStatus: function(callback) {
+  onLocationStatus: function (callback) {
     if (!callback || typeof callback === 'function') {
       _clientLocationStatusCallback = callback;
     }
@@ -164,7 +176,7 @@ var Situm = {
    * @param {OnLocationErrorCallback} callback Callback.
    * @see {@link requestLocationUpdates}
    */
-  onLocationError: function(callback) {
+  onLocationError: function (callback) {
     if (!callback || typeof callback === 'function') {
       _clientLocationErrorCallback = callback;
     }
@@ -186,9 +198,19 @@ var Situm = {
    * Stops positioning.
    * @returns {Promise} Get notified when the native SDK actually stops positioning.
    */
-  removeUpdates: function() {
+  removeUpdates: function () {
     return new Promise((res, rej) => {
-      exec(() => { res(true) }, (err) => { rej(err) }, PLUGIN_NAME, 'stopPositioning', []);
+      exec(
+        () => {
+          res(true);
+        },
+        (err) => {
+          rej(err);
+        },
+        PLUGIN_NAME,
+        'stopPositioning',
+        []
+      );
     });
   },
 
@@ -374,11 +396,6 @@ var Situm = {
    * @return {boolean} success True if there is a listener to which notify progress update. False if there isn't, so this method do nothing.
    */
   updateNavigationWithLocation: function (location, cb, error) {
-    if (!args) {
-      args = []
-    } else if (!Array.isArray(args)) {
-      args = [args]
-    }
     exec(cb, error, PLUGIN_NAME, 'updateNavigationWithLocation', [location]);
   },
   /**
@@ -408,7 +425,7 @@ var Situm = {
    * @param {function} cb Cordova native callback to recive data.
    * @param {function} error Cordova native callback to recive errors.
    */
-  removeRealTimeUpdates: function(cb, error) {
+  removeRealTimeUpdates: function (cb, error) {
     exec(cb, error, PLUGIN_NAME, 'removeRealTimeUpdates', []);
   }
 };
