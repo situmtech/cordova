@@ -568,6 +568,9 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
 }
 
 - (SITLocation *) locationJsonObjectToLocation:(NSDictionary *) jo {
+    if ([jo isKindOfClass:[NSArray class]] && [jo count] > 0) {
+        jo = [[jo objectEnumerator] nextObject];
+    }
     NSTimeInterval timestamp = [(NSNumber*)[jo valueForKey:@"timestamp"] doubleValue];
     SITPoint *position;
     // TODO: the map-viewer is not wrapping the position info into a position object.
