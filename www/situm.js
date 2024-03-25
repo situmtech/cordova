@@ -396,12 +396,6 @@ var Situm = {
    * @return {boolean} success True if there is a listener to which notify progress update. False if there isn't, so this method do nothing.
    */
   updateNavigationWithLocation: function (location, cb, error) {
-    // Do not remove this check, it prevents errors on iOS.
-    if (!args) {
-      args = []
-    } else if (!Array.isArray(args)) {
-      args = [args]
-    }
     exec(cb, error, PLUGIN_NAME, 'updateNavigationWithLocation', [location]);
   },
   /**
