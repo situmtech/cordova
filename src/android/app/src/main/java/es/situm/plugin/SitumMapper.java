@@ -758,6 +758,9 @@ static JSONObject buildingInfoToJsonObject(BuildingInfo buildingInfo) throws JSO
     JSONObject request = args.getJSONObject(0);
     if (request.has(SitumMapper.BUILDING_IDENTIFIER)) {
       String buildingIdentifier = String.valueOf(request.get(SitumMapper.BUILDING_IDENTIFIER));
+      if (buildingIdentifier.isEmpty()) {
+        buildingIdentifier = "-1";
+      }
       locationBuilder.buildingIdentifier(buildingIdentifier);
       Log.i(TAG, "buildingIdentifier: " + buildingIdentifier);
     }

@@ -77,7 +77,7 @@ Situm Cordova Plugin is licensed under [MIT License](https://opensource.org/lice
 Log in into your Situm Account. This key is generated in Situm Dashboard. Return true if apiKey was set successfully, otherwise false
 
 ```js
-cordova.plugins.Situm.setApiKey("SITUM_EMAIL", "SITUM_API_KEY");
+cordova.plugins.Situm.setApiKey('SITUM_EMAIL', 'SITUM_API_KEY');
 ```
 
 #### - setUserPass
@@ -85,7 +85,7 @@ cordova.plugins.Situm.setApiKey("SITUM_EMAIL", "SITUM_API_KEY");
 Provides user's email and password. Return true if apiKey was set successfully, otherwise false
 
 ```js
-cordova.plugins.Situm.setUserPass("SITUM_EMAIL", "SITUM_USER_PASS");
+cordova.plugins.Situm.setUserPass('SITUM_EMAIL', 'SITUM_USER_PASS');
 ```
 
 #### - setRemoteConfig
@@ -106,10 +106,13 @@ cordova.plugins.Situm.setCacheMaxAge(1 * 60 * 60); // 1 hour
 
 #### - startPositioning
 
+> [!WARNING]
+> This method is deprecated, instead use [requestLocationUpdates](#--requestLocationUpdates).
+
 Starts the positioning system. In the success callback it can return:
 
-- [Location](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Location)
-- [LocationStatus](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#LocationStatus)
+- [Location](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Location).
+- [LocationStatus](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#LocationStatus).
 
 ```js
   locationOptions = {
@@ -128,7 +131,71 @@ cordova.plugins.Situm.startPositioning(locationOptions, (res: any) => {
     });
 ```
 
+#### - requestLocationUpdates
+
+Starts the positioning system. You can customize the positioning system by specifying a [LocationRequest](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#LocationRequest) in the method parameters.
+
+Use [onLocationUpdate()](#--onLocationUpdate) to receive updates of the user's location,
+[onLocationStatus()](#--onLocationStatus) to receive updates of the positioning status
+and [onLocationError()](#--onLocationError) to receive the possible errors that take place when positioning.
+
+```js
+cordova.plugins.Situm.requestLocationUpdates(
+  {
+      buildingIdentifier = "YOUR_BUILDING_IDENTIFIER"
+  });
+```
+
+#### - removeUpdates
+
+Stop the positioning system.
+This method returns a promise, so use the .then() and .catch() methods to know the result.
+
+```js
+cordova.plugins.Situm.removeUpdates()
+  .then(() => {
+    // Positioning system has stopped successfully.
+  })
+  .catch((err: any) => {
+    // Error while stopping the positioning system.
+  });
+```
+
+#### - onLocationUpdate
+
+Use this callback to stay aware about the user's [Location](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#Location).
+
+```js
+cordova.plugins.Situm.onLocationUpdate((location: any) => {
+  console.log('The user has moved to: ' + location.position);
+});
+```
+
+#### - onLocationStatus
+
+Use this callback to stay aware about the [LocationStatus](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/global.html#LocationStatus) of the positioning system.
+
+```js
+cordova.plugins.Situm.onLocationStatus((status: string) => {
+  console.log('New positioning status: ' + status);
+});
+```
+
+#### - onLocationError
+
+Use this callback to stay aware about the errors the user might face when the positioning system starts.
+See [onLocationError()](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/situm#.onLocationError).
+
+```js
+cordova.plugins.Situm.onLocationError((err: any) => {
+  console.log('Error received when positioning: ' + err);
+});
+```
+
 #### - stopPositioning
+
+> [!WARNING]
+> This method is deprecated, instead use [removeUpdates](#--removeUpdates).
 
 Stop the positioning system on current active listener.
 
@@ -329,7 +396,7 @@ directionRequest = [
   building, // Building in which you're positioning
   from, // Point where you want to start the route. You can pass a Point or a Location
   to, // Point where you want to finish the route
-  {}, // Options to generate the route
+  {} // Options to generate the route
 ];
 
 cordova.plugins.Situm.requestDirections(
@@ -352,7 +419,7 @@ When you start feeding locations you can receive [NavigationProgress](https://de
 // Navigation request with example values
 navigationRequest = [
   (distanceToGoalThreshold = 10),
-  (distanceToFloorChangeThreshold = 5),
+  (distanceToFloorChangeThreshold = 5)
 ];
 cordova.plugins.Situm.requestNavigationUpdates(
   navigationRequest,
@@ -394,7 +461,7 @@ Emits the [real time](https://developers.situm.com/sdk_documentation/cordova/jsd
 ```js
 const request = {
   building: building, //Building in which you want to be notified
-  pollTime: 3000, // time in milliseconds
+  pollTime: 3000 // time in milliseconds
 };
 cordova.plugins.Situm.SitumPlugin.requestRealTimeUpdates(
   request,
@@ -462,11 +529,11 @@ cordova.plugins.MapView.onLoad((controller: any) => {
 
   // 2. Listen to events that take place inside our map like a poi being selected or deselected:
   controller.onPoiSelected((poiSelectedResult: any) => {
-    console.log("EXAMPLE> onPoiSelected -> ", poiSelectedResult);
+    console.log('EXAMPLE> onPoiSelected -> ', poiSelectedResult);
   });
 
   controller.onPoiDeselected((poiDeselectedResult: any) => {
-    console.log("EXAMPLE> onPoiDeselected -> ", poiDeselectedResult);
+    console.log('EXAMPLE> onPoiDeselected -> ', poiDeselectedResult);
   });
 });
 ```
@@ -482,7 +549,7 @@ Select a POI in the map.
 ```js
 cordova.plugins.MapView.onLoad((controller: any) => {
   // Once the MapView was loaded you can select a POI in our map by calling:
-  controller.selectPoi("YOUR_POI_IDENTIFIER");
+  controller.selectPoi('YOUR_POI_IDENTIFIER');
 });
 ```
 
@@ -497,7 +564,7 @@ cordova.plugins.MapView.onLoad((controller: any) => {
   // Once the MapView was loaded you can navigate to a POI in our map.
   // Make sure to call this method once the user is positioning indoors in your building,
   // otherwise this method will have no effect.
-  controller.navigateToPoi("YOUR_POI_IDENTIFIER");
+  controller.navigateToPoi('YOUR_POI_IDENTIFIER');
 
   // controller.navigateToPoi("YOUR_POI_IDENTIFIER", "CHOOSE_SHORTEST");
 });
@@ -514,7 +581,7 @@ Listen to the selection event of a POI.
 cordova.plugins.MapView.onLoad((controller: any) => {
   // Once the MapView was loaded you can listen to a POI being selected.
   controller.onPoiSelected((poiSelectedResult: any) => {
-    console.log("EXAMPLE> onPoiSelected -> ", poiSelectedResult);
+    console.log('EXAMPLE> onPoiSelected -> ', poiSelectedResult);
   });
 });
 ```
@@ -529,7 +596,7 @@ Listen to listen to a POI being deselected.
 cordova.plugins.MapView.onLoad((controller: any) => {
   // Once the MapView was loaded you can listen to a POI being deselected.
   controller.onPoiDeselected((poiDeselectedResult: any) => {
-    console.log("EXAMPLE> onPoiDeselected -> ", poiDeselectedResult);
+    console.log('EXAMPLE> onPoiDeselected -> ', poiDeselectedResult);
   });
 });
 ```

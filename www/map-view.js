@@ -57,7 +57,7 @@ const MapViewController = require('./map-view-controller')
  * @namespace MapView
  */
 class MapView extends HTMLElement {
-  _viewerDomain
+  _viewerDomain = 'https://map-viewer.situm.com'
 
   constructor() {
     super()
