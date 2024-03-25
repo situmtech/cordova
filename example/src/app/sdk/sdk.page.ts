@@ -18,7 +18,7 @@ import {
   IonPicker,
   IonThumbnail,
   NavController,
-  Platform,
+  Platform
 } from '@ionic/angular/standalone';
 import { NgFor, NgIf } from '@angular/common';
 import { locate, cloudDownload, map } from 'ionicons/icons';
@@ -54,8 +54,8 @@ declare let cordova: any;
     IonTextarea,
     IonPicker,
     NgFor,
-    NgIf,
-  ],
+    NgIf
+  ]
 })
 export class SDKPage {
   buildings: Array<any> | undefined;
@@ -109,7 +109,7 @@ export class SDKPage {
   // =                                    POSITIONING                                             =
   // ==============================================================================================
 
-  async startPositioning() {
+  async requestLocationUpdates() {
     if (this.positioning) {
       return;
     }
@@ -130,44 +130,43 @@ export class SDKPage {
   }
 
   private doStartPositioning() {
+    cordova.plugins.Situm.onLocationUpdate((location: any) => {
+      this._setStatus('POSITIONING');
+      this._setInfo(location);
+    });
+    cordova.plugins.Situm.onLocationStatus((status: string) => {
+      this._setStatus(status);
+      if (status == 'STARTING') {
+        this._setPositioning(true);
+      }
+    });
+    cordova.plugins.Situm.onLocationError((err: any) => {
+      this._setPositioning(false);
+      this._setStatus('ERROR WHILE POSITIONING');
+      this._setInfo(err);
+    });
     // Start positioning in the building specified in the /src/constants.ts you created before:
-    cordova.plugins.Situm.startPositioning(
+    cordova.plugins.Situm.requestLocationUpdates(
       // In case you have multiple buildings that the user could visit,
       // you might want to start positioning in all your buildings using global mode
       // by specifying an empty identifier:
       //
       // buildingIdentifier: ''
-      [{ buildingIdentifier: Constants.BUILDING_IDENTIFIER }],
-      (res: any) => {
-        if (res && res.statusName) {
-          this._setStatus(res.statusName);
-        }
-        if (res && res.position) {
-          this._setStatus('POSITIONING');
-          this._setInfo(res);
-        }
-        this._setPositioning(true);
-      },
-      (err: any) => {
-        this._setPositioning(false);
-        this._setStatus('ERROR WHILE POSITIONING');
-        this._setInfo(err);
-      }
+      { buildingIdentifier: Constants.BUILDING_IDENTIFIER }
     );
   }
 
-  async stopPositioning() {
-    cordova.plugins.Situm.stopPositioning(
-      () => {
+  async removeUpdates() {
+    cordova.plugins.Situm.removeUpdates()
+      .then(() => {
         this._setPositioning(false);
         this._setStatus('STOPPED');
         this._setInfo('');
-      },
-      (err: any) => {
+      })
+      .catch((err: any) => {
         this._setStatus('ERROR');
         this._setInfo(err);
-      }
-    );
+      });
   }
 
   // ==============================================================================================
@@ -373,16 +372,16 @@ export class SDKPage {
       options: [
         {
           text: 'Do fetchPois() before selecting a POI',
-          value: 'empty',
-        },
-      ],
-    },
+          value: 'empty'
+        }
+      ]
+    }
   ];
 
   public pickerButtons = [
     {
       text: 'Cancel',
-      role: 'cancel',
+      role: 'cancel'
     },
     {
       text: 'Confirm',
@@ -391,8 +390,8 @@ export class SDKPage {
         this.ngZone.run(() => {
           this.currentPoi = value.pois.value;
         });
-      },
-    },
+      }
+    }
   ];
 
   private _populatePOIPicker(pois: any) {
@@ -400,7 +399,7 @@ export class SDKPage {
     for (let poi of pois) {
       this.pickerColumns[0].options.push({
         text: poi.poiName,
-        value: poi,
+        value: poi
       });
     }
     this.pickerColumns[0].options.sort((a, b) => {

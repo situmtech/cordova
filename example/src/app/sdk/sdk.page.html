@@ -20,17 +20,17 @@
       <ion-row>
         <ion-button
           size="small"
-          (click)="startPositioning()"
+          (click)="requestLocationUpdates()"
           [disabled]="positioning"
         >
-          startPositioning()
+          requestLocationUpdates()
         </ion-button>
         <ion-button
           size="small"
-          (click)="stopPositioning()"
+          (click)="removeUpdates()"
           [disabled]="!positioning"
         >
-          stopPositioning()
+          removeUpdates()
         </ion-button>
       </ion-row>
     </ion-card-content>
