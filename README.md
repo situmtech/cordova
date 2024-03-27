@@ -2,12 +2,22 @@
 <h1 align="center">Situm Cordova Plugin</h1>
 </p>
 
-Situm Cordova Plugin is a set of utilities that allow any developer to build Cordova location based apps using Situm's indoor positioning system. Among many other capabilities, apps developed with Situm Cordova Plugin will be able to:
+[Situm Wayfinding](https://situm.com/wayfinding) for Capacitor and Cordova. Integrate plug&play navigation experience with floorplans, POIs, routes and turn-by-turn directions in no time. With the power of [Situm](https://www.situm.com/).
 
-- Obtain information related to buildings where Situm's positioning system is already configured: floorplans, points of interest, geotriggered events, etc.
-- Retrieve the location of the smartphone inside these buildings (position, orientation, and floor where the smartphone is).
-- Compute a route from a point A (e.g. where the smartphone is) to a point B (e.g. any point of interest within the building).
-- Trigger notifications when the user enters a certain area.
+This plugin has two parts:
+
+- The base SDK, the building blocks that allow you to:
+
+  - obtain information related to buildings where Situm's positioning system is already configured: floorplans, points of interest, geotriggered events, etc.
+  - retrieve the location of the smartphone inside these buildings (position, orientation, and floor where the smartphone is).
+  - compute a route from a point A (e.g. where the smartphone is) to a point B (e.g. any point of interest within the building).
+  - trigger notifications when the user enters a certain area.
+
+- A full featured and easy to integrate UI component (`<map-view>`) that allows you to:
+  - show your cartography on a map
+  - show the user location on the map
+  - calculate point-to-point wayfinging routes
+  - explore points of interest on your buildings on the map
 
 <div align="center" style="text-align:center">
 
