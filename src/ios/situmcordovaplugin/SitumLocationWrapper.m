@@ -691,6 +691,8 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
     NSNumber *accessible;
     BOOL minimizeFloorChanges = false;
     NSString *accessibilityModeValue = nil;
+    NSArray *includedTags = nil;
+    NSArray *excludedTags = nil; 
     if(options) {
         accessible = (NSNumber*)[options valueForKey: @"accessible"];
         if (accessible == nil) {
@@ -698,6 +700,15 @@ static SitumLocationWrapper *singletonSitumLocationWrapperObj;
         }
         accessibilityModeValue = options[@"accessibilityMode"];
         minimizeFloorChanges = [(NSNumber*)[options valueForKey: @"minimizeFloorChanges"] boolValue];
+
+        if (options[@"includedTags"] != nil && ![options[@"includedTags"] isEqual:[NSNull null]]) {
+             includedTags = options[@"includedTags"];
+             [directionsRequest setIncludedTags:includedTags];
+         }
+         if (options[@"excludedTags"] != nil && ![options[@"excludedTags"] isEqual:[NSNull null]]) {
+             excludedTags = options[@"excludedTags"];
+             [directionsRequest setExcludedTags:excludedTags];
+         }
     }
     
     if (accessibilityModeValue != nil) {
