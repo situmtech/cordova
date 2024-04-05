@@ -363,7 +363,7 @@ class MapViewControllerImpl {
 
   /**
    * @typedef {Object} MapViewDirectionsOptions - Options to apply to directions requests
-   * @property {string[]} includedTags - List of tags that you want to use when calculating a route. Only the tags added here will be used. If there are other tags in the graph they won't be used. The edges without a tag will be used. If you don't set nothing all the graph will be used to calculate the route. You can learn more about this topic on https://situm.com/docs/cartography-management/#tags
+   * @property {string[]} includedTags - List of tags that you want to use when calculating a route. Only the tags added here will be used. If there are other tags in the graph they won't be used. The edges without a tag will be used. If you don't set any tag, all the graph will be used to calculate the route. You can learn more about this topic on https://situm.com/docs/cartography-management/#tags
    * @property {string[]} excludedTags - List of tags that you want your route to avoid. If you exclude a tag the route will never pass through an edge that have this tag. If the route can only be generated passing through an edge with this tag the route calculation will fail. You can learn more about this topic on https://situm.com/docs/cartography-management/#tags.
    */
 
