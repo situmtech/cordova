@@ -1,0 +1,1 @@
+- Added method getDeviceId to retrieve the device identifier.
