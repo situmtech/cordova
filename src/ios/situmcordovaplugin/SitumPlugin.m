@@ -62,6 +62,11 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     }
 }
 
+-(void)getDeviceId:(CDVInvokedUrlCommand *)command {
+    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[SITServices deviceID]];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
 - (void)fetchBuildingInfo:(CDVInvokedUrlCommand *)command
 {
     // TODO:

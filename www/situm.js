@@ -80,6 +80,17 @@ var Situm = {
   },
 
   /**
+   * Get the device id.
+   * @description Gets the id of the device.
+   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {void}
+   */
+  getDeviceId: function (cb, error) {
+    exec(cb, error, PLUGIN_NAME, 'getDeviceId');
+  },
+
+  /**
    * Set callback and starts listen onLocationChanged event.
    * @param {LocationRequest} request Location Request.
    * @param {function} cb Cordova native callback to recive data.

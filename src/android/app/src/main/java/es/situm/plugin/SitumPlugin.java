@@ -56,6 +56,8 @@ public class SitumPlugin extends CordovaPlugin {
       Integer cacheAge = args.getInt(0);
       Log.d(TAG,"Setting cache max age to " + cacheAge + " seconds");
       es.situm.sdk.SitumSdk.configuration().setCacheMaxAge(cacheAge, TimeUnit.SECONDS);
+    } else if (action.equalsIgnoreCase("getDeviceId")) {    
+      getPluginInstance().getDeviceId(cordova, webView, args, callbackContext);
     } else if (action.equalsIgnoreCase("fetchBuildings")) {
       getPluginInstance().fetchBuildings(cordova, webView, args, callbackContext);
     } else if (action.equalsIgnoreCase("fetchBuildingInfo")) {
