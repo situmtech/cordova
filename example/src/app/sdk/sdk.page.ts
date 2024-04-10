@@ -109,6 +109,21 @@ export class SDKPage {
   // =                                    POSITIONING                                             =
   // ==============================================================================================
 
+  public getDeviceId() {
+    this._setStatus('RETRIEVING DEVICE ID ...');
+    cordova.plugins.Situm.getDeviceId(
+      (deviceID: String) => {
+        this._setStatus('RETRIEVED DEVICE ID');
+        this._setInfo('Device iD -> ' + deviceID);
+      },
+      (error: any) => {
+        this._setStatus('ERROR RETRIEVING DEVICEID');
+        console.error(error);
+        this._setInfo(error);
+      }
+    );
+  }
+
   async requestLocationUpdates() {
     if (this.positioning) {
       return;
