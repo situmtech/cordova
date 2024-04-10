@@ -1,4 +1,4 @@
-const Situm = require('@situm/cordova.situm')
+const Situm = require('@situm/cordova.situm');
 
 /**
  * Here's an example on how to use this controller class:
@@ -46,35 +46,35 @@ const Situm = require('@situm/cordova.situm')
  * @name MapViewController
  */
 class MapViewControllerImpl {
-  _onLoadCallback = undefined
-  _onPoiSelectedCallback = undefined
-  _onPoiDeselectedCallback = undefined
-  _buildings = undefined
-  _mapView = undefined
-  _isNavigating = false
+  _onLoadCallback = undefined;
+  _onPoiSelectedCallback = undefined;
+  _onPoiDeselectedCallback = undefined;
+  _buildings = undefined;
+  _mapView = undefined;
+  _isNavigating = false;
 
   constructor() {
-    Situm.internalSetEventDelegate(this._handleSdkNativeEvents.bind(this))
+    Situm.internalSetEventDelegate(this._handleSdkNativeEvents.bind(this));
   }
 
   _prepare(mapView) {
-    this._mapView = mapView
+    this._mapView = mapView;
   }
 
   _setOnLoadCallback(callback) {
-    this._onLoadCallback = callback
+    this._onLoadCallback = callback;
   }
 
   _sendMessageToViewer(type, payload) {
     let message = {
       type: type,
-      payload: payload,
-    }
+      payload: payload
+    };
     if (this._mapView && this._mapView.firstElementChild) {
       this._mapView.firstElementChild.contentWindow.postMessage(
         message,
         this._mapView._getViewerDomain()
-      )
+      );
     }
   }
 
@@ -88,16 +88,16 @@ class MapViewControllerImpl {
         // TODO: iOS is sending messages here not related to Location. Check
         // some fields to avoid assuming that we receive an object of type Location.
         if (payload.buildingIdentifier && payload.position) {
-          this._handleOnLocationUpdate(payload)
+          this._handleOnLocationUpdate(payload);
         } else if (payload.statusName) {
-          this._handleOnLocationStatus(payload)
+          this._handleOnLocationStatus(payload);
         }
-        break
+        break;
     }
   }
 
   _handleOnLocationUpdate(payload) {
-    this._sendMessageToViewer('location.update', payload)
+    this._sendMessageToViewer('location.update', payload);
     if (this._isNavigating) {
       Situm.updateNavigationWithLocation(
         [payload],
@@ -105,16 +105,16 @@ class MapViewControllerImpl {
           // Do nothing.
         },
         () => {
-          console.error('Error at updateNavigationWithLocation')
+          console.error('Error at updateNavigationWithLocation');
         }
-      )
+      );
     }
   }
 
   _handleOnLocationStatus(payload) {
     this._sendMessageToViewer('location.update_status', {
-      status: payload.statusName,
-    })
+      status: payload.statusName
+    });
   }
 
   // ==================================================
@@ -128,41 +128,41 @@ class MapViewControllerImpl {
           this._onLoadCallback &&
           typeof this._onLoadCallback === 'function'
         ) {
-          this._onLoadCallback(this)
-          console.debug('Map is ready!')
+          this._onLoadCallback(this);
+          console.debug('Map is ready!');
         }
-        break
+        break;
       case 'cartography.poi_selected':
-        console.debug(`poi (${m.payload.identifier}) was selected`)
+        console.debug(`poi (${m.payload.identifier}) was selected`);
         const poiSelectedResult = {
           poi: {
             identifier: m.payload.identifier,
-            buildingIdentifier: m.payload.buildingIdentifier,
-          },
-        }
-        this._onPoiSelectedCallback(poiSelectedResult)
-        break
+            buildingIdentifier: m.payload.buildingIdentifier
+          }
+        };
+        this._onPoiSelectedCallback(poiSelectedResult);
+        break;
       case 'cartography.poi_deselected':
         const poiDeselectedResult = {
           poi: {
             identifier: m.payload.identifier,
-            buildingIdentifier: m.payload.buildingIdentifier,
-          },
-        }
-        this._onPoiDeselectedCallback(poiDeselectedResult)
-        break
+            buildingIdentifier: m.payload.buildingIdentifier
+          }
+        };
+        this._onPoiDeselectedCallback(poiDeselectedResult);
+        break;
       case 'directions.requested':
-        this._onDirectionsRequested(m.payload)
-        break
+        this._onDirectionsRequested(m.payload);
+        break;
       case 'navigation.requested':
-        this._onNavigationRequested(m.payload)
-        break
+        this._onNavigationRequested(m.payload);
+        break;
       case 'navigation.stopped':
-        this._onNavigationCancel()
-        break
+        this._onNavigationCancel();
+        break;
       default:
-        console.debug('Got unmanaged message: ', m)
-        break
+        console.debug('Got unmanaged message: ', m);
+        break;
     }
   }
 
@@ -171,35 +171,35 @@ class MapViewControllerImpl {
     if (this._buildings) {
       let building = this._buildings.find(
         (b) => b.buildingIdentifier == buildingId
-      )
-      callback(building)
+      );
+      callback(building);
     } else {
       // Fetch buildings and calculate route.
       cordova.plugins.Situm.fetchBuildings(
         (res) => {
-          this._buildings = res
+          this._buildings = res;
           let building = this._buildings.find(
             (b) => b.buildingIdentifier == buildingId
-          )
-          callback(building)
+          );
+          callback(building);
         },
         (err) => {
-          callback(undefined)
+          callback(undefined);
         }
-      )
+      );
     }
   }
 
   // DIRECTIONS:
 
   _onDirectionsRequested(payload) {
-    let directionsRequest = payload.directionsRequest
+    let directionsRequest = payload.directionsRequest;
     let mapViewerData = {
       identifier: payload.identifier,
       originIdentifier: payload.originIdentifier,
       destinationIdentifier: payload.destinationIdentifier,
-      type: directionsRequest.accessibilityMode,
-    }
+      type: directionsRequest.accessibilityMode
+    };
     this._ensureBuilding(payload.buildingIdentifier, (building) => {
       if (building) {
         Situm.requestDirections(
@@ -207,41 +207,41 @@ class MapViewControllerImpl {
             building,
             directionsRequest.from,
             directionsRequest.to,
-            directionsRequest,
+            directionsRequest
           ],
           (route) => {
             this._sendMessageToViewer('directions.update', {
               ...route,
-              ...mapViewerData,
-            })
+              ...mapViewerData
+            });
           },
           (error) => {
             this._sendMessageToViewer('directions.update', {
               error: -1,
-              identifier: mapViewerData.identifier,
-            })
+              identifier: mapViewerData.identifier
+            });
           }
-        )
+        );
       } else {
         this._sendMessageToViewer('directions.update', {
           error: -1,
-          identifier: payload.identifier,
-        })
+          identifier: payload.identifier
+        });
       }
-    })
+    });
   }
 
   // NAVIGATION
 
   _onNavigationRequested(payload) {
-    let directionsRequest = payload.directionsRequest
+    let directionsRequest = payload.directionsRequest;
     let mapViewerData = {
       identifier: payload.identifier,
       originIdentifier: payload.originIdentifier,
       destinationIdentifier: payload.destinationIdentifier,
-      type: directionsRequest.accessibilityMode,
-    }
-    let navigationRequest = payload.navigationRequest
+      type: directionsRequest.accessibilityMode
+    };
+    let navigationRequest = payload.navigationRequest;
     this._ensureBuilding(payload.buildingIdentifier, (building) => {
       // Request directions again to update the calculated route on the native side.
       Situm.requestDirections(
@@ -249,62 +249,62 @@ class MapViewControllerImpl {
           building,
           directionsRequest.from,
           directionsRequest.to,
-          directionsRequest,
+          directionsRequest
         ],
         (route) => {
-          this._isNavigating = true
+          this._isNavigating = true;
           this._sendMessageToViewer('navigation.start', {
             ...route,
-            ...mapViewerData,
-          })
+            ...mapViewerData
+          });
           Situm.requestNavigationUpdates(
             [navigationRequest],
             (progress) => {
               // Navigation is working, handle different progress types:
               if (progress.type == 'progress') {
-                progress.type = 'PROGRESS' // The map-viewer waits for an upper case "type".
-                this._sendMessageToViewer('navigation.update', progress)
+                progress.type = 'PROGRESS'; // The map-viewer waits for an upper case "type".
+                this._sendMessageToViewer('navigation.update', progress);
               } else if (progress.type == 'destinationReached') {
                 this._sendMessageToViewer('navigation.update', {
-                  type: 'DESTINATION_REACHED',
-                })
-                this._isNavigating = false
+                  type: 'DESTINATION_REACHED'
+                });
+                this._isNavigating = false;
               } else if (progress.type == 'userOutsideRoute') {
                 this._sendMessageToViewer('navigation.update', {
-                  type: 'OUT_OF_ROUTE',
-                })
+                  type: 'OUT_OF_ROUTE'
+                });
               }
             },
             (error) => {
               this._sendMessageToViewer('directions.update', {
                 error: -1,
-                identifier: mapViewerData.identifier,
-              })
-              this._isNavigating = false
+                identifier: mapViewerData.identifier
+              });
+              this._isNavigating = false;
             }
-          )
+          );
         },
         (error) => {
           this._sendMessageToViewer('directions.update', {
             error: -1,
-            identifier: mapViewerData.identifier,
-          })
-          this._isNavigating = false
+            identifier: mapViewerData.identifier
+          });
+          this._isNavigating = false;
         }
-      )
-    })
+      );
+    });
   }
 
   _onNavigationCancel() {
-    this._isNavigating = false
+    this._isNavigating = false;
     Situm.removeNavigationUpdates(
       () => {
         // Do nothing.
       },
       () => {
-        console.error('Error removing navigation updates.')
+        console.error('Error removing navigation updates.');
       }
-    )
+    );
   }
 
   // ==================================================
@@ -321,8 +321,8 @@ class MapViewControllerImpl {
    * */
   selectPoi(identifier) {
     this._sendMessageToViewer('cartography.select_poi', {
-      identifier: identifier,
-    })
+      identifier: identifier
+    });
   }
 
   /**
@@ -344,8 +344,8 @@ class MapViewControllerImpl {
   navigateToPoi(identifier, accessibilityMode) {
     this._sendMessageToViewer('navigation.start', {
       navigationTo: Number.parseInt(identifier),
-      type: accessibilityMode,
-    })
+      type: accessibilityMode
+    });
   }
 
   /**
@@ -358,7 +358,31 @@ class MapViewControllerImpl {
    * @method
    */
   setLanguage(language) {
-    this._sendMessageToViewer('ui.set_language', language)
+    this._sendMessageToViewer('ui.set_language', language);
+  }
+
+  /**
+   * @typedef {Object} MapViewDirectionsOptions - Options to apply to directions requests
+   * @property {string[]} includedTags - List of tags that you want to use when calculating a route. Only the tags added here will be used. If there are other tags in the graph they won't be used. The edges without a tag will be used. If you don't set any tag, all the graph will be used to calculate the route. You can learn more about this topic on https://situm.com/docs/cartography-management/#tags
+   * @property {string[]} excludedTags - List of tags that you want your route to avoid. If you exclude a tag the route will never pass through an edge that have this tag. If the route can only be generated passing through an edge with this tag the route calculation will fail. You can learn more about this topic on https://situm.com/docs/cartography-management/#tags.
+   */
+
+  /**
+   * If you want to change the route calculated based on tags you can use this interface.
+   * Using this interface you can change all the routes that will be calculated including or excluding tags.
+   * Use the method this method after the MapView ends loading
+   * You can call this as many times you want and the mapviewer will use the last options that you set.
+   *
+   * @param {MapViewDirectionsOptions} directionsOptions the desired MapViewDirectionsOptions
+   * @memberof MapViewController
+   * @name setDirectionsOptions
+   * @method
+   */
+  setDirectionsOptions(directionsOptions) {
+    this._sendMessageToViewer('directions.set_options', {
+      includedTags: directionsOptions.includedTags,
+      excludedTags: directionsOptions.excludedTags
+    });
   }
 
   // ==================================================
@@ -373,7 +397,7 @@ class MapViewControllerImpl {
    * @method
    * */
   onPoiSelected(cb) {
-    this._onPoiSelectedCallback = cb
+    this._onPoiSelectedCallback = cb;
   }
 
   /**
@@ -384,9 +408,10 @@ class MapViewControllerImpl {
    * @method
    * */
   onPoiDeselected(cb) {
-    this._onPoiDeselectedCallback = cb
+    this._onPoiDeselectedCallback = cb;
   }
 }
 
-let MapViewController = new MapViewControllerImpl()
-module.exports = MapViewController
+let MapViewController = new MapViewControllerImpl();
+
+module.exports = MapViewController;
