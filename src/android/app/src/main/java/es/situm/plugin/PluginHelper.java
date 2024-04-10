@@ -106,10 +106,16 @@ public class PluginHelper {
         nmInstance = navigationManager;
     }
 
+    public void getDeviceId(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
+            final CallbackContext callbackContext) {
+        String deviceId = String.valueOf(SitumSdk.getDeviceID());
+        callbackContext.sendPluginResult(new PluginResult(Status.OK, deviceId));
+    }
+
     public void fetchBuildings(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
             final CallbackContext callbackContext) {
         try {
-           getCommunicationManagerInstance().fetchBuildings(new Handler<Collection<Building>>() {
+            getCommunicationManagerInstance().fetchBuildings(new Handler<Collection<Building>>() {
                 public void onSuccess(Collection<Building> buildings) {
                     try {
                         Log.d(PluginHelper.TAG, "onSuccess: Buildings fetched successfully.");

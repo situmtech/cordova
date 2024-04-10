@@ -17,6 +17,7 @@
 // The hooks for our plugin commands
 - (void)setApiKey:(CDVInvokedUrlCommand *)command;
 - (void)setUserPass:(CDVInvokedUrlCommand *)command;
+- (void)getDeviceId:(CDVInvokedUrlCommand *)command;
 - (void)startPositioning:(CDVInvokedUrlCommand *)command;
 - (void)setUseRemoteConfig:(CDVInvokedUrlCommand *)command;
 - (void)stopPositioning:(CDVInvokedUrlCommand *)command;
