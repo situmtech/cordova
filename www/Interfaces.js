@@ -31,9 +31,9 @@ var Building = {
   rotation,
   userIdentifier,
   customFields
-}
+};
 
-module.exports = Building
+module.exports = Building;
 
 /** @name
  * BuildingInfo
@@ -52,9 +52,9 @@ var BuildingInfo = {
   indoorPois,
   outdoorPois,
   events
-}
+};
 
-module.exports = BuildingInfo
+module.exports = BuildingInfo;
 
 /**
  * @name
@@ -77,9 +77,9 @@ var Floor = {
   mapUrl,
   scale,
   floorIdentifier
-}
+};
 
-module.exports = Floor
+module.exports = Floor;
 
 /** @name
  * Dimensions
@@ -92,9 +92,9 @@ module.exports = Floor
 var Dimensions = {
   width,
   height
-}
+};
 
-module.exports = Dimensions
+module.exports = Dimensions;
 
 /** @name
  * Bounds
@@ -111,9 +111,9 @@ var Bounds = {
   northWest,
   southEast,
   southWest
-}
+};
 
-module.exports = Bounds
+module.exports = Bounds;
 
 /**
  * @name
@@ -127,9 +127,9 @@ module.exports = Bounds
 var Coordinate = {
   latitude,
   longitude
-}
+};
 
-module.exports = Coordinate
+module.exports = Coordinate;
 
 /**
  * @name
@@ -143,9 +143,9 @@ module.exports = Coordinate
 var CartesianCoordinate = {
   x,
   y
-}
+};
 
-module.exports = CartesianCoordinate
+module.exports = CartesianCoordinate;
 
 /**
  * @name
@@ -179,9 +179,9 @@ var Poi = {
   category,
   infoHtml,
   customFields
-}
+};
 
-module.exports = Poi
+module.exports = Poi;
 
 /**
  * @name
@@ -204,9 +204,9 @@ var Geofence = {
   infoHtml,
   polygonPoints,
   customFields
-}
+};
 
-module.exports = Geofence
+module.exports = Geofence;
 
 /**
  * @name
@@ -220,16 +220,15 @@ module.exports = Geofence
  * @property {boolean} public - Whether the category is public or not
  */
 
- 
 var PoiCategory = {
   poiCategoryCode,
   poiCategoryName,
   icon_selected,
   icon_unselected,
   public
-}
+};
 
-module.exports = PoiCategory
+module.exports = PoiCategory;
 
 /**
  * @name
@@ -251,9 +250,9 @@ var Point = {
   floorIdentifier,
   isIndoor,
   isOutdoor
-}
+};
 
-module.exports = Point
+module.exports = Point;
 
 /**
  * @name
@@ -297,9 +296,9 @@ var Location = {
   isIndoor,
   isOutdoor,
   deviceId
-}
+};
 
-module.exports = Location
+module.exports = Location;
 
 /**
  * @name
@@ -313,9 +312,9 @@ module.exports = Location
 var LocationStatus = {
   statusName,
   statusOrdinal
-}
+};
 
-module.exports = LocationStatus
+module.exports = LocationStatus;
 
 /**
  * @name
@@ -333,9 +332,9 @@ var Angle = {
   degreesClockwise,
   radians,
   radiansMinusPiPi
-}
+};
 
-module.exports = Angle
+module.exports = Angle;
 
 /**
  * @name
@@ -365,9 +364,9 @@ var Route = {
   to,
   steps,
   segments
-}
+};
 
-module.exports = Route
+module.exports = Route;
 
 /**
  * @name
@@ -391,9 +390,9 @@ var RouteStep = {
   to,
   isFirst,
   isLast
-}
+};
 
-module.exports = RouteStep
+module.exports = RouteStep;
 
 /**
  * @name
@@ -407,9 +406,9 @@ module.exports = RouteStep
 var RouteSegment = {
   floorIdentifier,
   points
-}
+};
 
-module.exports = RouteSegment
+module.exports = RouteSegment;
 
 /**
  * @name
@@ -435,10 +434,9 @@ var Indication = {
   stepIdxDestination,
   stepIdxOrigin,
   neededLevelChange
-}
+};
 
-module.exports = Indication
-
+module.exports = Indication;
 
 /**
  * @name
@@ -474,10 +472,9 @@ var NavigationProgress = {
   routeStep,
   points,
   segments
-}
+};
 
-module.exports = NavigationProgress
-
+module.exports = NavigationProgress;
 
 /**
  * @name
@@ -509,9 +506,9 @@ var SitumEvent = {
   name,
   x,
   y
-}
+};
 
-module.exports = SitumEvent
+module.exports = SitumEvent;
 
 /**
  * @name
@@ -530,10 +527,10 @@ var SitumConversionArea = {
   topLeft,
   topRight,
   bottomLeft,
-  bottomRight,
-}
+  bottomRight
+};
 
-module.exports = Circle
+module.exports = Circle;
 
 /**
  * @name
@@ -546,10 +543,10 @@ module.exports = Circle
 
 var Circle = {
   center,
-  radius,
-}
+  radius
+};
 
-module.exports = SitumConversionArea
+module.exports = SitumConversionArea;
 
 /**
  * @name
@@ -587,7 +584,7 @@ var LocationRequest = {
   beaconFilters,
   smallestDisplacement,
   realtimeUpdateInterval,
-  autoEnableBleDuringPositioning,
+  autoEnableBleDuringPositioning
 };
 
 module.exports = LocationRequest;
@@ -601,7 +598,7 @@ module.exports = LocationRequest;
  */
 var LocationOptions = LocationRequest;
 
-module.exports = LocationOptions
+module.exports = LocationOptions;
 
 /**
  * @name
@@ -629,9 +626,9 @@ var NavigationRequest = {
   timeToFirstIndication,
   roundIndicationsStep,
   timeToIgnoreUnexpectedFloorChanges
-}
+};
 
-module.exports = NavigationRequest
+module.exports = NavigationRequest;
 
 /**
  * @name
@@ -649,9 +646,9 @@ var DirectionsRequest = {
   from,
   to,
   options
-}
+};
 
-module.exports = DirectionsRequest
+module.exports = DirectionsRequest;
 
 /**
  * @name
@@ -663,15 +660,19 @@ module.exports = DirectionsRequest
  * @property {boolean} accessible - Defines wheter or not the route has to be suitable for wheel chairs (true) or not (false). @deprecated, use accessibilityMode
  * @property {string} accessibilityMode - Defines the accessibility mode of the route. Possible values are: CHOOSE_SHORTEST, ONLY_NOT_ACCESSIBLE_FLOOR_CHANGES, ONLY_ACCESSIBLE
  * @property {number} startingAngle - Current user's orientation in degrees.
+ * @property {stting[]} includedTags - List of tags that you want to use when calculating a route. Only the tags added here will be used. If there are other tags in the graph they won't be used. The edges without a tag will be used. If you don't set nothing all the graph will be used to calculate the route. You can learn more about this topic on https://situm.com/docs/cartography-management/#tags
+ * @property {stting[]} excludedTags - List of tags that you want your route to avoid. If you exclude a tag the route will never pass through an edge that have this tag. If the route can only be generated passing through an edge with this tag the route calculation will fail. You can learn more about this topic on https://situm.com/docs/cartography-management/#tags.
  */
 
 var DirectionsOptions = {
   minimizeFloorChanges,
   accessibleRoute,
-  startingAngle
-}
+  startingAngle,
+  includedTags,
+  excludedTags
+};
 
-module.exports = DirectionsOptions
+module.exports = DirectionsOptions;
 
 /**
  * @name
@@ -687,9 +688,9 @@ var OutdoorLocationOptions = {
   userDefinedThreshold,
   computeInterval,
   averageSnrThreshold
-}
+};
 
-module.exports = OutdoorLocationOptions
+module.exports = OutdoorLocationOptions;
 
 /**
  * @name
@@ -701,9 +702,9 @@ module.exports = OutdoorLocationOptions
 
 var BeaconFilter = {
   uuid
-}
+};
 
-module.exports = BeaconFilter
+module.exports = BeaconFilter;
 
 /**
  * @name
@@ -716,10 +717,10 @@ module.exports = BeaconFilter
 
 var RealTimeRequest = {
   building,
-  pollTime,
-}
+  pollTime
+};
 
-module.exports = RealTimeRequest
+module.exports = RealTimeRequest;
 
 /**
  * @name
@@ -730,10 +731,10 @@ module.exports = RealTimeRequest
  */
 
 var RealTimeData = {
-  locations,
-}
+  locations
+};
 
-module.exports = RealTimeData
+module.exports = RealTimeData;
 
 /**
  * @name
@@ -747,8 +748,8 @@ module.exports = RealTimeData
 var PoiSelectedResult = {
   poi: {
     identifier,
-    buildingIdentifier,
-  },
+    buildingIdentifier
+  }
 };
 
 module.exports = PoiSelectedResult;
@@ -765,7 +766,7 @@ module.exports = PoiSelectedResult;
 var PoiDeselectedResult = {
   poi: {
     identifier,
-    buildingIdentifier,
+    buildingIdentifier
   }
 };
 
