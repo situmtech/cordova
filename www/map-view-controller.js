@@ -78,6 +78,16 @@ class MapViewControllerImpl {
     }
   }
 
+  _getDeviceId(callback) {
+    Situm.getDeviceId(
+      (deviceId) => callback(deviceId),
+      () => {
+        console.error('Error retrieving the device id.');
+        callback(null);
+      }
+    );
+  }
+
   // ==================================================
   // SDK MESSAGES:
   // ==================================================
