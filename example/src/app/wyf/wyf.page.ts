@@ -36,7 +36,7 @@ export class WYFPage {
 
     this.mapView?.nativeElement.setAttribute(
       'situm-api-key',
-      Constants.API_KEY
+      Constants.SITUM_API_KEY
     );
 
     this.mapView?.nativeElement.setAttribute(
@@ -48,5 +48,9 @@ export class WYFPage {
       'remote-identifier',
       Constants.REMOTE_IDENTIFIER
     );
+    this.mapView?.nativeElement.setAttribute(
+      'language',
+      Constants.LANGUAGE
+    )
   }
 }
