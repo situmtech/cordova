@@ -95,7 +95,7 @@ class MapView extends HTMLElement {
     let buildingIdentifierQP =
       buildingIdentifier.length > 0 ? `&buildingid=${buildingIdentifier}` : '';
     let languageQP = language.length > 0 ? `&lng=${language}` : '';
-    let deviceIdQP = deviceId ? `&device_id=${deviceId}` : '';
+    let deviceIdQP = deviceId ? `&deviceId=${deviceId}` : '';
 
     let query = `${situmApiKeyQP}${buildingIdentifierQP}${languageQP}${deviceIdQP}&mode=embed`;
 
