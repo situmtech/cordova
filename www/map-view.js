@@ -1,4 +1,4 @@
-const MapViewController = require('./map-view-controller')
+const MapViewController = require('./map-view-controller');
 /**
  * <h4>CODE SNIPPET</h4>
  *
@@ -57,75 +57,78 @@ const MapViewController = require('./map-view-controller')
  * @namespace MapView
  */
 class MapView extends HTMLElement {
-  _viewerDomain = 'https://map-viewer.situm.com'
+  _viewerDomain = 'https://map-viewer.situm.com';
 
   constructor() {
-    super()
+    super();
   }
 
   connectedCallback() {
-    MapViewController._prepare(this)
-    this.innerHTML = `
-      <iframe
-        id="map-view-iframe"
-        src="${this._getViewerURL()}"
-        width="100%"
-        height="100%"
-        style="border: none; box-shadow: none;"
-      />
-    `
-    window.addEventListener('message', this._messageReceivedCallback)
+    MapViewController._prepare(this);
+    MapViewController._getDeviceId((deviceId) => {
+      this.innerHTML = `
+        <iframe
+          id="map-view-iframe"
+          src="${this._getViewerURL(deviceId)}"
+          width="100%"
+          height="100%"
+          style="border: none; box-shadow: none;"
+        />
+      `;
+    });
+    window.addEventListener('message', this._messageReceivedCallback);
   }
 
   _getViewerDomain() {
-    return this._viewerDomain
+    return this._viewerDomain;
   }
 
-  _getViewerURL() {
+  _getViewerURL(deviceId) {
     let viewerDomain = this._formatValidDomain(
       this.getAttribute('viewer-domain')
-    )
-    let situmApiKey = this.getAttribute('situm-api-key') ?? ''
-    let buildingIdentifier = this.getAttribute('building-identifier') ?? ''
-    let language = this.getAttribute('language') ?? ''
+    );
+    let situmApiKey = this.getAttribute('situm-api-key') ?? '';
+    let buildingIdentifier = this.getAttribute('building-identifier') ?? '';
+    let language = this.getAttribute('language') ?? '';
 
-    let situmApiKeyQP = situmApiKey.length > 0 ? `apikey=${situmApiKey}` : ''
+    let situmApiKeyQP = situmApiKey.length > 0 ? `apikey=${situmApiKey}` : '';
     let buildingIdentifierQP =
-      buildingIdentifier.length > 0 ? `&buildingid=${buildingIdentifier}` : ''
-    let languageQP = language.length > 0 ? `&lng=${language}` : ''
+      buildingIdentifier.length > 0 ? `&buildingid=${buildingIdentifier}` : '';
+    let languageQP = language.length > 0 ? `&lng=${language}` : '';
+    let deviceIdQP = deviceId ? `&deviceId=${deviceId}` : '';
 
-    let query = `${situmApiKeyQP}${buildingIdentifierQP}${languageQP}&mode=embed`
+    let query = `${situmApiKeyQP}${buildingIdentifierQP}${languageQP}${deviceIdQP}&mode=embed`;
 
-    let remoteIdentifier = this.getAttribute('remote-identifier')
+    let remoteIdentifier = this.getAttribute('remote-identifier');
     if (remoteIdentifier && remoteIdentifier.length > 0) {
-      return `${viewerDomain}/id/${remoteIdentifier}?${query}`
+      return `${viewerDomain}/id/${remoteIdentifier}?${query}`;
     }
-    return `${viewerDomain}/?${query}`
+    return `${viewerDomain}/?${query}`;
   }
 
   _formatValidDomain(domain) {
-    let result = domain
+    let result = domain;
     if (result == null) {
-      return 'https://map-viewer.situm.com'
+      return 'https://map-viewer.situm.com';
     }
     if (!result.startsWith('https://') && !result.startsWith('http://')) {
-      result = `https://${result}`
+      result = `https://${result}`;
     }
     if (result.endsWith('/')) {
-      result = result.substring(0, result.length - 1)
+      result = result.substring(0, result.length - 1);
     }
-    this._viewerDomain = result
-    return result
+    this._viewerDomain = result;
+    return result;
   }
 
   _messageReceivedCallback(m) {
     try {
-      const msg = JSON.parse(m.data)
+      const msg = JSON.parse(m.data);
       if (msg && msg.type) {
-        MapViewController._handleMapViewMessages(msg)
+        MapViewController._handleMapViewMessages(msg);
       }
     } catch (error) {
-      console.warn('Got unparseable message:', m)
+      console.warn('Got unparseable message:', m);
     }
   }
 
@@ -137,10 +140,10 @@ class MapView extends HTMLElement {
   static onLoad(cb) {
     // For now, setting the on-load callback from the integrator is done using this (static) bridge.
     // Probably this could be improved.
-    MapViewController._setOnLoadCallback(cb)
+    MapViewController._setOnLoadCallback(cb);
   }
 }
 
-customElements.define('map-view', MapView)
+customElements.define('map-view', MapView);
 
-module.exports = MapView
+module.exports = MapView;
