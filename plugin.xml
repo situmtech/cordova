@@ -46,6 +46,7 @@
        </config-file>
 
         <source-file src="src/android/app/src/main/java/es/situm/plugin/SitumPlugin.java" target-dir="src/es/situm/plugin" />
+        <source-file src="src/android/app/src/main/java/es/situm/plugin/JsonUtils.java" target-dir="src/es/situm/plugin" />
         <source-file src="src/android/app/src/main/java/es/situm/plugin/PluginHelper.java" target-dir="src/es/situm/plugin" />
         <source-file src="src/android/app/src/main/java/es/situm/plugin/SitumMapper.java" target-dir="src/es/situm/plugin" />
         <source-file src="src/android/app/src/main/java/es/situm/plugin/DateUtils.java" target-dir="src/es/situm/plugin" />

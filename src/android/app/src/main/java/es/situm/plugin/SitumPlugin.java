@@ -102,6 +102,8 @@ public class SitumPlugin extends CordovaPlugin {
       getPluginInstance().requestRealTimeUpdates(cordova, webView, args, callbackContext);
     } else  if(action.equalsIgnoreCase("removeRealTimeUpdates")) {
       getPluginInstance().removeRealTimeUpdates(cordova, webView, args, callbackContext);
+    } else  if(action.equalsIgnoreCase("updateNavigationState")) {
+      getPluginInstance().updateNavigationState(cordova, webView, args, callbackContext);
     } else {
       getPluginInstance().returnDefaultResponse(callbackContext);
     }
