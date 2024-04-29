@@ -412,7 +412,7 @@ var Situm = {
     /**
    * For internal use only
    * @description Informs NavigationManager object the change of the user's location.
-   * @param {ExternalNavigation} externalNavigation New Location of the user. If null, nothing is done.
+   * @param {ExternalNavigation} externalNavigation Navigation info.
    * @param {function} cb Cordova native callback to recive data.
    * @param {function} error Cordova native callback to recive errors.
    * @return {boolean} success True if there is a listener to which notify progress update. False if there isn't, so this method do nothing.

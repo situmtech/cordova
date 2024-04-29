@@ -341,7 +341,7 @@ class MapViewControllerImpl {
     }
     this._isNavigating = true;
     let externalNavigation = { messageType: "NavigationStarted", payload: webPayload};
-    Situm.updateNavigationState(externalNavigation,  () => {;}, () => {});
+    Situm.updateNavigationState(externalNavigation,  () => {}, () => {});
   }
 
   _onViewerNavigationUpdated(webPayload) {
@@ -355,7 +355,7 @@ class MapViewControllerImpl {
       let externalNavigation = { messageType: "DestinationReached", payload: webPayload};
       Situm.updateNavigationState(externalNavigation,  () => {}, () => {});
       this._isNavigating = false;
-    } else {
+    } else if (webPayload.type == "OUT_OF_ROUTE") {
       let externalNavigation = { messageType: "OutsideRoute", payload: webPayload};
       Situm.updateNavigationState(externalNavigation,  () => {}, () => {});
       this._isNavigating = false;
