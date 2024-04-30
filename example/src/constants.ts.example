@@ -1,7 +1,30 @@
 // Create a constants.ts in this directory with your credentials
 
-export const API_USER = 'YOUR_SITUM_API_USER';
-export const API_KEY = 'YOUR_SITUM_API_KEY';
+// Your Situm email.
+export const SITUM_API_USER = 'YOUR_SITUM_API_USER';
+
+// Your Situm API Key (positioning).
+export const SITUM_API_KEY = 'YOUR_SITUM_API_KEY';
+
+// Set here the building identifier you want on the map.
 export const BUILDING_IDENTIFIER = 'YOUR_BUILDING_IDENTIFIER';
+
+// Alternatively, you can set an identifier that allows you to remotely configure all map settings.For now, you need to contact Situm to obtain yours.
+//For now, you need to contact Situm to obtain yours.
 export const REMOTE_IDENTIFIER = 'YOUR_REMOTE_IDENTIFIER';
+
+// You can also specify the language in which you want the UX of the viewer to be displayed.
+export const LANGUAGE = 'YOUR_LANGUAGE'; 
+
+// A String parameter that allows you to specify which domain will be displayed inside our webview.
 export const VIEWER_DOMAIN = 'https://map-viewer.situm.com';
+
+// A String parameter that allows you to specify which domain will be displayed inside our webview.
+export const API_DOMAIN = 'https://dashboard.situm.com';
+
+// Supporting documentation
+`
+╔═══════════════════════════════════════════════════════════════════════════════════════════╗
+║ Visit https://situm.com/docs/built-in-wayfinding-ui/#prepare-viewer for more information. ║
+╚═══════════════════════════════════════════════════════════════════════════════════════════╝
+`

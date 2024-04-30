@@ -74,7 +74,7 @@ export class SDKPage {
   ionViewDidEnter() {
     // First of all, authenticate yourself in our SDK to be able to start positioning, retrieve data, ...
     // Make sure you are authenticated before calling any other method of our SDK.
-    cordova.plugins.Situm.setApiKey(Constants.API_USER, Constants.API_KEY);
+    cordova.plugins.Situm.setApiKey(Constants.SITUM_API_USER, Constants.SITUM_API_KEY);
 
     // Use the remote configuration of your situm account.
     // With this flag activated, you can modify your location request without any code changes.

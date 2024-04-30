@@ -59,11 +59,11 @@ npm install
 
 ### Step 2: Set up your Situm credentials
 
-This example provides you with a template on [`src/constants.ts.example`](src/constants.ts.example) to set all your credentials used on the sdk tab just in one file. So rename this file to `constants.ts` and set up your credentials before running the app:
+This example provides you with a template on [`src/constants.ts.example`](src/constants.ts.example) to set all your credentials used on the sdk tab just in one file. So rename this file to `constants.ts` and set up [your credentials](https://situm.com/docs/built-in-wayfinding-ui/) before running the app:
 
 ```typescript
-export const API_USER = "YOUR_SITUM_API_USER";
-export const API_KEY = "YOUR_SITUM_API_KEY";
+export const SITUM_API_USER = "YOUR_SITUM_API_USER";
+export const SITUM_API_KEY = "YOUR_SITUM_API_KEY";
 export const BUILDING_IDENTIFIER = "YOUR_BUILDING_IDENTIFIER";
 export const VIEWER_DOMAIN = "https://map-viewer.situm.com";
 ```
