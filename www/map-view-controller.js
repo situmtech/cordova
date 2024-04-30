@@ -60,7 +60,9 @@ class MapViewControllerImpl {
 
   _prepare(mapView) {
     this._mapView = mapView;
-    let useViewerNavigation = mapView.getAttribute('use-viewer-navigation') ?? null;
+    let useViewerNavigation = mapView.getAttribute('use-viewer-navigation')
+      ? mapView.getAttribute('use-viewer-navigation')
+      : null;
     if (useViewerNavigation != null) {
       this._setNavigationType(useViewerNavigation);
     }

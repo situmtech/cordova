@@ -689,7 +689,7 @@ public class PluginHelper {
                   }
                 externalNavigation = new ExternalNavigation(messageType,payload);
             } catch (JSONException e) {
-              callbackContext.sendPluginResult(new PluginResult(Status.ERROR, "Error parsing the external navigation json" + e.getMessage());
+              callbackContext.sendPluginResult(new PluginResult(Status.ERROR, "Error parsing the external navigation json" + e.getMessage()));
             }
 
             getNavigationManagerInstance().updateNavigationState(externalNavigation);
