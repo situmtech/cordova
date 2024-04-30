@@ -12,10 +12,10 @@ const MapViewController = require('./map-view-controller');
  *   remote-identifier="YOUR_REMOTE_IDENTIFIER"
  * /&gt;
  * </pre>
- * 
+ *
  * <button id="copySnippetButton">Copy</button>
  * </div>
- * 
+ *
  * <script>
     document.getElementById("copySnippetButton").addEventListener("click", function() {
       var textToCopy = document.getElementById("textToCopy");
@@ -87,9 +87,15 @@ class MapView extends HTMLElement {
     let viewerDomain = this._formatValidDomain(
       this.getAttribute('viewer-domain')
     );
-    let situmApiKey = this.getAttribute('situm-api-key') ?? '';
-    let buildingIdentifier = this.getAttribute('building-identifier') ?? '';
-    let language = this.getAttribute('language') ?? '';
+    let situmApiKey = this.getAttribute('situm-api-key')
+      ? this.getAttribute('situm-api-key')
+      : '';
+    let buildingIdentifier = this.getAttribute('building-identifier')
+      ? this.getAttribute('building-identifier')
+      : '';
+    let language = this.getAttribute('language')
+      ? this.getAttribute('language')
+      : '';
 
     let situmApiKeyQP = situmApiKey.length > 0 ? `apikey=${situmApiKey}` : '';
     let buildingIdentifierQP =
