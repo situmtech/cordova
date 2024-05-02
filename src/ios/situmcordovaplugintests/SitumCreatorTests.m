@@ -57,8 +57,7 @@
     CLLocationCoordinate2D center = CLLocationCoordinate2DMake(42.8723472943445, -8.56325268745422);
     SITDimensions *dimensions = [[SITDimensions alloc] initWithWidth:71.0686153823893 height:42.6106416714803];
     SITAngle *angle = [[SITAngle alloc] initWithRadians:-3.31881803875501];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:kDateFormat];
+    NSDateFormatter *dateFormatter = [SitumCreatorTests createDateFormatter];
     NSDate *createdAt = [dateFormatter dateFromString:@"Wed Jan 04 18:41:43 +0000 2017"];
     NSDate *updatedAt = [dateFormatter dateFromString:@"Wed Sep 12 12:10:25 +0000 2018"];
     
@@ -113,8 +112,7 @@
 //floor1.json
 + (SITFloor *) createFloorWithAltitude {
     SITFloor *floor = [[SITFloor alloc] init];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:kDateFormat];
+    NSDateFormatter *dateFormatter = [SitumCreatorTests createDateFormatter];
     floor.createdAt = [dateFormatter dateFromString:@"Thu Jan 01 00:00:00 +0000 1970"];
     floor.updatedAt = [dateFormatter dateFromString:@"Thu Jan 01 00:00:00 +0000 1970"];
     floor.altitude = 2.5;
@@ -132,8 +130,7 @@
 + (SITFloor *) createFloorWithoutAltitude {
     SITFloor *floor = [[SITFloor alloc] init];
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:kDateFormat];
+    NSDateFormatter *dateFormatter = [SitumCreatorTests createDateFormatter];
     floor.createdAt = [dateFormatter dateFromString:@"Thu Jan 01 00:00:00 +0000 1970"];
     floor.updatedAt = [dateFormatter dateFromString:@"Thu Jan 01 00:00:00 +0000 1970"];
     floor.name = @"testName";
@@ -533,8 +530,7 @@
     category.name = string;
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(5, 2);
     SITPoint *point = [[SITPoint alloc] initWithCoordinate:coordinate buildingIdentifier:@"101"];
-    NSDateFormatter *formatter = [NSDateFormatter new];
-    [formatter setDateFormat:kDateFormat];
+    NSDateFormatter *formatter = [SitumCreatorTests createDateFormatter];
     NSDate *createdAt = [formatter dateFromString:@"Thu Jan 01 00:00:00 +0000 1970"];
     NSDate *updatedAt = [formatter dateFromString:@"Thu Jan 01 00:00:00 +0000 1970"];
     
@@ -563,8 +559,7 @@
     SITMultilanguageString *string = [[SITMultilanguageString alloc] initWithValue:@"Sin categoría" defaultLocale:[NSLocale localeWithLocaleIdentifier:@"es_ES"]];
     category.name = string;
     
-    NSDateFormatter *formatter = [NSDateFormatter new];
-    [formatter setDateFormat:kDateFormat];
+    NSDateFormatter *formatter = [SitumCreatorTests createDateFormatter];
     NSDate *createdAt = [formatter dateFromString:@"Thu Jan 01 00:00:00 +0000 1970"];
     NSDate *updatedAt = [formatter dateFromString:@"Thu Jan 01 00:00:00 +0000 1970"];
     
@@ -590,8 +585,7 @@
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(5, 7);
     SITPoint *point = [[SITPoint alloc] initWithCoordinate:coordinate buildingIdentifier:@"101"];
     
-    NSDateFormatter *formatter = [NSDateFormatter new];
-    [formatter setDateFormat:kDateFormat];
+    NSDateFormatter *formatter = [SitumCreatorTests createDateFormatter];
     NSDate *createdAt = [formatter dateFromString:@"Thu Jan 01 00:00:00 +0000 1970"];
     NSDate *updatedAt = [formatter dateFromString:@"Thu Jan 01 00:00:00 +0000 1970"];
     
@@ -616,8 +610,7 @@
     building.identifier = @"101";
     SITPoint *point = [[SITPoint alloc] initWithCoordinate:coordinate buildingIdentifier:@"101" floorIdentifier:@"12" cartesianCoordinate:cartesianCoordinate];
     
-    NSDateFormatter *formatter = [NSDateFormatter new];
-    [formatter setDateFormat:kDateFormat];
+    NSDateFormatter *formatter = [SitumCreatorTests createDateFormatter];
     NSDate *createdAt = [formatter dateFromString:@"Thu Jan 01 00:00:00 +0000 1970"];
     NSDate *updatedAt = [formatter dateFromString:@"Thu Jan 01 00:00:00 +0000 1970"];
     
@@ -648,8 +641,7 @@
     building.identifier = @"101";
     SITPoint *point = [[SITPoint alloc] initWithCoordinate:coordinate buildingIdentifier:@"101" floorIdentifier:@"12" cartesianCoordinate:cartesianCoordinate];
     
-    NSDateFormatter *formatter = [NSDateFormatter new];
-    [formatter setDateFormat:kDateFormat];
+    NSDateFormatter *formatter = [SitumCreatorTests createDateFormatter];
     NSDate *createdAt = [formatter dateFromString:@"Thu Jan 01 00:00:00 +0000 1970"];
     NSDate *updatedAt = [formatter dateFromString:@"Thu Jan 01 00:00:00 +0000 1970"];
     
@@ -922,6 +914,14 @@
     ca.topLeft = [[SITIndoorPoint alloc] initWithX:[NSNumber numberWithInt:5] y:[NSNumber numberWithInt:4] level_identifier:[NSNumber numberWithInt:12]];
     ca.topRight = [[SITIndoorPoint alloc] initWithX:[NSNumber numberWithInt:5] y:[NSNumber numberWithInt:6] level_identifier:[NSNumber numberWithInt:12]];
     return ca;
+}
+
++ (NSDateFormatter *)createDateFormatter{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:kDateFormat];
+    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    return dateFormatter;
 }
 
 @end

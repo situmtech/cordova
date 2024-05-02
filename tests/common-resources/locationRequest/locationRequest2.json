@@ -1,18 +1,14 @@
 [
     {
         "buildingIdentifier": 1051,
-        "name": "Ed. Emprendia - Situm"
-    },
-    {
-        "buildingIdentifier": 1051,
+        "name": "Ed. Emprendia - Situm",
         "interval": 1000,
         "indoorProvider": "INPHONE",
         "useBle": true,
         "useWifi": true,
         "motionMode": "BY_FOOT",
         "useForegroundService": true,
-        "outdoorLocationOptions": 
-        {
+        "outdoorLocationOptions": {
             "userDefinedThreshold": false,
             "computeInterval": 1,
             "averageSnrThreshold": 25.0
@@ -29,4 +25,4 @@
         "realtimeUpdateInterval": "REALTIME",
         "autoEnableBleDuringPositioning": false
     }
- ]
+]

@@ -1,10 +1,7 @@
 [
     {
         "buildingIdentifier": 1051,
-        "name": "Ed. Emprendia - Situm"
-    },
-    {
-        "buildingIdentifier": 1051,
+        "name": "Ed. Emprendia - Situm",
         "interval": 1000,
         "indoorProvider": "INPHONE",
         "useBle": true,
