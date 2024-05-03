@@ -52,6 +52,7 @@ class MapViewControllerImpl {
   _buildings = undefined;
   _mapView = undefined;
   _isNavigating = false;
+  _navigationType = "";
 
   constructor() {
     Situm.internalSetEventDelegate(this._handleSdkNativeEvents.bind(this));
@@ -59,6 +60,23 @@ class MapViewControllerImpl {
 
   _prepare(mapView) {
     this._mapView = mapView;
+    let useViewerNavigation = mapView.getAttribute('use-viewer-navigation')
+      ? mapView.getAttribute('use-viewer-navigation')
+      : null;
+    if (useViewerNavigation != null) {
+      this._setNavigationType(useViewerNavigation);
+    }
+  }
+
+  _setNavigationType(useViewerNavigation) {
+    if (useViewerNavigation) {
+      if (useViewerNavigation === "true") {
+        this._navigationType = 'webAssembly';
+      } else {
+        this._navigationType = 'sdk';
+      }
+    }
+     
   }
 
   _setOnLoadCallback(callback) {
@@ -141,6 +159,9 @@ class MapViewControllerImpl {
           this._onLoadCallback(this);
           console.debug('Map is ready!');
         }
+        if (this._navigationType) {
+          this._sendNavigationConfig(this._navigationType);
+        }
         break;
       case 'cartography.poi_selected':
         console.debug(`poi (${m.payload.identifier}) was selected`);
@@ -169,6 +190,15 @@ class MapViewControllerImpl {
         break;
       case 'navigation.stopped':
         this._onNavigationCancel();
+        break;
+      case 'viewer.navigation.started':
+        this._onViewerNavigationStarted(m.payload);
+        break;
+      case 'viewer.navigation.updated':
+        this._onViewerNavigationUpdated(m.payload);
+        break;
+      case 'viewer.navigation.stopped':
+        this._onViewerNavigationStopped(m.payload);
         break;
       default:
         console.debug('Got unmanaged message: ', m);
@@ -317,6 +347,45 @@ class MapViewControllerImpl {
     );
   }
 
+  _onViewerNavigationStarted(webPayload) {
+    if (this._isNavigating) {
+      return;
+    }
+    this._isNavigating = true;
+    let externalNavigation = { messageType: "NavigationStarted", payload: webPayload};
+    Situm.updateNavigationState(externalNavigation,  () => {}, () => {});
+  }
+
+  _onViewerNavigationUpdated(webPayload) {
+    if (!this._isNavigating) {
+      return;
+    }
+    if (webPayload.type == "PROGRESS") {
+      let externalNavigation = { messageType: "NavigationUpdated", payload: webPayload};
+      Situm.updateNavigationState(externalNavigation,  () => {}, () => {});
+    } else if (webPayload.type == "DESTINATION_REACHED") {
+      let externalNavigation = { messageType: "DestinationReached", payload: webPayload};
+      Situm.updateNavigationState(externalNavigation,  () => {}, () => {});
+      this._isNavigating = false;
+    } else if (webPayload.type == "OUT_OF_ROUTE") {
+      let externalNavigation = { messageType: "OutsideRoute", payload: webPayload};
+      Situm.updateNavigationState(externalNavigation,  () => {}, () => {});
+      this._isNavigating = false;
+    }
+    
+  }
+
+  _onViewerNavigationStopped(webPayload) {
+    if (!this._isNavigating) {
+      return;
+    }
+    this._isNavigating = false;
+    let externalNavigation = { messageType: "NavigationCancelled", payload: webPayload};
+    Situm.updateNavigationState(externalNavigation,  () => {}, () => {});
+  }
+
+
+
   // ==================================================
   // ACTIONS
   // ==================================================
@@ -333,6 +402,13 @@ class MapViewControllerImpl {
     this._sendMessageToViewer('cartography.select_poi', {
       identifier: identifier
     });
+  }
+
+  _sendNavigationConfig(navigationType) {
+    if (window.cordova.platformId !== 'android') {
+      return;
+    }
+    this._sendMessageToViewer('app.set_config_item', [{key:'internal.navigationLibrary',value:navigationType}]);
   }
 
   /**

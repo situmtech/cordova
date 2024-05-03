@@ -650,6 +650,22 @@ var DirectionsRequest = {
 
 module.exports = DirectionsRequest;
 
+
+/**
+ * @name
+ * ExternalNavigation
+ * @description
+ * For internal use only.
+ * @property {String} messageType
+ * @property {Map} payload 
+ */
+var ExternalNavigation = {
+  messageType,
+  payload
+};
+
+module.exports = ExternalNavigation;
+
 /**
  * @name
  * DirectionsOptions
