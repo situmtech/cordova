@@ -409,6 +409,17 @@ var Situm = {
   updateNavigationWithLocation: function (location, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'updateNavigationWithLocation', [location]);
   },
+    /**
+   * For internal use only
+   * @description Informs NavigationManager object the change of the user's location.
+   * @param {ExternalNavigation} externalNavigation Navigation info.
+   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {boolean} success True if there is a listener to which notify progress update. False if there isn't, so this method do nothing.
+   */
+    updateNavigationState: function (externalNavigation, cb, error) {
+      exec(cb, error, PLUGIN_NAME, 'updateNavigationState', [externalNavigation]);
+    },
   /**
    * Removes all location updates.
    * @description Removes all location updates. This removes the internal state of the manager, including the listener provided in requestNavigationUpdates(NavigationRequest, NavigationListener), so it won't receive more progress updates.

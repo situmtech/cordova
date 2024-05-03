@@ -19,6 +19,7 @@ import org.json.JSONObject;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import es.situm.sdk.SitumSdk;
 import es.situm.sdk.communication.CommunicationManager;
@@ -38,6 +39,7 @@ import es.situm.sdk.model.directions.Route;
 import es.situm.sdk.model.location.Location;
 import es.situm.sdk.model.navigation.NavigationProgress;
 import es.situm.sdk.model.realtime.RealTimeData;
+import es.situm.sdk.navigation.ExternalNavigation;
 import es.situm.sdk.navigation.NavigationListener;
 import es.situm.sdk.navigation.NavigationManager;
 import es.situm.sdk.navigation.NavigationRequest;
@@ -648,6 +650,50 @@ public class PluginHelper {
     public void invalidateCache(CallbackContext callbackContext) {
         getCommunicationManagerInstance().invalidateCache();
         callbackContext.sendPluginResult(new PluginResult(Status.OK, "Cache invalidated"));
+    }
+
+    public void updateNavigationState(final CordovaInterface cordova,
+        CordovaWebView webView,
+        JSONArray args,
+        final CallbackContext callbackContext) {
+            ExternalNavigation externalNavigation = null;
+            try {
+                JSONObject jsonObject = args.getJSONObject(0);
+                String type = jsonObject.getString("messageType");
+                ExternalNavigation.MessageType messageType;
+                switch (type) {
+                    case "NavigationStarted":
+                        messageType = ExternalNavigation.MessageType.NAVIGATION_STARTED;
+                        break;
+                  case "NavigationUpdated":
+                    messageType = ExternalNavigation.MessageType.NAVIGATION_UPDATED;
+                    break;
+                  case "DestinationReached":
+                    messageType = ExternalNavigation.MessageType.DESTINATION_REACHED;
+                    break;
+                  case "OutsideRoute":
+                    messageType = ExternalNavigation.MessageType.OUTSIDE_ROUTE;
+                    break;
+                  case "NavigationCancelled":
+                    messageType = ExternalNavigation.MessageType.NAVIGATION_CANCELLED;
+                    break;
+                    default:
+                      callbackContext.sendPluginResult(new PluginResult(Status.ERROR, "MessageType invalid"));
+                        return;
+                }
+                Map<String, Object> payload;
+                if (jsonObject.has("payload")) {
+                    payload = JsonUtils.toMap(jsonObject.getJSONObject("payload"));
+                  } else {
+                    payload = new HashMap<>();
+                  }
+                externalNavigation = new ExternalNavigation(messageType,payload);
+            } catch (JSONException e) {
+              callbackContext.sendPluginResult(new PluginResult(Status.ERROR, "Error parsing the external navigation json" + e.getMessage()));
+            }
+
+            getNavigationManagerInstance().updateNavigationState(externalNavigation);
+            callbackContext.sendPluginResult(new PluginResult(Status.OK, "Navigation state changed"));
     }
 
     public void requestNavigationUpdates(final CordovaInterface cordova,
