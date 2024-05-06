@@ -62,10 +62,10 @@ npm install
 This example provides you with a template on [`src/constants.ts.example`](src/constants.ts.example) to set all your credentials used on the sdk tab just in one file. So rename this file to `constants.ts` and set up your credentials before running the app:
 
 ```typescript
-export const API_USER = "YOUR_SITUM_API_USER";
-export const API_KEY = "YOUR_SITUM_API_KEY";
-export const BUILDING_IDENTIFIER = "YOUR_BUILDING_IDENTIFIER";
-export const VIEWER_DOMAIN = "https://map-viewer.situm.com";
+export const API_USER = 'YOUR_SITUM_API_USER';
+export const API_KEY = 'YOUR_SITUM_API_KEY';
+export const BUILDING_IDENTIFIER = 'YOUR_BUILDING_IDENTIFIER';
+export const VIEWER_DOMAIN = 'https://map-viewer.situm.com';
 ```
 
 > [!NOTE]
@@ -85,7 +85,7 @@ ionic cap run ios
 > [!NOTE]
 > iOS only
 >
-> You might need to update the pods of this app by executing inside `example/ios`:
+> You might need to update the pods of this app by executing inside `example/ios/App`:
 >
 > $ pod install --repo-update
 >
@@ -103,7 +103,10 @@ To integrate our plugin in a Cordova project, follow this 3 steps:
 1. Configure your Content-Security-Policy \<meta\> tag in your `www/index.html` to be able to display our MapView on Android:
 
 ```html
-<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: https://ssl.gstatic.com https://map-viewer.situm.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;" />
+<meta
+  http-equiv="Content-Security-Policy"
+  content="default-src 'self' data: https://ssl.gstatic.com https://map-viewer.situm.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"
+/>
 ```
 
 2. Configure your `config.xml` file to be able to display our MapView on iOS by adding the following \<allow-navigation\> tag:
