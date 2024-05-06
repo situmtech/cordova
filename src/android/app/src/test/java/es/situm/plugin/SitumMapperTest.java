@@ -1209,8 +1209,8 @@ public class SitumMapperTest {
     }
 
     private void testIndication(JSONObject indication, JSONObject defaultIndication) throws JSONException {
-        Assert.assertEquals(Indication.Orientation.class, indication.get(ORIENTATION_TYPE).getClass());
-        Assert.assertEquals(Indication.Orientation.valueOf(defaultIndication.get(ORIENTATION_TYPE).toString()), indication.get(ORIENTATION_TYPE));
+        Assert.assertEquals(Indication.Orientation.class, Indication.Orientation.valueOf(indication.get(ORIENTATION_TYPE).toString()).getClass());
+        Assert.assertEquals(Indication.Orientation.valueOf(defaultIndication.get(ORIENTATION_TYPE).toString()), Indication.Orientation.valueOf(indication.get(ORIENTATION_TYPE).toString()));
         Assert.assertEquals(Double.class, indication.get(ORIENTATION).getClass());
         Assert.assertEquals(defaultIndication.getDouble(ORIENTATION), indication.getDouble(ORIENTATION), 0);
         Assert.assertEquals(Integer.class, indication.get(STEP_IDX_DESTINTATION).getClass());
