@@ -590,6 +590,33 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
+- (void) updateNavigationState:(CDVInvokedUrlCommand *)command {
+
+    if (command.arguments.count > 0) {
+        NSDictionary *data = (NSDictionary*) [command.arguments objectAtIndex:0];
+        NSString *messageType = (NSString*)[data objectForKey:@"messageType"];
+        NSDictionary *payload = (NSDictionary*)[data objectForKey:@"payload"];
+        SITExternalNavigation *externalNavigation;
+        if ([messageType isEqual:@"NavigationStarted"]) {
+            externalNavigation = [[SITExternalNavigation alloc] initWith:NavigationStarted
+                                                             payload:payload];
+        } else if ([messageType isEqual:@"NavigationUpdated"]) {
+            externalNavigation = [[SITExternalNavigation alloc] initWith:NavigationUpdated
+                                                             payload:payload];
+        } else if ([messageType isEqual:@"DestinationReached"]) {
+            externalNavigation = [[SITExternalNavigation alloc] initWith:DestinationReached
+                                                             payload:payload];
+        } else if ([messageType isEqual:@"OutsideRoute"]) {
+            externalNavigation = [[SITExternalNavigation alloc] initWith:OutsideRoute
+                                                             payload:payload];
+        } else if ([messageType isEqual:@"NavigationCancelled"]) {
+            externalNavigation = [[SITExternalNavigation alloc] initWith:NavigationCancelled
+                                                             payload:payload];
+        }
+        [[SITNavigationManager sharedManager] updateNavigationState:externalNavigation];
+    }
+}
+
 - (void) removeNavigationUpdates:(CDVInvokedUrlCommand *)command {
     [[SITNavigationManager sharedManager] removeUpdates];
 }

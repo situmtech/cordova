@@ -405,9 +405,6 @@ class MapViewControllerImpl {
   }
 
   _sendNavigationConfig(navigationType) {
-    if (window.cordova.platformId !== 'android') {
-      return;
-    }
     this._sendMessageToViewer('app.set_config_item', [{key:'internal.navigationLibrary',value:navigationType}]);
   }
 
