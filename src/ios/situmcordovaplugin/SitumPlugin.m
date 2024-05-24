@@ -598,19 +598,19 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
         NSDictionary *payload = (NSDictionary*)[data objectForKey:@"payload"];
         SITExternalNavigation *externalNavigation;
         if ([messageType isEqual:@"NavigationStarted"]) {
-            externalNavigation = [[SITExternalNavigation alloc] initWith:NavigationStarted
+            externalNavigation = [[SITExternalNavigation alloc] initWithMessageType:kSITNavigationStarted
                                                              payload:payload];
         } else if ([messageType isEqual:@"NavigationUpdated"]) {
-            externalNavigation = [[SITExternalNavigation alloc] initWith:NavigationUpdated
+            externalNavigation = [[SITExternalNavigation alloc] initWithMessageType:kSITNavigationUpdated
                                                              payload:payload];
         } else if ([messageType isEqual:@"DestinationReached"]) {
-            externalNavigation = [[SITExternalNavigation alloc] initWith:DestinationReached
+            externalNavigation = [[SITExternalNavigation alloc] initWithMessageType:kSITDestinationReached
                                                              payload:payload];
         } else if ([messageType isEqual:@"OutsideRoute"]) {
-            externalNavigation = [[SITExternalNavigation alloc] initWith:OutsideRoute
+            externalNavigation = [[SITExternalNavigation alloc] initWithMessageType:kSITOutsideRoute
                                                              payload:payload];
         } else if ([messageType isEqual:@"NavigationCancelled"]) {
-            externalNavigation = [[SITExternalNavigation alloc] initWith:NavigationCancelled
+            externalNavigation = [[SITExternalNavigation alloc] initWithMessageType:kSITNavigationCancelled
                                                              payload:payload];
         }
         [[SITNavigationManager sharedManager] updateNavigationState:externalNavigation];
