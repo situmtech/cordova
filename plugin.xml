@@ -74,6 +74,9 @@
     		<config-file target="*-Info.plist" parent="NSLocationUsageDescription">
     			   <string>Location is required to find out where you are</string>
     		</config-file>
+            <config-file target="*-Info.plist" parent="NSMotionUsageDescription">
+    			   <string>We use your phone sensors (giroscope, accelerometer and altimeter) to improve location quality</string>
+    		</config-file>
 
         <framework src="CFNetwork.framework" />
         <framework src="CoreData.framework" />
