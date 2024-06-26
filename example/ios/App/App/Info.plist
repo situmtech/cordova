@@ -30,6 +30,8 @@
 	<string>Location is required to find out where you are</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location is required to find out where you are</string>
+    <key>NSMotionUsageDescription</key>
+    <string>We use your phone sensors (giroscope, accelerometer and altimeter) to improve location quality</string>
   <key>NSCalendarsUsageDescription</key>
   <string>This app requires calendar access to function properly.</string>
   <key>NSContactsUsageDescription</key>
@@ -38,8 +40,6 @@
   <string>This app requires photo library access to function properly.</string>
   <key>NSMicrophoneUsageDescription</key>
   <string>This app requires Microphone access to function properly.</string>
-  <key>NSMotionUsageDescription</key>
-  <string>This app requires Motion access to function properly.</string>
   <key>NSBluetoothAlwaysUsageDescription</key>
   <string>This app requires Bluetooth access to function properly.</string>
   <key>ITSAppUsesNonExemptEncryption</key>
