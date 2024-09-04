@@ -56,6 +56,7 @@ class MapViewControllerImpl {
 
   constructor() {
     Situm.internalSetEventDelegate(this._handleSdkNativeEvents.bind(this));
+    Situm.validateMapViewProjectSettings(() => {}, () => {});
   }
 
   _prepare(mapView) {

@@ -1,2 +1,4 @@
-### Added
-* Add support to viewer navigation in iOS. This was previously added in the version 3.5.4 only in Android and now iOS also works with this mode.
+## Unreleased
+
+ ### Added
+ * Added new xcode log for iOS to warn you if you havent added WKAppBoundDomains to your App Info.plist and you use the MapView.
