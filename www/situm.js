@@ -41,6 +41,13 @@ var Situm = {
     _internalEventDelegate = callback;
   },
   /**
+   * An internal method.
+   * @param {internalEventDelegate} callback.
+   */
+    validateMapViewProjectSettings: function (cb, error) {
+      exec(cb, error, PLUGIN_NAME, 'validateMapViewProjectSettings', []);
+    },
+  /**
    * Provides your API key to the Situm SDK.
    * @description Provides your API key to the Situm SDK. This key is generated for your application in the Dashboard. Old credentials will be removed.
    * @param {string} email Email that identifies the account. Can't be empty.

@@ -39,4 +39,5 @@
 // Realtime
 - (void)requestRealTimeUpdates:(CDVInvokedUrlCommand *)command;
 - (void)removeRealTimeUpdates:(CDVInvokedUrlCommand *)command;
+- (void)validateMapViewProjectSettings:(CDVInvokedUrlCommand *)command;
 @end

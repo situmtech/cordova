@@ -67,6 +67,10 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
+- (void)validateMapViewProjectSettings:(CDVInvokedUrlCommand *)command{
+    [SITMapViewValidator validateMapViewProjectSettings];
+}
+
 - (void)fetchBuildingInfo:(CDVInvokedUrlCommand *)command
 {
     // TODO:

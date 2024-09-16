@@ -968,4 +968,12 @@ public class PluginHelper {
             callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
         }
     }
+
+    public void validateMapViewProjectSettings(CordovaInterface cordova,
+    CordovaWebView webView,
+    JSONArray args,
+    final CallbackContext callbackContext) {
+        // In Android this method doesnt have to do anything
+      // TODO: Incorporate sending a result to the exterior
+    }
 }

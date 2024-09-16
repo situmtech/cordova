@@ -42,6 +42,10 @@
   <string>This app requires Microphone access to function properly.</string>
   <key>NSBluetoothAlwaysUsageDescription</key>
   <string>This app requires Bluetooth access to function properly.</string>
+  <key>WKAppBoundDomains</key>
+  <array>
+      <string>map-viewer.situm.com</string>
+  </array>
   <key>ITSAppUsesNonExemptEncryption</key>
   <false />
 	<key>UILaunchStoryboardName</key>
