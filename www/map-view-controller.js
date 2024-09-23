@@ -46,15 +46,15 @@ const Situm = require('@situm/cordova.situm');
  * @name MapViewController
  */
 class MapViewControllerImpl {
-  _onLoadCallback = undefined;
-  _onPoiSelectedCallback = undefined;
-  _onPoiDeselectedCallback = undefined;
-  _buildings = undefined;
-  _mapView = undefined;
-  _isNavigating = false;
-  _navigationType = "";
-
   constructor() {
+    this._onLoadCallback = undefined;
+    this._onPoiSelectedCallback = undefined;
+    this._onPoiDeselectedCallback = undefined;
+    this._buildings = undefined;
+    this._mapView = undefined;
+    this._isNavigating = false;
+    this._navigationType = '';
+
     Situm.internalSetEventDelegate(this._handleSdkNativeEvents.bind(this));
   }
 
@@ -70,13 +70,12 @@ class MapViewControllerImpl {
 
   _setNavigationType(useViewerNavigation) {
     if (useViewerNavigation) {
-      if (useViewerNavigation === "true") {
+      if (useViewerNavigation === 'true') {
         this._navigationType = 'webAssembly';
       } else {
         this._navigationType = 'sdk';
       }
     }
-     
   }
 
   _setOnLoadCallback(callback) {
@@ -352,27 +351,54 @@ class MapViewControllerImpl {
       return;
     }
     this._isNavigating = true;
-    let externalNavigation = { messageType: "NavigationStarted", payload: webPayload};
-    Situm.updateNavigationState(externalNavigation,  () => {}, () => {});
+    let externalNavigation = {
+      messageType: 'NavigationStarted',
+      payload: webPayload
+    };
+    Situm.updateNavigationState(
+      externalNavigation,
+      () => {},
+      () => {}
+    );
   }
 
   _onViewerNavigationUpdated(webPayload) {
     if (!this._isNavigating) {
       return;
     }
-    if (webPayload.type == "PROGRESS") {
-      let externalNavigation = { messageType: "NavigationUpdated", payload: webPayload};
-      Situm.updateNavigationState(externalNavigation,  () => {}, () => {});
-    } else if (webPayload.type == "DESTINATION_REACHED") {
-      let externalNavigation = { messageType: "DestinationReached", payload: webPayload};
-      Situm.updateNavigationState(externalNavigation,  () => {}, () => {});
+    if (webPayload.type == 'PROGRESS') {
+      let externalNavigation = {
+        messageType: 'NavigationUpdated',
+        payload: webPayload
+      };
+      Situm.updateNavigationState(
+        externalNavigation,
+        () => {},
+        () => {}
+      );
+    } else if (webPayload.type == 'DESTINATION_REACHED') {
+      let externalNavigation = {
+        messageType: 'DestinationReached',
+        payload: webPayload
+      };
+      Situm.updateNavigationState(
+        externalNavigation,
+        () => {},
+        () => {}
+      );
       this._isNavigating = false;
-    } else if (webPayload.type == "OUT_OF_ROUTE") {
-      let externalNavigation = { messageType: "OutsideRoute", payload: webPayload};
-      Situm.updateNavigationState(externalNavigation,  () => {}, () => {});
+    } else if (webPayload.type == 'OUT_OF_ROUTE') {
+      let externalNavigation = {
+        messageType: 'OutsideRoute',
+        payload: webPayload
+      };
+      Situm.updateNavigationState(
+        externalNavigation,
+        () => {},
+        () => {}
+      );
       this._isNavigating = false;
     }
-    
   }
 
   _onViewerNavigationStopped(webPayload) {
@@ -380,11 +406,16 @@ class MapViewControllerImpl {
       return;
     }
     this._isNavigating = false;
-    let externalNavigation = { messageType: "NavigationCancelled", payload: webPayload};
-    Situm.updateNavigationState(externalNavigation,  () => {}, () => {});
+    let externalNavigation = {
+      messageType: 'NavigationCancelled',
+      payload: webPayload
+    };
+    Situm.updateNavigationState(
+      externalNavigation,
+      () => {},
+      () => {}
+    );
   }
-
-
 
   // ==================================================
   // ACTIONS
@@ -405,7 +436,9 @@ class MapViewControllerImpl {
   }
 
   _sendNavigationConfig(navigationType) {
-    this._sendMessageToViewer('app.set_config_item', [{key:'internal.navigationLibrary',value:navigationType}]);
+    this._sendMessageToViewer('app.set_config_item', [
+      { key: 'internal.navigationLibrary', value: navigationType }
+    ]);
   }
 
   /**
