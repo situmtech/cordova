@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -34,7 +34,6 @@
 		0D884A1321145F820066C765 /* libCordova.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A32D7114102E1C006B237C /* libCordova.a */; };
 		0D884A202114634E0066C765 /* SitumCreatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D884A1B2114634D0066C765 /* SitumCreatorTests.m */; };
 		0D884A222114634E0066C765 /* TestingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D884A1D2114634E0066C765 /* TestingHelper.m */; };
-		0D884A232114644C0066C765 /* SitumSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D884A0821145E510066C765 /* SitumSDK.framework */; };
 		0D884E7D2116FAA20066C765 /* resources in Resources */ = {isa = PBXBuildFile; fileRef = 0D884E7C2116FAA20066C765 /* resources */; };
 		0D884E832117012F0066C765 /* resources in Resources */ = {isa = PBXBuildFile; fileRef = 0D884E7C2116FAA20066C765 /* resources */; };
 		0D884E87211708900066C765 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0D884A1221145F820066C765 /* Info.plist */; };
@@ -49,6 +48,7 @@
 		0DF4AB1F21143D5800D81A31 /* ViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DF4AB1521143D5700D81A31 /* ViewController.h */; };
 		0DF4AB2021143D5800D81A31 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF4AB1621143D5700D81A31 /* ViewController.m */; };
 		230FADC12BC815C30079D285 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 230FADB52BC8145A0079D285 /* libc++.tbd */; };
+		2318D0F32CD25DEC0068DF54 /* SitumSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2318D0F22CD25DEC0068DF54 /* SitumSDK.xcframework */; };
 		29A6B8BBD41A308233C44F3E /* Pods_SitumCordovaPlugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF639F8C42C24AB0EC736F85 /* Pods_SitumCordovaPlugin.framework */; };
 		3A4011372153B0D500AC3BD5 /* InputCoordinateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4011362153B0D500AC3BD5 /* InputCoordinateTests.m */; };
 		3A4011392153B24400AC3BD5 /* InputLocationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4011382153B24400AC3BD5 /* InputLocationTests.m */; };
@@ -56,7 +56,6 @@
 		3A40113D2153CBA800AC3BD5 /* InputIndicationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A40113C2153CBA800AC3BD5 /* InputIndicationTests.m */; };
 		3A4D721721525B970038ED55 /* InputPointTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D721621525B970038ED55 /* InputPointTests.m */; };
 		3A4D721B215276660038ED55 /* InputCartesianCoordinateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D721A215276660038ED55 /* InputCartesianCoordinateTests.m */; };
-		3AC2FF4E21ADA883005D438A /* SitumSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC2FF4D21ADA883005D438A /* SitumSDK.framework */; };
 		7ED95D021AB9028C008C4574 /* CDVDebug.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ED95CF21AB9028C008C4574 /* CDVDebug.h */; };
 		7ED95D031AB9028C008C4574 /* CDVJSON_private.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ED95CF31AB9028C008C4574 /* CDVJSON_private.h */; };
 		7ED95D041AB9028C008C4574 /* CDVJSON_private.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED95CF41AB9028C008C4574 /* CDVJSON_private.m */; };
@@ -202,6 +201,7 @@
 		0DF4AB1521143D5700D81A31 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		0DF4AB1621143D5700D81A31 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		230FADB52BC8145A0079D285 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk/usr/lib/libc++.tbd"; sourceTree = DEVELOPER_DIR; };
+		2318D0F22CD25DEC0068DF54 /* SitumSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SitumSDK.xcframework; path = ../Pods/SitumSDK/SitumSDK.xcframework; sourceTree = "<group>"; };
 		30325A0B136B343700982B63 /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = "<group>"; };
 		3A4011362153B0D500AC3BD5 /* InputCoordinateTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputCoordinateTests.m; sourceTree = "<group>"; };
 		3A4011382153B24400AC3BD5 /* InputLocationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputLocationTests.m; sourceTree = "<group>"; };
@@ -289,9 +289,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				230FADC12BC815C30079D285 /* libc++.tbd in Frameworks */,
-				3AC2FF4E21ADA883005D438A /* SitumSDK.framework in Frameworks */,
 				0D884A1321145F820066C765 /* libCordova.a in Frameworks */,
-				0D884A232114644C0066C765 /* SitumSDK.framework in Frameworks */,
+				2318D0F32CD25DEC0068DF54 /* SitumSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +342,7 @@
 		0D5184E921145DEB00BFA9E3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2318D0F22CD25DEC0068DF54 /* SitumSDK.xcframework */,
 				230FADB52BC8145A0079D285 /* libc++.tbd */,
 				0D884A0821145E510066C765 /* SitumSDK.framework */,
 				3AC2FF4D21ADA883005D438A /* SitumSDK.framework */,
@@ -966,7 +966,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = situmcordovaplugintests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = es.situm.situmcordovaplugintests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1017,7 +1021,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = situmcordovaplugintests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = es.situm.situmcordovaplugintests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1185,7 +1193,11 @@
 				INFOPLIST_FILE = Cordova/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = org.apache.cordova.Cordova;
@@ -1232,7 +1244,11 @@
 				INFOPLIST_FILE = Cordova/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = org.apache.cordova.Cordova;
