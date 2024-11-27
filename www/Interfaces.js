@@ -596,7 +596,7 @@ module.exports = LocationRequest;
  *
  * @description
  * A data object that let you customize the Foreground Service Notification
- * this will be shown in the system's tray when the app is running as a
+ * that will be shown in the system's tray when the app is running as a
  * Foreground Service.
  * To be used with {@link LocationRequest}.
  * Only applies for Android.
@@ -617,18 +617,6 @@ var ForegroundServiceNotificationOptions = {
   tapAction
 };
 module.exports = ForegroundServiceNotificationOptions;
-
-/**
- * @name ForegroundServiceNotificationsTapAction
- * @description Predefined actions performed when tapping the Situm Foreground Service Notification.
- */
-// var ForegroundServiceNotificationsTapAction = {
-//   LaunchApp: 'LAUNCH_APP', // Launch the app's main activity
-//   LaunchSettings: 'LAUNCH_SETTINGS', // Launch the operating system settings screen for the app
-//   DoNothing: 'DO_NOTHING' // Do nothing when tapping the notification
-// };
-
-// module.exports = ForegroundServiceNotificationsTapAction;
 
 /**
  * @name

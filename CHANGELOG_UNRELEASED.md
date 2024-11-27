@@ -1,3 +1,3 @@
-### Feature
+### Added
 
 - Added ForegroundServiceNotificationOptions functions
