@@ -22,7 +22,7 @@ parameters:
     default: "1"
   - name: MAPVIEWERDOMAIN
     type: string
-    default: "https://map-viewer.situm.com"
+    default: "https://maps.situm.com"
   - name: REMOTEIDENTIFIER
     type: string
     default: "demo"
