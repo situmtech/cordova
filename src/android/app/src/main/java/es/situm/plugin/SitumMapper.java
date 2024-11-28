@@ -1,5 +1,7 @@
 package es.situm.plugin;
 
+import static es.situm.plugin.JsonUtils.toMap;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Base64;
@@ -761,54 +763,45 @@ static JSONObject buildingInfoToJsonObject(BuildingInfo buildingInfo) throws JSO
 
   static ForegroundServiceNotificationOptions buildForegroundServiceNotificationOptions(JSONObject foregroundServiceNotificationOptions) throws JSONException {
     ForegroundServiceNotificationOptions.Builder optionsBuilder = new ForegroundServiceNotificationOptions.Builder();
+    Map<String, Object> optionsMap = toMap(foregroundServiceNotificationOptions);
 
-    String title = foregroundServiceNotificationOptions.optString(SitumMapper.TITLE);
-    if (foregroundServiceNotificationOptions.has(SitumMapper.TITLE)
-            && !foregroundServiceNotificationOptions.isNull(SitumMapper.TITLE)
-            && !title.trim().isEmpty()){
+    String title = (String) optionsMap.get(SitumMapper.TITLE);
+    if (title != null && !title.trim().isEmpty()) {
       optionsBuilder.title(title);
       Log.i(TAG, "title: " + title);
     }
 
-    String message = foregroundServiceNotificationOptions.optString(SitumMapper.MESSAGE);
-    if (foregroundServiceNotificationOptions.has(SitumMapper.MESSAGE)
-            && !foregroundServiceNotificationOptions.isNull(SitumMapper.MESSAGE)
-            && !message.trim().isEmpty()) {
+    String message = (String) optionsMap.get(SitumMapper.MESSAGE);
+    if (message != null && !message.trim().isEmpty()) {
       optionsBuilder.message(message);
       Log.i(TAG, "message: " + message);
     }
 
-    if (foregroundServiceNotificationOptions.has(SitumMapper.SHOW_STOP_ACTION)) {
-      boolean showStopAction = foregroundServiceNotificationOptions.optBoolean(SitumMapper.SHOW_STOP_ACTION);
+    Boolean showStopAction = (Boolean) optionsMap.get(SitumMapper.SHOW_STOP_ACTION);
+    if (showStopAction != null) {
       optionsBuilder.showStopAction(showStopAction);
       Log.i(TAG, "showStopAction: " + showStopAction);
     }
 
-    String stopActionText = foregroundServiceNotificationOptions.optString(SitumMapper.STOP_ACTION_TEXT);
-    if (foregroundServiceNotificationOptions.has(SitumMapper.STOP_ACTION_TEXT)
-            && !foregroundServiceNotificationOptions.isNull(SitumMapper.STOP_ACTION_TEXT)
-            && !stopActionText.trim().isEmpty()) {
+    String stopActionText = (String) optionsMap.get(SitumMapper.STOP_ACTION_TEXT);
+    if (stopActionText != null && !stopActionText.trim().isEmpty()) {
       optionsBuilder.stopActionText(stopActionText);
       Log.i(TAG, "stopActionText: " + stopActionText);
     }
 
-    if (foregroundServiceNotificationOptions.has(SitumMapper.TAP_ACTION)) {
-      String tapActionValue = foregroundServiceNotificationOptions.optString(SitumMapper.TAP_ACTION);
-      switch (tapActionValue) {
-        case "LAUNCH_APP":
-          optionsBuilder.tapAction(ForegroundServiceNotificationOptions.TapAction.valueOf(tapActionValue));
-          break;
-        case "LAUNCH_SETTINGS":
-          optionsBuilder.tapAction(ForegroundServiceNotificationOptions.TapAction.valueOf(tapActionValue));
-          break;
-        case "DO_NOTHING":
-          optionsBuilder.tapAction(ForegroundServiceNotificationOptions.TapAction.valueOf(tapActionValue));
-          break;
+    String tapActionValue = (String) optionsMap.get(SitumMapper.TAP_ACTION);
+    if (tapActionValue != null) {
+      try {
+        optionsBuilder.tapAction(ForegroundServiceNotificationOptions.TapAction.valueOf(tapActionValue));
+        Log.i(TAG, "tapAction: " + tapActionValue);
+      } catch (IllegalArgumentException e) {
+        Log.w(TAG, "Invalid tapAction value: " + tapActionValue);
       }
     }
 
     return optionsBuilder.build();
   }
+
 
   static LocationRequest locationRequestJSONObjectToLocationRequest(JSONArray args) throws JSONException {
     LocationRequest.Builder locationBuilder = new LocationRequest.Builder();
