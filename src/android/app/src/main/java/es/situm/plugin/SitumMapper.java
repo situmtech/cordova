@@ -233,13 +233,7 @@ class SitumMapper {
   public static final String POLL_TIME = "pollTime";
 
   public static final String FOREGROUND_SERVICE_NOTIFICATION_OPTIONS = "foregroundServiceNotificationOptions";
-  public static final String TITLE = "title";
-  public static final String MESSAGE = "message";
-  public static final String SHOW_STOP_ACTION = "showStopAction";
-  public static final String STOP_ACTION_TEXT = "stopActionText";
-  public static final String TAP_ACTION = "tapAction";
-
-
+  
   public static final DateFormat dateFormat = DateUtils.dateFormat;
 
   private static final String TAG = "PluginHelper";
