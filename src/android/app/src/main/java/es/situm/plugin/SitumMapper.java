@@ -761,48 +761,6 @@ static JSONObject buildingInfoToJsonObject(BuildingInfo buildingInfo) throws JSO
 	return builder.build();
   }
 
-  static ForegroundServiceNotificationOptions buildForegroundServiceNotificationOptions(JSONObject foregroundServiceNotificationOptions) throws JSONException {
-    ForegroundServiceNotificationOptions.Builder optionsBuilder = new ForegroundServiceNotificationOptions.Builder();
-    Map<String, Object> optionsMap = toMap(foregroundServiceNotificationOptions);
-
-    String title = (String) optionsMap.get(SitumMapper.TITLE);
-    if (title != null && !title.trim().isEmpty()) {
-      optionsBuilder.title(title);
-      Log.i(TAG, "title: " + title);
-    }
-
-    String message = (String) optionsMap.get(SitumMapper.MESSAGE);
-    if (message != null && !message.trim().isEmpty()) {
-      optionsBuilder.message(message);
-      Log.i(TAG, "message: " + message);
-    }
-
-    Boolean showStopAction = (Boolean) optionsMap.get(SitumMapper.SHOW_STOP_ACTION);
-    if (showStopAction != null) {
-      optionsBuilder.showStopAction(showStopAction);
-      Log.i(TAG, "showStopAction: " + showStopAction);
-    }
-
-    String stopActionText = (String) optionsMap.get(SitumMapper.STOP_ACTION_TEXT);
-    if (stopActionText != null && !stopActionText.trim().isEmpty()) {
-      optionsBuilder.stopActionText(stopActionText);
-      Log.i(TAG, "stopActionText: " + stopActionText);
-    }
-
-    String tapActionValue = (String) optionsMap.get(SitumMapper.TAP_ACTION);
-    if (tapActionValue != null) {
-      try {
-        optionsBuilder.tapAction(ForegroundServiceNotificationOptions.TapAction.valueOf(tapActionValue));
-        Log.i(TAG, "tapAction: " + tapActionValue);
-      } catch (IllegalArgumentException e) {
-        Log.w(TAG, "Invalid tapAction value: " + tapActionValue);
-      }
-    }
-
-    return optionsBuilder.build();
-  }
-
-
   static LocationRequest locationRequestJSONObjectToLocationRequest(JSONArray args) throws JSONException {
     LocationRequest.Builder locationBuilder = new LocationRequest.Builder();
 
@@ -812,9 +770,9 @@ static JSONObject buildingInfoToJsonObject(BuildingInfo buildingInfo) throws JSO
     }
 
     JSONObject request = args.getJSONObject(0);
-    if(request.has(SitumMapper.FOREGROUND_SERVICE_NOTIFICATION_OPTIONS)){
+    if (request.has(SitumMapper.FOREGROUND_SERVICE_NOTIFICATION_OPTIONS)) {
       JSONObject notificationOptions = request.getJSONObject(SitumMapper.FOREGROUND_SERVICE_NOTIFICATION_OPTIONS);
-      ForegroundServiceNotificationOptions notificationConfig = buildForegroundServiceNotificationOptions(notificationOptions);
+      ForegroundServiceNotificationOptions notificationConfig = ForegroundServiceNotificationOptions.fromMap(toMap(notificationOptions));
       locationBuilder.foregroundServiceNotificationOptions(notificationConfig);
     }
 
