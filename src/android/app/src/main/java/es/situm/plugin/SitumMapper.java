@@ -233,7 +233,7 @@ class SitumMapper {
   public static final String POLL_TIME = "pollTime";
 
   public static final String FOREGROUND_SERVICE_NOTIFICATION_OPTIONS = "foregroundServiceNotificationOptions";
-  
+
   public static final DateFormat dateFormat = DateUtils.dateFormat;
 
   private static final String TAG = "PluginHelper";
@@ -766,6 +766,9 @@ static JSONObject buildingInfoToJsonObject(BuildingInfo buildingInfo) throws JSO
     JSONObject request = args.getJSONObject(0);
     if (request.has(SitumMapper.FOREGROUND_SERVICE_NOTIFICATION_OPTIONS)) {
       JSONObject notificationOptions = request.getJSONObject(SitumMapper.FOREGROUND_SERVICE_NOTIFICATION_OPTIONS);
+      if (notificationOptions.toString().isEmpty()) {
+        locationBuilder.build();
+      }
       ForegroundServiceNotificationOptions notificationConfig = ForegroundServiceNotificationOptions.fromMap(toMap(notificationOptions));
       locationBuilder.foregroundServiceNotificationOptions(notificationConfig);
     }
