@@ -766,11 +766,8 @@ static JSONObject buildingInfoToJsonObject(BuildingInfo buildingInfo) throws JSO
     JSONObject request = args.getJSONObject(0);
     if (request.has(SitumMapper.FOREGROUND_SERVICE_NOTIFICATION_OPTIONS)) {
       JSONObject notificationOptions = request.getJSONObject(SitumMapper.FOREGROUND_SERVICE_NOTIFICATION_OPTIONS);
-      if (notificationOptions.toString().isEmpty()) {
-        locationBuilder.build();
-      }
-      ForegroundServiceNotificationOptions notificationConfig = ForegroundServiceNotificationOptions.fromMap(toMap(notificationOptions));
-      locationBuilder.foregroundServiceNotificationOptions(notificationConfig);
+        ForegroundServiceNotificationOptions notificationConfig = ForegroundServiceNotificationOptions.fromMap(toMap(notificationOptions));
+        locationBuilder.foregroundServiceNotificationOptions(notificationConfig);
     }
 
     if (request.has(SitumMapper.BUILDING_IDENTIFIER)) {
