@@ -568,6 +568,7 @@ module.exports = SitumConversionArea;
  * @property {number} smallestDisplacement - Default smallest displacement to nofiy location updates
  * @property {string} realtimeUpdateInterval - Default interval to send locations to the Realtime. Possible values are REALTIME, FAST, NORMAL, SLOW and BATTERY_SAVER
  * @property {boolean} autoEnableBleDuringPositioning - Set if the BLE should be re-enabled during positioning if the ble is used. Android only
+ * @property {ForegroundServiceNotificationOptions} foregroundServiceNotificationOptions - Used to configure the notification options for a foreground service, allowing the definition of the title, message, stop button, button text, and the {@link ForegroundServiceNotificationsTapAction}.
  */
 var LocationRequest = {
   buildingIdentifier,
@@ -584,10 +585,40 @@ var LocationRequest = {
   beaconFilters,
   smallestDisplacement,
   realtimeUpdateInterval,
-  autoEnableBleDuringPositioning
+  autoEnableBleDuringPositioning,
+  foregroundServiceNotificationOptions
 };
 
 module.exports = LocationRequest;
+
+/**
+ * @name ForegroundServiceNotificationOptions
+ *
+ * @description
+ * (Only applies for Android)
+ *
+ * A data object that let you customize the Foreground Service Notification
+ * that will be shown in the system's tray when the app is running as a
+ * Foreground Service. These options are defined within the {@link LocationRequest}.
+ *
+ * You can use the following tapAction behaviour:
+ * - 'LAUNCH_APP': Launch the app's main activity. This is the default value.
+ * - 'LAUNCH_SETTINGS': Launch the operating system settings screen for the app.
+ * - 'DO_NOTHING': Do nothing when tapping the notification.
+ * @property {string} title
+ * @property {string} message
+ * @property {boolean} showStopAction Whether to show or not the button that stops the positioning system. Defaults to true.
+ * @property {string} stopActionText
+ * @property {'DO_NOTHING' | 'LAUNCH_APP' | 'LAUNCH_SETTINGS'} tapAction Predefined actions performed when tapping the Situm Foreground Service Notification. Defaults to 'LAUNCH_APP'.
+ */
+var ForegroundServiceNotificationOptions = {
+  title,
+  message,
+  showStopAction,
+  stopActionText,
+  tapAction
+};
+module.exports = ForegroundServiceNotificationOptions;
 
 /**
  * @name
@@ -650,14 +681,13 @@ var DirectionsRequest = {
 
 module.exports = DirectionsRequest;
 
-
 /**
  * @name
  * ExternalNavigation
  * @description
  * For internal use only.
  * @property {String} messageType
- * @property {Map} payload 
+ * @property {Map} payload
  */
 var ExternalNavigation = {
   messageType,

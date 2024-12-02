@@ -1,2 +1,3 @@
-### Fixed
-* Fixed tests on iOS
+### Added
+
+- Added ForegroundServiceNotificationOptions functions

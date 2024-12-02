@@ -1,5 +1,7 @@
 package es.situm.plugin;
 
+import static es.situm.plugin.JsonUtils.toMap;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Base64;
@@ -23,6 +25,7 @@ import java.util.Map;
 import java.util.Arrays;
 
 import es.situm.sdk.directions.DirectionsRequest;
+import es.situm.sdk.location.ForegroundServiceNotificationOptions;
 import es.situm.sdk.location.LocationRequest;
 import es.situm.sdk.location.LocationStatus;
 import es.situm.sdk.location.OutdoorLocationOptions;
@@ -228,6 +231,8 @@ class SitumMapper {
   public static final String OUTDOOR_POIS = "outdoorPOIs";
   public static final String LOCATIONS = "locations";
   public static final String POLL_TIME = "pollTime";
+
+  public static final String FOREGROUND_SERVICE_NOTIFICATION_OPTIONS = "foregroundServiceNotificationOptions";
 
   public static final DateFormat dateFormat = DateUtils.dateFormat;
 
@@ -759,6 +764,12 @@ static JSONObject buildingInfoToJsonObject(BuildingInfo buildingInfo) throws JSO
     }
 
     JSONObject request = args.getJSONObject(0);
+    if (request.has(SitumMapper.FOREGROUND_SERVICE_NOTIFICATION_OPTIONS)) {
+      JSONObject notificationOptions = request.getJSONObject(SitumMapper.FOREGROUND_SERVICE_NOTIFICATION_OPTIONS);
+      ForegroundServiceNotificationOptions notificationConfig = ForegroundServiceNotificationOptions.fromMap(toMap(notificationOptions));
+      locationBuilder.foregroundServiceNotificationOptions(notificationConfig);
+    }
+
     if (request.has(SitumMapper.BUILDING_IDENTIFIER)) {
       String buildingIdentifier = String.valueOf(request.get(SitumMapper.BUILDING_IDENTIFIER));
       if (buildingIdentifier.isEmpty()) {
