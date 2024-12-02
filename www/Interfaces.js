@@ -595,19 +595,21 @@ module.exports = LocationRequest;
  * @name ForegroundServiceNotificationOptions
  *
  * @description
+ * (Only applies for Android)
+ *
  * A data object that let you customize the Foreground Service Notification
  * that will be shown in the system's tray when the app is running as a
- * Foreground Service.
- * To be used with {@link LocationRequest}.
- * Only applies for Android.
+ * Foreground Service. These options are defined within the {@link LocationRequest}.
+ *
+ * You can use the following tapAction behaviour:
+ * - 'LAUNCH_APP': Launch the app's main activity. This is the default value.
+ * - 'LAUNCH_SETTINGS': Launch the operating system settings screen for the app.
+ * - 'DO_NOTHING': Do nothing when tapping the notification.
  * @property {string} title
  * @property {string} message
- * @property {boolean} showStopAction
+ * @property {boolean} showStopAction Whether to show or not the button that stops the positioning system. Defaults to true.
  * @property {string} stopActionText
- * @property {'DO_NOTHING' | 'LAUNCH_APP' | 'LAUNCH_SETTINGS'} tapAction Predefined actions performed when tapping the Situm Foreground Service Notification
- *   'LAUNCH_APP':  Launch the app's main activity
- *   'LAUNCH_SETTINGS':  Launch the operating system settings screen for the app
- *   'DO_NOTHING': Do nothing when tapping the notification
+ * @property {'DO_NOTHING' | 'LAUNCH_APP' | 'LAUNCH_SETTINGS'} tapAction Predefined actions performed when tapping the Situm Foreground Service Notification. Defaults to 'LAUNCH_APP'.
  */
 var ForegroundServiceNotificationOptions = {
   title,
