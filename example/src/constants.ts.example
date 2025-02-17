@@ -3,5 +3,5 @@
 export const API_USER = 'YOUR_SITUM_API_USER';
 export const API_KEY = 'YOUR_SITUM_API_KEY';
 export const BUILDING_IDENTIFIER = 'YOUR_BUILDING_IDENTIFIER';
-export const REMOTE_IDENTIFIER = 'YOUR_REMOTE_IDENTIFIER';
+export const PROFILE = '';
 export const VIEWER_DOMAIN = 'https://map-viewer.situm.com';

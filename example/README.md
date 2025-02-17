@@ -65,6 +65,7 @@ This example provides you with a template on [`src/constants.ts.example`](src/co
 export const API_USER = 'YOUR_SITUM_API_USER';
 export const API_KEY = 'YOUR_SITUM_API_KEY';
 export const BUILDING_IDENTIFIER = 'YOUR_BUILDING_IDENTIFIER';
+export const PROFILE = 'YOUR_MAPVIEW_PROFILE';
 export const VIEWER_DOMAIN = 'https://map-viewer.situm.com';
 ```
 
