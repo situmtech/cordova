@@ -107,7 +107,12 @@ class MapView extends HTMLElement {
 
     let remoteIdentifier = this.getAttribute('remote-identifier');
     if (remoteIdentifier && remoteIdentifier.length > 0) {
-      return `${viewerDomain}/id/${remoteIdentifier}?${query}`;
+      console.warn('Situm> MapView> [!] The "remote-identifier" attribute has been deprecated. Use "profile" instead.');
+    }
+    let profile = this.getAttribute('profile');
+    let effectiveProfile = profile && profile.length > 0 ? profile : remoteIdentifier;
+    if (effectiveProfile && effectiveProfile.length > 0) {
+      return `${viewerDomain}/id/${effectiveProfile}?${query}`;
     }
     return `${viewerDomain}/?${query}`;
   }

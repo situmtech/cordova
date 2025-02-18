@@ -45,8 +45,8 @@ export class WYFPage {
     );
 
     this.mapView?.nativeElement.setAttribute(
-      'remote-identifier',
-      Constants.REMOTE_IDENTIFIER
+      'profile',
+      Constants.PROFILE
     );
   }
 }
