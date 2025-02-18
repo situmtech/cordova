@@ -112,7 +112,7 @@ class MapView extends HTMLElement {
     let profile = this.getAttribute('profile');
     let effectiveProfile = profile && profile.length > 0 ? profile : remoteIdentifier;
     if (effectiveProfile && effectiveProfile.length > 0) {
-      return `${viewerDomain}/id/${remoteIdentifier}?${query}`;
+      return `${viewerDomain}/id/${effectiveProfile}?${query}`;
     }
     return `${viewerDomain}/?${query}`;
   }
