@@ -92,18 +92,20 @@ public class SitumPlugin extends CordovaPlugin {
       getPluginInstance().invalidateCache(callbackContext);
     } else if (action.equalsIgnoreCase("requestDirections")) {
       getPluginInstance().requestDirections(cordova, webView, args, callbackContext);
-    } else  if(action.equalsIgnoreCase("requestNavigationUpdates")) {
+    } else if(action.equalsIgnoreCase("requestNavigationUpdates")) {
       getPluginInstance().requestNavigationUpdates(cordova, webView, args, callbackContext);
-    } else  if(action.equalsIgnoreCase("updateNavigationWithLocation")) {
+    } else if(action.equalsIgnoreCase("updateNavigationWithLocation")) {
       getPluginInstance().updateNavigationWithLocation(cordova, webView, args, callbackContext);
-    } else  if(action.equalsIgnoreCase("removeNavigationUpdates")) {
+    } else if(action.equalsIgnoreCase("removeNavigationUpdates")) {
       getPluginInstance().removeNavigationUpdates(cordova, webView, args, callbackContext);
-    } else  if(action.equalsIgnoreCase("requestRealTimeUpdates")) {
+    } else if(action.equalsIgnoreCase("requestRealTimeUpdates")) {
       getPluginInstance().requestRealTimeUpdates(cordova, webView, args, callbackContext);
-    } else  if(action.equalsIgnoreCase("removeRealTimeUpdates")) {
+    } else if(action.equalsIgnoreCase("removeRealTimeUpdates")) {
       getPluginInstance().removeRealTimeUpdates(cordova, webView, args, callbackContext);
-    } else  if(action.equalsIgnoreCase("updateNavigationState")) {
+    } else if(action.equalsIgnoreCase("updateNavigationState")) {
       getPluginInstance().updateNavigationState(cordova, webView, args, callbackContext);
+    } else if(action.equalsIgnoreCase("configureUserHelper")) {
+      getPluginInstance().configureUserHelper(cordova, webView, args, callbackContext);
     } else {
       getPluginInstance().returnDefaultResponse(callbackContext);
     }
