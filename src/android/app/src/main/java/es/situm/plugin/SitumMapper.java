@@ -58,6 +58,7 @@ import es.situm.sdk.v1.SitumConversionArea;
 import es.situm.sdk.v1.SitumEvent;
 import es.situm.sdk.realtime.RealTimeRequest;
 import es.situm.sdk.model.realtime.RealTimeData;
+import es.situm.sdk.userhelper.UserHelperColorScheme;
 
 
 class SitumMapper {
@@ -979,5 +980,25 @@ static JSONObject buildingInfoToJsonObject(BuildingInfo buildingInfo) throws JSO
       }
     }
     return new DirectionsRequest.Builder().from(from, Angle.fromDegrees(startingAngle)).to(to).accessibilityMode(accessibilityMode).minimizeFloorChanges(minimizeFloorChanges).includedTags(includedTags).excludedTags(excludedTags).build();
+  }
+
+  static UserHelperColorScheme jsonObjectToUserHelperColorScheme(JSONObject args) throws JSONException {
+    UserHelperColorScheme.Builder builder = new UserHelperColorScheme.Builder();
+
+    if (args.has("primaryColor")) {
+      String primaryColor = args.getString("primaryColor");
+      if (primaryColor != null) {
+        builder.setPrimaryColor(primaryColor);
+      }
+    }
+
+    if (args.has("secondaryColor")) {
+      String secondaryColor = args.getString("secondaryColor");
+      if (secondaryColor != null) {
+        builder.setSecondaryColor(secondaryColor);
+      }
+    }
+
+    return builder.build();
   }
 }

@@ -782,4 +782,35 @@ destinationReachedOnRoute:(SITRoute *)route {
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
 
+- (void)configureUserHelper:(CDVInvokedUrlCommand *)command {
+    NSDictionary *options = [command.arguments objectAtIndex:0];
+    BOOL enabled = NO;
+    
+    if ([options objectForKey:@"enabled"]) {
+        enabled = [[options objectForKey:@"enabled"] boolValue];
+    }
+    
+    [[SITUserHelperManager sharedInstance] autoManage:enabled];
+    
+    if ([options objectForKey:@"colorScheme"]) {
+        NSDictionary *colorScheme = [options objectForKey:@"colorScheme"];
+        NSString *primaryColor = [colorScheme objectForKey:@"primaryColor"];
+        NSString *secondaryColor = [colorScheme objectForKey:@"secondaryColor"];
+        
+        SITUserHelperColorScheme *helperColorScheme = [[SITUserHelperColorScheme alloc] init];
+        if (primaryColor) {
+            helperColorScheme.primaryColor = primaryColor;
+        }
+        if (secondaryColor) {
+            helperColorScheme.secondaryColor = secondaryColor;
+        }
+        
+        [[SITUserHelperManager sharedInstance] setColorScheme:helperColorScheme];
+    }
+    
+    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"User helper configured"];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
+
 @end

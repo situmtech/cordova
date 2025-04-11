@@ -817,3 +817,35 @@ var PoiDeselectedResult = {
 };
 
 module.exports = PoiDeselectedResult;
+
+/**
+ * @name
+ * UserHelperColorScheme
+ * @description
+ * Color scheme for the user helper UI.
+ * @property {string} primaryColor - Primary color for the user helper UI. Use HEX color code (e.g. "#ff5733").
+ * @property {string} secondaryColor - Secondary color for the user helper UI. Use HEX color code (e.g. "#ff5733").
+ */
+
+var UserHelperColorScheme = {
+  primaryColor,
+  secondaryColor
+};
+
+module.exports = UserHelperColorScheme;
+
+/**
+ * @name
+ * UserHelperOptions
+ * @description
+ * Configuration options for the user helper.
+ * @property {boolean} enabled - Whether the user helper is enabled. Equivalent to the underlying native SitumSdk.userHelperManager#autoManage(true).
+ * @property {UserHelperColorScheme} colorScheme - Color scheme for the user helper UI.
+ */
+
+var UserHelperOptions = {
+  enabled,
+  colorScheme
+};
+
+module.exports = UserHelperOptions;
