@@ -823,8 +823,8 @@ module.exports = PoiDeselectedResult;
  * UserHelperColorScheme
  * @description
  * Color scheme for the user helper UI.
- * @property {string} primaryColor - Primary color for the user helper UI.
- * @property {string} secondaryColor - Secondary color for the user helper UI.
+ * @property {string} primaryColor - Primary color for the user helper UI. Use HEX color code (e.g. "#ff5733").
+ * @property {string} secondaryColor - Secondary color for the user helper UI. Use HEX color code (e.g. "#ff5733").
  */
 
 var UserHelperColorScheme = {

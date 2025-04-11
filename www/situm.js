@@ -452,7 +452,9 @@ var Situm = {
   },
   /**
    * Automatically assists users in resolving app-related permission and sensor issues.
-   * @description This method helps users resolve common issues like missing permissions or sensor problems.
+   * This method tells the native SDKs to present a user interface that explains detected 
+   * configuration issues and guides users through the required steps to resolve them, 
+   * following best practices for runtime permission requests.
    * @param {boolean} userHelperOptions Options for the user helper.
    * @param {function} cb Cordova native callback to receive data.
    * @param {function} error Cordova native callback to receive errors.
