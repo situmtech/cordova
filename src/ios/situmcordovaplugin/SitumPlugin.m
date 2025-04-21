@@ -793,19 +793,22 @@ destinationReachedOnRoute:(SITRoute *)route {
     [[SITUserHelperManager sharedInstance] autoManage:enabled];
     
     if ([options objectForKey:@"colorScheme"]) {
-        NSDictionary *colorScheme = [options objectForKey:@"colorScheme"];
-        NSString *primaryColor = [colorScheme objectForKey:@"primaryColor"];
-        NSString *secondaryColor = [colorScheme objectForKey:@"secondaryColor"];
-        
-        SITUserHelperColorScheme *helperColorScheme = [[SITUserHelperColorScheme alloc] init];
-        if (primaryColor) {
-            helperColorScheme.primaryColor = primaryColor;
+        id colorSchemeValue = [options objectForKey:@"colorScheme"];
+        if ([colorSchemeValue isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *colorScheme = [options objectForKey:@"colorScheme"];
+            NSString *primaryColor = [colorScheme objectForKey:@"primaryColor"];
+            NSString *secondaryColor = [colorScheme objectForKey:@"secondaryColor"];
+
+            SITUserHelperColorScheme *helperColorScheme = [[SITUserHelperColorScheme alloc] init];
+            if (primaryColor) {
+                helperColorScheme.primaryColor = primaryColor;
+            }
+            if (secondaryColor) {
+                helperColorScheme.secondaryColor = secondaryColor;
+            }
+
+            [[SITUserHelperManager sharedInstance] setColorScheme:helperColorScheme];
         }
-        if (secondaryColor) {
-            helperColorScheme.secondaryColor = secondaryColor;
-        }
-        
-        [[SITUserHelperManager sharedInstance] setColorScheme:helperColorScheme];
     }
     
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"User helper configured"];
