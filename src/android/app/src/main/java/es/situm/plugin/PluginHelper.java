@@ -47,6 +47,7 @@ import es.situm.sdk.realtime.RealTimeListener;
 import es.situm.sdk.realtime.RealTimeManager;
 import es.situm.sdk.realtime.RealTimeRequest;
 import es.situm.sdk.utils.Handler;
+import es.situm.sdk.userhelper.UserHelperColorScheme;
 import es.situm.sdk.v1.SitumEvent;
 
 public class PluginHelper {
@@ -546,16 +547,6 @@ public class PluginHelper {
                     PluginResult result = new PluginResult(Status.ERROR, error.getMessage());
                     result.setKeepCallback(true);
                     callbackContext.sendPluginResult(result);
-                    switch (error.getCode()) {
-                        case 8001:
-                            requestLocationPermission(cordova);
-                            return;
-                        case 8002:
-                            showLocationSettings(cordova);
-                            return;
-                        default:
-                            return;
-                    }
                 }
             };
             try {
@@ -629,16 +620,6 @@ public class PluginHelper {
         PluginResult pluginResult = new PluginResult(Status.OK, jsonaGeofences);
         pluginResult.setKeepCallback(true);
         callbackContext.sendPluginResult(pluginResult);
-    }
-
-    private void showLocationSettings(CordovaInterface cordova) {
-        Toast.makeText(cordova.getActivity(), "You must enable location", Toast.LENGTH_LONG).show();
-        cordova.getActivity().startActivityForResult(new Intent("android.settings.LOCATION_SOURCE_SETTINGS"), 0);
-    }
-
-    private void requestLocationPermission(CordovaInterface cordova) {
-        ActivityCompat.requestPermissions(cordova.getActivity(),
-                new String[] { "android.permission.ACCESS_FINE_LOCATION" }, 0);
     }
 
     public void returnDefaultResponse(CallbackContext callbackContext) {
@@ -897,6 +878,34 @@ public class PluginHelper {
         // 
         Log.i(TAG, "Remove realtime updates");
         getRealtimeManagerInstance().removeRealTimeUpdates(); // TODO: Incorporate sending a result to the exterior
+    }
+
+    public void configureUserHelper(
+        CordovaInterface cordova,
+        CordovaWebView webView,
+        JSONArray args,
+        final CallbackContext callbackContext
+    ) {
+        try {
+            JSONObject jsonUserHelperOptions = args.getJSONObject(0);
+            boolean enabled = false;
+            if (jsonUserHelperOptions.has("enabled")) {
+                enabled = jsonUserHelperOptions.getBoolean("enabled");
+            }
+            if (jsonUserHelperOptions.has("colorScheme")) {
+                JSONObject jsonColorScheme = jsonUserHelperOptions.getJSONObject("colorScheme");
+                UserHelperColorScheme colorScheme = SitumMapper.jsonObjectToUserHelperColorScheme(jsonColorScheme);
+                SitumSdk.userHelperManager().setColorScheme(colorScheme);
+            }
+            SitumSdk.userHelperManager().autoManage(enabled);
+
+            callbackContext.sendPluginResult(new PluginResult(Status.OK, "User helper configured"));
+          } catch (Exception e) {
+            Log.d(TAG, "exception: " + e);
+  
+            e.printStackTrace();
+            callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
+          }
     }
 
     // Initialize Navigation Component 

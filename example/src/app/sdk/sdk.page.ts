@@ -24,7 +24,6 @@ import { NgFor, NgIf } from '@angular/common';
 import { locate, cloudDownload, map } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 
-import { requestPermissions } from '../utils/request.permissions';
 import * as Constants from '../../constants';
 
 // Declare a cordova variable to avoid typescript errors
@@ -81,6 +80,10 @@ export class SDKPage {
     // See all the parameters you can modify in https://dashboard.situm.com/settings.
     cordova.plugins.Situm.setUseRemoteConfig(true);
 
+    // Tell the native SDK to automatically request permissions and manage
+    // sensor (BLE/Location) issues.
+    cordova.plugins.Situm.enableUserHelper();
+
     // Wait until receive the MapViewController of our map and
     // be able to send actions and receive events that occur inside it.
     cordova.plugins.MapView.onLoad((controller: any) => {
@@ -114,22 +117,7 @@ export class SDKPage {
       return;
     }
     this._setInfo('');
-    // You might want to know how we ask the all the permissions,
-    // so take a look at /src/app/utils/request.permission.ts
-    requestPermissions(
-      () => {
-        this.doStartPositioning();
-      },
-      (errorMessage: any) => {
-        this._setInfo(
-          'Something did happen while asking for permission: ' + errorMessage
-        );
-      },
-      this.platform
-    );
-  }
 
-  private doStartPositioning() {
     cordova.plugins.Situm.onLocationUpdate((location: any) => {
       this._setStatus('POSITIONING');
       this._setInfo(location);
