@@ -452,30 +452,46 @@ var Situm = {
   },
   /**
    * Automatically assists users in resolving app-related permission and sensor issues.
+   *
    * This method tells the native SDKs to present a user interface that explains detected 
    * configuration issues and guides users through the required steps to resolve them, 
    * following best practices for runtime permission requests.
-   * @param {boolean} userHelperOptions Options for the user helper.
-   * @param {function} cb Cordova native callback to receive data.
-   * @param {function} error Cordova native callback to receive errors.
+   *
+   * Issues addressed include:
+   * - Missing permissions for Location or Bluetooth.
+   * - Disabled Location or Bluetooth sensors.
+   *
+   * Use the <code>userHelperOptions</code> parameter to configure the available options.
+   * Call {@link enableUserHelper} as a shortcut to enable the user helper with default configuration.
+   * Call {@link disableUserHelper} as a shortcut to disable the user helper.
+   *
+   * @param {UserHelperOptions} userHelperOptions - Options for the user helper.
+   * @param {function} cb - Cordova native callback to receive data.
+   * @param {function} error - Cordova native callback to receive errors.
    */
   configureUserHelper: function (userHelperOptions, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'configureUserHelper', [userHelperOptions]);
   },
 
   /**
-   * Enables the user helper. Equivalent to configureUserHelper({enabled: true}).
-   * @param {function} cb Cordova native callback to receive data.
-   * @param {function} error Cordova native callback to receive errors.
+   * Enables the user helper.
+   *
+   * Shortcut for {@link configureUserHelper} with <code>{enabled: true}</code>.
+   *
+   * @param {function} cb - Cordova native callback to receive data.
+   * @param {function} error - Cordova native callback to receive errors.
    */
   enableUserHelper: function (cb, error) {
     this.configureUserHelper({enabled: true}, cb, error);
   },
 
   /**
-   * Disables the user helper. Equivalent to configureUserHelper({enabled: false}).
-   * @param {function} cb Cordova native callback to receive data.
-   * @param {function} error Cordova native callback to receive errors.
+   * Disables the user helper.
+   *
+   * Shortcut for {@link configureUserHelper} with <code>{enabled: false}</code>.
+   *
+   * @param {function} cb - Cordova native callback to receive data.
+   * @param {function} error - Cordova native callback to receive errors.
    */
   disableUserHelper: function (cb, error) {
     this.configureUserHelper({enabled: false}, cb, error);

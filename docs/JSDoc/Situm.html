@@ -134,7 +134,7 @@
             
             <div class="container-source members">
                 <code><a href="situm.js.html">situm.js</a></code>,
-                <code><a href="situm.js.html#line462">line 462</a></code>
+                <code><a href="situm.js.html#line472">line 472</a></code>
             </div>
             
         </h4>
@@ -147,9 +147,18 @@
     
     <div class="description">
         Automatically assists users in resolving app-related permission and sensor issues.
+
 This method tells the native SDKs to present a user interface that explains detected 
 configuration issues and guides users through the required steps to resolve them, 
 following best practices for runtime permission requests.
+
+Issues addressed include:
+- Missing permissions for Location or Bluetooth.
+- Disabled Location or Bluetooth sensors.
+
+Use the <code>userHelperOptions</code> parameter to configure the available options.
+Call enableUserHelper as a shortcut to enable the user helper with default configuration.
+Call disableUserHelper as a shortcut to disable the user helper.
     </div>
     
 
@@ -191,7 +200,7 @@ following best practices for runtime permission requests.
             <td class="type">
             
                 
-<span class="param-type">boolean</span>
+<span class="param-type"><a href="global.html#UserHelperOptions">UserHelperOptions</a></span>
 
 
             
@@ -322,7 +331,7 @@ following best practices for runtime permission requests.
             
             <div class="container-source members">
                 <code><a href="situm.js.html">situm.js</a></code>,
-                <code><a href="situm.js.html#line480">line 480</a></code>
+                <code><a href="situm.js.html#line496">line 496</a></code>
             </div>
             
         </h4>
@@ -334,7 +343,9 @@ following best practices for runtime permission requests.
 
     
     <div class="description">
-        Disables the user helper. Equivalent to configureUserHelper({enabled: false}).
+        Disables the user helper.
+
+Shortcut for configureUserHelper with <code>{enabled: false}</code>.
     </div>
     
 
@@ -484,7 +495,7 @@ following best practices for runtime permission requests.
             
             <div class="container-source members">
                 <code><a href="situm.js.html">situm.js</a></code>,
-                <code><a href="situm.js.html#line471">line 471</a></code>
+                <code><a href="situm.js.html#line484">line 484</a></code>
             </div>
             
         </h4>
@@ -496,7 +507,9 @@ following best practices for runtime permission requests.
 
     
     <div class="description">
-        Enables the user helper. Equivalent to configureUserHelper({enabled: true}).
+        Enables the user helper.
+
+Shortcut for configureUserHelper with <code>{enabled: true}</code>.
     </div>
     
 
