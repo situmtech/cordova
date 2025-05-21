@@ -4,5 +4,5 @@ steps:
     fetchDepth: 3
     displayName: Checkout repo
   - bash: |
-      ls -lahrt 
+      ls -lahrt  ../
     displayName: List repo dir
