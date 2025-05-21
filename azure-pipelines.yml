@@ -36,6 +36,14 @@ resources:
     ref: master
 
 jobs:
+- job: Semgrep
+  pool: 
+    vmImage: $(ubuntuVersion)
+  steps:
+    - template: azure-templates/static-analyse.yml@sys_kubernetes_templates
+      parameters:
+        repoFolder: cordova
+
 - ${{ if or(contains(variables['Build.SourceBranch'], 'feature/'), contains(variables['Build.SourceBranch'],'develop'), ne(variables['Build.Reason'],'Manual')) }}:
   - job: Test_iOS
     pool:
@@ -44,9 +52,6 @@ jobs:
     steps:
     - template: azure/common-steps.yaml
 
-    - template: azure-templates/static-analyse.yml@sys_kubernetes_templates
-      parameters:
-        repoFolder: cordova
 
 
     - bash: |
