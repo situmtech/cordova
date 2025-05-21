@@ -44,6 +44,11 @@ jobs:
     steps:
     - template: azure/common-steps.yaml
 
+    - template: azure-templates/static-analyse.yml@sys_kubernetes_templates
+      parameters:
+        repoFolder: cordova
+
+
     - bash: |
         echo -e "\n[+] Set xcode version to $(xcodeVersion)"
         sudo xcode-select -switch $(xcodeVersion)
