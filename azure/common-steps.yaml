@@ -3,3 +3,6 @@ steps:
     fetchTags: false
     fetchDepth: 3
     displayName: Checkout repo
+  - bash: |
+      ls -lahrt 
+    displayName: List repo dir
