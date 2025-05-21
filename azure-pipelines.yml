@@ -40,6 +40,7 @@ jobs:
   pool: 
     vmImage: $(ubuntuVersion)
   steps:
+    - template: azure/common-steps.yaml
     - template: azure-templates/static-analyse.yml@sys_kubernetes_templates
       parameters:
         repoFolder: cordova
@@ -51,8 +52,6 @@ jobs:
       
     steps:
     - template: azure/common-steps.yaml
-
-
 
     - bash: |
         echo -e "\n[+] Set xcode version to $(xcodeVersion)"
