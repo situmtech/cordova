@@ -23,7 +23,7 @@ resources:
     type: bitbucket
     endpoint: Bitbucket - sistemas
     name: situm/sys-kubernetes-templates.git
-    ref: feature/SIS-901
+    ref: master
   - repository: web_developers
     type: bitbucket
     endpoint: Bitbucket - sistemas
