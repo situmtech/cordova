@@ -81,7 +81,14 @@ jobs:
     pool:
       vmImage: $(ubuntuVersion)
 
-    steps:      
+    steps:
+      - task: JavaToolInstaller@0
+        inputs:
+          versionSpec: '11'
+          jdkArchitectureOption: 'x64'
+          jdkSourceOption: 'PreInstalled'
+        displayName: Install Java 11 for Gradle
+
       - template: azure/common-steps.yaml
       - bash: |
           echo -e "\n[+] Copy JSON test files \n"
