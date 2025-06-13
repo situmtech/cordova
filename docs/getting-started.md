@@ -5,13 +5,13 @@
 </div>
 
 In this tutorial, we will guide you step by step to set up your first Cordova application using Cordova Situm Plugin. 
-Before starting to write code, we recommend you to set up an account on our Dashboard ([https://dashboard.situm.es](https://dashboard.situm.es)), retrieve your API KEY and configure your first building.
+Before starting to write code, we recommend you to set up an account on our Dashboard ([https://dashboard.situm.com](https://dashboard.situm.com)), retrieve your API KEY and configure your first building.
 
-1. Go to the [sign in form](http://dashboard.situm.es/accounts/register) and enter your username and password to sign in.
+1. Go to the [sign in form](http://dashboard.situm.com/accounts/register) and enter your username and password to sign in.
 
-2. Go to the [account section](https://dashboard.situm.es/accounts/profile) and on the bottom, click on “generate one” to generate your API KEY.
+2. Go to the [account section](https://dashboard.situm.com/accounts/profile) and on the bottom, click on “generate one” to generate your API KEY.
 
-3. Go to the [buildings section](http://dashboard.situm.es/buildings) and create your first building.
+3. Go to the [buildings section](http://dashboard.situm.com/buildings) and create your first building.
 
 4. Download Situm Mapping Tool in Play Store (Only Android devices) and calibrate your building. Check out our user guide for detailed information.
 
