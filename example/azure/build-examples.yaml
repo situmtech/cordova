@@ -67,7 +67,7 @@ steps:
           echo -e "\n[+] Install fastlane \n"
           gem install fastlane
 
-          export WHATS_NEW="Plugin version: $(pluginVersion), USER: ${{parameters.XAPIEMAIL}}, BUILDINGID: ${{ parameters.BUILDINGID }}, DASHBOARD_URL: https://dashboard.situm.com MAPVIEWER_DOMAIN: ${{ parameters.MAPVIEWERDOMAIN}}"
+          export WHATS_NEW="Plugin version: $(pluginVersion), USER: ${{parameters.XAPIEMAIL}}, BUILDINGID: ${{ parameters.BUILDINGID }}, DASHBOARD_URL: https://api.situm.com MAPVIEWER_DOMAIN: ${{ parameters.MAPVIEWERDOMAIN}}"
           export BUILDNUMBER=${{ parameters.BUILDNUMBER }}
           export appleDevTeamId=$(appleDevTeamId)
           echo -e "\n[+] Setting variables to deploy:"
