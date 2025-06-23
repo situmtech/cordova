@@ -128,7 +128,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
             if (IS_LOG_ENABLED) {
                 NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ No buildings were retrieved", DEFAULT_SITUM_LOG, operation]);
             }
-            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"There are no buildings on the account. Please go to dashboard http://dashboard.situm.es and learn more about the first step with Situm technology"];
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"There are no buildings on the account. Please go to dashboard http://dashboard.situm.com and learn more about the first step with Situm technology"];
         }
         else {
             NSMutableArray *ja = [[NSMutableArray alloc] init];
@@ -256,7 +256,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
             if (IS_LOG_ENABLED) {
                 NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ no floors on building: %@", DEFAULT_SITUM_LOG, operation, buildingJO]);
             }
-            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"The selected building does not have floors. Correct that on http://dashboard.situm.es"];
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"The selected building does not have floors. Correct that on http://dashboard.situm.com"];
         } else {
             if (IS_LOG_ENABLED) {
                 NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ retrieved floors: %@ on building: %@", DEFAULT_SITUM_LOG, operation, floors, buildingJO]);
