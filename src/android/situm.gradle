@@ -12,7 +12,7 @@ allprojects {
 
 dependencies {
     implementation 'com.google.android.gms:play-services-location:16.0.0'
-    implementation('es.situm:situm-sdk:3.31.2@aar') {
+    implementation('es.situm:situm-sdk:3.32.0@aar') {
         transitive = true
     }
 }
