@@ -1,5 +1,5 @@
 target 'SitumCordovaPlugin' do
   use_frameworks!
   platform :ios, '9.0'
-  pod 'SitumSDK', '3.34.3'
+  pod 'SitumSDK', '3.34.4'
 end
