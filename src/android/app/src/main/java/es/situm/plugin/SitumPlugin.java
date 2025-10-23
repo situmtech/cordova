@@ -3,6 +3,7 @@
 package es.situm.plugin;
 
 import android.util.Log;
+import android.content.Context;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,6 +22,7 @@ public class SitumPlugin extends CordovaPlugin {
   private static final String TAG = "SitumPlugin";
 
   private static volatile PluginHelper pluginInstance;
+  private static volatile TextToSpeechManager ttsManager;
 
   private static PluginHelper getPluginInstance() {
     if (pluginInstance == null) { //Check for the first time
@@ -32,12 +34,24 @@ public class SitumPlugin extends CordovaPlugin {
     return pluginInstance;
   }
 
+  private static void setupTtsManager(Context context) {
+      if (ttsManager == null) {
+          synchronized (TextToSpeechManager.class) {
+              if(ttsManager == null) ttsManager = new TextToSpeechManager(context);
+          }
+      }
+      getPluginInstance().setTextToSpeechManager(ttsManager);
+  }
+
+  @Override
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     super.initialize(cordova, webView);
     Log.d(TAG, "Initializing Situm Plugin");
     SitumSdk.init(cordova.getActivity());
+    setupTtsManager(cordova.getActivity());
   }
 
+  @Override
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
     Log.d(TAG, "execute: " + action);
     if (action.equalsIgnoreCase("setUseRemoteConfig")) {
@@ -106,6 +120,8 @@ public class SitumPlugin extends CordovaPlugin {
       getPluginInstance().updateNavigationState(cordova, webView, args, callbackContext);
     } else if(action.equalsIgnoreCase("configureUserHelper")) {
       getPluginInstance().configureUserHelper(cordova, webView, args, callbackContext);
+    } else if(action.equalsIgnoreCase("internalHandleMapViewMessage")) {
+      getPluginInstance().internalHandleMapViewMessage(cordova, webView, args, callbackContext);
     } else {
       getPluginInstance().returnDefaultResponse(callbackContext);
     }
