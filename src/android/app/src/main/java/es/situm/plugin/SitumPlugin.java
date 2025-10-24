@@ -22,11 +22,14 @@ public class SitumPlugin extends CordovaPlugin {
   private static final String TAG = "SitumPlugin";
 
   private static volatile PluginHelper pluginInstance;
+  private static final Object PLUGIN_LOCK = new Object();
+  
   private static volatile TextToSpeechManager ttsManager;
+  private static final Object TTS_LOCK = new Object();
 
   private static PluginHelper getPluginInstance() {
     if (pluginInstance == null) { //Check for the first time
-      synchronized (PluginHelper.class) {   //Check for the second time.
+      synchronized (PLUGIN_LOCK) {   //Check for the second time.
         //if there is no instance available... create new one
         if (pluginInstance == null) pluginInstance = new PluginHelper();
       }
@@ -36,7 +39,7 @@ public class SitumPlugin extends CordovaPlugin {
 
   private static void setupTtsManager(Context context) {
       if (ttsManager == null) {
-          synchronized (TextToSpeechManager.class) {
+          synchronized (TTS_LOCK) {
               if(ttsManager == null) ttsManager = new TextToSpeechManager(context);
           }
       }
@@ -44,11 +47,11 @@ public class SitumPlugin extends CordovaPlugin {
   }
 
   @Override
-  public void initialize(CordovaInterface cordova, CordovaWebView webView) {
-    super.initialize(cordova, webView);
+  public void pluginInitialize() {
+    super.pluginInitialize();
     Log.d(TAG, "Initializing Situm Plugin");
-    SitumSdk.init(cordova.getActivity());
-    setupTtsManager(cordova.getActivity());
+    SitumSdk.init(this.cordova.getActivity());
+    setupTtsManager(this.cordova.getActivity());
   }
 
   @Override
