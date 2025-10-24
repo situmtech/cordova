@@ -107,6 +107,7 @@
         <source-file src="src/ios/situmcordovaplugin/Constants.m" />
         <source-file src="src/ios/situmcordovaplugin/SITUtils.m" />
         <source-file src="src/ios/situmcordovaplugin/SITUtils.h" />
-        
+        <source-file src="src/ios/situmcordovaplugin/SITTextToSpeechManager.m" />
+        <source-file src="src/ios/situmcordovaplugin/SITTextToSpeechManager.h" />
     </platform>
 </plugin>
