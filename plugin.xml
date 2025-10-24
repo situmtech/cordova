@@ -2,7 +2,7 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     id="@situm/cordova"
-    version="3.15.29">
+    version="3.15.30">
     <name>Situm Cordova plugin Official</name>
     <description>This is the stable branch.</description>
     <license>MIT</license>
@@ -94,7 +94,7 @@
             <config>
             </config>
             <pods use-frameworks="false">
-                <pod name="SitumSDK" spec="~> 3.34.6"/>
+                <pod name="SitumSDK" spec="~> 3.34.7"/>
             </pods>
         </podspec>
 
