@@ -55,6 +55,23 @@ public class SitumPlugin extends CordovaPlugin {
   }
 
   @Override
+  public void onPause(boolean multitasking) {
+    getPluginInstance().onPause();
+  }
+
+  @Override
+  public void onResume(boolean multitasking) {
+    getPluginInstance().onResume();
+  }
+
+  @Override
+  public void onDestroy() {
+    getPluginInstance().onDestroy();
+    pluginInstance = null;
+    ttsManager = null;
+  }
+
+  @Override
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
     Log.d(TAG, "execute: " + action);
     if (action.equalsIgnoreCase("setUseRemoteConfig")) {

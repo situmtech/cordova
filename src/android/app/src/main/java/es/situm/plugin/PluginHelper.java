@@ -114,6 +114,31 @@ public class PluginHelper {
         nmInstance = navigationManager;
     }
 
+    public void onResume() {
+        ttsManager.setCanSpeak(true);
+    }
+
+    public void onPause() {
+        ttsManager.setCanSpeak(false);
+    }
+
+    public void onDestroy() {
+        ttsManager.stop();
+        ttsManager = null;
+        locationListener = null;
+        locationRequest = null;
+        navigationListener = null;
+        navigationRequest = null;
+        cmInstance = null;
+        nmInstance = null;
+        realtimeListener = null;
+        rmInstance = null;
+        computedRoute = null;
+        computedLocation = null;
+        callbackEnterGeofences = null;
+        callbackExitGeofences = null;
+    }
+
     public void getDeviceId(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
             final CallbackContext callbackContext) {
         String deviceId = String.valueOf(SitumSdk.getDeviceID());
