@@ -124,7 +124,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
         if (IS_LOG_ENABLED) {
             NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ Fetching buildings returned values", DEFAULT_SITUM_LOG, operation]);
         }
-        NSArray *buildings = [mapping valueForKey:ResultsKey];
+        NSArray *buildings = [[mapping valueForKey:ResultsKey] copy];
         CDVPluginResult* pluginResult = nil;
         if (buildings.count == 0) {
             if (IS_LOG_ENABLED) {
