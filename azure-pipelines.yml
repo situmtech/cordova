@@ -1,4 +1,3 @@
-
 trigger:
   - develop
   - release/*
@@ -7,324 +6,326 @@ trigger:
 pr: none
 
 variables:
-- group: Passwords
-- group: SoftwareVersions
-- group: ConfluencePages
-- group: ChangelogIds
+  - group: Passwords
+  - group: SoftwareVersions
+  - group: ConfluencePages
+  - group: ChangelogIds
 
 parameters:
-   - name: CordovaVersion
-     displayName: Plugin version (Only required for Release)
-     default: "0.0.0"
+  - name: CordovaVersion
+    displayName: Plugin version (Only required for Release)
+    default: "0.0.0"
 
 resources:
   repositories:
-  - repository: sys_kubernetes_templates
-    type: bitbucket
-    endpoint: Bitbucket - sistemas
-    name: situm/sys-kubernetes-templates.git
-    ref: master
-  - repository: web_developers
-    type: bitbucket
-    endpoint: Bitbucket - sistemas
-    name: situm/web-developers.git
-    ref: master
-  - repository: cordova_sdk_validation
-    type: bitbucket
-    endpoint: Bitbucket - sistemas
-    name: situm/cordova-sdk-validation.git
-    ref: master
+    - repository: sys_kubernetes_templates
+      type: bitbucket
+      endpoint: Bitbucket - sistemas
+      name: situm/sys-kubernetes-templates.git
+      ref: master
+    - repository: web_developers
+      type: bitbucket
+      endpoint: Bitbucket - sistemas
+      name: situm/web-developers.git
+      ref: master
+    - repository: cordova_sdk_validation
+      type: bitbucket
+      endpoint: Bitbucket - sistemas
+      name: situm/cordova-sdk-validation.git
+      ref: master
 
 jobs:
-- job: Semgrep
-  pool: 
-    vmImage: $(ubuntuVersion)
-  steps:
-    - template: azure/common-steps.yaml
-    - template: azure-templates/static-analyse.yml@sys_kubernetes_templates
-      parameters:
-        repoFolder: .
-        teams: mobile
-
-- ${{ if or(contains(variables['Build.SourceBranch'], 'feature/'), contains(variables['Build.SourceBranch'],'develop'), ne(variables['Build.Reason'],'Manual')) }}:
-  - job: Test_iOS
-    pool:
-      vmImage: $(macOSVersion)
-      
-    steps:
-    - template: azure/common-steps.yaml
-
-    - bash: |
-        echo -e "\n[+] Set xcode version to $(xcodeVersion)"
-        sudo xcode-select -switch $(xcodeVersion)
-
-        echo -e "\n[+] Copy JSON test files \n"
-        tests/scripts/copy_ios_resources.sh
-
-        echo -e "\n[+] Pod install \n"
-        cd src/ios 
-        pod install
-        
-        echo -e "\n[+] Execute xcode tests \n"
-
-        xcodebuild test -workspace SitumCordovaPlugin.xcworkspace -scheme CordovaLib -destination $(iosSimulator)
-
-        if [ $? -ne 0 ];then
-          echo -e "\n [!] Error with tests....... \n"
-          exit 1
-        fi
-
-      displayName: Execute Tests
-  
-  
-  - job: Test_Android
-    pool:
-      vmImage: $(ubuntuVersion)
-
-    steps:
-      - task: JavaToolInstaller@0
-        inputs:
-          versionSpec: '11'
-          jdkArchitectureOption: 'x64'
-          jdkSourceOption: 'PreInstalled'
-        displayName: Install Java 11 for Gradle
-
-      - template: azure/common-steps.yaml
-      - bash: |
-          echo -e "\n[+] Copy JSON test files \n"
-          tests/scripts/copy_android_resources.sh
-          
-          echo -e "\n[+] Execute gradle tests \n"
-          cd src/android 
-          ./gradlew test --continue --info
-
-          if [ $? -ne 0 ];then
-            echo -e "\n [!] Error with tests....... \n"
-            exit 1
-          fi
-
-        displayName: Execute Test
-
-      - task: PublishTestResults@2
-        inputs:
-          testResultsFormat: 'JUnit'
-          testResultsFiles: 'src/android/app/build/test-results/*/*.xml'
-        displayName: Publish test
-        condition: always()
-
-  - job: Test_JS
-    pool:
-      vmImage: $(ubuntuVersion)
-
-    steps:
-      - bash: |
-          cd cordova
-      
-          echo -e "\n[+] Install npm dependencies \n"
-          npm install
-      
-          echo -e "\n[+] Execute npm tests \n"
-          npm test
-        displayName: JS Test
-
-  
-- ${{ if contains(variables['Build.SourceBranch'], 'release/') }}:
-  - job: Generate_Release
+  - job: Static_Analyse
     pool:
       vmImage: $(ubuntuVersion)
     steps:
       - template: azure/common-steps.yaml
-
-      - task: NodeTool@0
-        inputs:
-          versionSource: 'spec' 
-          versionSpec: $(nodeVersion)
-
-      - ${{ if eq(variables['Build.Reason'],'manual') }}:
-        - bash: |
-            if [[ "${{ parameters.CordovaVersion }}" == "0.0.0" ]];then
-              echo -e "\n[!] IMPORTANT: You don't set the plugin version when you run the release branch and I'm not fortune teller\n"
-              exit 1
-            else
-              echo "##vso[task.setvariable variable=version]$(echo ${{ parameters.CordovaVersion }})"
-              echo -e "\n[+] I'm a shy step so I don't tell you anything\n"
-            fi
-    
-          displayName: Set Cordova Version Manual
-    
-      - ${{ if ne(variables['Build.Reason'],'manual') }}:
-        - bash: |
-            CordovaVersion=$(echo $(Build.SourceBranch) | cut -d "/" -f 4)
-            echo "##vso[task.setvariable variable=version]$(echo $CordovaVersion)"
-            echo -e "\n[+] I'm a shy step that only executes where this pipeline run automatic\n"
-          displayName: Set Cordova Version Automatic
-
-      - bash: |
-
-          echo -e "\n[+] Installing NPM version $(npmVersion)\n"
-          npm install -g $(npmVersion)
-
-          currentBranch=$(echo $(Build.SourceBranch) | cut -d "/" -f 3,4)
-          echo "##vso[task.setvariable variable=currentBranch]$(echo $currentBranch)"
-          
-          echo -e "\n[+] Variables:"
-          echo -e "\t[+] Plugin version: $(version)"
-          echo -e "\t[+] NPM CLI version: $(npm --version)"
-          echo -e "\t[+] Current branch: $currentBranch"
-
-          echo -e "\n[+] Setting git remote credentials\n"
-          if [ -d "cordova" ];then
-            cd cordova
-          fi
-          git remote set-url origin https://situmops:$(github_token)@github.com/$(Build.Repository.Name).git
-          cat .git/config
-
-        displayName: Initial Vars & Configs
-
-      - bash: |
-      
-          cd cordova
-          echo -e "\n[+] Setting NPM version to $(version)"
-          npm version $(version) --no-git-tag-version
-      
-          echo -e "\n[+] Change plugin version in plugin.xml"
-          sed -i "s/version=\".*\">/version=\"$(version)\">/g" plugin.xml
-      
-          echo -e "\n[+] Setting git to push NPM version\n"
-          git config --global user.email "sistemas@situm.es"
-          git config --global user.name "Situmops"
-      
-          echo -e "\n[+] Fetch branches \n"
-          git fetch
-      
-          echo -e "\n[+] Changing to $(currentBranch)"
-          git checkout $(currentBranch)
-      
-          echo -e "\n[+] Add,Commit and Push to $(currentBranch)"
-          git commit -am "[skip ci] Setting the Cordova version to $(version)"
-          git push --set-upstream origin $(currentBranch)
-          git push
-        displayName: Make changes
-      
-      
-      - template: azure-templates/publish_release.yml@sys_kubernetes_templates
+      - template: azure-templates/static-analyse.yml@sys_kubernetes_templates
         parameters:
-          bitbucket:
-            bitbucket_user: situmops
-          system: "N/A"
-          server: "github"
-          repoFolder: "cordova"
-          mergeBranches:
-            - "master"
-            - "develop"
-      
-      - bash: |
-          cd cordova
-          echo -e "\n[+] Fetch all branches\n"
-          git fetch
-      
-          echo -e "\n[+] Checkout and Pull to master branch\n"
-          git checkout master
-          git pull origin master
-      
-          echo -e "\n[+] Configure NPM login"
-          echo "//registry.npmjs.org/:_authToken=$(NPM_TOKEN)" > ~/.npmrc
-      
-          echo -e "\n[+] Publish NPM packages"
-          npm publish --access=public
-      
-        displayName: NPM publish
-      
-      
-      - bash: |
-          cd cordova
-      
-          echo -e "\n[+] Install dependencies"
-          npm install
-      
-          echo -e "\n[+] Generate Documentation\n"
-          npm run jsdoc
-      
-        displayName: Generate JSDoc
-         
-      - template: azure-templates/commit-doc.yaml@sys_kubernetes_templates
-        parameters:
-          version: $(version)
-          docPath: cordova/docs/JSDoc
-          system: cordova
-          bitbucket:
-            bitbucket_user: $(bitbucket_user)
-            bitbucket_pass: $(bitbucket_pass)
-          release: "cordova"
-      
-      - bash: |
-          if [ -d "cordova" ]; then
-            cd cordova
-          fi
-      
-          echo -e "\n[+] Pull master changes and change to master branch \n"
-          git fetch
-          git checkout master
-          git pull origin master
-      
-          iossdk=$(grep -oP 'spec="\~> \K[0-9]+\.[0-9]+\.[0-9]+' plugin.xml)
-          androidsdk=$(grep -oE 'es.situm:situm-sdk:[0-9]+\.[0-9]+\.[0-9]+@aar' src/android/situm.gradle | awk -F'[:@]' '{print $3}')
-      
-      
-          echo -e "\n[+] Checkout to previous commit\n"
-          git stash
-          git checkout HEAD~1
-      
-          iossdk_old=$(grep -oP 'spec="\~> \K[0-9]+\.[0-9]+\.[0-9]+' plugin.xml)
-          androidsdk_old=$(grep -oE 'es.situm:situm-sdk:[0-9]+\.[0-9]+\.[0-9]+@aar' src/android/situm.gradle | awk -F'[:@]' '{print $3}')
+          repoFolder: .
+          teams: mobile
+          phase: semgrep
 
-          echo -e "\n[+] Return repository to master branch\n"
-          git checkout master
-      
-          echo -e "\n[+] Versions:"
-          echo -e "\t[+] Cordova SDK: $(version)"
-          echo -e "\t[+] ANDROID SDK: $androidsdk"
-          echo -e "\t[+] IOS SDK: $iossdk"
-          echo -e "\t[+] ANDROID SDK (OLD VERSION): $androidsdk_old"
-          echo -e "\t[+] IOS SDK (OLD IOS): $iossdk_old"
-          
-          versions="| *VERSIÓN* | *FECHA* | *ANDROID SDK* | *IOS SDK* |\n|$(version)|$(date +"%d/%m/%Y")|"
-      
-          if [ "$androidsdk" != "$androidsdk_old" ];then
-            versions="$versions *$androidsdk* |"
-            android_changelog_version=$androidsdk
-          else
-            android_changelog_version="0.0.0"
-            versions="$versions $androidsdk|"
-          fi
-      
-          if [ "$iossdk" != "$iossdk_old" ];then
-            versions="$versions *$iossdk*|"
-            ios_changelog_version=$iossdk
-          else
-            ios_changelog_version="0.0.0"
-            versions="$versions $iossdk|"
-          fi
-      
-          echo "##vso[task.setvariable variable=versions]$(echo $versions)"
-          echo "##vso[task.setvariable variable=android_changelog_version]$(echo $android_changelog_version)"
-          echo "##vso[task.setvariable variable=ios_changelog_version]$(echo $ios_changelog_version)"
-      
-        displayName: Get Versions
-       
-      - template: azure-templates/publish-changelog.yaml@sys_kubernetes_templates
+      - template: azure-templates/static-analyse.yml@sys_kubernetes_templates
         parameters:
-          changelogId: $(Cordova_Changelog_id)
-          android_changelog_version: $(android_changelog_version)
-          ios_changelog_version: $(ios_changelog_version)
-          
-      - template: azure-templates/release-table.yaml@sys_kubernetes_templates
-        parameters:
-          versions: $(versions)
-          releaseTable: CORDOVA_SDK_TABLE
-          confluence_release_page: $(CORDOVA_SDK_TABLE)
-          confluence_release_page_title: "SDK Automatic Release Table - Cordova Plugin"
-          bitbucket:
-            bitbucket_user: $(bitbucket_user)
-            bitbucket_pass: $(bitbucket_pass)
-        
+          repoFolder: .
+          teams: mobile
+          phase: trivy
+
+  - ${{ if or(contains(variables['Build.SourceBranch'], 'feature/'), contains(variables['Build.SourceBranch'],'develop'), ne(variables['Build.Reason'],'Manual')) }}:
+      - job: Test_iOS
+        pool:
+          vmImage: $(macOSVersion)
+
+        steps:
+          - template: azure/common-steps.yaml
+
+          - bash: |
+              echo -e "\n[+] Set xcode version to $(xcodeVersion)"
+              sudo xcode-select -switch $(xcodeVersion)
+
+              echo -e "\n[+] Copy JSON test files \n"
+              tests/scripts/copy_ios_resources.sh
+
+              echo -e "\n[+] Pod install \n"
+              cd src/ios 
+              pod install
+
+              echo -e "\n[+] Execute xcode tests \n"
+
+              xcodebuild test -workspace SitumCordovaPlugin.xcworkspace -scheme CordovaLib -destination $(iosSimulator)
+
+              if [ $? -ne 0 ];then
+                echo -e "\n [!] Error with tests....... \n"
+                exit 1
+              fi
+
+            displayName: Execute Tests
+
+      - job: Test_Android
+        pool:
+          vmImage: $(ubuntuVersion)
+
+        steps:
+          - task: JavaToolInstaller@0
+            inputs:
+              versionSpec: "11"
+              jdkArchitectureOption: "x64"
+              jdkSourceOption: "PreInstalled"
+            displayName: Install Java 11 for Gradle
+
+          - template: azure/common-steps.yaml
+          - bash: |
+              echo -e "\n[+] Copy JSON test files \n"
+              tests/scripts/copy_android_resources.sh
+
+              echo -e "\n[+] Execute gradle tests \n"
+              cd src/android 
+              ./gradlew test --continue --info
+
+              if [ $? -ne 0 ];then
+                echo -e "\n [!] Error with tests....... \n"
+                exit 1
+              fi
+
+            displayName: Execute Test
+
+          - task: PublishTestResults@2
+            inputs:
+              testResultsFormat: "JUnit"
+              testResultsFiles: "src/android/app/build/test-results/*/*.xml"
+            displayName: Publish test
+            condition: always()
+
+      - job: Test_JS
+        pool:
+          vmImage: $(ubuntuVersion)
+
+        steps:
+          - bash: |
+              cd cordova
+
+              echo -e "\n[+] Install npm dependencies \n"
+              npm install
+
+              echo -e "\n[+] Execute npm tests \n"
+              npm test
+            displayName: JS Test
+
+  - ${{ if contains(variables['Build.SourceBranch'], 'release/') }}:
+      - job: Generate_Release
+        pool:
+          vmImage: $(ubuntuVersion)
+        steps:
+          - template: azure/common-steps.yaml
+
+          - task: NodeTool@0
+            inputs:
+              versionSource: "spec"
+              versionSpec: $(nodeVersion)
+
+          - ${{ if eq(variables['Build.Reason'],'manual') }}:
+              - bash: |
+                  if [[ "${{ parameters.CordovaVersion }}" == "0.0.0" ]];then
+                    echo -e "\n[!] IMPORTANT: You don't set the plugin version when you run the release branch and I'm not fortune teller\n"
+                    exit 1
+                  else
+                    echo "##vso[task.setvariable variable=version]$(echo ${{ parameters.CordovaVersion }})"
+                    echo -e "\n[+] I'm a shy step so I don't tell you anything\n"
+                  fi
+
+                displayName: Set Cordova Version Manual
+
+          - ${{ if ne(variables['Build.Reason'],'manual') }}:
+              - bash: |
+                  CordovaVersion=$(echo $(Build.SourceBranch) | cut -d "/" -f 4)
+                  echo "##vso[task.setvariable variable=version]$(echo $CordovaVersion)"
+                  echo -e "\n[+] I'm a shy step that only executes where this pipeline run automatic\n"
+                displayName: Set Cordova Version Automatic
+
+          - bash: |
+
+              echo -e "\n[+] Installing NPM version $(npmVersion)\n"
+              npm install -g $(npmVersion)
+
+              currentBranch=$(echo $(Build.SourceBranch) | cut -d "/" -f 3,4)
+              echo "##vso[task.setvariable variable=currentBranch]$(echo $currentBranch)"
+
+              echo -e "\n[+] Variables:"
+              echo -e "\t[+] Plugin version: $(version)"
+              echo -e "\t[+] NPM CLI version: $(npm --version)"
+              echo -e "\t[+] Current branch: $currentBranch"
+
+              echo -e "\n[+] Setting git remote credentials\n"
+              if [ -d "cordova" ];then
+                cd cordova
+              fi
+              git remote set-url origin https://situmops:$(github_token)@github.com/$(Build.Repository.Name).git
+              cat .git/config
+
+            displayName: Initial Vars & Configs
+
+          - bash: |
+
+              cd cordova
+              echo -e "\n[+] Setting NPM version to $(version)"
+              npm version $(version) --no-git-tag-version
+
+              echo -e "\n[+] Change plugin version in plugin.xml"
+              sed -i "s/version=\".*\">/version=\"$(version)\">/g" plugin.xml
+
+              echo -e "\n[+] Setting git to push NPM version\n"
+              git config --global user.email "sistemas@situm.es"
+              git config --global user.name "Situmops"
+
+              echo -e "\n[+] Fetch branches \n"
+              git fetch
+
+              echo -e "\n[+] Changing to $(currentBranch)"
+              git checkout $(currentBranch)
+
+              echo -e "\n[+] Add,Commit and Push to $(currentBranch)"
+              git commit -am "[skip ci] Setting the Cordova version to $(version)"
+              git push --set-upstream origin $(currentBranch)
+              git push
+            displayName: Make changes
+
+          - template: azure-templates/publish_release.yml@sys_kubernetes_templates
+            parameters:
+              bitbucket:
+                bitbucket_user: situmops
+              system: "N/A"
+              server: "github"
+              repoFolder: "cordova"
+              mergeBranches:
+                - "master"
+                - "develop"
+
+          - bash: |
+              cd cordova
+              echo -e "\n[+] Fetch all branches\n"
+              git fetch
+
+              echo -e "\n[+] Checkout and Pull to master branch\n"
+              git checkout master
+              git pull origin master
+
+              echo -e "\n[+] Configure NPM login"
+              echo "//registry.npmjs.org/:_authToken=$(NPM_TOKEN)" > ~/.npmrc
+
+              echo -e "\n[+] Publish NPM packages"
+              npm publish --access=public
+
+            displayName: NPM publish
+
+          - bash: |
+              cd cordova
+
+              echo -e "\n[+] Install dependencies"
+              npm install
+
+              echo -e "\n[+] Generate Documentation\n"
+              npm run jsdoc
+
+            displayName: Generate JSDoc
+
+          - template: azure-templates/commit-doc.yaml@sys_kubernetes_templates
+            parameters:
+              version: $(version)
+              docPath: cordova/docs/JSDoc
+              system: cordova
+              bitbucket:
+                bitbucket_user: $(bitbucket_user)
+                bitbucket_pass: $(bitbucket_pass)
+              release: "cordova"
+
+          - bash: |
+              if [ -d "cordova" ]; then
+                cd cordova
+              fi
+
+              echo -e "\n[+] Pull master changes and change to master branch \n"
+              git fetch
+              git checkout master
+              git pull origin master
+
+              iossdk=$(grep -oP 'spec="\~> \K[0-9]+\.[0-9]+\.[0-9]+' plugin.xml)
+              androidsdk=$(grep -oE 'es.situm:situm-sdk:[0-9]+\.[0-9]+\.[0-9]+@aar' src/android/situm.gradle | awk -F'[:@]' '{print $3}')
+
+
+              echo -e "\n[+] Checkout to previous commit\n"
+              git stash
+              git checkout HEAD~1
+
+              iossdk_old=$(grep -oP 'spec="\~> \K[0-9]+\.[0-9]+\.[0-9]+' plugin.xml)
+              androidsdk_old=$(grep -oE 'es.situm:situm-sdk:[0-9]+\.[0-9]+\.[0-9]+@aar' src/android/situm.gradle | awk -F'[:@]' '{print $3}')
+
+              echo -e "\n[+] Return repository to master branch\n"
+              git checkout master
+
+              echo -e "\n[+] Versions:"
+              echo -e "\t[+] Cordova SDK: $(version)"
+              echo -e "\t[+] ANDROID SDK: $androidsdk"
+              echo -e "\t[+] IOS SDK: $iossdk"
+              echo -e "\t[+] ANDROID SDK (OLD VERSION): $androidsdk_old"
+              echo -e "\t[+] IOS SDK (OLD IOS): $iossdk_old"
+
+              versions="| *VERSIÓN* | *FECHA* | *ANDROID SDK* | *IOS SDK* |\n|$(version)|$(date +"%d/%m/%Y")|"
+
+              if [ "$androidsdk" != "$androidsdk_old" ];then
+                versions="$versions *$androidsdk* |"
+                android_changelog_version=$androidsdk
+              else
+                android_changelog_version="0.0.0"
+                versions="$versions $androidsdk|"
+              fi
+
+              if [ "$iossdk" != "$iossdk_old" ];then
+                versions="$versions *$iossdk*|"
+                ios_changelog_version=$iossdk
+              else
+                ios_changelog_version="0.0.0"
+                versions="$versions $iossdk|"
+              fi
+
+              echo "##vso[task.setvariable variable=versions]$(echo $versions)"
+              echo "##vso[task.setvariable variable=android_changelog_version]$(echo $android_changelog_version)"
+              echo "##vso[task.setvariable variable=ios_changelog_version]$(echo $ios_changelog_version)"
+
+            displayName: Get Versions
+
+          - template: azure-templates/publish-changelog.yaml@sys_kubernetes_templates
+            parameters:
+              changelogId: $(Cordova_Changelog_id)
+              android_changelog_version: $(android_changelog_version)
+              ios_changelog_version: $(ios_changelog_version)
+
+          - template: azure-templates/release-table.yaml@sys_kubernetes_templates
+            parameters:
+              versions: $(versions)
+              releaseTable: CORDOVA_SDK_TABLE
+              confluence_release_page: $(CORDOVA_SDK_TABLE)
+              confluence_release_page_title: "SDK Automatic Release Table - Cordova Plugin"
+              bitbucket:
+                bitbucket_user: $(bitbucket_user)
+                bitbucket_pass: $(bitbucket_pass)
