@@ -1,9 +1,7 @@
 package es.situm.plugin;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 
@@ -50,6 +48,8 @@ import es.situm.sdk.utils.Handler;
 import es.situm.sdk.userhelper.UserHelperColorScheme;
 import es.situm.sdk.v1.SitumEvent;
 
+import es.situm.plugin.TextToSpeechManager;
+
 public class PluginHelper {
 
     private static final String TAG = "PluginHelper";
@@ -64,12 +64,17 @@ public class PluginHelper {
     private volatile NavigationManager nmInstance;
     private RealTimeListener realtimeListener;
     private volatile RealTimeManager rmInstance;
+    private TextToSpeechManager ttsManager;
 
     private Route computedRoute;
     private Location computedLocation;
 
     private CallbackContext callbackEnterGeofences;
     private CallbackContext callbackExitGeofences;
+
+    void setTextToSpeechManager(TextToSpeechManager ttsManager) {
+        this.ttsManager = ttsManager;
+    }
 
     private CommunicationManager getCommunicationManagerInstance() {
         if (cmInstance == null) { //Check for the first time
@@ -107,6 +112,31 @@ public class PluginHelper {
 
     public void setNavigationManager(NavigationManager navigationManager) {
         nmInstance = navigationManager;
+    }
+
+    public void onResume() {
+        ttsManager.setCanSpeak(true);
+    }
+
+    public void onPause() {
+        ttsManager.setCanSpeak(false);
+    }
+
+    public void onDestroy() {
+        ttsManager.stop();
+        ttsManager = null;
+        locationListener = null;
+        locationRequest = null;
+        navigationListener = null;
+        navigationRequest = null;
+        cmInstance = null;
+        nmInstance = null;
+        realtimeListener = null;
+        rmInstance = null;
+        computedRoute = null;
+        computedLocation = null;
+        callbackEnterGeofences = null;
+        callbackExitGeofences = null;
     }
 
     public void getDeviceId(CordovaInterface cordova, CordovaWebView webView, JSONArray args,
@@ -976,5 +1006,48 @@ public class PluginHelper {
             e.printStackTrace();
             callbackContext.sendPluginResult(new PluginResult(Status.ERROR, e.getMessage()));
         }
+    }
+
+    // ----------------------------------
+    // MapView messages: 
+    // ----------------------------------
+
+    public void internalHandleMapViewMessage(
+        CordovaInterface cordova,
+        CordovaWebView webView,
+        JSONArray args,
+        CallbackContext callbackContext
+    ) {
+        if (args.length() != 2) return;
+
+        try {
+            String message = args.optString(0, null);
+            Object rawPayload = args.opt(1);
+            JSONObject payload = null;
+            if (rawPayload == null || "null".equalsIgnoreCase(String.valueOf(rawPayload))) {
+                payload = null;
+            } else if (rawPayload instanceof JSONObject) {
+                payload = (JSONObject) rawPayload;
+            } else if (rawPayload instanceof String) {
+                payload = new JSONObject();
+                payload.put("value", rawPayload);
+            }
+            switch (message) {
+                case "ui.speak_aloud_text":
+                    _handleSpeakAloudText(cordova, payload);
+                    break;
+                // Any other message here...
+                default:
+                    break;
+            }
+            callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK));
+
+        } catch (JSONException e) {
+            callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, e.getMessage()));
+        }
+    }
+
+    private void _handleSpeakAloudText(CordovaInterface cordova, JSONObject payload) {
+        ttsManager.speak(payload);
     }
 }

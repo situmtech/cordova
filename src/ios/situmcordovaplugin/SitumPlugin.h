@@ -36,6 +36,7 @@
 - (void)fetchPoiCategoryIconSelected:(CDVInvokedUrlCommand *)command;
 - (void)invalidateCache:(CDVInvokedUrlCommand *)command;
 - (void)requestDirections:(CDVInvokedUrlCommand *)command;
+- (void)internalHandleMapViewMessage:(CDVInvokedUrlCommand *)command;
 // Realtime
 - (void)requestRealTimeUpdates:(CDVInvokedUrlCommand *)command;
 - (void)removeRealTimeUpdates:(CDVInvokedUrlCommand *)command;

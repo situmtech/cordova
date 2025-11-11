@@ -66,16 +66,18 @@ class MapView extends HTMLElement {
   connectedCallback() {
     MapViewController._prepare(this);
     MapViewController._getDeviceId((deviceId) => {
-      this.innerHTML = `
-        <iframe
-          id="map-view-iframe"
-          src="${this._getViewerURL(deviceId)}"
-          width="100%"
-          height="100%"
-          style="border: none; box-shadow: none;"
-        />
-      `;
+      const iframe = document.createElement('iframe');
+      iframe.setAttribute('id', 'map-view-iframe');
+      iframe.setAttribute('src', this._getViewerURL(deviceId));
+      iframe.setAttribute('width', '100%');
+      iframe.setAttribute('height', '100%');
+      iframe.style.border = 'none';
+      iframe.style.boxShadow = 'none';
+
+      this.innerHTML = '';
+      this.appendChild(iframe);
     });
+
     window.addEventListener('message', this._messageReceivedCallback);
   }
 
