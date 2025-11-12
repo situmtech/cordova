@@ -1,6 +1,7 @@
 #import "SitumPlugin.h"
 #import "SitumLocationWrapper.h"
 #import "SITUtils.h"
+#import "SITTextToSpeechManager.h"
 
 
 #import <Cordova/CDVAvailability.h>
@@ -17,6 +18,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 @interface SitumPlugin() {}
         
 @property (nonatomic, strong) SITRoute *computedRoute;
+@property (nonatomic, strong) SITTextToSpeechManager *ttsManager;
 
 @end
 
@@ -122,7 +124,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
         if (IS_LOG_ENABLED) {
             NSLog(@"%@", [NSString stringWithFormat: @"%@ %@ Fetching buildings returned values", DEFAULT_SITUM_LOG, operation]);
         }
-        NSArray *buildings = [mapping valueForKey:ResultsKey];
+        NSArray *buildings = [[mapping valueForKey:ResultsKey] copy];
         CDVPluginResult* pluginResult = nil;
         if (buildings.count == 0) {
             if (IS_LOG_ENABLED) {
@@ -626,6 +628,60 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
     [[SITCommunicationManager sharedManager] clearCache];
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:obj.copy];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
+// MapView messages:
+
+- (void)internalHandleMapViewMessage:(CDVInvokedUrlCommand *)command {
+    if (command.arguments.count != 2) {
+        return;
+    }
+    
+    @try {
+        id message = command.arguments[0];
+        id rawPayload = command.arguments[1];
+        NSDictionary *payload = nil;
+
+        if (rawPayload == [NSNull null] ||
+            ([rawPayload isKindOfClass:[NSString class]] &&
+             [((NSString *)rawPayload).lowercaseString isEqualToString:@"null"])) {
+            payload = nil;
+        } else if ([rawPayload isKindOfClass:[NSDictionary class]]) {
+            payload = rawPayload;
+        } else if ([rawPayload isKindOfClass:[NSString class]]) {
+            payload = @{ @"value": rawPayload };
+        }
+
+        NSDictionary *handlers = @{
+            @"ui.speak_aloud_text": ^{
+                [self handleSpeakAloudText:payload];
+            },
+            // Any other MapView message that should be handled natively...
+        };
+
+        void (^handler)(void) = handlers[message];
+        if (handler) handler();
+
+        CDVPluginResult *pluginResult =
+            [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+        [self.commandDelegate sendPluginResult:pluginResult
+                                    callbackId:command.callbackId];
+
+    }
+    @catch (NSException *exception) {
+        CDVPluginResult *pluginResult =
+            [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                               messageAsString:exception.reason];
+        [self.commandDelegate sendPluginResult:pluginResult
+                                    callbackId:command.callbackId];
+    }
+}
+
+- (void)handleSpeakAloudText:(NSDictionary *)payload {
+    if (!_ttsManager) {
+        _ttsManager = [[SITTextToSpeechManager alloc] init];
+    }
+    [self.ttsManager speakWithPayload:payload];
 }
 
 // Realtime 

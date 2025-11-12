@@ -76,7 +76,6 @@ class MapViewControllerImpl {
         this._navigationType = 'sdk';
       }
     }
-     
   }
 
   _setOnLoadCallback(callback) {
@@ -152,16 +151,7 @@ class MapViewControllerImpl {
   _handleMapViewMessages(m) {
     switch (m.type) {
       case 'app.map_is_ready':
-        if (
-          this._onLoadCallback &&
-          typeof this._onLoadCallback === 'function'
-        ) {
-          this._onLoadCallback(this);
-          console.debug('Map is ready!');
-        }
-        if (this._navigationType) {
-          this._sendNavigationConfig(this._navigationType);
-        }
+        this._handleMapIsReady();
         break;
       case 'cartography.poi_selected':
         console.debug(`poi (${m.payload.identifier}) was selected`);
@@ -200,10 +190,29 @@ class MapViewControllerImpl {
       case 'viewer.navigation.stopped':
         this._onViewerNavigationStopped(m.payload);
         break;
+      case 'ui.speak_aloud_text': 
+      // case ...: Add here any other message that must be delegated to the native side.
+        this._internalHandleMapViewMessage(m.type, m.payload);
+        break;
       default:
         console.debug('Got unmanaged message: ', m);
         break;
     }
+  }
+
+  _handleMapIsReady() {
+    if (this._onLoadCallback &&
+        typeof this._onLoadCallback === 'function') {
+      this._onLoadCallback(this);
+      console.debug('Map is ready!');
+    }
+    if (this._navigationType) {
+      this._sendNavigationConfig(this._navigationType);
+    }
+    this._sendMessageToViewer('app.set_config_item', [
+      {key: "internal.tts.engine", value: "mobile"},
+      // Any other config item here...
+    ]);
   }
 
   // Fetch the given building and return it or undefined if not found.
@@ -384,7 +393,9 @@ class MapViewControllerImpl {
     Situm.updateNavigationState(externalNavigation,  () => {}, () => {});
   }
 
-
+  _internalHandleMapViewMessage(message, webPayload) {
+    Situm.internalHandleMapViewMessage(message, webPayload);
+  }
 
   // ==================================================
   // ACTIONS

@@ -41,6 +41,14 @@ var Situm = {
     _internalEventDelegate = callback;
   },
   /**
+   * An internal method.
+   * @param {string} message MapView message key.
+   * @param {object} payload MapView message payload.
+   */
+  internalHandleMapViewMessage: function(message, payload) {
+    exec(() => {}, () => {}, PLUGIN_NAME, 'internalHandleMapViewMessage', [message, payload]);
+  },
+  /**
    * Provides your API key to the Situm SDK.
    * @description Provides your API key to the Situm SDK. This key is generated for your application in the Dashboard. Old credentials will be removed.
    * @param {string} email Email that identifies the account. Can't be empty.
