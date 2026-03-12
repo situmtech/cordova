@@ -115,16 +115,22 @@ public class PluginHelper {
     }
 
     public void onResume() {
-        ttsManager.setCanSpeak(true);
+        if (ttsManager != null) {
+            ttsManager.setCanSpeak(true);
+        }
     }
 
     public void onPause() {
-        ttsManager.setCanSpeak(false);
+        if (ttsManager != null) {
+            ttsManager.setCanSpeak(false);
+        }
     }
 
     public void onDestroy() {
-        ttsManager.stop();
-        ttsManager = null;
+        if (ttsManager != null) {
+            ttsManager.stop();
+            ttsManager = null;
+        }
         locationListener = null;
         locationRequest = null;
         navigationListener = null;
@@ -1048,6 +1054,8 @@ public class PluginHelper {
     }
 
     private void _handleSpeakAloudText(CordovaInterface cordova, JSONObject payload) {
-        ttsManager.speak(payload);
+        if (ttsManager != null) {
+            ttsManager.speak(payload);
+        }
     }
 }
