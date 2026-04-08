@@ -72,7 +72,7 @@ jobs:
               pod install
 
               echo -e "\n[+] Execute xcode tests \n"
-
+              xcrun simctl list > /dev/null # Try to minimize some weird errors because not finding emulators
               xcodebuild test -workspace SitumCordovaPlugin.xcworkspace -scheme CordovaLib -destination $(iosSimulator)
 
               if [ $? -ne 0 ];then
