@@ -123,12 +123,11 @@ jobs:
 
         steps:
           - bash: |
-              cd cordova
 
-              echo -e "\n[+] Install pnpm dependencies \n"
+              echo -e "\n[+] Install dependencies \n"
               pnpm install
 
-              echo -e "\n[+] Execute pnpm tests \n"
+              echo -e "\n[+] Execute tests \n"
               pnpm test
             displayName: JS Test
 
