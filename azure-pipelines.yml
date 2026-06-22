@@ -187,7 +187,7 @@ jobs:
 
               cd cordova
               echo -e "\n[+] Setting NPM version to $(version)"
-              #pnpm version $(version) --no-git-tag-version
+              pnpm version $(version) --no-git-tag-version
 
               echo -e "\n[+] Change plugin version in plugin.xml"
               sed -i "s/version=\".*\">/version=\"$(version)\">/g" plugin.xml
