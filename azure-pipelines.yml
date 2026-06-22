@@ -123,6 +123,8 @@ jobs:
 
         steps:
           - bash: |
+              echo -e "\n[+] Installing PNPM version $(pnpmVersion)\n"
+              npm install -g $(pnpmVersion) 
 
               echo -e "\n[+] Install dependencies \n"
               pnpm install
