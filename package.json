@@ -10,6 +10,7 @@
     "url": "https://github.com/situmtech/cordova/issues"
   },
   "homepage": "https://github.com/situmtech/cordova#readme",
+  "packageManager": "pnpm@11.5.0",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
