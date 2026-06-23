@@ -121,6 +121,7 @@ steps:
 
           corepack enable
           corepack prepare pnpm@$(pnpmVersion) --activate
+          pnpm setup
 
           pnpm i -g $(office365Cli)
 
