@@ -172,7 +172,7 @@ jobs:
 
               echo -e "\n[+] Variables:"
               echo -e "\t[+] Plugin version: $(version)"
-              echo -e "\t[+] NPM CLI version: $(pnpm --version)"
+              echo -e "\t[+] PNPM CLI version: $(pnpm --version)"
               echo -e "\t[+] Current branch: $currentBranch"
 
               echo -e "\n[+] Setting git remote credentials\n"
