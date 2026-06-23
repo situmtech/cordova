@@ -124,7 +124,8 @@ jobs:
         steps:
           - bash: |
               echo -e "\n[+] Installing PNPM version $(pnpmVersion)\n"
-              npm install -g $(pnpmVersion) 
+              corepack enable
+              corepack prepare pnpm@$(pnpmVersion) --activate
 
               echo -e "\n[+] Install dependencies \n"
               pnpm install
