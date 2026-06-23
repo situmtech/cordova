@@ -119,9 +119,8 @@ steps:
 
           echo -e "\n[+] Install $(office365Cli) cli\n"
 
-          corepack enable
-          corepack prepare pnpm@$(pnpmVersion) --activate
-          pnpm setup
+          export PNPM_HOME="$HOME/.local/share/pnpm"
+          export PATH="$PNPM_HOME:$PNPM_HOME/bin:$PATH"
 
           pnpm i -g $(office365Cli)
 
