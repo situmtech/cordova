@@ -30,6 +30,8 @@ steps:
       echo -e "\n[+] Installing PNPM version $(pnpmVersion)\n"
       npm install -g $(pnpmVersion) 
 
+      pnpm setup
+
       echo -e "\n[+] Install $(ioniccli)\n"
       pnpm install $(ioniccli)
 
