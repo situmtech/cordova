@@ -120,7 +120,6 @@ steps:
           echo -e "\n[+] Install $(office365Cli) cli\n"
 
           export PNPM_HOME="$HOME/.local/share/pnpm"
-          export PATH="$PNPM_HOME:$PNPM_HOME/bin:$PATH"
 
           pnpm i -g $(office365Cli)
 
