@@ -39,7 +39,7 @@ git clone https://github.com/situmtech/cordova.git
 
 ```bash
 cd cordova/example
-npm install
+pnpm install
 ```
 
 > [!TIP]
@@ -78,9 +78,16 @@ From the `example/` folder, execute the following command to run the app on your
 
 ```bash
 # For Android devices
-ionic cap run android
+pnpm run cap:android
 # For iOS devices
-ionic cap run ios
+pnpm run cap:ios
+```
+
+You can also run the same commands from the repository root:
+
+```bash
+pnpm --dir example run cap:android
+pnpm --dir example run cap:ios
 ```
 
 > [!NOTE]
