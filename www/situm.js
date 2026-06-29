@@ -3,6 +3,8 @@ const common = require('@situm/cordova.common-utils');
 
 var PLUGIN_NAME = 'SitumPlugin';
 let _internalEventDelegate = undefined;
+let _internalTokenCallback = undefined;
+let _token = String;
 
 let _clientLocationUpdateCallback;
 let _clientLocationStatusCallback;
@@ -48,6 +50,12 @@ var Situm = {
   internalHandleMapViewMessage: function(message, payload) {
     exec(() => {}, () => {}, PLUGIN_NAME, 'internalHandleMapViewMessage', [message, payload]);
   },
+  internalGetToken: function() {
+    return _token;
+  },
+  internalSetTokenCallback: function(callback) {
+    _internalTokenCallback = callback;
+  },
   /**
    * Provides your API key to the Situm SDK.
    * @description Provides your API key to the Situm SDK. This key is generated for your application in the Dashboard. Old credentials will be removed.
@@ -62,6 +70,21 @@ var Situm = {
   },
   setUseRemoteConfig: function (useRemoteConfig, cb, error) {
     exec(cb, error, PLUGIN_NAME, 'setUseRemoteConfig', [useRemoteConfig]);
+  },
+  /**
+   * Provides your token to the Situm SDK.
+   * @description Provides your token to the Situm SDK. You need to generate this token and handle the token refresh.
+   * @param {string} base64Token Email that identifies the account. Can't be empty.
+   * @param {function} cb Cordova native callback to recive data.
+   * @param {function} error Cordova native callback to recive errors.
+   * @return {boolean} success True if operation finished successfully, otherwise false
+   */
+  setToken: function (base64Token, cb, error) {
+    _token = base64Token;
+    if (_internalTokenCallback) {
+      _internalTokenCallback(base64Token);
+    }
+    exec(cb, error, PLUGIN_NAME, 'setToken', [base64Token]);
   },
   /**
    * Provides user's email and password.

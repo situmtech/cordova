@@ -99,7 +99,7 @@ class MapView extends HTMLElement {
       ? this.getAttribute('language')
       : '';
 
-    let situmApiKeyQP = situmApiKey.length > 0 ? `apikey=${situmApiKey}` : '';
+    let situmApiKeyQP = situmApiKey.length > 0 ? `apikey=${situmApiKey}` : 'wait_for_auth=true';
     let buildingIdentifierQP =
       buildingIdentifier.length > 0 ? `&buildingid=${buildingIdentifier}` : '';
     let languageQP = language.length > 0 ? `&lng=${language}` : '';
