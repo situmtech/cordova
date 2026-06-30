@@ -1,0 +1,6 @@
+allowBuilds:
+  esbuild: true
+  nice-napi: true
+minimumReleaseAge: 4320
+packages:
+  - "example"

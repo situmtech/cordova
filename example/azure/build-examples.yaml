@@ -119,7 +119,10 @@ steps:
 
           echo -e "\n[+] Install $(office365Cli) cli\n"
 
-          npm i -g $(office365Cli)
+          export PNPM_HOME="$HOME/.local/share/pnpm"
+          export PATH="$PNPM_HOME:$PNPM_HOME/bin:$PATH"
+
+          pnpm i -g $(office365Cli)
 
           echo -e "\n[+] Login in Sharepoint \n"
           m365 login --authType password --userName $(sharepoint_user)  --password $(sharepoint_pass) --appId $(sharepoint_appId)

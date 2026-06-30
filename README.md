@@ -620,8 +620,7 @@ cordova.plugins.MapView.onLoad((controller: any) => {
     1.  Install mocha and expect.js:
 
     ```javascript
-    npm install mocha --save
-    npm install expect.js --save
+    pnpm add -D mocha expect.js
     ```
 
     2. In js tests folder run:
