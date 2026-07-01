@@ -99,13 +99,13 @@ class MapView extends HTMLElement {
       ? this.getAttribute('language')
       : '';
 
-    let situmApiKeyQP = situmApiKey.length > 0 ? `apikey=${situmApiKey}` : 'wait_for_auth=true';
+    let authQP = situmApiKey.length > 0 ? `apikey=${situmApiKey}` : 'wait_for_auth=true';
     let buildingIdentifierQP =
       buildingIdentifier.length > 0 ? `&buildingid=${buildingIdentifier}` : '';
     let languageQP = language.length > 0 ? `&lng=${language}` : '';
     let deviceIdQP = deviceId ? `&deviceId=${deviceId}` : '';
 
-    let query = `${situmApiKeyQP}${buildingIdentifierQP}${languageQP}${deviceIdQP}&mode=embed`;
+    let query = `${authQP}${buildingIdentifierQP}${languageQP}${deviceIdQP}&mode=embed`;
 
     let remoteIdentifier = this.getAttribute('remote-identifier');
     if (remoteIdentifier && remoteIdentifier.length > 0) {
