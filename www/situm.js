@@ -72,9 +72,24 @@ var Situm = {
     exec(cb, error, PLUGIN_NAME, 'setUseRemoteConfig', [useRemoteConfig]);
   },
   /**
-   * Provides your token to the Situm SDK.
-   * @description Provides your token to the Situm SDK. You need to generate this token and handle the token refresh.
-   * @param {string} base64Token Email that identifies the account. Can't be empty.
+   * Provides your token to the Situm SDK. Any previously configured credentials will be replaced.
+   * <p>The SDK does not cryptographically validate the token signature, nor does it verify the
+   * token against Situm servers when this method is called. The token is parsed locally only to
+   * obtain the account information needed by the SDK, and it will be sent as a Bearer token in
+   * subsequent authenticated network requests.</p>
+   * 
+   * <p>If the provided token is expired, has an invalid signature, or is otherwise rejected by
+   * Situm servers, network operations that require server authentication will fail. However,
+   * features that can operate with already cached local data may continue to work, such as
+   * visualizing cached resources or positioning with previously downloaded positioning data.</p>
+   * 
+   * <p>User-provided tokens cannot be renewed automatically by the SDK. To recover from an
+   * expired or rejected token, provide a new token by calling this method again.</p>
+   * 
+   * @description Provides your token to the Situm SDK. Any previously configured credentials will be replaced.
+   * @param {string} base64Token String representing the token used for authentication; must not be {@code null} or empty.
+   *                             The expected format is a base64-encoded JWT with header, payload and signature sections.
+   *                             This token can be retrieved from <a href="https://developers.situm.com/pages/rest/openapi/#tag/jwt/POST/api/v1/auth/access_tokens">a REST endpoint</a>.
    * @param {function} cb Cordova native callback to recive data.
    * @param {function} error Cordova native callback to recive errors.
    * @return {boolean} success True if operation finished successfully, otherwise false
