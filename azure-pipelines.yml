@@ -187,6 +187,11 @@ jobs:
           - bash: |
 
               cd cordova
+
+              echo -e "\n[+] Installing PNPM version $(pnpmVersion)\n"
+              corepack enable
+              corepack prepare pnpm@$(pnpmVersion) --activate
+
               echo -e "\n[+] Setting NPM version to $(version)"
               pnpm version $(version) --no-git-tag-version
 
@@ -233,7 +238,7 @@ jobs:
               echo "//registry.npmjs.org/:_authToken=$(NPM_TOKEN)" > ~/.npmrc
 
               echo -e "\n[+] Publish NPM packages"
-              pnpm publish --access=public
+              pnpm publish --access public
 
             displayName: NPM publish
 
