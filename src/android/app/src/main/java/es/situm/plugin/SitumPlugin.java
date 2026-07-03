@@ -86,6 +86,14 @@ public class SitumPlugin extends CordovaPlugin {
       String email = args.getString(0);
       String password = args.getString(1);
       es.situm.sdk.SitumSdk.configuration().setUserPass(email, password);
+    } else if (action.equalsIgnoreCase("setToken")) {
+      try {
+        String token = args.getString(0);
+        es.situm.sdk.SitumSdk.configuration().setToken(token);
+      } catch(IllegalArgumentException e) {
+        Log.d(TAG,"Error setting authentication token: " + e);
+        return false;  
+      }
     } else if (action.equalsIgnoreCase("setCacheMaxAge")) {    
       Integer cacheAge = args.getInt(0);
       Log.d(TAG,"Setting cache max age to " + cacheAge + " seconds");
