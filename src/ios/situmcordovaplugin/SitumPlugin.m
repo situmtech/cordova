@@ -29,7 +29,22 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 - (void)setApiKey:(CDVInvokedUrlCommand *)command {
     NSString* email = [command.arguments objectAtIndex:0];
     NSString* apiKey = [command.arguments objectAtIndex:1];
-    [SITServices provideAPIKey:apiKey forEmail:email];
+    [SITServices setApiKey:apiKey];
+    
+    if (IS_LOG_ENABLED) {
+        NSArray *allPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [allPaths objectAtIndex:0];
+        NSString *pathForLog = [documentsDirectory stringByAppendingPathComponent:@"logging.txt"];
+        freopen([pathForLog cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
+
+        NSLog(@"%@", [NSString stringWithFormat: @"%@ Logging ios calls", DEFAULT_SITUM_LOG]);
+    }
+
+}
+
+- (void)setToken:(CDVInvokedUrlCommand *)command {
+    NSString* token = [command.arguments objectAtIndex:0];
+    [SITServices setToken:token];
     
     if (IS_LOG_ENABLED) {
         NSArray *allPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -50,7 +65,7 @@ static NSString *DEFAULT_SITUM_LOG = @"SitumSDK >>: ";
 - (void)setUserPass:(CDVInvokedUrlCommand *)command {
     NSString* email = [command.arguments objectAtIndex:0];
     NSString* password = [command.arguments objectAtIndex:1];
-    [SITServices provideUser:email password:password];
+    [SITServices setUser:email pass:password];
 }
 
 - (void)setCacheMaxAge:(CDVInvokedUrlCommand *)command {

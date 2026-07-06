@@ -53,9 +53,11 @@ class MapViewControllerImpl {
   _mapView = undefined;
   _isNavigating = false;
   _navigationType = "";
+  _isWaitingForAuth = false;
 
   constructor() {
     Situm.internalSetEventDelegate(this._handleSdkNativeEvents.bind(this));
+    Situm.internalSetTokenCallback(this._handleTokenSet.bind(this));
   }
 
   _prepare(mapView) {
@@ -153,6 +155,9 @@ class MapViewControllerImpl {
       case 'app.map_is_ready':
         this._handleMapIsReady();
         break;
+      case 'app.ready_for_auth':
+        this._handleReadyForAuth();
+        break;
       case 'cartography.poi_selected':
         console.debug(`poi (${m.payload.identifier}) was selected`);
         const poiSelectedResult = {
@@ -213,6 +218,26 @@ class MapViewControllerImpl {
       {key: "internal.tts.engine", value: "mobile"},
       // Any other config item here...
     ]);
+  }
+
+  _handleReadyForAuth() {
+    this._isWaitingForAuth = true;
+    this._sendTokenToViewer(Situm.internalGetToken());
+  }
+
+  _handleTokenSet(token) {
+    if (this._isWaitingForAuth) {
+      this._sendTokenToViewer(token);
+    }
+  }
+
+  _sendTokenToViewer(token) {
+    if (!token) {
+      return;
+    }
+    this._sendMessageToViewer('app.set_auth', 
+      {jwt: token}
+    );
   }
 
   // Fetch the given building and return it or undefined if not found.
