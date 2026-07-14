@@ -18,7 +18,9 @@ ion-item.custom {
   --margin-end: 0px;
 }
 
-ion-textarea.custom {
-  --placeholder-color: black;
-  --placeholder-opacity: 1;
+ion-textarea.positioning-info-textarea {
+  display: block;
+  max-height: 200vh;
+  overflow-y: auto;
+  --color: var(--ion-color-dark);
 }
