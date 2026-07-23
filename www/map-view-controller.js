@@ -214,19 +214,21 @@ class MapViewControllerImpl {
 
   _onViewerNavigationUpdated(webPayload) {
     let messageType;
-    if (webPayload.type == "PROGRESS") {
-      messageType = 'NavigationUpdated';
-    } else if (webPayload.type == "DESTINATION_REACHED") {
-      messageType = 'DestinationReached';
-    } else if (webPayload.type == "OUT_OF_ROUTE") {
-      messageType = 'OutsideRoute';
+    switch (webPayload.type) {
+      case 'PROGRESS':
+        messageType = 'NavigationUpdated';
+        break;
+      case 'DESTINATION_REACHED':
+        messageType = 'DestinationReached';
+        break;
+      case 'OUT_OF_ROUTE':
+        messageType = 'OutsideRoute';
+        break;
+      default:
+        return;
     }
 
-    const externalNavigation = {
-      messageType,
-      payload: webPayload
-    };
-
+    const externalNavigation = { messageType, payload: webPayload };
     Situm.updateNavigationState(externalNavigation, () => { }, () => { });
   }
 
