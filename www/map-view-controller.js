@@ -49,10 +49,7 @@ class MapViewControllerImpl {
   _onLoadCallback = undefined;
   _onPoiSelectedCallback = undefined;
   _onPoiDeselectedCallback = undefined;
-  _buildings = undefined;
   _mapView = undefined;
-  _isNavigating = false;
-  _navigationType = "";
   _isWaitingForAuth = false;
 
   constructor() {
@@ -62,21 +59,12 @@ class MapViewControllerImpl {
 
   _prepare(mapView) {
     this._mapView = mapView;
-    let useViewerNavigation = mapView.getAttribute('use-viewer-navigation')
-      ? mapView.getAttribute('use-viewer-navigation')
-      : null;
-    if (useViewerNavigation != null) {
-      this._setNavigationType(useViewerNavigation);
-    }
-  }
 
-  _setNavigationType(useViewerNavigation) {
-    if (useViewerNavigation) {
-      if (useViewerNavigation === "true") {
-        this._navigationType = 'webAssembly';
-      } else {
-        this._navigationType = 'sdk';
-      }
+    if (mapView.hasAttribute('use-viewer-navigation')) {
+      console.warn(
+        'Situm> MapView> [!] The "use-viewer-navigation" attribute is deprecated and ignored. ' +
+        'The MapView always uses its own routing and navigation library.'
+      );
     }
   }
 
@@ -127,17 +115,6 @@ class MapViewControllerImpl {
 
   _handleOnLocationUpdate(payload) {
     this._sendMessageToViewer('location.update', payload);
-    if (this._isNavigating) {
-      Situm.updateNavigationWithLocation(
-        [payload],
-        () => {
-          // Do nothing.
-        },
-        () => {
-          console.error('Error at updateNavigationWithLocation');
-        }
-      );
-    }
   }
 
   _handleOnLocationStatus(payload) {
@@ -177,15 +154,6 @@ class MapViewControllerImpl {
         };
         this._onPoiDeselectedCallback(poiDeselectedResult);
         break;
-      case 'directions.requested':
-        this._onDirectionsRequested(m.payload);
-        break;
-      case 'navigation.requested':
-        this._onNavigationRequested(m.payload);
-        break;
-      case 'navigation.stopped':
-        this._onNavigationCancel();
-        break;
       case 'viewer.navigation.started':
         this._onViewerNavigationStarted(m.payload);
         break;
@@ -210,9 +178,6 @@ class MapViewControllerImpl {
         typeof this._onLoadCallback === 'function') {
       this._onLoadCallback(this);
       console.debug('Map is ready!');
-    }
-    if (this._navigationType) {
-      this._sendNavigationConfig(this._navigationType);
     }
     this._sendMessageToViewer('app.set_config_item', [
       {key: "internal.tts.engine", value: "mobile"},
@@ -240,180 +205,34 @@ class MapViewControllerImpl {
     );
   }
 
-  // Fetch the given building and return it or undefined if not found.
-  _ensureBuilding(buildingId, callback) {
-    if (this._buildings) {
-      let building = this._buildings.find(
-        (b) => b.buildingIdentifier == buildingId
-      );
-      callback(building);
-    } else {
-      // Fetch buildings and calculate route.
-      cordova.plugins.Situm.fetchBuildings(
-        (res) => {
-          this._buildings = res;
-          let building = this._buildings.find(
-            (b) => b.buildingIdentifier == buildingId
-          );
-          callback(building);
-        },
-        (err) => {
-          callback(undefined);
-        }
-      );
-    }
-  }
-
-  // DIRECTIONS:
-
-  _onDirectionsRequested(payload) {
-    let directionsRequest = payload.directionsRequest;
-    let mapViewerData = {
-      identifier: payload.identifier,
-      originIdentifier: payload.originIdentifier,
-      destinationIdentifier: payload.destinationIdentifier,
-      type: directionsRequest.accessibilityMode
-    };
-    this._ensureBuilding(payload.buildingIdentifier, (building) => {
-      if (building) {
-        Situm.requestDirections(
-          [
-            building,
-            directionsRequest.from,
-            directionsRequest.to,
-            directionsRequest
-          ],
-          (route) => {
-            this._sendMessageToViewer('directions.update', {
-              ...route,
-              ...mapViewerData
-            });
-          },
-          (error) => {
-            this._sendMessageToViewer('directions.update', {
-              error: -1,
-              identifier: mapViewerData.identifier
-            });
-          }
-        );
-      } else {
-        this._sendMessageToViewer('directions.update', {
-          error: -1,
-          identifier: payload.identifier
-        });
-      }
-    });
-  }
-
   // NAVIGATION
 
-  _onNavigationRequested(payload) {
-    let directionsRequest = payload.directionsRequest;
-    let mapViewerData = {
-      identifier: payload.identifier,
-      originIdentifier: payload.originIdentifier,
-      destinationIdentifier: payload.destinationIdentifier,
-      type: directionsRequest.accessibilityMode
-    };
-    let navigationRequest = payload.navigationRequest;
-    this._ensureBuilding(payload.buildingIdentifier, (building) => {
-      // Request directions again to update the calculated route on the native side.
-      Situm.requestDirections(
-        [
-          building,
-          directionsRequest.from,
-          directionsRequest.to,
-          directionsRequest
-        ],
-        (route) => {
-          this._isNavigating = true;
-          this._sendMessageToViewer('navigation.start', {
-            ...route,
-            ...mapViewerData
-          });
-          Situm.requestNavigationUpdates(
-            [navigationRequest],
-            (progress) => {
-              // Navigation is working, handle different progress types:
-              if (progress.type == 'progress') {
-                progress.type = 'PROGRESS'; // The map-viewer waits for an upper case "type".
-                this._sendMessageToViewer('navigation.update', progress);
-              } else if (progress.type == 'destinationReached') {
-                this._sendMessageToViewer('navigation.update', {
-                  type: 'DESTINATION_REACHED'
-                });
-                this._isNavigating = false;
-              } else if (progress.type == 'userOutsideRoute') {
-                this._sendMessageToViewer('navigation.update', {
-                  type: 'OUT_OF_ROUTE'
-                });
-              }
-            },
-            (error) => {
-              this._sendMessageToViewer('directions.update', {
-                error: -1,
-                identifier: mapViewerData.identifier
-              });
-              this._isNavigating = false;
-            }
-          );
-        },
-        (error) => {
-          this._sendMessageToViewer('directions.update', {
-            error: -1,
-            identifier: mapViewerData.identifier
-          });
-          this._isNavigating = false;
-        }
-      );
-    });
-  }
-
-  _onNavigationCancel() {
-    this._isNavigating = false;
-    Situm.removeNavigationUpdates(
-      () => {
-        // Do nothing.
-      },
-      () => {
-        console.error('Error removing navigation updates.');
-      }
-    );
-  }
-
   _onViewerNavigationStarted(webPayload) {
-    if (this._isNavigating) {
-      return;
-    }
-    this._isNavigating = true;
     let externalNavigation = { messageType: "NavigationStarted", payload: webPayload};
     Situm.updateNavigationState(externalNavigation,  () => {}, () => {});
   }
 
   _onViewerNavigationUpdated(webPayload) {
-    if (!this._isNavigating) {
-      return;
+    let messageType;
+    switch (webPayload.type) {
+      case 'PROGRESS':
+        messageType = 'NavigationUpdated';
+        break;
+      case 'DESTINATION_REACHED':
+        messageType = 'DestinationReached';
+        break;
+      case 'OUT_OF_ROUTE':
+        messageType = 'OutsideRoute';
+        break;
+      default:
+        return;
     }
-    if (webPayload.type == "PROGRESS") {
-      let externalNavigation = { messageType: "NavigationUpdated", payload: webPayload};
-      Situm.updateNavigationState(externalNavigation,  () => {}, () => {});
-    } else if (webPayload.type == "DESTINATION_REACHED") {
-      let externalNavigation = { messageType: "DestinationReached", payload: webPayload};
-      Situm.updateNavigationState(externalNavigation,  () => {}, () => {});
-      this._isNavigating = false;
-    } else if (webPayload.type == "OUT_OF_ROUTE") {
-      let externalNavigation = { messageType: "OutsideRoute", payload: webPayload};
-      Situm.updateNavigationState(externalNavigation,  () => {}, () => {});
-      this._isNavigating = false;
-    }
-    
+
+    const externalNavigation = { messageType, payload: webPayload };
+    Situm.updateNavigationState(externalNavigation, () => { }, () => { });
   }
 
   _onViewerNavigationStopped(webPayload) {
-    if (!this._isNavigating) {
-      return;
-    }
-    this._isNavigating = false;
     let externalNavigation = { messageType: "NavigationCancelled", payload: webPayload};
     Situm.updateNavigationState(externalNavigation,  () => {}, () => {});
   }
@@ -438,10 +257,6 @@ class MapViewControllerImpl {
     this._sendMessageToViewer('cartography.select_poi', {
       identifier: identifier
     });
-  }
-
-  _sendNavigationConfig(navigationType) {
-    this._sendMessageToViewer('app.set_config_item', [{key:'internal.navigationLibrary',value:navigationType}]);
   }
 
   /**
