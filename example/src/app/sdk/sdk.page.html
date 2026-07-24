@@ -93,16 +93,16 @@
   </ion-card>
 
   <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ currentStatus }}</ion-card-title>
+    </ion-card-header>
     <ion-card-content>
-      <ion-item>
-        <ion-label>{{ currentStatus }}</ion-label>
-      </ion-item>
-
       <ion-textarea
-        class="custom"
+        class="positioning-info-textarea"
         [readonly]="true"
-        placeholder="{{ currentPositioningInfo }}"
-        style="height: 60vh"
+        [autoGrow]="false"
+        rows="45"
+        value="{{ currentPositioningInfo }}"
       />
     </ion-card-content>
   </ion-card>
