@@ -89,10 +89,10 @@ jobs:
         steps:
           - task: JavaToolInstaller@0
             inputs:
-              versionSpec: "11"
+              versionSpec: "17"
               jdkArchitectureOption: "x64"
               jdkSourceOption: "PreInstalled"
-            displayName: Install Java 11 for Gradle
+            displayName: Install Java 17 for Gradle
 
           - template: azure/common-steps.yaml
           - bash: |

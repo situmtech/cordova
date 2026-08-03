@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
+    namespace "es.plugin.situm"
     compileSdkVersion 34
     defaultConfig {
         applicationId "es.plugin.situm"

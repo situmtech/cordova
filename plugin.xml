@@ -11,7 +11,7 @@
     <issue>https://github.com/situmtech/situm-cordova-plugin/issues</issue>
 
     <engines>
-        <engine name="cordova-android" version=">=10.0.0" />
+        <engine name="cordova-android" version=">=13.0.0" />
     </engines>
 
     <js-module src="www/map-view.js" name="map-view">
