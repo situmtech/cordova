@@ -47,7 +47,6 @@ pnpm install
 >
 > - node >= 18.13.X
 > - @ionic/cli 7.1.5
-> - gradle 8.13
 > - java 17.0.6
 
 > [!NOTE]
