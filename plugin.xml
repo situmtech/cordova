@@ -12,7 +12,7 @@
 
     <engines>
         <!-- Keep this version in sync with the corresponding engine version in package.json -->
-        <engine name="cordova-android" version=">=13.0.0" />
+        <engine name="cordova-android" version=">=11.0.0" />
     </engines>
 
     <js-module src="www/map-view.js" name="map-view">
