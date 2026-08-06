@@ -10,8 +10,6 @@ import {
   IonCardContent,
   IonCardTitle,
   IonItem,
-  IonLabel,
-  IonList,
   IonIcon,
   IonTextarea,
   IonRow,
@@ -20,7 +18,7 @@ import {
   NavController,
   Platform
 } from '@ionic/angular/standalone';
-import { NgFor, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { locate, cloudDownload, map } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 
@@ -45,14 +43,11 @@ declare let cordova: any;
     IonCardTitle,
     IonCardContent,
     IonButton,
-    IonLabel,
     IonItem,
-    IonList,
     IonRow,
     IonIcon,
     IonTextarea,
     IonPicker,
-    NgFor,
     NgIf
   ]
 })

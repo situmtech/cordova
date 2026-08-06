@@ -4,5 +4,10 @@ allowBuilds:
 blockExoticSubdeps: true
 minimumReleaseAge: 10080
 trustPolicy: no-downgrade
+trustPolicyExclude:
+  - "chokidar@4.0.3"
+  - "ua-parser-js@0.7.41"
+  - "semver@6.3.1"
+  - "semver@5.7.2"
 packages:
   - "example"
