@@ -7,7 +7,6 @@ trustPolicy: no-downgrade
 trustPolicyExclude:
   - "chokidar@4.0.3"
   - "ua-parser-js@0.7.41"
-  - "semver@6.3.1"
-  - "semver@5.7.2"
+  - "semver@5.7.2 || 6.3.1"
 packages:
   - "example"
