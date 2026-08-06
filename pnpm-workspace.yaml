@@ -1,6 +1,9 @@
 allowBuilds:
   esbuild: true
   nice-napi: true
+  "@parcel/watcher": false
+  lmdb: false
+  msgpackr-extract: false
 blockExoticSubdeps: true
 minimumReleaseAge: 10080
 trustPolicy: no-downgrade
