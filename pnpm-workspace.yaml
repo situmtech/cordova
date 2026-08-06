@@ -1,6 +1,8 @@
 allowBuilds:
   esbuild: true
   nice-napi: true
-minimumReleaseAge: 4320
+blockExoticSubdeps: true
+minimumReleaseAge: 10080
+trustPolicy: no-downgrade
 packages:
   - "example"
