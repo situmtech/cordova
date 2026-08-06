@@ -1,6 +1,5 @@
 allowBuilds:
   esbuild: true
-  nice-napi: true
   "@parcel/watcher": false
   lmdb: false
   msgpackr-extract: false
