@@ -43,7 +43,8 @@ steps:
           cd example
 
           echo -e "\n[+] Build ios app\n"
-          npx ionic cap sync ios
+          pnpm run build
+          cap sync ios
 
           cd ios/App
 
@@ -91,7 +92,8 @@ steps:
           cd example
 
           echo -e "\n[+] Build android app \n"
-          npx ionic capacitor sync android
+          pnpm run build
+          cap sync android
 
           cd android
           ./gradlew assembleDebug

@@ -1,4 +1,4 @@
-import { Component, NgZone } from '@angular/core';
+import { Component, inject, NgZone } from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
@@ -52,16 +52,16 @@ declare let cordova: any;
   ]
 })
 export class SDKPage {
+  private ngZone = inject(NgZone);
+  private navCtrl = inject(NavController);
+  public platform = inject(Platform);
+
   buildings: Array<any> | undefined;
   currentBuilding: any | undefined;
   pois: any | undefined;
   currentPoi: any | undefined;
 
-  constructor(
-    private ngZone: NgZone,
-    private navCtrl: NavController,
-    public platform: Platform
-  ) {
+  constructor() {
     addIcons({ locate, cloudDownload, map });
   }
 
