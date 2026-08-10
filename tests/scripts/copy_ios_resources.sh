@@ -1,3 +1,3 @@
 #! /bin/bash
 
-cp -r tests/common-resources/ src/ios/situmcordovaplugintests/resources/
+cp -r tests/common-resources/ tests/ios/situmcordovaplugintests/resources/

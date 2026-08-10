@@ -68,7 +68,7 @@ jobs:
               tests/scripts/copy_ios_resources.sh
 
               echo -e "\n[+] Pod install \n"
-              cd src/ios 
+              cd tests/ios
               pod install
 
               echo -e "\n[+] Execute xcode tests \n"

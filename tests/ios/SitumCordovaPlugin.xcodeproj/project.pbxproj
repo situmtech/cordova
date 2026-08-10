@@ -446,7 +446,7 @@
 				954995EE214F8BBB007F3C28 /* Constants.h */,
 				954995EF214F8BBB007F3C28 /* Constants.m */,
 			);
-			path = SitumPlugin;
+			path = ../../src/ios/SitumPlugin;
 			sourceTree = "<group>";
 		};
 		2171956E4E55E1727C64E4E0 /* Pods */ = {
@@ -1000,8 +1000,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Frameworks",
-					"$(PROJECT_DIR)/SitumPlugin",
-					"$(PROJECT_DIR)/SitumPlugin/Frameworks",
+					"$(PROJECT_DIR)/../../src/ios/SitumPlugin",
+					"$(PROJECT_DIR)/../../src/ios/SitumPlugin/Frameworks",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
@@ -1031,8 +1031,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Frameworks",
-					"$(PROJECT_DIR)/SitumPlugin",
-					"$(PROJECT_DIR)/SitumPlugin/Frameworks",
+					"$(PROJECT_DIR)/../../src/ios/SitumPlugin",
+					"$(PROJECT_DIR)/../../src/ios/SitumPlugin/Frameworks",
 				);
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
