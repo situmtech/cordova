@@ -46,6 +46,10 @@ This plugin has two parts:
 - [Configure](https://situm.com/docs/a-basic-cordova-app/) this plugin in your project.
 - [API Reference](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/situm) will help you use a particular class or method.
 
+### iOS linker configuration
+
+When using the plugin with Swift Package Manager, add `$(inherited) -ObjC` to the app target's **Other Linker Flags** (`OTHER_LDFLAGS`) in Xcode. SitumSDK requires this flag to load Objective-C categories at runtime.
+
 ---
 
 ## Versioning
