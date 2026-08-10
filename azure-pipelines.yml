@@ -67,13 +67,9 @@ jobs:
               echo -e "\n[+] Copy JSON test files \n"
               tests/scripts/copy_ios_resources.sh
 
-              echo -e "\n[+] Pod install \n"
-              cd tests/ios
-              pod install
-
               echo -e "\n[+] Execute xcode tests \n"
               xcrun simctl list > /dev/null # Try to minimize some weird errors because not finding emulators
-              xcodebuild test -workspace SitumCordovaPlugin.xcworkspace -scheme CordovaLib -destination $(iosSimulator)
+              xcodebuild test -project tests/ios/SitumCordovaPlugin.xcodeproj -scheme CordovaLib -destination $(iosSimulator)
 
               if [ $? -ne 0 ];then
                 echo -e "\n [!] Error with tests....... \n"

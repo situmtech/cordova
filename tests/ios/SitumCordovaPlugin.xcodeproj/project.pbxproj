@@ -42,6 +42,7 @@
 		0DF4AB1D21143D5800D81A31 /* SitumPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DF4AB1321143D5700D81A31 /* SitumPlugin.h */; };
 		0DF4AB1E21143D5800D81A31 /* SitumPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF4AB1421143D5700D81A31 /* SitumPlugin.m */; };
 		0FB43F032F027E888989A5A6 /* Pods_SitumCordovaPlugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 361A0C80C99309A1162DA760 /* Pods_SitumCordovaPlugin.framework */; };
+		F1A2B3C4D5E6F70809101114 /* SitumCordovaPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = F1A2B3C4D5E6F70809101113 /* SitumCordovaPlugin */; };
 		230FADC12BC815C30079D285 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 230FADB52BC8145A0079D285 /* libc++.tbd */; };
 		2318D0F32CD25DEC0068DF54 /* SitumSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2318D0F22CD25DEC0068DF54 /* SitumSDK.xcframework */; };
 		3A4011372153B0D500AC3BD5 /* InputCoordinateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4011362153B0D500AC3BD5 /* InputCoordinateTests.m */; };
@@ -271,9 +272,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				230FADC12BC815C30079D285 /* libc++.tbd in Frameworks */,
-				0D884A1321145F820066C765 /* libCordova.a in Frameworks */,
-				2318D0F32CD25DEC0068DF54 /* SitumSDK.xcframework in Frameworks */,
+				F1A2B3C4D5E6F70809101114 /* SitumCordovaPlugin in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,7 +629,9 @@
 			buildRules = (
 			);
 			dependencies = (
-				0D884A1521145F820066C765 /* PBXTargetDependency */,
+			);
+			packageProductDependencies = (
+				F1A2B3C4D5E6F70809101113 /* SitumCordovaPlugin */,
 			);
 			name = situmcordovaplugintests;
 			productName = situmcordovaplugintests;
@@ -707,6 +708,9 @@
 				Base,
 			);
 			mainGroup = 0867D691FE84028FC02AAC07;
+			packageReferences = (
+				F1A2B3C4D5E6F70809101112 /* XCLocalSwiftPackageReference "../.." */,
+			);
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -744,6 +748,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		F1A2B3C4D5E6F70809101112 /* XCLocalSwiftPackageReference "../.." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../..;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F1A2B3C4D5E6F70809101113 /* SitumCordovaPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F1A2B3C4D5E6F70809101112 /* XCLocalSwiftPackageReference "../.." */;
+			productName = SitumCordovaPlugin;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		FA6EE7DFE56F7763CB81C9E2 /* [CP] Check Pods Manifest.lock */ = {
@@ -901,11 +920,6 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = ACLL2M4T26;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Frameworks",
-					"$(PROJECT_DIR)/Pods/SitumSDK",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -917,13 +931,14 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = situmcordovaplugintests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "$(inherited) -ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = es.situm.situmcordovaplugintests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -961,24 +976,20 @@
 				DEVELOPMENT_TEAM = ACLL2M4T26;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Frameworks",
-					"$(PROJECT_DIR)/Pods/SitumSDK",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = situmcordovaplugintests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "$(inherited) -ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = es.situm.situmcordovaplugintests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;

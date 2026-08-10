@@ -42,7 +42,6 @@ bin/
 tests/android/\.project
 
 tests/android/\.settings/
-tests/ios/Pods
 tests/ios/situmcordovaplugintests/resources
 tests/ios/SitumCordovaPlugin.xcodeproj/project.xcworkspace/xcuserdata
 tests/ios/SitumCordovaPlugin.xcodeproj/xcuserdata

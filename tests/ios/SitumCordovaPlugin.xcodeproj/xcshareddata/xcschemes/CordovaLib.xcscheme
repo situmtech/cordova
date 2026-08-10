@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D2AAC07D0554694100DB518D"
-               BuildableName = "libCordova.a"
-               BlueprintName = "SitumCordovaPlugin"
+               BlueprintIdentifier = "0D884A0D21145F820066C765"
+               BuildableName = "situmcordovaplugintests.xctest"
+               BlueprintName = "situmcordovaplugintests"
                ReferencedContainer = "container:SitumCordovaPlugin.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -40,15 +40,6 @@
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D2AAC07D0554694100DB518D"
-            BuildableName = "libCordova.a"
-            BlueprintName = "SitumCordovaPlugin"
-            ReferencedContainer = "container:SitumCordovaPlugin.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -62,15 +53,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D2AAC07D0554694100DB518D"
-            BuildableName = "libCordova.a"
-            BlueprintName = "SitumCordovaPlugin"
-            ReferencedContainer = "container:SitumCordovaPlugin.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -80,15 +62,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D2AAC07D0554694100DB518D"
-            BuildableName = "libCordova.a"
-            BlueprintName = "SitumCordovaPlugin"
-            ReferencedContainer = "container:SitumCordovaPlugin.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
