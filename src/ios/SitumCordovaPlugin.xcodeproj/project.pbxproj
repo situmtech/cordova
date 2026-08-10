@@ -37,16 +37,10 @@
 		0D884E7D2116FAA20066C765 /* resources in Resources */ = {isa = PBXBuildFile; fileRef = 0D884E7C2116FAA20066C765 /* resources */; };
 		0D884E832117012F0066C765 /* resources in Resources */ = {isa = PBXBuildFile; fileRef = 0D884E7C2116FAA20066C765 /* resources */; };
 		0D884E87211708900066C765 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0D884A1221145F820066C765 /* Info.plist */; };
-		0DF4AB1721143D5800D81A31 /* AppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DF4AB0621143D5700D81A31 /* AppDelegate.h */; };
-		0DF4AB1821143D5800D81A31 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF4AB0721143D5700D81A31 /* AppDelegate.m */; };
-		0DF4AB1921143D5800D81A31 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF4AB0E21143D5700D81A31 /* main.m */; };
-		0DF4AB1A21143D5800D81A31 /* situmcordovaplugin.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0DF4AB0F21143D5700D81A31 /* situmcordovaplugin.xcdatamodeld */; };
 		0DF4AB1B21143D5800D81A31 /* SitumLocationWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DF4AB1121143D5700D81A31 /* SitumLocationWrapper.h */; };
 		0DF4AB1C21143D5800D81A31 /* SitumLocationWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF4AB1221143D5700D81A31 /* SitumLocationWrapper.m */; };
 		0DF4AB1D21143D5800D81A31 /* SitumPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DF4AB1321143D5700D81A31 /* SitumPlugin.h */; };
 		0DF4AB1E21143D5800D81A31 /* SitumPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF4AB1421143D5700D81A31 /* SitumPlugin.m */; };
-		0DF4AB1F21143D5800D81A31 /* ViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DF4AB1521143D5700D81A31 /* ViewController.h */; };
-		0DF4AB2021143D5800D81A31 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF4AB1621143D5700D81A31 /* ViewController.m */; };
 		0FB43F032F027E888989A5A6 /* Pods_SitumCordovaPlugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 361A0C80C99309A1162DA760 /* Pods_SitumCordovaPlugin.framework */; };
 		230FADC12BC815C30079D285 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 230FADB52BC8145A0079D285 /* libc++.tbd */; };
 		2318D0F32CD25DEC0068DF54 /* SitumSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2318D0F22CD25DEC0068DF54 /* SitumSDK.xcframework */; };
@@ -186,20 +180,10 @@
 		0D884A1D2114634E0066C765 /* TestingHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestingHelper.m; sourceTree = "<group>"; };
 		0D884A1F2114634E0066C765 /* TestingHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestingHelper.h; sourceTree = "<group>"; };
 		0D884E7C2116FAA20066C765 /* resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = resources; sourceTree = "<group>"; };
-		0DF4AB0621143D5700D81A31 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		0DF4AB0721143D5700D81A31 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		0DF4AB0821143D5700D81A31 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0DF4AB0A21143D5700D81A31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		0DF4AB0C21143D5700D81A31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		0DF4AB0D21143D5700D81A31 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0DF4AB0E21143D5700D81A31 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		0DF4AB1021143D5700D81A31 /* situmcordovaplugin.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = situmcordovaplugin.xcdatamodel; sourceTree = "<group>"; };
 		0DF4AB1121143D5700D81A31 /* SitumLocationWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SitumLocationWrapper.h; sourceTree = "<group>"; };
 		0DF4AB1221143D5700D81A31 /* SitumLocationWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SitumLocationWrapper.m; sourceTree = "<group>"; };
 		0DF4AB1321143D5700D81A31 /* SitumPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SitumPlugin.h; sourceTree = "<group>"; };
 		0DF4AB1421143D5700D81A31 /* SitumPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SitumPlugin.m; sourceTree = "<group>"; };
-		0DF4AB1521143D5700D81A31 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		0DF4AB1621143D5700D81A31 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		230FADB52BC8145A0079D285 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk/usr/lib/libc++.tbd"; sourceTree = DEVELOPER_DIR; };
 		2318D0F22CD25DEC0068DF54 /* SitumSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SitumSDK.xcframework; path = ../Pods/SitumSDK/SitumSDK.xcframework; sourceTree = "<group>"; };
 		30325A0B136B343700982B63 /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = "<group>"; };
@@ -325,7 +309,7 @@
 		0867D691FE84028FC02AAC07 = {
 			isa = PBXGroup;
 			children = (
-				0DF4AB0521143D5700D81A31 /* situmcordovaplugin */,
+				0DF4AB0521143D5700D81A31 /* SitumPlugin */,
 				0D884A0F21145F820066C765 /* situmcordovaplugintests */,
 				7ED95D0E1AB9029B008C4574 /* Public */,
 				7ED95CF11AB9028C008C4574 /* Private */,
@@ -452,27 +436,17 @@
 			path = situmcordovaplugintests;
 			sourceTree = "<group>";
 		};
-		0DF4AB0521143D5700D81A31 /* situmcordovaplugin */ = {
+		0DF4AB0521143D5700D81A31 /* SitumPlugin */ = {
 			isa = PBXGroup;
 			children = (
-				0DF4AB0621143D5700D81A31 /* AppDelegate.h */,
-				0DF4AB0721143D5700D81A31 /* AppDelegate.m */,
-				0DF4AB0821143D5700D81A31 /* Assets.xcassets */,
-				0DF4AB0921143D5700D81A31 /* LaunchScreen.storyboard */,
-				0DF4AB0B21143D5700D81A31 /* Main.storyboard */,
-				0DF4AB0D21143D5700D81A31 /* Info.plist */,
-				0DF4AB0E21143D5700D81A31 /* main.m */,
-				0DF4AB0F21143D5700D81A31 /* situmcordovaplugin.xcdatamodeld */,
 				0DF4AB1121143D5700D81A31 /* SitumLocationWrapper.h */,
 				0DF4AB1221143D5700D81A31 /* SitumLocationWrapper.m */,
 				0DF4AB1321143D5700D81A31 /* SitumPlugin.h */,
 				0DF4AB1421143D5700D81A31 /* SitumPlugin.m */,
-				0DF4AB1521143D5700D81A31 /* ViewController.h */,
-				0DF4AB1621143D5700D81A31 /* ViewController.m */,
 				954995EE214F8BBB007F3C28 /* Constants.h */,
 				954995EF214F8BBB007F3C28 /* Constants.m */,
 			);
-			path = situmcordovaplugin;
+			path = SitumPlugin;
 			sourceTree = "<group>";
 		};
 		2171956E4E55E1727C64E4E0 /* Pods */ = {
@@ -609,7 +583,6 @@
 				7ED95D351AB9029B008C4574 /* CDV.h in Headers */,
 				0D5CFD62212C275E00C6E436 /* CDVUIWebViewEngine.h in Headers */,
 				7ED95D3B1AB9029B008C4574 /* CDVCommandDelegateImpl.h in Headers */,
-				0DF4AB1F21143D5800D81A31 /* ViewController.h in Headers */,
 				7ED95D3D1AB9029B008C4574 /* CDVCommandQueue.h in Headers */,
 				7ED95D531AB9029B008C4574 /* CDVWhitelist.h in Headers */,
 				7ED95D361AB9029B008C4574 /* CDVAppDelegate.h in Headers */,
@@ -640,7 +613,6 @@
 				0DF4AB1D21143D5800D81A31 /* SitumPlugin.h in Headers */,
 				0DF4AB1B21143D5800D81A31 /* SitumLocationWrapper.h in Headers */,
 				0D5CFD59212C275E00C6E436 /* CDVLogger.h in Headers */,
-				0DF4AB1721143D5800D81A31 /* AppDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -855,7 +827,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D5CFD60212C275E00C6E436 /* CDVUIWebViewDelegate.m in Sources */,
-				0DF4AB1921143D5800D81A31 /* main.m in Sources */,
 				0D5CFD57212C275E00C6E436 /* CDVHandleOpenURL.m in Sources */,
 				0D5CFD53212C275E00C6E436 /* CDVIntentAndNavigationFilter.m in Sources */,
 				954995F1214F8BBB007F3C28 /* Constants.m in Sources */,
@@ -869,7 +840,6 @@
 				7ED95D421AB9029B008C4574 /* CDVInvokedUrlCommand.m in Sources */,
 				7ED95D4B1AB9029B008C4574 /* CDVTimer.m in Sources */,
 				0D5CFD66212C275E00C6E436 /* CDVUIWebViewEngine.m in Sources */,
-				0DF4AB1A21143D5800D81A31 /* situmcordovaplugin.xcdatamodeld in Sources */,
 				0D5CFD5A212C275E00C6E436 /* CDVLogger.m in Sources */,
 				0D5CFD51212C275E00C6E436 /* CDVGestureHandler.m in Sources */,
 				0D5CFD63212C275E00C6E436 /* CDVUIWebViewNavigationDelegate.m in Sources */,
@@ -882,8 +852,6 @@
 				7ED95D441AB9029B008C4574 /* CDVPlugin+Resources.m in Sources */,
 				7ED95D4D1AB9029B008C4574 /* CDVURLProtocol.m in Sources */,
 				0DF4AB1E21143D5800D81A31 /* SitumPlugin.m in Sources */,
-				0DF4AB1821143D5800D81A31 /* AppDelegate.m in Sources */,
-				0DF4AB2021143D5800D81A31 /* ViewController.m in Sources */,
 				7ED95D461AB9029B008C4574 /* CDVPlugin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -902,25 +870,6 @@
 			targetProxy = C0C01ED11E39137C0056E6CB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		0DF4AB0921143D5700D81A31 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0DF4AB0A21143D5700D81A31 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		0DF4AB0B21143D5700D81A31 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0DF4AB0C21143D5700D81A31 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		0D884A1721145F820066C765 /* Debug */ = {
@@ -1051,8 +1000,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Frameworks",
-					"$(PROJECT_DIR)/situmcordovaplugin",
-					"$(PROJECT_DIR)/situmcordovaplugin/Frameworks",
+					"$(PROJECT_DIR)/SitumPlugin",
+					"$(PROJECT_DIR)/SitumPlugin/Frameworks",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
@@ -1082,8 +1031,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Frameworks",
-					"$(PROJECT_DIR)/situmcordovaplugin",
-					"$(PROJECT_DIR)/situmcordovaplugin/Frameworks",
+					"$(PROJECT_DIR)/SitumPlugin",
+					"$(PROJECT_DIR)/SitumPlugin/Frameworks",
 				);
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1305,18 +1254,6 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCVersionGroup section */
-		0DF4AB0F21143D5700D81A31 /* situmcordovaplugin.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				0DF4AB1021143D5700D81A31 /* situmcordovaplugin.xcdatamodel */,
-			);
-			currentVersion = 0DF4AB1021143D5700D81A31 /* situmcordovaplugin.xcdatamodel */;
-			path = situmcordovaplugin.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
 }
