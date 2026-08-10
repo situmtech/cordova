@@ -1,1 +1,1 @@
-#import <SitumCordovaPlugin/SitumLocationWrapper.h>
+@import SitumCordovaPlugin;

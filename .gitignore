@@ -46,3 +46,9 @@ tests/ios/situmcordovaplugintests/resources
 tests/ios/SitumCordovaPlugin.xcodeproj/project.xcworkspace/xcuserdata
 tests/ios/SitumCordovaPlugin.xcodeproj/xcuserdata
 tests/ios/SitumCordovaPlugin.xcworkspace/xcuserdata
+tests/ios/SitumCordovaPlugin.xcodeproj/project.xcworkspace/xcshareddata/swiftpm
+
+# Swift Package Manager generated files
+.build
+.swiftpm
+Package.resolved

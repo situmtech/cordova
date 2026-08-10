@@ -1,1 +1,1 @@
-#import <SitumCordovaPlugin/Constants.h>
+@import SitumCordovaPlugin;
