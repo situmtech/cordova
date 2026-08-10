@@ -55,7 +55,7 @@
     </platform>
 
     <!-- ios -->
-    <platform name="ios">
+    <platform name="ios" package="swift">
         <js-module src="www/situm.js" name="situm">
             <runs/>
             <clobbers target="cordova.plugins.Situm" />
@@ -94,7 +94,7 @@
             <config>
             </config>
             <pods use-frameworks="false">
-                <pod name="SitumSDK" spec="~> 3.40.0"/>
+                <pod name="SitumSDK" spec="~> 3.40.0" nospm="true" />
             </pods>
         </podspec>
 
