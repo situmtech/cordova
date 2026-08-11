@@ -638,6 +638,23 @@ mocha test
 - [mocha](https://www.npmjs.com/package/mocha), needed to run tests.
 - [expect.js](https://www.npmjs.com/package/expect.js), needed to do assertions.
 
+### Run iOS tests
+
+The iOS tests use JSON fixtures that are generated locally and are not committed. Prepare them before opening the Xcode project or running the tests:
+
+```sh
+tests/scripts/copy_ios_resources.sh
+xcodebuild test -project tests/ios/SitumCordovaPlugin.xcodeproj \
+  -scheme CordovaLib \
+  -destination 'platform=iOS Simulator,name=<simulator name>'
+```
+
+Clean the generated fixtures when they are no longer needed:
+
+```sh
+tests/scripts/clean_ios_resources.sh
+```
+
 ### Note for Android platform
 
 Situm SDK for Android now compiles and targets sdkVersion 31 (Android 12). To work properly on Android 12 devices and above, the host app must:
