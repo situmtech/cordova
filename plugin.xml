@@ -61,9 +61,10 @@
             <clobbers target="cordova.plugins.Situm" />
         </js-module>
         <config-file target="config.xml" parent="/*">
-	        <feature name="SitumPlugin">
+            <feature name="SitumPlugin">
                 <param name="ios-package" value="SitumPlugin" onload="true" />
             </feature>
+            <preference name="deployment-target" value="16.0" />
         </config-file>
 
         <config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
