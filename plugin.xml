@@ -94,7 +94,7 @@
             <config>
             </config>
             <pods use-frameworks="false">
-                <pod name="SitumSDK" spec="~> 3.41.0"/>
+                <pod name="SitumSDK" spec="~> 3.40.0"/>
             </pods>
         </podspec>
 
