@@ -7,10 +7,10 @@ text is provided in the accompanying LICENSE file.
 
 ## Declared native dependencies
 
-| Component                                            | Platform | Version    | License or terms                      |
-| ---------------------------------------------------- | -------- | ---------- | ------------------------------------- |
-| SitumSDK                                             | iOS      | ~> 3.40.0  | Applicable Situm terms and conditions |
-| SitumSDK                                             | Android  | 3.38.0@aar | Applicable Situm terms and conditions |
+| Component                                            | Platform | License or terms                      |
+| ---------------------------------------------------- | -------- | ------------------------------------- |
+| SitumSDK                                             | iOS      | Applicable Situm terms and conditions |
+| SitumSDK                                             | Android  | Applicable Situm terms and conditions |
 
 SitumSDK is a separate product of Situm Technologies. The MIT License for this
 plugin does not grant rights to SitumSDK beyond its applicable terms and
