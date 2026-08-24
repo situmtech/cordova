@@ -1,7 +1,7 @@
 require_relative '../../../node_modules/.pnpm/@capacitor+ios@5.5.1_@capacitor+core@5.7.8/node_modules/@capacitor/ios/scripts/pods_helpers'
 
-platform :ios, '13.0'
-use_frameworks! :linkage => :static
+platform :ios, '16.0'
+use_frameworks!
 
 # workaround to avoid Xcode caching of Pods that requires
 # Product -> Clean Build Folder after new Cordova plugins installed
