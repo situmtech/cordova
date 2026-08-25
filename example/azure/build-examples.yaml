@@ -44,7 +44,7 @@ steps:
 
           echo -e "\n[+] Build ios app\n"
           pnpm run build
-          cap sync ios
+          pnpm exec cap sync ios
 
           cd ios/App
 
@@ -93,7 +93,7 @@ steps:
 
           echo -e "\n[+] Build android app \n"
           pnpm run build
-          cap sync android
+          pnpm exec cap sync android
 
           cd android
           ./gradlew assembleDebug
