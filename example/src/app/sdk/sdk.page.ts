@@ -1,4 +1,4 @@
-import { Component, NgZone } from '@angular/core';
+import { Component, inject, NgZone } from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
@@ -10,8 +10,6 @@ import {
   IonCardContent,
   IonCardTitle,
   IonItem,
-  IonLabel,
-  IonList,
   IonIcon,
   IonTextarea,
   IonRow,
@@ -20,7 +18,7 @@ import {
   NavController,
   Platform
 } from '@ionic/angular/standalone';
-import { NgFor, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { locate, cloudDownload, map } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 
@@ -45,28 +43,25 @@ declare let cordova: any;
     IonCardTitle,
     IonCardContent,
     IonButton,
-    IonLabel,
     IonItem,
-    IonList,
     IonRow,
     IonIcon,
     IonTextarea,
     IonPicker,
-    NgFor,
     NgIf
   ]
 })
 export class SDKPage {
+  private ngZone = inject(NgZone);
+  private navCtrl = inject(NavController);
+  public platform = inject(Platform);
+
   buildings: Array<any> | undefined;
   currentBuilding: any | undefined;
   pois: any | undefined;
   currentPoi: any | undefined;
 
-  constructor(
-    private ngZone: NgZone,
-    private navCtrl: NavController,
-    public platform: Platform
-  ) {
+  constructor() {
     addIcons({ locate, cloudDownload, map });
   }
 
