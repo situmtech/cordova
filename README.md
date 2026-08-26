@@ -636,9 +636,9 @@ mocha test
 
 ### Note for Android platform
 
-Situm SDK for Android now compiles and targets sdkVersion 31 (Android 12). To work properly on Android 12 devices and above, the host app must:
+Situm SDK for Android now compiles and targets sdkVersion 34 (Android 14). To work properly on Android 14 devices and above, the host app must:
 
-- Target android api 31 or above. In your project `config.xml` file, add `<preference name="android-targetSdkVersion" value="31" />` to the Android platform configuration.
+- Target android api 34 or above. In your project `config.xml` file, add `<preference name="android-targetSdkVersion" value="34" />` to the Android platform configuration.
 - Request the runtime permissions `ACCESS_COARSE_LOCATION`, `BLUETOOTH_SCAN` and `BLUETOOTH_CONNECT` (plus `ACCESS_FINE_LOCATION` if you are using [Global Mode](https://situm.com/docs/how-does-situm-work/#5-toc-title)). Remember to also add them to the Android platform section of your `config.xml` file:
 
 ```xml
@@ -669,7 +669,7 @@ Situm SDK for Android now compiles and targets sdkVersion 31 (Android 12). To wo
     xmlns:android="http://schemas.android.com/apk/res/android">
 ```
 
-- If you find problems, also make sure the Gradle JDK points to version 11 in your project configuration (recommended Android Studio embedded JDK).
+- If you find problems, also make sure the Gradle JDK points to version 17 in your project configuration (recommended Android Studio embedded JDK).
 
 ### Capacitor compatibility
 

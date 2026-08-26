@@ -45,17 +45,8 @@ pnpm install
 > [!TIP]
 > You might want to try out this configuration if you are facing some issues to build our sample app:
 >
-> - node >= 18.13.X
-> - @ionic/cli 7.1.5
-> - gradle 8.4
+> - node 20.19+, 22.12+, or 24+
 > - java 17.0.6
-
-> [!NOTE]
-> Make sure you are using `@ionic/cli` and not the deprecated `ionic` npm package. Otherwise you won't be able to build the app and you will receive the following error:
-
-```diff
-- [ERROR] Invalid project type: angular-standalone (project config: ./ionic.config.json).
-```
 
 ### Step 2: Set up your Situm credentials
 

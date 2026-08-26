@@ -31,15 +31,9 @@
   "engines": [
     {
       "name": "cordova-android",
-      "version": ">=6.0.0"
+      "version": ">=11.0.0"
     }
   ],
-  "dependencies": {
-    "cordova-common": "^2.2.5",
-    "describe": "^1.2.0",
-    "q": "^1.5.1",
-    "tui-jsdoc-template": "^1.2.2"
-  },
   "scripts": {
     "test": "cd tests/js && mocha",
     "eslint": "node node_modules/eslint/bin/eslint www && node node_modules/eslint/bin/eslint src && node node_modules/eslint/bin/eslint tests",
@@ -56,6 +50,7 @@
     "expect.js": "^0.3.1",
     "jsdoc": "^3.5.5",
     "jsdoc-toolkit": "0.0.2",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "tui-jsdoc-template": "^1.2.2"
   }
 }
