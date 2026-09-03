@@ -15,7 +15,7 @@ let package = Package(
         .package(url: "https://github.com/apache/cordova-ios.git", branch: "master"),
         .package(
             url: "https://github.com/situmtech/situm-sdk-spm.git",
-            .upToNextMinor(from: "3.40.0")
+            .upToNextMinor(from: "3.41.0")
         )
     ],
     targets: [

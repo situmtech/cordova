@@ -33,9 +33,6 @@ steps:
 
       pnpm setup
 
-      echo -e "\n[+] Install $(ioniccli)\n"
-      pnpm install $(ioniccli)
-
       echo -e "\n[+] Install plugin dependencies\n"
       pnpm install
 

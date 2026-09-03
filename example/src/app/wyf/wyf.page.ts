@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
   ElementRef,
@@ -23,7 +24,7 @@ import * as Constants from 'src/constants';
   standalone: true,
   imports: [IonHeader, IonToolbar, IonTitle, IonThumbnail, IonContent],
 })
-export class WYFPage {
+export class WYFPage implements AfterViewInit {
   @ViewChild('mapView') mapView: ElementRef | undefined;
 
   // Internal code
