@@ -9,7 +9,9 @@ let package = Package(
         .library(name: "SitumCordovaPlugin", targets: ["SitumCordovaPlugin"])
     ],
     dependencies: [
-        // Cordova requires this dependency to resolve plugin packages.
+        // Keep this exact URL and branch format; see
+        // https://cordova.apache.org/docs/en/latest/guide/platforms/ios/plugin.html
+        // Cordova uses the app's cordova-ios version when installing this plugin.
         .package(url: "https://github.com/apache/cordova-ios.git", branch: "master"),
         .package(
             url: "https://github.com/situmtech/situm-sdk-spm.git",
