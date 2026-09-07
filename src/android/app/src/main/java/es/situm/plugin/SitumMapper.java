@@ -63,9 +63,6 @@ import es.situm.sdk.userhelper.UserHelperColorScheme;
 
 class SitumMapper {
 
-  public static final float MIN_SNR = 10;
-  public static final float MAX_SNR = 40;
-
   public static final String ADDRESS = "address";
   public static final String BOUNDS = "bounds";
   public static final String BOUNDS_ROTATED = "boundsRotated";
@@ -188,9 +185,7 @@ class SitumMapper {
   public static final String AUTO_ENABLE_BLE = "autoEnableBleDuringPositioning";
 
   public static final String OUTDOOR_LOCATION_OPTIONS = "outdoorLocationOptions";
-  public static final String USER_DEFINED_THRESHOLD = "userDefinedThreshold";
   public static final String COMPUTE_INTERVAL = "computeInterval";
-  public static final String AVERAGE_SNR_THRESHOLD = "averageSnrThreshold";
 
   public static final String BEACON_FILTERS = "beaconFilters";
   public static final String UUID = "uuid";
@@ -911,25 +906,12 @@ static JSONObject buildingInfoToJsonObject(BuildingInfo buildingInfo) throws JSO
   static OutdoorLocationOptions buildOutdoorLocationOptions(JSONObject outdoorLocationOptions) throws JSONException{
     OutdoorLocationOptions.Builder optionsBuilder = new OutdoorLocationOptions.Builder();
 
-    if (outdoorLocationOptions.has(SitumMapper.USER_DEFINED_THRESHOLD)) {
-      Boolean userDefinedThreshold = outdoorLocationOptions.getBoolean(SitumMapper.USER_DEFINED_THRESHOLD);
-      optionsBuilder.userDefinedThreshold(userDefinedThreshold);
-      Log.i(TAG, "userDefinedThreshold: " + userDefinedThreshold);
-    }
-
     if (outdoorLocationOptions.has(SitumMapper.COMPUTE_INTERVAL)) {
       Integer computeInterval = outdoorLocationOptions.getInt(SitumMapper.COMPUTE_INTERVAL);
       if (computeInterval != null && computeInterval >= 1) {
         optionsBuilder.computeInterval(computeInterval);
         Log.i(TAG, "computeInterval: " + computeInterval);
       }
-    }
-
-    if (outdoorLocationOptions.has(SitumMapper.AVERAGE_SNR_THRESHOLD));
-    Float averageSnrThreshold = new Float(outdoorLocationOptions.getDouble(SitumMapper.AVERAGE_SNR_THRESHOLD));
-    if (averageSnrThreshold != null && averageSnrThreshold >= MIN_SNR && averageSnrThreshold <= MAX_SNR) {
-      optionsBuilder.averageSnrThreshold(averageSnrThreshold);
-      Log.i(TAG, "averageSnrThreshold: " + averageSnrThreshold);
     }
     return optionsBuilder.build();
   }
