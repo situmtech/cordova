@@ -725,15 +725,11 @@ module.exports = DirectionsOptions;
  * OutdoorLocationOptions
  * @description
  * Outdoor location options are only used in indoor-outdoor mode (Only available for Android)
- * @property {boolean} userDefinedThreshold
  * @property {number} computeInterval - Interval (in milliseconds) between consecutive GPS readings performed by Situm SDK, and therefore between consecutive generated Outdoor Locations.
- * @property {number} averageSnrThreshold
  */
 
 var OutdoorLocationOptions = {
-  userDefinedThreshold,
   computeInterval,
-  averageSnrThreshold
 };
 
 module.exports = OutdoorLocationOptions;
