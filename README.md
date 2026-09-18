@@ -30,6 +30,7 @@ This plugin has two parts:
 ## Table of contents
 
 - [Getting started](#getting-started)
+- [iOS dependency management](#ios-dependency-management)
 - [Versioning](#versioning)
 - [Submitting contributions](#submitting-contributions)
 - [License](#license)
@@ -45,6 +46,13 @@ This plugin has two parts:
 - Set up your Situm account following [these steps](https://situm.com/docs/01-introduction/#3-toc-title).
 - [Configure](https://situm.com/docs/a-basic-cordova-app/) this plugin in your project.
 - [API Reference](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/situm) will help you use a particular class or method.
+
+### iOS dependency management
+
+This version requires iOS 16 or later. Swift Package Manager (SPM) is the recommended dependency manager for new iOS integrations. SitumSDK is resolved automatically by the plugin; do not add it directly to your app.
+
+- **Cordova:** with Cordova iOS 8+, this plugin uses SPM automatically. Other plugins may continue using their own native dependency manager. Existing Cordova projects using earlier versions, including Cordova iOS 7, continue to resolve SitumSDK through CocoaPods without changes.
+- **Capacitor:** projects configured with the SPM iOS template resolve SitumSDK through SPM when you run `npx cap sync ios`. Open the generated iOS workspace in Xcode. Existing Capacitor projects retain their configured dependency manager, including CocoaPods.
 
 ---
 
@@ -633,6 +641,23 @@ mocha test
 
 - [mocha](https://www.npmjs.com/package/mocha), needed to run tests.
 - [expect.js](https://www.npmjs.com/package/expect.js), needed to do assertions.
+
+### Run iOS tests
+
+The iOS tests use JSON fixtures that are generated locally and are not committed. Prepare them before opening the Xcode project or running the tests:
+
+```sh
+tests/scripts/copy_ios_resources.sh
+xcodebuild test -project tests/ios/SitumCordovaPlugin.xcodeproj \
+  -scheme CordovaLib \
+  -destination 'platform=iOS Simulator,name=<simulator name>'
+```
+
+Clean the generated fixtures when they are no longer needed:
+
+```sh
+tests/scripts/clean_ios_resources.sh
+```
 
 ### Note for Android platform
 

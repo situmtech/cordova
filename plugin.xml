@@ -56,15 +56,16 @@
     </platform>
 
     <!-- ios -->
-    <platform name="ios">
+    <platform name="ios" package="swift">
         <js-module src="www/situm.js" name="situm">
             <runs/>
             <clobbers target="cordova.plugins.Situm" />
         </js-module>
         <config-file target="config.xml" parent="/*">
-	        <feature name="SitumPlugin">
+            <feature name="SitumPlugin">
                 <param name="ios-package" value="SitumPlugin" onload="true" />
             </feature>
+            <preference name="deployment-target" value="16.0" />
         </config-file>
 
         <config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
@@ -95,20 +96,20 @@
             <config>
             </config>
             <pods use-frameworks="false">
-                <pod name="SitumSDK" spec="~> 3.41.2"/>
+                <pod name="SitumSDK" spec="~> 3.41.2" nospm="true" />
             </pods>
         </podspec>
 
 
-        <header-file src="src/ios/situmcordovaplugin/SitumPlugin.h" />
-        <header-file src="src/ios/situmcordovaplugin/SitumLocationWrapper.h" />
-        <header-file src="src/ios/situmcordovaplugin/Constants.h" />
-        <source-file src="src/ios/situmcordovaplugin/SitumPlugin.m" />
-        <source-file src="src/ios/situmcordovaplugin/SitumLocationWrapper.m" />
-        <source-file src="src/ios/situmcordovaplugin/Constants.m" />
-        <source-file src="src/ios/situmcordovaplugin/SITUtils.m" />
-        <source-file src="src/ios/situmcordovaplugin/SITUtils.h" />
-        <source-file src="src/ios/situmcordovaplugin/SITTextToSpeechManager.m" />
-        <source-file src="src/ios/situmcordovaplugin/SITTextToSpeechManager.h" />
+        <header-file src="src/ios/SitumPlugin/SitumPlugin.h" />
+        <header-file src="src/ios/SitumPlugin/SitumLocationWrapper.h" />
+        <header-file src="src/ios/SitumPlugin/Constants.h" />
+        <source-file src="src/ios/SitumPlugin/SitumPlugin.m" />
+        <source-file src="src/ios/SitumPlugin/SitumLocationWrapper.m" />
+        <source-file src="src/ios/SitumPlugin/Constants.m" />
+        <source-file src="src/ios/SitumPlugin/SITUtils.m" />
+        <source-file src="src/ios/SitumPlugin/SITUtils.h" />
+        <source-file src="src/ios/SitumPlugin/SitTextToSpeechManager.m" />
+        <source-file src="src/ios/SitumPlugin/SITTextToSpeechManager.h" />
     </platform>
 </plugin>
