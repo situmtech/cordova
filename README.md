@@ -30,6 +30,7 @@ This plugin has two parts:
 ## Table of contents
 
 - [Getting started](#getting-started)
+- [iOS dependency management](#ios-dependency-management)
 - [Versioning](#versioning)
 - [Submitting contributions](#submitting-contributions)
 - [License](#license)
@@ -46,9 +47,12 @@ This plugin has two parts:
 - [Configure](https://situm.com/docs/a-basic-cordova-app/) this plugin in your project.
 - [API Reference](https://developers.situm.com/sdk_documentation/cordova/jsdoc/latest/situm) will help you use a particular class or method.
 
-### iOS linker configuration
+### iOS dependency management
 
-When using the plugin with Swift Package Manager, add `$(inherited) -ObjC` to the app target's **Other Linker Flags** (`OTHER_LDFLAGS`) in Xcode. SitumSDK requires this flag to load Objective-C categories at runtime.
+This version requires iOS 16 or later. Swift Package Manager (SPM) is the recommended dependency manager for new iOS integrations. SitumSDK is resolved automatically by the plugin; do not add it directly to your app.
+
+- **Cordova:** with Cordova iOS 8+, this plugin uses SPM automatically. Other plugins may continue using their own native dependency manager. Existing Cordova projects using earlier versions, including Cordova iOS 7, continue to resolve SitumSDK through CocoaPods without changes.
+- **Capacitor:** projects configured with the SPM iOS template resolve SitumSDK through SPM when you run `npx cap sync ios`. Open the generated iOS workspace in Xcode. Existing Capacitor projects retain their configured dependency manager, including CocoaPods.
 
 ---
 

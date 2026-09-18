@@ -84,11 +84,7 @@ pnpm --dir example run cap:ios
 > [!NOTE]
 > iOS only
 >
-> You might need to update the pods of this app by executing inside `example/ios/App`:
->
-> $ pod install --repo-update
->
-> Also check out the project [code signing](https://developer.apple.com/support/code-signing/) before you run the example.
+> This Capacitor 8 example uses Swift Package Manager. `cap sync ios` manages its iOS dependencies.
 
 You can also run the app from your IDE:
 
@@ -124,8 +120,10 @@ cordova plugin add @situm/cordova
 # For Android
 cordova run android
 # For iOS
-cordova run iOS
+cordova run ios
 ```
+
+For iOS, this plugin uses Swift Package Manager automatically with Cordova iOS 8 or newer. 
 
 > [!TIP]
 > You might want to learn [how to create a basic Cordova app using our @situm/cordova plugin](https://situm.com/docs/a-basic-cordova-app/).
