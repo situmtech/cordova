@@ -4,8 +4,6 @@
 - Added iOS support for Swift Package Manager (SPM).
 
 ### Updated
-
-- Increased the minimum supported iOS version to 16.
 - SPM is the recommended dependency manager for new iOS integrations.
 - With Cordova iOS 8 or newer, this plugin resolves SitumSDK through SPM. Other plugins may continue using their own native dependency manager. Existing Cordova projects using earlier versions, including Cordova iOS 7, continue to use CocoaPods without changes.
 - Capacitor projects configured with the SPM iOS template resolve SitumSDK through SPM. Existing Capacitor projects retain their configured dependency manager, including CocoaPods, without changes.
