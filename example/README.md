@@ -86,6 +86,9 @@ pnpm --dir example run cap:ios
 >
 > This Capacitor 8 example uses Swift Package Manager. `cap sync ios` manages its iOS dependencies.
 
+> [!WARNING]
+> When developing against a local checkout of `@situm/cordova`, running `npx cap sync ios` modifies the plugin's `Package.swift`. Review the file with `git diff -- Package.swift` before committing, and keep only intentional dependency-version changes.
+
 You can also run the app from your IDE:
 
 - On Android: open `example/android/` with Android Studio.

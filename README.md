@@ -54,6 +54,9 @@ This version requires iOS 16 or later. Swift Package Manager (SPM) is the recomm
 - **Cordova:** with Cordova iOS 8+, this plugin uses SPM automatically. Other plugins may continue using their own native dependency manager. Existing Cordova projects using earlier versions, including Cordova iOS 7, continue to resolve SitumSDK through CocoaPods without changes.
 - **Capacitor:** projects configured with the SPM iOS template resolve SitumSDK through SPM when you run `npx cap sync ios`. Open the generated iOS workspace in Xcode. Existing Capacitor projects retain their configured dependency manager, including CocoaPods.
 
+> [!WARNING]
+> When developing against a local checkout of `@situm/cordova`, running `npx cap sync ios` modifies the plugin's `Package.swift`. Review the file with `git diff -- Package.swift` before committing, and keep only intentional dependency-version changes.
+
 ---
 
 ## Versioning
