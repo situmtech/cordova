@@ -68,13 +68,7 @@
             <preference name="deployment-target" value="16.0" />
         </config-file>
 
-        <config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
-		        <string>Location is required to find out where you are</string>
-    		</config-file>
     		<config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
-    			   <string>Location is required to find out where you are</string>
-    		</config-file>
-    		<config-file target="*-Info.plist" parent="NSLocationUsageDescription">
     			   <string>Location is required to find out where you are</string>
     		</config-file>
             <config-file target="*-Info.plist" parent="NSMotionUsageDescription">
@@ -86,7 +80,6 @@
         <framework src="UIKit.framework" />
         <framework src="CoreLocation.framework" />
         <framework src="CoreMotion.framework" />
-        <framework src="CoreBluetooth.framework" />
         <framework src="Security.framework" />
         <framework src="SystemConfiguration.framework"/>
         <framework src="libz.dylib" />
