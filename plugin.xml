@@ -102,7 +102,7 @@
         <source-file src="src/ios/SitumPlugin/Constants.m" />
         <source-file src="src/ios/SitumPlugin/SITUtils.m" />
         <source-file src="src/ios/SitumPlugin/SITUtils.h" />
-        <source-file src="src/ios/SitumPlugin/SitTextToSpeechManager.m" />
+        <source-file src="src/ios/SitumPlugin/SITTextToSpeechManager.m" />
         <source-file src="src/ios/SitumPlugin/SITTextToSpeechManager.h" />
     </platform>
 </plugin>

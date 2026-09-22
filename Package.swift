@@ -30,7 +30,7 @@ let package = Package(
             sources: [
                 "Constants.m",
                 "SITUtils.m",
-                "SitTextToSpeechManager.m",
+                "SITTextToSpeechManager.m",
                 "SitumLocationWrapper.m",
                 "SitumPlugin.m"
             ],
