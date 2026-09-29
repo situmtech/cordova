@@ -46,11 +46,6 @@ steps:
           pnpm run build
           pnpm exec cap sync ios
 
-          cd ios/App
-
-          echo -e "\n[+] Pod install with --repo-update option \n"
-          pod install --repo-update
-
         displayName: Install iOS example dependencies
 
       - bash: |
