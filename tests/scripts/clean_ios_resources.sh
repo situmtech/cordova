@@ -1,3 +1,3 @@
 #! /bin/bash
 
-rm -rf src/ios/situmcordovaplugintests/resources/
+rm -rf tests/ios/situmcordovaplugintests/resources/

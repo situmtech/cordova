@@ -2,7 +2,7 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     id="@situm/cordova"
-    version="3.17.9">
+    version="3.18.0">
     <name>Situm Cordova plugin Official</name>
     <description>This is the stable branch.</description>
     <license>MIT</license>
@@ -56,24 +56,19 @@
     </platform>
 
     <!-- ios -->
-    <platform name="ios">
+    <platform name="ios" package="swift">
         <js-module src="www/situm.js" name="situm">
             <runs/>
             <clobbers target="cordova.plugins.Situm" />
         </js-module>
         <config-file target="config.xml" parent="/*">
-	        <feature name="SitumPlugin">
+            <feature name="SitumPlugin">
                 <param name="ios-package" value="SitumPlugin" onload="true" />
             </feature>
+            <preference name="deployment-target" value="16.0" />
         </config-file>
 
-        <config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
-		        <string>Location is required to find out where you are</string>
-    		</config-file>
     		<config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
-    			   <string>Location is required to find out where you are</string>
-    		</config-file>
-    		<config-file target="*-Info.plist" parent="NSLocationUsageDescription">
     			   <string>Location is required to find out where you are</string>
     		</config-file>
             <config-file target="*-Info.plist" parent="NSMotionUsageDescription">
@@ -85,7 +80,6 @@
         <framework src="UIKit.framework" />
         <framework src="CoreLocation.framework" />
         <framework src="CoreMotion.framework" />
-        <framework src="CoreBluetooth.framework" />
         <framework src="Security.framework" />
         <framework src="SystemConfiguration.framework"/>
         <framework src="libz.dylib" />
@@ -95,20 +89,20 @@
             <config>
             </config>
             <pods use-frameworks="false">
-                <pod name="SitumSDK" spec="~> 3.42.0"/>
+                <pod name="SitumSDK" spec="~> 3.42.0" nospm="true" />
             </pods>
         </podspec>
 
 
-        <header-file src="src/ios/situmcordovaplugin/SitumPlugin.h" />
-        <header-file src="src/ios/situmcordovaplugin/SitumLocationWrapper.h" />
-        <header-file src="src/ios/situmcordovaplugin/Constants.h" />
-        <source-file src="src/ios/situmcordovaplugin/SitumPlugin.m" />
-        <source-file src="src/ios/situmcordovaplugin/SitumLocationWrapper.m" />
-        <source-file src="src/ios/situmcordovaplugin/Constants.m" />
-        <source-file src="src/ios/situmcordovaplugin/SITUtils.m" />
-        <source-file src="src/ios/situmcordovaplugin/SITUtils.h" />
-        <source-file src="src/ios/situmcordovaplugin/SITTextToSpeechManager.m" />
-        <source-file src="src/ios/situmcordovaplugin/SITTextToSpeechManager.h" />
+        <header-file src="src/ios/SitumPlugin/SitumPlugin.h" />
+        <header-file src="src/ios/SitumPlugin/SitumLocationWrapper.h" />
+        <header-file src="src/ios/SitumPlugin/Constants.h" />
+        <source-file src="src/ios/SitumPlugin/SitumPlugin.m" />
+        <source-file src="src/ios/SitumPlugin/SitumLocationWrapper.m" />
+        <source-file src="src/ios/SitumPlugin/Constants.m" />
+        <source-file src="src/ios/SitumPlugin/SITUtils.m" />
+        <source-file src="src/ios/SitumPlugin/SITUtils.h" />
+        <source-file src="src/ios/SitumPlugin/SITTextToSpeechManager.m" />
+        <source-file src="src/ios/SitumPlugin/SITTextToSpeechManager.h" />
     </platform>
 </plugin>

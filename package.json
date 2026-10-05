@@ -1,6 +1,6 @@
 {
   "name": "@situm/cordova",
-  "version": "3.17.9",
+  "version": "3.18.0",
   "description": "Situm Wayfinding for Capacitor and Cordova. Integrate plug&play indoor navigation experience with floorplans, POIs, routes and turn-by-turn directions in no time. With the power of Situm.",
   "private": false,
   "repository": "https://github.com/situmtech/cordova",
@@ -10,7 +10,7 @@
     "url": "https://github.com/situmtech/cordova/issues"
   },
   "homepage": "https://github.com/situmtech/cordova#readme",
-  "packageManager": "pnpm@11.5.0",
+  "packageManager": "pnpm@11.21.0",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
