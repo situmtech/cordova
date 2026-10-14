@@ -72,10 +72,6 @@ public class PluginHelper {
     private CallbackContext callbackEnterGeofences;
     private CallbackContext callbackExitGeofences;
 
-    void setTextToSpeechManager(TextToSpeechManager ttsManager) {
-        this.ttsManager = ttsManager;
-    }
-
     private CommunicationManager getCommunicationManagerInstance() {
         if (cmInstance == null) { //Check for the first time
             synchronized (CommunicationManager.class) {   //Check for the second time.
@@ -1053,6 +1049,9 @@ public class PluginHelper {
                 payload.put("value", rawPayload);
             }
             switch (message) {
+                case "app.map_is_ready":
+                    _initTtsManager(cordova);
+                    break;
                 case "ui.speak_aloud_text":
                     _handleSpeakAloudText(cordova, payload);
                     break;
@@ -1064,6 +1063,12 @@ public class PluginHelper {
 
         } catch (JSONException e) {
             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, e.getMessage()));
+        }
+    }
+
+    private void _initTtsManager(CordovaInterface cordova) {
+        if (ttsManager == null) {
+            ttsManager = new TextToSpeechManager(cordova.getActivity());
         }
     }
 

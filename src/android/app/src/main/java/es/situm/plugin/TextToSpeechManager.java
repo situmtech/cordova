@@ -2,6 +2,7 @@ package es.situm.plugin;
 
 import android.content.Context;
 import android.os.Build;
+import android.os.Looper;
 import android.speech.tts.TextToSpeech;
 
 import org.json.JSONException;
@@ -9,70 +10,86 @@ import org.json.JSONObject;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class TextToSpeechManager implements TextToSpeech.OnInitListener {
 
     private static final float DEFAULT_SPEECH_RATE_VALUE = 1.0f;
-    private TextToSpeech textToSpeech;
-    private boolean canSpeak = true;
+    private volatile TextToSpeech textToSpeech;
+    private volatile boolean canSpeak = true;
+    private final ExecutorService ttsExecutor = Executors.newSingleThreadExecutor();
 
     public TextToSpeechManager(Context context) {
-        String enginePackage = getPreferredTtsEnginePackage(context);
-        if (enginePackage != null) {
-            textToSpeech = new TextToSpeech(context, this, enginePackage);
-        } else {
-            textToSpeech = new TextToSpeech(context, this);
-        }
+        doThreadSafeCall(() -> {
+            String enginePackage = getPreferredTtsEnginePackage(context);
+            if (enginePackage != null) {
+                textToSpeech = new TextToSpeech(context, this, enginePackage);
+            } else {
+                textToSpeech = new TextToSpeech(context, this);
+            }
+        });
     }
 
     @Override
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
             // Establece el idioma (opcional)
-            textToSpeech.setLanguage(Locale.getDefault());
+            doThreadSafeCall(() -> {
+                if (textToSpeech != null) {
+                    textToSpeech.setLanguage(Locale.getDefault());
+                }
+            });
         }
     }
 
+    private void doThreadSafeCall(Runnable block) {
+        ttsExecutor.execute(block);
+    }
+
     public void speak(JSONObject arguments) {
-        if (!canSpeak) return;
-        if (!arguments.has("text")) return;
+        doThreadSafeCall(() -> {
+            if (textToSpeech == null) return;
+            if (!canSpeak) return;
+            if (!arguments.has("text")) return;
 
-        if (arguments.has("lang")) {
+            if (arguments.has("lang")) {
+                try {
+                    String lang = arguments.getString("lang");
+                    textToSpeech.setLanguage(new Locale(lang));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    // DO NOTHING: use the current language.
+                }
+            }
+
+            if (arguments.has("pitch")) {
+                try {
+                    float pitch = (float) arguments.getDouble("pitch");
+                    textToSpeech.setPitch(pitch);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    // DO NOTHING: use the current pitch.
+                }
+            }
+
+            if (arguments.has("rate")) {
+                try {
+                    float rate = (float) arguments.getDouble("rate");
+                    textToSpeech.setSpeechRate(convertToAndroidSpeechRate(rate));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    // DO NOTHING: use the current rate.
+                }
+            }
+
             try {
-                String lang = arguments.getString("lang");
-                textToSpeech.setLanguage(new Locale(lang));
+                String text = arguments.getString("text");
+                textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
             } catch (JSONException e) {
                 e.printStackTrace();
-                // DO NOTHING: use the current language.
             }
-        }
-
-        if (arguments.has("pitch")) {
-            try {
-                float pitch = (float) arguments.getDouble("pitch");
-                textToSpeech.setPitch(pitch);
-            } catch (JSONException e) {
-                e.printStackTrace();
-                // DO NOTHING: use the current pitch.
-            }
-        }
-
-        if (arguments.has("rate")) {
-            try {
-                float rate = (float) arguments.getDouble("rate");
-                textToSpeech.setSpeechRate(convertToAndroidSpeechRate(rate));
-            } catch (JSONException e) {
-                e.printStackTrace();
-                // DO NOTHING: use the current rate.
-            }
-        }
-
-        try {
-            String text = arguments.getString("text");
-            textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        });
     }
 
     // ui.speak_aloud_text message sends the speech rate in FlutterTts scale [0.0f,1.0f],
@@ -85,10 +102,14 @@ public class TextToSpeechManager implements TextToSpeech.OnInitListener {
     }
 
     public void stop() {
-        if (textToSpeech != null) {
-            textToSpeech.stop();
-            textToSpeech.shutdown();
-        }
+        doThreadSafeCall(() -> {
+            if (textToSpeech != null) {
+                textToSpeech.stop();
+                textToSpeech.shutdown();
+                textToSpeech = null;
+            }
+            ttsExecutor.shutdown();
+        });
     }
 
     private String getPreferredTtsEnginePackage(Context context) {
@@ -108,10 +129,12 @@ public class TextToSpeechManager implements TextToSpeech.OnInitListener {
     }
 
     public void setCanSpeak(boolean value) {
-        // TTS is paused when screen is off, app goes background and MapView gets destroyed
-        canSpeak = value;
-        if (!canSpeak && textToSpeech != null) {
-            textToSpeech.stop();
-        }
+        doThreadSafeCall(() -> {
+            // TTS is paused when screen is off, app goes background and MapView gets destroyed
+            canSpeak = value;
+            if (!canSpeak && textToSpeech != null) {
+                textToSpeech.stop();
+            }
+        });
     }
 }
