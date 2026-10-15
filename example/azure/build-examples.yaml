@@ -78,10 +78,10 @@ steps:
     - ${{ if contains(parameters.system, 'ubuntu') }}:
       - task: JavaToolInstaller@0
         inputs:
-          versionSpec: '17'
+          versionSpec: '21'
           jdkArchitectureOption: 'x64'
           jdkSourceOption: 'PreInstalled'
-        displayName: Install Java 17 for Gradle
+        displayName: Install Java 21 for Gradle
 
       - bash: |
           cd example
