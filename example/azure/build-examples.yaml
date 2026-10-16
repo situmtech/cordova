@@ -71,6 +71,8 @@ steps:
 
 
           echo -e "\n[+] Build example with fastlane \n"
+          export FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT=180
+          export FASTLANE_XCODEBUILD_SETTINGS_RETRIES=10
           fastlane ios beta
 
         displayName: Build iOS example
