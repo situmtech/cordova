@@ -45,7 +45,7 @@ platform :ios do
       path: "App.xcodeproj",
       targets: ["App"],
       team_id: ENV['appleDevTeamId'],
-      code_sign_identity: "iPhone Distribution",   # o "Apple Distribution"
+      code_sign_identity: "Apple Development",   # o "Apple Distribution"
       profile_name: "Situm Cordova SDK Example",
       bundle_identifier: "com.situm.capacitorexample"
     )
