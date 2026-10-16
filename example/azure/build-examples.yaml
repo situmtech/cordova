@@ -70,8 +70,10 @@ steps:
           echo -e "\t[+] Set WHATS_NEW: $WHATS_NEW"
 
 
-          echo -e "\n[+] Build example with fastlane \n"
-          fastlane ios beta
+           echo -e "\n[+] Build example with fastlane \n"
+           export FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT=30
+           export FASTLANE_XCODEBUILD_SETTINGS_RETRIES=5
+           fastlane ios beta
 
         displayName: Build iOS example
 
