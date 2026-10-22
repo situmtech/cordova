@@ -130,6 +130,7 @@ class MapViewControllerImpl {
   _handleMapViewMessages(m) {
     switch (m.type) {
       case 'app.map_is_ready':
+        this._internalHandleMapViewMessage(m.type, m.payload);
         this._handleMapIsReady();
         break;
       case 'app.ready_for_auth':

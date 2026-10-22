@@ -23,9 +23,6 @@ public class SitumPlugin extends CordovaPlugin {
 
   private static volatile PluginHelper pluginInstance;
   private static final Object PLUGIN_LOCK = new Object();
-  
-  private static volatile TextToSpeechManager ttsManager;
-  private static final Object TTS_LOCK = new Object();
 
   private static PluginHelper getPluginInstance() {
     if (pluginInstance == null) { //Check for the first time
@@ -37,21 +34,11 @@ public class SitumPlugin extends CordovaPlugin {
     return pluginInstance;
   }
 
-  private static void setupTtsManager(Context context) {
-      if (ttsManager == null) {
-          synchronized (TTS_LOCK) {
-              if(ttsManager == null) ttsManager = new TextToSpeechManager(context);
-          }
-      }
-      getPluginInstance().setTextToSpeechManager(ttsManager);
-  }
-
   @Override
   public void pluginInitialize() {
     super.pluginInitialize();
     Log.d(TAG, "Initializing Situm Plugin");
     SitumSdk.init(this.cordova.getActivity());
-    setupTtsManager(this.cordova.getActivity());
   }
 
   @Override
@@ -68,7 +55,6 @@ public class SitumPlugin extends CordovaPlugin {
   public void onDestroy() {
     getPluginInstance().onDestroy();
     pluginInstance = null;
-    ttsManager = null;
   }
 
   @Override

@@ -71,6 +71,8 @@ steps:
 
 
           echo -e "\n[+] Build example with fastlane \n"
+          export FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT=180
+          export FASTLANE_XCODEBUILD_SETTINGS_RETRIES=10
           fastlane ios beta
 
         displayName: Build iOS example
@@ -78,10 +80,10 @@ steps:
     - ${{ if contains(parameters.system, 'ubuntu') }}:
       - task: JavaToolInstaller@0
         inputs:
-          versionSpec: '17'
+          versionSpec: '21'
           jdkArchitectureOption: 'x64'
           jdkSourceOption: 'PreInstalled'
-        displayName: Install Java 17 for Gradle
+        displayName: Install Java 21 for Gradle
 
       - bash: |
           cd example
