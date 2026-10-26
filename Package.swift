@@ -14,7 +14,7 @@ let package = Package(
         // Keep this exact URL and branch format; see
         // https://cordova.apache.org/docs/en/latest/guide/platforms/ios/plugin.html
         // Cordova uses the app's cordova-ios version when installing this plugin.
-        .package(url: "https://github.com/situmtech/situm-sdk-spm", exact: "3.42.2")
+        .package(url: "https://github.com/situmtech/situm-sdk-spm", exact: "3.42.3")
     ],
     targets: [
         .target(
