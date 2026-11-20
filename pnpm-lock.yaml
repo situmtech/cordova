@@ -77,9 +77,6 @@ importers:
       '@capacitor/app':
         specifier: ^8.0.0
         version: 8.1.1(@capacitor/core@8.5.0)
-      '@capacitor/camera':
-        specifier: ^8.0.0
-        version: 8.2.3(@capacitor/core@8.5.0)
       '@capacitor/core':
         specifier: ^8.0.0
         version: 8.5.0
@@ -1051,11 +1048,6 @@ packages:
 
   '@capacitor/app@8.1.1':
     resolution: {integrity: sha512-xM2ZTX5jK60tFtmjsmJv+Cdj1Qsb6NcavkqmdEnCPQBeya9oKhamZJxYOnQNj1ZvcJM7sWfG6BEtSLx42pisbA==}
-    peerDependencies:
-      '@capacitor/core': '>=8.0.0'
-
-  '@capacitor/camera@8.2.3':
-    resolution: {integrity: sha512-x9Pl5UgvrZyU5Hl53Fly9f6u019hhgN+gSdDgi+WygxK9DUVuYKjigplOXz3VJQ9m8ttUSjqN/rAC3JVnyEzcA==}
     peerDependencies:
       '@capacitor/core': '>=8.0.0'
 
@@ -5975,6 +5967,7 @@ packages:
 
   tui-jsdoc-template@1.2.2:
     resolution: {integrity: sha512-oqw0IYaot86VJ2owKBozJnilgta0Z55x8r9PeHj7vb+jDoSvJGRUQUcgs56SZh9HE20fx54Pe75p84X85/ygLA==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   type-check@0.3.2:
     resolution: {integrity: sha512-ZCmOJdvOWDBYJlzAoFkC+Q0+bUyEOS1ltgp1MGU03fqHG+dbi9tBFU2Rd9QKiDZFAYrhPh2JUf7rZRIuHRKtOg==}
@@ -7515,10 +7508,6 @@ snapshots:
       '@capacitor/core': 8.5.0
 
   '@capacitor/app@8.1.1(@capacitor/core@8.5.0)':
-    dependencies:
-      '@capacitor/core': 8.5.0
-
-  '@capacitor/camera@8.2.3(@capacitor/core@8.5.0)':
     dependencies:
       '@capacitor/core': 8.5.0
 
